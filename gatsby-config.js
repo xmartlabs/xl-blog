@@ -1,6 +1,6 @@
 module.exports = {
   siteMetadata: {
-    siteUrl: "https://www.yourdomain.tld",
+    siteUrl: "https://blog.xmartlabs.com",
     title: "XL-Blog",
   },
   plugins: [
