@@ -1,8 +1,161 @@
 // Handling multiple layouts
 // If you want to use different layouts for different pages, you can pass this information in the context of the pages you create, and then conditionally render in your layout file.
 // called after every page is created.
-exports.onCreatePage = ({ page, actions }) => {
+
+
+const path = require("path")
+const _ = require("lodash")
+
+exports.createPages = async ({ actions, graphql, reporter }) => {
   const { createPage } = actions
+  const tagTemplate = path.resolve("src/templates/tags.js")
+  const categoryTemplate = path.resolve("src/templates/categories.js")
+  const authorTemplate = path.resolve("src/templates/authors.js")
+
+  const result = await graphql(`
+    {
+      tagsGroup: allMdx(limit: 2000) {
+        group(field: frontmatter___tags) {
+          fieldValue
+        }
+      }
+      categoriesGroup: allMdx(limit: 2000) {
+        group(field: frontmatter___category) {
+          fieldValue
+        }
+      }
+      authorsGroup: allMdx(limit: 2000) {
+        group(field: frontmatter___author) {
+          fieldValue
+        }
+      }
+    }
+  `)
+  // handle errors
+  if (result.errors) {
+    reporter.panicOnBuild(`Error while running GraphQL query.`)
+    return
+  }
+  
+  // Extract tag data from query
+  const tags = result.data.tagsGroup.group
+  // Make tag pages
+  tags.forEach(tag => {
+    createPage({
+      path: `/tags/${_.kebabCase(tag.fieldValue)}/`,
+      component: tagTemplate,
+      context: {
+        tag: tag.fieldValue,
+      },
+    })
+  })
+
+    
+  // Extract tag data from query
+  const categories = result.data.categoriesGroup.group
+  // Make tag pages
+  categories.forEach(category => {
+    createPage({
+      path: `/categories/${_.kebabCase(category.fieldValue)}/`,
+      component: categoryTemplate,
+      context: {
+        category: category.fieldValue,
+      },
+    })
+  })
+
+    // Extract tag data from query
+    const authors = result.data.authorsGroup.group
+    // Make tag pages
+    authors.forEach(author => {
+      createPage({
+        path: `/authors/${_.kebabCase(author.fieldValue)}/`,
+        component: authorTemplate,
+        context: {
+          author: author.fieldValue,
+        },
+      })
+    })
+}
+
+// exports.createPages = async ({ actions, graphql, reporter }) => {
+//   const { createPage } = actions
+
+
+  //const blogPostTemplate = path.resolve("src/templates/post.js")
+  //const tagTemplate = path.resolve("src/templates/tags.js")
+
+  // const result = await graphql(`
+  //   {
+  //     postsRemark: allMarkdownRemark(
+  //       sort: { order: DESC, fields: [frontmatter___date] }
+  //       limit: 2000
+  //     ) {
+  //       edges {
+  //         node {
+  //           frontmatter {
+  //             slug
+  //             tags
+  //           }
+  //         }
+  //       }
+  //     }
+  //   }
+  // `)
+
+  // tagsGroup: allMarkdownRemark(limit: 2000) {
+  //   group(field: frontmatter___tags) {
+  //     fieldValue
+  //   }
+  // }
+
+  // handle errors
+  // if (result.errors) {
+  //   reporter.panicOnBuild(`Error while running GraphQL query.`)
+  //   return
+  // }
+
+  // const posts = result.data.postsRemark.edges
+
+  // Create post detail pages
+  // posts.forEach(({ node }) => {
+  //   createPage({
+  //     path: node.frontmatter.slug,
+  //     component: blogPostTemplate,
+  //   })
+  // })
+
+  // Extract tag data from query
+  //const tags = result.data.tagsGroup.group
+
+  // Make tag pages
+  // tags.forEach(tag => {
+  //   createPage({
+  //     path: `/tags/${_.kebabCase(tag.fieldValue)}/`,
+  //     component: tagTemplate,
+  //     context: {
+  //       tag: tag.fieldValue,
+  //     },
+  //   })
+  // })
+// }
+
+
+// exports.onCreatePage = ({ page, actions, getNode }) => {
+//   const { createPage } = actions
+
+  // // Change the node internal type from 'allMarkdownRemark' to 'MarkdownRemark'
+  // if (node.internal.type === `MarkdownRemark`) {
+  //   const value = createFilePath({ page, getNode })
+  //   createNodeField({
+  //     name: `slug`,
+  //     node,
+  //     value,
+  //   })
+  // }
+  // else {
+  //   createPage(page)
+  // }
 
   // page.matchPath is a special key that's used for matching pages
   // only on the client.
@@ -12,6 +165,6 @@ exports.onCreatePage = ({ page, actions }) => {
 
   // if (page.path.match(/special-page/)) {
   //page.context.layout = "main"
-  createPage(page)
+
   // }
-}
+// }

@@ -2,6 +2,7 @@ module.exports = {
   siteMetadata: {
     siteUrl: "https://blog.xmartlabs.com",
     title: "XL-Blog",
+    descripton: "Blog description",
   },
   plugins: [
     "gatsby-plugin-netlify-cms",
@@ -13,6 +14,12 @@ module.exports = {
       resolve: "gatsby-plugin-manifest",
       options: {
         icon: "src/images/icon.png",
+      },
+    },
+    {
+      resolve: `gatsby-transformer-yaml`,
+      options: {
+        typeName: `Yaml`, // a fixed string
       },
     },
     "gatsby-plugin-mdx",
@@ -34,5 +41,20 @@ module.exports = {
       },
       __key: "pages",
     },
+    {
+      resolve: "gatsby-source-filesystem",
+      options: {
+        name: "blogs",
+        path: `${__dirname}/blogs/`,
+      },
+    },
+    {
+      resolve: "gatsby-source-filesystem",
+      options: {
+        name: "content",
+        path: `${__dirname}/content/`,
+      },
+    },
+    "gatsby-transformer-remark",
   ],
 };
