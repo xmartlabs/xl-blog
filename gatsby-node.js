@@ -93,9 +93,6 @@ exports.createPages = async ({ actions, graphql, reporter }) => {
         },
       })
     })
-
-    // Extract posts data from query
-    console.log(result.data.posts.edges)
     
     const posts = result.data.posts.edges    
     const numPages = Math.ceil(posts.length / postsPerPage);
