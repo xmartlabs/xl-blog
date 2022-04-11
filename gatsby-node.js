@@ -2,6 +2,7 @@
 // If you want to use different layouts for different pages, you can pass this information in the context of the pages you create, and then conditionally render in your layout file.
 // called after every page is created.
 
+const postsPerPage = 2;
 
 const path = require("path")
 const _ = require("lodash")
@@ -27,6 +28,22 @@ exports.createPages = async ({ actions, graphql, reporter }) => {
       authorsGroup: allMdx(limit: 2000) {
         group(field: frontmatter___author) {
           fieldValue
+        }
+      }
+      posts: allMdx(sort: {fields: frontmatter___date, order: DESC})  {
+        edges {
+          node {
+            id
+            frontmatter {
+              date(formatString: "MMMM D, YYYY")
+              title
+              author
+              category
+              tags
+            }
+            body
+            slug
+          }
         }
       }
     }
@@ -76,69 +93,26 @@ exports.createPages = async ({ actions, graphql, reporter }) => {
         },
       })
     })
+
+    // Extract posts data from query
+    console.log(result.data.posts.edges)
+    
+    const posts = result.data.posts.edges    
+    const numPages = Math.ceil(posts.length / postsPerPage);
+    Array.from({ length: numPages }).forEach((_, i) => {
+      createPage({
+        path: i === 0 ? `/` : `/page/${i + 1}`,
+        component: path.resolve("./src/templates/blog-list.js"),
+        context: {
+          limit: postsPerPage,
+          skip: i * postsPerPage,
+          numPages,
+          currentPage: i + 1,
+        },
+      });
+    });
 }
 
-// exports.createPages = async ({ actions, graphql, reporter }) => {
-//   const { createPage } = actions
-
-
-  //const blogPostTemplate = path.resolve("src/templates/post.js")
-  //const tagTemplate = path.resolve("src/templates/tags.js")
-
-  // const result = await graphql(`
-  //   {
-  //     postsRemark: allMarkdownRemark(
-  //       sort: { order: DESC, fields: [frontmatter___date] }
-  //       limit: 2000
-  //     ) {
-  //       edges {
-  //         node {
-  //           frontmatter {
-  //             slug
-  //             tags
-  //           }
-  //         }
-  //       }
-  //     }
-  //   }
-  // `)
-
-  // tagsGroup: allMarkdownRemark(limit: 2000) {
-  //   group(field: frontmatter___tags) {
-  //     fieldValue
-  //   }
-  // }
-
-  // handle errors
-  // if (result.errors) {
-  //   reporter.panicOnBuild(`Error while running GraphQL query.`)
-  //   return
-  // }
-
-  // const posts = result.data.postsRemark.edges
-
-  // Create post detail pages
-  // posts.forEach(({ node }) => {
-  //   createPage({
-  //     path: node.frontmatter.slug,
-  //     component: blogPostTemplate,
-  //   })
-  // })
-
-  // Extract tag data from query
-  //const tags = result.data.tagsGroup.group
-
-  // Make tag pages
-  // tags.forEach(tag => {
-  //   createPage({
-  //     path: `/tags/${_.kebabCase(tag.fieldValue)}/`,
-  //     component: tagTemplate,
-  //     context: {
-  //       tag: tag.fieldValue,
-  //     },
-  //   })
-  // })
-// }
 
 
 // exports.onCreatePage = ({ page, actions, getNode }) => {

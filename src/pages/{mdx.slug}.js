@@ -1,5 +1,5 @@
 import * as React from 'react'
-import context from '../context/context'
+// import context from '../context/context'
 import Layout from '../layouts/layout'
 import { MDXRenderer } from 'gatsby-plugin-mdx'
 import { graphql } from 'gatsby'

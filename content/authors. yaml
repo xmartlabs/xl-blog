@@ -1,3 +1,178 @@
-- character: a
-- character: b
-- character: c
+- author: mtnBarreto
+  display_name: Martin Barreto
+  image: members/martin.png
+  twitter: mtnBarreto
+  github: mtnBarreto
+  profile_url: https://twitter.com/mtnBarreto
+- author: agustin
+  display_name: Agustin Hernandez
+  image: members/agustin.jpg
+  twitter: awstinh
+  github: agustinh17
+  profile_url: https://twitter.com/awstinh
+- author: dernst
+  display_name: Diego Ernst
+  image: members/dernst.jpg
+  github: dernster
+  profile_url: https://github.com/dernster
+- author: esanchez
+  display_name: Ezequiel Santiago Sanchez
+  image: members/esanchez.jpg
+  github: squiel91
+  profile_url: https://twitter.com/squiel91
+- author: enrique
+  display_name: Enrique Galindo
+  image: members/enrique.jpg
+  twitter: enrigalmig
+  github: enrigalmig
+  profile_url: https://github.com/enrigalmig
+- author: alberto
+  display_name: Alberto Attia
+  image: members/alberto.jpg
+  twitter: https://twitter.com/aattia
+  github: mtnBarreto
+  profile_url: https://twitter.com/aattia
+- author: maximo
+  display_name: Maximo Mussini
+  image: members/maximo.jpg
+  twitter: maximomussini
+  github: ElMassimo
+  profile_url: https://github.com/ElMassimo
+- author: mathias
+  display_name: Mathias Claassen
+  image: members/mathias.jpg
+  twitter: https://twitter.com/mClaassen26
+  github: mats-claassen
+  profile_url: https://github.com/mats-claassen
+- author: santiago
+  display_name: Santiago Castro
+  image: members/santiago.jpg
+  twitter: https://twitter.com/bryant1410
+  github: bryant1410
+  profile_url: https://santi.uy
+- author: helen
+  display_name: Helen Olhausen
+  image: members/helen.jpg
+  twitter: https://twitter.com/helOlhausen
+  github: helOlhausen
+  profile_url: https://github.com/helOlhausen
+- author: remer
+  display_name: Miguel Revetria
+  image: members/remer.jpg
+  github: m-revetria
+  profile_url: https://github.com/m-revetria
+- author: mirland
+  display_name: Matías Irland
+  image: members/mirland.jpg
+  github: mirland
+  profile_url: https://github.com/mirland
+- author: mcousillas
+  display_name: Mauricio Cousillas
+  image: members/cousillas.jpg
+  twitter: https://twitter.com/CousillasM
+  github: mcousillas6
+  profile_url: https://github.com/mcousillas6
+- author: xl
+  display_name: Xmartlabs Team
+  image: members/xl.png
+  github: xmartlabs
+  profile_url: https://github.com/xmartlabs
+- author: felipe
+  display_name: Felipe de León
+  image: members/felipe.jpg
+  github: f7deleon
+  profile_url: https://github.com/f7deleon
+- author: mlorenzo
+  display_name: Matías Lorenzo
+  image: members/mlorenzo.png
+  github: mlvieras
+  profile_url: https://github.com/mlvieras
+- author: jrocco
+  display_name: Joaquín Rocco
+  image: members/jrocco.jpg
+  github: joaquinrok
+  profile_url: https://github.com/joaquinrok
+- author: pbt
+  display_name: Rodrigo Bayá
+  image: members/pbt.jpg
+  github: pbt31
+  profile_url: https://github.com/pbt31
+- author: bruno
+  display_name: Bruno Ferrari
+  image: members/bruno.jpg
+  github: FerrariBruno
+  profile_url: https://github.com/FerrariBruno
+- author: nicoh
+  display_name: Nicolas Hernandez
+  image: members/nicoh.png
+  github: nicoache1
+  profile_url: https://github.com/nicoache1
+- author: ceci
+  display_name: Cecilia Pirotto
+  image: members/ceci.jpeg
+  github: cecipirotto
+  profile_url: https://github.com/cecipirotto
+- author: arsu
+  display_name: Rodrigo Arsuaga
+  image: members/arsu.png
+  github: rodriar
+  profile_url: https://github.com/rodriar
+- author: tabu
+  display_name: Jorge Gonzalez
+  image: members/tabu.jpg
+  github: jgonzalezalbisu
+  profile_url: https://github.com/jgonzalezalbisu
+- author: renzo
+  display_name: Renzo Gambone
+  image: members/renzo.jpeg
+  github: renzodgc
+  profile_url: https://github.com/renzodgc
+- author: fer-barrios
+  display_name: Fernanda Barrios
+  image: members/fer-barrios.png
+  profile_url: https://www.linkedin.com/in/maría-fernanda-barrios-sánchez-560a08b1/
+- author: nicolantean
+  display_name: Nicolás Lantean
+  image: members/nicolantean.jpg
+  github: nicolantean
+  profile_url: https://github.com/nicolantean
+- author: emi
+  display_name: Emiliano Botti
+  image: members/emi.jpeg
+  github: eb16
+  profile_url: https://github.com/eb16
+- author: robert
+  display_name: Roberto Sosa
+  image: members/robert.png
+  github: xl-rsosa
+  profile_url: https://github.com/xl-rsosa
+- author: sante
+  display_name: Agustín Santellán
+  image: members/sante.png
+  github: sante
+  profile_url: https://github.com/sante
+- author: edu
+  display_name: Eduardo Ferreira
+  image: members/edu.png
+  github: EduQA
+  profile_url: https://github.com/EduQA
+- author: andresh
+  display_name: Andrés Herrera
+  image: members/andresh.jpeg
+  github: andresherrera97
+  profile_url: https://github.com/andresherrera97
+- author: vale
+  display_name: Valentina Bianco
+  image: members/valentina-bianco.png
+  github: ValentinaBianco
+  profile_url: https://www.linkedin.com/in/valentina-bianco-scremini-a432a8130
+- author: pablog
+  display_name: Pablo Grill
+  image: members/pablog.png
+  github: pgrill
+  profile_url: https://github.com/pgrill
+- author: lazaro
+  display_name: Lázaro
+  image: members/lazaro.jpeg
+  github: pgrill
+  profile_url: https://github.com/LazaroM2019
