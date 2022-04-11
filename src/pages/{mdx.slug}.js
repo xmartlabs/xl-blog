@@ -3,16 +3,24 @@ import * as React from 'react'
 import Layout from '../layouts/layout'
 import { MDXRenderer } from 'gatsby-plugin-mdx'
 import { graphql } from 'gatsby'
+import AuthorsYAMLData from "../../content/authors.yaml"
+import CategoriesYAMLDATA from "../../content/categories.yaml"
 
 const BlogPost = ({ data }) => {
-  
+  console.log(AuthorsYAMLData);
+  const author = AuthorsYAMLData.find(author => { return author.author === data.mdx.frontmatter.author })
+  const category = CategoriesYAMLDATA.find(category => { return category.category === data.mdx.frontmatter.category })
   return (
-    <Layout pageTitle="Super Cool Blog Posts">
+    <>
+        <div>{ category.title }</div>
+        <div>{ author.display_name }</div>
+        <div>{ author.image }</div>
+        <div>{ author.profile_url }</div>
         <p>{data.mdx.frontmatter.date}</p>
         <MDXRenderer>
             {data.mdx.body}
         </MDXRenderer>
-    </Layout>
+    </>
   )
 }
 

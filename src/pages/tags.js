@@ -9,7 +9,7 @@ import kebabCase from "lodash/kebabCase"
 import { Link, graphql } from "gatsby"
 
 const TagsPage = ({ data }) => (
-  <div>
+  <>
     <div>
       <h1>Tags</h1>
       <ul>
@@ -22,7 +22,7 @@ const TagsPage = ({ data }) => (
         ))}
       </ul>
     </div>
-  </div>
+  </>
 )
 
 TagsPage.propTypes = {

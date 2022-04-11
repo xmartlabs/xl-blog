@@ -1,11 +1,15 @@
 import React from "react"
 import { graphql, Link } from "gatsby"
-import Layout from "../layouts/layout"
 
 
 const BlogList = ({ pageContext, data }) => {
     const { edges, totalCount } = data.allMdx
-    const { limit, skip } = pageContext
+    const { limit, skip, numPages,  currentPage} = pageContext
+
+    const isFirst = currentPage === 1
+    const isLast = currentPage === numPages
+    const prevPage = currentPage - 1 === 1 ? "/" : `/page/${(currentPage - 1)}`.toString()
+    const nextPage = `/page/${(currentPage + 1)}`.toString()
     return (
         <>
             <h1>Limit: {limit}</h1>
@@ -16,7 +20,7 @@ const BlogList = ({ pageContext, data }) => {
                 return (
                     <article key={node.id}>
                         <h2>
-                        <Link to={`${ node.slug }`}>
+                        <Link to={`/${ node.slug }`}>
                             {node.frontmatter.title}
                         </Link>
                         <p>Posted: {node.frontmatter.date}</p>
@@ -24,6 +28,18 @@ const BlogList = ({ pageContext, data }) => {
                     </article>
                 )
             })}
+            <>
+            {!isFirst && (
+                <Link to={prevPage} rel="prev">
+                ← Previous Page
+                </Link>
+            )}
+            {!isLast && (
+                <Link to={nextPage} rel="next">
+                Next Page →
+                </Link>
+            )}
+            </>
         </>
     )
 }

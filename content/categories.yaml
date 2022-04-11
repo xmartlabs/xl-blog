@@ -1,0 +1,32 @@
+- category: people-events
+  title: Lessons learned on our journey.
+  display_name: People & Events
+  url: /category/people-and-events
+- category: business-agile
+  title: Lessons learned on our journey.
+  display_name: Business & Agile
+  url: /category/business-and-agile
+- category: product-design
+  title: Product Design lessons learned on our journey.
+  display_name: Product Design
+  url: /category/product-design
+- category: development
+  title: Engineering lessons learned on our journey.
+  display_name: Development
+  url: /category/product-development
+- category: machine-learning
+  title: Machine Learning lessons learned on our journey.
+  display_name: Machine Learning
+  url: /category/machine-learning
+- category: data-engineering
+  title: Data Engineering lessons learned on our journey.
+  display_name: Data Engineering
+  url: /category/data-engineering
+- category: ios-development
+  title: Swift lessons learned on our journey.
+  display_name: iOS Development
+  url: /category/ios-development
+- category: android-development
+  title: Android lessons learned on our journey.
+  display_name: Android Development
+  url: /category/android-development
