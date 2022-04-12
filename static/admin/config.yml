@@ -1,8 +1,12 @@
 backend:
-  name: xmartlabs/xl-blog
+  name: github
+  repo: xmartlabs/xl-blog
+  branch: master
+  auth_endpoint: auth
 
-media_folder: static/assets
-public_folder: /assets
+media_folder: src/images
+public_folder: public/assets
+publish_mode: editorial_workflow
 
 collections:
   - name: blog
