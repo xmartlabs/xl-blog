@@ -2,7 +2,9 @@ import React from "react"
 import Footer from "../components/footer"
 import NavBar from "../components/nav-bar"
 import styled from "styled-components"
+import Helmet from "react-helmet"
 import { StyledContainerWrapper } from "../elements/containers"
+import { withPrefix } from "gatsby"
 
 export const StyledMain = styled.main`
   grid-column-start: 2;
@@ -13,6 +15,7 @@ export const StyledMain = styled.main`
 
 function Layout({ children, pageContext }) {
       return (
+        <>
           <StyledContainerWrapper>
             <NavBar />
             <StyledMain>
@@ -20,6 +23,10 @@ function Layout({ children, pageContext }) {
             </StyledMain>
             <Footer />
           </StyledContainerWrapper>
+          <Helmet>
+            <script src={withPrefix('identity.js')} type="text/javascript"></script>
+          </Helmet>
+        </>
       )
 }
 
