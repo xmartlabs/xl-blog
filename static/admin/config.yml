@@ -1,7 +1,7 @@
 backend:
-  name: github
+  name: git-gateway
   repo: xmartlabs/xl-blog
-  branch: master
+  branch: main
   auth_endpoint: auth
 
 media_folder: src/images
