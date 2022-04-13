@@ -9,9 +9,9 @@ public_folder: public/assets
 publish_mode: editorial_workflow
 
 collections:
-  - name: blog
-    label: Blog
-    folder: blogs
+  - name: "blog"
+    label: "Blog"
+    folder: "blogs"
     create: true
     fields:
       - { name: path, label: Path }
