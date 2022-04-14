@@ -12,8 +12,13 @@ backend:
 
 local_backend: true
 
-media_folder: src/images
-public_folder: public/assets
+
+media_folder: static/images
+public_folder: /images
+
+
+# media_folder: src/images
+# public_folder: public/assets
 
 publish_mode: editorial_workflow
 
@@ -26,6 +31,7 @@ collections:
       - { name: title, label: Title, required: true, pattern: ['.{12,}', "Must have at least 12 characters"] }
       - { name: heading, label: Heading, widget: string }
       - { name: subheading, label: Subheading, widget: string }
+      - { name: featured, label: "Featured Post", widget: boolean, default: false }
       - { name: date, label: Date, widget: datetime, format: "YYYY-MM-DD" , date_format: "YYYY-MM-DD" , time_format: false, picker_utc: true }
       - name: category
         label: Category
