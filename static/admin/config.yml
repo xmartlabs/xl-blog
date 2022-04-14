@@ -16,6 +16,9 @@ local_backend: true
 media_folder: static/images
 public_folder: /images
 
+extension: "mdx"
+format: "frontmatter"
+
 
 # media_folder: src/images
 # public_folder: public/assets
