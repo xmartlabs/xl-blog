@@ -14,7 +14,30 @@ collections:
     folder: "blogs"
     create: true
     fields:
-      - { name: path, label: Path }
-      - { name: date, label: Date, widget: datetime }
-      - { name: title, label: Title }
+      - { name: title, label: Title, required: true, pattern: ['.{12,}', "Must have at least 12 characters"] }
+      - { name: date, label: Date, widget: datetime, format: "YYY-MM-DD" , date_format: "YYY-MM-DD" , time_format: false, picker_utc: true }
+      - name: category
+        label: Category
+        widget: "select"
+        options:
+          - { label: "People & Events", value: "people-events" } 
+          - { label: "Business & Agile", value: "business-agile" }
+          - { label: "Product Design", value: "product-design" }
+          - { label: "Development", value: "development" }
+          - { label: "Machine Learning", value: "machine-learning" }
+          - { label: "Data Engineering", value: "data-engineering" }
+          - { label: "iOS Development", value: "ios-development" }
+          - { label: "Android Development", value: "android-development" }
+      - { name: tags, label: Tags }
+      - { name: author, label: Author, widget: "select", options:[mtnBarreto, agustin, dernst, esanchez, enrique, alberto, maximo, mathias, santiago, helen, remer, mirland, mcousillas, xl, felipe, mlorenzo, jrocco, pbt, bruno, nicoh, ceci, arsu, tabu, renzo, fer-barrios, nicolantean, emi, robert, sante, edu, andresh, vale, pablog, lazaro] }
       - { name: body, label: Body, widget: markdown }
+    identifier_field: title
+
+
+   
+
+
+
+
+
+
