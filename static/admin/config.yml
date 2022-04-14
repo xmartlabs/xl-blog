@@ -16,9 +16,8 @@ local_backend: true
 media_folder: static/images
 public_folder: /images
 
-extension: "mdx"
-format: "frontmatter"
-
+# extension: "mdx"
+# format: "frontmatter"
 
 # media_folder: src/images
 # public_folder: public/assets
@@ -29,6 +28,8 @@ collections:
   - name: "blog"
     label: "Blog"
     folder: "blogs"
+    extension: mdx
+    format: frontmatter
     create: true
     fields:
       - { name: title, label: Title, required: true, pattern: ['.{12,}', "Must have at least 12 characters"] }
