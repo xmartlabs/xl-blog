@@ -15,7 +15,7 @@ collections:
     create: true
     fields:
       - { name: title, label: Title, required: true, pattern: ['.{12,}', "Must have at least 12 characters"] }
-      - { name: date, label: Date, widget: datetime, format: "YYY-MM-DD" , date_format: "YYY-MM-DD" , time_format: false, picker_utc: true }
+      - { name: date, label: Date, widget: datetime, format: "YYYY-MM-DD" , date_format: "YYYY-MM-DD" , time_format: false, picker_utc: true }
       - name: category
         label: Category
         widget: "select"
