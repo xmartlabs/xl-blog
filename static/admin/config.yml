@@ -29,7 +29,44 @@ collections:
           - { label: "iOS Development", value: "ios-development" }
           - { label: "Android Development", value: "android-development" }
       - { name: tags, label: Tags }
-      - { name: author, label: Author, widget: "select", options:[mtnBarreto, agustin, dernst, esanchez, enrique, alberto, maximo, mathias, santiago, helen, remer, mirland, mcousillas, xl, felipe, mlorenzo, jrocco, pbt, bruno, nicoh, ceci, arsu, tabu, renzo, fer-barrios, nicolantean, emi, robert, sante, edu, andresh, vale, pablog, lazaro] }
+      - name: author
+        label: Author
+        widget: "select"
+        options:
+          - { value: "mtnBarreto", label: "Martin Barreto" }
+          - { value: "agustin", label: "Agustin Hernandez" }
+          - { value: "dernst", label: "Diego Ernst" }
+          - { value: "esanchez", label: "Ezequiel Santiago Sanchez" }
+          - { value: "enrique", label: "Enrique Galindo" }
+          - { value: "alberto", label: "Alberto Attia" }
+          - { value: "maximo", label: "Maximo Mussini" }
+          - { value: "mathias", label: "Mathias Claassen" }
+          - { value: "santiago", label: "Santiago Castro" }
+          - { value: "helen", label: "Helen Olhausen" }
+          - { value: "remer", label: "Miguel Revetria" }
+          - { value: "mirland", label: "Matías Irland" }
+          - { value: "mcousillas", label: "Mauricio Cousillas" }
+          - { value: "xl", label: "Xmartlabs Team" }
+          - { value: "felipe", label: "Felipe de León" }
+          - { value: "mlorenzo", label: "Matías Lorenzo" }
+          - { value: "jrocco", label: "Joaquín Rocco" }
+          - { value: "pbt", label: "Rodrigo Bayá" }
+          - { value: "bruno", label: "Bruno Ferrari" }
+          - { value: "nicoh", label: "Nicolas Hernandez" }
+          - { value: "ceci", label: "Cecilia Pirotto" }
+          - { value: "arsu", label: "Rodrigo Arsuaga" }
+          - { value: "tabu", label: "Jorge Gonzalez" }
+          - { value: "renzo", label: "Renzo Gambone" }
+          - { value: "fer-barrios", label: "Fernanda Barrios" }
+          - { value: "nicolantean", label: "Nicolás Lantean" }
+          - { value: "emi", label: "Emiliano Botti" }
+          - { value: "robert", label: "Roberto Sosa" }
+          - { value: "sante", label: "Agustín Santellán" }
+          - { value: "edu", label: "Eduardo Ferreira" }
+          - { value: "andresh", label: "Andrés Herrera" }
+          - { value: "vale", label: "Valentina Bianco" }
+          - { value: "pablog", label: "Pablo Grill" }
+          - { value: "lazaro", label: "Lázaro" }
       - { name: body, label: Body, widget: markdown }
     identifier_field: title
 
