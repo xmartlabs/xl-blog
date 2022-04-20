@@ -54,7 +54,7 @@ collections:
         name: "thumbnail"
         widget: "image"
         choose_url: true
-        media_folder: images
+        # media_folder: images
         # default: "/uploads/chocolate-dogecoin.jpg"
         media_library:
           config:
