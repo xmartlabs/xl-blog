@@ -29,7 +29,7 @@ To prevent permissions issues we will install all the gems only for the builder 
 
 Before starting, include the ruby bin folder to builder's path by adding the line below to the files `~/.bashrc` and `~/.bash_login`:
 
-{% highlight shell %}
+```shell
 
 # It may change depending on the ruby's version on your system
 export PATH="$PATH:/var/_xcsbuildd/.gem/ruby/2.0.0/bin"
@@ -38,7 +38,7 @@ export PATH="$PATH:/var/_xcsbuildd/.gem/ruby/2.0.0/bin"
 
 Now let's install these gems:
 
-{% highlight shell %}
+```shell
 
 $ sudo su - _xcsbuildd
 
@@ -111,7 +111,7 @@ Before our Deployer Bot starts integrating, we have to perform some tasks which 
 
 Fastlane tools will look for useful information at `Appfile` file to deploy the lanes such as **Apple ID** and **application Bundle Identifier**. Code snippet below illustrates how `Appfile` could looks like:
 
-{% highlight ruby %}
+```ruby
 
 app_identifier "<MY_APP_BUNDLE_ID>" # The bundle identifier of your app
 
@@ -133,7 +133,7 @@ Downloading and configuring provisioning profiles is done by Fastlane [sigh](htt
 
 The `before_integration` lane is defined in the `Fastfile` file as shown below:
 
-{% highlight ruby %}
+```ruby
 
 lane :before_integration do
   # fetch the number of commits in the current branch
@@ -160,7 +160,7 @@ end
 
 If we run `fastlane before_integration`, it will connect to iOS Member Center and download the profiles for the app indicated by its bundle id in the `Appfile`. Additionally, we have to send the password to fastlane. To make this work with Xcode bots, we pass it through the environment variable `FASTLANE_PASSWORD`:
 
-{% highlight shell %}
+```shell
 
 $ export FASTLANE_PASSWORD="<APPLE_ID_PASSWORD>"
 $ fastlane before_integration
@@ -181,7 +181,7 @@ After the bot finishes integrating the project, we will be able to access the cr
 
 Let's start simple without taking care of the upload to iTunes Connect for now:
 
-{% highlight ruby %}
+```ruby
 
 lane :after_integration do
   plistFile = './MyApp-Info.plist'
@@ -217,7 +217,7 @@ end
 
 Now we are going to export the IPA from the archive file created by the bot during the integration. We do this by running the command `xcrun xcodebuild` in the `after_integration` lane. Additionally, we're going to upload the IPA to iTunes Connect using Fastlane [deliver](https://github.com/fastlane/deliver) tool. See details below:
 
-{% highlight ruby %}
+```ruby
 
 lane :after_integration do
   plistFile = './MyApp-Info.plist'
@@ -254,7 +254,7 @@ end
 
 Typically our projects have production and staging application targets. `Fastfile` file will require different lanes for each target that we want to upload to iTunes Connect. We need to  modify the `Appfile` file to set up the correct app identifier depending on each lane:
 
-{% highlight ruby %}
+```ruby
 
 for_platform :ios do
   for_lane :before_integration_staging do
@@ -286,7 +286,7 @@ itunes_connect_id "<itunes_connect_email@server.com>"
 
 Finally, after some refactor, the `Fastfile` file may looks like as shown below:
 
-{% highlight ruby %}
+```ruby
 
 require './libs/utils.rb'
 
@@ -470,7 +470,7 @@ During our process of setting up Xcode Server, we faced many drawbacks and issue
 
 We tried by unlocking it before running `sigh` as shown below without luck:
 
-{% highlight shell %}
+```shell
 
 # Try to unlock the keychain to be accessed by fastlane actions
 $ security -v unlock-keychain -p `cat /Library/Developer/XcodeServer/SharedSecrets/PortalKeychainSharedSecret` /Library/Developer/XcodeServer/Keychains/Portal.keychain
@@ -498,7 +498,7 @@ We simply couldn't access the keychain when running Fastlane. We opted to just s
 
 We ended up deleting CocoaPods and installing it as a described above:
 
-{% highlight shell %}
+```shell
 
 $ sudo rm -fr /var/_xcsbuildd/.cocoapods
 
@@ -529,7 +529,7 @@ Ensure that:
 
 After updating Xcode to version 7.2.1 we were able to select it on Server app, then Xcode service was disabled. When we tried to select the correct Xcode app there was a dialog saying *"You must agree to the terms of the xcode software license agreement"* was shown. We found the solution on an Apple Forum thread [Can not choose Xcode in Server App - "You must agree to the terms..."](https://forums.developer.apple.com/thread/34683), running next command will allow you to select Xcode on Server app:
 
-{% highlight shell %}
+```shell
 
 $ sudo /Applications/Xcode.app/Contents/Developer/usr/bin/xcscontrol --initialize
 
@@ -555,7 +555,7 @@ To commit changelog changes and a build number bump we need to have access to th
    `$ sudo su - _xcsbuildd`
 * Copy a valid ssh key to `~/.ssh`.
 * Modify `~/.bash_login` in order to automatically add your custom key to ssh agent:
-   {% highlight shell %}
+   ```shell
    $ echo 'eval "$(ssh-agent -s)"' >> ~/.bash_login
    $ echo 'ssh-add ~/.ssh/id_rsa_github' >> ~/.bash_login
    ```

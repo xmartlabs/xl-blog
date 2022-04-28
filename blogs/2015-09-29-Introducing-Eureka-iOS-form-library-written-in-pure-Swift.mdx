@@ -38,7 +38,7 @@ Let's deep into what we mean by each of the listed points.
 
 Eureka uses a chainable approach along with custom swift operators to declare a table-view form.
 
-{% highlight swift %}
+```swift
 self.form +++=  DateRow("Date") {
                   $0.value = NSDate()
                   $0.title = "The clock says:"
@@ -71,7 +71,7 @@ However, full customization is supported. Eureka! provides 2 customization level
 
 General customization allows us to make changes to all rows or cells of a specific type.
 
-{% highlight swift %}
+```swift
 // set up minimumDate for all DateRows
 DateRow.defaultRowInitializer = { row in row.minimumDate = NSDate() }
 // modify all NameRow cell textField font to UIFont.systemFontOfSize(fontSize: 12.0)
@@ -86,7 +86,7 @@ Notice that the cell and row parameters are strongly typed and these 3 method ar
 
 Individual customization allows us to make changes to a particular row or cell instance.
 
-{% highlight swift %}
+```swift
 // Every row has a initializer that receive a tag and a initializer blog
 // as a first and second parameter respectively.
 let segmentedRow =  SegmentedRow<Emoji>("Emoji"){
@@ -122,7 +122,7 @@ I can ensure Eureka is super safe either during form creation or when defining n
 
 Eureka allows us to easily attach onChange and onSelect handlers to a row.
 
-{% highlight swift %}
+```swift
 let segmentedRow =  SegmentedRow<Emoji>("Emoji"){
                       $0.title = "Who are You?"  // set up the row title
                       $0.options = [💁, 🍐, 👦, 🐗, 🐼, 🐻] // available options
@@ -139,7 +139,7 @@ Doing that we gain for free a lot of helpers and behaviour and we are able to it
 
 Let's see this in action assuming form is an instance of Form:
 
-{% highlight swift %}
+```swift
 // let's get second form section and append a new DateRow
 let section_two = form[1] <<< DateRow("Date") { $0.value = NSDate() } // we can also use append instead of <<< operator
 

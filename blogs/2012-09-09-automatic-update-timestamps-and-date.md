@@ -22,7 +22,7 @@ permalink: /:year/:month/:day/:title/
   <li>Allow caching of your webpage: the changes are made on the browser and the server response is "always" the same.</li>
 </ul>
 <p><b>A small example:</b></p>
-{% highlight html %}
+```html
 <time class="timeago" datetime="2012-09-10T14:30:52-0300">September 10, 2012</time>;
 ```
 ```

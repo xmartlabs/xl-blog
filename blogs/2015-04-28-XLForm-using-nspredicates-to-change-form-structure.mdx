@@ -35,7 +35,7 @@ We chose the `NSPredicate` class to define conditions because NSPredicate provid
 
 We added `hidden` and `disabled` properties to `XLFormRowDescriptor` and `XLFormSectionDescriptor`. These properties can be set with an NSPredicate, a NSString or a NSNumber boolean.  When a NSString is set, a NSPredicate will be generated taking the string as the NSPredicate `format` parameter.
 
-{% highlight objc %}
+```objc
 @property id disabled;
 @property id hidden;
 ```
@@ -53,18 +53,18 @@ To conditionally hide or disable a row we can set either a `NSPredicate` or a `N
 Setting the property to a `NSString` is faster when the predicate is simple because there is no need to add `.value` after each row variable (we do that internally). For complex predicates we recommend to set up the `hidden` property using a `NSPredicate` instance.
 
 An example predicate string could be the following:
-{% highlight objc %}
+```objc
 row.hidden = [NSString stringWithFormat:@"$%@ contains 'Music'", hobbyRow];
 ```
 
 the same predicate set up using a NSPredicate:
-{% highlight objc %}
+```objc
 row.hidden = [NSPredicate predicateWithFormat:@"$%@.value contains 'Music'", hobbyRow];
 ```
 
 Notice that `%@` will be replaced by `hobbyRow`'s tag string (XLForm uses unique tags as an abstraction to identify rows). We can also get the same result writing the condition as (hobbyRowTag is the hobbyRow tag value):
 
-{% highlight objc %}
+```objc
 row.hidden = [NSPredicate predicateWithFormat:@"$hobbyRowTag.value contains 'Music'"];
 ```
 
@@ -77,7 +77,7 @@ When an incorrect predicate is set and it cannot be parsed then an exception wil
 
 At any time you can get the `hidden` or `disabled` evaluated boolean values invoking `isHidden` or `isDisabled` methods respectively.
 
-{% highlight objc %}
+```objc
 -(BOOL)isDisabled;
 -(BOOL)isHidden;
 ```
@@ -94,7 +94,7 @@ Let's see this simple example:
 Suppose we have a form that questions the users hobbies. So we will have a multiple selector where the user can choose some of "Sport", "Music" and "Films". Now if the user selects "Sport" we want him to name his favourite sportsman but if the user selects "Films" we want to ask which is the best film he has seen or which is his favourite actor. And so on.
 
 So we need to define a section with the first question:
-{% highlight objc %}
+```objc
 section = [XLFormSectionDescriptor formSectionWithTitle:@"Hobbies"];
 [form addFormSection:section];
 
@@ -107,14 +107,14 @@ hobbyRow.value = @[];
 ```
 
 Then we define a section for the next questions but we just want to show this section when at least one option is selected in the first row:
-{% highlight objc %}
+```objc
 section = [XLFormSectionDescriptor formSectionWithTitle:@"Some more questions"];
 section.hidden = [NSPredicate predicateWithFormat:[NSString stringWithFormat:@"$%@.value.@count = 0", hobbyRow]];
 [form addFormSection:section];
 ```
 
 Then we define some rows that depend on the value of the first row. They are just questions depending on the selected hobbies:
-{% highlight objc%}
+```objc
 row = [XLFormRowDescriptor formRowDescriptorWithTag:kSport
                                             rowType:XLFormRowDescriptorTypeTextView
                                               title:@"Your favourite sportsman?"];

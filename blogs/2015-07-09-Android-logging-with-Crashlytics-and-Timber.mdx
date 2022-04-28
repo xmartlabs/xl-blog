@@ -11,13 +11,13 @@ It's an annoying problem to have crashes in your Android app. Obviously you want
 
 A typical log goes like this:
 
-{% highlight java %}
+```java
 Log.e(TAG, "A message about something weird");
 ```
 
 For more information you could catch an exception and print its stack trace:
 
-{% highlight java %}
+```java
 exception.printStackTrace();
 ```
 
@@ -25,7 +25,7 @@ During app development you can notice this easily. But what happens if this occu
 
 Apart from this, what is that `TAG`? You know, it's something that gives you context about the message and it's a common practice to name it after the class you are working on:
 
-{% highlight java %}
+```java
 private static final String TAG = "SomeClass";
 ```
 
@@ -66,13 +66,13 @@ To setup Crashlytics in your app you have to add this to your `build.gradle`:
 
 This in your Application creation:
 
-{% highlight java %}
+```java
 Fabric.with(this, new Crashlytics());
 ```
 
 And if you want it to be disabled in debug mode (and I'm sure you want) use this instead:
 
-{% highlight java %}
+```java
 CrashlyticsCore core = new CrashlyticsCore.Builder()
         .disabled(BuildConfig.DEBUG)
         .build();
@@ -87,13 +87,13 @@ By the way, Crashlytics also provides Answers: a service that logs app usage in 
 
 Crashes are automatically reported. On the other hand, to log caught exceptions you just simple write:
 
-{% highlight java %}
+```java
 Crashlytics.logException(exception);
 ```
 
 Key-value pairs can be added to the issues before you log them by using:
 
-{% highlight java %}
+```java
 Crashlytics.setString("key", "value");
 ```
 
@@ -109,7 +109,7 @@ So, every time I want to log something, do I have to use the Android Log and Cra
 
 To use Android log only in debug mode you could use something like this code in your Application creation:
 
-{% highlight java %}
+```java
 @Override
 public void onCreate() {
     super.onCreate();
@@ -157,19 +157,19 @@ This way we could log only those messages above certain severity. Also some cont
 
 To log you just simply:
 
-{% highlight java %}
+```java
 Timber.e(exception, "Message");
 ```
 
 Or a null message if you want:
 
-{% highlight java %}
+```java
 Timber.w(exception, null);
 ```
 
 A simple message can be logged, and it'll be sent via Crashlytics too:
 
-{% highlight java %}
+```java
 Timber.e("A cool message");
 ```
 
