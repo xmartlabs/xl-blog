@@ -43,30 +43,30 @@ API to create a cool geographic app. We will use&nbsp;<a href="https://twitter.g
 <p>
   Now that we have defined the events we can begin coding our Socket.IO-powered server. We will store the users information in a variable, so that we can broadcast the chat messages&nbsp;accordingly.
 </p>
-{% highlight js %}
+```
 var connectedUsers = {};
 var io = require('socket.io');
 var webSocket = io.listen(httpServer);
-{% endhighlight %}
+```
 
 <p>
 Here we are using Socket.IO with the Node HTTP server <a href="/2012/11/06/geographic-chat-app-with-nodejs/">we created</a>, but it can also be set to run standalone.
 </p>
-{% highlight js %}
+```
 webSocket.sockets.on('connection', function(socket) {
-{% endhighlight %}
+```
 
 <p>
 Inside this function we will add our event listeners. Setting a listener is really simple, just tell Socket.IO the name of the event and the callback function to handle it.
 </p>
 
-{% highlight js %}
+```
   socket.on('join', function(user, sendKey) {
   user.key = Date.now();
   connectedUsers[user.key] = user;
   sendKey(user.key);
   socket.set('userkey', user.key);
-{% endhighlight %}
+```
 Here we take the data from the event, a user in this example, and stash it in a variable. The event callback can receive an arbitrary number of parameters.
 <br />There is a special case when the last parameter is a function, it will act as an acknowledgement. This acknowledgement can also contain data, in that way it resembles a remote function call.
 <br />
@@ -74,10 +74,10 @@ Here we take the data from the event, a user in this example, and stash it in a 
 <br />
 <br />Finally, we want to notify users that are already in the chat room that another users has joined in.
 <br />
-{% highlight js %}
+```
 socket.broadcast.emit("user connected", user);
 });
-{% endhighlight %}
+```
 
 <p>
 The <i>broadcast</i> flag we use here tells Socket.IO to send the message to all the sockets that are connected to the server, except the one that triggered the event.
@@ -86,7 +86,7 @@ The <i>broadcast</i> flag we use here tells Socket.IO to send the message to all
   The other event is similar, we use <i>get</i> to retrieve the data we saved before.
 </p>
 
-{% highlight js %}
+```
 socket.on('message', function(msg) {
   socket.get('userkey', function(err, key) {
     var user = connectedUsers[key];
@@ -100,13 +100,13 @@ socket.on('message', function(msg) {
     }
   });
 });
-{% endhighlight %}
+```
 
 <p>
 Socket.IO provides several default events, you might want to check the <a href="https://github.com/LearnBoost/socket.io/wiki/Exposed-events">docs</a>. Here we handle the disconnection of a client.
 </p>
 
-{% highlight js %}
+```
 socket.on('disconnect', function() {
   socket.get('userkey', function(err, key) {
     var userInfo = connectedUsers[key];
@@ -116,7 +116,7 @@ socket.on('disconnect', function() {
     }
   });
 });
-{% endhighlight %}
+```
 
 <p>
 Now we need to work out the client side. In order to use Socket.IO from the browser you must add a reference to the client script. If you are using node.js as your web server then it will serve the file for you, just add the following reference to the
@@ -125,13 +125,13 @@ HTML:
 
 {% highlight html %}
   <script src="/socket.io/socket.io.js"></script>
-{% endhighlight %}
+```
 
 <p>
 Here we present a simplified version of the chat client, so that you don't get overwhelmed with presentation details and we can focus in the Socket.IO bits.
 </p>
 
-{% highlight js %}
+```
 var user = {};
 var usersCount, messagesList, messageBox, sendButton, webSocket;
 
@@ -178,7 +178,7 @@ function sendChatMessage() {
  webSocket.send(messageVal);
 }
 
-{% endhighlight %}
+```
 First we register listeners to each event, passing our event handlers. After that we emit a <i>join</i> message, which will allow us to enter the chat room and send messages. Notice that we use a callback function to receive a session key after connection,
 these acknowledgements come in real handy to return success or error messages.
 <br />

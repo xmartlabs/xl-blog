@@ -34,7 +34,7 @@ Before starting, include the ruby bin folder to builder's path by adding the lin
 # It may change depending on the ruby's version on your system
 export PATH="$PATH:/var/_xcsbuildd/.gem/ruby/2.0.0/bin"
 
-{% endhighlight %}
+```
 
 Now let's install these gems:
 
@@ -49,7 +49,7 @@ $ ln -s `which pod` /Applications/Xcode.app/Contents/Developer/usr/bin/pod
 $ gem install --user-install fastlane
 $ ln -s `which fastlane` /Applications/Xcode.app/Contents/Developer/usr/bin/fastlane
 
-{% endhighlight %}
+```
 
 
 #### Emails & Notifications
@@ -127,7 +127,7 @@ itunes_connect_id "<itunes_connect_email@server.com>"
 # itc_team_name "<ITC_TEAM_NAME>"
 # itc_team_id "<ITC_TEAM_ID>"
 
-{% endhighlight %}
+```
 
 Downloading and configuring provisioning profiles is done by Fastlane [sigh](https://github.com/fastlane/sigh) tool. Its usage is really straightforward, just set up the `Appfile` correctly and it'll do the rest.
 
@@ -154,7 +154,7 @@ lane :before_integration do
   sigh(output_path: '/Library/Developer/XcodeServer/ProvisioningProfiles', skip_install: true)
 end
 
-{% endhighlight %}
+```
 
 > `number_of_commits` and `cocoapods` are Fastlane actions. Both `Appfile` and `Fastfile` files must be within a `fastlane` folder in the root directory of your project.
 
@@ -165,7 +165,7 @@ If we run `fastlane before_integration`, it will connect to iOS Member Center an
 $ export FASTLANE_PASSWORD="<APPLE_ID_PASSWORD>"
 $ fastlane before_integration
 
-{% endhighlight %}
+```
 
 > Initially we attempted to use Keychain to pass the passwords to Fastlane `sigh` but it doesn't work, for further info about this see [here](#attempting-to-developer-password-to-fastlane-tools).
 
@@ -213,7 +213,7 @@ lane :after_integration do
   push_git_tags
 end
 
-{% endhighlight %}
+```
 
 Now we are going to export the IPA from the archive file created by the bot during the integration. We do this by running the command `xcrun xcodebuild` in the `after_integration` lane. Additionally, we're going to upload the IPA to iTunes Connect using Fastlane [deliver](https://github.com/fastlane/deliver) tool. See details below:
 
@@ -246,7 +246,7 @@ lane :after_integration do
 
 end
 
-{% endhighlight %}
+```
 
 > We are not using the bot to create the IPA file because it is not available yet during trigger execution time. We are not using [gym](https://github.com/fastlane/gym) either because of the Keychain restriction problem.
 
@@ -280,7 +280,7 @@ itunes_connect_id "<itunes_connect_email@server.com>"
 # team_name "<TEAM_NAME>"
 # team_id "<TEAM_ID>"
 
-{% endhighlight %}
+```
 
 > Setting up apple_dev_portal_id and itunes_connect_id allows us to use different accounts for fetching profiles and uploading to iTunes Connect respectively.
 
@@ -426,7 +426,7 @@ platform :ios do
   end
 end
 
-{% endhighlight %}
+```
 
 Notes about previous `Fastfile` file:
 
@@ -452,7 +452,7 @@ Notes about previous `Fastfile` file:
 </dict>
 </plist>
 
-{% endhighlight %}
+```
 
 As the last step, add a new after integration trigger that executes our `after_integration_staging` lane:
 
@@ -478,7 +478,7 @@ $ security -v unlock-keychain -p `cat /Library/Developer/XcodeServer/SharedSecre
 # Will download profiles using sigh
 $ fastlane before_integration_staging
 
-{% endhighlight %}
+```
 
 On the output log appears next messages:
 
@@ -507,7 +507,7 @@ $ gem install --user-install cocoapods
 $ pod setup
 $ ln -s `which pod` /Applications/Xcode.app/Contents/Developer/usr/bin/pod
 
-{% endhighlight %}
+```
 
 #### Fastlane - Sigh & Gym cannot access to keychain
 
@@ -533,7 +533,7 @@ After updating Xcode to version 7.2.1 we were able to select it on Server app, t
 
 $ sudo /Applications/Xcode.app/Contents/Developer/usr/bin/xcscontrol --initialize
 
-{% endhighlight %}
+```
 
 #### IPA not available
 
@@ -558,13 +558,13 @@ To commit changelog changes and a build number bump we need to have access to th
    {% highlight shell %}
    $ echo 'eval "$(ssh-agent -s)"' >> ~/.bash_login
    $ echo 'ssh-add ~/.ssh/id_rsa_github' >> ~/.bash_login
-   {% endhighlight %}
+   ```
 * Determine which key should be used to access git repo by changing `~/.ssh/config` file, for example add next lines:
    {% highlight text %}
     Host github.com
        HostName github.com
      IdentityFile ~/.ssh/id_rsa_github
-   {% endhighlight %}
+   ```
 
 This will also be helpful to fetch git submodules.
 
@@ -576,4 +576,4 @@ If the upload to iTunes Connect fails with an error similar to "Invalid Signatur
 
 parameter ErrorMessage = ERROR ITMS-90035: "Invalid Signature. A sealed resource is missing or invalid. Make sure you have signed your application with a distribution certificate, not an ad hoc certificate or a development certificate. Verify that the code signing settings in Xcode are correct at the target level (which override any values at the project level). Additionally, make sure the bundle you are uploading was built using a Release target in Xcode, not a Simulator target. If you are certain your code signing settings are correct, choose "Clean All" in Xcode, delete the "build" directory in the Finder, and rebuild your release target. For more information, please consult https://developer.apple.com/library/ios/documentation/Security/Conceptual/CodeSigningGuide/Introduction/Introduction.html
 
-{% endhighlight %}
+```

@@ -53,7 +53,7 @@ self.form +++=  DateRow("Date") {
                   $0.value = 🍐
                 }
            <<<  PhoneRow("Phone") { $0.placeholder = "Phone" }
-{% endhighlight %}
+```
 
 ### Support dynamic table-view forms <a name="dynamic-forms"></a>
 
@@ -78,7 +78,7 @@ DateRow.defaultRowInitializer = { row in row.minimumDate = NSDate() }
 NameRow.defaultCellUpdate = { cell, row in cell.textField?.font =  UIFont.systemFontOfSize(fontSize: 12.0)  }
 // Modify all CheckRow cells in order to show a orange check mark.  
 CheckRow.defaultCellSetup = { cell, row in cell.tintColor = UIColor.orangeColor() }
-{% endhighlight %}
+```
 
 Notice that the cell and row parameters are strongly typed and these 3 method are injected automatically through protocol extensions since all rows should conform to `RowType`.
 
@@ -103,7 +103,7 @@ let nameRow =  NameRow("Name").cellSetup { cell, row in
                               .cellUpdate { cell, row in
                                 cell.textLabel?.textColor = UIColor.redColor()
                               }
-{% endhighlight %}
+```
 
 Notice that the parameter function type is `(NameCell, NameRow) -> ()` for `NameRow` and is (SegmentedCell<Emoji>, SegmentedRow<Emoji>) -> () for `SegmentedRow<Emoji>`.
 
@@ -129,7 +129,7 @@ let segmentedRow =  SegmentedRow<Emoji>("Emoji"){
                     }
                     .onChange { row in print(row.value?.name) } // row.value is Emoji?, name is a stored property
                     .onCellSelection { cell, row in print("Cell was selected") }
-{% endhighlight %}
+```
 
 #### Form and Section conform to RangeReplaceableCollectionType, MutableCollectionType
 
@@ -162,7 +162,7 @@ form += [newSection1, newSection2]
 section += [newRow1, newRow2, newRow3]
 
 //And there are much more possibilities ;)
-{% endhighlight %}
+```
 
 
 ### Extensible

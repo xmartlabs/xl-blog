@@ -23,7 +23,7 @@ send geographic updates in real time.
   <li><b><i>request locations</i></b>: When a user wants to know every other connected user's location.</li>
 </ul>
 
-{% highlight js %}
+```
 socket.on("send location", function(data) {
   socket.get('userkey', function(err, key) {
     var user = connectedUsers[key];
@@ -39,7 +39,7 @@ socket.on("send location", function(data) {
 socket.on("request locations", function(sendData) {
   sendData(connectedUsers);
 });
-{% endhighlight %}
+```
 
 
 <p>
@@ -55,7 +55,7 @@ To simplify this demo we will write the client from scratch, you can see how the
   We will store all the markers in a hash, creating one marker for each user that is connected to the server. Notice that you will need to include the <a href="https://developers.google.com/maps/documentation/javascript/tutorial">Google Maps script</a>.
 </p>
 
-{% highlight js %}
+```
   var webSocket, myMap;
 var markers = {};
 
@@ -96,14 +96,14 @@ function removeMarker(key){
   }
 }
 
-{% endhighlight %}
+```
 
 The client suscribes to <i>location update</i> in order to add markers to the map or update existing ones, and to <i>user disconnected</i> to remove markers from the map after a user is no longer connected.
 <br />Additionally, the client emits a <i>request locations</i> event to ask the server to send the locations of users that are already connected (and therefore will not send their location unless it changes), passing an acknowledgement function <i>loadMarkers</i>that will receive the data and add the corresponding markers.
 <br />
 
 
-{% highlight js %}
+```
 
 function loadMarkers(data) {
   for(key in data) {
@@ -120,14 +120,14 @@ function getMarker(lat, lng, label) {
   });
 }
 
-{% endhighlight %}
+```
 
 Now our client is ready to receive geographic updates in real time. But who is sending them?
 <br />Here we use the Geolocation API to get the user's location from the browser and send an update to the server, but we could use any client that supports Socket.IO.
 <br />
 
 
-{% highlight js %}
+```
 
 function tryGeolocation(){
   if(navigator.geolocation) {
@@ -149,7 +149,7 @@ function errorHandler(error) {
   alert("Error detecting your location");
 }
 
-{% endhighlight %}
+```
 
 
 Now that we have a working application it would be nice to try it out with our friends, so we will upload it to <a href="https://www.heroku.com/">heroku</a>. They have written a <a href="https://devcenter.heroku.com/articles/nodejs">very complete article</a> on how to upload a Node.js app, below we will only go over the configuration files you need for this app.
@@ -157,7 +157,7 @@ Now that we have a working application it would be nice to try it out with our f
 <br />First we need to define our application dependencies in a 'package.json' file so that heroku prepares the required environment, locate it in your project's root folder. Here's an example of the file's content:
 <br />
 
-{% highlight js %}
+```
 
 {
   "dependencies": {
@@ -170,23 +170,23 @@ Now that we have a working application it would be nice to try it out with our f
   }
 }
 
-{% endhighlight %}
+```
 
 <p>
 We need to tell heroku how to start our application, so create a file called 'Procfile' with the following content:
 </p>
 
-{% highlight js %}
+```
 
 web: node app.js
 
-{% endhighlight %}
+```
 
 The last thing we need is to configure Socket.IO to use long-polling, since at the time of writing heroku's Cedar stack still doesn't support the WebSockets protocol. Add the following to your 'app.js' file, which is the <a href="https://devcenter.heroku.com/articles/using-socket-io-with-node-js-on-heroku">recommended configuration</a>:
 <br />
 
 
-{% highlight js %}
+```
 
 // assuming webSocket is the Socket.IO server object
 webSocket.configure(function () {
@@ -194,7 +194,7 @@ webSocket.configure(function () {
   webSocket.set("polling duration", 10);
 });
 
-{% endhighlight %}
+```
 
 Done! You can check the full source code and <a href="https://github.com/xmartlabs/map-chat/fork">fork it on github</a>.
 <br />Wanna try? Go to&nbsp;<a href="https://xmart-chat.herokuapp.com/">our live demo</a>.

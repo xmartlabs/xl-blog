@@ -24,12 +24,12 @@ permalink: /:year/:month/:day/:title/
 <p><b>A small example:</b></p>
 {% highlight html %}
 <time class="timeago" datetime="2012-09-10T14:30:52-0300">September 10, 2012</time>;
-{% endhighlight %}
-{% highlight js %}
+```
+```
 $(document).ready(function() {
   $("time.timeago").timeago();
 });
-{% endhighlight %}
+```
 The result is a formatted timestamp that automatically updates itself.
 <p>
   <time class="timeago" datetime="2012-09-10T14:30:52-0300" style="color: black;">September 10, 2012</time> this post was published.

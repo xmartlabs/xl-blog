@@ -29,18 +29,18 @@ on top of node, but this time we will do it by hand.
 </p>
 
 
-{% highlight js %}
+```
 var fs = require('fs'),
 url = require('url'),
 http = require('http'),
 path = require('path'),
 mime = require('mime');
-{% endhighlight %}
+```
 <p>
 Next we create the server, passing the function that handles the HTTP requests as an argument.
 </p>
 
-{% highlight js %}
+```
 httpServer = http.createServer(function(request, response) {
   var pathname = url.parse(request.url).pathname;
   if(pathname == "/") pathname = "index.html";
@@ -53,7 +53,7 @@ httpServer = http.createServer(function(request, response) {
     response.end();
     return;
   }
-{% endhighlight %}
+```
 
 
 Then we obtain the name of the file we need to return from the request, and set a default file for the root ("/index.html"). After that we check if the file exists inside a 'public' folder located in the same directory of the script, returning a 404 response
@@ -65,7 +65,7 @@ reading operation.
 </p>
 
 <pre>
-{% highlight js %}
+```
 response.writeHead(200, { 'Content-Type': mime.lookup(filename) });
 fs.createReadStream(filename, {
   'flags': 'r',
@@ -77,24 +77,24 @@ fs.createReadStream(filename, {
 }).addListener("close", function() {
   response.end();
 });
-{% endhighlight %}
+```
 </pre>
 
 <p>
 There you go, we have a working web server! Right? Ehm, not yet. We need the server to open a port so it can listen to requests. Add this line at the bottom of your script.
 </p>
 
-{% highlight js %}
+```
 httpServer.listen(process.env.PORT || 8080, "0.0.0.0");
-{% endhighlight %}
+```
 
 <p>
 Make sure you have a 'public' folder in the same directory where you saved the script and put an 'index.html' with the content of your choice. Next open a terminal and type:
 </p>
 
-{% highlight js %}
+```
 node app.js
-{% endhighlight %}
+```
 Now we're ready! You can test if the server is working by opening a tab in your browser at 'localhost:8080'.
 <br />
 <br />Now that we have a basic web server we can start building the chat application, in the following posts we will show you how to use Socket.IO to send chat messages and geographic updates in real time. If you are impacient and can't wait for the next post

@@ -13,13 +13,13 @@ A typical log goes like this:
 
 {% highlight java %}
 Log.e(TAG, "A message about something weird");
-{% endhighlight %}
+```
 
 For more information you could catch an exception and print its stack trace:
 
 {% highlight java %}
 exception.printStackTrace();
-{% endhighlight %}
+```
 
 During app development you can notice this easily. But what happens if this occurs in the user's device? You won't realize. And yet worse, it will get logged in the users' devices consuming memory space for a non-existent reader.
 
@@ -27,7 +27,7 @@ Apart from this, what is that `TAG`? You know, it's something that gives you con
 
 {% highlight java %}
 private static final String TAG = "SomeClass";
-{% endhighlight %}
+```
 
 After all, why do we have to do this? This is boilerplate. You have to add it to each class that you log messages and receive warnings about some of them being unused if any log is removed.
 
@@ -68,7 +68,7 @@ This in your Application creation:
 
 {% highlight java %}
 Fabric.with(this, new Crashlytics());
-{% endhighlight %}
+```
 
 And if you want it to be disabled in debug mode (and I'm sure you want) use this instead:
 
@@ -77,7 +77,7 @@ CrashlyticsCore core = new CrashlyticsCore.Builder()
         .disabled(BuildConfig.DEBUG)
         .build();
 Fabric.with(this, new Crashlytics.Builder().core(core).build());
-{% endhighlight %}
+```
 
 (thanks [@gonzalomelov](https://github.com/gonzalomelov) for a fix regarding this)
 
@@ -89,13 +89,13 @@ Crashes are automatically reported. On the other hand, to log caught exceptions 
 
 {% highlight java %}
 Crashlytics.logException(exception);
-{% endhighlight %}
+```
 
 Key-value pairs can be added to the issues before you log them by using:
 
 {% highlight java %}
 Crashlytics.setString("key", "value");
-{% endhighlight %}
+```
 
 Other data types are accepted too.
 
@@ -151,7 +151,7 @@ public class CrashlyticsTree extends Timber.Tree {
         }
     }
 }
-{% endhighlight %}
+```
 
 This way we could log only those messages above certain severity. Also some context is added to Crashlytics issues. Remember that Crashlytics is already only in non-debug mode.
 
@@ -159,19 +159,19 @@ To log you just simply:
 
 {% highlight java %}
 Timber.e(exception, "Message");
-{% endhighlight %}
+```
 
 Or a null message if you want:
 
 {% highlight java %}
 Timber.w(exception, null);
-{% endhighlight %}
+```
 
 A simple message can be logged, and it'll be sent via Crashlytics too:
 
 {% highlight java %}
 Timber.e("A cool message");
-{% endhighlight %}
+```
 
 See? There is no `TAG` parameter. It's automagically assigned as the caller class' name by Timber.
 

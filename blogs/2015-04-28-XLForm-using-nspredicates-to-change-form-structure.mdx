@@ -38,7 +38,7 @@ We added `hidden` and `disabled` properties to `XLFormRowDescriptor` and `XLForm
 {% highlight objc %}
 @property id disabled;
 @property id hidden;
-{% endhighlight %}
+```
 
 
 ## How to use it
@@ -55,18 +55,18 @@ Setting the property to a `NSString` is faster when the predicate is simple beca
 An example predicate string could be the following:
 {% highlight objc %}
 row.hidden = [NSString stringWithFormat:@"$%@ contains 'Music'", hobbyRow];
-{% endhighlight %}
+```
 
 the same predicate set up using a NSPredicate:
 {% highlight objc %}
 row.hidden = [NSPredicate predicateWithFormat:@"$%@.value contains 'Music'", hobbyRow];
-{% endhighlight %}
+```
 
 Notice that `%@` will be replaced by `hobbyRow`'s tag string (XLForm uses unique tags as an abstraction to identify rows). We can also get the same result writing the condition as (hobbyRowTag is the hobbyRow tag value):
 
 {% highlight objc %}
 row.hidden = [NSPredicate predicateWithFormat:@"$hobbyRowTag.value contains 'Music'"];
-{% endhighlight %}
+```
 
 
 When the predicate is evaluated every tag variable gets substituted by the corresponding row descriptor. For this purpose the XLFormDescriptor has a dictionary which maps tags to rows.
@@ -80,7 +80,7 @@ At any time you can get the `hidden` or `disabled` evaluated boolean values invo
 {% highlight objc %}
 -(BOOL)isDisabled;
 -(BOOL)isHidden;
-{% endhighlight %}
+```
 
 Probably you will never have to invoke these previous methods directly from your own code, most of the time XLForm internal classes will use them.
 
@@ -104,14 +104,14 @@ XLFormRowDescriptor* hobbyRow = [XLFormRowDescriptor formRowDescriptorWithTag:kH
 hobbyRow.selectorOptions = @[@"Sport", @"Music", @"Films"];
 hobbyRow.value = @[];
 [section addFormRow:hobbyRow];
-{% endhighlight %}
+```
 
 Then we define a section for the next questions but we just want to show this section when at least one option is selected in the first row:
 {% highlight objc %}
 section = [XLFormSectionDescriptor formSectionWithTitle:@"Some more questions"];
 section.hidden = [NSPredicate predicateWithFormat:[NSString stringWithFormat:@"$%@.value.@count = 0", hobbyRow]];
 [form addFormSection:section];
-{% endhighlight %}
+```
 
 Then we define some rows that depend on the value of the first row. They are just questions depending on the selected hobbies:
 {% highlight objc%}
@@ -138,7 +138,7 @@ row = [XLFormRowDescriptor formRowDescriptorWithTag:kMusic
                                               title:@"Your favourite singer?"];
 row.hidden = [NSString stringWithFormat:@"NOT $%@ contains 'Music'", hobbyRow];
 [section addFormRow:row];
-{% endhighlight %}
+```
 
 So, that code is pretty straightforward if you have some XLForm experience. And the predicates are easy to understand as well.
 
