@@ -64,6 +64,7 @@ in case the file does not exist.
 reading operation.
 </p>
 
+<pre>
 {% highlight js %}
 response.writeHead(200, { 'Content-Type': mime.lookup(filename) });
 fs.createReadStream(filename, {
