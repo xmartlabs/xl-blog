@@ -60,13 +60,14 @@ webSocket.sockets.on('connection', function(socket) {
 Inside this function we will add our event listeners. Setting a listener is really simple, just tell Socket.IO the name of the event and the callback function to handle it.
 </p>
 
-```
+```javascript
   socket.on('join', function(user, sendKey) {
   user.key = Date.now();
   connectedUsers[user.key] = user;
   sendKey(user.key);
   socket.set('userkey', user.key);
 ```
+
 Here we take the data from the event, a user in this example, and stash it in a variable. The event callback can receive an arbitrary number of parameters.
 <br />There is a special case when the last parameter is a function, it will act as an acknowledgement. This acknowledgement can also contain data, in that way it resembles a remote function call.
 <br />
@@ -74,6 +75,7 @@ Here we take the data from the event, a user in this example, and stash it in a 
 <br />
 <br />Finally, we want to notify users that are already in the chat room that another users has joined in.
 <br />
+
 ```
 socket.broadcast.emit("user connected", user);
 });
