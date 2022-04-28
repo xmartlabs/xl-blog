@@ -10,7 +10,7 @@ const Authors = ({ pageContext, data }) => {
   const authorHeader = `${totalCount} post${
     totalCount === 1 ? "" : "s"
   } written by "${author}"`
-
+  const _ = require("lodash")    
   return (
     <div>
       <h1>{authorHeader}</h1>
@@ -19,7 +19,7 @@ const Authors = ({ pageContext, data }) => {
           const { title } = node.frontmatter
           return (
             <li key={node.slug}>
-              <Link to={node.slug}>{title}</Link>
+              <Link to={`/${_.kebabCase(node.frontmatter.permalink)}`}>{title}</Link>
             </li>
           )
         })}
@@ -67,6 +67,7 @@ export const pageQuery = graphql`
         node {
           frontmatter {
             title
+            permalink
           }
         }
       }

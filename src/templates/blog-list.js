@@ -1,8 +1,8 @@
 import React from "react"
 import { graphql, Link } from "gatsby"
 
-
 const BlogList = ({ pageContext, data }) => {
+    const _ = require("lodash")    
     const { edges, totalCount } = data.allMdx
     const { limit, skip, numPages,  currentPage} = pageContext
 
@@ -20,7 +20,7 @@ const BlogList = ({ pageContext, data }) => {
                 return (
                     <article key={node.id}>
                         <h2>
-                        <Link to={`/${ node.slug }`}>
+                        <Link to={`/${_.kebabCase(node.frontmatter.permalink)}`}>
                             {node.frontmatter.title}
                         </Link>
                         <p>Posted: {node.frontmatter.date}</p>
@@ -63,6 +63,7 @@ export const blogListQuery = graphql`
                         author
                         category
                         tags
+                        permalink
                     }
                     body
                     slug
