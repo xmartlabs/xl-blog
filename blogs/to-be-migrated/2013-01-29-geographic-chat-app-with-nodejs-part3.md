@@ -7,7 +7,7 @@ tags:
 - node.js
 author: maximo
 category: development
-permalink: /:year/:month/:day/:title/
+permalink: /geographic-chat-app-with-nodejs-part3/
 ---
 
 In this series of posts we are going to show you how to use <a href="https://nodejs.org/">node.js</a>&nbsp;and&nbsp;<a href="http://socket.io/">Socket.IO</a>&nbsp;to build a simple chat application, and then mix it up with Google Maps and the Geolocation

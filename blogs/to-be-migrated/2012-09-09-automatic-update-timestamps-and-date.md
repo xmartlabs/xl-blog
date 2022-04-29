@@ -7,7 +7,7 @@ tags:
 - jquery
 author: mtnBarreto
 category: development
-permalink: /:year/:month/:day/:title/
+permalink: /automatic-update-timestamps-and-date/
 ---
 <p>
 

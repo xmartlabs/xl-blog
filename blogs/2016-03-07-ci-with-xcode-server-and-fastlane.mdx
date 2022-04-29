@@ -1,10 +1,10 @@
 ---
-title: "CI and automatic deployment to iTunes Connect with Xcode Server"
-date:   2016-03-07
+title: CI and automatic deployment to iTunes Connect with Xcode Server
+date: 2016-03-07
 tags: [Server, CI, Fastlane]
 author: remer
 category: ios-development
-permalink: /:year/:month/:day/:title/
+permalink: /ci-with-xcode-server-and-fastlane/
 ---
 
 In this post I'm going to write about my experience and the problems I faced when setting up Xcode Server for CI and automatic deployment to iTunes Connect at Xmartlabs. I'm going to let you know how I could solve some problems hoping it may help somebody in the same situation.
@@ -435,7 +435,7 @@ Notes about previous `Fastfile` file:
 * `ensure_git_status_clean` will check if the bot's working folder has changes and will fail in such case. This will ensure that the bot’s working copy is exactly the same to the remote repository files. As we are changing local files on our `after_integration` lane, if something went wrong we'll want to reset all of them. So we added the action `reset_git_repo` in the `error` block.
 * The command `xcrun xcodebuild -exportArchive` requires a configuration file specified with the option `-exportOptionsPlist`. We created the file `ExportOptions.plist` within `fastlane` folder and its content is similar to:
 
-{% highlight xml %}
+```xml
 
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
@@ -560,7 +560,7 @@ To commit changelog changes and a build number bump we need to have access to th
    $ echo 'ssh-add ~/.ssh/id_rsa_github' >> ~/.bash_login
    ```
 * Determine which key should be used to access git repo by changing `~/.ssh/config` file, for example add next lines:
-   {% highlight text %}
+   ```
     Host github.com
        HostName github.com
      IdentityFile ~/.ssh/id_rsa_github
@@ -572,8 +572,6 @@ This will also be helpful to fetch git submodules.
 
 If the upload to iTunes Connect fails with an error similar to "Invalid Signature. A sealed resource is missing or invalid.", it may happen because the export archive command (xcodebuild command) is not receiving the option `-exportOptionsPlist`. i it up and the path to the file is OK. The full error message is:
 
-{% highlight text %}
-
+```
 parameter ErrorMessage = ERROR ITMS-90035: "Invalid Signature. A sealed resource is missing or invalid. Make sure you have signed your application with a distribution certificate, not an ad hoc certificate or a development certificate. Verify that the code signing settings in Xcode are correct at the target level (which override any values at the project level). Additionally, make sure the bundle you are uploading was built using a Release target in Xcode, not a Simulator target. If you are certain your code signing settings are correct, choose "Clean All" in Xcode, delete the "build" directory in the Finder, and rebuild your release target. For more information, please consult https://developer.apple.com/library/ios/documentation/Security/Conceptual/CodeSigningGuide/Introduction/Introduction.html
-
 ```

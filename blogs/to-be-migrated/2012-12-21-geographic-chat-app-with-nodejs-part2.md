@@ -7,7 +7,7 @@ tags:
 - node.js
 author: maximo
 category: development
-permalink: /:year/:month/:day/:title/
+permalink: /geographic-chat-app-with-nodejs-part2/
 ---
 <span>
   <a href="/2012/11/06/geographic-chat-app-with-nodejs/">Part one</a> | <a href="/2013/01/29/geographic-chat-app-with-nodejs-part3/">Part three</a>
