@@ -2,7 +2,7 @@
 // If you want to use different layouts for different pages, you can pass this information in the context of the pages you create, and then conditionally render in your layout file.
 // called after every page is created.
 
-const postsPerPage = 2;
+const postsPerPage = 10;
 
 const path = require("path")
 const _ = require("lodash")

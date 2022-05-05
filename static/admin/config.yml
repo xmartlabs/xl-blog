@@ -33,6 +33,7 @@ collections:
     create: true
     fields:
       - { name: title, label: Title, required: true, pattern: ['.{12,}', "Must have at least 12 characters"] }
+      - { name: permalink, label: Permalink, required: true, pattern: ['.{12,}', "Must have at least 12 characters"] }
       - { name: heading, label: Heading, widget: string }
       - { name: subheading, label: Subheading, widget: string }
       - { name: featured, label: "Featured Post", widget: boolean, default: false }
