@@ -249,3 +249,319 @@ Hope you liked this post! If you have any doubt, comment or complain, don't hesi
 [GitHub Archive]: https://www.githubarchive.org/
 [Jupyter Notebook]: https://jupyter.org/
 [Spark]: https://spark.apache.org/
+
+
+
+
+
+
+
+
+
+```
+npm run eject
+```
+
+Now that we have our blank canvas to work with, let's get our hands dirty.
+
+### Boilerplate
+
+We’ll need a couple of files to get started. First, we’ll need three different app entry points. The current one is `src/App.js`. Let's create a `src/apps` directory where to put all our entry points. These files will work as root files that start the corresponding React app. We'll need three since we don't want to mix the code of all three apps, and also you may want to configure some things differently. Think of three separate React apps living in the same repository.
+
+Our first app will be located in `src/apps/products`. The directory structure could be as follows:
+
+```
+/src
+  |- /apps
+    |- /products
+      |- app.js
+      |- app.test.js
+      |- app.css
+      |- index.js
+```
+
+What I've done here is simply move the files that were on `src/` and renamed them (we don't use Pascal Case to name component files, but you can do it if you like). We'll have to adapt them down the line, but we'll cross that bridge when we get there.
+
+You should create similar files for the other two apps (`checkout` and `static-pages`). In some cases you might want some configuration to work similarily across apps (for example, the router, debugging components). So what we usually do is create an `AppTemplate` component that serves that purpose, and then simply render that component in each `app.js` file. For simplicity, let's copy the code that's in the initial `App.js` file and paste it in `src/apps/app-template.js`.
+
+```jsx
+/* src/apps/app-template.js */
+import React, { Component } from 'react';
+import logo from './logo.svg';
+
+class AppTemplate extends Component {
+  render() {
+    return (
+      <div className="App">
+        <header className="App-header">
+          <img src={logo} className="App-logo" alt="logo" />
+          <p>
+            Edit <code>src/App.js</code> and save to reload.
+          </p>
+          <a
+            className="App-link"
+            href="https://reactjs.org"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            Learn React
+          </a>
+        </header>
+      </div>
+    );
+  }
+}
+
+export { AppTemplate };
+```
+
+Then, in each of our `app.js` files we'll do something like this:
+
+```jsx
+/* src/apps/products/app.js */
+import React from 'react';
+
+import { AppTemplate } from '../app-template';
+import './app.css';
+
+const App = () => (
+  <AppTemplate />
+);
+
+export default App;
+```
+
+**Note:** I've neglected to show a few updates you'll need to make in other files, but they should be pretty evident (for example updating imports in each of the apps `index.js` files).
+
+This setup will allow you to centralize configuration of code that needs to go on every sub app, while also allowing us to override or add local configuration to a specific app. You can even pass props to `AppTemplate` if you want, to make this approach even more versatile. Right now all our `app.js` files are equal, but as apps grow, they'll start changing and becoming more complex.
+
+If you try to start the project now, it will most certainly crash. That's because we haven't told Webpack we want it to process multiple entry points!
+
+### Webpack Configuration
+
+Take a look at webpack's main configuration file, located in `config/webpack.config.js`. If you don't have experience with Webpack there's a lot to take in (a **lot**), but let's focus on what's important. Take a look at the `entry` key on line 127. To Webpack, entry points are a way of specifying the different bundles you want to create. Each entry point will be processed individually. Therefore, what we want to do is specify three entry points, one for each of our sub apps. `Create React App` centralizes path configuration in a single `paths.js` file. We must edit this file to add information of all our apps. Add this code somewhere on the paths file:
+
+#### Path Configuration
+
+```js
+/* config/paths.js */
+const apps = {
+  CHECKOUT: 'checkout',
+  PRODUCTS: 'products',
+  STATIC_PAGES: 'static-pages',
+};
+
+const appData = Object.values(apps).map((appName) => {
+  return {
+    js: {
+      name: appName,
+      path: resolveApp(`src/apps/${appName}/index.js`),
+    },
+    html: {
+      chunks: [ appName ],
+      filename: `${appName}.html`,
+      template: resolveApp(`public/base-template.html`),
+    }
+  }
+});
+```
+
+The idea is to export the configuration for each of our apps on the `appData` object. The `js` key should make sense, as we're specifying the name of the app (`products`) and where its entry point is located (`src/apps/products/index.js`). The `html` key might not make a lot of sense right now, so let's explain.
+
+The `template` key specifies where the base template for the HTML of the app is located. You should already have an `index.html` in your public folder. I'd suggest renaming it to something like `base-template.html` to avoid confusions. The `filename` key specifies what the final name of the HTML should be (`products.html`). The `chunks` key is very important, as it tells Webpack to only include the chunks related to this app (`products.js`, `products.css` and all other assets).
+
+Now, simply export this new object we've made. You can also remove unnecessary exports that were already there, since we won't use them:
+
+```js
+/* config/paths.js */
+module.exports = {
+  dotenv: resolveApp('.env'),
+  appData, // <- New
+  appPath: resolveApp('.'),
+  appBuild: resolveApp('build'),
+  appPublic: resolveApp('public'),
+  appPackageJson: resolveApp('package.json'),
+  appSrc: resolveApp('src'),
+  appTsConfig: resolveApp('tsconfig.json'),
+  yarnLockFile: resolveApp('yarn.lock'),
+  testsSetup: resolveModule(resolveApp, 'src/setupTests'),
+  proxySetup: resolveApp('src/setupProxy.js'),
+  appNodeModules: resolveApp('node_modules'),
+  publicUrl: getPublicUrl(resolveApp('package.json')),
+  servedPath: getServedPath(resolveApp('package.json')),
+};
+```
+
+#### Entry point Configuration
+
+On line 134 of the Webpack configuration file is the `entry` key. We must add our new entry points:
+
+```js
+/* config/webpack.config.js */
+const entries = {};
+paths.appData.forEach((entry) => {
+  const entryJs = entry.js;
+  entries[entryJs.name] = [
+    // Include an alternative client for WebpackDevServer. A client's job is to
+    // connect to WebpackDevServer by a socket and get notified about changes.
+    // When you save a file, the client will either apply hot updates (in case
+    // of CSS changes), or refresh the page (in case of JS changes). When you
+    // make a syntax error, this client will display a syntax error overlay.
+    // Note: instead of the default WebpackDevServer client, we use a custom one
+    // to bring better experience for Create React App users. You can replace
+    // the line below with these two lines if you prefer the stock client:
+    // require.resolve('webpack-dev-server/client') + '?/',
+    // require.resolve('webpack/hot/dev-server'),
+    isEnvDevelopment &&
+      require.resolve('react-dev-utils/webpackHotDevClient'),
+    // Finally, this is your app's code:
+    entryJs.path,
+    // We include the app code last so that if there is a runtime error during
+    // initialization, it doesn't blow up the WebpackDevServer client, and
+    // changing JS code would still trigger a refresh.
+  ].filter(Boolean);
+});
+
+return {
+  // ...
+  entry: entries,
+}
+```
+
+#### Output Configuration
+
+Right now, Webpack expects you to only generate one final bundle. We're trying to split our app so this approach won't work. Head to the `output` key on the configuration object and look for the `filename` key inside. In development mode its value is `static/js/bundle.js`. We don't want it to have a static name, since we'll be creating three of them and they'll step on each other. The easy solution is to use Webpack's handy interpolation schemes: simply change the value to `static/js/[name].bundle.js`. This will make Webpack interpolate the name of the bundle in the file, so you'll end up creating three different main bundles.
+
+And *voilà*, Webpack now knows where to look for our JS files and thus define the apps correctly. But there's a final task: configure the HTML Webpack generates for each app. We'll do this on the `plugins` key, creating one instance of `HtmlWebpackPlugin` for each of our apps.
+
+```js
+return {
+  // ...
+  plugins: [
+    //...
+    ...paths.appData.map(appData => new HtmlWebpackPlugin(Object.assign(
+      {},
+      appData,
+      {
+        inject: true,
+      },
+      isEnvProduction
+        ? {
+            minify: {
+              removeComments: true,
+              collapseWhitespace: true,
+              removeRedundantAttributes: true,
+              useShortDoctype: true,
+              removeEmptyAttributes: true,
+              removeStyleLinkTypeAttributes: true,
+              keepClosingSlash: true,
+              minifyJS: true,
+              minifyCSS: true,
+              minifyURLs: true,
+            },
+          }
+        : undefined
+    ))),
+  ],
+}
+```
+
+Remember to maintain the relative order of the plugins. Also, keep in mind that you have to *replace* the instance of HtmlWebpackPlugin that is already being created.
+
+Now are apps are correctly split. Sadly it isn't the end yet, but we're getting closer! The last thing we'll need to do is configure Webpack's development server to serve us the three different apps.
+
+### Rewriting Development Routes
+
+The development server that runs when you start the project in development is biased towards a single-entry-point implementation. We'll need to change a couple of things in order to make URL splitting work here. Essentially, the development server needs to know which app it needs to serve on which URL. We can do so with *rewrites*:
+
+```js
+/* config/paths.js */
+const appRewrites = [
+  { from: /products/, to: `/${apps.PRODUCTS}.html` },
+  { from: /checkout/, to: `/${apps.CHECKOUT}.html` },
+  { from: /static-pages/, to: `/${apps.STATIC_PAGES}.html` },
+  { from: /.*/, to: `/${apps.PRODUCTS}.html` },
+];
+```
+
+Now simply export `appRewrites` so that we can access it from the configuration file.
+
+Rewrites work with regular expressions, so you won't necessarily need to specify *each* of your app's paths manually. Here I've given a naive example to get you going. It's also reasonable to put a catch-all rule at the end so that the user always gets an app served to them (maybe to show them a not found page).
+
+Now, let's tell Webpack's development server to use these rewrites. The configuration resides in `config/webpackDevServer.config.js`.
+
+```js
+/* config/webpackDevServer.config.js */
+{
+  //...
+  historyApiFallback: {
+    // Paths with dots should still use the history fallback.
+    // See https://github.com/facebook/create-react-app/issues/387.
+    disableDotRule: true,
+    rewrites: paths.appRewrites, // <--- Add this rule
+  }
+}
+```
+
+Great! Your app now supports URL splitting correctly! Let's do a recap. Stick around for the caveats section, since you'll probably need to do a few more touches here and there to start your development process smoothly.
+
+## Recap
+
+Here's what we've accomplished so far:
+
+- Create individual entry points for our apps.
+- Configure Webpack's bundler to support all our apps.
+- Configure Webpack's development server to serve different HTML files depending on the URL.
+
+If you try to start the server now, it'll crash. This is because the scripts that are bundled with CreateReactApp's code expect only one Javascript entry points. It should be extremely simple to fix this, simply check the start and build scripts on `scripts/`. Once you start the server, you should be met with something similar to this:
+
+<img width="100%" src="/images/url-splitting/app-base-page.png" />
+
+To convince ourselves that our apps are different, we can change the background to different colors. Go to each app's `app.css` file and edit the background color. I've used red, green and blue. Now navigate to `/products`, `/checkout` and `/static-pages` and you should be met by three different background colors. This means our server is serving them correctly!
+
+## Caveats
+
+### Code Sharing
+
+The whole idea of URL splitting is to avoid serving the user code they probably won't need. On the other hand, we should have a way to share code between our apps, to make everything as DRY as possible. But beware, sharing code between apps can be tricky! Be sure to import only what you'll need on any specific app. You might end up loading every app with code that will never be visited.
+
+Try structuring your code in a way that reusable code is correctly labeled and easy to identify (i.e. global styling files, helpers and generic components). This will make it easier for people who work with your code to know what they're looking at, and give you an idea of how much code you're sharing.
+
+Much like a prepubescent teenager, your apps want to have a personality! If you find yourself sharing *everything* between apps, it might be a sign that you didn't split them in a sensible way. Also, sharing little to no code between them can also be signalling an issue. It's all a matter of balance.
+
+### Service Workers and PWAs
+
+The initial app we created is configured to be a [Progressive Web App](https://developers.google.com/web/progressive-web-apps/) out of the box. This is because it is assumed you'll always have a single bundle, and having your app be a PWA without configuration is sure useful!
+
+The problem is, our app is now *three* different bundles. You can't have a PWA with multiple entry points that don't share all the code. What you can have is three different PWAs scoped by an internal path in your domain. I won't go into detail on how you could achieve this, since it isn't the scope of this article, and I personally don't find it very useful (but it could be for your use case).
+
+If you've followed this blogpost's code to a tee, then probably all your apps' `index.js` file have these lines somewhere:
+
+```js
+// If you want your app to work offline and load faster, you can change
+// unregister() to register() below. Note this comes with some pitfalls.
+// Learn more about service workers: https://bit.ly/CRA-PWA
+serviceWorker.unregister();
+```
+
+This means that our app is not really a PWA yet. We'd need to explicitly enable the service worker on the client's browser by changing that line. So, essentially you're not in trouble if you leave all this code hanging around, but I always like to remove all the evidence to avoid confusing people who are not familiar with the code.
+
+### Production Backend
+
+One of the advantages of SPAs is that the backend that serves them can be as dumb as a second coat of paint. Meaning that, no matter the request, the backend will always serve the matching public file, or the HTML entry points for your SPA.
+
+Sadly, with URL splitting you'll need to make your backend a little smarter. Much like we did with Webpack's development server, you'll need to specify what HTML file to serve on which URLs. This can be done extremely quickly using an Express backend (which is what I do).
+
+### Frontend Routing
+
+If you have experience with SPA's with React, you've probably used React Router to solve your routing needs. The issue is, React Router will solve routing *inside* each of your apps, but not *between* them. Perfect time to sell my next blog post!
+
+Jokes aside, this is a somewhat deep topic, so I've decided to split it. Check out part two when it releases!
+
+## Afterword
+
+Yes, I know, configuring URL splitting is quite horrible, and you certainly shouldn't go through the hassle of doing it **unless** you really need it. Think of it as another tool in your toolbelt. And, believe me, I've run into mind-boggling issues while configuring the project myself. But in the end, it's a one-time thing that will help you get a more stable, more performant app in the end. And every time you configure it it gets easier.
+
+So don't be afraid if you don't understand everything that's going on. With time, you will. And if there's something that wasn't clear, feel free to leave a comment or an issue on the repo! I'm always open for feedback.
+
+Cheers!

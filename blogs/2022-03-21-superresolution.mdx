@@ -115,27 +115,21 @@ After seeing similar results of academic papers, we can conclude that almost all
 In the next section, we'll discuss qualitative results. Here we'll have different perspectives and several examples about how SwinIR is better in some cases, but RCAN has advantages for others.
 
 <div class="twentytwenty-container">
- <!-- The before image is first -->
  <img src="/images/ml-superresolution/zoom_flor_seed.png" />
- <!-- The after image is last -->
  <img src="/images/ml-superresolution/zoom_flor_seed_swin.png" />
 </div>
 
 For this image, SwinIR was better at eliminating the noise around the flower's petals and made a reasonably good reconstruction of the light in the fruit even after zooming.
 
 <div class="twentytwenty-container">
- <!-- The before image is first -->
  <img src="/images/ml-superresolution/zoom_ext.png" />
- <!-- The after image is last -->
  <img src="/images/ml-superresolution/zoom_ext_swin.png" />
 </div>
 
 Here SwinIR did an excellent job with lines and recovering the texture of the stones in the floor and wall. The reconstruction of the shadows was really "meticulous," preserving its topology, meaning that despite correcting the image, the algorithm maintains the lounge chair's geometric proportions (shape, size, etc.)
 
 <div class="twentytwenty-container">
- <!-- The before image is first -->
  <img src="/images/ml-superresolution/zoom_ext_tree.png" />
- <!-- The after image is last -->
  <img src="/images/ml-superresolution/zoom_ext_tree_swin.png" />
 </div>
 
@@ -144,9 +138,7 @@ There is no question that SwinIR was the top performer in the above cases. Howev
 In the marketing industry, it's common to see images that focus on one object while the background is blurred or out of focus. For this type of image, SwinIR isn't the best alternative because its algorithm is based on reconstructing the image, so it will try to "fix" the background blur that's there intentionally. Let's see some examples:
 
 <div class="twentytwenty-container">
- <!-- The before image is first -->
  <img src="/images/ml-superresolution/test_497x712.jpg" />
- <!-- The after image is last -->
  <img src="/images/ml-superresolution/test_497x712_SwinIR_large.png" />
 </div>
 
@@ -156,9 +148,7 @@ In this image, **Muhammad Ali's** fist is in focus while the rest of his body 
 The next question is: Can we find some image that improves its quality and keeps the sense and topology through SwinIR? Trying to answer this led to some excellent examples. Let's see them:
 
 <div class="twentytwenty-container">
- <!-- The before image is first -->
  <img src="/images/ml-superresolution/caracol.png" />
- <!-- The after image is last -->
  <img src="/images/ml-superresolution/caracol_swin.png" />
 </div>
 
@@ -167,9 +157,7 @@ In this case, we can see how the algorithm considers the wheel's blurriness (due
 Can SwinIR keep the topology of the image in paintings like Van Gogh's *The Starry Night*?
 
 <div class="twentytwenty-container">
- <!-- The before image is first -->
  <img src="/images/ml-superresolution/orig_64571-750x430.jpg" />
- <!-- The after image is last -->
  <img src="/images/ml-superresolution/orig_64571-750x430_SwinIR_large.png" />
 </div>
 

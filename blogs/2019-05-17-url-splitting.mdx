@@ -38,7 +38,7 @@ The first thing you need to do when URL splitting is deciding how many sub apps 
 
 Here's a crude diagram of how our app would be split, with some examples of the URLs each will be in charge of.
 
-<img width="100%" src="/images/url-splitting/apps-diagram.png">
+<img width="100%" src="/images/url-splitting/apps-diagram.png" />
 
 You may be wondering why we put the login and register page on the Checkout App. Why not split a fourth app with all these pages? Well, you certainly could! But in this case, it makes sense that most of the time users will log in or register when starting the checkout process. Threading authentication and checkout together seems like a good idea, but to be really sure we’d need to check the analytics of similar businesses.
 
@@ -317,7 +317,7 @@ Here's what we've accomplished so far:
 
 If you try to start the server now, it'll crash. This is because the scripts that are bundled with CreateReactApp's code expect only one Javascript entry points. It should be extremely simple to fix this, simply check the start and build scripts on `scripts/`. Once you start the server, you should be met with something similar to this:
 
-<img width="100%" src="/images/url-splitting/app-base-page.png">
+<img width="100%" src="/images/url-splitting/app-base-page.png" />
 
 To convince ourselves that our apps are different, we can change the background to different colors. Go to each app's `app.css` file and edit the background color. I've used red, green and blue. Now navigate to `/products`, `/checkout` and `/static-pages` and you should be met by three different background colors. This means our server is serving them correctly!
 

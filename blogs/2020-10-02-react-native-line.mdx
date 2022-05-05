@@ -30,7 +30,7 @@ The new login functionality accepts any kind of argument like the native LineSDK
 
 Try out any of the following arguments:
 
-```jsx
+```js
 {
   scopes?: LoginPermission[]
   onlyWebLogin?: boolean
@@ -40,7 +40,7 @@ Try out any of the following arguments:
 
 Where `scopes` accepts:
 
-```jsx
+```js
 {
   EMAIL = 'email',
   /// The permission to get an ID token in the login response.
@@ -54,7 +54,7 @@ Where `scopes` accepts:
 
 and `botPrompt`:
 
-```jsx
+```js
 {
   aggressive = 'aggressive',
   normal = 'normal',
@@ -67,7 +67,7 @@ This means your application would have the ability to get specific logged user i
 
 Simply trigger this piece of code to logout the user:
 
-```jsx
+```js
 try {
    ...
    await Line.logout()
@@ -81,7 +81,7 @@ try {
 
 If you want to get information from the logged user, just run this snippet of code:
 
-```jsx
+```js
 try {
    ...
    const profile = await Line.getProfile()
@@ -93,7 +93,7 @@ try {
 
 And you will get this `profile` object to use as you wish:
 
-```jsx
+```js
 {
    /// The user ID of the current authorized user.
   userID: String
@@ -131,7 +131,7 @@ Unlike most natives modules in the React Native community which are developed in
 
 This was an easy decision to make. First, we have been using Swift and Kotlin since their first release. Secondly, [Line SDK is deprecating the Objective-C version](https://developers.line.biz/en/docs/ios-sdk/objective-c/overview/) on behalf of Swift (see image below). Lastly, and this is more obvious, Swift and Kotlin are modern, more intuitive, easy to read, and maintain than Obj-c and Java respectively.
 
-<img src="/images/react-native-line/migrate.png" alt="deprecation advertisement" >
+<img src="/images/react-native-line/migrate.png" alt="deprecation advertisement" />
 
 # Integration Guide
 

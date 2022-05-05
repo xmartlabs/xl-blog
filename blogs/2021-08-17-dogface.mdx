@@ -34,7 +34,7 @@ For training, the model uses triplet loss. The idea behind this loss function is
 The equation for triplet loss is:
 
 <p style="text-align:center;">
-    <img style="width: 100%" src="/images/dogface/triplet_loss.png" alt="triplet_loss">
+    <img style="width: 100%" src="/images/dogface/triplet_loss.png" alt="triplet_loss" />
 </p>
 
 Where x<sub>a</sub>, x<sub>p</sub> , and x<sub>n</sub> represent the anchor, positive and negative samples, respectively, and the function <i>f</i> represents the embedding of the image sample. So that equation says that if the positive sample is closer than the negative (by a distance &alpha;) then the embedding is acceptable, if not, there is something to change in the network.
@@ -58,7 +58,7 @@ While the results presented in the paper are:
 The confusion matrix and the ROC curve:
 
 <p style="text-align:center;">
-    <img style="width: 100%" src="/images/dogface/cm_roc.png" alt="cm_roc">
+    <img style="width: 100%" src="/images/dogface/cm_roc.png" alt="cm_roc" />
 </p>
 
 The chosen threshold balances the false negatives and false positives.
@@ -80,7 +80,7 @@ Labeling by the nearest neighbor, the accuracy is around 0.48, which results in 
 To make the classification easier, the paper shows the rank-k classification. This is done by doing the same split in the validation dataset, then instead of keeping the label of the nearest neighbor, we take the k closest labels, this means that if for example, the two nearest neighbors correspond to the same dog, then this counts as one.
 
 <p style="text-align:center;">
-    <img style="width: 85%" src="/images/dogface/rank_k.png" alt="rank_k">
+    <img style="width: 85%" src="/images/dogface/rank_k.png" alt="rank_k" />
 </p>
 
 This increases the accuracy substantially, and it might be a more accurate representation of the case of use of this model, as it would be reasonable for the user to upload an image, and then the program gives more than one possible match, leaving the user to make the final decision.
