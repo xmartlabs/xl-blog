@@ -33,9 +33,8 @@ collections:
     create: true
     fields:
       - { name: title, label: Title, required: true, pattern: ['.{12,}', "Must have at least 12 characters"] }
+      - { name: subtitle, label: Subtitle, widget: string }
       - { name: permalink, label: Permalink, required: true, pattern: ['.{12,}', "Must have at least 12 characters"] }
-      - { name: heading, label: Heading, widget: string }
-      - { name: subheading, label: Subheading, widget: string }
       - { name: featured, label: "Featured Post", widget: boolean, default: false }
       - { name: date, label: Date, widget: datetime, format: "YYYY-MM-DD" , date_format: "YYYY-MM-DD" , time_format: false, picker_utc: true }
       - name: category
