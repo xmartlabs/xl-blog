@@ -1,0 +1,23 @@
+@import 'assets/stylesheets/mixins';
+@import 'assets/stylesheets/colors';
+
+.button {
+  padding: 16px;
+  border-radius: 4px;
+  height: 48px;
+  max-width: 500px;
+}
+
+.primary {
+  background-color: $primary;
+  color: $button-text;
+}
+
+.secondary {
+  background-color: transparent;
+  color: $primary;
+}
+
+.secondaryLoading > div {
+  background-color: $primary;
+}

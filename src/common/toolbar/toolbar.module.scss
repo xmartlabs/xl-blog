@@ -1,0 +1,120 @@
+@import "assets/stylesheets/mixins";
+@import "assets/stylesheets/colors";
+@import "assets/stylesheets/variables";
+
+.toolbar {
+  position: fixed;
+  top: 0;
+  display: flex;
+  width: 100%;
+  height: 96px;
+
+  z-index: $toolbar-z-index;
+
+  @include mobile {
+    height: 70px;
+  }
+}
+
+.logo {
+  margin-top: 13px;
+  margin-left: 64px;
+
+  @include mobile {
+    margin-top: 12px;
+    margin-left: 16px;
+
+    height: 48px;
+  }
+}
+
+.right {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  width: 100%;
+
+  @include desktop-only {
+    margin-right: 64px;
+  }
+
+  @include mobile {
+    width: 75%;
+  }
+}
+
+.buttonsContainer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 300px;
+
+  @include mobile {
+    justify-content: flex-end;
+  }
+}
+
+.modal {
+  width: 300px;
+  display: flex;
+  flex-direction: column;
+
+  @include mobile {
+    justify-content: center;
+    width: 100%;
+  }
+}
+
+.text {
+  color: $secondary;
+}
+
+.buttonColor {
+  color: $primary;
+}
+
+.modalBody {
+  display: flex;
+  justify-content: center;
+}
+
+.modalHeader {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.closeButton {
+  & svg {
+    font-size: 3rem;
+    color: $primary;
+  }
+
+  margin-top: 10px;
+  margin-right: 10px;
+  padding: 6px;
+}
+
+.menuIcon {
+  & svg {
+    font-size: 3rem;
+    color: $primary;
+  }
+}
+
+.homeMenuIcon {
+  @extend .menuIcon;
+
+  & svg {
+    color: $white;
+  }
+}
+
+.button {
+  @include mobile {
+    display: none;
+  }
+}
+
+.paperProps {
+  width: 100%
+}
