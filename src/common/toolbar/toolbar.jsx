@@ -1,8 +1,9 @@
 import React from 'react';
-import {classnames} from '../../helpers';
-import {AppLink, routeNaming} from 'routes';
+import { classnames } from '../../helpers';
 import logo from '../../../static/images/logo.svg';
-import {Button} from "../button";
+import { Button } from "../button";
+import { Link } from "gatsby";
+import { bool } from "prop-types";
 import styles from './toolbar.module.scss';
 
 const Toolbar = ({withGetStartedButton}) => {
@@ -39,9 +40,9 @@ const Toolbar = ({withGetStartedButton}) => {
     return (
         <>
             <nav className={styles.toolbar}>
-                <AppLink routeName={routeNaming.HOME}>
+                <Link to="/home">
                     <img src={logo} alt="" className={styles.logo}/>
-                </AppLink>
+                </Link>
                 <div className={styles.right}>
                     <div
                         className={classnames({
