@@ -1,7 +1,7 @@
 import React from 'react';
 import { string } from 'prop-types';
 import {classnames} from "../../helpers";
-import styles from './loading-dots.module.scss';
+import styles from './loading-dots.module.css';
 
 const LoadingDots = ({ className }) => (
   <div className={classnames(styles.spinner, className)}>

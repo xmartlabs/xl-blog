@@ -9,9 +9,9 @@ export const StyledFooter = styled.div`
 
 `
 
-const Footer = () => {
+const Footer = ({children}) => {
   return (<StyledFooter>
-            <h1>Footer</h1>
+            {children}
           </StyledFooter>)
 }
 

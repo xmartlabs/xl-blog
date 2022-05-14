@@ -12,10 +12,6 @@ const BlogList = ({ pageContext, data }) => {
     const nextPage = `/page/${(currentPage + 1)}`.toString()
     return (
         <>
-            <h1>Limit: {limit}</h1>
-            <h1>Skip: {skip}</h1>
-            <h1>Edges Count: {edges.length}</h1>
-            <h1>TOTAL COUNT: {totalCount}</h1>
             {edges.map(({ node }) => {
                 return (
                     <article key={node.id}>

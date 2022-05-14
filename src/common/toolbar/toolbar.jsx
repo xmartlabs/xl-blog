@@ -4,7 +4,7 @@ import logo from '../../../static/images/logo.svg';
 import { Button } from "../button";
 import { Link } from "gatsby";
 import { bool } from "prop-types";
-import styles from './toolbar.module.scss';
+import styles from './toolbar.module.css';
 
 const Toolbar = ({withGetStartedButton}) => {
 

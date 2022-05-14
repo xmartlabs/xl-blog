@@ -5,7 +5,7 @@ import {
 
 import { LoadingDots } from "../loading";
 import { classnames } from "../../helpers";
-import styles from './button.module.scss';
+import styles from './button.module.css';
 
 const Button = ({
   buttonStyle, className, children, loading, onClick, ...props

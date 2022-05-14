@@ -7,13 +7,13 @@ const postsPerPage = 10;
 const path = require("path")
 const _ = require("lodash")
 
-exports.createPages = async ({ actions, graphql, reporter }) => {
-  const { createPage } = actions
-  const tagTemplate = path.resolve("src/templates/tags.js")
-  const categoryTemplate = path.resolve("src/templates/categories.js")
-  const authorTemplate = path.resolve("src/templates/authors.js")
+exports.createPages = async ({actions, graphql, reporter}) => {
+    const {createPage} = actions
+    const tagTemplate = path.resolve("src/templates/tags.js")
+    const categoryTemplate = path.resolve("src/templates/categories.js")
+    const authorTemplate = path.resolve("src/templates/authors.js")
 
-  const result = await graphql(`
+    const result = await graphql(`
     {
       tagsGroup: allMdx(limit: 2000) {
         group(field: frontmatter___tags) {
@@ -48,94 +48,93 @@ exports.createPages = async ({ actions, graphql, reporter }) => {
       }
     }
   `)
-  // handle errors
-  if (result.errors) {
-    reporter.panicOnBuild(`Error while running GraphQL query.`)
-    return
-  }
-  
-  // Extract tag data from query
-  const tags = result.data.tagsGroup.group
-  // Make tag pages
-  tags.forEach(tag => {
-    createPage({
-      path: `/tags/${_.kebabCase(tag.fieldValue)}/`,
-      component: tagTemplate,
-      context: {
-        tag: tag.fieldValue,
-      },
-    })
-  })
+    // handle errors
+    if (result.errors) {
+        reporter.panicOnBuild(`Error while running GraphQL query.`)
+        return
+    }
 
-    
-  // Extract tag data from query
-  const categories = result.data.categoriesGroup.group
-  // Make tag pages
-  categories.forEach(category => {
-    createPage({
-      path: `/categories/${_.kebabCase(category.fieldValue)}/`,
-      component: categoryTemplate,
-      context: {
-        category: category.fieldValue,
-      },
+    // Extract tag data from query
+    const tags = result.data.tagsGroup.group
+    // Make tag pages
+    tags.forEach(tag => {
+        createPage({
+            path: `/tags/${_.kebabCase(tag.fieldValue)}/`,
+            component: tagTemplate,
+            context: {
+                tag: tag.fieldValue,
+            },
+        })
     })
-  })
+
+
+    // Extract tag data from query
+    const categories = result.data.categoriesGroup.group
+    // Make tag pages
+    categories.forEach(category => {
+        createPage({
+            path: `/categories/${_.kebabCase(category.fieldValue)}/`,
+            component: categoryTemplate,
+            context: {
+                category: category.fieldValue,
+            },
+        })
+    })
 
     // Extract tag data from query
     const authors = result.data.authorsGroup.group
     // Make tag pages
     authors.forEach(author => {
-      createPage({
-        path: `/authors/${_.kebabCase(author.fieldValue)}/`,
-        component: authorTemplate,
-        context: {
-          author: author.fieldValue,
-        },
-      })
+        createPage({
+            path: `/authors/${_.kebabCase(author.fieldValue)}/`,
+            component: authorTemplate,
+            context: {
+                author: author.fieldValue,
+            },
+        })
     })
-    
-    const posts = result.data.posts.edges    
+
+    const posts = result.data.posts.edges
     const numPages = Math.ceil(posts.length / postsPerPage);
-    Array.from({ length: numPages }).forEach((_, i) => {
-      createPage({
-        path: i === 0 ? `/` : `/page/${i + 1}`,
-        component: path.resolve("./src/templates/blog-list.js"),
-        context: {
-          limit: postsPerPage,
-          skip: i * postsPerPage,
-          numPages: numPages,
-          currentPage: i + 1,
-        },
-      });
+    Array.from({length: numPages}).forEach((_, i) => {
+        createPage({
+            path: i === 0 ? `/` : `/page/${i + 1}`,
+            component: path.resolve("./src/templates/blog-list.js"),
+            context: {
+                limit: postsPerPage,
+                skip: i * postsPerPage,
+                numPages: numPages,
+                currentPage: i + 1,
+            },
+        });
     });
 }
-
 
 
 // exports.onCreatePage = ({ page, actions, getNode }) => {
 //   const { createPage } = actions
 
-  // // Change the node internal type from 'allMarkdownRemark' to 'MarkdownRemark'
-  // if (node.internal.type === `MarkdownRemark`) {
-  //   const value = createFilePath({ page, getNode })
-  //   createNodeField({
-  //     name: `slug`,
-  //     node,
-  //     value,
-  //   })
-  // }
-  // else {
-  //   createPage(page)
-  // }
+// // Change the node internal type from 'allMarkdownRemark' to 'MarkdownRemark'
+// if (node.internal.type === `MarkdownRemark`) {
+//   const value = createFilePath({ page, getNode })
+//   createNodeField({
+//     name: `slug`,
+//     node,
+//     value,
+//   })
+// }
+// else {
+//   createPage(page)
+// }
 
-  // page.matchPath is a special key that's used for matching pages
-  // only on the client.
-  //if (page.path.match(/^\/app/)) {
-  //  page.matchPath = "/app/*"
-  //}
+// page.matchPath is a special key that's used for matching pages
+// only on the client.
+//if (page.path.match(/^\/app/)) {
+//  page.matchPath = "/app/*"
+//}
 
-  // if (page.path.match(/special-page/)) {
-  //page.context.layout = "main"
+// if (page.path.match(/special-page/)) {
+//page.context.layout = "main"
 
-  // }
+// }
 // }

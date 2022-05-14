@@ -4,9 +4,9 @@ const Theme = {
         main: "Italiana, serif",
     },
     colors: {
-        main1: "#FFE6F6",
-        main2: "#FFE6F6",
-        main3: "#FFE6F6",
+        main1: "#FFFFFF",
+        main2: "#FFEFFF",
+        main3: "#FFEFFF",
         dark1: "#52424D",
         dark2: "#FFE6F6", 
         dark3: "#FFE6F6",
