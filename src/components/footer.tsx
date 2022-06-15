@@ -8,7 +8,7 @@ export const StyledFooter = styled.div`
   position: relative;
   overflow: hidden;
   height: 40vh;
-  background-color: #333;
+  background-color: #161616;
 
 `
 

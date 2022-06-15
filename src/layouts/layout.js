@@ -7,6 +7,8 @@ import Helmet from "react-helmet"
 import { StyledContainerWrapper, StyledContainerHeader, StyledContainerNavBarXL } from "../elements"
 import { withPrefix} from "gatsby"
 import { navMenu, navMenuItem, col20 } from '../components/layout.module.css'
+import { StaticImage } from "gatsby-plugin-image"
+import { Link } from "gatsby"
 
 export const StyledMain = styled.main`
   grid-column-start: 2;
@@ -64,7 +66,16 @@ function Layout({children, pageContext}) {
                 <StyledContainerNavBarXL>
                     <StyledContainerHeader>
                         <div className={navMenu}>
-                            <Logo/>
+                            <Link
+                                to="/"
+                                id="logo-xl">
+                                <StaticImage 
+                                    src="../../static/images/logo.svg"
+                                    alt=""
+                                    width={40}
+                                    height={40}
+                                />
+                            </Link>
                             <NavMenu menuItems={menuElements} classNameItem={navMenuItem} />
                             
                         </div>
@@ -81,18 +92,16 @@ function Layout({children, pageContext}) {
                 <Footer>
                     <StyledFooterWrapper>
                         <div className={ col20 }>
-                            <div>
-                                <StyledFooterTextTitle>Company</StyledFooterTextTitle>
-                            </div>
-                            <div>
-                                <StyledFooterText>Services</StyledFooterText>
-                            </div>
-                            <div>
-                                <StyledFooterText>Work</StyledFooterText>
-                            </div>                        
-                            <div>
-                                <StyledFooterText>Our Company</StyledFooterText>
-                            </div>
+                            <Link
+                                to="/"
+                                id="logo-xl-white">
+                                <StaticImage 
+                                    src="../../static/images/logo-white.svg"
+                                    alt=""
+                                    width={90}
+                                    height={150}
+                                />
+                            </Link>
                         </div>                        
                         
                         <div className={ col20 }>

@@ -1,20 +1,23 @@
 import * as React from "react"
 import { Link } from "gatsby"
 import PropTypes from "prop-types"
-import { StaticImage } from "gatsby-plugin-image"
+import { GatsbyImage, getImage } from "gatsby-plugin-image"
 
-const Logo = ({
-                  path = "/",
+
+const Logo = ({                
+                path = "/",  
+                image,
                   ...props
               }) => {
+    const img = getImage(image)
     return (
         <Link
             {...props}
             to={path}
             id="logo"
             >
-            <StaticImage
-                src="../../static/images/logo.svg"
+            <GatsbyImage 
+                image= {img}
                 alt=""
                 width={40}
                 height={40}
