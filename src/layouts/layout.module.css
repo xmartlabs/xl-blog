@@ -3,6 +3,10 @@
     src: local('Gilroy'), url(../fonts/Gilroy/Gilroy-Regular.ttf) format('truetype');
 }
 
+body{
+    font-family: 'Gilroy';
+}
+
 .navMenu {
     position: relative;
     z-index: 10;

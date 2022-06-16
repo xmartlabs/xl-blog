@@ -1,12 +1,11 @@
 import React from "react"
-import Logo from "../components/logo"
 import NavMenu from "../components/nav-menu"
 import Footer from "../components/footer"
 import styled from "styled-components"
 import Helmet from "react-helmet"
-import { StyledContainerWrapper, StyledContainerHeader, StyledContainerNavBarXL } from "../elements"
+import { StyledContainerHeader, StyledContainerNavBarXL } from "../elements"
 import { withPrefix} from "gatsby"
-import { navMenu, navMenuItem, col20 } from '../layouts/layout.css'
+import { navMenu, navMenuItem, col20 } from '../layouts/layout.module.css'
 import { StaticImage } from "gatsby-plugin-image"
 import { Link } from "gatsby"
 
@@ -49,7 +48,7 @@ export const StyledFooterTextTitle = styled.label`
 export const StyledFooterText = styled.label`
     color: #fff;
     size: 17px;
-    line-height: 38px;
+    line-height: 38px;    
 `
 
 const menuElements = [
@@ -134,21 +133,6 @@ function Layout({children, pageContext}) {
                             </div>
                         </div>
 
-                        {/* <div className={ col20 }>
-                            <div>
-                                <StyledFooterTextTitle>Community</StyledFooterTextTitle>
-                            </div>
-                            <div>
-                                <StyledFooterText>Community</StyledFooterText>
-                            </div>
-                            <div>
-                                <StyledFooterText>Open Positions</StyledFooterText>
-                            </div>                        
-                            <div>
-                                <StyledFooterText>Blog</StyledFooterText>
-                            </div>
-                        </div> */}
- 
                         <div className={ col20 }>
                             <div>
                                 <StyledFooterTextTitle>Media</StyledFooterTextTitle>
