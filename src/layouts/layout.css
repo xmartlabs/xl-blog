@@ -1,0 +1,20 @@
+@font-face {
+    font-family: 'Gilroy';
+    src: local('Gilroy'), url(../fonts/Gilroy/Gilroy-Regular.ttf) format('truetype');
+}
+
+.navMenu {
+    position: relative;
+    z-index: 10;
+    display: flex;
+    align-items: center;
+}
+
+.navMenuItem {
+    margin-left: 50px;
+    color: #fff;
+    display: inline-block;
+}
+.col20 {
+    width: 20%;
+}

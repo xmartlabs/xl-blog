@@ -6,7 +6,7 @@ import styled from "styled-components"
 import Helmet from "react-helmet"
 import { StyledContainerWrapper, StyledContainerHeader, StyledContainerNavBarXL } from "../elements"
 import { withPrefix} from "gatsby"
-import { navMenu, navMenuItem, col20 } from '../components/layout.module.css'
+import { navMenu, navMenuItem, col20 } from '../layouts/layout.css'
 import { StaticImage } from "gatsby-plugin-image"
 import { Link } from "gatsby"
 
@@ -40,13 +40,13 @@ export const StyledFooterWrapper = styled.div`
     width: 85%;
     justify-content: center;
 `
-export const StyledFooterTextTitle = styled.h4`
+export const StyledFooterTextTitle = styled.label`
     color: #959595;
     size: 17px;
     line-height: 38px;
 `
 
-export const StyledFooterText = styled.h4`
+export const StyledFooterText = styled.label`
     color: #fff;
     size: 17px;
     line-height: 38px;
@@ -121,21 +121,6 @@ function Layout({children, pageContext}) {
                         
                         <div className={ col20 }>
                             <div>
-                                <StyledFooterTextTitle>Company</StyledFooterTextTitle>
-                            </div>
-                            <div>
-                                <StyledFooterText>Services</StyledFooterText>
-                            </div>
-                            <div>
-                                <StyledFooterText>Work</StyledFooterText>
-                            </div>                        
-                            <div>
-                                <StyledFooterText>Our Company</StyledFooterText>
-                            </div>
-                        </div>
-
-                        <div className={ col20 }>
-                            <div>
                                 <StyledFooterTextTitle>Community</StyledFooterTextTitle>
                             </div>
                             <div>
@@ -148,6 +133,21 @@ function Layout({children, pageContext}) {
                                 <StyledFooterText>Blog</StyledFooterText>
                             </div>
                         </div>
+
+                        {/* <div className={ col20 }>
+                            <div>
+                                <StyledFooterTextTitle>Community</StyledFooterTextTitle>
+                            </div>
+                            <div>
+                                <StyledFooterText>Community</StyledFooterText>
+                            </div>
+                            <div>
+                                <StyledFooterText>Open Positions</StyledFooterText>
+                            </div>                        
+                            <div>
+                                <StyledFooterText>Blog</StyledFooterText>
+                            </div>
+                        </div> */}
  
                         <div className={ col20 }>
                             <div>

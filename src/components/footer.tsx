@@ -9,7 +9,8 @@ export const StyledFooter = styled.div`
   overflow: hidden;
   height: 40vh;
   background-color: #161616;
-
+  flex-direction: column;
+  align-items: center;
 `
 
 const Footer = ({children}) => {
