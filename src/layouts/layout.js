@@ -5,7 +5,8 @@ import styled from "styled-components"
 import Helmet from "react-helmet"
 import { StyledContainerHeader, StyledContainerNavBarXL } from "../elements"
 import { withPrefix} from "gatsby"
-import { navMenu, navMenuItem, col20 } from '../layouts/layout.module.css'
+
+import { navMenu, navMenuItem, footerCol, desktopLogo } from '../layouts/layout.module.css'
 import { StaticImage } from "gatsby-plugin-image"
 import { Link } from "gatsby"
 
@@ -38,6 +39,11 @@ export const StyledFooterWrapper = styled.div`
     flex-wrap: wrap;
     width: 85%;
     justify-content: center;
+    @media (max-width: 768px) {
+      justify-content: flex-end;
+      margin-left: 3em;
+      width: 100%;
+    }
 `
 export const StyledFooterTextTitle = styled.label`
     color: #959595;
@@ -61,7 +67,6 @@ const menuElements = [
 function Layout({children, pageContext}) {
     return (
         <>
-            {/* <StyledContainerWrapper> */}
                 <StyledContainerNavBarXL>
                     <StyledContainerHeader>
                         <div className={navMenu}>
@@ -76,7 +81,6 @@ function Layout({children, pageContext}) {
                                 />
                             </Link>
                             <NavMenu menuItems={menuElements} classNameItem={navMenuItem} />
-                            
                         </div>
                         <StyledGetStartedButton id="header-getintouch" 
                              href="#/" 
@@ -90,7 +94,8 @@ function Layout({children, pageContext}) {
                 </StyledMain>
                 <Footer>
                     <StyledFooterWrapper>
-                        <div className={ col20 }>
+
+                        <div className={ desktopLogo}>
                             <Link
                                 to="/"
                                 id="logo-xl-white">
@@ -101,9 +106,9 @@ function Layout({children, pageContext}) {
                                     height={150}
                                 />
                             </Link>
-                        </div>                        
-                        
-                        <div className={ col20 }>
+                        </div>
+
+                        <div className={ footerCol }>
                             <div>
                                 <StyledFooterTextTitle>Company</StyledFooterTextTitle>
                             </div>
@@ -118,7 +123,7 @@ function Layout({children, pageContext}) {
                             </div>
                         </div>                        
                         
-                        <div className={ col20 }>
+                        <div className={ footerCol }>
                             <div>
                                 <StyledFooterTextTitle>Community</StyledFooterTextTitle>
                             </div>
@@ -133,7 +138,7 @@ function Layout({children, pageContext}) {
                             </div>
                         </div>
 
-                        <div className={ col20 }>
+                        <div className={ footerCol }>
                             <div>
                                 <StyledFooterTextTitle>Media</StyledFooterTextTitle>
                             </div>
@@ -149,7 +154,6 @@ function Layout({children, pageContext}) {
                         </div>
                     </StyledFooterWrapper>
                 </Footer>
-            {/* </StyledContainerWrapper> */}
             <Helmet>
                 <script src={withPrefix('identity.js')} type="text/javascript"></script>
             </Helmet>

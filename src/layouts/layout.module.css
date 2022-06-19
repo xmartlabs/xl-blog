@@ -19,6 +19,19 @@ body{
     color: #fff;
     display: inline-block;
 }
-.col20 {
+.footerCol {
     width: 20%;
+}
+
+.desktopLogo {
+    width: 20%;
+}
+
+@media screen and (max-width: 768px) {
+    .desktopLogo{
+        display: none;
+    }
+    .footerCol {
+        width: 30%;
+    }
 }
