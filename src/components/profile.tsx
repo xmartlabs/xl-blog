@@ -1,5 +1,4 @@
-import React from "react"
-
+import * as React from "react"
 
 const Profile = () => {
     return <h1>Profile</h1>

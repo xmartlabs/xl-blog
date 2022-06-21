@@ -1,4 +1,4 @@
-import React from "react"
+import * as React from "react"
 import { Link, navigate,  } from "gatsby"
 import styled from "styled-components"
 
@@ -19,7 +19,10 @@ const NavBar = () => {
   return (
     <StyledNavBar>
       <Nav>
-        <Link to="/">Home</Link>
+        <Link to="/">Work</Link>
+        <Link to="/">Services</Link>
+        <Link to="/">Our Company</Link>
+        <Link to="/">Community</Link>
         {` `}
         <a href="https://xmartlabs.com">XL Website</a>
         {` `}

@@ -35,3 +35,36 @@ export const StyledFormWrapper = styled.div`
 export const StyledContainerCentered = styled.div`
     text-align: center;
 `
+
+export const StyledContainerHeader = styled.div`
+    align-items: center;
+    flex-direction: row;
+    justify-content: space-between;
+    display: flex;
+    position: static;
+    width: 85%;
+    max-width: 1300px;
+    
+    @media ${props => props.theme.breakpoints.tablet} {
+    }
+
+    @media ${props => props.theme.breakpoints.mobile} {
+    }
+`
+
+export const StyledContainerNavBarXL = styled.div`
+    /*position: fixed;*/
+    display: flex;
+    width: 100%;
+    height: 95px;
+    justify-content: center;
+    align-items: stretch;
+    background-color: #fff;
+    object-fit: fill;
+    
+    @media ${props => props.theme.breakpoints.tablet} {
+    }
+
+    @media ${props => props.theme.breakpoints.mobile} {
+    }
+`
