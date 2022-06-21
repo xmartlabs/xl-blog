@@ -1,7 +1,7 @@
 const Theme = {
     fonts: {
-        titles: "Italiana, serif",
-        main: "Italiana, serif",
+        titles: "gilroy, serif",
+        main: "gilroy, serif",
     },
     colors: {
         main1: "#FFFFFF",

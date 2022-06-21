@@ -1,10 +1,7 @@
-@font-face {
-    font-family: 'Gilroy';
-    src: local('Gilroy'), url(../fonts/Gilroy/Gilroy-Regular.ttf) format('truetype');
-}
+@import "../css/typography.css";
 
 body{
-    font-family: 'Gilroy';
+    font-family: 'gilroy', serif;
 }
 
 .navMenu {
