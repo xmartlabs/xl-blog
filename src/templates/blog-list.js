@@ -14,6 +14,10 @@ export const ListRow = styled.div`
 export const ListContainer = styled.div`
   justify-content: center;
   margin: 0 18%;
+
+  @media ${props => props.theme.breakpoints.mobile} {
+    margin: 0 1.5rem;
+  }
 `
 
 const BlogList = ({ pageContext, data }) => {

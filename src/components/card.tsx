@@ -10,20 +10,27 @@ export const ListNode = styled.div`
     flex-direction: column;
     flex-wrap: wrap;
     max-width: 22.4rem;
-    flex-basis: 33.333333%
 `
 
 export const StyledImage = styled.img`
   border-radius: 3%;
-  margin-bottom: 25px;
+  margin-bottom: 1.5rem;
   width: 100%;
   height: 15.3rem;
+
+  @media ${props => props.theme.breakpoints.mobile} {
+    height: 8.125rem;
+  }
 `
 
 export const StyledLink = styled(Link)`
   text-decoration: none;
   color: black;
-  font-size: 1.875em;
+  font-size: 1.875rem;
+
+  @media ${props => props.theme.breakpoints.mobile} {
+    font-size: 1.375rem;
+  }
 `
 
 export const CategoryWrapper = styled.div`
