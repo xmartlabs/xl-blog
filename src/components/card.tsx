@@ -33,30 +33,21 @@ export const StyledLink = styled(Link)`
   }
 `
 
-export const CategoryWrapper = styled.div`
-  display: flex;
-  flex-direction: row;
-  gap: .5rem;
-  color: #F6C14D;
-`
-
 export const StyledIcon = styled(FontAwesomeIcon)`
   position: relative;
   top: 0.4em;
 `
 
-const Card = ({ data }) => {
-  return (
-    <article key={data.id}>
-      <ListNode>
-        <StyledImage src={data.frontmatter.thumbnail}/>
-        <Category data={data.frontmatter.category}/>
-        <StyledLink to={`/${_.kebabCase(data.frontmatter.permalink)}`}>
-            {data.frontmatter.title}
-        </StyledLink>
-      </ListNode>
-    </article>
-  )
-}
+const Card = ({ data }) => (
+  <article key={data.id}>
+    <ListNode>
+      <StyledImage src={data.frontmatter.thumbnail}/>
+      <Category data={data.frontmatter.category}/>
+      <StyledLink to={`/${_.kebabCase(data.frontmatter.permalink)}`}>
+          {data.frontmatter.title}
+      </StyledLink>
+    </ListNode>
+  </article>
+)
 
 export default Card

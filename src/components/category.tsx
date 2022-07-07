@@ -6,22 +6,22 @@ import { faCircle } from '@fortawesome/free-solid-svg-icons'
 export const CategoryWrapper = styled.div`
   display: flex;
   flex-direction: row;
-  gap: .5rem;
+  gap: 0.3rem;
   color: #F6C14D;
 `
 
 export const StyledIcon = styled(FontAwesomeIcon)`
   position: relative;
   top: 0.4em;
+  height: 0.438rem;
+  width: 0.438rem;
 `
 
-const Category = ({ data }) => {
-  return (
+const Category = ({ data }) => (
     <CategoryWrapper>
-      <StyledIcon icon={faCircle} size="2xs"></StyledIcon>
+      <StyledIcon icon={faCircle}></StyledIcon>
       <p className="category">{data}</p>
     </CategoryWrapper>
-  )
-}
+)
 
 export default Category

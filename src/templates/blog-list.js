@@ -33,11 +33,7 @@ const BlogList = ({ pageContext, data }) => {
         <>
           <ListContainer>
             <ListRow>
-              {edges.map(({ node }) => {
-                  return (
-                    <Card data={node}/>
-                  )
-              })}
+              {edges.map(({ node }) => <Card data={node}/> )}
             </ListRow>
           </ListContainer>
           <>

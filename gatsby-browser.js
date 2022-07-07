@@ -50,7 +50,7 @@ const GlobalStyles = createGlobalStyle`
       margin-bottom: 1.5rem;
     }
 
-    a {
+    .category, a {
       font-family: ${prop => prop.theme.fonts.links};
     }
 
