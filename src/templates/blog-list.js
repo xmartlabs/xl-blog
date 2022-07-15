@@ -1,6 +1,7 @@
 import React from "react"
 import styled from "styled-components"
 import Card from "../components/card"
+import Pager from "../components/pager"
 
 import { graphql, Link } from "gatsby"
 
@@ -20,15 +21,15 @@ export const ListContainer = styled.div`
   }
 `
 
+export const PagerContainer = styled.div`
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+`
+
 const BlogList = ({ pageContext, data }) => {
     const _ = require("lodash")    
     const { edges, totalCount } = data.allMdx
-    const { limit, skip, numPages,  currentPage} = pageContext
-
-    const isFirst = currentPage === 1
-    const isLast = currentPage === numPages
-    const prevPage = currentPage - 1 === 1 ? "/" : `/page/${(currentPage - 1)}`.toString()
-    const nextPage = `/page/${(currentPage + 1)}`.toString()
     return (
         <>
           <ListContainer>
@@ -36,18 +37,7 @@ const BlogList = ({ pageContext, data }) => {
               {edges.map(({ node }) => <Card data={node}/> )}
             </ListRow>
           </ListContainer>
-          <>
-          {!isFirst && (
-              <Link to={prevPage} rel="prev">
-              ← Previous Page
-              </Link>
-          )}
-          {!isLast && (
-              <Link to={nextPage} rel="next">
-              Next Page →
-              </Link>
-          )}
-          </>
+          <Pager pageContext={pageContext}/>
         </>
     )
 }

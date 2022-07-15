@@ -1,0 +1,16 @@
+.pager-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  margin: 80px 40%;
+}
+
+.pager-link {
+  text-decoration: none;
+  color:  #858585;
+}
+
+.selected-page {
+  text-decoration: none;
+  color:  #EE1A64;
+}
