@@ -4,23 +4,46 @@ import Pages from "../components/pages"
 
 import { Link } from "gatsby"
 
+const setPrevPage = ({currentPage}) => {
+  if (currentPage === 1) {
+    return 'javascript:void(0)'
+  } else if ((currentPage - 1) === 1) {
+    return '/'
+  } else {
+    return `/page/${(currentPage - 1)}`
+  }
+}
+
+const setNextPage = ({numPages, currentPage}) => {
+  if (currentPage === numPages) {
+    return 'javascript:void(0)'
+  } else {
+    return `/page/${(currentPage + 1)}`
+  }
+}
+
+const setPagesData = ({numPages, currentPage}) => {
+  if (currentPage + 2 >= numPages) {
+    return {firstPage: (numPages - 4), secondPage: (numPages - 3), thirdPage: (numPages - 2), fourthPage: (numPages - 1), lastPage: numPages, currentPage: currentPage}
+  } else if (currentPage - 2 <= 1) {
+    return {firstPage: 1, secondPage: 2, thirdPage: 3, fourthPage: 4, lastPage: 5, currentPage: currentPage}
+  } else {
+    return {firstPage: (currentPage - 2), secondPage: (currentPage - 1), thirdPage: currentPage, fourthPage: (currentPage + 1), lastPage: (currentPage + 2), currentPage: currentPage}
+  }
+}
+
 const Pager = ({ pageContext }) => {
   const { numPages,  currentPage} = pageContext
-  let pagesData = {}
-  if (currentPage + 3 >= numPages) {
-    pagesData = {firstPage: (numPages - 3), secondPage: (numPages - 2), thirdPage: (numPages - 1), lastPage: numPages, currentPage: currentPage}
-  } else {
-    pagesData = {firstPage: currentPage, secondPage: (currentPage + 1), thirdPage: (currentPage + 2), lastPage: (currentPage + 3), currentPage: currentPage}
-  }
-  const prevPage = currentPage - 1 === 1 ? "/" : `/page/${(currentPage - 1)}`.toString()
-  const nextPage = `/page/${(currentPage + 1)}`.toString()
+  const pagesData = setPagesData({numPages, currentPage})
+  const prevPage = setPrevPage({currentPage})
+  const nextPage = setNextPage({numPages, currentPage})
   return(
     <div className={pagerStyles.pagerContainer}>
-      <Link className={pagerStyles.pagerLink} to={prevPage} rel="prev">
+      <Link className={currentPage === 1 ? pagerStyles.disabledPagerLink : pagerStyles.pagerLink} to={prevPage} rel="prev">
       ← Prev
       </Link>
       <Pages data={pagesData}/>
-      <Link className={pagerStyles.pagerLink} to={nextPage} rel="next">
+      <Link className={currentPage === numPages ? pagerStyles.disabledPagerLink : pagerStyles.pagerLink} to={nextPage} rel="next">
       Next →
       </Link>
     </div>

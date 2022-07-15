@@ -10,6 +10,12 @@
   color:  #858585;
 }
 
+.disabled-pager-link {
+  text-decoration: none;
+  color:  #B6B6B6;
+  cursor: not-allowed;
+}
+
 .selected-page {
   text-decoration: none;
   color:  #EE1A64;
