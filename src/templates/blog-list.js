@@ -1,5 +1,24 @@
 import React from "react"
+import styled from "styled-components"
+import Card from "../components/card"
+
 import { graphql, Link } from "gatsby"
+
+export const ListRow = styled.div`
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 4.4rem;
+`
+
+export const ListContainer = styled.div`
+  justify-content: center;
+  margin: 0 18%;
+
+  @media ${props => props.theme.breakpoints.mobile} {
+    margin: 0 1.5rem;
+  }
+`
 
 const BlogList = ({ pageContext, data }) => {
     const _ = require("lodash")    
@@ -12,30 +31,23 @@ const BlogList = ({ pageContext, data }) => {
     const nextPage = `/page/${(currentPage + 1)}`.toString()
     return (
         <>
-            {edges.map(({ node }) => {
-                return (
-                    <article key={node.id}>
-                        <h2>
-                        <Link to={`/${_.kebabCase(node.frontmatter.permalink)}`}>
-                            {node.frontmatter.title}
-                        </Link>
-                        <p>Posted: {node.frontmatter.date}</p>
-                        </h2>
-                    </article>
-                )
-            })}
-            <>
-            {!isFirst && (
-                <Link to={prevPage} rel="prev">
-                ← Previous Page
-                </Link>
-            )}
-            {!isLast && (
-                <Link to={nextPage} rel="next">
-                Next Page →
-                </Link>
-            )}
-            </>
+          <ListContainer>
+            <ListRow>
+              {edges.map(({ node }) => <Card data={node}/> )}
+            </ListRow>
+          </ListContainer>
+          <>
+          {!isFirst && (
+              <Link to={prevPage} rel="prev">
+              ← Previous Page
+              </Link>
+          )}
+          {!isLast && (
+              <Link to={nextPage} rel="next">
+              Next Page →
+              </Link>
+          )}
+          </>
         </>
     )
 }
@@ -60,6 +72,7 @@ export const blogListQuery = graphql`
                         category
                         tags
                         permalink
+                        thumbnail
                     }
                     body
                     slug

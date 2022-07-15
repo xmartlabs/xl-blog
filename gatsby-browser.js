@@ -49,6 +49,14 @@ const GlobalStyles = createGlobalStyle`
     p {
       margin-bottom: 1.5rem;
     }
+
+    .category, a {
+      font-family: ${prop => prop.theme.fonts.links};
+    }
+
+    .category {
+      font-family: ${prop => prop.theme.fonts.links};
+    }
 `
 
 export const wrapRootElement = ({element}) => {

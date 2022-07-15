@@ -5,6 +5,7 @@ module.exports = {
     descripton: "Blog description",
   },
   plugins: [
+    "gatsby-plugin-fontawesome-css",
     "gatsby-plugin-netlify-cms",
     "gatsby-plugin-styled-components",
     "gatsby-plugin-image",
@@ -55,6 +56,6 @@ module.exports = {
         path: `${__dirname}/content/`,
       },
     },
-    "gatsby-transformer-remark",
+    "gatsby-transformer-remark"
   ],
 };
