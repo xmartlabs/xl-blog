@@ -1,0 +1,59 @@
+.divider {
+  border-color: #646464;
+  width: 85%;
+  position: absolute;
+  bottom: 0;
+}
+
+.newsletter-text {
+  color: #858585;
+  font-size: 27px;
+}
+
+.text-container {
+  margin-bottom: 3.25rem;
+  justify-content: center;
+}
+
+.newsletter-header {
+  color: white;
+  font-size: 45px;
+  font-weight: bold;
+  margin-bottom: 2rem;
+}
+
+.newsletter-logo {
+  position: absolute;
+  top: -66px;
+  background-color: white;
+  height: 134px;
+}
+
+.form {
+  display: flex;
+  flex-direction: row;
+  height: 3rem;
+  margin-top: 3.25rem;
+}
+
+.input{
+  width: 390px;
+}
+
+.button {
+  width: 241px;
+  font-size: 14px;
+  font-weight: bolder;
+  color: white;
+  background-color: #EE1A64;
+}
+
+button, input[type="submit"], input[type="text"] {
+  border: none;
+  outline: none;
+}
+
+input[type="text"] {
+  font-size: 14px;
+  padding: 0px 26px;
+}

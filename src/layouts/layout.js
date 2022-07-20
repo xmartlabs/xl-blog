@@ -1,6 +1,7 @@
 import React from "react"
 import NavMenu from "../components/nav-menu"
 import Footer from "../components/footer"
+import NewsLetter from "../components/newsletter"
 import styled from "styled-components"
 import Helmet from "react-helmet"
 import { StyledContainerHeader, StyledContainerNavBarXL } from "../elements"
@@ -92,6 +93,7 @@ function Layout({children, pageContext}) {
                 <StyledMain>
                     {children}
                 </StyledMain>
+                <NewsLetter/>
                 <Footer>
                     <StyledFooterWrapper>
 
