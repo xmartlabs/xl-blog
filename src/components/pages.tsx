@@ -1,5 +1,5 @@
 import React from "react"
-import * as pagerStyles from "../css/pager.module.css"
+import * as pagerStyles from "../css/pager.module.scss"
 
 import { Link } from "gatsby"
 

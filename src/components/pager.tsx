@@ -1,5 +1,5 @@
 import React from "react"
-import * as pagerStyles from "../css/pager.module.css"
+import * as pagerStyles from "../css/pager.module.scss"
 import Pages from "../components/pages"
 
 import { Link } from "gatsby"
@@ -7,33 +7,57 @@ import { Link } from "gatsby"
 const setPrevPage = ({currentPage}) => {
   if (currentPage === 1) {
     return 'javascript:void(0)'
-  } else if ((currentPage - 1) === 1) {
-    return '/'
-  } else {
-    return `/page/${(currentPage - 1)}`
   }
+  
+  if ((currentPage - 1) === 1) {
+    return '/'
+  }
+
+  return `/page/${(currentPage - 1)}`
 }
 
 const setNextPage = ({numPages, currentPage}) => {
   if (currentPage === numPages) {
     return 'javascript:void(0)'
-  } else {
-    return `/page/${(currentPage + 1)}`
   }
+  return `/page/${(currentPage + 1)}`
 }
 
 const setPagesData = ({numPages, currentPage}) => {
   if (currentPage + 2 >= numPages) {
-    return {firstPage: (numPages - 4), secondPage: (numPages - 3), thirdPage: (numPages - 2), fourthPage: (numPages - 1), lastPage: numPages, currentPage: currentPage}
-  } else if (currentPage - 2 <= 1) {
-    return {firstPage: 1, secondPage: 2, thirdPage: 3, fourthPage: 4, lastPage: 5, currentPage: currentPage}
-  } else {
-    return {firstPage: (currentPage - 2), secondPage: (currentPage - 1), thirdPage: currentPage, fourthPage: (currentPage + 1), lastPage: (currentPage + 2), currentPage: currentPage}
+    return {
+      firstPage: (numPages - 4),
+      secondPage: (numPages - 3),
+      thirdPage: (numPages - 2),
+      fourthPage: (numPages - 1),
+      lastPage: numPages,
+      currentPage: currentPage
+    };
+  } 
+  
+  if (currentPage - 2 <= 1) {
+    return {
+      firstPage: 1,
+      secondPage: 2,
+      thirdPage: 3,
+      fourthPage: 4,
+      lastPage: 5,
+      currentPage: currentPage
+    };
+  }
+
+  return {
+    firstPage: (currentPage - 2),
+    secondPage: (currentPage - 1),
+    thirdPage: currentPage,
+    fourthPage: (currentPage + 1),
+    lastPage: (currentPage + 2),
+    currentPage: currentPage
   }
 }
 
 const Pager = ({ pageContext }) => {
-  const { numPages,  currentPage} = pageContext
+  const {numPages,  currentPage} = pageContext
   const pagesData = setPagesData({numPages, currentPage})
   const prevPage = setPrevPage({currentPage})
   const nextPage = setNextPage({numPages, currentPage})

@@ -1,3 +1,5 @@
+@import '../css/colors.scss';
+
 .pager-container {
   display: flex;
   flex-direction: row;
@@ -7,16 +9,16 @@
 
 .pager-link {
   text-decoration: none;
-  color:  #858585;
+  color:  $default-gray;
 }
 
 .disabled-pager-link {
   text-decoration: none;
-  color:  #B6B6B6;
+  color:  $disabled-gray;
   cursor: not-allowed;
 }
 
 .selected-page {
   text-decoration: none;
-  color:  #EE1A64;
+  color:  $xl-pink;
 }
