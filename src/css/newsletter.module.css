@@ -1,3 +1,14 @@
+.container {
+  width: 100%;
+  justify-content: center;
+  display: flex;
+  position: relative;
+  height: 38rem;
+  background-color: #161616;
+  flex-direction: column;
+  align-items: center;
+}
+
 .divider {
   border-color: #646464;
   width: 85%;
@@ -25,7 +36,20 @@
 .newsletter-logo {
   position: absolute;
   top: -66px;
-  background-color: white;
+  height: 134px;
+}
+
+.newsletter-left-decoration {
+  position: absolute;
+  top: -66px;
+  left: 258px;
+  height: 134px;
+}
+
+.newsletter-right-decoration {
+  position: absolute;
+  top: -66px;
+  right: 258px;
   height: 134px;
 }
 
@@ -34,10 +58,14 @@
   flex-direction: row;
   height: 3rem;
   margin-top: 3.25rem;
+  color: #161616;
+  font-style: 'gilroy-medium';
 }
 
 .input{
   width: 390px;
+  border-bottom-left-radius: 5px;
+  border-top-left-radius: 5px;
 }
 
 .button {
@@ -46,6 +74,8 @@
   font-weight: bolder;
   color: white;
   background-color: #EE1A64;
+  border-bottom-right-radius: 5px;
+  border-top-right-radius: 5px;
 }
 
 button, input[type="submit"], input[type="text"] {
