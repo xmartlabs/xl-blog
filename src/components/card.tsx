@@ -1,6 +1,6 @@
 import React from "react"
 import Category from "./category"
-import * as generalStyles from "../css/general.module.css"
+import * as generalStyles from "../css/general.module.scss"
 
 import { Link } from "gatsby"
 

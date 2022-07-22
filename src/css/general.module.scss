@@ -1,3 +1,5 @@
+@import '../css/colors.scss';
+
 .list-node {
   display: flex;
   flex-direction: column;
@@ -30,7 +32,7 @@ font-size: 1.875rem;
   display: flex;
   flex-direction: row;
   gap: 0.3rem;
-  color: #F6C14D;
+  color: $default-yellow;
 }
 
 .styled-icon {

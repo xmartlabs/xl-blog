@@ -1,0 +1,24 @@
+@import '../css/colors.scss';
+
+.pager-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  margin: 80px 40%;
+}
+
+.pager-link {
+  text-decoration: none;
+  color:  $default-gray;
+}
+
+.disabled-pager-link {
+  text-decoration: none;
+  color:  $disabled-gray;
+  cursor: not-allowed;
+}
+
+.selected-page {
+  text-decoration: none;
+  color:  $xl-pink;
+}
