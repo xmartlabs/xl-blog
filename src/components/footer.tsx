@@ -7,7 +7,7 @@ export const StyledFooter = styled.div`
   display: flex;
   position: relative;
   overflow: hidden;
-  height: 40vh;
+  height: 25vh;
   background-color: #161616;
   flex-direction: column;
   align-items: center;

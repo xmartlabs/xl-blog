@@ -48,13 +48,13 @@ export const StyledFooterWrapper = styled.div`
 `
 export const StyledFooterTextTitle = styled.label`
     color: #959595;
-    size: 17px;
+    font-size: 14px;
     line-height: 38px;
 `
 
 export const StyledFooterText = styled.label`
     color: #fff;
-    size: 17px;
+    font-size: 14px;
     line-height: 38px;    
 `
 
@@ -104,8 +104,8 @@ function Layout({children, pageContext}) {
                                 <StaticImage 
                                     src="../../static/images/logo-white.svg"
                                     alt=""
-                                    width={90}
-                                    height={150}
+                                    width={65}
+                                    height={108}
                                 />
                             </Link>
                         </div>
