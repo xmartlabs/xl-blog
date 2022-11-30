@@ -6,12 +6,11 @@ import { StyledContainerWrapper } from "../elements/containers";
 
 import * as styledPostLayout from "./post-layout.module.scss";
 
-
 function Layout({ children, pageContext }) {
       return (
           <StyledContainerWrapper>
             <NavBar />
-            <main>
+            <main className={styledPostLayout.main}>
               {children}
             </main>
             <Footer />
