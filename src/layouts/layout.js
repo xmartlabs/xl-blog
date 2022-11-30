@@ -11,13 +11,6 @@ import Footer from "../components/footer/footer.tsx";
 import { navMenu, navMenuItem, footerCol, desktopLogo } from '../layouts/layout.module.scss';
 import { StyledContainerHeader, StyledContainerNavBarXL } from "../elements";
 
-export const StyledMain = styled.main`
-  grid-column-start: 2;
-  grid-column-end: span 12;
-  grid-row-start: 2;
-  grid-row-end: span 1;
-`
-
 export const StyledGetStartedButton = styled.a`
   width: 147px;
   height: 44px;
@@ -34,6 +27,7 @@ export const StyledGetStartedTextButton = styled.div`
   font-size: 14px;
   font-weight: 700;
   letter-spacing: .5px;
+  max-height: 17px;
 `
 export const StyledFooterWrapper = styled.div`
   display: flex;
@@ -77,8 +71,8 @@ function Layout({children, pageContext}) {
               <StaticImage 
                 src="../../static/images/logo.svg"
                 alt=""
-                width={40}
-                height={40}
+                width={56}
+                height={56}
               />
             </Link>
             <NavMenu menuItems={menuElements} classNameItem={navMenuItem} />
@@ -90,9 +84,7 @@ function Layout({children, pageContext}) {
           </StyledGetStartedButton>
         </StyledContainerHeader>
       </StyledContainerNavBarXL>
-      <StyledMain>
-        {children}
-      </StyledMain>
+      {children}
       <Footer>
         <StyledFooterWrapper>
           <div className={ desktopLogo}>

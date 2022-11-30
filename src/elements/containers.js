@@ -51,14 +51,10 @@ export const StyledContainerHeader = styled.div`
 `
 
 export const StyledContainerNavBarXL = styled.div`
-  /*position: fixed;*/
   display: flex;
   width: 100%;
   height: 95px;
   justify-content: center;
-  align-items: stretch;
-  background-color: #fff;
-  object-fit: fill;
   
   @media ${props => props.theme.breakpoints.tablet} {
   }

@@ -1,20 +1,17 @@
-import React from "react"
-import styled from "styled-components"
-import Card from "../components/card/card.tsx"
-import Pager from "../components/pager/pager.tsx"
+import React from "react";
 
-import { graphql, Link } from "gatsby"
+import styled from "styled-components";
 
-export const ListRow = styled.div`
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
-  gap: 4.4rem;
-`
+import Card from "../components/card/card.tsx";
+import Pager from "../components/pager/pager.tsx";
+
+import { graphql } from "gatsby";
 
 export const ListContainer = styled.div`
-  justify-content: center;
-  margin: 0 18%;
+  margin: 0 10%;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(22.4rem, 1fr));  
+  gap: 6rem 7.4rem;
 
   @media ${props => props.theme.breakpoints.mobile} {
   margin: 0 1.5rem;
@@ -33,16 +30,14 @@ const BlogList = ({ pageContext, data }) => {
   return (
     <>
       <ListContainer>
-      <ListRow>
         {edges.map(({ node }) => <Card data={node}/> )}
-      </ListRow>
       </ListContainer>
       <Pager pageContext={pageContext}/>
     </>
-  )
-}
+  );
+};
 
-export default BlogList
+export default BlogList;
 
 export const blogListQuery = graphql`
   query blogListQuery($skip: Int!, $limit: Int!) {
