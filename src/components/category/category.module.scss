@@ -1,0 +1,15 @@
+@import "../../css/colors.scss";
+
+.category-wrapper {
+  display: flex;
+  flex-direction: row;
+  gap: 0.3rem;
+  color: $default-yellow;
+}
+
+.styled-icon {
+  position: relative;
+  top: 0.4em;
+  height: 0.438rem;
+  width: 0.438rem;
+}

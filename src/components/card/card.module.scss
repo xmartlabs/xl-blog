@@ -1,4 +1,4 @@
-@import '../css/colors.scss';
+@import "../../css/colors.scss";
 
 .list-node {
   display: flex;
@@ -19,25 +19,11 @@
 }
 
 .styled-link {
-text-decoration: none;
-color: black;
-font-size: 1.875rem;
+  text-decoration: none;
+  color: $black;
+  font-size: 1.875rem;
 
   @media screen and (max-width:50rem) {
     font-size: 1.375rem;
   }
-}
-
-.category-wrapper {
-  display: flex;
-  flex-direction: row;
-  gap: 0.3rem;
-  color: $default-yellow;
-}
-
-.styled-icon {
-  position: relative;
-  top: 0.4em;
-  height: 0.438rem;
-  width: 0.438rem;
 }

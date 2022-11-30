@@ -1,14 +1,14 @@
-import React from "react"
-import NavMenu from "../components/nav-menu"
-import Footer from "../components/footer"
-import styled from "styled-components"
-import Helmet from "react-helmet"
-import { StyledContainerHeader, StyledContainerNavBarXL } from "../elements"
-import { withPrefix} from "gatsby"
+import React from "react";
+import Helmet from "react-helmet";
+import { withPrefix, Link} from "gatsby";
 
-import { navMenu, navMenuItem, footerCol, desktopLogo } from '../layouts/layout.module.css'
-import { StaticImage } from "gatsby-plugin-image"
-import { Link } from "gatsby"
+import styled from "styled-components";
+import { StaticImage } from "gatsby-plugin-image";
+
+import NavMenu from "../components/nav-menu/nav-menu.js";
+import Footer from "../components/footer/footer.tsx";
+import { navMenu, navMenuItem, footerCol, desktopLogo } from '../layouts/layout.module.scss';
+import { StyledContainerHeader, StyledContainerNavBarXL } from "../elements";
 
 export const StyledMain = styled.main`
   grid-column-start: 2;
@@ -161,4 +161,4 @@ function Layout({children, pageContext}) {
     )
 }
 
-export default Layout
+export default Layout;

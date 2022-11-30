@@ -1,5 +1,7 @@
 import React, { useEffect } from "react";
+
 import { Router } from "@reach/router";
+
 import PrivateRoute from "../components/privateRoute";
 import { navigate } from "gatsby";
 import Profile from "../components/profile";
@@ -18,6 +20,7 @@ const App = () => {
       <PrivateRoute path="/profile" component={Profile} />
       <BounceToHome default />
     </Router>
-  )
-}
-export default App
+  );
+};
+
+export default App;

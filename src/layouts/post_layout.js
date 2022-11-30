@@ -1,23 +1,19 @@
-import React from "react"
-import Footer from "../components/footer"
-import NavBar from "../components/nav-bar"
-import styled from "styled-components"
-import { StyledContainerWrapper } from "../elements/containers"
+import React from "react";
 
-export const StyledMain = styled.main`
-  grid-column-start: 2;
-  grid-column-end: span 12;
-  grid-row-start: 2;
-  grid-row-end: span 1;
-`
+import Footer from "../components/footer";
+import NavBar from "../components/nav-bar";
+import { StyledContainerWrapper } from "../elements/containers";
+
+import * as styledPostLayout from "./post-layout.module.scss";
+
 
 function Layout({ children, pageContext }) {
       return (
           <StyledContainerWrapper>
             <NavBar />
-            <StyledMain>
+            <main>
               {children}
-            </StyledMain>
+            </main>
             <Footer />
           </StyledContainerWrapper>
       )
