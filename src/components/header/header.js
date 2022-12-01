@@ -1,12 +1,12 @@
-import { useRef, useLayoutEffect } from "react";
+import { useRef } from "react";
 
 import PropTypes from "prop-types";
 
 import * as styledHeader from "./header.module.scss";
 
 const Header = props => {
-  const headerRef = useRef(null)
-    const {
+  const headerRef = useRef(null);
+  const {
     sticky = true,
     stickyMobile = false,
     maxWidth,
@@ -15,25 +15,7 @@ const Header = props => {
     justify,
     border,
     ...rest
-    } = props;
-
-  // Component Lifecycle
-
-  useLayoutEffect(() => {
-  }, []);
-
-  // Partials
-
-  const stickyPartial = sticky
-  ? {
-      position: stickyMobile ? "sticky" : ["initial", "sticky"],
-      top: 0,
-  }
-  : null;
-
-  const borderPartial = border
-  ? {borderBottom: border}
-  : {borderBottom: "1px solid", borderColor: "border"}
+  } = props;
 
   return (
   <header
