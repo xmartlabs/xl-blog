@@ -8,11 +8,11 @@ import { Link } from "gatsby";
 
 const setPrevPage = ({currentPage}) => {
   if (currentPage === 1) {
-  return 'javascript:void(0)'
+    return 'javascript:void(0)'
   }
   
   if ((currentPage - 1) === 1) {
-  return '/'
+    return '/'
   }
 
   return `/page/${(currentPage - 1)}`
@@ -20,42 +20,43 @@ const setPrevPage = ({currentPage}) => {
 
 const setNextPage = ({numPages, currentPage}) => {
   if (currentPage === numPages) {
-  return 'javascript:void(0)'
+    return 'javascript:void(0)'
   }
+
   return `/page/${(currentPage + 1)}`
 };
 
 const setPagesData = ({numPages, currentPage}) => {
   if (currentPage + 2 >= numPages) {
-  return {
-    firstPage: (numPages - 4),
-    secondPage: (numPages - 3),
-    thirdPage: (numPages - 2),
-    fourthPage: (numPages - 1),
-    lastPage: numPages,
-    currentPage: currentPage
-  };
+    return {
+      firstPage: (numPages - 4),
+      secondPage: (numPages - 3),
+      thirdPage: (numPages - 2),
+      fourthPage: (numPages - 1),
+      lastPage: numPages,
+      currentPage: currentPage
+    };
   } 
   
   if (currentPage - 2 <= 1) {
-  return {
-    firstPage: 1,
-    secondPage: 2,
-    thirdPage: 3,
-    fourthPage: 4,
-    lastPage: 5,
-    currentPage: currentPage
-  };
+    return {
+      firstPage: 1,
+      secondPage: 2,
+      thirdPage: 3,
+      fourthPage: 4,
+      lastPage: 5,
+      currentPage: currentPage
+    };
   }
 
-  return {
-  firstPage: (currentPage - 2),
-  secondPage: (currentPage - 1),
-  thirdPage: currentPage,
-  fourthPage: (currentPage + 1),
-  lastPage: (currentPage + 2),
-  currentPage: currentPage
-  }
+    return {
+      firstPage: (currentPage - 2),
+      secondPage: (currentPage - 1),
+      thirdPage: currentPage,
+      fourthPage: (currentPage + 1),
+      lastPage: (currentPage + 2),
+      currentPage: currentPage
+    };
 };
 
 const Pager = ({ pageContext }) => {

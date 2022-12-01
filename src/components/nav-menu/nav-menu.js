@@ -15,32 +15,33 @@ const NavMenu = ({
   children,
   ...props
 }) => {
+  
+  if (children) {
+    return children;
+  };
 
-  return (
-    children ? (
-    children
-    ) : (
-      menuItems.map(({ label, path }) => (
-        path.charAt(0) === "/" ? (
-          <Link to={path} 
-            sx={{ variant: "navlink" }} 
-            className={ classNameItem }
-            key={label}>
-            <p className={styledNavMenu.linkMenu}>{label}</p>
-          </Link>
-    ) : (
-      <Link
-        to={path}
-        target="_blank"
-        className={ classNameItem }
-        rel="noopener noreferrer"
-        sx={{ variant: "navlink" }}
-        key={label}>
-        <p className={styledNavMenu.linkMenu}>{label}</p>
-      </Link>
+  return menuItems.map(({ label, path }) => (
+    path.charAt(0) === "/"
+      ? (
+        <Link to={path} 
+          sx={{ variant: "navlink" }} 
+          className={ classNameItem }
+          key={label}
+        >
+          <p className={styledNavMenu.linkMenu}>{label}</p>
+        </Link>
+      ) : (
+        <Link
+          to={path}
+          target="_blank"
+          className={ classNameItem }
+          rel="noopener noreferrer"
+          sx={{ variant: "navlink" }}
+          key={label}>
+          <p className={styledNavMenu.linkMenu}>{label}</p>
+        </Link>
       )
-    ))
-   ) 
+    )
   );
 };
 

@@ -11,3 +11,10 @@ $disabled-gray: #B6B6B6;
 // Dark
 $black: #000000;
 $footer-container: #161616;
+
+// White
+$neutral100: #fff;
+
+:export {
+  whiteColor: $neutral100;
+}

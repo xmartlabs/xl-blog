@@ -1,8 +1,8 @@
-import styled from 'styled-components';   
+import styled from 'styled-components'; 
 
 export const StyledFormButton = styled.button`
   font-family: ${prop => prop.theme.fonts.titles};
-  color: #fff;
+  color: white;
   background-color: ${props => props.theme.colors.dark1 };
   padding: 1rem 2rem 1rem 2rem;
   font-size: 0.8rem;
