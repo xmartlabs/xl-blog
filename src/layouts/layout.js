@@ -6,9 +6,9 @@ import { withPrefix, Link} from "gatsby";
 import styled from "styled-components";
 import { StaticImage } from "gatsby-plugin-image";
 
-import NavMenu from "../components/nav-menu/nav-menu.js";
+import NavMenu from "../components/nav-menu/nav-menu.jsx";
 import Footer from "../components/footer/footer.tsx";
-import { navMenu, navMenuItem, footerCol, desktopLogo } from '../layouts/layout.module.scss';
+import { navMenuContainer, footerCol, desktopLogo,  } from './layout.module.scss';
 import { StyledContainerHeader, StyledContainerNavBarXL } from "../elements";
 
 export const StyledGetStartedButton = styled.a`
@@ -52,19 +52,12 @@ export const StyledFooterText = styled.label`
   line-height: 38px;    
 `
 
-const menuElements = [
-  {label: "Work", path:"/"},
-  {label: "Services", path:"/" },
-  {label: "Our Company", path:"/" },
-  {label: "Community", path:"/" },
-];
-
 function Layout({children, pageContext}) {
   return (
     <>
       <StyledContainerNavBarXL>
         <StyledContainerHeader>
-          <div className={navMenu}>
+          <div className={navMenuContainer}>
             <Link
               to="/"
               id="logo-xl">
@@ -75,7 +68,7 @@ function Layout({children, pageContext}) {
                 height={56}
               />
             </Link>
-            <NavMenu menuItems={menuElements} classNameItem={navMenuItem} />
+            <NavMenu />
           </div>
           <StyledGetStartedButton id="header-getintouch" 
             href="#/" 
