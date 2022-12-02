@@ -30,8 +30,9 @@ const NavMenu = () => {
       return (
         <Link
           {...commonProps}
+          className={navMenuStyled.linkTextContainer}
         >
-          <h5 className={navMenuStyled.linkMenu}>{commonProps.key}</h5>
+          <h5 className={navMenuStyled.link}>{commonProps.key}</h5>
         </Link>
       )
     })
