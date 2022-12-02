@@ -1,4 +1,5 @@
 @import "../css/typography.css";
+@import "../css/colors.scss";
 
 body {
     font-family: 'gilroy', serif;
@@ -13,7 +14,7 @@ body {
 
 .navMenuItem {
     margin-left: 50px;
-    color: #fff;
+    color: $neutral100;
     display: inline-block;
 }
 .footerCol {

@@ -20,31 +20,25 @@ const NavMenu = ({
     return children;
   };
 
-  return menuItems.map(({ label, path }) => (
-    path.charAt(0) === "/"
-      ? (
-        <Link to={path} 
-          sx={{ variant: "navlink" }} 
-          className={ classNameItem }
-          key={label}
-        >
-          <p className={styledNavMenu.linkMenu}>{label}</p>
-        </Link>
-      ) : (
-        <Link
-          to={path}
-          target="_blank"
-          className={ classNameItem }
-          rel="noopener noreferrer"
-          sx={{ variant: "navlink" }}
-          key={label}>
-          <p className={styledNavMenu.linkMenu}>{label}</p>
-        </Link>
-      )
-    )
-  );
-};
+  let commonProps = {
+    to: menuItems.map(({path})),
+    sx: {variant: "navlink"},
+    className: classNameItem,
+    key: menuItems.map(({label})), 
+  }
 
+  if (path.charAt(0) !== "/") {
+    commonProps = { ...commonProps, target: "_blank", rel: "noopener noreferrer"};
+  }
+
+  return (    
+    <Link
+      {...commonProps}
+    >
+      <p className={styledNavMenu.linkMenu}>{label}</p>
+    </Link>
+    );
+};
 NavMenu.propTypes = {
   flex: PropTypes.bool,
   justify: PropTypes.oneOfType([PropTypes.string, PropTypes.array]),

@@ -1,37 +1,19 @@
 import React from "react";
-
-import styled from "styled-components";
+import { graphql } from "gatsby";
 
 import Card from "../components/card/card.tsx";
 import Pager from "../components/pager/pager.tsx";
 
-import { graphql } from "gatsby";
-
-export const ListContainer = styled.div`
-  margin: 0 10%;
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(22.4rem, 1fr));  
-  gap: 6rem 7.4rem;
-
-  @media ${props => props.theme.breakpoints.mobile} {
-  margin: 0 1.5rem;
-  }
-`
-
-export const PagerContainer = styled.div`
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-`
+import * as blogListStyles from "./blog-list.module.scss";
 
 const BlogList = ({ pageContext, data }) => {
   const _ = require("lodash")    
   const { edges, totalCount } = data.allMdx
   return (
     <>
-      <ListContainer>
+      <div className={blogListStyles.container} >
         {edges.map(({ node }) => <Card data={node}/> )}
-      </ListContainer>
+      </div>
       <Pager pageContext={pageContext}/>
     </>
   );
