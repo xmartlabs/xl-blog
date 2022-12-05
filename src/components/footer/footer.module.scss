@@ -1,0 +1,11 @@
+@import "../../css/colors.scss";
+
+.container {
+  justify-content: center;
+  display: flex;
+  overflow: hidden;
+  height: 40vh;
+  background-color: $footer-container;
+  flex-direction: column;
+  align-items: center;
+}

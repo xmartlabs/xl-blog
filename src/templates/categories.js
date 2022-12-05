@@ -1,8 +1,8 @@
-import React from "react"
-import PropTypes from "prop-types"
+import React from "react";
+import PropTypes from "prop-types";
 
 // Components
-import { Link, graphql } from "gatsby"
+import { Link, graphql } from "gatsby";
 
 const Categories = ({ pageContext, data }) => {
   const { category } = pageContext

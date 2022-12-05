@@ -1,9 +1,9 @@
 import React, { useEffect } from "react";
-import { Router } from "@reach/router";
-import PrivateRoute from "../components/privateRoute";
 import { navigate } from "gatsby";
-import Profile from "../components/profile";
 
+import { Router } from "@reach/router";
+
+import PrivateRoute from "../components/privateRoute";
 
 const BounceToHome = () => {
   useEffect(() => {
@@ -15,9 +15,10 @@ const BounceToHome = () => {
 const App = () => {
   return (
     <Router basepath="/app">
-      <PrivateRoute path="/profile" component={Profile} />
+      <PrivateRoute />
       <BounceToHome default />
     </Router>
-  )
-}
-export default App
+  );
+};
+
+export default App;

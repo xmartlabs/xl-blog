@@ -1,0 +1,14 @@
+@import "/src/css/colors.scss";
+
+.linkTextContainer {
+  margin: 10px 0 10px 50px;
+  display: inline-block;
+  text-decoration: none;
+}
+
+.link {
+  color: $black;
+  font-size: 16px;
+  line-height: 20px;
+  font-weight: 700;
+}

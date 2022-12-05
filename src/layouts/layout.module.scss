@@ -1,0 +1,29 @@
+@import "../css/typography.css";
+@import "/src/css/colors.scss";
+
+body {
+  font-family: 'gilroy', serif;
+}
+
+.navMenuContainer {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.footerCol {
+  width: 20%;
+}
+
+.desktopLogo {
+  width: 20%;
+}
+
+@media screen and (max-width: 768px) {
+  .desktopLogo{
+    display: none;
+  }
+  .footerCol {
+    width: 30%;
+  }
+}
