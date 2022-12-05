@@ -17,4 +17,4 @@ Category.propTypes = {
   data: PropTypes.object.isRequired,
 };
 
-export default Category;
+export { Category };

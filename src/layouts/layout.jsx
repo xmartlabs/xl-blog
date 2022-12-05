@@ -6,8 +6,8 @@ import { withPrefix, Link} from "gatsby";
 import styled from "styled-components";
 import { StaticImage } from "gatsby-plugin-image";
 
-import NavMenu from "../components/nav-menu";
-import Footer from "../components/footer";
+import { NavMenu } from "../components/nav-menu";
+import { Footer } from "../components/footer";
 
 import { navMenuContainer, footerCol, desktopLogo,  } from './layout.module.scss';
 import { StyledContainerHeader, StyledContainerNavBarXL } from "../elements";
@@ -52,7 +52,6 @@ export const StyledFooterText = styled.label`
   size: 17px;
   line-height: 38px;    
 `
-
 function Layout({ children }) {
   return (
     <>
@@ -87,7 +86,7 @@ function Layout({ children }) {
               id="logo-xl-white">
               <StaticImage 
                 src="../../static/images/logo-white.svg"
-                alt=""
+                alt="Xmartlabs"
                 width={90}
                 height={150}
               />

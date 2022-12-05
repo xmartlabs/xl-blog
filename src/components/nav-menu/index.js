@@ -1,1 +1,1 @@
-export { NavMenu } from "./nav-menu.jsx";
+export { NavMenu } from './nav-menu';

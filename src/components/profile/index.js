@@ -1,1 +1,1 @@
-export { Profile } from "./profile.jsx";
+export { Profile } from "./profile";

@@ -1,1 +1,1 @@
-export { Category } from "./category.jsx";
+export { Category } from "./category";

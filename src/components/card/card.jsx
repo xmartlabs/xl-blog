@@ -1,10 +1,10 @@
 import React from "react";
 import PropTypes from "prop-types";
-import _ from "/lodash/index.d.ts";
+import _ from "lodash";
 
 import { Link } from "gatsby";
 
-import Category from "../category";
+import { Category } from "../category";
 
 import * as cardStyles from "./card.module.scss";
 
@@ -22,4 +22,4 @@ Card.propTypes = {
   data: PropTypes.object.isRequired,
 };
 
-export default Card;
+export { Card };

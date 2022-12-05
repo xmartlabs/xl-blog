@@ -1,11 +1,12 @@
 import React from "react";
+import { Link } from "gatsby";
+
 import PropTypes from "prop-types";
 
 import * as pagerStyles from "./pager.module.scss";
 
-import Pages from "../pages";
+import { Pages } from "../pages";
 
-import { Link } from "gatsby";
 
 const setPrevPage = ({currentPage}) => {
   if (currentPage === 1) {
@@ -83,4 +84,4 @@ Pager.propTypes = {
   pageContext: PropTypes.object.isRequired,
 };
 
-export default Pager;
+export { Pager };

@@ -15,7 +15,6 @@ const NavMenu = () => {
   return (
     menuElements.map(({label, path}) => {
       let commonProps = {
-        sx: { variant: "navlink" }, 
         key: label, 
         to: path
       }
@@ -39,8 +38,4 @@ const NavMenu = () => {
   );
 }
 
-NavMenu.propTypes = {
-  menuItems: PropTypes.array.isRequired,
-};
-
-export default NavMenu
+export { NavMenu };

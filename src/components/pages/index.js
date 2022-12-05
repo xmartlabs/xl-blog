@@ -1,1 +1,1 @@
-export { Pages } from "./pages.jsx";
+export { Pages } from './pages';

@@ -1,10 +1,11 @@
 import React from "react";
+import PropTypes from "prop-types";
 
 import Footer from "../components/footer";
 import NavBar from "../components/nav-bar";
 import { StyledContainerWrapper } from "../elements/containers";
 
-function Layout({ children }) {
+const Layout = ({ children }) => {
   return (
     <StyledContainerWrapper>
       <NavBar />
@@ -15,5 +16,9 @@ function Layout({ children }) {
     </StyledContainerWrapper>
   )
 }
+
+Layout.propTypes = {
+  children: PropTypes.object.isRequired,
+};
 
 export default Layout;

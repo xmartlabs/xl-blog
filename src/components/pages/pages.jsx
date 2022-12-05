@@ -29,4 +29,4 @@ Pages.propTypes = {
   data: PropTypes.object.isRequired,
 };
 
-export default Pages;
+export { Pages };

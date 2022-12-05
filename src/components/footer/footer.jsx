@@ -13,4 +13,4 @@ Footer.propTypes = {
   children: PropTypes.object.isRequired,
 };
 
-export default Footer;
+export { Footer };

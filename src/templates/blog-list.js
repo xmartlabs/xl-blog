@@ -1,8 +1,8 @@
 import React from "react";
 import { graphql } from "gatsby";
 
-import Card from "../components/card";
-import Pager from "../components/pager";
+import { Card } from '../components/card';
+import { Pager } from '../components/pager';
 
 import * as blogListStyles from "./blog-list.module.scss";
 
