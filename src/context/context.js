@@ -1,7 +1,5 @@
 // Context.js
 import React from "react"
-//import { AnyType } from "./types"
-
 
 const defaultContextValue = {
   data: {

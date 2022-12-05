@@ -1,8 +1,9 @@
 import React from "react";
+import PropTypes from "prop-types";
 
 import * as pagerStyles from "./pager.module.scss";
 
-import Pages from "../pages/pages";
+import Pages from "../pages";
 
 import { Link } from "gatsby";
 
@@ -60,10 +61,11 @@ const setPagesData = ({numPages, currentPage}) => {
 };
 
 const Pager = ({ pageContext }) => {
-  const {numPages,  currentPage} = pageContext
-  const pagesData = setPagesData({numPages, currentPage})
-  const prevPage = setPrevPage({currentPage})
-  const nextPage = setNextPage({numPages, currentPage})
+  const {numPages,  currentPage} = pageContext;
+  const pagesData = setPagesData({numPages, currentPage});
+  const prevPage = setPrevPage({currentPage});
+  const nextPage = setNextPage({numPages, currentPage});
+  
   return(
     <div className={pagerStyles.pagerContainer}>
       <Link className={currentPage === 1 ? pagerStyles.disabledPagerLink : pagerStyles.pagerLink} to={prevPage} rel="prev">
@@ -75,6 +77,10 @@ const Pager = ({ pageContext }) => {
       </Link>
     </div>
   );
+};
+
+Pager.propTypes = {
+  pageContext: PropTypes.object.isRequired,
 };
 
 export default Pager;

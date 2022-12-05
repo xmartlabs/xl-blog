@@ -1,13 +1,13 @@
-@import "../../css/colors.scss";
+@import "/src/css/colors.scss";
 
-.category-wrapper {
+.categoryWrapper {
   display: flex;
   flex-direction: row;
   gap: 0.3rem;
   color: $default-yellow;
 }
 
-.styled-icon {
+.styledIcon {
   top: 0.4em;
   height: 0.438rem;
   width: 0.438rem;

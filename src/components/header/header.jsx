@@ -2,7 +2,7 @@ import { useRef } from "react";
 
 import PropTypes from "prop-types";
 
-import * as styledHeader from "./header.module.scss";
+import * as headerStyles from "./header.module.scss";
 
 const Header = props => {
   const headerRef = useRef(null);
@@ -21,7 +21,7 @@ const Header = props => {
   <header
     ref={headerRef}
   >
-    <div id="header-content" className={styledHeader.container}>
+    <div id="header-content" className={headerStyles.container}>
       {...rest}
     </div>
   </header>
@@ -34,9 +34,9 @@ Header.propTypes = {
   justify: PropTypes.oneOfType([PropTypes.string, PropTypes.array]),
   boxShadow: PropTypes.string,
   maxWidth: PropTypes.oneOfType([
-  PropTypes.string,
-  PropTypes.number,
-  PropTypes.array,
+    PropTypes.string,
+    PropTypes.number,
+    PropTypes.array,
   ]),
   children: PropTypes.node.isRequired,
 };

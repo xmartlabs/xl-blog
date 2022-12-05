@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from "prop-types";
 
 import * as pagerStyles from "../pager/pager.module.scss";
 
@@ -22,6 +23,10 @@ const Pages = ({ data }) => {
     )}
   </>
   );
+};
+
+Pages.propTypes = {
+  data: PropTypes.object.isRequired,
 };
 
 export default Pages;

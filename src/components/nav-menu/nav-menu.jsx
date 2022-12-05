@@ -3,7 +3,7 @@ import { Link } from "gatsby";
 
 import PropTypes from "prop-types";
 
-import * as navMenuStyled from "./nav-menu.module.scss";
+import * as navMenuStyles from "./nav-menu.module.scss";
 
 const NavMenu = () => {
   const menuElements = [
@@ -30,9 +30,9 @@ const NavMenu = () => {
       return (
         <Link
           {...commonProps}
-          className={navMenuStyled.linkTextContainer}
+          className={navMenuStyles.linkTextContainer}
         >
-          <h5 className={navMenuStyled.link}>{commonProps.key}</h5>
+          <h5 className={navMenuStyles.link}>{commonProps.key}</h5>
         </Link>
       )
     })
@@ -40,7 +40,7 @@ const NavMenu = () => {
 }
 
 NavMenu.propTypes = {
-  menuItems: PropTypes.array,
-}
+  menuItems: PropTypes.array.isRequired,
+};
 
 export default NavMenu

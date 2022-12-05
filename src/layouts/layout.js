@@ -6,8 +6,9 @@ import { withPrefix, Link} from "gatsby";
 import styled from "styled-components";
 import { StaticImage } from "gatsby-plugin-image";
 
-import NavMenu from "../components/nav-menu/nav-menu.jsx";
-import Footer from "../components/footer/footer.tsx";
+import NavMenu from "../components/nav-menu";
+import Footer from "../components/footer";
+
 import { navMenuContainer, footerCol, desktopLogo,  } from './layout.module.scss';
 import { StyledContainerHeader, StyledContainerNavBarXL } from "../elements";
 
@@ -52,7 +53,7 @@ export const StyledFooterText = styled.label`
   line-height: 38px;    
 `
 
-function Layout({children, pageContext}) {
+function Layout({ children }) {
   return (
     <>
       <StyledContainerNavBarXL>
