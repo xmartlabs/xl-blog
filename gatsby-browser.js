@@ -47,10 +47,6 @@ const GlobalStyles = createGlobalStyle`
       margin-bottom: 1rem;
     }
 
-    p {
-      margin-bottom: 1.5rem;
-    }
-
     .category, a {
       font-family: ${prop => prop.theme.fonts.links};
     }
