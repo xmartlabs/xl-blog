@@ -18,6 +18,7 @@ const Card = ({ data }) => (
   </article>
 );
 
+
 Card.propTypes = {
   data: PropTypes.object.isRequired,
 };

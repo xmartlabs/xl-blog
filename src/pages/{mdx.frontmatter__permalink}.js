@@ -5,32 +5,33 @@ import { graphql, Link } from 'gatsby';
 
 import AuthorsYAMLData from "../../content/authors.yaml";
 import CategoriesYAMLDATA from "../../content/categories.yaml";
+import { Category } from "../components/category";
 
-import * as blogPostStyles from './blog-post.module.scss';
+import * as styles from './blog-post.module.scss';
 
 const _ = require("lodash")
 
 const BlogPost = ({ data }) => {
-  const author = AuthorsYAMLData.find(author => { return author.author === data.mdx.frontmatter.author })
-  const category = CategoriesYAMLDATA.find(category => { return category.category === data.mdx.frontmatter.category })
+  const author = AuthorsYAMLData.find(author => { return author.author === data.mdx.frontmatter.author });
+  const category = CategoriesYAMLDATA.find(category => { return category.category === data.mdx.frontmatter.category });
+
   return (
-    <div className={blogPostStyles.container}>
-      <div className={blogPostStyles.headerContainer}>
-        <div className={blogPostStyles.typePost}>
-          {category.category}
+    <div className={styles.container}>
+      <div className={styles.headerContainer}>
+        <Category data={category.display_name}/>
+        <div className={styles.titleContainer}>
+          { data.mdx.frontmatter.title }
         </div>
-        <div className={blogPostStyles.categoryContainer}>
-          <Link to={`/categories/${ _.kebabCase(category.category) }`}>{ category.title }</Link>
-        </div>
-        <div className={blogPostStyles.authorContainer}>
-          <Link to={`/authors/${ _.kebabCase(author.author) }`}>{ author.display_name }</Link>
-          <div className={blogPostStyles.authorImage}>
-            { author.image }
+        <div className={styles.authorContainer}>
+          <div className={styles.authorInformation}>
+            <div className={styles.authorImage}>
+              <img src={`../../static/images/${author.image}`} />
+            </div>
+            <Link className={styles.authorName} to={`/authors/${ _.kebabCase(author.author) }`}>{ author.display_name }</Link>
+            </div>
+          <div className={styles.postDateContainer}>
+            <p className={styles.postDate}>{data.mdx.frontmatter.date}</p>
           </div>
-          <div className={blogPostStyles.authorUrl}>
-            { author.profile_url }
-          </div>
-          <p className={blogPostStyles.postDate}>{data.mdx.frontmatter.date}</p>
         </div>
       </div>
       <MDXRenderer>

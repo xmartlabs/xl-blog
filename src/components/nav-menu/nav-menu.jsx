@@ -1,8 +1,6 @@
 import * as React from "react";
 import { Link } from "gatsby";
 
-import PropTypes from "prop-types";
-
 import * as navMenuStyles from "./nav-menu.module.scss";
 
 const NavMenu = () => {
