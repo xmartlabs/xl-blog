@@ -25,7 +25,7 @@ const BlogPost = ({ data }) => {
         <div className={styles.authorContainer}>
           <div className={styles.authorInformation}>
             <div className={styles.authorImage}>
-              <img src={`../../static/images/${author.image}`} />
+              <img src={author.image} />
             </div>
             <Link className={styles.authorName} to={`/authors/${ _.kebabCase(author.author) }`}>{ author.display_name }</Link>
             </div>
@@ -34,9 +34,11 @@ const BlogPost = ({ data }) => {
           </div>
         </div>
       </div>
-      <MDXRenderer>
-        {data.mdx.body}
-      </MDXRenderer>
+      <div className={styles.bodyPostContainer}>
+        <MDXRenderer>
+          {data.mdx.body}
+        </MDXRenderer>
+      </div>
     </div>
   )
 }

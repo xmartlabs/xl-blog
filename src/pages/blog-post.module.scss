@@ -17,6 +17,27 @@
       bottom: 0;
       margin-top: 2rem;
     }
+
+    .bodyPostContainer {
+      padding: 5rem 1rem 8rem;
+
+      img {
+        height: 22rem;
+      }
+
+      div {
+        display: flex;
+        flex-direction: column;
+
+        img {
+          width: 100%;
+        }
+
+        img:first-child {
+          margin-bottom: 4rem;
+        }
+      }
+    }
   }
 }
 
@@ -76,4 +97,93 @@
   line-height: 1.3rem;
   font-weight: 900;
   font-size: 1.1rem;
+}
+
+.bodyPostContainer {
+  padding: 5rem 20rem 10rem;
+  color: $letterBlue;
+  text-align: justify;
+  font-size: 1.1rem;
+
+
+  h2 {
+    font-weight: bold;
+    font-size: 1.9rem;
+    margin: 3rem 0 2rem;
+  }
+
+  h3 {
+    font-weight: bold;
+    font-size: 1.6rem;
+    margin: 2rem 0 1.5rem;
+  }
+
+  h2, h3 {
+    color: $black;
+  }
+
+  p img {
+    margin: 0rem;
+  }
+
+  p {
+    line-height: 2rem;
+    margin-bottom: 2rem;
+  }
+
+  ul, li {
+    margin: 0rem 1.5rem 1rem;
+  }
+
+  a {
+    color: $letterBlue;
+  } 
+
+  aside {
+    font-size: 1.2rem;
+    line-height: 2.2rem;
+    text-transform: uppercase;
+    margin: 3rem 0 2rem;
+  }
+
+  figure {
+    width: 100%;
+    height: 100%;
+  }
+
+  img {
+    width: 100%;
+    height: 31rem;
+    margin: 1.5rem 0;
+    border-radius: 5px;
+  }
+
+  div {
+    width: 100%;
+    
+    img {
+      width: 45%;
+      margin: 0;
+    }
+
+    img:first-child {
+      margin-right: 10%;
+    }
+
+    margin: 2rem 0;
+  }
+
+  table {
+    margin: auto;
+    font-size: 1.1rem;
+    line-height: 2.2rem;
+    text-align: center;
+    margin-bottom: 2rem;
+    border-collapse: collapse;
+
+    th, td {
+      border: 1px solid black;
+      padding: 0.5rem;
+    }
+  }
 }
