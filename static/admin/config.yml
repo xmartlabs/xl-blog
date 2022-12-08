@@ -28,7 +28,7 @@ collections:
   - name: "blog"
     label: "Blog"
     folder: "blogs"
-    extension: mdx
+    extension: md
     format: frontmatter
     create: true
     fields:

@@ -24,7 +24,7 @@ const BlogPost = ({ data }) => {
         </h1>
         <div className={styles.authorContainer}>
           <div className={styles.authorInformation}>
-            <img src={author.image} alt={author.display_name} className={styles.authorImage} />
+            <img src={`images/${author.image}`} alt={author.display_name} className={styles.authorImage} />
             <Link className={styles.authorName} to={`/authors/${ _.kebabCase(author.author) }`}>{ author.display_name }</Link>
           </div>
           <p className={styles.postDate} >{data.mdx.frontmatter.date}</p>
