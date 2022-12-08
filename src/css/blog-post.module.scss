@@ -1,52 +1,5 @@
 @import "/src/css/colors.scss";
 
-// General Container
-
-.container {
-  @media screen and (max-width: 768px) {
-    .headerContainer {
-      min-height: 100%;
-      padding: 5rem 1rem 8rem;
-    } 
-
-    .titleContainer {
-      margin: 2rem 0;
-    }
-
-    .postDateContainer {
-      display: flex;
-      justify-content: start;
-      bottom: 0;
-      margin-top: 2rem;
-    }
-
-    .bodyPostContainer {
-      padding: 5rem 1rem 8rem;
-
-      img {
-        height: 16rem;
-      }
-
-      div {
-        display: flex;
-        flex-direction: column;
-
-        img {
-          width: 100%;
-        }
-
-        img:first-child {
-          margin-bottom: 4rem;
-        }
-
-        iframe {
-          height: 15rem;
-        }
-      }
-    }
-  }
-}
-
 // Header Blog Elements
 
 .headerContainer {
@@ -66,7 +19,6 @@
 .authorContainer {
   width: 100%;
   max-height: 4.2rem;
-
 }
 
 .authorInformation {
@@ -78,11 +30,8 @@
 .authorImage {
   border-radius: 10px;
   margin-right: 2rem;
-
-  img {
-    width: 67px;
-    height: 67px;
-  }
+  width: 67px;
+  height: 67px;
 }
 
 .authorName {
@@ -93,18 +42,15 @@
   text-decoration: none;
 }
 
-.postDateContainer {
-  display: flex;
-  justify-content: end;
-  position: relative;
-  bottom: 1.7rem;
-}
-
 .postDate {
   color: $info-post;
   line-height: 1.3rem;
   font-weight: 900;
   font-size: 1.1rem;
+  display: flex;
+  justify-content: end;
+  position: relative;
+  bottom: 1.7rem;
 }
 
 // Blog body
@@ -183,12 +129,12 @@
     margin: 2rem 0;
     
     img {
-      width: 45%;
+      width: 48%;
       margin: 0;
     }
 
-    img:first-child {
-      margin-right: 10%;
+    img ~ img {
+      margin-left: 4%;
     }
 
     iframe {
@@ -215,5 +161,52 @@
     margin-bottom: 2rem;
     white-space: pre-wrap;
     word-break: break-all;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .headerContainer {
+    min-height: 100%;
+    padding: 5rem 1rem 8rem;
+  } 
+
+  .titleContainer {
+    margin: 2rem 0;
+  }
+
+  .postDateContainer {
+    justify-content: start;
+    bottom: 0;
+    margin-top: 2rem;
+  }
+
+  .bodyPostContainer {
+    padding: 5rem 1rem 8rem;
+
+    img {
+      height: 16rem;
+    }
+
+    div {
+      display: flex;
+      flex-direction: column;
+
+      img {
+        width: 100%;
+      }
+
+      img ~ img {
+        margin: 3rem 0 0;
+      }
+
+      iframe {
+        height: 15rem;
+      }
+    }
+
+    table {
+      display: block;
+      overflow-x: scroll;
+    }
   }
 }

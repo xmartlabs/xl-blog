@@ -7,31 +7,27 @@ import AuthorsYAMLData from "../../content/authors.yaml";
 import CategoriesYAMLDATA from "../../content/categories.yaml";
 import { Category } from "../components/category";
 
-import * as styles from './blog-post.module.scss';
+import * as styles from '../css/blog-post.module.scss';
 
-const _ = require("lodash")
+const _ = require("lodash");
 
 const BlogPost = ({ data }) => {
-  const author = AuthorsYAMLData.find(author => { return author.author === data.mdx.frontmatter.author });
-  const category = CategoriesYAMLDATA.find(category => { return category.category === data.mdx.frontmatter.category });
+  const author = AuthorsYAMLData.find(({ author }) => (author === data.mdx.frontmatter.author));
+  const category = CategoriesYAMLDATA.find(({ category }) => (category === data.mdx.frontmatter.category));
 
   return (
-    <div className={styles.container}>
+    <>
       <div className={styles.headerContainer}>
         <Category data={category.display_name}/>
-        <div className={styles.titleContainer}>
+        <h1 className={styles.titleContainer}>
           { data.mdx.frontmatter.title }
-        </div>
+        </h1>
         <div className={styles.authorContainer}>
           <div className={styles.authorInformation}>
-            <div className={styles.authorImage}>
-              <img src={author.image} />
-            </div>
+            <img src={author.image} alt={author.display_name} className={styles.authorImage} />
             <Link className={styles.authorName} to={`/authors/${ _.kebabCase(author.author) }`}>{ author.display_name }</Link>
-            </div>
-          <div className={styles.postDateContainer}>
-            <p className={styles.postDate}>{data.mdx.frontmatter.date}</p>
           </div>
+          <p className={styles.postDate} >{data.mdx.frontmatter.date}</p>
         </div>
       </div>
       <div className={styles.bodyPostContainer}>
@@ -39,9 +35,9 @@ const BlogPost = ({ data }) => {
           {data.mdx.body}
         </MDXRenderer>
       </div>
-    </div>
-  )
-}
+    </>
+  );
+};
 
 export const query = graphql`
   query ($id: String) {
@@ -58,4 +54,4 @@ export const query = graphql`
   }
 `
 
-export default BlogPost
+export default BlogPost; 

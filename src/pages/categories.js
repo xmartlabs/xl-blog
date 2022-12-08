@@ -12,7 +12,7 @@ const CategoriesPage = ({ data }) => (
     <div>
       <h1>CategoriesPage</h1>
       <ul>
-        {data.allMdx.group.map(category => (
+        {data.allMd.group.map(category => (
           <li key={category.fieldValue}>
             <Link to={`/categories/${kebabCase(category.fieldValue)}/`}>
               {category.fieldValue} ({category.totalCount})
@@ -26,7 +26,7 @@ const CategoriesPage = ({ data }) => (
 
 CategoriesPage.propTypes = {
   data: PropTypes.shape({
-    allMdx: PropTypes.shape({
+    allMd: PropTypes.shape({
       group: PropTypes.arrayOf(
         PropTypes.shape({
           fieldValue: PropTypes.string.isRequired,
