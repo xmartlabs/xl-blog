@@ -9,23 +9,31 @@ import { Category } from "../components/category";
 
 import * as styles from '../css/blog-post.module.scss';
 
+import { AuthorSerializer, CategorySerializer } from '../networking';
+
 const _ = require("lodash");
 
 const BlogPost = ({ data }) => {
   const author = AuthorsYAMLData.find(({ author }) => (author === data.mdx.frontmatter.author));
+  const authorBlog = AuthorSerializer.deSerialize(author);
+
   const category = CategoriesYAMLDATA.find(({ category }) => (category === data.mdx.frontmatter.category));
+  const categoryBlog = CategorySerializer.deSerialize(category);
+
+  console.log(categoryBlog);
+  console.log(authorBlog)
 
   return (
     <>
       <div className={styles.headerContainer}>
-        <Category data={category.display_name}/>
+        <Category data={categoryBlog.displayName}/>
         <h1 className={styles.titleContainer}>
           { data.mdx.frontmatter.title }
         </h1>
         <div className={styles.authorContainer}>
           <div className={styles.authorInformation}>
-            <img src={`images/${author.image}`} alt={author.display_name} className={styles.authorImage} />
-            <Link className={styles.authorName} to={`/authors/${ _.kebabCase(author.author) }`}>{ author.display_name }</Link>
+            <img src={`images/${authorBlog.image}`} alt="" className={styles.authorImage} />
+            <Link className={styles.authorName} to={`/authors/${ _.kebabCase(authorBlog.author) }`}>{ authorBlog.displayName }</Link>
           </div>
           <p className={styles.postDate} >{data.mdx.frontmatter.date}</p>
         </div>
