@@ -15,13 +15,9 @@ const _ = require("lodash");
 
 const BlogPost = ({ data }) => {
   const author = AuthorsYAMLData.find(({ author }) => (author === data.mdx.frontmatter.author));
-  const authorBlog = AuthorSerializer.deSerialize(author);
-
   const category = CategoriesYAMLDATA.find(({ category }) => (category === data.mdx.frontmatter.category));
+  const authorBlog = AuthorSerializer.deSerialize(author);
   const categoryBlog = CategorySerializer.deSerialize(category);
-
-  console.log(categoryBlog);
-  console.log(authorBlog)
 
   return (
     <>
