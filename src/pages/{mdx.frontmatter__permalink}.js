@@ -6,10 +6,10 @@ import { graphql, Link } from 'gatsby';
 import AuthorsYAMLData from "../../content/authors.yaml";
 import CategoriesYAMLDATA from "../../content/categories.yaml";
 import { Category } from "../components/category";
+import { AuthorSerializer, CategorySerializer } from "../networking";
 
 import * as styles from '../css/blog-post.module.scss';
 
-import { AuthorSerializer, CategorySerializer } from '../networking';
 
 const _ = require("lodash");
 
