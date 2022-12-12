@@ -2,19 +2,15 @@
 
 // Header Blog Elements
 
-.headerContainer {
-  padding: 5rem 20rem 31.7rem;
-  background-image: url("../../static/images/banner-blog/banner-desktop.png");
-  background-size: cover;
-  background-position:center;
-  background-repeat:no-repeat;	
+.bannerContainer {
+  padding: 5rem 50rem 28rem 17rem;
 }
 
 .titleContainer {
   font-size: 2.8rem;
   line-height: 3rem;
   font-weight: bold;
-  margin: 3rem 0;
+  margin: 3rem 0 5rem;
 }
 
 .authorContainer {
@@ -60,6 +56,7 @@
   color: $letterBlue;
   text-align: justify;
   font-size: 1.1rem;
+  background-color: $neutral100;
 
   h1 {
     font-size: 2.2rem;
@@ -175,9 +172,9 @@
 }
 
 @media screen and (max-width: 768px) {
-  .headerContainer {
+  .bannerContainer {
     min-height: 100%;
-    padding: 5rem 1rem 8rem;
+    padding: 2rem 1rem 16.8rem 1rem;
   } 
 
   .titleContainer {

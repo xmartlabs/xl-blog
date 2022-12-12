@@ -10,6 +10,8 @@ import { AuthorSerializer, CategorySerializer } from "../networking";
 
 import * as styles from '../css/blog-post.module.scss';
 
+import { classnames } from "../"
+
 
 const _ = require("lodash");
 
@@ -21,7 +23,7 @@ const BlogPost = ({ data }) => {
 
   return (
     <>
-      <div className={styles.headerContainer}>
+      <div className={classnames(styles.bannerContainer)}>
         <Category data={categoryBlog.displayName}/>
         <h1 className={styles.titleContainer}>
           { data.mdx.frontmatter.title }

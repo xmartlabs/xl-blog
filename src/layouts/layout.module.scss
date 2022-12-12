@@ -5,6 +5,12 @@ body {
   font-family: 'gilroy', serif;
 }
 
+.bannerBlogContainer {
+  background-image: url("../../static/images/banner-blog/banner-desktop.png");
+  background-repeat: no-repeat;
+  background-size: contain;
+}
+
 .navMenuContainer {
   display: flex;
   flex-direction: row;
@@ -25,5 +31,11 @@ body {
   }
   .footerCol {
     width: 30%;
+  }
+
+  .bannerBlogContainer {
+    background-image: url("../../static/images/banner-blog/banner-movile.png");
+    background-repeat: no-repeat;
+    background-size: contain;
   }
 }
