@@ -6,10 +6,10 @@ import { graphql, Link } from 'gatsby';
 import AuthorsYAMLData from "../../content/authors.yaml";
 import CategoriesYAMLDATA from "../../content/categories.yaml";
 import { Category } from "../components/category";
+import { classnames } from "../helpers/utils";
+import { AuthorSerializer, CategorySerializer } from '../serializer';
 
 import * as styles from '../css/blog-post.module.scss';
-
-import { AuthorSerializer, CategorySerializer } from '../serializer';
 
 const _ = require("lodash");
 
@@ -23,15 +23,15 @@ const BlogPost = ({ data }) => {
     <>
       <div className={styles.headerContainer}>
         <Category data={categoryBlog.displayName}/>
-        <h1 className={styles.titleContainer}>
+        <h1 className={classnames(styles.titleContainer, "text__heading__one__black")}>
           { data.mdx.frontmatter.title }
         </h1>
         <div className={styles.authorContainer}>
           <div className={styles.authorInformation}>
             <img src={`images/${authorBlog.image}`} alt="" className={styles.authorImage} />
-            <Link className={styles.authorName} to={`/authors/${ _.kebabCase(authorBlog.author) }`}>{ authorBlog.displayName }</Link>
+            <Link className={classnames(styles.authorName, "text__author__name__black")} to={`/authors/${ _.kebabCase(authorBlog.author) }`}>{ authorBlog.displayName }</Link>
           </div>
-          <p className={styles.postDate} >{data.mdx.frontmatter.date}</p>
+          <p className={classnames(styles.postDate, "text__post__date__grayTwo")} >{data.mdx.frontmatter.date}</p>
         </div>
       </div>
       <div className={styles.bodyPostContainer}>

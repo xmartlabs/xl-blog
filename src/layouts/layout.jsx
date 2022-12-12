@@ -8,9 +8,10 @@ import { StaticImage } from "gatsby-plugin-image";
 
 import { NavMenu } from "../components/nav-menu";
 import { Footer } from "../components/footer";
+import { StyledContainerHeader, StyledContainerNavBarXL } from "../elements";
 
 import { navMenuContainer, footerCol, desktopLogo,  } from './layout.module.scss';
-import { StyledContainerHeader, StyledContainerNavBarXL } from "../elements";
+import "../index.scss";
 
 export const StyledGetStartedButton = styled.a`
   width: 147px;

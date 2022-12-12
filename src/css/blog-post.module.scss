@@ -8,7 +8,6 @@
 }
 
 .titleContainer {
-  @extend .text__heading__one__black;
   margin: 3rem 0;
 }
 
@@ -30,12 +29,10 @@
 }
 
 .authorName {
-  @extend .text__author__name__black;
   text-decoration: none;
 }
 
 .postDate {
-  @extend .text__post__date__grayTwo;
   display: flex;
   justify-content: end;
   position: relative;
