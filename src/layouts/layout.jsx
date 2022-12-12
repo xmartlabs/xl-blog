@@ -9,6 +9,7 @@ import { StaticImage } from "gatsby-plugin-image";
 import { NavMenu } from "../components/nav-menu";
 import { Footer } from "../components/footer";
 import { StyledContainerHeader, StyledContainerNavBarXL } from "../elements";
+import "../index.scss";
 
 import * as styles from "./layout.module.scss";
 

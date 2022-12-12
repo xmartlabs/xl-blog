@@ -4,8 +4,6 @@ import { ThemeProvider, createGlobalStyle } from "styled-components";
 import Theme from "./src/themes/theme";
 import { AppContextProviderComponent } from "./src/context/context";
 import Layout from "./src/layouts/layout";
-import "./src/index.module.scss";
-import "./src/index.module.scss";
 
 // Logs when the client route changes
 export const onRouteUpdate = ({ location, prevLocation }) => {
@@ -13,7 +11,7 @@ export const onRouteUpdate = ({ location, prevLocation }) => {
   console.log("old pathname", prevLocation ? prevLocation.pathname : null)
 }
 
-const GlobalStyles = createGlobalStyle`
+const GlobalStyles = createGlobalStyle`    
     * {
         box-sizing: border-box;
         margin: 0;
