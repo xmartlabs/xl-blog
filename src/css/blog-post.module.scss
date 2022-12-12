@@ -42,7 +42,8 @@
 // Blog body
 
 .bodyPostContainer {
-  padding: 5rem 20rem 10rem;
+  padding: 0rem 20rem 10rem;
+  margin-top: 8rem;
   text-align: justify;
   font-size: 1.1rem;
   background-color: $neutral100;
@@ -172,7 +173,8 @@
   }
 
   .bodyPostContainer {
-    padding: 5rem 1rem 8rem;
+    padding: 0rem 1rem 8rem;
+    margin-top: 3rem;
 
     img {
       height: 16rem;
