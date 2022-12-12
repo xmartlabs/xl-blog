@@ -4,6 +4,8 @@ import { ThemeProvider, createGlobalStyle } from "styled-components";
 import Theme from "./src/themes/theme";
 import { AppContextProviderComponent } from "./src/context/context";
 import Layout from "./src/layouts/layout";
+import "./src/index.module.scss";
+import "./src/index.module.scss";
 
 // Logs when the client route changes
 export const onRouteUpdate = ({ location, prevLocation }) => {

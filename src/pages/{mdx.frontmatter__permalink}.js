@@ -9,7 +9,7 @@ import { Category } from "../components/category";
 
 import * as styles from '../css/blog-post.module.scss';
 
-import { AuthorSerializer, CategorySerializer } from '../networking';
+import { AuthorSerializer, CategorySerializer } from '../serializer';
 
 const _ = require("lodash");
 

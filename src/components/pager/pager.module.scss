@@ -9,16 +9,16 @@
 
 .pagerLink {
   text-decoration: none;
-  color:  $default-gray;
+  color:  $defaultGray;
 }
 
 .disabledPagerLink {
   text-decoration: none;
-  color:  $disabled-gray;
+  color:  $disabledGray;
   cursor: not-allowed;
 }
 
 .selectedPage {
   text-decoration: none;
-  color:  $xl-pink;
+  color:  $xlPink;
 }
