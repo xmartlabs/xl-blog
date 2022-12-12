@@ -1,4 +1,5 @@
 @import "/src/css/colors.scss";
+@import "/src/css/text-styles.scss";
 
 // Header Blog Elements
 
@@ -7,10 +8,8 @@
 }
 
 .titleContainer {
-  font-size: 2.8rem;
-  line-height: 3rem;
-  font-weight: bold;
-  margin: 3rem 0 5rem;
+  @extend .text__heading__one__black;
+  margin: 3rem 0;
 }
 
 .authorContainer {
@@ -31,18 +30,12 @@
 }
 
 .authorName {
-  font-size: 1.2rem;
-  line-height: 2rem;
-  font-weight: 600;
-  color: $black;
+  @extend .text__author__name__black;
   text-decoration: none;
 }
 
 .postDate {
-  color: $info-post;
-  line-height: 1.3rem;
-  font-weight: 900;
-  font-size: 1.1rem;
+  @extend .text__post__date__grayTwo;
   display: flex;
   justify-content: end;
   position: relative;
@@ -53,34 +46,28 @@
 
 .bodyPostContainer {
   padding: 5rem 20rem 10rem;
-  color: $letterBlue;
   text-align: justify;
   font-size: 1.1rem;
   background-color: $neutral100;
 
   h1 {
-    font-size: 2.2rem;
+    @extend .text__heading__one__black;
     margin: 3rem 0;
   }
 
   h2 {
-    font-size: 1.9rem;
+    @extend .text__heading__two__black;
     margin: 3rem 0 2rem;
   }
 
   h3 {
-    font-size: 1.6rem;
+    @extend .text__heading__three__black;
     margin: 2rem 0 1.5rem;
   }
 
   h4 {
-    font-size: 1.3rem;
+    @extend .text__heading__four__black;
     margin: 1.5rem 0 1rem;
-  }
-
-  h1, h2, h3, h4 {
-    color: $black;
-    font-weight: bold;
   }
 
   p img {
@@ -88,7 +75,7 @@
   }
 
   p {
-    line-height: 2rem;
+    @extend .text__paragraph__blueTwo;
     margin-bottom: 2rem;
   }
 
@@ -97,12 +84,11 @@
   }
 
   a {
-    color: $letterBlue;
+    color: $blueTwo;
   } 
 
   aside {
-    font-size: 1.2rem;
-    line-height: 2.2rem;
+    @extend .text__aside;
     text-transform: uppercase;
     margin: 3rem 0 2rem;
   }
@@ -147,9 +133,8 @@
   }
 
   table {
+    @extend .text__aside;
     margin: auto;
-    font-size: 1.1rem;
-    line-height: 2.2rem;
     text-align: center;
     margin-bottom: 2rem;
     border-collapse: collapse;
@@ -170,6 +155,8 @@
     word-break: break-all;
   }
 }
+
+// Responsive Design
 
 @media screen and (max-width: 768px) {
   .bannerContainer {
