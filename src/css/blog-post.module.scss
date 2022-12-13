@@ -1,0 +1,205 @@
+@import "/src/css/colors.scss";
+@import "/src/css/text-styles.scss";
+
+// Header Blog Elements
+
+.bannerContainer {
+  padding: 5rem 50rem 5rem 17rem;
+}
+
+.titleContainer {
+  margin: 3rem 0;
+}
+
+.authorContainer {
+  width: 100%;
+  max-height: 5.5rem;
+}
+
+.authorInformation {
+  display: flex;
+  flex-direction: row;
+}
+
+.authorImage {
+  border-radius: 10px;
+  margin-right: 2rem;
+  width: 5.5rem;
+  height: 100%;
+}
+
+.authorName {
+  text-decoration: none;
+}
+
+.postDate {
+  display: flex;
+  justify-content: end;
+  position: relative;
+  bottom: 1.7rem;
+}
+
+// Blog body
+
+.bodyPostContainer {
+  padding: 5rem 20rem 10rem 17rem;
+  text-align: justify;
+
+  h1 {
+    @extend .text__heading__one__black;
+    margin: 3rem 0;
+  }
+
+  h2 {
+    @extend .text__heading__two__black;
+    margin: 3rem 0 2rem;
+  }
+
+  h3 {
+    @extend .text__heading__three__black;
+    margin: 2rem 0 1.5rem;
+  }
+
+  h4 {
+    @extend .text__heading__four__black;
+    margin: 1.5rem 0 1rem;
+  }
+
+  p img {
+    margin: 0rem;
+  }
+
+  p {
+    @extend .text__paragraph__blueTwo;
+    margin-bottom: 2rem;
+  }
+
+  ul, li {
+    margin: 0rem 1.5rem 1rem;
+  }
+
+  a {
+    color: $blueTwo;
+  } 
+
+  aside {
+    @extend .text__paragraph__two__blueTwo;
+    text-transform: uppercase;
+    margin: 3rem 0 2rem;
+  }
+
+  figure {
+    width: 100%;
+    height: 100%;
+
+    img {
+      min-width: 100%;
+    }
+  }
+
+  img {
+    width: 100%;
+    height: 23rem;
+    border-radius: 5px;
+    display: block;
+    margin: auto;
+  }
+
+  div {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    margin: 2rem 0;
+    
+    img {
+      width: 48%;
+      margin: 0;
+    }
+
+    img ~ img {
+      margin-left: 4%;
+    }
+
+    iframe {
+      width: 100%;
+      height: 42rem;
+    }
+  }
+
+  table {
+    @extend .text__paragraph__two__blueTwo;
+    margin: auto;
+    text-align: center;
+    margin-bottom: 2rem;
+    border-collapse: collapse;
+
+    th, td {
+      border: 1px solid black;
+      padding: 0.5rem;
+    }
+
+    img {
+      max-width: 100%;
+    }
+  }
+
+  pre {
+    margin-bottom: 2rem;
+    white-space: pre-wrap;
+    word-break: break-all;
+  }
+}
+
+// Responsive Design
+
+@media screen and (max-width: 768px) {
+  .bannerContainer {
+    min-height: 100%;
+    padding: 2rem 1rem 16.8rem 1rem;
+  } 
+
+  .titleContainer {
+    margin: 2rem 0;
+  }
+
+  .postDate {
+    justify-content: start;
+    bottom: 0;
+    margin-top: 2rem;
+  }
+
+  .bodyPostContainer {
+    padding: 0rem 1rem 8rem;
+    margin-top: 3rem;
+
+    img {
+      height: 16rem;
+    }
+
+    div {
+      flex-direction: column;
+
+      img {
+        width: 100%;
+      }
+
+      img ~ img {
+        margin: 3rem 0 0;
+      }
+
+      iframe {
+        height: 15rem;
+      }
+    }
+
+    table {
+      display: block;
+      overflow-x: scroll;
+
+      img {
+        max-width: 100%;
+      }
+    }
+  }
+}

@@ -1,0 +1,135 @@
+@import './colors.scss';
+
+// Body Text 
+
+$font-weights: (
+  boldWeight900: 900,
+  boldWeight600: 600,
+);
+
+$text-line-heights: (
+  headingOne: 3rem,
+  aside: 2.2rem,
+  headingTwo: 2rem,
+  headingThree: 1.5rem,
+  headingFour: 1.3rem,
+);
+
+$text-sizes: (
+  headingOne: 2.8rem,
+  headingTwo: 1.9rem,
+  headingThree: 1.6rem,
+  headingFour: 1.3rem,
+  authorName: 1.2rem,
+  paragraph: 1.1rem,
+);
+
+$text-colors: (  
+  black: $black,
+  blueTwo: $blueTwo,
+  grayTwo: $grayTwo,
+
+);
+
+//---- TEXT ----
+
+@mixin text__heading__one {
+  font-size: map-get($map: $text-sizes, $key: headingOne);
+  font-weight: map-get($map: $font-weights, $key: boldWeight900);
+  line-height: map-get($map: $text-line-heights, $key: headingOne);
+}
+
+@mixin text__heading__two {
+  font-size: map-get($map: $text-sizes, $key: headingTwo);
+  font-weight: map-get($map: $font-weights, $key: boldWeight900);
+  line-height: map-get($map: $text-line-heights, $key: headingTwo);
+}
+
+@mixin text__heading__three {
+  font-size: map-get($map: $text-sizes, $key: headingThree);
+  font-weight: map-get($map: $font-weights, $key: boldWeight900);
+  line-height: map-get($map: $text-line-heights, $key: headingThree);
+}
+
+@mixin text__heading__four {
+  font-size: map-get($map: $text-sizes, $key: headingFour);
+  font-weight: map-get($map: $font-weights, $key: boldWeight900);
+  line-height: map-get($map: $text-line-heights, $key: headingFour);
+}
+
+@mixin text__paragraph {
+  font-size: map-get($map: $text-sizes, $key: paragraph);
+  line-height: map-get($map: $text-line-heights, $key: headingTwo);
+}
+
+@mixin text__paragraph__bold {
+  font-size: map-get($map: $text-sizes, $key: authorName);
+  font-weight: map-get($map: $font-weights, $key: boldWeight600);
+  line-height: map-get($map: $text-line-heights, $key: headingTwo);
+}
+
+@mixin text__label__bold {
+  font-size: map-get($map: $text-sizes, $key: paragraph);
+  font-weight: map-get($map: $font-weights, $key: boldWeight900);
+  line-height: map-get($map: $text-line-heights, $key: headingFour);
+}
+
+@mixin text__paragraph__two {
+  font-size: map-get($map: $text-sizes, $key: authorName);
+  line-height: map-get($map: $text-line-heights, $key: aside);
+}
+
+//---- COLOR ---
+
+@mixin color-styles {
+  @each $color in map-keys($text-colors) {
+    &__#{$color} {
+      color: map-get($text-colors, $color);
+      @content;
+    }
+  }
+}
+
+.text {
+  &__heading__one {
+    @include color-styles {
+      @include text__heading__one;
+    }
+  }
+  &__heading__two {
+    @include color-styles {
+      @include text__heading__two;
+    }
+  }
+  &__heading__three {
+    @include color-styles {
+      @include text__heading__three;
+    }
+  }
+  &__heading__four {
+    @include color-styles {
+      @include text__heading__four;
+    }
+  }
+  &__paragraph {
+    @include color-styles {
+      @include text__paragraph;
+    }
+  }
+  &__paragraph__bold {
+    @include color-styles {
+      @include text__paragraph__bold;
+    }
+  }
+  &__label__bold {
+    @include color-styles {
+      @include text__label__bold;
+    }
+  }
+  &__paragraph__two {
+    @include color-styles {
+      @include text__paragraph__two;
+    }
+  }
+}
+

@@ -54,6 +54,7 @@ Common treatment recommendations go from managing the intensity of glyphosate to
 <figure>
   <img style="width: 100%" src="/images/farming-ml/herbicidesxtime.png" />
 </figure>
+
 [Image source](https://blogs.cornell.edu/whatscroppingup/2020/03/23/statewide-herbicide-resistance-screening-to-start-in-2020-help-us-to-help-you/)
 
 ## How ML can solve these problems
@@ -119,6 +120,7 @@ Smart Spraying works similarly to the solution described throughout the post. By
 More custom solutions sometimes adapt better to systems you already have in place. Furthermore, tagging images from your field itself would be convenient because the types of plants and weeds vary in each case. A custom image library that was verified by people working the fields could be even more accurate than a ready-made solution.
 
 <aside>
+
 👉 Improve your overall performance: save costs and materials by integrating AI technology into your process. Contact us [here](https://form.typeform.com/to/D1PhDJIR).
 
 </aside>

@@ -11,6 +11,7 @@ import { Footer } from "../components/footer";
 import { StyledContainerHeader, StyledContainerNavBarXL } from "../elements";
 
 import { navMenuContainer, footerCol, desktopLogo,  } from './layout.module.scss';
+import "../index.scss";
 
 export const StyledGetStartedButton = styled.a`
   width: 147px;
