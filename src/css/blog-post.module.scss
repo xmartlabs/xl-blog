@@ -42,7 +42,7 @@
 // Blog body
 
 .bodyPostContainer {
-  padding: 5rem 20rem 10rem;
+  padding: 5rem 20rem 10rem 17rem;
   text-align: justify;
 
   h1 {
@@ -83,7 +83,7 @@
   } 
 
   aside {
-    @extend .text__aside;
+    @extend .text__paragraph__two__blueTwo;
     text-transform: uppercase;
     margin: 3rem 0 2rem;
   }
@@ -128,7 +128,7 @@
   }
 
   table {
-    @extend .text__aside;
+    @extend .text__paragraph__two__blueTwo;
     margin: auto;
     text-align: center;
     margin-bottom: 2rem;
