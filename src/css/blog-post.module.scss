@@ -42,11 +42,8 @@
 // Blog body
 
 .bodyPostContainer {
-  padding: 0rem 20rem 10rem;
-  margin-top: 8rem;
+  padding: 5rem 20rem 10rem;
   text-align: justify;
-  font-size: 1.1rem;
-  background-color: $neutral100;
 
   h1 {
     @extend .text__heading__one__black;
