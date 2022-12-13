@@ -10,6 +10,7 @@ import { NavMenu } from "../components/nav-menu";
 import { Footer } from "../components/footer";
 import { StyledContainerHeader, StyledContainerNavBarXL } from "../elements";
 import "../index.scss";
+import { classnames } from "../helpers/utils";
 
 import * as styles from "./layout.module.scss";
 
@@ -57,7 +58,7 @@ export const StyledFooterText = styled.label`
 function Layout({ children }) {
   return (
     <>
-      <div className={styles.bannerBlogContainer}>
+      <div className={classnames(styles.bannerBlogContainer, styles.bannerHomeContainer)}>
         <StyledContainerNavBarXL>
           <StyledContainerHeader>
             <div className={styles.navMenuContainer}>

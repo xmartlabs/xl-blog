@@ -11,6 +11,12 @@ body {
   background-size: contain;
 }
 
+.bannerHomeContainer {
+  background-image: url("../../static/images/home-banner/home-banner-desktop.png");
+  background-repeat: no-repeat;
+  background-size: contain;
+}
+
 .navMenuContainer {
   display: flex;
   flex-direction: row;
@@ -36,5 +42,9 @@ body {
 
   .bannerBlogContainer {
     background-image: url("../../static/images/banner-blog/banner-movile.png");
+  }
+
+  .bannerHomeContainer {
+    background-image: url("../../static/images/home-banner/home-banner-movile.png");
   }
 }

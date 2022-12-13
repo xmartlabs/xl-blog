@@ -10,6 +10,7 @@ import { classnames } from "../helpers/utils";
 import { AuthorSerializer, CategorySerializer } from '../serializer';
 
 import * as styles from '../css/blog-post.module.scss';
+import { HomeBanner } from '../components/home-banner';
 
 const _ = require("lodash");
 
@@ -38,6 +39,9 @@ const BlogPost = ({ data }) => {
         <MDXRenderer>
           {data.mdx.body}
         </MDXRenderer>
+      </div>
+      <div> 
+        <HomeBanner/>
       </div>
     </>
   );
