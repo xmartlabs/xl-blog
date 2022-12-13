@@ -48,11 +48,13 @@ httpServer = http.createServer(function(request, response) {
 
   path.exists(filename, function(exists) {
     if(!exists) {
-    response.writeHead(404, { "Content-Type": "text/plain" });
-    response.write("404 Not Found");
-    response.end();
-    return;
+      response.writeHead(404, { "Content-Type": "text/plain" });
+      response.write("404 Not Found");
+      response.end();
+      return;
+    }
   }
+}
 ```
 
 
