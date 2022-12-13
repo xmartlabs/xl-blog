@@ -11,7 +11,7 @@ export const onRouteUpdate = ({ location, prevLocation }) => {
   console.log("old pathname", prevLocation ? prevLocation.pathname : null)
 }
 
-const GlobalStyles = createGlobalStyle`    
+const GlobalStyles = createGlobalStyle`
     * {
         box-sizing: border-box;
         margin: 0;
