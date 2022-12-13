@@ -21,7 +21,7 @@ const BlogPost = ({ data }) => {
 
   return (
     <>
-      <div className={styles.headerContainer}>
+      <div className={styles.bannerContainer}>
         <Category data={categoryBlog.displayName}/>
         <h1 className={classnames(styles.titleContainer, "text__heading__one__black")}>
           { data.mdx.frontmatter.title }
@@ -29,9 +29,9 @@ const BlogPost = ({ data }) => {
         <div className={styles.authorContainer}>
           <div className={styles.authorInformation}>
             <img src={`images/${authorBlog.image}`} alt="" className={styles.authorImage} />
-            <Link className={classnames(styles.authorName, "text__author__name__black")} to={`/authors/${ _.kebabCase(authorBlog.author) }`}>{ authorBlog.displayName }</Link>
+            <Link className={classnames(styles.authorName, "text__paragraph__bold__black")} to={`/authors/${ _.kebabCase(authorBlog.author) }`}>{ authorBlog.displayName }</Link>
           </div>
-          <p className={classnames(styles.postDate, "text__post__date__grayTwo")} >{data.mdx.frontmatter.date}</p>
+          <label className={classnames(styles.postDate, "text__label__bold__grayTwo")} >{data.mdx.frontmatter.date}</label>
         </div>
       </div>
       <div className={styles.bodyPostContainer}>
