@@ -1,3 +1,28 @@
 .containerTitleHome {
-  margin-top: 30rem;
+  margin-top: 10rem;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  width: 44rem;
+}
+
+.textContainer {
+  display: flex;
+  width: 20rem;
+
+  h2 {
+    margin: 0;
+  }
+
+}
+
+.iconContainer {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+
+  svg {
+    max-width: 2rem;
+    max-height: 3rem;
+  }
 }

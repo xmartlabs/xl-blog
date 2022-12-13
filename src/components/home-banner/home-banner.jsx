@@ -1,19 +1,19 @@
 import React from "react"
 
-import star from "../../../static/images/icons/star.svg";
-import { ReactComponent } from "../../../static/images/icons/polygon.svg";
+import { StarIcon } from "../star-icon/star-icon";
+import { PolygonIcon } from "../polygon-icon/polygon-icon";
 
 import * as styles from "./home-banner.module.scss";
 
 const HomeBanner = () => (
-  <div>
-    <div className={styles.containerTitleHome}>
-      <h1>Xmartlabs Blog</h1>
-      <div>
-        {star}
-        <p>Design. Engineering. Lessons learned on our journey</p>
-        {/* <Polygon /> */}
-        {/* <Polygon /> */}
+  <div className={styles.containerTitleHome}>
+    <h1>Xmartlabs Blog</h1>
+    <div className={styles.textContainer}>
+      <StarIcon />
+      <h2>Design. Engineering. Lessons learned on our journey</h2>
+      <div className={styles.iconContainer}>
+        <PolygonIcon />
+        <PolygonIcon />
       </div>
     </div>
   </div>
