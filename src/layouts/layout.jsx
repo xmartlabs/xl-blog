@@ -13,6 +13,7 @@ import "../index.scss";
 import { classnames } from "../helpers/utils";
 
 import * as styles from "./layout.module.scss";
+import { useState } from "react";
 
 export const StyledGetStartedButton = styled.a`
   width: 147px;
@@ -54,8 +55,9 @@ export const StyledFooterText = styled.label`
   size: 17px;
   line-height: 38px;    
 `
+function Layout({ children, path }) {
 
-function Layout({ children }) {
+  console.log(path)
   return (
     <>
       <div className={classnames(styles.bannerBlogContainer, styles.bannerHomeContainer)}>
