@@ -1,7 +1,8 @@
-import React from "react";
+import React, {useState} from "react";
 
 import Helmet from "react-helmet";
 import { withPrefix, Link} from "gatsby";
+import PropTypes from "prop-types";
 
 import styled from "styled-components";
 import { StaticImage } from "gatsby-plugin-image";
@@ -11,12 +12,11 @@ import { Footer } from "../components/footer";
 import { StyledContainerHeader, StyledContainerNavBarXL } from "../elements";
 import "../index.scss";
 import { classnames } from "../helpers/utils";
+import { HomeBanner } from "../components/home-banner/home-banner";
+
+import { AppContext, initialState, BannerType } from "../config/context.js";
 
 import * as styles from "./layout.module.scss";
-import { useState } from "react";
-import { useContext } from "react";
-import { AppContext, BannerType } from "../config/context";
-import { HomeBanner } from "../components/home-banner/home-banner";
 
 export const StyledGetStartedButton = styled.a`
   width: 147px;
@@ -58,49 +58,39 @@ export const StyledFooterText = styled.label`
   size: 17px;
   line-height: 38px;    
 `
-function Layout({ children, type }) {
-  const { setState } = useContext(AppContext);
 
-  const banner = () => {
-    if (type === BannerType.author) {
-      return bannerAuthorContainer;
-    }
-
-    if (type === BannerType.blog) {
-      return bannerBlogContainer;
-    }
-
-    return bannerHomeContainer;
-  }
-
+function Layout({ children }) {  
+  const [contextState, setContextState] = useState(initialState);
   return (
     <>
-      <div className={classnames(styles.bannerHomeContainer,styles[`${banner()}Banner`])}>
-        <StyledContainerNavBarXL>
-          <StyledContainerHeader>
-            <div className={styles.navMenuContainer}>
-              <Link
-                to="/"
-                id="logo-xl">
-                <StaticImage 
-                  src="../../static/images/logo.svg"
-                  alt=""
-                  width={56}
-                  height={56}
-                />
-              </Link>
-              <NavMenu />
-            </div>
-            <StyledGetStartedButton id="header-getintouch" 
-              href="#/" 
-            >
-            <StyledGetStartedTextButton>GET STARTED</StyledGetStartedTextButton>
-            </StyledGetStartedButton>
-          </StyledContainerHeader>
-        </StyledContainerNavBarXL>
-        {type === BannerType.home && <HomeBanner />}
-        {children}
-      </div>
+      <AppContext.Provider value={{ state: contextState, setState: setContextState }}>
+        <div className={classnames(styles[`${contextState.type}Banner`])}>
+          <StyledContainerNavBarXL>
+            <StyledContainerHeader>
+              <div className={styles.navMenuContainer}>
+                <Link
+                  to="/"
+                  id="logo-xl">
+                  <StaticImage 
+                    src="../../static/images/logo.svg"
+                    alt=""
+                    width={56}
+                    height={56}
+                  />
+                </Link>
+                <NavMenu />
+              </div>
+              <StyledGetStartedButton id="header-getintouch" 
+                href="#/" 
+              >
+              <StyledGetStartedTextButton>GET STARTED</StyledGetStartedTextButton>
+              </StyledGetStartedButton>
+            </StyledContainerHeader>
+          </StyledContainerNavBarXL>
+          {contextState.type === BannerType.home && <HomeBanner />}
+          {children}
+        </div>
+      </AppContext.Provider>
       <Footer>
         <StyledFooterWrapper>
           <div className={styles.desktopLogo}>
@@ -167,6 +157,11 @@ function Layout({ children, type }) {
       </Helmet>
     </>
   );
+}
+
+Layout.propTypes = {
+  children: PropTypes.object, 
+  type: BannerType,
 }
 
 export default Layout;

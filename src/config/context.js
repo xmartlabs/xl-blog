@@ -1,4 +1,4 @@
-import { createContext, Dispatch, SetStateAction } from 'react';
+import React, { createContext } from "react";
 
 const BannerType = {
   author: 'author',
@@ -6,17 +6,14 @@ const BannerType = {
   home: 'home',
 };
 
-const StateType = {
-  type: BannerType,
-};
-
 const initialState = {
   type: BannerType.home,
 };
 
-const AppContext = createContext<{
-  state: StateType,
-  setState: Dispatch<SetStateAction>
-}>({ state: initialState, setState: () => {} });
+const StateType = {
+  type: BannerType,
+};
 
-export { AppContext, initialState, BannerType, StateType };
+const AppContext = createContext({ state: initialState, setState: () => {} });
+
+export { AppContext, BannerType, initialState, StateType };

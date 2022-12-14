@@ -11,7 +11,7 @@ import { AuthorSerializer, CategorySerializer } from '../serializer';
 
 import * as styles from '../css/blog-post.module.scss';
 import { useContext } from 'react';
-import { AppContext } from '../config/context';
+import { AppContext, BannerType } from '../config/context';
 
 const _ = require("lodash");
 
@@ -20,7 +20,9 @@ const BlogPost = ({ data }) => {
   const category = CategoriesYAMLDATA.find(({ category }) => (category === data.mdx.frontmatter.category));
   const authorBlog = AuthorSerializer.deSerialize(author);
   const categoryBlog = CategorySerializer.deSerialize(category);
+
   const { state: { type }, setState } = useContext(AppContext);
+  setState({ state: { type: BannerType.blog }});
 
   return (
     <>

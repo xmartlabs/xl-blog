@@ -4,7 +4,6 @@ import { ThemeProvider, createGlobalStyle } from "styled-components";
 import Theme from "./src/themes/theme";
 import { AppContextProviderComponent } from "./src/context/context";
 import Layout from "./src/layouts/layout";
-import { AppContext } from "./src/config/context";
 
 // Logs when the client route changes
 export const onRouteUpdate = ({ location, prevLocation }) => {
@@ -58,14 +57,13 @@ const GlobalStyles = createGlobalStyle`
 `
 
 export const wrapRootElement = ({element}) => {
+
   return (<ThemeProvider theme={Theme}>
     <GlobalStyles />
     <AppContextProviderComponent>
-      <AppContext.Provider value={{ state: contextState, setState: setContextState }}>
-        <Layout>
-          {element}
-        </Layout>
-      </AppContext.Provider>
+      <Layout>
+        {element}
+      </Layout>
     </AppContextProviderComponent>
   </ThemeProvider>)
 }
