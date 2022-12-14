@@ -14,6 +14,9 @@ import { classnames } from "../helpers/utils";
 
 import * as styles from "./layout.module.scss";
 import { useState } from "react";
+import { useContext } from "react";
+import { AppContext, BannerType } from "../config/context";
+import { HomeBanner } from "../components/home-banner/home-banner";
 
 export const StyledGetStartedButton = styled.a`
   width: 147px;
@@ -55,12 +58,24 @@ export const StyledFooterText = styled.label`
   size: 17px;
   line-height: 38px;    
 `
-function Layout({ children, path }) {
+function Layout({ children, type }) {
+  const { setState } = useContext(AppContext);
 
-  console.log(path)
+  const banner = () => {
+    if (type === BannerType.author) {
+      return bannerAuthorContainer;
+    }
+
+    if (type === BannerType.blog) {
+      return bannerBlogContainer;
+    }
+
+    return bannerHomeContainer;
+  }
+
   return (
     <>
-      <div className={classnames(styles.bannerBlogContainer, styles.bannerHomeContainer)}>
+      <div className={classnames(styles.bannerHomeContainer,styles[`${banner()}Banner`])}>
         <StyledContainerNavBarXL>
           <StyledContainerHeader>
             <div className={styles.navMenuContainer}>
@@ -83,6 +98,7 @@ function Layout({ children, path }) {
             </StyledGetStartedButton>
           </StyledContainerHeader>
         </StyledContainerNavBarXL>
+        {type === BannerType.home && <HomeBanner />}
         {children}
       </div>
       <Footer>
