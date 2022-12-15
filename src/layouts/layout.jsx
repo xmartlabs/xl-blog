@@ -9,9 +9,9 @@ import { StaticImage } from "gatsby-plugin-image";
 import { NavMenu } from "../components/nav-menu";
 import { Footer } from "../components/footer";
 import { StyledContainerHeader, StyledContainerNavBarXL } from "../elements";
-
-import { navMenuContainer, footerCol, desktopLogo,  } from './layout.module.scss';
 import "../index.scss";
+
+import * as styles from "./layout.module.scss";
 
 export const StyledGetStartedButton = styled.a`
   width: 147px;
@@ -53,35 +53,38 @@ export const StyledFooterText = styled.label`
   size: 17px;
   line-height: 38px;    
 `
+
 function Layout({ children }) {
   return (
     <>
-      <StyledContainerNavBarXL>
-        <StyledContainerHeader>
-          <div className={navMenuContainer}>
-            <Link
-              to="/"
-              id="logo-xl">
-              <StaticImage 
-                src="../../static/images/logo.svg"
-                alt=""
-                width={56}
-                height={56}
-              />
-            </Link>
-            <NavMenu />
-          </div>
-          <StyledGetStartedButton id="header-getintouch" 
-            href="#/" 
-          >
+      <div className={styles.bannerBlogContainer}>
+        <StyledContainerNavBarXL>
+          <StyledContainerHeader>
+            <div className={styles.navMenuContainer}>
+              <Link
+                to="/"
+                id="logo-xl">
+                <StaticImage 
+                  src="../../static/images/logo.svg"
+                  alt=""
+                  width={56}
+                  height={56}
+                />
+              </Link>
+              <NavMenu />
+            </div>
+            <StyledGetStartedButton id="header-getintouch" 
+              href="#/" 
+            >
             <StyledGetStartedTextButton>GET STARTED</StyledGetStartedTextButton>
-          </StyledGetStartedButton>
-        </StyledContainerHeader>
-      </StyledContainerNavBarXL>
-      {children}
+            </StyledGetStartedButton>
+          </StyledContainerHeader>
+        </StyledContainerNavBarXL>
+        {children}
+      </div>
       <Footer>
         <StyledFooterWrapper>
-          <div className={ desktopLogo}>
+          <div className={styles.desktopLogo}>
             <Link
               to="/"
               id="logo-xl-white">
@@ -94,7 +97,7 @@ function Layout({ children }) {
             </Link>
           </div>
             
-          <div className={ footerCol }>
+          <div className={styles.footerCol}>
             <div>
               <StyledFooterTextTitle>Company</StyledFooterTextTitle>
             </div>
@@ -109,7 +112,7 @@ function Layout({ children }) {
             </div>
           </div>                        
             
-          <div className={ footerCol }>
+          <div className={styles.footerCol}>
             <div>
               <StyledFooterTextTitle>Community</StyledFooterTextTitle>
             </div>
@@ -124,7 +127,7 @@ function Layout({ children }) {
             </div>
           </div>
 
-          <div className={ footerCol }>
+          <div className={styles.footerCol}>
             <div>
               <StyledFooterTextTitle>Media</StyledFooterTextTitle>
             </div>
