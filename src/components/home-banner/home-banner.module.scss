@@ -7,8 +7,6 @@
   align-items: flex-start;
   flex-direction: column;
   width: 50%;
-  position: absolute;
-  top: 10rem;
 }
 
 .textContainer {
@@ -41,29 +39,30 @@
 @media only screen and (max-width: 768px) {
 
   .containerTitleHome {
-    margin: 0 1rem;
+    margin: 0 2rem;
     width: 100%;
-    top: 7.5rem;
+    margin-top: 2.5rem;
 
     h1 {
       font-size: 2.5rem;
       line-height: 0;
+      margin-bottom: 2rem;
     }
 
     h2 {
       font-size: 2rem;
       line-height: 2.5rem;
+      text-indent: 2rem;
 
       svg {
-        max-width: 2rem;
-        max-height: 2rem;
+        max-width: 0rem;
+        max-height: 0rem;
       }
     }
   }
 
   .textContainer {
     max-width: 20.5rem;
-    margin-top: 1rem;
   }
 
   .polygonContainer {
