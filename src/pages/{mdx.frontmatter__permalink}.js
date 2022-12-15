@@ -8,9 +8,9 @@ import CategoriesYAMLDATA from "../../content/categories.yaml";
 import { Category } from "../components/category";
 import { classnames } from "../helpers/utils";
 import { AuthorSerializer, CategorySerializer } from '../serializer';
+import { NewsLetter } from '../components/newsletter/newsletter';
 
 import * as styles from '../css/blog-post.module.scss';
-import { NewsLetter } from '../components/newsletter/newsletter';
 
 const _ = require("lodash");
 

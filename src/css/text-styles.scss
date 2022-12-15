@@ -22,12 +22,15 @@ $text-sizes: (
   headingFour: 1.3rem,
   authorName: 1.2rem,
   paragraph: 1.1rem,
+  labelNeutral: 0.7rem,
 );
 
 $text-colors: (  
   black: $black,
   blueTwo: $blueTwo,
   grayTwo: $grayTwo,
+  white: $neutral100,
+  defaultGray: $defaultGray,
 
 );
 
@@ -77,6 +80,11 @@ $text-colors: (
 @mixin text__paragraph__two {
   font-size: map-get($map: $text-sizes, $key: authorName);
   line-height: map-get($map: $text-line-heights, $key: aside);
+}
+
+@mixin text__label__neutral {
+  font-size: map-get($map: $text-sizes, $key: labelNeutral);
+  font-weight: map-get($map: $font-weights, $key: boldWeight600);
 }
 
 //---- COLOR ---
@@ -129,6 +137,11 @@ $text-colors: (
   &__paragraph__two {
     @include color-styles {
       @include text__paragraph__two;
+    }
+  }
+  &__label__neutral {
+    @include color-styles {
+      @include text__label__neutral;
     }
   }
 }

@@ -1,8 +1,69 @@
 @import "/src/css/colors.scss";
+@import "/src/css/text-styles.scss";
 
 .container {
   width: 55rem;
-  height: 16rem;
+  height: 18rem;
   background-color: $darkOne;
   margin: 0 0 5rem 5rem;
+  border-radius: 8.6px;
+  display: flex;
+  flex-direction: column;
+  padding: 2.5rem 3.2rem 2.2rem;
+}
+
+.closeIcon {
+  align-self: end;
+  position: absolute;
+
+  svg {
+    width: 1.5rem;
+    height: 1.5rem;
+  }
+}
+
+.logoImage {
+  width: 8rem;
+  height: 7rem;
+}
+
+.fillContainer {
+  display: flex;
+  flex-direction: row;
+  height: 100%;
+}
+
+.imageContainer {
+  height: 100%;
+  display: flex;
+  align-items: center;
+}
+
+.textContainer {
+  margin: 1rem 0 0 3rem;
+  width: 60%;
+}
+
+.paragraph {
+  margin: 1rem 0;
+}
+
+.suscribeContainer {
+  display: flex;
+  flex-direction: row;
+  height: 2.8rem;
+}
+
+.input {
+  width: 65%;
+  border: 1px solid $neutral100;
+  border-radius: 3px 0 0 3px;
+  padding: 0 1rem;
+}
+
+button {
+  width: 35%;
+  border-radius: 0 3px 3px 0;
+  border: 1px solid $xlPink;
+  background-color: $xlPink;
 }
