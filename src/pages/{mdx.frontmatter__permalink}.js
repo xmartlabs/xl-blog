@@ -10,6 +10,7 @@ import { classnames } from "../helpers/utils";
 import { AuthorSerializer, CategorySerializer } from '../serializer';
 
 import * as styles from '../css/blog-post.module.scss';
+import { NewsLetter } from '../components/newsletter/newsletter';
 
 const _ = require("lodash");
 
@@ -39,6 +40,7 @@ const BlogPost = ({ data }) => {
           {data.mdx.body}
         </MDXRenderer>
       </div>
+      <NewsLetter />
     </>
   );
 };

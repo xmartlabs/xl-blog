@@ -1,27 +1,26 @@
 import React from "react";
+
 import { CloseIcon } from "../close-icon";
+import { Input } from "../input";
 
-const NewsLetter = () => {
-  const [close, setClose] = useState(false);
+import * as styles from "./newsletter.module.scss";
 
-  return (
+const NewsLetter = () => (
+  <div className={styles.container}>
+    <CloseIcon />
     <div>
-      <CloseIcon />
       <div>
+        <img src="" />
+      </div>
+      <div>
+        <h3>Xmartlabs´ Newsletter</h3>
+        <p>Subscribe to our newsletter and get updates on AI, Computer Vision as well as mobile and web development.</p>
         <div>
-          <img src="../../static/images/logo.svg" />
-        </div>
-        <div>
-          <h3>Xmartlabs´ Newsletter</h3>
-          <p>Subscribe to our newsletter and get updates on AI, Computer Vision as well as mobile and web development.</p>
+          <Input placeholder="Type your email here" />
         </div>
       </div>
-
     </div>
-  )
-  
-
-
-}
+  </div>
+);
 
 export { NewsLetter }; 
