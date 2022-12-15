@@ -44,14 +44,14 @@
     margin-top: 2.5rem;
 
     h1 {
-      font-size: 2.5rem;
+      @include text__heading__one;
       line-height: 0;
       margin-bottom: 2rem;
+
     }
 
     h2 {
-      font-size: 2rem;
-      line-height: 2.5rem;
+      @include text__heading__two;
       text-indent: 2rem;
 
       svg {
