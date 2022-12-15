@@ -12,7 +12,7 @@ const CategoriesPage = ({ data }) => (
     <div>
       <h1>CategoriesPage</h1>
       <ul>
-        {data.allMd.group.map(category => (
+        {data.allMdx.group.map(category => (
           <li key={category.fieldValue}>
             <Link to={`/categories/${kebabCase(category.fieldValue)}/`}>
               {category.fieldValue} ({category.totalCount})
