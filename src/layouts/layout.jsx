@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, { useState } from "react";
 
 import Helmet from "react-helmet";
 import { withPrefix, Link} from "gatsby";
@@ -61,10 +61,11 @@ export const StyledFooterText = styled.label`
 
 function Layout({ children }) {  
   const [contextState, setContextState] = useState(initialState);
+
   return (
     <>
       <AppContext.Provider value={{ state: contextState, setState: setContextState }}>
-        <div className={classnames(styles[`${contextState.type}Banner`])}>
+        <div className={classnames(styles[`${contextState}Banner`])}>
           <StyledContainerNavBarXL>
             <StyledContainerHeader>
               <div className={styles.navMenuContainer}>
@@ -87,7 +88,7 @@ function Layout({ children }) {
               </StyledGetStartedButton>
             </StyledContainerHeader>
           </StyledContainerNavBarXL>
-          {contextState.type === BannerType.home && <HomeBanner />}
+          {contextState === BannerType.home && <HomeBanner />}
           {children}
         </div>
       </AppContext.Provider>

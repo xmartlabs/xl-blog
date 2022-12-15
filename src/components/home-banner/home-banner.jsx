@@ -7,13 +7,15 @@ import * as styles from "./home-banner.module.scss";
 
 const HomeBanner = () => (
   <div className={styles.containerTitleHome}>
-    <h1>Xmartlabs Blog</h1>
+    <h1 className="text__heading__one__big__black">Xmartlabs Blog</h1>
     <div className={styles.textContainer}>
-      <StarIcon />
-      <h2>Design. Engineering. Lessons learned on our journey</h2>
-      <div className={styles.iconContainer}>
-        <PolygonIcon />
-        <PolygonIcon />
+      <h2 className="text__heading__two__big__black">
+        <StarIcon />
+        Design. Engineering. Lessons learned on our journey
+      </h2>
+      <div className={styles.polygonContainer}>
+        <PolygonIcon className={styles.iconPolygonOne} />
+        <PolygonIcon className={styles.iconPolygonTwo} />
       </div>
     </div>
   </div>

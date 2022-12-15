@@ -7,8 +7,6 @@ import { Link } from "gatsby";
 import { Category } from "../category";
 
 import * as cardStyles from "./card.module.scss";
-import { useContext } from "react";
-import { AppContext, BannerType } from "../../config/context";
 
 const Card = ({ data }) => {
   return (

@@ -6,14 +6,8 @@ const BannerType = {
   home: 'home',
 };
 
-const initialState = {
-  type: BannerType.home,
-};
-
-const StateType = {
-  type: BannerType,
-};
+const initialState = BannerType.home;
 
 const AppContext = createContext({ state: initialState, setState: () => {} });
 
-export { AppContext, BannerType, initialState, StateType };
+export { AppContext, BannerType, initialState };

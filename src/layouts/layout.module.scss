@@ -32,6 +32,7 @@ body {
 }
 
 @media screen and (max-width: 768px) {
+  
   .desktopLogo{
     display: none;
   }
@@ -40,11 +41,11 @@ body {
     width: 30%;
   }
 
-  .bannerBlogContainer {
+  .blogBanner {
     background-image: url("../../static/images/banner-blog/banner-movile.png");
   }
 
-  .bannerHomeContainer {
+  .homeBanner {
     background-image: url("../../static/images/home-banner/home-banner-movile.png");
   }
 }

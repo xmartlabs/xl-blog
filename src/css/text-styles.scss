@@ -5,18 +5,23 @@
 $font-weights: (
   boldWeight900: 900,
   boldWeight600: 600,
+  lightWeight100: 100,
 );
 
 $text-line-heights: (
+  headingOneBig: 7rem,
   headingOne: 3rem,
   aside: 2.2rem,
+  headingTwoBig: 4.5rem,
   headingTwo: 2rem,
   headingThree: 1.5rem,
   headingFour: 1.3rem,
 );
 
 $text-sizes: (
+  headingOneBig: 4.5rem,
   headingOne: 2.8rem,
+  headingTwoBig: 4rem,
   headingTwo: 1.9rem,
   headingThree: 1.6rem,
   headingFour: 1.3rem,
@@ -79,6 +84,18 @@ $text-colors: (
   line-height: map-get($map: $text-line-heights, $key: aside);
 }
 
+@mixin text__heading__one__big {
+  font-size: map-get($map: $text-sizes, $key: headingOneBig);
+  font-weight: map-get($map: $font-weights, $key: boldWeight900);
+  line-height: map-get($map: $text-line-heights, $key: headingOneBig);
+}
+
+@mixin text__heading__two__big {
+  font-size: map-get($map: $text-sizes, $key: headingTwoBig);
+  font-weight: map-get($map: $font-weights, $key: lightWeight100);
+  line-height: map-get($map: $text-line-heights, $key: headingTwoBig);
+}
+
 //---- COLOR ---
 
 @mixin color-styles {
@@ -129,6 +146,16 @@ $text-colors: (
   &__aside {
     @include color-styles {
       @include text__aside;
+    }
+  }
+  &__heading__one__big {
+    @include color-styles {
+      @include text__heading__one__big;
+    }
+  }
+  &__heading__two__big {
+    @include color-styles {
+      @include text__heading__two__big;
     }
   }
 }

@@ -1,28 +1,81 @@
+@import '/src/css/colors.scss';
+@import '/src/css/text-styles.scss';
+
 .containerTitleHome {
-  margin-top: 10rem;
+  margin: 10rem 0 0 11rem;
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   flex-direction: column;
-  width: 44rem;
+  width: 50%;
+  position: absolute;
+  top: 10rem;
 }
 
 .textContainer {
   display: flex;
-  width: 20rem;
+  width: 41rem;
 
   h2 {
     margin: 0;
   }
-
 }
 
-.iconContainer {
+.polygonContainer {
   display: flex;
-  flex-direction: row;
-  align-items: center;
+  justify-content: center;
+  align-items: end;
+  position: absolute;
+  width: 82%;
+  height: 62%;
+}
 
-  svg {
-    max-width: 2rem;
-    max-height: 3rem;
+.iconPolygonOne {
+  margin: 0 0.5rem 0 0.5rem;
+  fill: $xlPink;
+}
+
+.iconPolygonTwo {
+  fill: $xlPinkTwo;
+}
+
+@media only screen and (max-width: 768px) {
+
+  .containerTitleHome {
+    margin: 0 1rem;
+    width: 100%;
+    top: 7.5rem;
+
+    h1 {
+      font-size: 2.5rem;
+      line-height: 0;
+    }
+
+    h2 {
+      font-size: 2rem;
+      line-height: 2.5rem;
+
+      svg {
+        max-width: 2rem;
+        max-height: 2rem;
+      }
+    }
   }
+
+  .textContainer {
+    max-width: 20.5rem;
+    margin-top: 1rem;
+  }
+
+  .polygonContainer {
+    width: 100%;
+    height: 85%;
+
+    .iconPolygonOne, .iconPolygonTwo {
+      max-width: 2rem;
+      max-height: 2rem;
+      margin: 0;
+    }
+
+  }
+  
 }
