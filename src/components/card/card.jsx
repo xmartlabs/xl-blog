@@ -11,7 +11,6 @@ import { CategorySerializer } from '../../serializer';
 import * as styles from "./card.module.scss";
 
 const Card = ({ data }) => {
-
   const category = CategoriesYAMLDATA.find(({ category }) => (category === data.frontmatter.category));
   const categoryBlog = CategorySerializer.deSerialize(category);
 
