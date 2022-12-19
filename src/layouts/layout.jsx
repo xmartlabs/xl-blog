@@ -160,11 +160,10 @@ function Layout({ children }) {
 
 Layout.propTypes = {
   children: PropTypes.object, 
-  type: BannerType,
 }
 
 Layout.defaultProps = {
-  type: BannerType.home,
+  children: {},
 };
 
 export default Layout;
