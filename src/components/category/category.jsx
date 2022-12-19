@@ -10,6 +10,7 @@ const Category = ({ data }) => (
   <div className={categoryStyles.categoryWrapper}>
     <FontAwesomeIcon className={categoryStyles.styledIcon} icon={faCircle}/>
     <p className="category">{data}</p>
+    {console.log(data)}
   </div>
 );
 
