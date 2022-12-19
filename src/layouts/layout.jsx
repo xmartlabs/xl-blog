@@ -165,4 +165,8 @@ Layout.propTypes = {
   type: BannerType,
 }
 
+Layout.defaultProps = {
+  type: BannerType.home,
+};
+
 export default Layout;

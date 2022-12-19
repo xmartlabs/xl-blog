@@ -1,7 +1,7 @@
 import React from "react"
 
-import { StarIcon } from "../star-icon/star-icon";
-import { PolygonIcon } from "../polygon-icon/polygon-icon";
+import { StarIcon } from "../icons/star-icon";
+import { PolygonIcon } from "../icons/polygon-icon";
 
 import * as styles from "./home-banner.module.scss";
 

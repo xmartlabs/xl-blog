@@ -23,8 +23,8 @@
   justify-content: center;
   align-items: end;
   position: absolute;
-  width: 82%;
-  height: 62%;
+  left: 32rem;
+  top: 33.5rem;
 }
 
 .iconPolygonOne {
@@ -66,12 +66,12 @@
   }
 
   .polygonContainer {
-    width: 100%;
-    height: 85%;
+    left: 12.5rem;    
+    top: 14.7rem;
 
     .iconPolygonOne, .iconPolygonTwo {
-      max-width: 2rem;
-      max-height: 2rem;
+      max-width: 1.5rem;
+      max-height: 1.5rem;
       margin: 0;
     }
 
