@@ -46,18 +46,17 @@
     h1 {
       @include text__heading__one;
       line-height: 0;
-      margin-bottom: 2rem;
+      margin-bottom: 2.4rem;
 
     }
 
     h2 {
       @include text__heading__two;
       text-indent: 2rem;
+    }
 
-      svg {
-        max-width: 0rem;
-        max-height: 0rem;
-      }
+    .iconStar {
+      display: none;
     }
   }
 
@@ -67,7 +66,7 @@
 
   .polygonContainer {
     left: 12.5rem;    
-    top: 14.7rem;
+    top: 15rem;
 
     .iconPolygonOne, .iconPolygonTwo {
       max-width: 1.5rem;

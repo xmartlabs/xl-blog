@@ -10,7 +10,7 @@ const HomeBanner = () => (
     <h1 className="text__heading__one__big__black">Xmartlabs Blog</h1>
     <div className={styles.textContainer}>
       <h2 className="text__heading__two__big__black">
-        <StarIcon />
+        <StarIcon className={styles.iconStar} />
         Design. Engineering. Lessons learned on our journey
       </h2>
       <div className={styles.polygonContainer}>
