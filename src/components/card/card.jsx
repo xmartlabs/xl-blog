@@ -12,7 +12,7 @@ const Card = ({ data }) => (
   <article key={data.id} className={cardStyles.container}>
     <img className={cardStyles.styledImage} src={data.frontmatter.thumbnail}/>
     <Category data={data.frontmatter.category}/>
-    <Link className={cardStyles.styledLink} to={`/${_.kebabCase(data.frontmatter.permalink)}`} >
+    <Link className={cardStyles.styledLink} to={`/${_.kebabCase(data.frontmatter.permalink)}`}>
       {data.frontmatter.title}
     </Link>
   </article>

@@ -11,9 +11,7 @@ import { NavMenu } from "../components/nav-menu";
 import { Footer } from "../components/footer";
 import { StyledContainerHeader, StyledContainerNavBarXL } from "../elements";
 import "../index.scss";
-import { classnames } from "../helpers/utils";
-import { HomeBanner } from "../components/home-banner/home-banner";
-
+import { HomeBanner } from "../components/home-banner";
 import { AppContext, initialState, BannerType } from "../config/context.js";
 
 import * as styles from "./layout.module.scss";
@@ -65,7 +63,7 @@ function Layout({ children }) {
   return (
     <>
       <AppContext.Provider value={{ state: contextState, setState: setContextState }}>
-        <div className={classnames(styles[`${contextState}Banner`])}>
+        <div className={styles[`${contextState}Banner`]}>
           <StyledContainerNavBarXL>
             <StyledContainerHeader>
               <div className={styles.navMenuContainer}>
