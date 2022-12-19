@@ -20,7 +20,7 @@ const Card = ({ data }) => {
       <article key={data.id} className={styles.container}>
         <img className={styles.styledImage} src={data.frontmatter.thumbnail}/>
         <Category data={categoryBlog.displayName}/>
-        <h1 className={styles.title}>
+        <h1 className="text__heading__two__separated__black">
           {data.frontmatter.title}
         </h1>
       </article>

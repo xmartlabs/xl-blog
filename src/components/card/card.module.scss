@@ -24,10 +24,6 @@
 }
 
 .title {
-  color: $black;
-  font-size: 1.875rem;
-  max-width: 100%;
-
   @media screen and (max-width:50rem) {
     font-size: 1.375rem;
   }
