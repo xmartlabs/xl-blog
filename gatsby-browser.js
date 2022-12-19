@@ -57,6 +57,7 @@ const GlobalStyles = createGlobalStyle`
 `
 
 export const wrapRootElement = ({element}) => {
+
   return (<ThemeProvider theme={Theme}>
     <GlobalStyles />
     <AppContextProviderComponent>

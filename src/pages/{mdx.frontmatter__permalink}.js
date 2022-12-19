@@ -1,4 +1,5 @@
 import * as React from 'react';
+import { useContext, useEffect } from 'react'
 
 import { MDXRenderer } from 'gatsby-plugin-mdx';
 import { graphql, Link } from 'gatsby';
@@ -8,6 +9,7 @@ import CategoriesYAMLDATA from "../../content/categories.yaml";
 import { Category } from "../components/category";
 import { classnames } from "../helpers/utils";
 import { AuthorSerializer, CategorySerializer } from '../serializer';
+import { AppContext, BannerType } from '../config/context';
 
 import * as styles from '../css/blog-post.module.scss';
 
@@ -18,6 +20,11 @@ const BlogPost = ({ data }) => {
   const category = CategoriesYAMLDATA.find(({ category }) => (category === data.mdx.frontmatter.category));
   const authorBlog = AuthorSerializer.deSerialize(author);
   const categoryBlog = CategorySerializer.deSerialize(category);
+  const { setState } = useContext(AppContext);
+
+  useEffect(() => {
+    setState(BannerType.blog);
+  }, []);
 
   return (
     <>
