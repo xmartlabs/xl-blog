@@ -64,28 +64,7 @@ function Layout({ children }) {
     <>
       <AppContext.Provider value={{ state: contextState, setState: setContextState }}>
         <div className={styles[`${contextState}Banner`]}>
-          <StyledContainerNavBarXL>
-            <StyledContainerHeader>
-              <div className={styles.navMenuContainer}>
-                <Link
-                  to="/"
-                  id="logo-xl">
-                  <StaticImage 
-                    src="../../static/images/logo.svg"
-                    alt=""
-                    width={56}
-                    height={56}
-                  />
-                </Link>
-                <NavMenu />
-              </div>
-              <StyledGetStartedButton id="header-getintouch" 
-                href="#/" 
-              >
-              <StyledGetStartedTextButton>GET STARTED</StyledGetStartedTextButton>
-              </StyledGetStartedButton>
-            </StyledContainerHeader>
-          </StyledContainerNavBarXL>
+          <NavMenu />
           {contextState === BannerType.home && <HomeBanner />}
           {children}
         </div>
