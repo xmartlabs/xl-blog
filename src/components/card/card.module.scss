@@ -12,10 +12,6 @@
   padding-top: 56.6%;
   display: block;
   margin-bottom: 1.5rem;
-
-  @media screen and (max-width:50rem) {
-    height: 10rem;
-  }
 }
 
 .styledImage {
@@ -32,8 +28,3 @@
   text-decoration: none;
 }
 
-.title {
-  @media screen and (max-width:50rem) {
-    font-size: 1.375rem;
-  }
-}
