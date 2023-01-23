@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { useContext, useEffect } from 'react'
+import { useContext, useEffect, useState } from 'react'
 
 import { MDXRenderer } from 'gatsby-plugin-mdx';
 import { graphql, Link } from 'gatsby';
@@ -10,6 +10,7 @@ import { Category } from "../components/category";
 import { classnames } from "../helpers/utils";
 import { AuthorSerializer, CategorySerializer } from '../serializer';
 import { AppContext, BannerType } from '../config/context';
+import { SocialBlog } from '../components/social-blog';
 
 import * as styles from '../css/blog-post.module.scss';
 
@@ -28,6 +29,7 @@ const BlogPost = ({ data }) => {
 
   return (
     <>
+    <SocialBlog />
       <div className={styles.bannerContainer}>
         <Category data={categoryBlog.displayName}/>
         <h1 className={classnames(styles.titleContainer, "text__heading__one__black")}>
