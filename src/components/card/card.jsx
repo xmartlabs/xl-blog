@@ -15,7 +15,9 @@ const Card = ({ data }) => {
   return (
     <Link className={styles.styledLink} to={`/${_.kebabCase(data.frontmatter.permalink)}`}>
       <article key={data.id} className={styles.container}>
-        <img className={styles.styledImage} src={data.frontmatter.thumbnail}/>
+        <div className={styles.imageContainer}>
+          <img className={styles.styledImage} src={data.frontmatter.thumbnail}/>
+        </div>
         <Category data={categoryBlog.displayName}/>
         <h1 className="text__heading__two__separated__black">
           {data.frontmatter.title}

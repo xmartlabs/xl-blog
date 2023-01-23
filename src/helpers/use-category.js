@@ -5,8 +5,7 @@ import { CategorySerializer } from '../serializer';
 
 const useCategory = (data) => {
   const category = CategoriesYAMLDATA.find(({ category }) => (category === data));
-  const categoryBlog = CategorySerializer.deSerialize(category);
-  return categoryBlog;
+  return CategorySerializer.deSerialize(category);
 };
 
 export { useCategory };
