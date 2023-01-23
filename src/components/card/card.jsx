@@ -5,14 +5,12 @@ import _ from "lodash";
 import { Link } from "gatsby";
 
 import { Category } from "../category";
-import CategoriesYAMLDATA from "../../../content/categories.yaml";
-import { CategorySerializer } from '../../serializer';
+import { useCategory } from '../../helpers';
 
 import * as styles from "./card.module.scss";
 
 const Card = ({ data }) => {
-  const category = CategoriesYAMLDATA.find(({ category }) => (category === data.frontmatter.category));
-  const categoryBlog = CategorySerializer.deSerialize(category);
+  const categoryBlog = useCategory(data.frontmatter.category);
 
   return (
     <Link className={styles.styledLink} to={`/${_.kebabCase(data.frontmatter.permalink)}`}>
@@ -26,7 +24,6 @@ const Card = ({ data }) => {
     </Link>
   );
 };
-
 
 Card.propTypes = {
   data: PropTypes.object.isRequired,
