@@ -29,7 +29,6 @@ const BlogPost = ({ data }) => {
 
   return (
     <>
-    <SocialBlog />
       <div className={styles.bannerContainer}>
         <Category data={categoryBlog.displayName}/>
         <h1 className={classnames(styles.titleContainer, "text__heading__one__black")}>
