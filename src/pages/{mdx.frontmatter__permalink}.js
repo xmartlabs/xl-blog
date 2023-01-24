@@ -22,13 +22,23 @@ const BlogPost = ({ data }) => {
   const authorBlog = AuthorSerializer.deSerialize(author);
   const categoryBlog = CategorySerializer.deSerialize(category);
   const { setState } = useContext(AppContext);
+  const [scrollTop, setScrollTop] = (0);
+
+  const handleScroll = (event) => {
+   setScrollTop(event.currentTarge.scrollTop);
+  }
 
   useEffect(() => {
     setState(BannerType.blog);
   }, []);
 
+  console.log(scrollTop)
+
   return (
     <>
+    <SocialBlog 
+      onScroll={handleScroll}
+    />
       <div className={styles.bannerContainer}>
         <Category data={categoryBlog.displayName}/>
         <h1 className={classnames(styles.titleContainer, "text__heading__one__black")}>
