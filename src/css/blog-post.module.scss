@@ -8,6 +8,11 @@
   opacity: 0;
 }
 
+.socialAppear {
+  transition: transform 0.5s ease-in-out, opacity 0.5s ease-in-out;
+  opacity: 100;
+}
+
 // Header Blog Elements
 
 .bannerContainer {
