@@ -1,5 +1,7 @@
 import React from "react";
 
+import PropTypes from "prop-types";
+
 import { Twitter, Facebook, Linkedin } from "../icons";
 import { classnames } from "../../helpers/utils";
 
@@ -14,3 +16,11 @@ const SocialBlog = ({ className }) => (
 );
 
 export { SocialBlog };
+
+SocialBlog.propTypes = {
+  className: PropTypes.string, 
+}
+
+SocialBlog.defaultProps = {
+  className: '',
+};

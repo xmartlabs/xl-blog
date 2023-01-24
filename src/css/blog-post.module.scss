@@ -4,7 +4,8 @@
 // Social Media
 
 .socialDisappear {
-  display: none;
+  transition: transform 0.5s ease-in-out, opacity 0.5s ease-in-out;
+  opacity: 0;
 }
 
 // Header Blog Elements
