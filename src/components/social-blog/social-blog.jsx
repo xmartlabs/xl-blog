@@ -1,17 +1,14 @@
 import React from "react";
 
 import { Twitter, Facebook, Linkedin } from "../icons";
-import { classnames } from "../../helpers/utils";
 
 import * as styles from "./social-blog.module.scss";
 
-const SocialBlog = ({ onScroll }) => (
-  <div className={styles.container}
-  onScroll={onScroll}
-  >
-    <Twitter className={styles.socialIcon} />
-    <Facebook className={classnames(styles.socialIcon, styles.facebookSpace)} />
-    <Linkedin className={styles.socialIcon} />
+const SocialBlog = () => (
+  <div className={styles.container}>
+    <a href="https://twitter.com/xmartlabs"><Twitter className={styles.socialIcon} /></a>
+    <a href="https://www.facebook.com/xmartlabs/" className={styles.facebookSpace}><Facebook className={styles.socialIcon} /></a>
+    <a href="https://www.linkedin.com/company/xmartlabs/"><Linkedin className={styles.socialIcon} /></a>
   </div>
 );
 
