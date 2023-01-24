@@ -5,19 +5,27 @@ import _ from "lodash";
 import { Link } from "gatsby";
 
 import { Category } from "../category";
+import { useCategory } from '../../helpers';
 
-import * as cardStyles from "./card.module.scss";
+import * as styles from "./card.module.scss";
 
-const Card = ({ data }) => (
-  <article key={data.id} className={cardStyles.container}>
-    <img className={cardStyles.styledImage} src={data.frontmatter.thumbnail}/>
-    <Category data={data.frontmatter.category}/>
-    <Link className={cardStyles.styledLink} to={`/${_.kebabCase(data.frontmatter.permalink)}`}>
-      {data.frontmatter.title}
+const Card = ({ data }) => {
+  const categoryBlog = useCategory(data.frontmatter.category);
+
+  return (
+    <Link className={styles.styledLink} to={`/${_.kebabCase(data.frontmatter.permalink)}`}>
+      <article key={data.id} className={styles.container}>
+        <div className={styles.imageContainer}>
+          <img className={styles.styledImage} src={data.frontmatter.thumbnail}/>
+        </div>
+        <Category data={categoryBlog.displayName}/>
+        <h1 className="text__heading__two__separated__black">
+          {data.frontmatter.title}
+        </h1>
+      </article>
     </Link>
-  </article>
-);
-
+  );
+};
 
 Card.propTypes = {
   data: PropTypes.object.isRequired,
