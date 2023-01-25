@@ -68,6 +68,13 @@ const BlogPost = ({ data }) => {
           {data.mdx.body}
         </MDXRenderer>
       </div>
+      {
+        disappearSocial &&
+        <div className={styles.socialBottomContainer}>
+          <span className={classnames('text__paragraph__bold__grayTwo', styles.sharePosition)}>Share:</span>
+          <SocialBlog className={styles.socialBottom} />
+        </div>
+      }
     </div>
   );
 };

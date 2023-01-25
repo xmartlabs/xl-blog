@@ -8,9 +8,31 @@
   opacity: 0;
 }
 
+.socialDisappear::after {
+  display: none;
+}
+
 .socialAppear {
   transition: transform 0.5s ease-in-out, opacity 0.5s ease-in-out;
   opacity: 100;
+}
+
+.socialBottomContainer {
+  display: flex;
+  flex-direction: row;
+  justify-content: end;
+  width: 89%;
+}
+
+.socialBottom {
+  display: flex;
+  flex-direction: row;
+  position: static;
+}
+
+.sharePosition {
+  align-self: center;
+  margin-right: 1rem;
 }
 
 // Header Blog Elements
@@ -54,7 +76,7 @@
 // Blog body
 
 .bodyPostContainer {
-  padding: 5rem 20rem 10rem 17rem;
+  padding: 5rem 20rem 2rem 17rem;
   text-align: justify;
 
   h1 {
