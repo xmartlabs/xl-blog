@@ -9,9 +9,9 @@ import { Category } from "../components/category";
 import { classnames, useCategory } from "../helpers";
 import { AuthorSerializer } from '../serializer';
 import { AppContext, BannerType } from '../config/context';
+import { MoreFromXlBlog } from '../components/more-from-xl-blog';
 
 import * as styles from '../css/blog-post.module.scss';
-import { MoreFromXlBlog } from '../components/more-from-xl-blog';
 
 const _ = require("lodash");
 
