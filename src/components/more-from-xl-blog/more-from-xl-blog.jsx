@@ -4,7 +4,7 @@ import { graphql, Link } from "gatsby";
 
 import { classnames } from "../../helpers";
 
-import { Card } from "../card";
+import { Card } from "../../components/card";
 
 import * as styles from './more-from-xl-blog.module.scss';
 
