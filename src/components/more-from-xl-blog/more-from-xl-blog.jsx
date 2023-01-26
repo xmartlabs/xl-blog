@@ -25,14 +25,11 @@ const MoreFromXlBlog = ({data}) => {
 export { MoreFromXlBlog };
 
 export const moreFromXlQuery = graphql`
-  query moreFromXlQuery($skip: Int!, $limit: Int) {
+  query moreFromXlQuery($limit: Int) {
     allMdx(
       sort: { fields: [frontmatter___date], order: DESC}
       limit: 3
-      skip: $skip
-      filter: {
-        id: "Xmartlabs"
-      }
+      filter: {frontmatter: {category: {eq: "develop"}}}
     ) {
       totalCount
       edges {
