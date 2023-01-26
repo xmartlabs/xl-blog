@@ -1,1 +1,1 @@
-export { MoreFromXlBlog } from './more-from-xl-blog';
+export { MoreFromXlBlog } from "./more-from-xl-blog";
