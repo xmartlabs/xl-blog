@@ -9,6 +9,7 @@ import { StaticImage } from "gatsby-plugin-image";
 
 import { NavMenu } from "../components/nav-menu";
 import { Footer } from "../components/footer";
+import { MobileMenu } from "../components/mobile-menu";
 import { StyledContainerHeader, StyledContainerNavBarXL } from "../elements";
 import "../index.scss";
 import { HomeBanner } from "../components/home-banner";
@@ -82,7 +83,7 @@ function Layout({ children }) {
               <StyledGetStartedButton id="header-getintouch" 
                 href="#/" 
               >
-              <StyledGetStartedTextButton>GET STARTED</StyledGetStartedTextButton>
+                <StyledGetStartedTextButton>GET STARTED</StyledGetStartedTextButton>
               </StyledGetStartedButton>
             </StyledContainerHeader>
           </StyledContainerNavBarXL>
@@ -90,6 +91,7 @@ function Layout({ children }) {
           {children}
         </div>
       </AppContext.Provider>
+      <MobileMenu />
       <Footer>
         <StyledFooterWrapper>
           <div className={styles.desktopLogo}>

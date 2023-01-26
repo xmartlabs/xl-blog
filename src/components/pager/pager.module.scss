@@ -22,3 +22,9 @@
   text-decoration: none;
   color:  $xlPink;
 }
+
+@media screen and (max-width: 768px) {
+  .pagerContainer {
+    margin: 80px 9%;
+  }
+}
