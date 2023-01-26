@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 
 import Helmet from "react-helmet";
 import { withPrefix, Link} from "gatsby";
@@ -60,6 +60,40 @@ export const StyledFooterText = styled.label`
 
 function Layout({ children }) {  
   const [contextState, setContextState] = useState(initialState);
+  const [width, setWidth] = useState(window.innerWidth);
+
+  const handleWindowSizeChange = () => {
+    setWidth(window.innerWidth);
+  }
+
+  useEffect(() => {
+    window.addEventListener('resize', handleWindowSizeChange);
+    return () => {
+      window.removeEventListener('resize', handleWindowSizeChange);
+    }
+  }, []);
+
+  const isMobile = width <= 768;
+
+  const handleMenuNavShows = () => {
+    if (isMobile === false) {
+      return <NavMenu />
+    } else {
+      return <MobileMenu />
+    }
+  }
+
+  const handleGetStartedShows = () => {
+    if (isMobile === false) {
+      return (
+        <StyledGetStartedButton id="header-getintouch" href="#/" >
+          <StyledGetStartedTextButton>GET STARTED</StyledGetStartedTextButton>
+        </StyledGetStartedButton>
+      )
+    }
+    return;
+  }
+  console.log(isMobile, handleMenuNavShows)
 
   return (
     <>
@@ -78,20 +112,15 @@ function Layout({ children }) {
                     height={56}
                   />
                 </Link>
-                <NavMenu />
+                {handleMenuNavShows()}
               </div>
-              <StyledGetStartedButton id="header-getintouch" 
-                href="#/" 
-              >
-                <StyledGetStartedTextButton>GET STARTED</StyledGetStartedTextButton>
-              </StyledGetStartedButton>
+              {handleGetStartedShows()}
             </StyledContainerHeader>
           </StyledContainerNavBarXL>
           {contextState === BannerType.home && <HomeBanner />}
           {children}
         </div>
       </AppContext.Provider>
-      <MobileMenu />
       <Footer>
         <StyledFooterWrapper>
           <div className={styles.desktopLogo}>
