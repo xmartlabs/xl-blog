@@ -2,18 +2,44 @@
 
 .moreFromXlContainer {
   background-color: $blueThree;
-  height: 50rem;
 }
 
 .titleStyle {
   text-decoration: none;
-  margin-left: 8.5rem;
 }
 
 .titleContainer {
+  margin: 0 0 6rem 8.9rem;
   padding-top: 6rem;
 }
 
 .blogsContainer {
-  
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  align-items: center;  
+}
+
+.cardStyles {
+  width: 23%;
+  margin-bottom: 5rem;
+}
+
+@media screen and (max-width: 768px) {
+  .blogsContainer {
+    flex-direction: column;
+  }
+
+  .titleContainer {
+    margin: 0 5rem 4rem 1.2rem;
+  }
+
+  .titleStyle {
+    line-height: 2rem;
+  }
+
+  .cardStyles {
+    width: 90%;
+  }
+
 }
