@@ -1,9 +1,11 @@
 import * as React from "react";
 import { Link } from "gatsby";
 
+import { classnames } from "../../helpers";
+
 import * as navMenuStyles from "./nav-menu.module.scss";
 
-const NavMenu = () => {
+const NavMenu = ({ className }) => {
   const menuElements = [
     {label: "Work", path:"/"},
     {label: "Services", path:"/" },
@@ -27,7 +29,7 @@ const NavMenu = () => {
       return (
         <Link
           {...commonProps}
-          className={navMenuStyles.linkTextContainer}
+          className={classnames(navMenuStyles.linkTextContainer, className)}
         >
           <h5 className={navMenuStyles.link}>{commonProps.key}</h5>
         </Link>

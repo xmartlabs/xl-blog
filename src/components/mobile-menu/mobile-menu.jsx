@@ -7,14 +7,11 @@ import { MenuMobileIcon } from "../icons/menu-icon/menu-mobile-icon";
 
 import * as styles from "./mobile-menu.module.scss";
 
-const MobileMenu = () => {
+const MobileMenu = ({ children }) => {
   const [ handleMenu, setHandleMenu ] = useState(false);
 
   const handleMenuButton = () => {
-    setHandleMenu(true);
-    if (handleMenu) {
-      setHandleMenu(false);
-    }
+    setHandleMenu(!handleMenu);
   }
 
   return (
@@ -22,10 +19,10 @@ const MobileMenu = () => {
       <Button onClick={handleMenuButton} className={styles.buttonMenu} >
         <MenuMobileIcon />
       </Button>
-      {handleMenu && <nav>
-        <div className={styles.menuOptions} >
-          <NavMenu />
-        </div>
+      {handleMenu && 
+      <nav className={styles.menuContainer}>
+          <NavMenu className={styles.linkMenu} />
+          {children}
       </nav>
       } 
     </div>

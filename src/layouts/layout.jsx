@@ -42,7 +42,6 @@ export const StyledFooterWrapper = styled.div`
   justify-content: center;
   @media (max-width: 768px) {
   justify-content: flex-end;
-  margin-left: 3em;
   width: 100%;
   }
 `
@@ -78,9 +77,8 @@ function Layout({ children }) {
   const handleMenuNavShows = () => {
     if (isMobile === false) {
       return <NavMenu />
-    } else {
-      return <MobileMenu />
     }
+    return;
   }
 
   const handleGetStartedShows = () => {
@@ -89,9 +87,16 @@ function Layout({ children }) {
         <StyledGetStartedButton id="header-getintouch" href="#/" >
           <StyledGetStartedTextButton>GET STARTED</StyledGetStartedTextButton>
         </StyledGetStartedButton>
+      ) 
+    } else {
+      return (
+        <MobileMenu>
+          <StyledGetStartedButton id="header-getintouch" href="#/" >
+              <StyledGetStartedTextButton>GET STARTED</StyledGetStartedTextButton>
+            </StyledGetStartedButton> 
+        </MobileMenu>
       )
     }
-    return;
   }
   console.log(isMobile, handleMenuNavShows)
 
