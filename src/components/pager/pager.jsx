@@ -31,10 +31,9 @@ const setNextPage = ({numPages, currentPage}) => {
 const setPagesData = ({numPages, currentPage}) => {
   if (currentPage + 2 >= numPages) {
     return {
-      firstPage: (numPages - 4),
-      secondPage: (numPages - 3),
-      thirdPage: (numPages - 2),
-      fourthPage: (numPages - 1),
+      firstPage: (numPages - 3),
+      secondPage: (numPages - 2),
+      thirdPage: (numPages - 1),
       lastPage: numPages,
       currentPage: currentPage
     };
@@ -45,20 +44,18 @@ const setPagesData = ({numPages, currentPage}) => {
       firstPage: 1,
       secondPage: 2,
       thirdPage: 3,
-      fourthPage: 4,
-      lastPage: 5,
+      lastPage: 4,
       currentPage: currentPage
     };
   }
 
-    return {
-      firstPage: (currentPage - 2),
-      secondPage: (currentPage - 1),
-      thirdPage: currentPage,
-      fourthPage: (currentPage + 1),
-      lastPage: (currentPage + 2),
-      currentPage: currentPage
-    };
+  return {
+    firstPage: (currentPage - 2),
+    secondPage: (currentPage - 1),
+    thirdPage: currentPage,
+    lastPage: (currentPage + 1),
+    currentPage: currentPage
+  };
 };
 
 const Pager = ({ pageContext }) => {

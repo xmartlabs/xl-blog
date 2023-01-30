@@ -98,8 +98,6 @@ function Layout({ children }) {
       )
     }
   }
-  console.log(isMobile, handleMenuNavShows)
-
   return (
     <>
       <AppContext.Provider value={{ state: contextState, setState: setContextState }}>
