@@ -46,7 +46,7 @@ const BlogPost = ({ data }) => {
           {data.mdx.body}
         </MDXRenderer>
       </div>
-      <MoreFromXlBlog />
+      <MoreFromXlBlog data={data} />
     </>
   );
 };
@@ -62,6 +62,27 @@ export const query = graphql`
         tags
       }
       body
+    } allMdx (
+       sort: { fields: [frontmatter___date], order: DESC }
+        limit: 3
+        filter: {frontmatter: {author: {ne: "vale"}}}
+    ) {
+      edges {
+        node {
+          id
+          frontmatter {
+            date(formatString: "MMMM D, YYYY")
+            title
+            author
+            category
+            tags
+            permalink
+            thumbnail
+          }
+          body
+          slug
+        }
+      }
     }
   }
 `
