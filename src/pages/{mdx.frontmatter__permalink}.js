@@ -52,7 +52,7 @@ const BlogPost = ({ data }) => {
 };
 
 export const query = graphql`
-  query ($id: String) {
+  query ($id: String, $author: String) {
     mdx(id: {eq: $id}) {
       frontmatter {
         title
@@ -65,11 +65,10 @@ export const query = graphql`
     } allMdx (
        sort: { fields: [frontmatter___date], order: DESC }
         limit: 3
-        filter: {frontmatter: {author: {ne: "vale"}}}
+        filter: {frontmatter: {author: {ne: $author}}}
     ) {
       edges {
         node {
-          id
           frontmatter {
             date(formatString: "MMMM D, YYYY")
             title
