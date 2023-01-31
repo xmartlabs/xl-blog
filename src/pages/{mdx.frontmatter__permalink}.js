@@ -11,6 +11,7 @@ import { AuthorSerializer } from '../serializer';
 import { AppContext, BannerType } from '../config/context';
 
 import * as styles from '../css/blog-post.module.scss';
+import { XlNewsletter } from '../components/xl-newsletter/xl-newsletter';
 
 const _ = require("lodash");
 
@@ -45,6 +46,7 @@ const BlogPost = ({ data }) => {
           {data.mdx.body}
         </MDXRenderer>
       </div>
+      <XlNewsletter />
     </>
   );
 };
