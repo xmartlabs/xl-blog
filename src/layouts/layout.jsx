@@ -16,6 +16,7 @@ import { HomeBanner } from "../components/home-banner";
 import { AppContext, initialState, BannerType } from "../config/context.js";
 
 import * as styles from "./layout.module.scss";
+import { Button } from "../components/button";
 
 export const StyledGetStartedButton = styled.a`
   width: 147px;
@@ -88,20 +89,22 @@ function Layout({ children }) {
           <StyledGetStartedTextButton>GET STARTED</StyledGetStartedTextButton>
         </StyledGetStartedButton>
       ) 
-    } else {
+    }
+  }
+
+  const handleShowMobileMenu = () => {
+    if (isMobile) {
       return (
-        <MobileMenu>
-          <StyledGetStartedButton id="header-getintouch" href="#/" >
-              <StyledGetStartedTextButton>GET STARTED</StyledGetStartedTextButton>
-            </StyledGetStartedButton> 
-        </MobileMenu>
+        <MobileMenu />
       )
     }
   }
+
   return (
     <>
       <AppContext.Provider value={{ state: contextState, setState: setContextState }}>
         <div className={styles[`${contextState}Banner`]}>
+        {handleShowMobileMenu()}
           <StyledContainerNavBarXL>
             <StyledContainerHeader>
               <div className={styles.navMenuContainer}>

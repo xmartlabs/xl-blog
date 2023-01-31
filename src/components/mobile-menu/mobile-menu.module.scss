@@ -1,27 +1,36 @@
+@import "../../css/text-styles.scss";
+@import "../../css//colors.scss";
+
 .container {
-  display: flex;
-  flex-direction: column;
-  align-items: end;
-  width: 9rem;
-  height: 15rem;
-  margin-top: 13rem;
-  position: relative;
-}
-
-.buttonMenu {
-  border-color: transparent;
-  background-color: transparent;
-}
-
-.menuContainer {
+  width: 100%;
   position: absolute;
-  margin-top: 2rem;
-  display: flex;
-  flex-direction: column;
+}
+
+.menuOpen {
+  height: 49rem;
   background-color: white;
 }
 
-.linkMenu {
-  margin: 10px 0;
-  text-align: center;
+.buttonIconStyles {
+  background-color: transparent;
+  border: transparent;
+  margin-top: 2.5rem;
+  margin: 2.5rem 1.8rem 0 0;
+}
+
+.buttonIconPosition {
+  display: flex;
+  flex-direction: row;
+  justify-content: end;
+}
+
+.openButton {
+  display: none !important;
+}
+
+.menuOptions {
+  @extend .text__heading__one__big__black;
+  margin: 2rem 0 0 1.9rem;
+  display: flex;
+  flex-direction: column;
 }
