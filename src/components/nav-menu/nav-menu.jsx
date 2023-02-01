@@ -3,14 +3,15 @@ import { Link } from "gatsby";
 
 import { classnames } from "../../helpers";
 
-import * as navMenuStyles from "./nav-menu.module.scss";
+import * as styles from "./nav-menu.module.scss";
 
-const NavMenu = ({ className }) => {
+const NavMenu = ({ className, menuOpen }) => {
   const menuElements = [
     {label: "Work", path:"/"},
     {label: "Services", path:"/" },
     {label: "Our Company", path:"/" },
     {label: "Community", path:"/" },
+    {label: "Blog", path:"/"},
   ];
   return (
     menuElements.map(({label, path}) => {
@@ -29,9 +30,9 @@ const NavMenu = ({ className }) => {
       return (
         <Link
           {...commonProps}
-          className={classnames(navMenuStyles.linkTextContainer, className)}
+          className={classnames(styles.linkTextContainer, className)}
         >
-          <h5 className={navMenuStyles.link}>{commonProps.key}</h5>
+          <h5 className={classnames(styles.link, {["text__heading__two__separated__black"]: menuOpen})}>{commonProps.key}</h5>
         </Link>
       )
     })

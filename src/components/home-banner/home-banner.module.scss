@@ -36,6 +36,10 @@
   fill: $xlPinkTwo;
 }
 
+.menuOpen {
+  position: static;
+}
+
 @media only screen and (max-width: 768px) {
 
   .containerTitleHome {
@@ -74,5 +78,5 @@
     }
 
   }
-  
+
 }

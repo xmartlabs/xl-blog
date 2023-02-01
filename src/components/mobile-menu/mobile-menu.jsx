@@ -1,7 +1,7 @@
 import React, { useState } from "react";
+import { Link } from "gatsby";
 
 import { NavMenu } from "../nav-menu";
-
 import { Button } from "../button";
 import { MenuMobileIcon } from "../icons/menu-icon";
 import { CloseIcon } from "../icons/close-icon";
@@ -13,44 +13,40 @@ import { classnames } from "../../helpers";
 
 import * as styles from "./mobile-menu.module.scss";
 
-const MobileMenu = () => {
-  const [ handleMenu, setHandleMenu ] = useState(false);
-
-  const handleMenuButton = () => {
-    setHandleMenu(!handleMenu);
-  }
-
-  console.log(handleMenu)
-
-  return (
-    <>
-      <div className={classnames(styles.container, { [styles.menuOpen]: handleMenu })} >
-        <div className={classnames(styles.buttonIconPosition, { [styles.openButton]: handleMenu })}>
-          <Button onClick={handleMenuButton} className={styles.buttonIconStyles} >
-            <MenuMobileIcon />
-          </Button>
-        </div>
-        {handleMenu && 
-          <div>
-            <div className={styles.buttonIconPosition}>
-              <Button onClick={handleMenuButton} className={classnames(styles.buttonIconPosition, styles.buttonIconStyles)} >
-                <CloseIcon />
-              </Button>
+const MobileMenu = ({ onClick, status }) => (
+  <>
+    <div className={classnames(styles.container, { [styles.menuOpen]: status })} >
+      <div className={classnames(styles.buttonIconPosition, { [styles.openButton]: status })}>
+        <Button onClick={onClick} className={styles.buttonIconStyles} >
+        <MenuMobileIcon />
+        </Button>
+      </div>
+      {status && 
+        <div>
+          <div className={styles.buttonIconPosition}>
+            <Button onClick={onClick} className={classnames(styles.buttonIconPosition, styles.buttonIconStyles)} >
+              <CloseIcon />
+            </Button>
+          </div>
+          <div className={styles.menuContainer} >
+            <div className={styles.menuOptions}>
+              <NavMenu className={styles.menuOptions}  menuOpen={status}/>
             </div>
-            <NavMenu className={styles.menuOptions} />
-            <h4>Ready to partner?</h4>
-            <Button>Lets's talk</Button>
-            <div>
-              <LinkedInIcon />
-              <InstagramIcon />
-              <TwitterIcon />
-              <GithubIcon />
+            <div className={styles.partnerContainer}>
+              <h4 className="text__label__bold__black">Ready to partner?</h4>
+              <Link to="/" className={styles.partnerButton}>Lets's talk</Link>
+            </div>
+            <div className={styles.socialContainer}>
+              <Link to="/"><LinkedInIcon /></Link>
+              <Link to="/" className={styles.instagramSpace}><InstagramIcon /></Link>
+              <Link to="/"><TwitterIcon /></Link>
+              <Link to="/" className={styles.gitSpace}><GithubIcon /></Link>
             </div>
           </div>
-        }
         </div>
-    </>
-  );
-};
+      }
+    </div>
+  </>
+);
 
 export { MobileMenu };

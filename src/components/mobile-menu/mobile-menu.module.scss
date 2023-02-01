@@ -1,14 +1,17 @@
-@import "../../css/text-styles.scss";
 @import "../../css//colors.scss";
+
+// General Container
 
 .container {
   width: 100%;
   position: absolute;
 }
 
+// Menu Buttons
+
 .menuOpen {
   height: 49rem;
-  background-color: white;
+  background-color: $neutral100;
 }
 
 .buttonIconStyles {
@@ -25,12 +28,48 @@
 }
 
 .openButton {
-  display: none !important;
+  display: none;
+}
+
+// Menu
+
+.menuContainer {
+  margin: 4rem 0 0 1.9rem;
 }
 
 .menuOptions {
-  @extend .text__heading__one__big__black;
-  margin: 2rem 0 0 1.9rem;
   display: flex;
   flex-direction: column;
+  margin-left: 0;
+}
+
+.partnerContainer {
+  margin-top: 3rem;
+}
+
+.partnerButton {
+  width: 13rem;
+  height: 2.8rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: $xlPink;
+  color: $neutral100;
+  margin: 1.5rem 0 9.5rem;
+  text-decoration: none;
+
+}
+
+.socialContainer {
+  display: flex;
+  align-items: center;
+  flex-direction: row;
+}
+
+.instagramSpace {
+  padding: 0 2rem;
+}
+
+.gitSpace {
+  padding-left: 2rem;
 }

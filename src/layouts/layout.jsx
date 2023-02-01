@@ -16,7 +16,6 @@ import { HomeBanner } from "../components/home-banner";
 import { AppContext, initialState, BannerType } from "../config/context.js";
 
 import * as styles from "./layout.module.scss";
-import { Button } from "../components/button";
 
 export const StyledGetStartedButton = styled.a`
   width: 147px;
@@ -61,6 +60,7 @@ export const StyledFooterText = styled.label`
 function Layout({ children }) {  
   const [contextState, setContextState] = useState(initialState);
   const [width, setWidth] = useState(window.innerWidth);
+  const [ handleMenu, setHandleMenu ] = useState(false);
 
   const handleWindowSizeChange = () => {
     setWidth(window.innerWidth);
@@ -92,10 +92,14 @@ function Layout({ children }) {
     }
   }
 
+  const handleMenuButton = () => {
+    setHandleMenu(!handleMenu);
+  }
+
   const handleShowMobileMenu = () => {
     if (isMobile) {
       return (
-        <MobileMenu />
+        <MobileMenu onClick={handleMenuButton} status={handleMenu} />
       )
     }
   }
@@ -123,7 +127,7 @@ function Layout({ children }) {
               {handleGetStartedShows()}
             </StyledContainerHeader>
           </StyledContainerNavBarXL>
-          {contextState === BannerType.home && <HomeBanner />}
+          {contextState === BannerType.home && <HomeBanner menuOpen={handleMenu} />}
           {children}
         </div>
       </AppContext.Provider>
