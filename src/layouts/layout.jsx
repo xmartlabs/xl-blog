@@ -59,7 +59,7 @@ export const StyledFooterText = styled.label`
 
 function Layout({ children }) {  
   const [contextState, setContextState] = useState(initialState);
-  const [width, setWidth] = useState(window.innerWidth);
+  const [width, setWidth] = useState(0);
   const [ handleMenu, setHandleMenu ] = useState(false);
 
   const handleWindowSizeChange = () => {
@@ -67,6 +67,8 @@ function Layout({ children }) {
   }
 
   useEffect(() => {
+    const size = window.innerWidth;
+    setWidth(size);
     window.addEventListener('resize', handleWindowSizeChange);
     return () => {
       window.removeEventListener('resize', handleWindowSizeChange);
