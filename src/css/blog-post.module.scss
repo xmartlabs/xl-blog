@@ -21,7 +21,7 @@
   display: flex;
   flex-direction: row;
   justify-content: end;
-  width: 89%;
+  padding-right: 12rem;
 }
 
 .socialBottom {
@@ -235,5 +235,10 @@
         max-width: 100%;
       }
     }
+  }
+
+  .socialBottomContainer {
+    justify-content: start;
+    padding-left: 1rem;
   }
 }
