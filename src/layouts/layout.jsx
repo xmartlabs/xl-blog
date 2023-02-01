@@ -59,7 +59,8 @@ export const StyledFooterText = styled.label`
 
 function Layout({ children }) {  
   const [contextState, setContextState] = useState(initialState);
-  const [width, setWidth] = useState(window.innerWidth);
+  const window = window.innerWidth;
+  const [width, setWidth] = useState(window);
   const [ handleMenu, setHandleMenu ] = useState(false);
 
   const handleWindowSizeChange = () => {
