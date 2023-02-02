@@ -7,24 +7,24 @@
   flex-wrap: wrap;
 }
 
-.styledImage {
-  border-radius: 3%;
+.imageContainer {
+  position: relative;
+  padding-top: 56.6%;
+  display: block;
   margin-bottom: 1.5rem;
-  width: 100%;
-  height: 15rem;
+}
 
-  @media screen and (max-width:50rem) {
-    height: 8.125rem;
-  }
+.styledImage {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  border-radius: 3%;
+  object-fit: fill;
 }
 
 .styledLink {
   text-decoration: none;
-  color: $black;
-  font-size: 1.875rem;
-  max-width: 100%;
-
-  @media screen and (max-width:50rem) {
-    font-size: 1.375rem;
-  }
 }
+

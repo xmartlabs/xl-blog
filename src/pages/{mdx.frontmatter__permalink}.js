@@ -1,14 +1,14 @@
 import * as React from 'react';
 import { useContext, useEffect, useState } from 'react'
 
+import { useContext, useEffect } from 'react'
 import { MDXRenderer } from 'gatsby-plugin-mdx';
 import { graphql, Link } from 'gatsby';
 
 import AuthorsYAMLData from "../../content/authors.yaml";
-import CategoriesYAMLDATA from "../../content/categories.yaml";
 import { Category } from "../components/category";
-import { classnames } from "../helpers/utils";
-import { AuthorSerializer, CategorySerializer } from '../serializer';
+import { classnames, useCategory } from "../helpers";
+import { AuthorSerializer } from '../serializer';
 import { AppContext, BannerType } from '../config/context';
 import { SocialBlog } from '../components/social-blog';
 
@@ -18,11 +18,11 @@ const _ = require("lodash");
 
 const BlogPost = ({ data }) => {
   const author = AuthorsYAMLData.find(({ author }) => (author === data.mdx.frontmatter.author));
-  const category = CategoriesYAMLDATA.find(({ category }) => (category === data.mdx.frontmatter.category));
   const authorBlog = AuthorSerializer.deSerialize(author);
-  const categoryBlog = CategorySerializer.deSerialize(category);
   const { setState } = useContext(AppContext);
   const [ disappearSocial, setDisappearSocial ] = useState(false);
+
+  const categoryBlog = useCategory(data.mdx.frontmatter.category);
 
   useEffect(() => {
     setState(BannerType.blog);
