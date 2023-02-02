@@ -15,7 +15,7 @@ import "../index.scss";
 import { HomeBanner } from "../components/home-banner";
 import { AppContext, initialState, BannerType } from "../config/context.js";
 
-import { useIsMobile } from "../hooks";
+import { useMediaQuery } from "../hooks";
 
 import * as styles from "./layout.module.scss";
 
@@ -62,7 +62,7 @@ export const StyledFooterText = styled.label`
 function Layout({ children }) {  
   const [contextState, setContextState] = useState(initialState);
   const [ handleMenu, setHandleMenu ] = useState(false);
-  const isMobile = useIsMobile();
+  const isMobile = useMediaQuery("(max-width: 768px)");
 
   const handleMenuNavShows = () => {
     if (isMobile === false) {
