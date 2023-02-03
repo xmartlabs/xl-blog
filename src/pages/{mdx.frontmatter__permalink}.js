@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { useContext, useEffect, useState } from 'react'
+import { useContext, useEffect, useState, useRef } from 'react'
 
 import { MDXRenderer } from 'gatsby-plugin-mdx';
 import { graphql, Link } from 'gatsby';
@@ -21,7 +21,7 @@ const BlogPost = ({ data }) => {
   const authorBlog = AuthorSerializer.deSerialize(author);
   const { setState } = useContext(AppContext);
   const [ disappearSocial, setDisappearSocial ] = useState(false);
-
+  const refMoreFrom = useRef(null);
   const categoryBlog = useCategory(data.mdx.frontmatter.category);
 
   useEffect(() => {
@@ -37,7 +37,8 @@ const BlogPost = ({ data }) => {
   }, []);
 
   const handleScroll = () => {
-    const bottom = Math.ceil(window.innerHeight + window.scrollY) >= document.documentElement.scrollHeight;
+   const moreFromXlSize = refMoreFrom?.current?.clientHeight || 0;
+    const bottom = Math.ceil(window.innerHeight + window.scrollY + moreFromXlSize + 200) >= document.documentElement.scrollHeight;
     if (bottom) {
       setDisappearSocial(true);
     } else {
@@ -48,7 +49,7 @@ const BlogPost = ({ data }) => {
   };
 
   return (
-    <div onScroll={handleScroll}>
+    <div onScroll={handleScroll} >
       <SocialBlog className={disappearSocial ? styles.socialDisappear : styles.socialAppear} />
         <div className={styles.bannerContainer}>
           <Category data={categoryBlog.displayName}/>
@@ -72,13 +73,13 @@ const BlogPost = ({ data }) => {
         <span className={classnames('text__paragraph__bold__grayTwo', styles.sharePosition)}>Share:</span>
         <SocialBlog className={styles.socialBottom} />
       </div>
-      <MoreFromXlBlog data={data} />
+        <MoreFromXlBlog data={data} refMoreFrom={refMoreFrom} />
     </div>
   );
 };
 
 export const query = graphql`
-  query ($id: String, $author: String) {
+  query ($id: String) {
     mdx(id: {eq: $id}) {
       frontmatter {
         title
@@ -91,7 +92,6 @@ export const query = graphql`
     } allMdx (
        sort: { fields: [frontmatter___date], order: DESC }
         limit: 3
-        filter: {frontmatter: {author: {ne: $author}}}
     ) {
       edges {
         node {
