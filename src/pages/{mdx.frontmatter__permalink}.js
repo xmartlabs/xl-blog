@@ -10,9 +10,9 @@ import { classnames, useCategory } from "../helpers";
 import { AuthorSerializer } from '../serializer';
 import { AppContext, BannerType } from '../config/context';
 import { SocialBlog } from '../components/social-blog';
+import { XlNewsletter } from '../components/xl-newsletter/xl-newsletter';
 
 import * as styles from '../css/blog-post.module.scss';
-import { XlNewsletter } from '../components/xl-newsletter/xl-newsletter';
 
 const _ = require("lodash");
 
@@ -21,6 +21,7 @@ const BlogPost = ({ data }) => {
   const authorBlog = AuthorSerializer.deSerialize(author);
   const { setState } = useContext(AppContext);
   const [ disappearSocial, setDisappearSocial ] = useState(false);
+  const [show, setShow] = useState(true);
 
   const categoryBlog = useCategory(data.mdx.frontmatter.category);
 
@@ -47,6 +48,10 @@ const BlogPost = ({ data }) => {
     };
   };
 
+  const handleButton = () => {
+    setShow(false);
+  }
+  
   return (
     <div onScroll={handleScroll}>
       <SocialBlog className={disappearSocial ? styles.socialDisappear : styles.socialAppear} />
@@ -72,7 +77,11 @@ const BlogPost = ({ data }) => {
         <span className={classnames('text__paragraph__bold__grayTwo', styles.sharePosition)}>Share:</span>
         <SocialBlog className={styles.socialBottom} />
       </div>
-      <XlNewsletter />
+      {show && 
+        <div className={styles.newsletterContainer}>
+          <XlNewsletter onClick={handleButton()} />
+        </div>
+        }
     </div>
   );
 };

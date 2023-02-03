@@ -1,2 +1,68 @@
+@import "/src/css/colors.scss";
+
 .container {
+  width: 55rem;
+  height: 17rem;
+  background-color: $darkTwo;
+  margin-bottom: 5rem;
+  display: flex;
+  flex-direction: row;
+  border-radius: 0.5rem;
+  padding: 0 2rem 0 4rem;
+}
+
+.close {
+  display: flex;
+  flex-direction: row;
+  margin-top: 2rem; 
+  width: 5.5rem; 
+  justify-content: end;
+}
+
+.logoContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  width: 6.3rem;
+}
+
+.linkLogoXl {
+  background-color: $neutral100;
+  max-height: 99px;
+  max-width: 97px;
+}
+
+.informationContainer {
+  display: flex;
+  flex-direction: column;
+  margin-left: 4rem;
+}
+
+.textNewsletter {
+  width: 32rem;
+}
+
+.subscribeContainer {
+  margin-top: 1rem;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+}
+
+.inputNewsletter {
+  height: 2.4rem;
+  width: 19rem;
+  border-color: transparent;
+  border-radius: 0.2rem 0 0 0.2rem;
+
+}
+
+.buttonNewsletter {
+  width: 12.7rem;
+  height: 2.4rem;
+  background-color: $xlPink;
+  border-color: transparent;
 }
