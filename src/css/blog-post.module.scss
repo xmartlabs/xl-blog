@@ -1,6 +1,40 @@
 @import "/src/css/colors.scss";
 @import "/src/css/text-styles.scss";
 
+// Social Media
+
+.socialDisappear {
+  transition: transform 0.5s ease-in-out, opacity 0.5s ease-in-out;
+  opacity: 0;
+}
+
+.socialDisappear::after {
+  display: none;
+}
+
+.socialAppear {
+  transition: transform 0.5s ease-in-out, opacity 0.5s ease-in-out;
+  opacity: 100;
+}
+
+.socialBottomContainer {
+  display: flex;
+  flex-direction: row;
+  justify-content: end;
+  padding-right: 12rem;
+}
+
+.socialBottom {
+  display: flex;
+  flex-direction: row;
+  position: static;
+}
+
+.sharePosition {
+  align-self: center;
+  margin-right: 1rem;
+}
+
 // Header Blog Elements
 
 .bannerContainer {
@@ -42,7 +76,7 @@
 // Blog body
 
 .bodyPostContainer {
-  padding: 5rem 20rem 10rem 17rem;
+  padding: 5rem 20rem 2rem 17rem;
   text-align: justify;
 
   h1 {
@@ -201,5 +235,10 @@
         max-width: 100%;
       }
     }
+  }
+
+  .socialBottomContainer {
+    justify-content: start;
+    padding-left: 1rem;
   }
 }
