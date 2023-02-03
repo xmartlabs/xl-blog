@@ -48,7 +48,7 @@ const BlogPost = ({ data }) => {
     };
   };
 
-  const handleButton = () => {
+  const handleShowBanner = () => {
     setShow(false);
   }
   
@@ -77,11 +77,9 @@ const BlogPost = ({ data }) => {
         <span className={classnames('text__paragraph__bold__grayTwo', styles.sharePosition)}>Share:</span>
         <SocialBlog className={styles.socialBottom} />
       </div>
-      {show && 
-        <div className={styles.newsletterContainer}>
-          <XlNewsletter onClick={handleButton()} />
-        </div>
-        }
+      <div className={styles.newsletterContainer}>
+        <XlNewsletter onClick={handleShowBanner()} showBanner={show} />
+      </div>
     </div>
   );
 };

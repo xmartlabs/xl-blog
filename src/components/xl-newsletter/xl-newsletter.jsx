@@ -11,8 +11,10 @@ import { classnames } from "../../helpers";
 
 import * as styles from "./xl-newsletter.module.scss";
 
-const XlNewsletter = ({ onClick }) => {
+const XlNewsletter = ({ onClick, showBanner }) => {
   return (
+    <>
+    {showBanner && 
     <div className={styles.container} >
       <div className={styles.logoContainer}>
         <Link to="/" className={styles.linkLogoXl}>
@@ -29,14 +31,16 @@ const XlNewsletter = ({ onClick }) => {
         <h2 className="text__heading__two__neutral100">Xmartlabs´ Newsletter</h2>
         <p className={classnames("text__paragraph__two__defaultGray", styles.textNewsletter)}>Subscribe to our newsletter and get updates on AI, Computer Vision as well as mobile and web development.</p>
         <div className={styles.subscribeContainer}>
-          <Input placeholder="Type your email" className={styles.inputNewsletter} />
-          <Button text="SUBSCRIBE" className={classnames(styles.buttonNewsletter, "text__label__bold__neutral100")} onClick={onClick} />
+          <Input placeholder="Type your email..." className={classnames(styles.inputNewsletter, "text__placeholder__grayThree")} />
+          <Button text="SUBSCRIBE" className={classnames(styles.buttonNewsletter, "text__paragraph__small__neutral100")} onClick={onClick} />
         </div>
       </div>
       <div className={styles.close}>
         <Close />
       </div>
     </div>
+  }
+  </>
   )
 };
 
