@@ -3,7 +3,6 @@ import React, { useState } from "react";
 import Helmet from "react-helmet";
 import { withPrefix, Link} from "gatsby";
 import PropTypes from "prop-types";
-
 import styled from "styled-components";
 import { StaticImage } from "gatsby-plugin-image";
 
@@ -11,9 +10,9 @@ import { NavMenu } from "../components/nav-menu";
 import { Footer } from "../components/footer";
 import { MobileMenu } from "../components/mobile-menu";
 import { StyledContainerHeader, StyledContainerNavBarXL } from "../elements";
-import "../index.scss";
 import { HomeBanner } from "../components/home-banner";
 import { AppContext, initialState, BannerType } from "../config/context.js";
+import "../index.scss";
 
 import { useMediaQuery } from "../hooks";
 
@@ -88,7 +87,7 @@ function Layout({ children }) {
   const handleShowMobileMenu = () => {
     if (isMobile) {
       return (
-        <MobileMenu onClick={handleMenuButton} status={handleMenu} />
+        <MobileMenu onClick={handleMenuButton} openOrClose={handleMenu} />
       )
     }
   }
