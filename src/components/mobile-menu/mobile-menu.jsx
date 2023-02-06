@@ -6,7 +6,7 @@ import { NavMenu } from "../nav-menu";
 import { Button } from "../button";
 import { MenuMobileIcon } from "../icons/menu-icon";
 import { CloseIcon } from "../icons/close-icon";
-import { LinkedInIcon } from "../icons/linked-in/";
+import { LinkedInIcon } from "../icons/linked-in";
 import { InstagramIcon } from "../icons/instagram";
 import { TwitterIcon } from "../icons/twitter";
 import { GithubIcon } from "../icons/github";
