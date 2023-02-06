@@ -9,7 +9,7 @@ import { Category } from "../components/category";
 import { classnames, useCategory } from "../helpers";
 import { AuthorSerializer } from '../serializer';
 import { AppContext, BannerType } from '../config/context';
-import { MoreFromXlBlog } from '../components/more-from-xl-blog';
+import { MoreFromBlogs } from '../components/more-from-blogs';
 import { SocialBlog } from '../components/social-blog';
 
 import * as styles from '../css/blog-post.module.scss';
@@ -38,8 +38,8 @@ const BlogPost = ({ data }) => {
 
   const handleScroll = () => {
    const moreFromXlSize = refMoreFrom?.current?.clientHeight || 0;
-    const bottom = Math.ceil(window.innerHeight + window.scrollY + moreFromXlSize + 200) >= document.documentElement.scrollHeight;
-    if (bottom) {
+    const isInbottom = Math.ceil(window.innerHeight + window.scrollY + moreFromXlSize + 200) >= document.documentElement.scrollHeight;
+    if (isInbottom) {
       setDisappearSocial(true);
     } else {
       if (!disappearSocial) {
@@ -49,7 +49,7 @@ const BlogPost = ({ data }) => {
   };
 
   return (
-    <div onScroll={handleScroll} >
+    <div onScroll={handleScroll}>
       <SocialBlog className={disappearSocial ? styles.socialDisappear : styles.socialAppear} />
         <div className={styles.bannerContainer}>
           <Category data={categoryBlog.displayName}/>
@@ -73,7 +73,7 @@ const BlogPost = ({ data }) => {
         <span className={classnames('text__paragraph__bold__grayTwo', styles.sharePosition)}>Share:</span>
         <SocialBlog className={styles.socialBottom} />
       </div>
-        <MoreFromXlBlog data={data} refMoreFrom={refMoreFrom} />
+      <MoreFromBlogs data={data} refMoreFrom={refMoreFrom} moreFromAuthor="More From Xmartlabs Blog" />
     </div>
   );
 };

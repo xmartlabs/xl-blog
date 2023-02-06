@@ -32,4 +32,8 @@ Card.propTypes = {
   className: PropTypes.string,
 };
 
+Card.defaultProps = {
+  className: '',
+}
+
 export { Card };
