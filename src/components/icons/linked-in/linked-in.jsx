@@ -14,4 +14,4 @@ LinkedInIcon.propTypes = {
 
 LinkedInIcon.defaultProps = {
   className: '',
-}
+};

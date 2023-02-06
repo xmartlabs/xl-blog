@@ -17,4 +17,4 @@ CloseIcon.propTypes = {
 
 CloseIcon.defaultProps = {
   className: '',
-}
+};

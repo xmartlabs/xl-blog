@@ -16,4 +16,4 @@ MenuMobileIcon.propTypes = {
 
 MenuMobileIcon.defaultProps = {
   className: '',
-}
+};

@@ -5,7 +5,7 @@ import { classnames } from "../../helpers";
 
 import * as styles from "./nav-menu.module.scss";
 
-const NavMenu = ({ className, menuOpen }) => {
+const NavMenu = ({ className, openMenu }) => {
   const menuElements = [
     {label: "Work", path:"/"},
     {label: "Services", path:"/" },
@@ -32,7 +32,7 @@ const NavMenu = ({ className, menuOpen }) => {
           {...commonProps}
           className={classnames(styles.linkTextContainer, className)}
         >
-          <h5 className={classnames(styles.link, {["text__heading__two__separated__black"]: menuOpen})}>{commonProps.key}</h5>
+          <h5 className={classnames(styles.link, {["text__heading__two__separated__black"]: openMenu})}>{commonProps.key}</h5>
         </Link>
       )
     })

@@ -14,4 +14,4 @@ InstagramIcon.propTypes = {
 
 InstagramIcon.defaultProps = {
   className: '',
-}
+};

@@ -4,7 +4,7 @@ import React from "react";
 const defaultContextValue = {
   data: {
     // set your initial data shape here
-    menuOpen: false,
+    openMenu: false,
   },
   setData: () => {},
 }

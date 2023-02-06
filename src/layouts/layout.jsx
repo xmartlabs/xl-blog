@@ -115,7 +115,7 @@ function Layout({ children }) {
               {handleGetStartedShows()}
             </StyledContainerHeader>
           </StyledContainerNavBarXL>
-          {contextState === BannerType.home && <HomeBanner menuOpen={handleMenu} />}
+          {contextState === BannerType.home && <HomeBanner openMenu={handleMenu} />}
           {children}
         </div>
       </AppContext.Provider>

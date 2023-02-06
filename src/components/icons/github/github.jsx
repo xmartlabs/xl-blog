@@ -15,4 +15,4 @@ GithubIcon.propTypes = {
 
 GithubIcon.defaultProps = {
   className: '',
-}
+};

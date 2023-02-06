@@ -17,10 +17,10 @@ import * as styles from "./mobile-menu.module.scss";
 
 const MobileMenu = ({ onClick, openOrClose }) => (
   <>
-    <div className={classnames(styles.container, { [styles.menuOpen]: openOrClose })} >
+    <div className={classnames(styles.container, { [styles.openMenu]: openOrClose })} >
       <div className={classnames(styles.buttonIconPosition, { [styles.openButton]: openOrClose })}>
         <Button onClick={onClick} className={styles.buttonIconStyles} >
-        <MenuMobileIcon />
+          <MenuMobileIcon />
         </Button>
       </div>
       {openOrClose && 
@@ -31,9 +31,7 @@ const MobileMenu = ({ onClick, openOrClose }) => (
             </Button>
           </div>
           <div className={styles.menuContainer} >
-            <div className={styles.menuOptions}>
-              <NavMenu className={styles.menuOptions}  menuOpen={openOrClose}/>
-            </div>
+            <NavMenu className={styles.menuOptions}  openMenu={openOrClose}/>
             <div className={styles.partnerContainer}>
               <h4 className="text__label__bold__black">Ready to partner?</h4>
               <Link to="/" className={styles.partnerButton}>Lets's talk</Link>

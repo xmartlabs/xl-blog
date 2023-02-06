@@ -8,7 +8,7 @@ import PropTypes from "prop-types";
 
 import * as styles from "./home-banner.module.scss";
 
-const HomeBanner = ({ menuOpen }) => (
+const HomeBanner = ({ openMenu }) => (
   <div className={styles.containerTitleHome}>
     <h1 className="text__heading__one__big__black">Xmartlabs Blog</h1>
     <div className={styles.textContainer}>
@@ -16,7 +16,7 @@ const HomeBanner = ({ menuOpen }) => (
         <StarIcon className={styles.iconStar} />
         Design. Engineering. Lessons learned on our journey
       </h2>
-      <div className={classnames(styles.polygonContainer, { [styles.menuOpen]: menuOpen })}>
+      <div className={classnames(styles.polygonContainer, { [styles.openMenu]: openMenu })}>
         <PolygonIcon className={styles.iconPolygonOne} />
         <PolygonIcon className={styles.iconPolygonTwo} />
       </div>
@@ -27,9 +27,9 @@ const HomeBanner = ({ menuOpen }) => (
 export { HomeBanner }; 
 
 HomeBanner.propTypes = {
-  menuOpen: PropTypes.bool,
+  openMenu: PropTypes.bool,
 };
 
 HomeBanner.defaultProps = {
-  menuOpen: false,
+  openMenu: false,
 };
