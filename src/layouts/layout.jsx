@@ -87,7 +87,7 @@ function Layout({ children }) {
   const handleShowMobileMenu = () => {
     if (isMobile) {
       return (
-        <MobileMenu onClick={handleMenuButton} openOrClose={handleMenu} />
+        <MobileMenu onClick={handleMenuButton} showMenu={handleMenu} />
       )
     }
   }

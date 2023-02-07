@@ -15,15 +15,15 @@ import { classnames } from "../../helpers";
 
 import * as styles from "./mobile-menu.module.scss";
 
-const MobileMenu = ({ onClick, openOrClose }) => (
+const MobileMenu = ({ onClick, showMenu }) => (
   <>
-    <div className={classnames(styles.container, { [styles.openMenu]: openOrClose })} >
-      <div className={classnames(styles.buttonIconPosition, { [styles.openButton]: openOrClose })}>
+    <div className={classnames(styles.container, { [styles.openMenu]: showMenu })} >
+      <div className={classnames(styles.buttonIconPosition, { [styles.openButton]: showMenu })}>
         <Button onClick={onClick} className={styles.buttonIconStyles} >
           <MenuMobileIcon />
         </Button>
       </div>
-      {openOrClose && 
+      {showMenu && 
         <div>
           <div className={styles.buttonIconPosition}>
             <Button onClick={onClick} className={classnames(styles.buttonIconPosition, styles.buttonIconStyles)} >
@@ -31,7 +31,7 @@ const MobileMenu = ({ onClick, openOrClose }) => (
             </Button>
           </div>
           <div className={styles.menuContainer} >
-            <NavMenu className={styles.menuOptions}  openMenu={openOrClose}/>
+            <NavMenu className={styles.menuOptions}  openMenu={showMenu}/>
             <div className={styles.partnerContainer}>
               <h4 className="text__label__bold__black">Ready to partner?</h4>
               <Link to="/" className={styles.partnerButton}>Lets's talk</Link>
@@ -53,10 +53,10 @@ export { MobileMenu };
 
 MobileMenu.propTypes = {
   onClick: PropTypes.func,
-  openOrClose: PropTypes.bool,
+  showMenu: PropTypes.bool,
 };
 
 MobileMenu.defaultProps = {
   onClick: () => {},
-  openOrClose: false,
+  showMenu: false,
 };
