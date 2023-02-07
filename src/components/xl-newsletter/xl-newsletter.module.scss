@@ -1,4 +1,5 @@
 @import "/src/css/colors.scss";
+@import "/src/css/text-styles.scss";
 
 .container {
   width: 55rem;
@@ -53,10 +54,11 @@
 }
 
 .inputNewsletter {
-  height: 2.4rem;
+  height: 2.5rem;
   width: 19rem;
   border-color: transparent;
   border-radius: 0.2rem 0 0 0.2rem;
+  outline: none;
 }
 
 .inputNewsletter::placeholder {
@@ -65,7 +67,61 @@
 
 .buttonNewsletter {
   width: 12.7rem;
-  height: 2.4rem;
+  height: 2.5rem;
   background-color: $xlPink;
   border-color: transparent;
+  cursor: pointer;
+}
+
+@media screen and (max-width: 768px) {
+  .container {
+    width: 23.5rem;
+    height: 33rem;
+    padding: 0;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .logoContainer {
+    height: 33%;
+
+  }
+
+  .informationContainer {
+    max-width: 19rem;
+    margin-left: 0;
+
+    h2 {
+      margin-top: 0;
+      text-align: center;
+      width: 18rem;
+    }
+  }
+
+  .textNewsletter {
+    width: 100%;
+    text-align: center;
+    font-size: 1rem;
+  }
+
+  .subscribeContainer {
+    flex-direction: column;
+    width: 100%;
+    align-self: center;
+
+    .inputNewsletter {
+      margin-bottom: 1rem;
+      border-radius: 0.2rem;
+    }
+  }
+
+  .buttonNewsletter, .inputNewsletter {
+    width: 100%;
+  }
+
+  .close {
+    position: absolute;
+    width: 19.5rem;
+    margin-top: 1.5rem;
+  }
 }

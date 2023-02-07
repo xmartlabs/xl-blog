@@ -11,10 +11,9 @@ import { classnames } from "../../helpers";
 
 import * as styles from "./xl-newsletter.module.scss";
 
-const XlNewsletter = ({ onClick, showBanner }) => {
+const XlNewsletter = ({ onClick }) => {
   return (
     <>
-    {showBanner && 
     <div className={styles.container} >
       <div className={styles.logoContainer}>
         <Link to="/" className={styles.linkLogoXl}>
@@ -39,7 +38,6 @@ const XlNewsletter = ({ onClick, showBanner }) => {
         <Close />
       </div>
     </div>
-  }
   </>
   )
 };

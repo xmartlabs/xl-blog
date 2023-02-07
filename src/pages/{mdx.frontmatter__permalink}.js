@@ -21,7 +21,6 @@ const BlogPost = ({ data }) => {
   const authorBlog = AuthorSerializer.deSerialize(author);
   const { setState } = useContext(AppContext);
   const [ disappearSocial, setDisappearSocial ] = useState(false);
-  const [show, setShow] = useState(true);
 
   const categoryBlog = useCategory(data.mdx.frontmatter.category);
 
@@ -47,10 +46,6 @@ const BlogPost = ({ data }) => {
       }
     };
   };
-
-  const handleShowBanner = () => {
-    setShow(false);
-  }
   
   return (
     <div onScroll={handleScroll}>
@@ -78,7 +73,7 @@ const BlogPost = ({ data }) => {
         <SocialBlog className={styles.socialBottom} />
       </div>
       <div className={styles.newsletterContainer}>
-        <XlNewsletter onClick={handleShowBanner()} showBanner={show} />
+        <XlNewsletter />
       </div>
     </div>
   );
