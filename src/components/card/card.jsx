@@ -9,11 +9,11 @@ import { classnames, useCategory } from '../../helpers';
 
 import * as styles from "./card.module.scss";
 
-const Card = ({ data, className }) => {
+const Card = ({ data, className, keyCard }) => {
   const categoryBlog = useCategory(data.frontmatter.category);
 
   return (
-    <Link className={classnames(styles.styledLink, className)} to={`/${_.kebabCase(data.frontmatter.permalink)}`}>
+    <Link className={classnames(styles.styledLink, className)} to={`/${_.kebabCase(data.frontmatter.permalink)}`} keyCard={keyCard}>
       <article key={data.id} className={styles.container}>
         <div className={styles.imageContainer}>
           <img className={styles.styledImage} src={data.frontmatter.thumbnail}/>
