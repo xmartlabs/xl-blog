@@ -3,7 +3,6 @@ import { Link } from "gatsby";
 import PropTypes from "prop-types";
 
 import { NavMenu } from "../nav-menu";
-import { Button } from "../button";
 import { MenuMobileIcon } from "../icons/menu-icon";
 import { CloseIcon } from "../icons/close-icon";
 import { LinkedInIcon } from "../icons/linked-in";
@@ -19,16 +18,16 @@ const MobileMenu = ({ onClick, showMenu }) => (
   <>
     <div className={classnames(styles.container, { [styles.openMenu]: showMenu })} >
       <div className={classnames(styles.buttonIconPosition, { [styles.openButton]: showMenu })}>
-        <Button onClick={onClick} className={styles.buttonIconStyles} >
+        <button onClick={onClick} className={styles.buttonIconStyles} >
           <MenuMobileIcon />
-        </Button>
+        </button>
       </div>
       {showMenu && 
         <div>
           <div className={styles.buttonIconPosition}>
-            <Button onClick={onClick} className={classnames(styles.buttonIconPosition, styles.buttonIconStyles)} >
+            <button onClick={onClick} className={classnames(styles.buttonIconPosition, styles.buttonIconStyles)} >
               <CloseIcon />
-            </Button>
+            </button>
           </div>
           <div className={styles.menuContainer} >
             <NavMenu className={styles.menuOptions}  openMenu={showMenu}/>
