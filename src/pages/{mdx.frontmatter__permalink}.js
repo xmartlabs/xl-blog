@@ -10,7 +10,6 @@ import { classnames, useCategory } from "../helpers";
 import { AuthorSerializer } from '../serializer';
 import { AppContext, BannerType } from '../config/context';
 import { SocialBlog } from '../components/social-blog';
-import { XlNewsletter } from '../components/xl-newsletter/xl-newsletter';
 
 import * as styles from '../css/blog-post.module.scss';
 
@@ -71,9 +70,6 @@ const BlogPost = ({ data }) => {
       <div className={styles.socialBottomContainer}>
         <span className={classnames('text__paragraph__bold__grayTwo', styles.sharePosition)}>Share:</span>
         <SocialBlog className={styles.socialBottom} />
-      </div>
-      <div className={styles.newsletterContainer}>
-        <XlNewsletter />
       </div>
     </div>
   );
