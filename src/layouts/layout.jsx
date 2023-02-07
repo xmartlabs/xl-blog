@@ -11,8 +11,7 @@ import { NavMenu } from "../components/nav-menu";
 import { Footer } from "../components/footer";
 import { StyledContainerHeader, StyledContainerNavBarXL } from "../elements";
 import "../index.scss";
-import { HomeBanner } from "../components/home-banner";
-import { AppContext, initialState, BannerType } from "../config/context.js";
+import { AppContext, initialState } from "../config/context.js";
 
 import * as styles from "./layout.module.scss";
 
@@ -86,7 +85,6 @@ function Layout({ children }) {
               </StyledGetStartedButton>
             </StyledContainerHeader>
           </StyledContainerNavBarXL>
-          {contextState === BannerType.home && <HomeBanner />}
           {children}
         </div>
       </AppContext.Provider>
