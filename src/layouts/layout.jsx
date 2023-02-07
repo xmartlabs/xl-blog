@@ -70,7 +70,7 @@ function Layout({ children }) {
                   to="/"
                   id="logo-xl">
                   <StaticImage 
-                    src="../../static/images/logo.svg"
+                    src="../../static/images/logo.png"
                     alt=""
                     width={56}
                     height={56}
