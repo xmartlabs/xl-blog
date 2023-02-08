@@ -71,14 +71,14 @@ function Layout({ children }) {
   };
 
   const handleMenuNavShows = () => {
-    if (isMobile === false) {
+    if (!isMobile) {
       return <NavMenu />
     }
     return;
   }
 
   const handleGetStartedShows = () => {
-    if (isMobile === false) {
+    if (!isMobile) {
       return (
         <StyledGetStartedButton id="header-getintouch" href="#/" >
           <StyledGetStartedTextButton>GET STARTED</StyledGetStartedTextButton>
@@ -97,6 +97,7 @@ function Layout({ children }) {
         <MobileMenu onClick={handleMenuButton} showMenu={handleMenu} links={menuSocialLinks} />
       )
     }
+    return;
   }
 
   return (
