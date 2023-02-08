@@ -4,7 +4,7 @@ const useMediaQuery = (query) => {
   const [matches, setMatches] = useState(false);
 
   const handleWindowSizeChange = () => {
-    if (window !== undefined) {
+    if (window) {
       const match = window.matchMedia(query);
       setMatches(match.matches);
     }

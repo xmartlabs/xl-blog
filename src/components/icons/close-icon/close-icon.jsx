@@ -10,7 +10,6 @@ export const CloseIcon = ({ className }) => (
 
 );
 
-
 CloseIcon.propTypes = {
   className: PropTypes.string,
 };

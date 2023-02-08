@@ -9,7 +9,6 @@ export const MenuMobileIcon = ({ className }) => (
   </svg>
 );
 
-
 MenuMobileIcon.propTypes = {
   className: PropTypes.string,
 };

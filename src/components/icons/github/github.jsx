@@ -8,7 +8,6 @@ export const GithubIcon = ({ className }) => (
   </svg>
 );
 
-
 GithubIcon.propTypes = {
   className: PropTypes.string,
 };
