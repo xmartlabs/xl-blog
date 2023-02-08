@@ -9,12 +9,12 @@ import { Card } from "../card";
 
 import * as styles from './more-from-blogs.module.scss';
 
-const MoreFromBlogs = ({ data, refMoreFrom, moreFromAuthor }) => {
+const ThreeMoreBlogsSection = ({ data, refMoreFrom, threeBlogsSectionTitle }) => {
   const { edges } = data.allMdx;
   return (
     <div className={styles.moreFromXlContainer} ref={refMoreFrom} >
       <div className={styles.titleContainer}>
-        <Link to="/" className={classnames("text__heading__three__blueTwo", styles.titleStyle)}>{`${moreFromAuthor} →`}</Link>
+        <Link to="/" className={classnames("text__heading__three__blueTwo", styles.titleStyle)}>{`${threeBlogsSectionTitle} →`}</Link>
       </div>
       <div className={styles.blogsContainer}>
         {edges.map(({node}) => <Card data={node} key={node.id} className={styles.cardStyles} />)}
@@ -23,9 +23,9 @@ const MoreFromBlogs = ({ data, refMoreFrom, moreFromAuthor }) => {
   );
 }
 
-export { MoreFromBlogs };
+export { ThreeMoreBlogsSection };
 
-MoreFromBlogs.propTypes = {
+ThreeMoreBlogsSection.propTypes = {
   refMoreFrom: PropTypes.object,
   data: PropTypes.shape({
     allMdx: PropTypes.shape({

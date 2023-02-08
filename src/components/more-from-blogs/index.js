@@ -1,1 +1,1 @@
-export { MoreFromBlogs } from "./more-from-blogs";
+export { ThreeMoreBlogsSection } from "./more-from-blogs";
