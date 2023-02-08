@@ -13,8 +13,8 @@ const Card = ({ data, className, keyCard }) => {
   const categoryBlog = useCategory(data.frontmatter.category);
 
   return (
-    <Link className={classnames(styles.styledLink, className)} to={`/${_.kebabCase(data.frontmatter.permalink)}`} keyCard={keyCard}>
-      <article key={data.id} className={styles.container}>
+    <Link className={classnames(styles.styledLink, className)} to={`/${_.kebabCase(data.frontmatter.permalink)}`}>
+      <article key={data.id} className={styles.container} keyCard={keyCard}>
         <div className={styles.imageContainer}>
           <img className={styles.styledImage} src={data.frontmatter.thumbnail}/>
         </div>
