@@ -1,5 +1,4 @@
 import React from "react";
-import { Link } from "gatsby";
 import PropTypes from "prop-types";
 
 import { NavMenu } from "../nav-menu";
@@ -37,13 +36,13 @@ const MobileMenu = ({ onClick, showMenu, links }) => {
               <NavMenu className={styles.menuOptions}  openMenu={showMenu}/>
               <div className={styles.partnerContainer}>
                 <h4 className="text__label__bold__black">Ready to partner?</h4>
-                <Link to="/" className={styles.partnerButton}>Lets's talk</Link>
+                <a href="https://form.typeform.com/to/c7G2RUWm" target="_blank" rel="noopener noreferrer" className={styles.partnerButton}>Lets's talk</a>
               </div>
               <div className={styles.socialContainer}>
-                <Link to={linkedIn}><LinkedInIcon /></Link>
-                <Link to={instagram} className={styles.instagramSpace}><InstagramIcon /></Link>
-                <Link to={twitter}><TwitterIcon /></Link>
-                <Link to={gitHub} className={styles.gitSpace}><GithubIcon /></Link>
+                <a href={linkedIn} target="_blank" rel="noopener noreferrer"><LinkedInIcon /></a>
+                <a href={instagram} target="_blank" rel="noopener noreferrer" className={styles.instagramSpace}><InstagramIcon /></a>
+                <a href={twitter} target="_blank" rel="noopener noreferrer"><TwitterIcon /></a>
+                <a href={gitHub} target="_blank" rel="noopener noreferrer" className={styles.gitSpace}><GithubIcon /></a>
               </div>
             </div>
           </div>

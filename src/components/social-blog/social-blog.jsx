@@ -13,9 +13,9 @@ const SocialBlog = ({ className, links}) => {
 
   return (
     <div className={classnames(styles.container, className)}>
-      <a href={twitter}><TwitterIcon className={styles.socialIcon} /></a>
-      <a href={facebook} className={styles.facebookSpace}><Facebook className={styles.socialIcon} /></a>
-      <a href={linkedIn}><Linkedin className={styles.socialIcon} /></a>
+      <a href={twitter} target="_blank" rel="noopener noreferrer"><TwitterIcon className={styles.socialIcon} /></a>
+      <a href={facebook} target="_blank" rel="noopener noreferrer" className={styles.facebookSpace}><Facebook className={styles.socialIcon} /></a>
+      <a href={linkedIn} target="_blank" rel="noopener noreferrer"><Linkedin className={styles.socialIcon} /></a>
     </div>
   );
 };

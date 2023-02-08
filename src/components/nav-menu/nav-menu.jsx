@@ -7,10 +7,10 @@ import * as styles from "./nav-menu.module.scss";
 
 const NavMenu = ({ className, openMenu }) => {
   const menuElements = [
-    {label: "Work", path:"/"},
-    {label: "Services", path:"/" },
-    {label: "Our Company", path:"/" },
-    {label: "Community", path:"/" },
+    {label: "Work", path:"https://xmartlabs.com/work"},
+    {label: "Services", path:"https://xmartlabs.com/services" },
+    {label: "Our Company", path:"https://xmartlabs.com/company" },
+    {label: "Community", path:"https://xmartlabs.com/community" },
     {label: "Blog", path:"/"},
   ];
   return (

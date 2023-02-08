@@ -80,7 +80,7 @@ function Layout({ children }) {
   const handleGetStartedShows = () => {
     if (!isMobile) {
       return (
-        <StyledGetStartedButton id="header-getintouch" href="#/" >
+        <StyledGetStartedButton id="header-getintouch" href="https://form.typeform.com/to/c7G2RUWm" target="_blank" rel="noopener noreferrer">
           <StyledGetStartedTextButton>GET STARTED</StyledGetStartedTextButton>
         </StyledGetStartedButton>
       ) 

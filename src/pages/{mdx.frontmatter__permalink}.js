@@ -1,6 +1,5 @@
 import * as React from 'react';
 import { useContext, useEffect, useState } from 'react'
-
 import { MDXRenderer } from 'gatsby-plugin-mdx';
 import { graphql, Link } from 'gatsby';
 
@@ -22,10 +21,12 @@ const BlogPost = ({ data }) => {
   const [ disappearSocial, setDisappearSocial ] = useState(false);
   const categoryBlog = useCategory(data.mdx.frontmatter.category);
 
+  const currentUrl = window?.location.pathname;
+
   const shareBlogPostLinks = {
-    twitter: "https://twitter.com/xmartlabs",
-    facebook: "https://es-la.facebook.com/xmartlabs/",
-    linkedIn: "https://www.linkedin.com/company/xmartlabs/mycompany/",
+    twitter: `https://twitter.com/intent/tweet?url=URL&text=${currentUrl}`,
+    facebook: `https://www.facebook.com/sharer/sharer.php?u=https://blog.xmartlabs.com/blog${currentUrl}`,
+    linkedIn: `https://www.linkedin.com/sharing/share-offsite/?url=https%3A%2F%2Fblog.xmartlabs.com%2Fblog%2F${currentUrl}%2F`,
   };
   
   const shareXlProfileLinks = {
