@@ -46,9 +46,20 @@ const BlogPost = ({ data }) => {
     };
   };
 
+  const shareBlogPostLinks = {
+    twitter: "https://twitter.com/share?ref_src=twsrc%5Etfw",
+    facebook: "https://www.facebook.com/dialog/share?app_id=145634995501895&display=popup&href=https%3A%2F%2Fdevelopers.facebook.com%2Fdocs%2F&redirect_uri=https%3A%2F%2Fdevelopers.facebook.com%2Ftools%2Fexplorer",
+    linkedIn: "rhtyj",
+  };
+  const shareXlProfileLinks = {
+    twitter: "hola",
+    facebook: "<a href=`https://www.facebook.com/sharer/sharer.php?u=data.permalink`>",
+    linkedIn: "tyjtyj",
+  };
+
   return (
     <div onScroll={handleScroll}>
-      <SocialBlog className={disappearSocial ? styles.socialDisappear : styles.socialAppear} />
+      <SocialBlog className={disappearSocial ? styles.socialDisappear : styles.socialAppear} links={shareBlogPostLinks} />
         <div className={styles.bannerContainer}>
           <Category data={categoryBlog.displayName}/>
           <h1 className={classnames(styles.titleContainer, "text__heading__one__black")}>
@@ -69,7 +80,7 @@ const BlogPost = ({ data }) => {
       </div>
       <div className={styles.socialBottomContainer}>
         <span className={classnames('text__paragraph__bold__grayTwo', styles.sharePosition)}>Share:</span>
-        <SocialBlog className={styles.socialBottom} />
+        <SocialBlog className={styles.socialBottom} link={shareXlProfileLinks} />
       </div>
     </div>
   );
