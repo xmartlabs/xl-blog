@@ -7,7 +7,9 @@ import { classnames } from "../../helpers/utils";
 
 import * as styles from "./social-blog.module.scss";
 
-const SocialBlog = ({ className, links: {twitter, facebook, linkedIn} }) => {
+const SocialBlog = ({ className, links}) => {
+
+  const {twitter, facebook, linkedIn} = links;
 
   return (
     <div className={classnames(styles.container, className)}>

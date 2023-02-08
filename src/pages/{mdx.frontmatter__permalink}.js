@@ -20,8 +20,19 @@ const BlogPost = ({ data }) => {
   const authorBlog = AuthorSerializer.deSerialize(author);
   const { setState } = useContext(AppContext);
   const [ disappearSocial, setDisappearSocial ] = useState(false);
-
   const categoryBlog = useCategory(data.mdx.frontmatter.category);
+
+  const shareBlogPostLinks = {
+    twitter: "https://twitter.com/xmartlabs",
+    facebook: "https://es-la.facebook.com/xmartlabs/",
+    linkedIn: "https://www.linkedin.com/company/xmartlabs/mycompany/",
+  };
+  
+  const shareXlProfileLinks = {
+    twitter: "https://twitter.com/xmartlabs",
+    facebook: "https://es-la.facebook.com/xmartlabs/",
+    linkedIn: "https://www.linkedin.com/company/xmartlabs/mycompany/",
+  };
 
   useEffect(() => {
     setState(BannerType.blog);
@@ -44,17 +55,6 @@ const BlogPost = ({ data }) => {
         setDisappearSocial(false);
       }
     };
-  };
-
-  const shareBlogPostLinks = {
-    twitter: "https://twitter.com/share?ref_src=twsrc%5Etfw",
-    facebook: "https://www.facebook.com/dialog/share?app_id=145634995501895&display=popup&href=https%3A%2F%2Fdevelopers.facebook.com%2Fdocs%2F&redirect_uri=https%3A%2F%2Fdevelopers.facebook.com%2Ftools%2Fexplorer",
-    linkedIn: "rhtyj",
-  };
-  const shareXlProfileLinks = {
-    twitter: "hola",
-    facebook: "<a href=`https://www.facebook.com/sharer/sharer.php?u=data.permalink`>",
-    linkedIn: "tyjtyj",
   };
 
   return (
@@ -80,7 +80,7 @@ const BlogPost = ({ data }) => {
       </div>
       <div className={styles.socialBottomContainer}>
         <span className={classnames('text__paragraph__bold__grayTwo', styles.sharePosition)}>Share:</span>
-        <SocialBlog className={styles.socialBottom} link={shareXlProfileLinks} />
+        <SocialBlog className={styles.socialBottom} links={shareXlProfileLinks} />
       </div>
     </div>
   );

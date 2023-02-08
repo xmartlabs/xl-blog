@@ -63,6 +63,13 @@ function Layout({ children }) {
   const [ handleMenu, setHandleMenu ] = useState(false);
   const isMobile = useMediaQuery("(max-width: 768px)");
 
+  const menuSocialLinks = {
+    linkedIn: "https://www.linkedin.com/company/xmartlabs/mycompany/",
+    instagram: "https://www.instagram.com/xmartlabs/",
+    twitter: "https://twitter.com/xmartlabs",
+    gitHub: "https://github.com/xmartlabs",
+  };
+
   const handleMenuNavShows = () => {
     if (isMobile === false) {
       return <NavMenu />
@@ -87,7 +94,7 @@ function Layout({ children }) {
   const handleShowMobileMenu = () => {
     if (isMobile) {
       return (
-        <MobileMenu onClick={handleMenuButton} showMenu={handleMenu} />
+        <MobileMenu onClick={handleMenuButton} showMenu={handleMenu} links={menuSocialLinks} />
       )
     }
   }
