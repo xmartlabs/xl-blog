@@ -61,7 +61,7 @@ The thread said the following:
 - He ended by highlighting they're open to a dialog that creates the clarity the industry deserves. They would be more than happy to make changes on their products to follow any regulations deemed necessary whether they agree with them or not.
 
 <div class="videoWrapper">
-<iframe class="youtube" src="https://www.youtube-nocookie.com/embed/Of8Yj4-EtDw" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+  <iframe class="youtube" src="https://www.youtube-nocookie.com/embed/Of8Yj4-EtDw" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 </div>
 
 ## DAO

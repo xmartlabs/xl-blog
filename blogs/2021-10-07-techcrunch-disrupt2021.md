@@ -67,7 +67,8 @@ Be careful with the language you use, especially if you're an academic or Ph.D.,
 <p style="text-align:center;">
     <img style="width: 100%" src="/images/tcd21-startup-landscape/hello.gif" alt="You had me at hello" />
 </p>
-Jerry Maguire (1999)  *[Source](https://i.gifer.com/origin/82/821cae4dd9ed6e9826feea3f0963dad6.gif)*
+
+[Jerry Maguire (1999)](https://i.gifer.com/origin/82/821cae4dd9ed6e9826feea3f0963dad6.gif)
 
 Canvas Venture's Rebecca Lynn highlighted the importance of "getting the investors at hello." This means hooking them at the beginning. How? Be a phenomenal storyteller, and showcase your excitement. If you can't get excited about your business, no one else will. And remember you control the clock, so make sure you manage the time correctly; articulate what your company does in 30 seconds or less, don't get lost in product demos, make it a dialogue, not a monologue. Ideally, the person should go out of the room and gush about knowing you, so think of a soundbite with which you want them to walk out of the room.
 
@@ -111,6 +112,7 @@ As mentioned previously, remote reality significantly impacted founding, especia
 <p style="text-align:center;">
     <img style="width: 100%" src="/images/tcd21-startup-landscape/GlobalVentureCapitalActivity.png" alt="Global Venture Capital Activity" />
 </p>
+
 [Source](https://www.google.com/url?sa=i&url=https%3A%2F%2Finsight.factset.com%2Fventure-capital-activity-skyrockets-in-the-first-half-of-2021&psig=AOvVaw2jh6caWGIGh-N3BodLRSH1&ust=1633801259917000&source=images&cd=vfe&ved=0CAsQjRxqFwoTCMCIpZCuu_MCFQAAAAAdAAAAABBM)
 
 **Final notes**
@@ -135,6 +137,7 @@ In the tech industry, there's always the question of whether or not to outsource
 <p style="text-align:center;">
     <img style="width: 100%" src="/images/tcd21-startup-landscape/global-low-code-no-code-market.png" alt="global low code and no code market" />
 </p>
+
 [Source](https://www.spreadsheetweb.com/how-big-is-the-global-low-code-no-code-market-and-how-fast-is-it-growing/)
 
 **Prepare for a rainy day**
