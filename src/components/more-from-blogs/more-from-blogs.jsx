@@ -9,7 +9,7 @@ import { Card } from "../card";
 
 import * as styles from './more-from-blogs.module.scss';
 
-const ThreeMoreBlogsSection = ({ data, refMoreFrom, threeBlogsSectionTitle }) => {
+const MoreBlogsSection = ({ data, refMoreFrom, threeBlogsSectionTitle }) => {
   const { edges } = data.allMdx;
   return (
     <div className={styles.moreFromXlContainer} ref={refMoreFrom} >
@@ -23,9 +23,9 @@ const ThreeMoreBlogsSection = ({ data, refMoreFrom, threeBlogsSectionTitle }) =>
   );
 }
 
-export { ThreeMoreBlogsSection };
+export { MoreBlogsSection };
 
-ThreeMoreBlogsSection.propTypes = {
+MoreBlogsSection.propTypes = {
   refMoreFrom: PropTypes.object,
   data: PropTypes.shape({
     allMdx: PropTypes.shape({

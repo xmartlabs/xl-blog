@@ -9,7 +9,7 @@ import { Category } from "../components/category";
 import { classnames, useCategory } from "../helpers";
 import { AuthorSerializer } from '../serializer';
 import { AppContext, BannerType } from '../config/context';
-import { ThreeMoreBlogsSection } from '../components/more-from-blogs';
+import { MoreBlogsSection } from '../components/more-from-blogs';
 import { SocialBlog } from '../components/social-blog';
 
 import * as styles from '../css/blog-post.module.scss';
@@ -73,7 +73,7 @@ const BlogPost = ({ data }) => {
         <span className={classnames('text__paragraph__bold__grayTwo', styles.sharePosition)}>Share:</span>
         <SocialBlog className={styles.socialBottom} />
       </div>
-      <ThreeMoreBlogsSection data={data} refMoreFrom={refMoreFrom} threeBlogsSectionTitle="More From Xmartlabs Blog" />
+      <MoreBlogsSection data={data} refMoreFrom={refMoreFrom} threeBlogsSectionTitle="More From Xmartlabs Blog" />
     </div>
   );
 };
