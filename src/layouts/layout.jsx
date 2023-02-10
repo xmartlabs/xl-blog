@@ -62,49 +62,12 @@ function Layout({ children }) {
   const [contextState, setContextState] = useState(initialState);
   const [ handleMenu, setHandleMenu ] = useState(false);
   const isMobile = useMediaQuery("(max-width: 768px)");
-
-  const menuSocialLinks = {
-    linkedIn: "https://www.linkedin.com/company/xmartlabs/mycompany/",
-    instagram: "https://www.instagram.com/xmartlabs/",
-    twitter: "https://twitter.com/xmartlabs",
-    gitHub: "https://github.com/xmartlabs",
-  };
-
-  const handleMenuNavShows = () => {
-    if (!isMobile) {
-      return <NavMenu />
-    }
-    return;
-  }
-
-  const handleGetStartedShows = () => {
-    if (!isMobile) {
-      return (
-        <StyledGetStartedButton id="header-getintouch" href="https://form.typeform.com/to/c7G2RUWm" target="_blank" rel="noopener noreferrer">
-          <StyledGetStartedTextButton>GET STARTED</StyledGetStartedTextButton>
-        </StyledGetStartedButton>
-      ) 
-    }
-  }
-
-  const handleMenuButton = () => {
-    setHandleMenu(!handleMenu);
-  }
-
-  const handleShowMobileMenu = () => {
-    if (isMobile) {
-      return (
-        <MobileMenu onClick={handleMenuButton} showMenu={handleMenu} links={menuSocialLinks} />
-      )
-    }
-    return;
-  }
-
+  
   return (
     <>
       <AppContext.Provider value={{ state: contextState, setState: setContextState }}>
         <div className={styles[`${contextState}Banner`]}>
-        {handleShowMobileMenu()}
+        {isMobile && <MobileMenu onClick={() => setHandleMenu(!handleMenu)} showMenu={handleMenu} />}
           <StyledContainerNavBarXL>
             <StyledContainerHeader>
               <div className={styles.navMenuContainer}>
@@ -118,9 +81,13 @@ function Layout({ children }) {
                     height={56}
                   />
                 </Link>
-                {handleMenuNavShows()}
+                {!isMobile && <NavMenu />}
               </div>
-              {handleGetStartedShows()}
+              {!isMobile && 
+              <StyledGetStartedButton id="header-getintouch" href="#/" >
+                <StyledGetStartedTextButton>GET STARTED</StyledGetStartedTextButton>
+              </StyledGetStartedButton>
+              }
             </StyledContainerHeader>
           </StyledContainerNavBarXL>
           {contextState === BannerType.home && <HomeBanner openMenu={handleMenu} />}
