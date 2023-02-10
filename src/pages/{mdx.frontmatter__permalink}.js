@@ -48,7 +48,7 @@ const BlogPost = ({ data }) => {
 
   return (
     <div onScroll={handleScroll}>
-      <SocialBlog className={disappearSocial ? styles.socialDisappear : styles.socialAppear} />
+      <SocialBlog className={disappearSocial ? styles.socialDisappear : styles.socialAppear} socialAtRight={true} />
         <div className={styles.bannerContainer}>
           <Category data={categoryBlog.displayName}/>
           <h1 className={classnames(styles.titleContainer, "text__heading__one__black")}>
@@ -68,7 +68,6 @@ const BlogPost = ({ data }) => {
         </MDXRenderer>
       </div>
       <div className={styles.socialBottomContainer}>
-        <span className={classnames('text__paragraph__bold__grayTwo', styles.sharePosition)}>Share:</span>
         <SocialBlog className={styles.socialBottom} />
       </div>
     </div>
