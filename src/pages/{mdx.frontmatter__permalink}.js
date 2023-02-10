@@ -9,7 +9,7 @@ import { Category } from "../components/category";
 import { classnames, useCategory } from "../helpers";
 import { AuthorSerializer } from '../serializer';
 import { AppContext, BannerType } from '../config/context';
-import { MoreBlogsSection } from '../components/more-from-blogs';
+import { MoreBlogsSection } from '../components/more-blogs-section';
 import { SocialBlog } from '../components/social-blog';
 
 import * as styles from '../css/blog-post.module.scss';

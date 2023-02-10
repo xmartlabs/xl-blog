@@ -7,7 +7,7 @@ import { classnames } from "../../helpers";
 
 import { Card } from "../card";
 
-import * as styles from './more-from-blogs.module.scss';
+import * as styles from './more-blogs-section.module.scss';
 
 const MoreBlogsSection = ({ data, refMoreFrom, threeBlogsSectionTitle }) => {
   const { edges } = data.allMdx;
