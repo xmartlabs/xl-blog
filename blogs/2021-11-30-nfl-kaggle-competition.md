@@ -21,8 +21,8 @@ The dataset has two sources of information, the videos, and the tracking informa
 The video training datasets consist of 60 short plays (around 10 seconds videos with 60 fps). Each play is filmed from two synchronized cameras, one located at the endzone and the other one at the sideline, concluding in a total of 120 videos in the training dataset.
 
 <p style="text-align: center">
-	Left image: SidelinView. Right image: Endzone view.
 	<img src="/images/nfl-kaggle-competition/nfl_frame.png" />
+	Left image: SidelinView. Right image: Endzone view.
 </p>
 
 The tracking information comes from a device located in the player's shoulder pad. It gives the relative position of each player on the field with other information about the player's movement at a 10Hz frequency. The tracking has the 'x' and 'y' positions described in the image below.
@@ -31,7 +31,7 @@ The tracking information comes from a device located in the player's shoulder pa
 
 Other supplementary information given in tracking is speed, acceleration, distance traveled from the last point, and orientation. Below, you can see an example of the player's position at the beginning of a game.
 
-<div style="text-align: center">
+<div style="text-align: end">
 	<img src="/images/nfl-kaggle-competition/nfl_trackingpositions.png" />
 </div>
 
@@ -48,18 +48,18 @@ The central part of this problem is mapping the helmet's positions in a given fr
 In our case, we used the method proposed in the paper "Robust Point Set Registration Using Gaussian Mixture Models," which has its [code](https://github.com/bing-jian/gmmreg-python) available in Python. With some minor changes, we were able to include it in our solution.
 
 
-<p style="text-align: center;font-style: italic;">
-	Left: Example shown in code presentation, Right: Example of implementation in our solution.
+<p style="text-align: end;font-style: italic;">
 	<img src="/images/nfl-kaggle-competition/nfl_2dmatching.png" />
+	Left: Example shown in code presentation, Right: Example of implementation in our solution.
 </p>
 
 
 When passed two normalized clouds of points, the algorithm can return a correspondence between those cloud points. There are some issues; for example, when both sets have 22 points, the algorithm works really well, but when the video has a frame with fewer helmets, the results might have some errors. Because of this, we decided only to do 2D matching when there are 15 helmets or more in the image frame. Later we'll explain how we propagate the labels to the frames that don't have enough helmets. Besides this, we didn't run the matching on all frames, as variations in consecutive frames were almost none.
 
 
-<p style="text-align: center;font-style: italic;">
-	Example of a low number of helmets in the frame.
+<p style="text-align: end;font-style: italic;">
 	<img src="/images/nfl-kaggle-competition/nfl_helmetsinframe.png" />
+	Example of a low number of helmets in the frame.
 </p>
 
 
@@ -80,9 +80,9 @@ After fixing those simple errors, we matched each remaining frame with detectabl
 In some cases, this implementation gave impressive results. As seen in the following video, green bounding boxes are correctly labeled helmets and yellow when there is an impact (higher reward for the correct label while collision). The red bounding boxes are due to wrong labels during a collision.
 
 
-<p style="text-align: center;font-style: italic;">
-	Output of our solution applied to a Sideline video.
+<p style="text-align: end;font-style: italic;">
 	<img src="/images/nfl-kaggle-competition/nfl_helmet.gif" />
+	Output of our solution applied to a Sideline video.
 </p>
 
 
@@ -97,9 +97,9 @@ As seen in the example of the two marked players, the bottom one appears to be m
 The rotation is done using the purple line, and the angle with the green one is the rotation angle.
 
 
-<p style="text-align: center;font-style: italic;">
-	Image rotation example.
+<p style="text-align: end;font-style: italic;">
 	<img src="/images/nfl-kaggle-competition/nfl_rotation.png" />
+	Image rotation example.
 </p>
 
 
@@ -119,9 +119,9 @@ Most of the detected helmets are field players, so considering all helmets as pl
 
 Each video was labeled "Sideline" or "Endzone," but it wasn't specified from which side or field end it was being recorded. There were two possibilities for each. Identifying this quickly and confidently can signify a correction before the matching, which facilitates it and means it needs fewer iterations.
 
-<p style="text-align: center;font-style: italic;">
-	Left: Endzone example. Right: Sideline example.
+<p style="text-align: end;font-style: italic;">
 	<img src="/images/nfl-kaggle-competition/nfl_angle.png" />
+	Left: Endzone example. Right: Sideline example.
 </p>
 
 At the beginning of each video, we saw that the formations were very identifiable and easy to correlate with the tracking. In other words, with the correct view, the 2D matching should have a high rate of matches. So the implementation takes five frames distributed in the first 100 frames. In these selected frames, the 2D matching is done for each possible case; the one with the most matches is selected as correct; after doing it for all five frames, the correct side is selected and saved.

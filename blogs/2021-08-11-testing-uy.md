@@ -14,10 +14,10 @@ permalink: /our-take-on-testinguy-2021/
 Each year, Testing UY offers a variety of talks, workshops, and lightning talks (15 minutes duration). Due to the pandemic, this year is the first year where the event is 100% remote, but the good spirit and collaboration have been the same as in previous editions.
 For this edition, Xmartlabs is a Bronze Sponsor.
 
-<p style="text-align:center;">
+<p style="text-align:end;">
 <img style="width: 100%" src="/images/our-take-on-testinguy/testing-uy-sala-antel.png" alt="Testing UY 2109" />
+Janet Gregory in the 2019 Testing UY edition.
 </p>
-> Janet Gregory in the 2019 Testing UY edition.
 
 ## Talks, Workshops, and Challenge
 
