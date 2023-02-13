@@ -28,3 +28,13 @@
   text-decoration: none;
 }
 
+@media only screen and (max-width:50rem) {
+  .container { 
+    width: 96%;
+  }
+
+  .styledLink {
+    display: flex;
+    justify-content: center;
+  }
+}

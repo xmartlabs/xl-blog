@@ -36,12 +36,15 @@
   fill: $xlPinkTwo;
 }
 
+.openMenu {
+  position: static;
+}
+
 @media only screen and (max-width: 768px) {
 
   .containerTitleHome {
-    margin: 0 2rem;
-    width: 100%;
-    margin-top: 2.5rem;
+    margin: 2.5rem 0 0 1.5rem;
+    width: auto;
 
     h1 {
       @include text__heading__one;
@@ -65,8 +68,8 @@
   }
 
   .polygonContainer {
-    left: 12.5rem;    
-    top: 15rem;
+    left: 8.5em;    
+    top: 15.2rem;
 
     .iconPolygonOne, .iconPolygonTwo {
       max-width: 1.5rem;
@@ -75,5 +78,5 @@
     }
 
   }
-  
+
 }
