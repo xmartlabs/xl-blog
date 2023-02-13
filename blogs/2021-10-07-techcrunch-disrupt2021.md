@@ -3,7 +3,6 @@ title: What TechCrunch Disrupt 2021 Taught Us About the Startup Landscape
 date: 2021-10-11
 tags: [TechCrunch Disrupt 2021, Startups, Venture Capital, TC Disrupt Recap]
 author: vale
-
 category: people-events
 thumbnail: images/tcd21-startup-landscape/disrupt2021.jpg
 permalink: /techcrunch-disrupt-2021-takeaways-for-entrepreneurs-and-founders/
