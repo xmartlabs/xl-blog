@@ -13,7 +13,6 @@ $text-line-heights: (
   headingOneBig: 7rem,
   headingOne: 3rem,
   aside: 2.2rem,
-  headingTwoSeparated: 2.5rem,
   headingTwoBig: 4.5rem,
   headingTwo: 2rem,
   headingThree: 1.5rem,
@@ -102,7 +101,7 @@ $text-colors: (
 
 @mixin text__heading__two__separated {
   font-size: map-get($map: $text-sizes, $key: headingTwoSeparated);
-  line-height: map-get($map: $text-line-heights, $key: headingTwoSeparated);
+  line-height: map-get($map: $text-line-heights, $key: aside);
   font-weight: map-get($map: $font-weights, $key: boldWeight300);
 }
 

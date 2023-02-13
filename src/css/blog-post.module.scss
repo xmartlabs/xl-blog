@@ -163,15 +163,45 @@
   }
 
   table {
-    @extend .text__paragraph__two__blueTwo;
+    font-family: 'gilroy', serif;
     margin: auto;
-    text-align: center;
     margin-bottom: 2rem;
     border-collapse: collapse;
+    word-break: break-all;
+    width: 100%;
 
-    th, td {
-      border: 1px solid black;
-      padding: 0.5rem;
+    tbody th, td {
+      @extend .text__paragraph__two__blueTwo;
+      border: none;
+      padding: 1rem 1rem;
+
+    }
+
+    thead {
+      @extend .text__heading__four__blueTwo;
+      background-color: $yellowOne;
+
+      th {
+        padding: 1rem 0rem 1rem 1rem;
+      }
+
+      :last-child {
+        padding-right: 1rem;
+      }
+    }
+
+    tbody {
+      tr:nth-child(even) {
+        background-color: $blueFour;
+      }
+  
+      tr:nth-child(odd) {
+        background-color: $blueFive;
+      }
+    }
+
+    tr {
+      height: 5rem;
     }
 
     img {
@@ -235,6 +265,10 @@
     table {
       display: block;
       overflow-x: scroll;
+      
+      td {
+        padding: 0 0 0 1rem;
+      }
 
       img {
         max-width: 100%;
