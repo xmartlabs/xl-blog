@@ -51,11 +51,10 @@ Glyphosate resistance is perhaps the newest and more widespread type of resistan
 
 Common treatment recommendations go from managing the intensity of glyphosate to rotating or tank-mixing it with herbicides that have different modes of action. It is also recommended to scout the field to identify the weeds and record their locations. However, this also means incurring in further expenses, as tank mixes, for example, are not usually cheap.
 
-<figure>
+<figure style="text-align: end">
   <img style="width: 100%" src="/images/farming-ml/herbicidesxtime.png" />
+  <a href="https://blogs.cornell.edu/whatscroppingup/2020/03/23/statewide-herbicide-resistance-screening-to-start-in-2020-help-us-to-help-you/">Image Source</a>
 </figure>
-
-[Image source](https://blogs.cornell.edu/whatscroppingup/2020/03/23/statewide-herbicide-resistance-screening-to-start-in-2020-help-us-to-help-you/)
 
 ## How ML can solve these problems
 
@@ -89,7 +88,9 @@ AlexNet and other models were based on ImageNet, which is one of the visual data
 
 ![data set](/images/farming-ml/dataset.png)
 
-[Image source](https://www.imageclef.org/2013/plant)
+<p style="text-align: end">
+  <a href="https://www.imageclef.org/2013/plant">Image Source</a>
+</p>
 
 So no matter the dataset you choose (MS COCO, ImageNet, etc.), you won’t have to train your model from zero to recognize and classify plant images.
 
@@ -113,7 +114,9 @@ The system already comes integrated into their John Deere Sprayer, which minimiz
 
 ![See & Spray™ ([image source](https://johndeerevirtualpavilion.co.nz/see-and-spray-select/))](/images/farming-ml/See_Spray.gif)
 
-See & Spray™ ([image source](https://johndeerevirtualpavilion.co.nz/see-and-spray-select/))
+<p style="text-align: end">
+  <a href="https://johndeerevirtualpavilion.co.nz/see-and-spray-select/">See & Spray™</a>
+</p>
 
 Smart Spraying works similarly to the solution described throughout the post. By using cameras and AI, their system distinguishes plants from weeds and the software automatically selects and applies the correct type of herbicide where it’s needed. Smart Spraying works similarly to the solution described throughout the post. Using cameras and AI, their system distinguishes plants from weeds, and the software automatically selects and applies the correct type of herbicide where needed. This solution is broader than John Deere’s, meaning it can be used in other scenarios besides the fallow ground. It’s also extremely fast, recognizing and spraying the weed in 300 milliseconds.
 
