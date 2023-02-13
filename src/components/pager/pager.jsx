@@ -3,7 +3,7 @@ import { Link } from "gatsby";
 
 import PropTypes from "prop-types";
 
-import * as pagerStyles from "./pager.module.scss";
+import * as styles from "./pager.module.scss";
 
 import { Pages } from "../pages";
 
@@ -31,10 +31,9 @@ const setNextPage = ({numPages, currentPage}) => {
 const setPagesData = ({numPages, currentPage}) => {
   if (currentPage + 2 >= numPages) {
     return {
-      firstPage: (numPages - 4),
-      secondPage: (numPages - 3),
-      thirdPage: (numPages - 2),
-      fourthPage: (numPages - 1),
+      firstPage: (numPages - 3),
+      secondPage: (numPages - 2),
+      thirdPage: (numPages - 1),
       lastPage: numPages,
       currentPage: currentPage
     };
@@ -45,20 +44,18 @@ const setPagesData = ({numPages, currentPage}) => {
       firstPage: 1,
       secondPage: 2,
       thirdPage: 3,
-      fourthPage: 4,
-      lastPage: 5,
+      lastPage: 4,
       currentPage: currentPage
     };
   }
 
-    return {
-      firstPage: (currentPage - 2),
-      secondPage: (currentPage - 1),
-      thirdPage: currentPage,
-      fourthPage: (currentPage + 1),
-      lastPage: (currentPage + 2),
-      currentPage: currentPage
-    };
+  return {
+    firstPage: (currentPage - 2),
+    secondPage: (currentPage - 1),
+    thirdPage: currentPage,
+    lastPage: (currentPage + 1),
+    currentPage: currentPage
+  };
 };
 
 const Pager = ({ pageContext }) => {
@@ -68,12 +65,12 @@ const Pager = ({ pageContext }) => {
   const nextPage = setNextPage({numPages, currentPage});
   
   return(
-    <div className={pagerStyles.pagerContainer}>
-      <Link className={currentPage === 1 ? pagerStyles.disabledPagerLink : pagerStyles.pagerLink} to={prevPage} rel="prev">
+    <div className={styles.pagerContainer}>
+      <Link className={currentPage === 1 ? styles.disabledPagerLink : styles.pagerLink} to={prevPage} rel="prev">
         ← Prev
       </Link>
       <Pages data={pagesData}/>
-      <Link className={currentPage === numPages ? pagerStyles.disabledPagerLink : pagerStyles.pagerLink} to={nextPage} rel="next">
+      <Link className={currentPage === numPages ? styles.disabledPagerLink : styles.pagerLink} to={nextPage} rel="next">
         Next →
       </Link>
     </div>
