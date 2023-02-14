@@ -41,10 +41,11 @@
   display: flex;
   flex-direction: column;
   margin-left: 0;
+  margin-bottom: 1.3rem;
 }
 
 .partnerContainer {
-  margin-top: 3rem;
+  margin-top: 4.5rem;
 }
 
 .partnerButton {
@@ -55,7 +56,7 @@
   align-items: center;
   background-color: $xlPink;
   color: $neutral100;
-  margin: 1.5rem 0 9.5rem;
+  margin: 1.5rem 0 7.5rem;
   text-decoration: none;
 
 }

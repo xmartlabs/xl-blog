@@ -12,7 +12,9 @@ const NavMenu = ({ className, openMenu }) => {
     {label: "Our Company", path:"/" },
     {label: "Community", path:"/" },
     {label: "Blog", path:"/"},
+    {label: "Work with us", path:"/"},
   ];
+  
   return (
     menuElements.map(({label, path}) => {
       let commonProps = {
