@@ -32,7 +32,6 @@ const BlogPost = ({ data }) => {
 
     return () => {
       window.removeEventListener('scroll', handleScroll);
-      setState(BannerType.home)
     };
   }, []);
 
