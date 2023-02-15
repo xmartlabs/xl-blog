@@ -10,10 +10,18 @@ import { TwitterIcon } from "../icons/twitter";
 import { GithubIcon } from "../icons/github";
 
 import { classnames } from "../../helpers";
+import { SocialElement } from "../social-element";
 
 import * as styles from "./mobile-menu.module.scss";
 
 const MobileMenu = ({ onClick, showMenu }) => {
+
+  const mobileLinks = {
+    linkedInMobile: {path: "https://www.linkedin.com/company/xmartlabs/mycompany/", icon: <LinkedInIcon />},
+    instagram: {path: "https://www.instagram.com/xmartlabs", icon: <InstagramIcon className={styles.instagramSpace}/>},
+    twitterMobile: {path: "https://twitter.com/xmartlabs", icon: <TwitterIcon />},
+    github: {path: "https://github.com/xmartlabs", icon: <GithubIcon className={styles.gitSpace} />},
+  };
 
   return (
     <>
@@ -36,12 +44,7 @@ const MobileMenu = ({ onClick, showMenu }) => {
                 <h4 className="text__label__bold__black">Ready to partner?</h4>
                 <a href="https://form.typeform.com/to/c7G2RUWm" target="_blank" rel="noopener noreferrer" className={styles.partnerButton}>Lets's talk</a>
               </div>
-              <div className={styles.socialContainer}>
-                <a href="https://www.linkedin.com/company/xmartlabs/mycompany/" target="_blank" rel="noopener noreferrer"><LinkedInIcon /></a>
-                <a href="https://www.instagram.com/xmartlabs" target="_blank" rel="noopener noreferrer" className={styles.instagramSpace}><InstagramIcon /></a>
-                <a href="https://twitter.com/xmartlabs" target="_blank" rel="noopener noreferrer"><TwitterIcon /></a>
-                <a href="https://github.com/xmartlabs" target="_blank" rel="noopener noreferrer" className={styles.gitSpace}><GithubIcon /></a>
-              </div>
+                <SocialElement links={mobileLinks} className={styles.socialContainer} />
             </div>
           </div>
         }

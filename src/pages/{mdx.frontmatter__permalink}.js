@@ -8,7 +8,8 @@ import { Category } from "../components/category";
 import { classnames, useCategory } from "../helpers";
 import { AuthorSerializer } from '../serializer';
 import { AppContext, BannerType } from '../config/context';
-import { SocialBlog } from '../components/social-blog';
+import { SocialElement } from '../components/social-element';
+import { TwitterIcon, Facebook, Linkedin } from "../components/icons";
 
 import * as styles from '../css/blog-post.module.scss';
 
@@ -24,15 +25,24 @@ const BlogPost = ({ data }) => {
   const currentUrl = window?.location.pathname;
 
   const shareBlogPostLinks = {
-    twitter: `https://twitter.com/intent/tweet?url=URL&text=${currentUrl}`,
-    facebook: `https://www.facebook.com/sharer/sharer.php?u=https://blog.xmartlabs.com/blog${currentUrl}`,
-    linkedIn: `https://www.linkedin.com/sharing/share-offsite/?url=https%3A%2F%2Fblog.xmartlabs.com%2Fblog%2F${currentUrl}%2F`,
+    twitter: {
+      path: `https://twitter.com/intent/tweet?url=URL&text=${currentUrl}`, 
+      icon: <TwitterIcon className={styles.socialIcon} />,
+    },
+    facebook:{
+      path: `https://www.facebook.com/sharer/sharer.php?u=https://blog.xmartlabs.com/blog${currentUrl}`, 
+      icon: <Facebook className={classnames(styles.socialIcon, styles.facebookSpace)} />
+    },
+    linkedIn: {
+      path: `https://www.linkedin.com/sharing/share-offsite/?url=https%3A%2F%2Fblog.xmartlabs.com%2Fblog%2F${currentUrl}%2F`,
+      icon: <Linkedin className={styles.socialIcon} />
+    }
   };
   
   const shareXlProfileLinks = {
-    twitter: "https://twitter.com/xmartlabs",
-    facebook: "https://es-la.facebook.com/xmartlabs/",
-    linkedIn: "https://www.linkedin.com/company/xmartlabs/mycompany/",
+    twitter: {path: "https://twitter.com/xmartlabs", icon: <TwitterIcon className={styles.socialIcon} /> },
+    facebook: {path: "https://es-la.facebook.com/xmartlabs/", icon: <Facebook className={classnames(styles.socialIcon, styles.facebookSpace)} />},
+    linkedIn: {path: "https://www.linkedin.com/company/xmartlabs/mycompany/", icon: <Linkedin className={styles.socialIcon} />}
   };
 
   useEffect(() => {
@@ -60,7 +70,7 @@ const BlogPost = ({ data }) => {
 
   return (
     <div onScroll={handleScroll}>
-      <SocialBlog className={disappearSocial ? styles.socialDisappear : styles.socialAppear} links={shareBlogPostLinks} />
+      <SocialElement className={disappearSocial ? styles.socialDisappear : styles.socialAppear} links={shareBlogPostLinks} />
         <div className={styles.bannerContainer}>
           <Category data={categoryBlog.displayName}/>
           <h1 className={classnames(styles.titleContainer, "text__heading__one__black")}>
@@ -81,7 +91,7 @@ const BlogPost = ({ data }) => {
       </div>
       <div className={styles.socialBottomContainer}>
         <span className={classnames('text__paragraph__bold__grayTwo', styles.sharePosition)}>Share:</span>
-        <SocialBlog className={styles.socialBottom} links={shareXlProfileLinks} />
+        <SocialElement className={styles.socialBottom} links={shareXlProfileLinks} />
       </div>
     </div>
   );
