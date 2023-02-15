@@ -13,9 +13,7 @@ import { classnames } from "../../helpers";
 
 import * as styles from "./mobile-menu.module.scss";
 
-const MobileMenu = ({ onClick, showMenu, links }) => {
-
-  const {linkedIn, instagram, twitter, gitHub} = links;
+const MobileMenu = ({ onClick, showMenu }) => {
 
   return (
     <>
@@ -39,10 +37,10 @@ const MobileMenu = ({ onClick, showMenu, links }) => {
                 <a href="https://form.typeform.com/to/c7G2RUWm" target="_blank" rel="noopener noreferrer" className={styles.partnerButton}>Lets's talk</a>
               </div>
               <div className={styles.socialContainer}>
-                <a href={linkedIn} target="_blank" rel="noopener noreferrer"><LinkedInIcon /></a>
-                <a href={instagram} target="_blank" rel="noopener noreferrer" className={styles.instagramSpace}><InstagramIcon /></a>
-                <a href={twitter} target="_blank" rel="noopener noreferrer"><TwitterIcon /></a>
-                <a href={gitHub} target="_blank" rel="noopener noreferrer" className={styles.gitSpace}><GithubIcon /></a>
+                <a href="https://www.linkedin.com/company/xmartlabs/mycompany/" target="_blank" rel="noopener noreferrer"><LinkedInIcon /></a>
+                <a href="https://www.instagram.com/xmartlabs" target="_blank" rel="noopener noreferrer" className={styles.instagramSpace}><InstagramIcon /></a>
+                <a href="https://twitter.com/xmartlabs" target="_blank" rel="noopener noreferrer"><TwitterIcon /></a>
+                <a href="https://github.com/xmartlabs" target="_blank" rel="noopener noreferrer" className={styles.gitSpace}><GithubIcon /></a>
               </div>
             </div>
           </div>
