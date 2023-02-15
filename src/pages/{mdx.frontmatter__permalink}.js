@@ -73,7 +73,7 @@ const BlogPost = ({ data }) => {
         <span className={classnames('text__paragraph__bold__grayTwo', styles.sharePosition)}>Share:</span>
         <SocialBlog className={styles.socialBottom} />
       </div>
-      <MoreBlogsSection data={data} refMoreFrom={refMoreFrom} threeBlogsSectionTitle="More From Xmartlabs Blog" />
+      <MoreBlogsSection data={data} refMoreFrom={refMoreFrom} title="More From Xmartlabs Blog" />
     </div>
   );
 };
