@@ -39,7 +39,3 @@ export { XlNewsletter };
 XlNewsletter.propTypes = {
   onClick: PropTypes.func,
 };
-
-XlNewsletter.defaultProps = {
-  onClick: () => {},
-}
