@@ -4,3 +4,5 @@ export { MenuMobileIcon } from "./menu-icon";
 export { Linkedin } from "./linkedin";
 export { TwitterIcon } from "./twitter";
 export { Facebook } from "./facebook"
+export { GithubIcon } from "./github";
+export { InstagramIcon } from "./instagram";

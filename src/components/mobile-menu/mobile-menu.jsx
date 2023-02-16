@@ -5,9 +5,9 @@ import { NavMenu } from "../nav-menu";
 import { MenuMobileIcon } from "../icons/menu-icon";
 import { CloseIcon } from "../icons/close-icon";
 import { LinkedInIcon } from "../icons/linked-in";
-import { InstagramIcon } from "../icons/instagram";
+import { InstagramIcon } from "../icons";
 import { TwitterIcon } from "../icons/twitter";
-import { GithubIcon } from "../icons/github";
+import { GithubIcon } from "../icons";
 
 import { classnames } from "../../helpers";
 import { SocialElement } from "../social-element";
@@ -16,12 +16,12 @@ import * as styles from "./mobile-menu.module.scss";
 
 const MobileMenu = ({ onClick, showMenu }) => {
 
-  const mobileLinks = {
-    linkedInMobile: {path: "https://www.linkedin.com/company/xmartlabs/mycompany/", icon: <LinkedInIcon />},
-    instagram: {path: "https://www.instagram.com/xmartlabs", icon: <InstagramIcon className={styles.instagramSpace}/>},
-    twitterMobile: {path: "https://twitter.com/xmartlabs", icon: <TwitterIcon />},
-    github: {path: "https://github.com/xmartlabs", icon: <GithubIcon className={styles.gitSpace} />},
-  };
+  const mobileLinks = [
+    {path: "https://www.linkedin.com/company/xmartlabs/mycompany/", icon: <LinkedInIcon />},
+    {path: "https://www.instagram.com/xmartlabs", icon: <InstagramIcon className={styles.instagramSpace}/>},
+    {path: "https://twitter.com/xmartlabs", icon: <TwitterIcon />},
+    {path: "https://github.com/xmartlabs", icon: <GithubIcon className={styles.gitSpace} />},
+  ];
 
   return (
     <>
