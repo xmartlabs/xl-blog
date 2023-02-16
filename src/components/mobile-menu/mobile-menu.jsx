@@ -32,7 +32,7 @@ const MobileMenu = ({ onClick, showMenu }) => (
           <div className={styles.menuContainer} >
             <NavMenu className={styles.menuOptions}  openMenu={showMenu}/>
             <div className={styles.partnerContainer}>
-              <h4 className="text__label__bold__black">Ready to partner?</h4>
+              <h4 className="text__small__paragraph__black">Ready to partner?</h4>
               <Link to="/" className={styles.partnerButton}>Lets's talk</Link>
             </div>
             <div className={styles.socialContainer}>

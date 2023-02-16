@@ -66,31 +66,31 @@ function Layout({ children }) {
     <>
       <AppContext.Provider value={{ state: contextState, setState: setContextState }}>
         <div className={styles[`${contextState}Banner`]}>
-        {isMobile && <MobileMenu onClick={() => setShowMenu(!showMenu)} showMenu={showMenu} />}
-          <StyledContainerNavBarXL>
-            <StyledContainerHeader>
-              <div className={styles.navMenuContainer}>
-                <Link
-                  to="/"
-                  id="logo-xl">
-                  <StaticImage 
-                    src="../../static/images/logo.png"
-                    alt=""
-                    width={56}
-                    height={56}
-                  />
-                </Link>
-                {!isMobile && <NavMenu />}
-              </div>
-              {!isMobile && 
-              <StyledGetStartedButton id="header-getintouch" href="#/" >
-                <StyledGetStartedTextButton>GET STARTED</StyledGetStartedTextButton>
-              </StyledGetStartedButton>
-              }
-            </StyledContainerHeader>
-          </StyledContainerNavBarXL>
-          {children}
+            <StyledContainerNavBarXL>
+            {isMobile && <MobileMenu onClick={() => setShowMenu(!showMenu)} showMenu={showMenu} />}
+              <StyledContainerHeader>
+                <div className={styles.navMenuContainer}>
+                  <Link
+                    to="/"
+                    id="logo-xl">
+                    <StaticImage 
+                      src="../../static/images/logo.png"
+                      alt=""
+                      width={56}
+                      height={56}
+                    />
+                  </Link>
+                  {!isMobile && <NavMenu />}
+                </div>
+                {!isMobile && 
+                <StyledGetStartedButton id="header-getintouch" href="#/" >
+                  <StyledGetStartedTextButton>GET STARTED</StyledGetStartedTextButton>
+                </StyledGetStartedButton>
+                }
+              </StyledContainerHeader>
+            </StyledContainerNavBarXL>
         </div>
+        {children}
       </AppContext.Provider>
       <Footer>
         <StyledFooterWrapper>

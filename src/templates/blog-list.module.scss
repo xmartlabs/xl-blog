@@ -1,10 +1,10 @@
 .container {
-  margin: 55% 10% 0;
+  margin: 7% 10% 0;
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(22.4rem, 1fr));  
   gap: 6rem 7.4rem;
 
   @media only screen and (max-width:50rem) {
-    margin: 50rem 0rem;
+    margin: 5rem 0rem;
   }
 }
