@@ -22,7 +22,8 @@ const BlogPost = ({ data }) => {
   const [ disappearSocial, setDisappearSocial ] = useState(false);
   const categoryBlog = useCategory(data.mdx.frontmatter.category);
 
-  const currentUrl = window?.location.pathname;
+  const windowVerification = () => typeof window !== "undefined"
+  const currentUrl = windowVerification && window.location.pathname;
 
   const shareBlogPostLinks = [
     {
