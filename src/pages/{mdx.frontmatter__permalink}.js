@@ -22,20 +22,25 @@ const BlogPost = ({ data }) => {
   const [ disappearSocial, setDisappearSocial ] = useState(false);
   const categoryBlog = useCategory(data.mdx.frontmatter.category);
 
-  const windowVerification = () => typeof window !== "undefined"
-  const currentUrl = windowVerification && window?.location.pathname;
+
+  const checkWindow = () => {
+    if (typeof window !== 'undefined') {
+      return window.location.pathname;
+    }
+    return;
+  }
 
   const shareBlogPostLinks = [
     {
-      path: `https://twitter.com/intent/tweet?url=URL&text=${currentUrl}`, 
+      path: `https://twitter.com/intent/tweet?url=URL&text=${checkWindow()}`, 
       icon: <TwitterIcon className={styles.socialIcon} />,
     },
     {
-      path: `https://www.facebook.com/sharer/sharer.php?u=https://blog.xmartlabs.com/blog${currentUrl}`, 
+      path: `https://www.facebook.com/sharer/sharer.php?u=https://blog.xmartlabs.com/blog${checkWindow()}`, 
       icon: <Facebook className={classnames(styles.socialIcon, styles.facebookSpace)} />
     },
     {
-      path: `https://www.linkedin.com/sharing/share-offsite/?url=https%3A%2F%2Fblog.xmartlabs.com%2Fblog%2F${currentUrl}%2F`,
+      path: `https://www.linkedin.com/sharing/share-offsite/?url=https%3A%2F%2Fblog.xmartlabs.com%2Fblog%2F${checkWindow()}%2F`,
       icon: <Linkedin className={styles.socialIcon} />
     }
   ];
