@@ -23,7 +23,7 @@ const BlogPost = ({ data }) => {
   const categoryBlog = useCategory(data.mdx.frontmatter.category);
 
   const windowVerification = () => typeof window !== "undefined"
-  const currentUrl = windowVerification && window.location.pathname;
+  const currentUrl = windowVerification && window?.location.pathname;
 
   const shareBlogPostLinks = [
     {
