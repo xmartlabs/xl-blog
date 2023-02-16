@@ -34,7 +34,9 @@
 // Header Blog Elements
 
 .bannerContainer {
-  padding: 5rem 50rem 28rem 17rem;
+  padding: 0rem 50rem 28rem 17rem;
+  position: absolute;
+  top: 10rem;
 }
 
 .titleContainer {
@@ -283,6 +285,6 @@
 
   .socialBottomContainer {
     justify-content: start;
-    padding-left: 1rem;
+    padding: 0 0 0 1rem;
   }
 }
