@@ -35,7 +35,3 @@ const XlNewsletter = () => (
 );
 
 export { XlNewsletter };
-
-XlNewsletter.propTypes = {
-  onClick: PropTypes.func,
-};
