@@ -12,11 +12,22 @@ import * as styles from "./card.module.scss";
 const Card = ({ data }) => {
   const categoryBlog = useCategory(data.frontmatter.category);
 
+  const urlImages = () => {
+    if (window?.location?.href === 'http://localhost:8000/') {
+      return data.frontmatter.thumbnail;
+    } else {
+      if (typeof window !== 'undefined') {
+        const imageUrl = window?.location?.href.slice(0, -6);
+        return `${imageUrl}${data.frontmatter.thumbnail}`
+      }
+    }
+  }
+
   return (
     <Link className={styles.styledLink} to={`/${_.kebabCase(data.frontmatter.permalink)}`}>
       <article key={data.id} className={styles.container}>
         <div className={styles.imageContainer}>
-          <img className={styles.styledImage} src={data.frontmatter.thumbnail}/>
+          <img className={styles.styledImage} src={urlImages()}/>
         </div>
         <Category data={categoryBlog.displayName}/>
         <h1 className="text__heading__two__separated__black">
