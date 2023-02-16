@@ -13,7 +13,7 @@ const Card = ({ data }) => {
   const categoryBlog = useCategory(data.frontmatter.category);
 
   const urlImages = () => {
-    if (window?.location?.href === 'http://localhost:8000/') {
+    if (typeof window !== 'undefined' && window.location.href === 'http://localhost:8000/') {
       return data.frontmatter.thumbnail;
     } else {
       if (typeof window !== 'undefined') {
