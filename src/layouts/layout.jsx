@@ -59,14 +59,13 @@ export const StyledFooterText = styled.label`
 
 function Layout({ children }) {  
   const [contextState, setContextState] = useState(initialState);
-  const [ showMenu, setShowMenu ] = useState(false);
   const isMobile = useMediaQuery("(max-width: 768px)");
   
   return (
     <>
       <AppContext.Provider value={{ state: contextState, setState: setContextState }}>
         <div className={styles[`${contextState}Banner`]}>
-        {isMobile && <MobileMenu onClick={() => setShowMenu(!showMenu)} showMenu={showMenu} />}
+        {isMobile && <MobileMenu />}
           <StyledContainerNavBarXL>
             <StyledContainerHeader>
               <div className={styles.navMenuContainer}>
