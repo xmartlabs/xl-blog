@@ -11,8 +11,10 @@ import * as styles from './more-blogs-section.module.scss';
 
 const MoreBlogsSection = ({ data, refMoreFrom, title }) => {
   const { edges } = data.allMdx;
+  console.log(refMoreFrom)
   return (
     <div className={styles.moreFromXlContainer} ref={refMoreFrom} >
+      {console.log(refMoreFrom)}
       <div className={styles.titleContainer}>
         <Link to="/" className={classnames("text__heading__three__blueTwo", styles.titleStyle)}>{`${title} →`}</Link>
       </div>
@@ -56,4 +58,9 @@ MoreBlogsSection.propTypes = {
       })
     })
   })
+};
+
+MoreBlogsSection.defaultProps = {
+  refMoreFrom: {current: ''},
+  title: '',
 };
