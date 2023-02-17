@@ -18,6 +18,7 @@ $text-line-heights: (
   headingThree: 1.5rem,
   headingFour: 1.3rem,
   smallParagraph: 0.8rem,
+  paragraphSmall: 1rem,
 );
 
 $text-sizes: (
@@ -31,6 +32,7 @@ $text-sizes: (
   authorName: 1.2rem,
   paragraph: 1.1rem,
   smallParagraph: 0.9rem,
+  paragraphSmall: 0.7rem,
 );
 
 $text-colors: (  
@@ -38,6 +40,8 @@ $text-colors: (
   blueTwo: $blueTwo,
   grayTwo: $grayTwo,
   neutral100: $neutral100,
+  defaultGray: $defaultGray,
+  grayThree: $grayThree,
 
 );
 
@@ -112,6 +116,18 @@ $text-colors: (
   line-height: map-get($map: $text-line-heights, $key: smallParagraph);
   font-weight: map-get($map: $font-weights, $key: boldWeight900);
 }
+@mixin text__paragraph__small {
+  font-size: map-get($map: $text-sizes, $key: paragraphSmall);
+  line-height: map-get($map: $text-line-heights, $key: paragraphSmall);
+  font-weight: map-get($map: $font-weights, $key: boldWeight900);
+}
+
+@mixin text__placeholder {
+  font-size: map-get($map: $text-sizes, $key: paragraphSmall);
+  line-height: map-get($map: $text-line-heights, $key: paragraphSmall);
+  font-weight: map-get($map: $font-weights, $key: lightWeight100);
+}
+
 //---- COLOR ---
 
 @mixin color-styles {
@@ -182,6 +198,16 @@ $text-colors: (
   &__small__paragraph {
     @include color-styles {
       @include text__small__paragraph;
+    }
+  }
+  &__paragraph__small {
+    @include color-styles {
+      @include text__paragraph__small;
+    }
+  }
+  &__placeholder {
+    @include color-styles {
+      @include text__placeholder;
     }
   }
 }

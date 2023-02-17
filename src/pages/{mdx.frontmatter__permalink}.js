@@ -45,7 +45,7 @@ const BlogPost = ({ data }) => {
       }
     };
   };
-
+  
   return (
     <div onScroll={handleScroll}>
       <SocialBlog className={disappearSocial ? styles.socialDisappear : styles.socialAppear} socialAtRight={true} />
