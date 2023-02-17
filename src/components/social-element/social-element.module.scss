@@ -7,6 +7,17 @@
   top: 16rem;
 }
 
+.socialIcon {
+  width: 1.5rem;
+  height: 1.5rem;
+}
+
+.blogIcons {
+  display: flex;
+  align-items: center;
+  margin: 0.7rem;
+}
+
 @media screen and (max-width: 768px) {
   .container {
     display: none;

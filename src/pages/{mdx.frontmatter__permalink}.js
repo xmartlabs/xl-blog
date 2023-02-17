@@ -33,22 +33,25 @@ const BlogPost = ({ data }) => {
   const shareBlogPostLinks = [
     {
       path: `https://twitter.com/intent/tweet?url=URL&text=${checkWindow()}`, 
-      icon: <TwitterIcon className={styles.socialIcon} />,
+      icon: <TwitterIcon />,
+      id: 'blog'
     },
     {
       path: `https://www.facebook.com/sharer/sharer.php?u=https://blog.xmartlabs.com/blog${checkWindow()}`, 
-      icon: <Facebook className={classnames(styles.socialIcon, styles.facebookSpace)} />
+      icon: <Facebook />,
+      id: 'blog'
     },
     {
       path: `https://www.linkedin.com/sharing/share-offsite/?url=https%3A%2F%2Fblog.xmartlabs.com%2Fblog%2F${checkWindow()}%2F`,
-      icon: <Linkedin className={styles.socialIcon} />
+      icon: <Linkedin />,
+      id: 'blog'
     }
   ];
   
   const shareXlProfileLinks = [
-    {path: "https://twitter.com/xmartlabs", icon: <TwitterIcon className={styles.socialIcon} /> },
-    {path: "https://es-la.facebook.com/xmartlabs/", icon: <Facebook className={classnames(styles.socialIcon, styles.facebookSpace)} />},
-    {path: "https://www.linkedin.com/company/xmartlabs/mycompany/", icon: <Linkedin className={styles.socialIcon} />}
+    {path: "https://twitter.com/xmartlabs", icon: <TwitterIcon />, id: 'blog'},
+    {path: "https://es-la.facebook.com/xmartlabs/", icon: <Facebook />, id: 'blog'},
+    {path: "https://www.linkedin.com/company/xmartlabs/mycompany/", icon: <Linkedin />, id: 'blog'}
   ];
 
   useEffect(() => {

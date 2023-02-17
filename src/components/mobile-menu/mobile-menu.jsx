@@ -18,9 +18,9 @@ const MobileMenu = ({ onClick, showMenu }) => {
 
   const mobileLinks = [
     {path: "https://www.linkedin.com/company/xmartlabs/mycompany/", icon: <LinkedInIcon />},
-    {path: "https://www.instagram.com/xmartlabs", icon: <InstagramIcon className={styles.instagramSpace}/>},
+    {path: "https://www.instagram.com/xmartlabs", icon: <InstagramIcon />},
     {path: "https://twitter.com/xmartlabs", icon: <TwitterIcon />},
-    {path: "https://github.com/xmartlabs", icon: <GithubIcon className={styles.gitSpace} />},
+    {path: "https://github.com/xmartlabs", icon: <GithubIcon />},
   ];
 
   return (

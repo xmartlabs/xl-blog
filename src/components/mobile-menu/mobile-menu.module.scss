@@ -65,12 +65,9 @@
   align-items: center;
   flex-direction: row;
   position: static;
+
+  a:nth-child(2n+0) {
+    margin: 0 2rem;
+  }  
 }
 
-.instagramSpace {
-  margin: 0 2rem;
-}
-
-.gitSpace {
-  margin-left: 2rem;
-}

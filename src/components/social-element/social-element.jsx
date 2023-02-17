@@ -10,7 +10,15 @@ const SocialElement = ({ className, links }) => {
 
   return (
     <div className={classnames(styles.container, className)}>
-      {links.map((item) => <a href={item?.path} target="_blank" rel="noopener noreferrer">{item?.icon}</a>,)}
+      {links.map((item) => 
+        <a 
+          href={item.path} 
+          target="_blank" 
+          rel="noopener noreferrer" 
+          className={classnames(styles.socialIcon, {[styles.blogIcons]: item.id === 'blog'})}>
+            {item.icon}
+        </a>
+      )}
     </div>
   );
 };
@@ -19,6 +27,7 @@ export { SocialElement };
 
 SocialElement.propTypes = {
   className: PropTypes.string, 
+  links: PropTypes.array.isRequired,
 }
 
 SocialElement.defaultProps = {
