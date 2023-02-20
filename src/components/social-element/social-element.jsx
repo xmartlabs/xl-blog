@@ -12,6 +12,7 @@ const SocialElement = ({ className, links }) => {
     <div className={classnames(styles.container, className)}>
       {links.map((item) => 
         <a 
+          key={item.path}
           href={item.path} 
           target="_blank" 
           rel="noopener noreferrer" 
