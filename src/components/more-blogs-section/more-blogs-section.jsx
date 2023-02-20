@@ -31,7 +31,7 @@ MoreBlogsSection.propTypes = {
   refMoreFrom: PropTypes.object,
   title: PropTypes.string,
   refMoreFrom: PropTypes.shape({
-    current: PropTypes.instanceOf(HTMLDivElement),
+    current: PropTypes.null,
   }),
   data: PropTypes.shape({
     allMdx: PropTypes.shape({
