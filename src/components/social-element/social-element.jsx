@@ -12,12 +12,13 @@ const SocialElement = ({ className, links }) => {
     <div className={classnames(styles.container, className)}>
       {links.map((item) => 
         <a 
-          key={item.path}
+          key={item.id}
           href={item.path} 
           target="_blank" 
           rel="noopener noreferrer" 
           className={classnames(styles.socialIcon, {[styles.blogIcons]: item.id === 'blog'})}>
             {item.icon}
+            {console.log(item.path)}
         </a>
       )}
     </div>
