@@ -11,15 +11,15 @@ import * as styles from './more-blogs-section.module.scss';
 
 const MoreBlogsSection = ({ data, refMoreFrom, title }) => {
   const { edges } = data.allMdx;
-  console.log(refMoreFrom)
+
   return (
     <div className={styles.moreFromXlContainer} ref={refMoreFrom} >
-      {console.log(refMoreFrom)}
       <div className={styles.titleContainer}>
         <Link to="/" className={classnames("text__heading__three__blueTwo", styles.titleStyle)}>{`${title} →`}</Link>
       </div>
       <div className={styles.blogsContainer}>
         {edges.map(({node}) => <Card data={node} key={node.id} className={styles.cardStyles} />)}
+        {console.log(refMoreFrom)}
       </div>
     </div>
   );
@@ -30,6 +30,9 @@ export { MoreBlogsSection };
 MoreBlogsSection.propTypes = {
   refMoreFrom: PropTypes.object,
   title: PropTypes.string,
+  refMoreFrom: PropTypes.shape({
+    current: PropTypes.instanceOf(HTMLDivElement),
+  }),
   data: PropTypes.shape({
     allMdx: PropTypes.shape({
       edges: PropTypes.shape({
