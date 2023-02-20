@@ -19,7 +19,6 @@ const MoreBlogsSection = ({ data, refMoreFrom, title }) => {
       </div>
       <div className={styles.blogsContainer}>
         {edges.map(({node}) => <Card data={node} key={node.id} className={styles.cardStyles} />)}
-        {console.log(refMoreFrom)}
       </div>
     </div>
   );
@@ -64,6 +63,6 @@ MoreBlogsSection.propTypes = {
 };
 
 MoreBlogsSection.defaultProps = {
-  refMoreFrom: {current: ''},
+  refMoreFrom: {current: HTMLDivElement},
   title: '',
 };
