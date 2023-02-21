@@ -2,11 +2,11 @@ import React from "react";
 import PropTypes from "prop-types";
 
 import { NavMenu } from "../nav-menu";
-import { MenuMobileIcon } from "../icons/menu-icon";
-import { CloseIcon } from "../icons/close-icon";
-import { LinkedInIcon } from "../icons/linked-in";
+import { MenuMobileIcon } from "../icons";
+import { CloseIcon } from "../icons";
+import { LinkedInIcon } from "../icons";
 import { InstagramIcon } from "../icons";
-import { TwitterIcon } from "../icons/twitter";
+import { TwitterIcon } from "../icons";
 import { GithubIcon } from "../icons";
 
 import { classnames } from "../../helpers";

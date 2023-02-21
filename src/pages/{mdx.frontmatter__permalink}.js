@@ -24,7 +24,7 @@ const BlogPost = ({ data }) => {
 
 
   const checkWindow = () => {
-    if (typeof window !== 'undefined') {
+    if (window) {
       return window.location.pathname;
     }
     return;
