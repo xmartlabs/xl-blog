@@ -10,12 +10,14 @@ import { classnames, useCategory } from "../helpers";
 import { AuthorSerializer } from '../serializer';
 import { AppContext, BannerType } from '../config/context';
 import { SocialBlog } from '../components/social-blog';
+import { Card } from '../components/card';
 
 import * as styles from '../css/blog-post.module.scss';
 
 const _ = require("lodash");
 
 const BlogPost = ({ data }) => {
+  console.log(data)
   const author = AuthorsYAMLData.find(({ author }) => (author === data.mdx.frontmatter.author));
   const authorBlog = AuthorSerializer.deSerialize(author);
   const { setState } = useContext(AppContext);
@@ -77,15 +79,28 @@ const BlogPost = ({ data }) => {
 
 export const query = graphql`
   query ($id: String) {
-    mdx(id: {eq: $id}) {
+    postDetial: mdx(id: {eq: $id}) {
       frontmatter {
         title
         date(formatString: "MMMM D, YYYY")
         author
         category
         tags
+        permalink
       }
       body
+    }
+    morePost: mdx(limit: 3) {
+      relatedPosts {
+        frontmatter {
+          title
+          date(formatString: "MMMM D, YYYY")
+          author
+          category
+          tags
+          permalink
+        }
+      }
     }
   }
 `

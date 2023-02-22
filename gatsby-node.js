@@ -7,11 +7,47 @@ const postsPerPage = 9;
 const path = require("path")
 const _ = require("lodash")
 
+exports.createResolvers = ({ createResolvers }) => {
+  const resolvers = {
+    Mdx: {
+      relatedPosts: {
+        type: ['Mdx'],
+        args: {
+          limit: {
+            type: "Int",
+          },
+        },
+        resolve: (source, args, context, info) => {
+          return context.nodeModel.runQuery({
+            query: {
+              filter: {
+                id: {
+                  ne: source.id,
+                },
+                frontmatter: {
+                  category: {
+                    eq: source.frontmatter.category,
+                  },
+                },
+              },
+              limit: args.limit,
+            },
+            type: 'Mdx',
+          })
+        },
+      },
+    },
+  }
+  
+  createResolvers(resolvers)
+}
+
 exports.createPages = async ({actions, graphql, reporter}) => {
     const {createPage} = actions
     const tagTemplate = path.resolve("src/templates/tags.js")
     const categoryTemplate = path.resolve("src/templates/categories.js")
     const authorTemplate = path.resolve("src/templates/authors.js")
+    const postTemplate = path.resolve("src/templates/post.js")
 
     const result = await graphql(`
     {
@@ -40,6 +76,7 @@ exports.createPages = async ({actions, graphql, reporter}) => {
               author
               category
               tags
+              permalink
             }
             body
             slug
@@ -108,6 +145,16 @@ exports.createPages = async ({actions, graphql, reporter}) => {
             },
         });
     });
+
+    posts.forEach(post => {
+      createPage({
+        path: post.node.frontmatter.permalink,
+        component: postTemplate,
+        context: {
+          id: post.node.id,
+        }
+      })
+    })
 }
 
 
