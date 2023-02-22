@@ -13,7 +13,7 @@ import { StyledContainerHeader, StyledContainerNavBarXL } from "../elements";
 import { HomeBanner } from "../components/home-banner";
 import { AppContext, initialState, BannerType } from "../config/context.js";
 import { SocialElement } from "../components/social-element";
-import { TwitterIcon, Facebook, Linkedin, InstagramIcon, LinkedInIcon, GithubIcon, XlFooterMobileIcon } from "../components/icons";
+import { TwitterIcon, Facebook, Linkedin, InstagramIcon, LinkedInIcon, GithubIcon } from "../components/icons";
 import "../index.scss";
 
 import { useMediaQuery } from "../hooks";
@@ -160,7 +160,16 @@ function Layout({ children }) {
           <SocialElement className={classnames(styles.socialBottom, {[styles.socialDisappear]: isMobile})} links={footerSocial}/>
           {isMobile && 
             <div className={styles.mobileIconContainer}>
-              <XlFooterMobileIcon className={styles.footerIconMobile}/>
+              <Link
+                to="/"
+                id="logo-xl-white-mobile">
+                <StaticImage 
+                  src="../../static/images/logo-white-mobile.svg"
+                  alt="Xmartlabs"
+                  width={160}
+                  height={150}
+                />
+            </Link>
               <SocialElement className={styles.socialBottom} links={footerSocialMobile}/>
             </div>}
         </StyledFooterWrapper>
