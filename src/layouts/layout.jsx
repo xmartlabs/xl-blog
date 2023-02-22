@@ -12,11 +12,14 @@ import { MobileMenu } from "../components/mobile-menu";
 import { StyledContainerHeader, StyledContainerNavBarXL } from "../elements";
 import { HomeBanner } from "../components/home-banner";
 import { AppContext, initialState, BannerType } from "../config/context.js";
+import { SocialElement } from "../components/social-element";
+import { TwitterIcon, Facebook, Linkedin, InstagramIcon, LinkedInIcon, GithubIcon, XlFooterMobileIcon } from "../components/icons";
 import "../index.scss";
 
 import { useMediaQuery } from "../hooks";
 
 import * as styles from "./layout.module.scss";
+import { classnames } from "../helpers";
 
 export const StyledGetStartedButton = styled.a`
   width: 147px;
@@ -42,8 +45,10 @@ export const StyledFooterWrapper = styled.div`
   width: 85%;
   justify-content: center;
   @media (max-width: 768px) {
-  justify-content: flex-end;
   width: 100%;
+  align-items: baseline;
+  justify-content: space-evenly;
+  padding-left: 1rem;
   }
 `
 export const StyledFooterTextTitle = styled.label`
@@ -55,13 +60,27 @@ export const StyledFooterTextTitle = styled.label`
 export const StyledFooterText = styled.label`
   color: #fff;
   size: 17px;
-  line-height: 38px;    
+  line-height: 38px;
 `
 
 function Layout({ children }) {  
   const [contextState, setContextState] = useState(initialState);
   const [ handleMenu, setHandleMenu ] = useState(false);
   const isMobile = useMediaQuery("(max-width: 768px)");
+
+  const footerSocial = [
+    {path: "https://www.instagram.com/xmartlabs", icon: <InstagramIcon />, id: 'blog'},
+    {path: "https://www.linkedin.com/company/xmartlabs/mycompany/", icon: <Linkedin />, id: 'blog'},
+    {path: "https://es-la.facebook.com/xmartlabs/", icon: <Facebook />, id: 'blog'},
+    {path: "https://twitter.com/xmartlabs", icon: <TwitterIcon />, id: 'blog'},
+  ];
+
+  const footerSocialMobile = [
+    {path: "https://www.linkedin.com/company/xmartlabs/mycompany/", icon: <LinkedInIcon />, id: 'blog'},
+    {path: "https://www.instagram.com/xmartlabs", icon: <InstagramIcon />, id: 'blog'},
+    {path: "https://twitter.com/xmartlabs/", icon: <TwitterIcon />, id: 'blog'},
+    {path: "https://github.com/xmartlabs", icon: <GithubIcon />, id: 'blog'},
+  ];
   
   return (
     <>
@@ -138,21 +157,12 @@ function Layout({ children }) {
               <StyledFooterText>Blog</StyledFooterText>
             </div>
           </div>
-
-          <div className={styles.footerCol}>
-            <div>
-              <StyledFooterTextTitle>Media</StyledFooterTextTitle>
-            </div>
-            <div>
-              <StyledFooterText>Linkedin</StyledFooterText>
-            </div>
-            <div>
-              <StyledFooterText>Instagram</StyledFooterText>
-            </div>                        
-            <div>
-              <StyledFooterText>Github</StyledFooterText>
-            </div>
-          </div>
+          <SocialElement className={classnames(styles.socialBottom, {[styles.socialDisappear]: isMobile})} links={footerSocial}/>
+          {isMobile && 
+            <div className={styles.mobileIconContainer}>
+              <XlFooterMobileIcon className={styles.footerIconMobile}/>
+              <SocialElement className={styles.socialBottom} links={footerSocialMobile}/>
+            </div>}
         </StyledFooterWrapper>
       </Footer>
       <Helmet>
