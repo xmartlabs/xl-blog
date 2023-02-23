@@ -10,8 +10,7 @@ import { NavMenu } from "../components/nav-menu";
 import { Footer } from "../components/footer";
 import { MobileMenu } from "../components/mobile-menu";
 import { StyledContainerHeader, StyledContainerNavBarXL } from "../elements";
-import { HomeBanner } from "../components/home-banner";
-import { AppContext, initialState, BannerType } from "../config/context.js";
+import { AppContext, initialState } from "../config/context.js";
 import "../index.scss";
 
 import { useMediaQuery } from "../hooks";
@@ -60,14 +59,13 @@ export const StyledFooterText = styled.label`
 
 function Layout({ children }) {  
   const [contextState, setContextState] = useState(initialState);
-  const [ handleMenu, setHandleMenu ] = useState(false);
   const isMobile = useMediaQuery("(max-width: 768px)");
   
   return (
     <>
       <AppContext.Provider value={{ state: contextState, setState: setContextState }}>
         <div className={styles[`${contextState}Banner`]}>
-        {isMobile && <MobileMenu onClick={() => setHandleMenu(!handleMenu)} showMenu={handleMenu} />}
+        {isMobile && <MobileMenu />}
           <StyledContainerNavBarXL>
             <StyledContainerHeader>
               <div className={styles.navMenuContainer}>
@@ -75,7 +73,7 @@ function Layout({ children }) {
                   to="/"
                   id="logo-xl">
                   <StaticImage 
-                    src="../../static/images/logo.svg"
+                    src="../../static/images/logo.png"
                     alt=""
                     width={56}
                     height={56}
@@ -90,7 +88,6 @@ function Layout({ children }) {
               }
             </StyledContainerHeader>
           </StyledContainerNavBarXL>
-          {contextState === BannerType.home && <HomeBanner openMenu={handleMenu} />}
           {children}
         </div>
       </AppContext.Provider>

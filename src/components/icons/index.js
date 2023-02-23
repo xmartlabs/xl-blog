@@ -8,3 +8,4 @@ export { GithubIcon } from "./github";
 export { InstagramIcon } from "./instagram";
 export { CloseIcon } from "./close-icon";
 export { LinkedInIcon } from "./linked-in";
+export { Close } from "./close";

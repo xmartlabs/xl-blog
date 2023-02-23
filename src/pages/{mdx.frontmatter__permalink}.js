@@ -73,7 +73,7 @@ const BlogPost = ({ data }) => {
       }
     };
   };
-
+  
   return (
     <div onScroll={handleScroll}>
       <SocialElement className={classnames(disappearSocial ? styles.socialDisappear : styles.socialAppear, styles.blogIcons)} links={shareBlogPostLinks} />

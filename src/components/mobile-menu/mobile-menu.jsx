@@ -1,4 +1,5 @@
-import React from "react";
+import React, { useState } from "react";
+import { Link } from "gatsby";
 import PropTypes from "prop-types";
 
 import { NavMenu } from "../nav-menu";
@@ -14,7 +15,8 @@ import { SocialElement } from "../social-element";
 
 import * as styles from "./mobile-menu.module.scss";
 
-const MobileMenu = ({ onClick, showMenu }) => {
+const MobileMenu = () => {
+  const [ showMenu, setShowMenu ] = useState(false);
 
   const mobileLinks = [
     {path: "https://www.linkedin.com/company/xmartlabs/mycompany/", icon: <LinkedInIcon />},
@@ -27,14 +29,14 @@ const MobileMenu = ({ onClick, showMenu }) => {
     <>
       <div className={classnames(styles.container, { [styles.openMenu]: showMenu })} >
         <div className={classnames(styles.buttonIconPosition, { [styles.openButton]: showMenu })}>
-          <button onClick={onClick} className={styles.buttonIconStyles} >
+          <button onClick={() => setShowMenu(!showMenu)} className={styles.buttonIconStyles} >
             <MenuMobileIcon />
           </button>
         </div>
         {showMenu && 
           <div>
             <div className={styles.buttonIconPosition}>
-              <button onClick={onClick} className={classnames(styles.buttonIconPosition, styles.buttonIconStyles)} >
+              <button onClick={() => setShowMenu(!showMenu)} className={classnames(styles.buttonIconPosition, styles.buttonIconStyles)} >
                 <CloseIcon />
               </button>
             </div>
