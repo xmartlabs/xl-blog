@@ -90,7 +90,7 @@ export const query = graphql`
       }
       body
     }
-    morePost: mdx(limit: 3) {
+    morePost: {
       relatedPosts {
         frontmatter {
           title

@@ -12,11 +12,6 @@ exports.createResolvers = ({ createResolvers }) => {
     Mdx: {
       relatedPosts: {
         type: ['Mdx'],
-        args: {
-          limit: {
-            type: "Int",
-          },
-        },
         resolve: (source, args, context, info) => {
           return context.nodeModel.runQuery({
             query: {
@@ -30,7 +25,6 @@ exports.createResolvers = ({ createResolvers }) => {
                   },
                 },
               },
-              limit: args.limit,
             },
             type: 'Mdx',
           })
