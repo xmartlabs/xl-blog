@@ -21,7 +21,7 @@ const Card = ({ data }) => {
         return `${imageUrl}/${data.frontmatter.thumbnail}`
       }
     }
-    return window.location.origin;
+    return typeof window !== 'undefined' && window.location.origin;
   }
 
   return (
