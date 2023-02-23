@@ -26,7 +26,7 @@ const BlogPost = ({ data }) => {
     if (typeof window !== 'undefined') {
       return window.location.pathname;
     }
-    return;
+    return '';
   }
 
   const shareBlogPostLinks = [

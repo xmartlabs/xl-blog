@@ -29,9 +29,9 @@ export { SocialElement };
 SocialElement.propTypes = {
   className: PropTypes.string, 
   links: PropTypes.arrayOf(PropTypes.objectOf({
-    path: PropTypes.string.isRequired,
-    icon: PropTypes.element.isRequired,
-  }))
+    path: PropTypes.string,
+    icon: PropTypes.element
+  })).isRequired
 }
 
 SocialElement.defaultProps = {

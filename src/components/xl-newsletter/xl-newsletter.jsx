@@ -3,7 +3,7 @@ import { StaticImage } from "gatsby-plugin-image";
 import { Link } from "gatsby";
 import PropTypes from "prop-types";
 
-import { Close } from "../icons"
+import { CloseNewsletter } from "../icons"
 
 import { classnames } from "../../helpers";
 
@@ -30,7 +30,7 @@ const XlNewsletter = () => (
         <button className={classnames(styles.buttonNewsletter, "text__paragraph__small__neutral100")} onClick={() => {}}>SUBSCRIBE</button>
       </div>
     </div>
-    <Close className={styles.close} />
+    <CloseNewsletter className={styles.close} />
   </div>
 );
 

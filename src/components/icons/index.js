@@ -6,6 +6,6 @@ export { TwitterIcon } from "./twitter";
 export { Facebook } from "./facebook"
 export { GithubIcon } from "./github";
 export { InstagramIcon } from "./instagram";
-export { CloseIcon } from "./close-icon";
+export { CloseIconMobile } from "./close-icon-mobile";
 export { LinkedInIcon } from "./linked-in";
-export { Close } from "./close";
+export { CloseNewsletter } from "./close-newsletter";

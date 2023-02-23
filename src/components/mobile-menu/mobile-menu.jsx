@@ -2,12 +2,7 @@ import React, { useState } from "react";
 import PropTypes from "prop-types";
 
 import { NavMenu } from "../nav-menu";
-import { MenuMobileIcon } from "../icons";
-import { CloseIcon } from "../icons";
-import { LinkedInIcon } from "../icons";
-import { InstagramIcon } from "../icons";
-import { TwitterIcon } from "../icons";
-import { GithubIcon } from "../icons";
+import { GithubIcon, TwitterIcon, InstagramIcon, LinkedInIcon, CloseIconMobile, MenuMobileIcon } from "../icons";
 
 import { classnames } from "../../helpers";
 import { SocialElement } from "../social-element";
@@ -36,7 +31,7 @@ const MobileMenu = () => {
           <div>
             <div className={styles.buttonIconPosition}>
               <button onClick={() => setShowMenu(!showMenu)} className={classnames(styles.buttonIconPosition, styles.buttonIconStyles)} >
-                <CloseIcon />
+                <CloseIconMobile />
               </button>
             </div>
             <div className={styles.menuContainer} >
