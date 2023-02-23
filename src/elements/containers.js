@@ -1,4 +1,5 @@
-import styled from 'styled-components';   
+import styled from 'styled-components';
+import '../css/variables.scss';
 
 export const StyledContainerWrapper = styled.div`
   height: 100%;

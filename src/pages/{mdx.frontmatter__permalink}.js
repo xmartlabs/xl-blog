@@ -48,7 +48,7 @@ const BlogPost = ({ data }) => {
   
   return (
     <div onScroll={handleScroll}>
-      <SocialBlog className={disappearSocial ? styles.socialDisappear : styles.socialAppear} socialAtRight={true} />
+      <SocialBlog className={disappearSocial ? styles.socialDisappear : styles.socialAppear} socialAtRight />
         <div className={styles.bannerContainer}>
           <Category data={categoryBlog.displayName}/>
           <h1 className={classnames(styles.titleContainer, "text__heading__one__black")}>
