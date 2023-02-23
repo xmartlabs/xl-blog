@@ -33,25 +33,22 @@ const BlogPost = ({ data }) => {
   const shareBlogPostLinks = [
     {
       path: `https://twitter.com/intent/tweet?url=URL&text=${checkWindow()}`, 
-      icon: <TwitterIcon />,
-      id: 'blog'
+      icon: <TwitterIcon />
     },
     {
       path: `https://www.facebook.com/sharer/sharer.php?u=https://blog.xmartlabs.com/blog${checkWindow()}`, 
       icon: <Facebook />,
-      id: 'blog'
     },
     {
       path: `https://www.linkedin.com/sharing/share-offsite/?url=https%3A%2F%2Fblog.xmartlabs.com%2Fblog%2F${checkWindow()}%2F`,
       icon: <Linkedin />,
-      id: 'blog'
     }
   ];
   
   const shareXlProfileLinks = [
-    {path: "https://twitter.com/xmartlabs", icon: <TwitterIcon />, id: 'blog'},
-    {path: "https://es-la.facebook.com/xmartlabs/", icon: <Facebook />, id: 'blog'},
-    {path: "https://www.linkedin.com/company/xmartlabs/mycompany/", icon: <Linkedin />, id: 'blog'}
+    {path: "https://twitter.com/xmartlabs", icon: <TwitterIcon />},
+    {path: "https://es-la.facebook.com/xmartlabs/", icon: <Facebook />},
+    {path: "https://www.linkedin.com/company/xmartlabs/mycompany/", icon: <Linkedin />}
   ];
 
   useEffect(() => {
@@ -79,7 +76,7 @@ const BlogPost = ({ data }) => {
 
   return (
     <div onScroll={handleScroll}>
-      <SocialElement className={disappearSocial ? styles.socialDisappear : styles.socialAppear} links={shareBlogPostLinks} />
+      <SocialElement className={classnames(disappearSocial ? styles.socialDisappear : styles.socialAppear, styles.blogIcons)} links={shareBlogPostLinks} />
         <div className={styles.bannerContainer}>
           <Category data={categoryBlog.displayName}/>
           <h1 className={classnames(styles.titleContainer, "text__heading__one__black")}>
@@ -100,7 +97,7 @@ const BlogPost = ({ data }) => {
       </div>
       <div className={styles.socialBottomContainer}>
         <span className={classnames('text__paragraph__bold__grayTwo', styles.sharePosition)}>Share:</span>
-        <SocialElement className={styles.socialBottom} links={shareXlProfileLinks} />
+        <SocialElement className={classnames(styles.socialBottom, styles.blogIcons)} links={shareXlProfileLinks} />
       </div>
     </div>
   );

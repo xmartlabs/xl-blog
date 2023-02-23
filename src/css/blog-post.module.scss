@@ -28,6 +28,7 @@
   display: flex;
   flex-direction: row;
   position: static;
+  align-items: center;
 }
 
 .sharePosition {
@@ -37,6 +38,14 @@
 
 .facebookSpace {
   margin: 1.5rem;
+}
+
+.blogIcons {
+  a {
+    display: flex;
+    align-items: center;
+    margin: 0.7rem;
+  }
 }
 
 // Header Blog Elements
