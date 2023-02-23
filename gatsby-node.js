@@ -32,9 +32,8 @@ exports.createResolvers = ({ createResolvers }) => {
       },
     },
   }
-  
   createResolvers(resolvers)
-}
+};
 
 exports.createPages = async ({actions, graphql, reporter}) => {
     const {createPage} = actions

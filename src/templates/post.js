@@ -10,7 +10,6 @@ import { classnames, useCategory } from "../helpers";
 import { AuthorSerializer } from '../serializer';
 import { AppContext, BannerType } from '../config/context';
 import { SocialBlog } from '../components/social-blog';
-import { Card } from '../components/card';
 
 import * as styles from '../css/blog-post.module.scss';
 
@@ -79,7 +78,7 @@ const BlogPost = ({ data }) => {
 
 export const query = graphql`
   query ($id: String) {
-    postDetial: mdx(id: {eq: $id}) {
+    mdx(id: {eq: $id}) {
       frontmatter {
         title
         date(formatString: "MMMM D, YYYY")
@@ -89,8 +88,6 @@ export const query = graphql`
         permalink
       }
       body
-    }
-    morePost: {
       relatedPosts {
         frontmatter {
           title
