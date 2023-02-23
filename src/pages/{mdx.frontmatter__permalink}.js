@@ -22,9 +22,8 @@ const BlogPost = ({ data }) => {
   const [ disappearSocial, setDisappearSocial ] = useState(false);
   const categoryBlog = useCategory(data.mdx.frontmatter.category);
 
-
   const checkWindow = () => {
-    if (window !== undefined) {
+    if (typeof window !== 'undefined') {
       return window.location.pathname;
     }
     return;
