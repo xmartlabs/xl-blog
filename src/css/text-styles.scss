@@ -1,5 +1,32 @@
 @import './colors.scss';
 
+// Text styles
+
+@font-face {
+  font-family: "gilroy";
+  src: url("../fonts/Gilroy-Regular.ttf");
+}
+
+@font-face {
+  font-family: "gilroy-bold";
+  src: url("../fonts/Gilroy-Bold.ttf");
+}
+
+@font-face {
+  font-family: "work-sans";
+  src: url("../fonts/WorkSans-Light.ttf");
+}
+
+@font-face {
+  font-family: "work-sans-bold";
+  src: url("../fonts/WorkSans-SemiBold.ttf");
+}
+
+@font-face {
+  font-family: "fira-code-bold";
+  src: url("../fonts/FiraCode-Bold.ttf");
+}
+
 // Body Text 
 
 $font-weights: (
