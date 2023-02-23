@@ -13,14 +13,15 @@ const Card = ({ data }) => {
   const categoryBlog = useCategory(data.frontmatter.category);
 
   const urlImages = () => {
-    if (typeof window !== 'undefined' && window.location.href === 'http://localhost:8000/') {
+    if (typeof window !== 'undefined' && `${window.location.href}/` === window.location.origin) {
       return data.frontmatter.thumbnail;
     } else {
       if (typeof window !== 'undefined') {
-        const imageUrl = window?.location?.href.slice(0, -6);
-        return `${imageUrl}${data.frontmatter.thumbnail}`
+        const imageUrl = window?.location?.origin;
+        return `${imageUrl}/${data.frontmatter.thumbnail}`
       }
     }
+    return window.location.origin;
   }
 
   return (
