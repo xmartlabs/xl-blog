@@ -14,12 +14,12 @@ import { HomeBanner } from "../components/home-banner";
 import { AppContext, initialState, BannerType } from "../config/context.js";
 import { SocialElement } from "../components/social-element";
 import { TwitterIcon, Facebook, Linkedin, InstagramIcon, LinkedInIcon, GithubIcon } from "../components/icons";
+import { classnames } from "../helpers";
 import "../index.scss";
 
 import { useMediaQuery } from "../hooks";
 
 import * as styles from "./layout.module.scss";
-import { classnames } from "../helpers";
 
 export const StyledGetStartedButton = styled.a`
   width: 147px;
@@ -160,16 +160,9 @@ function Layout({ children }) {
           <SocialElement className={classnames(styles.socialBottom, {[styles.socialDisappear]: isMobile})} links={footerSocial}/>
           {isMobile && 
             <div className={styles.mobileIconContainer}>
-              <Link
-                to="/"
-                id="logo-xl-white-mobile">
-                <StaticImage 
-                  src="../../static/images/logo-white-mobile.svg"
-                  alt="Xmartlabs"
-                  width={160}
-                  height={150}
-                />
-            </Link>
+              <a to="/" id="logo-xl-white-mobile">
+                <img src="/images/logo-white-mobile.png" alt="Xmartlabs"/>
+              </a>
               <SocialElement className={styles.socialBottom} links={footerSocialMobile}/>
             </div>}
         </StyledFooterWrapper>
