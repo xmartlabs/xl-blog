@@ -10,7 +10,7 @@ import { Card } from "../card";
 import * as styles from './more-blogs-section.module.scss';
 
 const MoreBlogsSection = ({ data, refMoreFrom, title }) => {
-  const { edges } = data.allMdx;
+  const { relatedPosts } = data.mdx;
 
   return (
     <div className={styles.moreFromXlContainer} ref={refMoreFrom} >
@@ -18,7 +18,8 @@ const MoreBlogsSection = ({ data, refMoreFrom, title }) => {
         <Link to="/" className={classnames("text__heading__three__blueTwo", styles.titleStyle)}>{`${title} →`}</Link>
       </div>
       <div className={styles.blogsContainer}>
-        {edges.map(({node}) => <Card data={node} key={node.id} className={styles.cardStyles} />)}
+        {relatedPosts.forEach((node) => <Card data={node} className={styles.cardStyles} />)}
+        {relatedPosts.slice(0, 3).map((post) => <Card data={post} key={post.frontmatter.title} className={styles.cardStyles} />)}
       </div>
     </div>
   );

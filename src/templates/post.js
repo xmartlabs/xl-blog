@@ -9,20 +9,20 @@ import { Category } from "../components/category";
 import { classnames, useCategory } from "../helpers";
 import { AuthorSerializer } from '../serializer';
 import { AppContext, BannerType } from '../config/context';
-import { MoreBlogsSection } from '../components/more-blogs-section';
 import { SocialBlog } from '../components/social-blog';
+import { MoreBlogsSection } from '../components/more-blogs-section';
 
 import * as styles from '../css/blog-post.module.scss';
 
 const _ = require("lodash");
 
 const BlogPost = ({ data }) => {
-  console.log(data)
   const author = AuthorsYAMLData.find(({ author }) => (author === data.mdx.frontmatter.author));
   const authorBlog = AuthorSerializer.deSerialize(author);
   const { setState } = useContext(AppContext);
   const [ disappearSocial, setDisappearSocial ] = useState(false);
   const refMoreFrom = useRef(null);
+
   const categoryBlog = useCategory(data.mdx.frontmatter.category);
 
   useEffect(() => {
@@ -38,16 +38,16 @@ const BlogPost = ({ data }) => {
   }, []);
 
   const handleScroll = () => {
-   const moreFromXlSize = refMoreFrom?.current?.clientHeight || 0;
-    const isInbottom = Math.ceil(window.innerHeight + window.scrollY + moreFromXlSize + 200) >= document.documentElement.scrollHeight;
-    if (isInbottom) {
-      setDisappearSocial(true);
-    } else {
-      if (!disappearSocial) {
-        setDisappearSocial(false);
-      }
-    };
-  };
+    const moreFromXlSize = refMoreFrom?.current?.clientHeight || 0;
+     const isInbottom = Math.ceil(window.innerHeight + window.scrollY + moreFromXlSize + 200) >= document.documentElement.scrollHeight;
+     if (isInbottom) {
+       setDisappearSocial(true);
+     } else {
+       if (!disappearSocial) {
+         setDisappearSocial(false);
+       }
+     };
+   }; 
   
   return (
     <div onScroll={handleScroll}>
@@ -89,8 +89,10 @@ export const query = graphql`
         category
         tags
         permalink
+        thumbnail
       }
       body
+      slug
       relatedPosts {
         frontmatter {
           title
@@ -99,6 +101,7 @@ export const query = graphql`
           category
           tags
           permalink
+          thumbnail
         }
       }
     }
