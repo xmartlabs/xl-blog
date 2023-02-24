@@ -3,7 +3,7 @@ title: Debugging an Annotation Processor in your project
 date: 2016-03-28
 tags: [Android, Annotation Processing, Android Studio, Debug]
 author: santiago
-category: android-development
+category: development
 permalink: /Debugging-an-Annotator-Processor-in-your-project/
 ---
 

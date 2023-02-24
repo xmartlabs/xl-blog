@@ -28,12 +28,12 @@
   display_name: Data Engineering
   url: /category/data-engineering
   color: #55555
-- category: ios-development
+- category: development
   title: Swift lessons learned on our journey.
   display_name: iOS Development
   url: /category/ios-development
   color: #55555
-- category: android-development
+- category: development
   title: Android lessons learned on our journey.
   display_name: Android Development
   url: /category/android-development
