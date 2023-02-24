@@ -1,20 +1,16 @@
-import React from "react";
+import React, { useState } from "react";
 import PropTypes from "prop-types";
 
 import { NavMenu } from "../nav-menu";
-import { MenuMobileIcon } from "../icons";
-import { CloseIcon } from "../icons";
-import { LinkedInIcon } from "../icons";
-import { InstagramIcon } from "../icons";
-import { TwitterIcon } from "../icons";
-import { GithubIcon } from "../icons";
+import { GithubIcon, TwitterIcon, InstagramIcon, LinkedInIcon, CloseIconMobile, MenuMobileIcon } from "../icons";
 
 import { classnames } from "../../helpers";
 import { SocialElement } from "../social-element";
 
 import * as styles from "./mobile-menu.module.scss";
 
-const MobileMenu = ({ onClick, showMenu }) => {
+const MobileMenu = () => {
+  const [ showMenu, setShowMenu ] = useState(false);
 
   const mobileLinks = [
     {path: "https://www.linkedin.com/company/xmartlabs/mycompany/", icon: <LinkedInIcon />},
@@ -27,15 +23,15 @@ const MobileMenu = ({ onClick, showMenu }) => {
     <>
       <div className={classnames(styles.container, { [styles.openMenu]: showMenu })} >
         <div className={classnames(styles.buttonIconPosition, { [styles.openButton]: showMenu })}>
-          <button onClick={onClick} className={styles.buttonIconStyles} >
+          <button onClick={() => setShowMenu(!showMenu)} className={styles.buttonIconStyles} >
             <MenuMobileIcon />
           </button>
         </div>
         {showMenu && 
           <div>
             <div className={styles.buttonIconPosition}>
-              <button onClick={onClick} className={classnames(styles.buttonIconPosition, styles.buttonIconStyles)} >
-                <CloseIcon />
+              <button onClick={() => setShowMenu(!showMenu)} className={classnames(styles.buttonIconPosition, styles.buttonIconStyles)} >
+                <CloseIconMobile />
               </button>
             </div>
             <div className={styles.menuContainer} >
