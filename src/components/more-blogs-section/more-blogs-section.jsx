@@ -15,7 +15,7 @@ const MoreBlogsSection = ({ data, refMoreFrom, title }) => {
   return (
     <div className={styles.moreFromXlContainer} ref={refMoreFrom} >
       <div className={styles.titleContainer}>
-        <Link to="/" className={classnames("text__heading__three__blueTwo", styles.titleStyle)}>{`${title} →`}</Link>
+        <Link to="/" className={classnames("text__heading__three__blueTwo", styles.titleStyle)}>More from about <span>{title}</span>→</Link>
       </div>
       <div className={styles.blogsContainer}>
         {relatedPosts.forEach((node) => <Card data={node} className={styles.cardStyles} />)}
