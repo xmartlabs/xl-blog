@@ -3,11 +3,12 @@ import PropTypes from "prop-types";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCircle } from "@fortawesome/free-solid-svg-icons";
+import { classnames } from "../../helpers";
 
 import * as categoryStyles from "./category.module.scss";
 
-const Category = ({ data }) => (
-  <div className={categoryStyles.categoryWrapper}>
+const Category = ({ data, className }) => (
+  <div className={classnames(categoryStyles.categoryWrapper, className)}>
     <FontAwesomeIcon className={categoryStyles.styledIcon} icon={faCircle}/>
     <p className="category">{data}</p>
   </div>
