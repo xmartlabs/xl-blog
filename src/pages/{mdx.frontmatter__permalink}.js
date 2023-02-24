@@ -12,7 +12,6 @@ import { AppContext, BannerType } from '../config/context';
 import { SocialElement } from '../components/social-element';
 import { TwitterIcon, Facebook, Linkedin } from "../components/icons";
 import { MoreBlogsSection } from '../components/more-blogs-section';
-import { SocialBlog } from '../components/social-blog';
 
 import * as styles from '../css/blog-post.module.scss';
 
