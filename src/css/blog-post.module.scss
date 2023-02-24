@@ -1,7 +1,6 @@
 @import "/src/css/colors.scss";
 @import "/src/css/text-styles.scss";
-@import "../css/typography.css";
-
+@import "/src/css/variables.scss";
 // Social Media
 
 .socialDisappear {
@@ -76,7 +75,7 @@
 .bodyPostContainer {
   padding: 5rem 38rem 2rem 17rem;
   text-align: justify;
-  font-family: 'work-sans';
+  font-family: $blog-font;
 
   h1 {
     @extend .text__heading__one__black;
@@ -113,7 +112,7 @@
 
   a {
     color: $blueTwo;
-    font-family: 'work-sans-bold';
+    font-family: $link-blog-font;
     font-weight: 600;
   } 
 
@@ -165,7 +164,7 @@
   }
 
   table {
-    font-family: 'gilroy', serif;
+    font-family: $primary-font, serif;
     margin: auto;
     margin-bottom: 2rem;
     border-collapse: collapse;
@@ -218,7 +217,7 @@
     word-break: break-all;
     background-color: $blueSix;
     padding: 3rem;
-    font-family: 'fira-code-bold';
+    font-family: $code-font;
   }
 }
 

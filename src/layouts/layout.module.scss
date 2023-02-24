@@ -1,8 +1,8 @@
-@import "../css/typography.css";
 @import "../css/colors.scss";
+@import "/src/css/variables.scss";
 
 body {
-  font-family: 'gilroy', serif;
+  font-family: $primary-font, serif;
 }
 
 .blogBanner {
