@@ -3,7 +3,7 @@ title: 4 reasons why you should use Airflow's Taskflow API
 date: 2022-02-22
 tags: [ETL, Airflow, Taskflow]
 author: remer
-category: data-engineering
+category: development
 thumbnail: images/taskflow/taskflow-blogpost.jpg
 permalink: /taskflow-the-airflow-new-feature-you-should-know/
 ---
