@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import PropTypes from "prop-types";
 
 import { NavMenu } from "../nav-menu";
-import { GithubIcon, TwitterIcon, InstagramIcon, LinkedInIcon, CloseIconMobile, MenuMobileIcon } from "../icons";
+import { GithubIcon, TwitterIcon, InstagramIcon, LinkedInIcon, CloseIcon, MenuMobileIcon } from "../icons";
 
 import { classnames } from "../../helpers";
 import { SocialElement } from "../social-element";
@@ -13,10 +13,26 @@ const MobileMenu = () => {
   const [ showMenu, setShowMenu ] = useState(false);
 
   const mobileLinks = [
-    {path: "https://www.linkedin.com/company/xmartlabs/mycompany/", icon: <LinkedInIcon />},
-    {path: "https://www.instagram.com/xmartlabs", icon: <InstagramIcon />},
-    {path: "https://twitter.com/xmartlabs", icon: <TwitterIcon />},
-    {path: "https://github.com/xmartlabs", icon: <GithubIcon />},
+    {
+      path: "https://www.linkedin.com/company/xmartlabs/mycompany/", 
+      icon: <LinkedInIcon />,
+      id: "socialMenuLinkedIn"
+    },
+    {
+      path: "https://www.instagram.com/xmartlabs", 
+      icon: <InstagramIcon />,
+      id: "socialMenuInstagram"
+    },
+    {
+      path: "https://twitter.com/xmartlabs", 
+      icon: <TwitterIcon />,
+      id: "socialMenuTwitter"
+    },
+    {
+      path: "https://github.com/xmartlabs", 
+      icon: <GithubIcon />,
+      id: "socialMenuGithub"
+    },
   ];
 
   return (
@@ -31,7 +47,7 @@ const MobileMenu = () => {
           <div>
             <div className={styles.buttonIconPosition}>
               <button onClick={() => setShowMenu(!showMenu)} className={classnames(styles.buttonIconPosition, styles.buttonIconStyles)} >
-                <CloseIconMobile />
+                <CloseIcon className={styles.closeIconMobile} />
               </button>
             </div>
             <div className={styles.menuContainer} >

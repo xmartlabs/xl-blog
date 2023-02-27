@@ -1,5 +1,6 @@
 import * as React from 'react';
-import { useContext, useEffect, useState } from 'react'
+import { useContext, useEffect, useState, useRef } from 'react'
+
 import { MDXRenderer } from 'gatsby-plugin-mdx';
 import { graphql, Link } from 'gatsby';
 
@@ -10,6 +11,7 @@ import { AuthorSerializer } from '../serializer';
 import { AppContext, BannerType } from '../config/context';
 import { SocialElement } from '../components/social-element';
 import { TwitterIcon, Facebook, Linkedin } from "../components/icons";
+import { MoreBlogsSection } from '../components/more-blogs-section';
 
 import * as styles from '../css/blog-post.module.scss';
 
@@ -20,6 +22,7 @@ const BlogPost = ({ data }) => {
   const authorBlog = AuthorSerializer.deSerialize(author);
   const { setState } = useContext(AppContext);
   const [ disappearSocial, setDisappearSocial ] = useState(false);
+  const refMoreFrom = useRef(null);
   const categoryBlog = useCategory(data.mdx.frontmatter.category);
 
   const checkWindow = () => {
@@ -32,22 +35,37 @@ const BlogPost = ({ data }) => {
   const shareBlogPostLinks = [
     {
       path: `https://twitter.com/intent/tweet?url=URL&text=${checkWindow()}`, 
-      icon: <TwitterIcon />
+      icon: <TwitterIcon />,
+      id: "socialSharePostTwitter"
     },
     {
       path: `https://www.facebook.com/sharer/sharer.php?u=https://blog.xmartlabs.com/blog${checkWindow()}`, 
       icon: <Facebook />,
+      id: "socialSharePostFacebook"
     },
     {
       path: `https://www.linkedin.com/sharing/share-offsite/?url=https%3A%2F%2Fblog.xmartlabs.com%2Fblog%2F${checkWindow()}%2F`,
       icon: <Linkedin />,
+      id: "socialSharePostLinkedIn"
     }
   ];
   
   const shareXlProfileLinks = [
-    {path: "https://twitter.com/xmartlabs", icon: <TwitterIcon />},
-    {path: "https://es-la.facebook.com/xmartlabs/", icon: <Facebook />},
-    {path: "https://www.linkedin.com/company/xmartlabs/mycompany/", icon: <Linkedin />}
+    {
+      path: "https://twitter.com/xmartlabs", 
+      icon: <TwitterIcon />,
+      id: "socialProfileTwitter"
+    },
+    {
+      path: "https://es-la.facebook.com/xmartlabs/", 
+      icon: <Facebook />,
+      id: "socialProfileFacebook"
+    },
+    {
+      path: "https://www.linkedin.com/company/xmartlabs/mycompany/", 
+      icon: <Linkedin />,
+      id: "socialProfileLinkedIn"
+    }
   ];
 
   useEffect(() => {
@@ -63,8 +81,9 @@ const BlogPost = ({ data }) => {
   }, []);
 
   const handleScroll = () => {
-    const bottom = Math.ceil(window.innerHeight + window.scrollY) >= document.documentElement.scrollHeight;
-    if (bottom) {
+   const moreFromXlSize = refMoreFrom?.current?.clientHeight || 0;
+    const isInbottom = Math.ceil(window.innerHeight + window.scrollY + moreFromXlSize + 200) >= document.documentElement.scrollHeight;
+    if (isInbottom) {
       setDisappearSocial(true);
     } else {
       if (!disappearSocial) {
@@ -98,6 +117,7 @@ const BlogPost = ({ data }) => {
         <span className={classnames('text__paragraph__bold__grayTwo', styles.sharePosition)}>Share:</span>
         <SocialElement className={classnames(styles.socialBottom, styles.blogIcons)} links={shareXlProfileLinks} />
       </div>
+      <MoreBlogsSection data={data} refMoreFrom={refMoreFrom} title="More From Xmartlabs Blog" />
     </div>
   );
 };
@@ -113,6 +133,26 @@ export const query = graphql`
         tags
       }
       body
+    } allMdx (
+       sort: { fields: [frontmatter___date], order: DESC }
+        limit: 3
+    ) {
+      edges {
+        node {
+          frontmatter {
+            date(formatString: "MMMM D, YYYY")
+            title
+            author
+            category
+            tags
+            permalink
+            thumbnail
+          }
+          body
+          slug
+          id
+        }
+      }
     }
   }
 `
