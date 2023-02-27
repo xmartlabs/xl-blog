@@ -35,22 +35,37 @@ const BlogPost = ({ data }) => {
   const shareBlogPostLinks = [
     {
       path: `https://twitter.com/intent/tweet?url=URL&text=${checkWindow()}`, 
-      icon: <TwitterIcon />
+      icon: <TwitterIcon />,
+      id: "socialSharePostTwitter"
     },
     {
       path: `https://www.facebook.com/sharer/sharer.php?u=https://blog.xmartlabs.com/blog${checkWindow()}`, 
       icon: <Facebook />,
+      id: "socialSharePostFacebook"
     },
     {
       path: `https://www.linkedin.com/sharing/share-offsite/?url=https%3A%2F%2Fblog.xmartlabs.com%2Fblog%2F${checkWindow()}%2F`,
       icon: <Linkedin />,
+      id: "socialSharePostLinkedIn"
     }
   ];
   
   const shareXlProfileLinks = [
-    {path: "https://twitter.com/xmartlabs", icon: <TwitterIcon />},
-    {path: "https://es-la.facebook.com/xmartlabs/", icon: <Facebook />},
-    {path: "https://www.linkedin.com/company/xmartlabs/mycompany/", icon: <Linkedin />}
+    {
+      path: "https://twitter.com/xmartlabs", 
+      icon: <TwitterIcon />,
+      id: "socialProfileTwitter"
+    },
+    {
+      path: "https://es-la.facebook.com/xmartlabs/", 
+      icon: <Facebook />,
+      id: "socialProfileFacebook"
+    },
+    {
+      path: "https://www.linkedin.com/company/xmartlabs/mycompany/", 
+      icon: <Linkedin />,
+      id: "socialProfileLinkedIn"
+    }
   ];
 
   useEffect(() => {

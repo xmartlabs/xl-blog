@@ -12,7 +12,7 @@ const SocialElement = ({ className, links }) => {
     <div className={classnames(styles.container, className)}>
       {links.map((item) => 
         <a 
-          key={item.path}
+          key={item.id}
           href={item.path} 
           target="_blank" 
           rel="noopener noreferrer" 
@@ -29,8 +29,8 @@ export { SocialElement };
 SocialElement.propTypes = {
   className: PropTypes.string, 
   links: PropTypes.arrayOf(PropTypes.objectOf({
-    path: PropTypes.string,
-    icon: PropTypes.element
+    path: PropTypes.string.isRequired,
+    icon: PropTypes.element.isRequired,
   })).isRequired
 }
 
