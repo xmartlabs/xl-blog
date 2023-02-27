@@ -68,17 +68,17 @@ function Layout({ children }) {
   const isMobile = useMediaQuery("(max-width: 768px)");
 
   const footerSocial = [
-    {path: "https://www.instagram.com/xmartlabs", icon: <InstagramIcon />, id: 'blog'},
-    {path: "https://www.linkedin.com/company/xmartlabs/mycompany/", icon: <Linkedin />, id: 'blog'},
-    {path: "https://es-la.facebook.com/xmartlabs/", icon: <Facebook />, id: 'blog'},
-    {path: "https://twitter.com/xmartlabs", icon: <TwitterIcon />, id: 'blog'},
+    {path: "https://www.instagram.com/xmartlabs", icon: <InstagramIcon />, id: 'footerInstagram'},
+    {path: "https://www.linkedin.com/company/xmartlabs/mycompany/", icon: <Linkedin />, id: 'footerLinkedIn'},
+    {path: "https://es-la.facebook.com/xmartlabs/", icon: <Facebook />, id: 'footerFacebook'},
+    {path: "https://twitter.com/xmartlabs", icon: <TwitterIcon />, id: 'footerTwitter'},
   ];
 
   const footerSocialMobile = [
-    {path: "https://www.linkedin.com/company/xmartlabs/mycompany/", icon: <LinkedInIcon />, id: 'blog'},
-    {path: "https://www.instagram.com/xmartlabs", icon: <InstagramIcon />, id: 'blog'},
-    {path: "https://twitter.com/xmartlabs/", icon: <TwitterIcon />, id: 'blog'},
-    {path: "https://github.com/xmartlabs", icon: <GithubIcon />, id: 'blog'},
+    {path: "https://www.linkedin.com/company/xmartlabs/mycompany/", icon: <LinkedInIcon />, id: 'footerMobileLinkedIn'},
+    {path: "https://www.instagram.com/xmartlabs", icon: <InstagramIcon />, id: 'footerMobileInstagram'},
+    {path: "https://twitter.com/xmartlabs/", icon: <TwitterIcon />, id: 'footerMobileTwitter'},
+    {path: "https://github.com/xmartlabs", icon: <GithubIcon />, id: 'footerMobileGithub'},
   ];
   
   return (
