@@ -59,7 +59,9 @@ const BlogPost = ({ data }) => {
               <img src={`images/${authorBlog.image}`} alt="" className={styles.authorImage} />
               <Link className={classnames(styles.authorName, "text__paragraph__bold__black")} to={`/authors/${ _.kebabCase(authorBlog.author) }`}>{ authorBlog.displayName }</Link>
             </div>
-            <label className={classnames(styles.postDate, "text__label__bold__grayTwo")} >{data.mdx.frontmatter.date}</label>
+            <div className={styles.blogInfoContainer}>
+              <label className={classnames(styles.postDate, "text__label__bold__grayTwo")} >{data.mdx.frontmatter.date}</label>
+              <label className={classnames("text__label__bold__grayTwo", styles.timeToRead)} >{data.mdx.timeToRead} min read</label></div>
           </div>
         </div>
       <div className={styles.bodyPostContainer}>
@@ -86,6 +88,7 @@ export const query = graphql`
         tags
       }
       body
+      timeToRead
     }
   }
 `
