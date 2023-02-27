@@ -16,6 +16,11 @@ const Category = ({ data, className }) => (
 
 Category.propTypes = {
   data: PropTypes.object.isRequired,
+  className: PropTypes.string,
+};
+
+Category.defaultProps = {
+  className: '',
 };
 
 export { Category };
