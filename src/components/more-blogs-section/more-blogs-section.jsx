@@ -18,7 +18,6 @@ const MoreBlogsSection = ({ data, refMoreFrom, title }) => {
         <Link to="/" className={classnames("text__heading__three__blueTwo", styles.titleStyle)}>More from about <span>{title}</span>→</Link>
       </div>
       <div className={styles.blogsContainer}>
-        {relatedPosts.forEach((node) => <Card data={node} className={styles.cardStyles} />)}
         {relatedPosts.slice(0, 3).map((post) => <Card data={post} key={post.frontmatter.title} className={styles.cardStyles} />)}
       </div>
     </div>
