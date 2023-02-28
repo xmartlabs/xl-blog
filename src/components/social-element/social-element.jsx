@@ -31,6 +31,7 @@ SocialElement.propTypes = {
   links: PropTypes.arrayOf(PropTypes.objectOf({
     path: PropTypes.string.isRequired,
     icon: PropTypes.element.isRequired,
+    id: PropTypes.string.isRequired,
   })).isRequired
 }
 
