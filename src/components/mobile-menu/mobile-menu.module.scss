@@ -1,0 +1,77 @@
+@import "../../css//colors.scss";
+
+// General Container
+
+.container {
+  width: 100%;
+  position: absolute;
+}
+
+// Menu Buttons
+
+.openMenu {
+  height: 49rem;
+  background-color: $neutral100;
+}
+
+.buttonIconStyles {
+  background-color: transparent;
+  border: transparent;
+  margin-top: 2.5rem;
+  margin: 2.5rem 3.5rem 0 0;
+}
+
+.buttonIconPosition {
+  display: flex;
+  flex-direction: row;
+  justify-content: end;
+}
+
+.openButton {
+  display: none;
+}
+
+// Menu
+
+.menuContainer {
+  margin: 4rem 0 0 1.9rem;
+}
+
+.menuOptions {
+  display: flex;
+  flex-direction: column;
+  margin-left: 0;
+}
+
+.partnerContainer {
+  margin-top: 3rem;
+}
+
+.partnerButton {
+  width: 13rem;
+  height: 2.8rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: $xlPink;
+  color: $neutral100;
+  margin: 1.5rem 0 9.5rem;
+  text-decoration: none;
+
+}
+
+.socialContainer {
+  display: flex;
+  align-items: center;
+  flex-direction: row;
+  position: static;
+
+  a:nth-child(2n+0) {
+    margin: 0 2rem;
+  }  
+}
+
+.closeIconMobile {
+  fill: $black;
+  width: 1.5rem;
+}

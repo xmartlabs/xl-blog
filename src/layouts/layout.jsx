@@ -3,16 +3,17 @@ import React, { useState } from "react";
 import Helmet from "react-helmet";
 import { withPrefix, Link} from "gatsby";
 import PropTypes from "prop-types";
-
 import styled from "styled-components";
 import { StaticImage } from "gatsby-plugin-image";
 
 import { NavMenu } from "../components/nav-menu";
 import { Footer } from "../components/footer";
+import { MobileMenu } from "../components/mobile-menu";
 import { StyledContainerHeader, StyledContainerNavBarXL } from "../elements";
+import { AppContext, initialState } from "../config/context.js";
 import "../index.scss";
-import { HomeBanner } from "../components/home-banner";
-import { AppContext, initialState, BannerType } from "../config/context.js";
+
+import { useMediaQuery } from "../hooks";
 
 import * as styles from "./layout.module.scss";
 
@@ -41,7 +42,6 @@ export const StyledFooterWrapper = styled.div`
   justify-content: center;
   @media (max-width: 768px) {
   justify-content: flex-end;
-  margin-left: 3em;
   width: 100%;
   }
 `
@@ -59,11 +59,13 @@ export const StyledFooterText = styled.label`
 
 function Layout({ children }) {  
   const [contextState, setContextState] = useState(initialState);
-
+  const isMobile = useMediaQuery("(max-width: 768px)");
+  
   return (
     <>
       <AppContext.Provider value={{ state: contextState, setState: setContextState }}>
         <div className={styles[`${contextState}Banner`]}>
+        {isMobile && <MobileMenu />}
           <StyledContainerNavBarXL>
             <StyledContainerHeader>
               <div className={styles.navMenuContainer}>
@@ -71,22 +73,21 @@ function Layout({ children }) {
                   to="/"
                   id="logo-xl">
                   <StaticImage 
-                    src="../../static/images/logo.svg"
+                    src="../../static/images/logo.png"
                     alt=""
                     width={56}
                     height={56}
                   />
                 </Link>
-                <NavMenu />
+                {!isMobile && <NavMenu />}
               </div>
-              <StyledGetStartedButton id="header-getintouch" 
-                href="#/" 
-              >
-              <StyledGetStartedTextButton>GET STARTED</StyledGetStartedTextButton>
+              {!isMobile && 
+              <StyledGetStartedButton id="header-getintouch" href="#/" >
+                <StyledGetStartedTextButton>GET STARTED</StyledGetStartedTextButton>
               </StyledGetStartedButton>
+              }
             </StyledContainerHeader>
           </StyledContainerNavBarXL>
-          {contextState === BannerType.home && <HomeBanner />}
           {children}
         </div>
       </AppContext.Provider>

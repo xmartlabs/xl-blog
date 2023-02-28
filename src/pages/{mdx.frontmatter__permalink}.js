@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { useContext, useEffect, useState } from 'react'
+import { useContext, useEffect, useState, useRef } from 'react'
 
 import { MDXRenderer } from 'gatsby-plugin-mdx';
 import { graphql, Link } from 'gatsby';
@@ -9,7 +9,9 @@ import { Category } from "../components/category";
 import { classnames, useCategory } from "../helpers";
 import { AuthorSerializer } from '../serializer';
 import { AppContext, BannerType } from '../config/context';
-import { SocialBlog } from '../components/social-blog';
+import { SocialElement } from '../components/social-element';
+import { TwitterIcon, Facebook, Linkedin } from "../components/icons";
+import { MoreBlogsSection } from '../components/more-blogs-section';
 
 import * as styles from '../css/blog-post.module.scss';
 
@@ -20,8 +22,51 @@ const BlogPost = ({ data }) => {
   const authorBlog = AuthorSerializer.deSerialize(author);
   const { setState } = useContext(AppContext);
   const [ disappearSocial, setDisappearSocial ] = useState(false);
-
+  const refMoreFrom = useRef(null);
   const categoryBlog = useCategory(data.mdx.frontmatter.category);
+
+  const checkWindow = () => {
+    if (typeof window !== 'undefined') {
+      return window.location.pathname;
+    }
+    return '';
+  }
+
+  const shareBlogPostLinks = [
+    {
+      path: `https://twitter.com/intent/tweet?url=URL&text=${checkWindow()}`, 
+      icon: <TwitterIcon />,
+      id: "socialSharePostTwitter"
+    },
+    {
+      path: `https://www.facebook.com/sharer/sharer.php?u=https://blog.xmartlabs.com/blog${checkWindow()}`, 
+      icon: <Facebook />,
+      id: "socialSharePostFacebook"
+    },
+    {
+      path: `https://www.linkedin.com/sharing/share-offsite/?url=https%3A%2F%2Fblog.xmartlabs.com%2Fblog%2F${checkWindow()}%2F`,
+      icon: <Linkedin />,
+      id: "socialSharePostLinkedIn"
+    }
+  ];
+  
+  const shareXlProfileLinks = [
+    {
+      path: "https://twitter.com/xmartlabs", 
+      icon: <TwitterIcon />,
+      id: "socialProfileTwitter"
+    },
+    {
+      path: "https://es-la.facebook.com/xmartlabs/", 
+      icon: <Facebook />,
+      id: "socialProfileFacebook"
+    },
+    {
+      path: "https://www.linkedin.com/company/xmartlabs/mycompany/", 
+      icon: <Linkedin />,
+      id: "socialProfileLinkedIn"
+    }
+  ];
 
   useEffect(() => {
     setState(BannerType.blog);
@@ -36,8 +81,9 @@ const BlogPost = ({ data }) => {
   }, []);
 
   const handleScroll = () => {
-    const bottom = Math.ceil(window.innerHeight + window.scrollY) >= document.documentElement.scrollHeight;
-    if (bottom) {
+   const moreFromXlSize = refMoreFrom?.current?.clientHeight || 0;
+    const isInbottom = Math.ceil(window.innerHeight + window.scrollY + moreFromXlSize + 200) >= document.documentElement.scrollHeight;
+    if (isInbottom) {
       setDisappearSocial(true);
     } else {
       if (!disappearSocial) {
@@ -45,10 +91,10 @@ const BlogPost = ({ data }) => {
       }
     };
   };
-
+  
   return (
     <div onScroll={handleScroll}>
-      <SocialBlog className={disappearSocial ? styles.socialDisappear : styles.socialAppear} />
+      <SocialElement className={classnames(disappearSocial ? styles.socialDisappear : styles.socialAppear, styles.blogIcons)} links={shareBlogPostLinks} />
         <div className={styles.bannerContainer}>
           <Category data={categoryBlog.displayName}/>
           <h1 className={classnames(styles.titleContainer, "text__heading__one__black")}>
@@ -69,8 +115,9 @@ const BlogPost = ({ data }) => {
       </div>
       <div className={styles.socialBottomContainer}>
         <span className={classnames('text__paragraph__bold__grayTwo', styles.sharePosition)}>Share:</span>
-        <SocialBlog className={styles.socialBottom} />
+        <SocialElement className={classnames(styles.socialBottom, styles.blogIcons)} links={shareXlProfileLinks} />
       </div>
+      <MoreBlogsSection data={data} refMoreFrom={refMoreFrom} title="More From Xmartlabs Blog" />
     </div>
   );
 };
@@ -86,6 +133,26 @@ export const query = graphql`
         tags
       }
       body
+    } allMdx (
+       sort: { fields: [frontmatter___date], order: DESC }
+        limit: 3
+    ) {
+      edges {
+        node {
+          frontmatter {
+            date(formatString: "MMMM D, YYYY")
+            title
+            author
+            category
+            tags
+            permalink
+            thumbnail
+          }
+          body
+          slug
+          id
+        }
+      }
     }
   }
 `

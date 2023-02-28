@@ -1,5 +1,10 @@
 export { PolygonIcon } from "./polygon-icon";
 export { StarIcon } from "./star-icon";
+export { MenuMobileIcon } from "./menu-icon";
 export { Linkedin } from "./linkedin";
-export { Twitter } from "./twitter";
+export { TwitterIcon } from "./twitter";
 export { Facebook } from "./facebook"
+export { GithubIcon } from "./github";
+export { InstagramIcon } from "./instagram";
+export { LinkedInIcon } from "./linked-in";
+export { CloseIcon } from "./close-icon";
