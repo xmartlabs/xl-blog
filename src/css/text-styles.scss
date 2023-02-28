@@ -27,7 +27,6 @@ $text-sizes: (
   headingOne: 2.8rem,
   headingTwoBig: 4rem,
   headingTwo: 1.9rem,
-  headingTwoSeparated: 1.8rem,
   headingThree: 1.6rem,
   headingFour: 1.3rem,
   authorName: 1.2rem,
@@ -104,12 +103,6 @@ $text-colors: (
   font-size: map-get($map: $text-sizes, $key: headingTwoBig);
   font-weight: map-get($map: $font-weights, $key: lightWeight100);
   line-height: map-get($map: $text-line-heights, $key: headingTwoBig);
-}
-
-@mixin text__heading__two__separated {
-  font-size: map-get($map: $text-sizes, $key: headingTwoSeparated);
-  line-height: map-get($map: $text-line-heights, $key: aside);
-  font-weight: map-get($map: $font-weights, $key: boldWeight300);
 }
 
 @mixin text__small__paragraph {
@@ -195,11 +188,6 @@ $text-colors: (
   &__heading__two__big {
     @include color-styles {
       @include text__heading__two__big;
-    }
-  }
-  &__heading__two__separated {
-    @include color-styles {
-      @include text__heading__two__separated;
     }
   }
   &__small__paragraph {
