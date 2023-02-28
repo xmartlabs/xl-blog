@@ -1,6 +1,7 @@
 @import "/src/css/colors.scss";
 @import "/src/css/text-styles.scss";
 @import "/src/css/variables.scss";
+
 // Social Media
 
 .socialDisappear {
@@ -111,9 +112,7 @@
   }
 
   a {
-    color: $blueTwo;
-    font-family: $link-blog-font;
-    font-weight: 600;
+    @extend .text__link__blog__blueTwo;    
   } 
 
   aside {
