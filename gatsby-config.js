@@ -31,7 +31,6 @@ module.exports = {
     },
     "gatsby-plugin-sharp",
     "gatsby-transformer-sharp",
-    "gatsby-remark-reading-time",
     {
       resolve: "gatsby-source-filesystem",
       options: {
