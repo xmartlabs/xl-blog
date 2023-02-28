@@ -16,7 +16,7 @@ const Tags = ({ blogTags }) => (
 );
 
 Tags.propTypes = {
-  blogTags: PropTypes.array.isRequired,
+  blogTags: PropTypes.arrayOf(PropTypes.string).isRequired,
 };
 
 Tags.defaultProps = {
