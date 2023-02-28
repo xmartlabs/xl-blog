@@ -17,7 +17,7 @@ const Card = ({ data }) => {
       const imageUrl = window.location.origin;
       return `${imageUrl}/${data.frontmatter.thumbnail}`;
     }
-    return data.frontmatter.permalink;
+    return data.frontmatter.thumbnail;
   }
 
   return (
