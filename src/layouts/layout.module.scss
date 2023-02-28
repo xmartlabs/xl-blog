@@ -31,6 +31,30 @@ body {
   width: 20%;
 }
 
+.socialBottom {
+  display: flex;
+  flex-direction: row;
+  position: static;
+  align-items: end;
+  justify-content: end;
+
+  svg {
+    filter: brightness(1.3);
+    width: 1.1rem;
+  }
+}
+
+.mobileIconContainer {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  width: 100%;
+}
+
+.socialDisappear {
+  display: none;
+}
+
 @media screen and (max-width: 768px) {
   
   .desktopLogo{
@@ -47,5 +71,15 @@ body {
 
   .homeBanner {
     background-image: url("../../static/images/home-banner/home-banner-mobile.png");
+  }
+
+  .socialBottom {
+    width: 100%;
+    align-items: center;
+
+    a {
+      width: 0.8rem;
+      filter: brightness(0.7);
+    }
   }
 }

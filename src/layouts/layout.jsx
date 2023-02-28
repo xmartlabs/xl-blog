@@ -10,6 +10,10 @@ import { NavMenu } from "../components/nav-menu";
 import { Footer } from "../components/footer";
 import { MobileMenu } from "../components/mobile-menu";
 import { StyledContainerHeader, StyledContainerNavBarXL } from "../elements";
+import { AppContext, initialState, BannerType } from "../config/context.js";
+import { SocialElement } from "../components/social-element";
+import { TwitterIcon, Facebook, Linkedin, InstagramIcon, LinkedInIcon, GithubIcon } from "../components/icons";
+import { classnames } from "../helpers";
 import { AppContext, initialState } from "../config/context.js";
 import "../index.scss";
 
@@ -41,8 +45,10 @@ export const StyledFooterWrapper = styled.div`
   width: 85%;
   justify-content: center;
   @media (max-width: 768px) {
-  justify-content: flex-end;
   width: 100%;
+  align-items: baseline;
+  justify-content: space-evenly;
+  padding-left: 1rem;
   }
 `
 export const StyledFooterTextTitle = styled.label`
@@ -54,12 +60,26 @@ export const StyledFooterTextTitle = styled.label`
 export const StyledFooterText = styled.label`
   color: #fff;
   size: 17px;
-  line-height: 38px;    
+  line-height: 38px;
 `
 
 function Layout({ children }) {  
   const [contextState, setContextState] = useState(initialState);
   const isMobile = useMediaQuery("(max-width: 768px)");
+
+  const footerSocial = [
+    {path: "https://www.instagram.com/xmartlabs", icon: <InstagramIcon />, id: 'footerInstagram'},
+    {path: "https://www.linkedin.com/company/xmartlabs/mycompany/", icon: <Linkedin />, id: 'footerLinkedIn'},
+    {path: "https://es-la.facebook.com/xmartlabs/", icon: <Facebook />, id: 'footerFacebook'},
+    {path: "https://twitter.com/xmartlabs", icon: <TwitterIcon />, id: 'footerTwitter'},
+  ];
+
+  const footerSocialMobile = [
+    {path: "https://www.linkedin.com/company/xmartlabs/mycompany/", icon: <LinkedInIcon />, id: 'footerMobileLinkedIn'},
+    {path: "https://www.instagram.com/xmartlabs", icon: <InstagramIcon />, id: 'footerMobileInstagram'},
+    {path: "https://twitter.com/xmartlabs/", icon: <TwitterIcon />, id: 'footerMobileTwitter'},
+    {path: "https://github.com/xmartlabs", icon: <GithubIcon />, id: 'footerMobileGithub'},
+  ];
   
   return (
     <>
@@ -135,21 +155,14 @@ function Layout({ children }) {
               <StyledFooterText>Blog</StyledFooterText>
             </div>
           </div>
-
-          <div className={styles.footerCol}>
-            <div>
-              <StyledFooterTextTitle>Media</StyledFooterTextTitle>
-            </div>
-            <div>
-              <StyledFooterText>Linkedin</StyledFooterText>
-            </div>
-            <div>
-              <StyledFooterText>Instagram</StyledFooterText>
-            </div>                        
-            <div>
-              <StyledFooterText>Github</StyledFooterText>
-            </div>
-          </div>
+          <SocialElement className={classnames(styles.socialBottom, {[styles.socialDisappear]: isMobile})} links={footerSocial}/>
+          {isMobile && 
+            <div className={styles.mobileIconContainer}>
+              <a to="/" id="logo-xl-white-mobile">
+                <img src="/images/logo-white-mobile.png" alt="Xmartlabs"/>
+              </a>
+              <SocialElement className={styles.socialBottom} links={footerSocialMobile}/>
+            </div>}
         </StyledFooterWrapper>
       </Footer>
       <Helmet>
