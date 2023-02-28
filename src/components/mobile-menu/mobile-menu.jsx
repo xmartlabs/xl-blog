@@ -1,21 +1,39 @@
 import React, { useState } from "react";
-import { Link } from "gatsby";
 import PropTypes from "prop-types";
 
 import { NavMenu } from "../nav-menu";
-import { MenuMobileIcon } from "../icons/menu-icon";
-import { CloseIcon } from "../icons/close-icon";
-import { LinkedInIcon } from "../icons/linked-in";
-import { InstagramIcon } from "../icons/instagram";
-import { TwitterIcon } from "../icons/twitter";
-import { GithubIcon } from "../icons/github";
+import { GithubIcon, TwitterIcon, InstagramIcon, LinkedInIcon, CloseIcon, MenuMobileIcon } from "../icons";
 
 import { classnames } from "../../helpers";
+import { SocialElement } from "../social-element";
 
 import * as styles from "./mobile-menu.module.scss";
 
 const MobileMenu = () => {
   const [ showMenu, setShowMenu ] = useState(false);
+
+  const mobileLinks = [
+    {
+      path: "https://www.linkedin.com/company/xmartlabs/mycompany/", 
+      icon: <LinkedInIcon />,
+      id: "socialMenuLinkedIn"
+    },
+    {
+      path: "https://www.instagram.com/xmartlabs", 
+      icon: <InstagramIcon />,
+      id: "socialMenuInstagram"
+    },
+    {
+      path: "https://twitter.com/xmartlabs", 
+      icon: <TwitterIcon />,
+      id: "socialMenuTwitter"
+    },
+    {
+      path: "https://github.com/xmartlabs", 
+      icon: <GithubIcon />,
+      id: "socialMenuGithub"
+    },
+  ];
 
   return (
     <>
@@ -29,27 +47,22 @@ const MobileMenu = () => {
           <div>
             <div className={styles.buttonIconPosition}>
               <button onClick={() => setShowMenu(!showMenu)} className={classnames(styles.buttonIconPosition, styles.buttonIconStyles)} >
-                <CloseIcon />
+                <CloseIcon className={styles.closeIconMobile} />
               </button>
             </div>
             <div className={styles.menuContainer} >
               <NavMenu className={styles.menuOptions}  openMenu={showMenu}/>
               <div className={styles.partnerContainer}>
-                <h4 className="text__small__paragraph__black">Ready to partner?</h4>
-                <Link to="/" className={styles.partnerButton}>Lets's talk</Link>
+                <h4 className="text__label__bold__black">Ready to partner?</h4>
+                <a href="https://form.typeform.com/to/c7G2RUWm" target="_blank" rel="noopener noreferrer" className={styles.partnerButton}>Lets's talk</a>
               </div>
-              <div className={styles.socialContainer}>
-                <Link to="/"><LinkedInIcon /></Link>
-                <Link to="/" className={styles.instagramSpace}><InstagramIcon /></Link>
-                <Link to="/"><TwitterIcon /></Link>
-                <Link to="/" className={styles.gitSpace}><GithubIcon /></Link>
-              </div>
+                <SocialElement links={mobileLinks} className={styles.socialContainer} />
             </div>
           </div>
         }
       </div>
     </>
-  )
+  );
 };
 
 export { MobileMenu };
