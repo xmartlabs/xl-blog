@@ -16,7 +16,7 @@ const Card = ({ data }) => {
     if (typeof window !== 'undefined' && window.location.href === window.location.origin) {
       return data.frontmatter.thumbnail;
     }
-    const imageUrl = window?.location?.origin || data.frontmatter.thumbnail;
+    const imageUrl = typeof window !== 'undefined' && window?.location?.origin;
     return `${imageUrl}/${data.frontmatter.thumbnail}`;
   }
 
