@@ -9,7 +9,8 @@ import { Category } from "../components/category";
 import { classnames, useCategory } from "../helpers";
 import { AuthorSerializer } from '../serializer';
 import { AppContext, BannerType } from '../config/context';
-import { SocialBlog } from '../components/social-blog';
+import { SocialElement } from '../components/social-element';
+import { TwitterIcon, Facebook, Linkedin } from "../components/icons";
 import { MoreBlogsSection } from '../components/more-blogs-section';
 
 import * as styles from '../css/blog-post.module.scss';
@@ -24,6 +25,49 @@ const BlogPost = ({ data }) => {
   const refMoreFrom = useRef(null);
 
   const categoryBlog = useCategory(data.mdx.frontmatter.category);
+
+  const checkWindow = () => {
+    if (typeof window !== 'undefined') {
+      return window.location.pathname;
+    }
+    return '';
+  }
+
+  const shareBlogPostLinks = [
+    {
+      path: `https://twitter.com/intent/tweet?url=URL&text=${checkWindow()}`, 
+      icon: <TwitterIcon />,
+      id: "socialSharePostTwitter"
+    },
+    {
+      path: `https://www.facebook.com/sharer/sharer.php?u=https://blog.xmartlabs.com/blog${checkWindow()}`, 
+      icon: <Facebook />,
+      id: "socialSharePostFacebook"
+    },
+    {
+      path: `https://www.linkedin.com/sharing/share-offsite/?url=https%3A%2F%2Fblog.xmartlabs.com%2Fblog%2F${checkWindow()}%2F`,
+      icon: <Linkedin />,
+      id: "socialSharePostLinkedIn"
+    }
+  ];
+  
+  const shareXlProfileLinks = [
+    {
+      path: "https://twitter.com/xmartlabs", 
+      icon: <TwitterIcon />,
+      id: "socialProfileTwitter"
+    },
+    {
+      path: "https://es-la.facebook.com/xmartlabs/", 
+      icon: <Facebook />,
+      id: "socialProfileFacebook"
+    },
+    {
+      path: "https://www.linkedin.com/company/xmartlabs/mycompany/", 
+      icon: <Linkedin />,
+      id: "socialProfileLinkedIn"
+    }
+  ];
 
   useEffect(() => {
     setState(BannerType.blog);
@@ -51,7 +95,7 @@ const BlogPost = ({ data }) => {
   
   return (
     <div onScroll={handleScroll}>
-      <SocialBlog className={disappearSocial ? styles.socialDisappear : styles.socialAppear} />
+      <SocialElement className={classnames(disappearSocial ? styles.socialDisappear : styles.socialAppear, styles.blogIcons)} links={shareBlogPostLinks} />
         <div className={styles.bannerContainer}>
           <Category data={categoryBlog.displayName}/>
           <h1 className={classnames(styles.titleContainer, "text__heading__one__black")}>
@@ -72,7 +116,7 @@ const BlogPost = ({ data }) => {
       </div>
       <div className={styles.socialBottomContainer}>
         <span className={classnames('text__paragraph__bold__grayTwo', styles.sharePosition)}>Share:</span>
-        <SocialBlog className={styles.socialBottom} />
+        <SocialElement className={classnames(styles.socialBottom, styles.blogIcons)} links={shareXlProfileLinks} />
       </div>
       <MoreBlogsSection data={data} refMoreFrom={refMoreFrom} title={categoryBlog.displayName} />
     </div>

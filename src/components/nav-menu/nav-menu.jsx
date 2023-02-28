@@ -7,10 +7,10 @@ import * as styles from "./nav-menu.module.scss";
 
 const NavMenu = ({ className, openMenu }) => {
   const menuElements = [
-    {label: "Work", path:"/"},
-    {label: "Services", path:"/" },
-    {label: "Our Company", path:"/" },
-    {label: "Community", path:"/" },
+    {label: "Work", path:"/work"},
+    {label: "Services", path:"/services" },
+    {label: "Our Company", path:"/company" },
+    {label: "Community", path:"/community" },
     {label: "Blog", path:"/"},
   ];
   return (

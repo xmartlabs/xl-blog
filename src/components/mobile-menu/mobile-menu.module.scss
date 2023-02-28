@@ -64,12 +64,14 @@
   display: flex;
   align-items: center;
   flex-direction: row;
+  position: static;
+
+  a:nth-child(2n+0) {
+    margin: 0 2rem;
+  }  
 }
 
-.instagramSpace {
-  padding: 0 2rem;
-}
-
-.gitSpace {
-  padding-left: 2rem;
+.closeIconMobile {
+  fill: $black;
+  width: 1.5rem;
 }
