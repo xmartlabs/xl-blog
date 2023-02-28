@@ -13,8 +13,11 @@ const Card = ({ data }) => {
   const categoryBlog = useCategory(data.frontmatter.category);
 
   const urlImages = () => {
-    const imageUrl = typeof window !== 'undefined' && window.location.origin;
-    return `${imageUrl}/${data.frontmatter.thumbnail}`;
+    if (typeof window !== 'undefined') {
+      const imageUrl = window.location.origin;
+      return `${imageUrl}/${data.frontmatter.thumbnail}`;
+    }
+    return ``;
   }
 
   return (
