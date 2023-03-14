@@ -3,7 +3,7 @@ title: Introducing PagerTabStripView! - Finally a PagerView in pure SwiftUI
 date: 2021-08-06
 tags: [PagerTabStripView, SwiftUI PagerView, XLPagertabStrip]
 author: mtnBarreto
-category: ios-development
+category: development
 thumbnail: images/pager-swiftui/Twitter-1.png
 social_image: /images/pager-swiftui/Twitter-1.png
 twitter_image: /images/pager-swiftui/Twitter-1.png

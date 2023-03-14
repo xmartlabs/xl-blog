@@ -3,12 +3,10 @@ title: 4 reasons why you should use Airflow's Taskflow API
 date: 2022-02-22
 tags: [ETL, Airflow, Taskflow]
 author: remer
-category: data-engineering
+category: development
 thumbnail: images/taskflow/taskflow-blogpost.jpg
 permalink: /taskflow-the-airflow-new-feature-you-should-know/
 ---
-
-permalink: /blog/taskflow-the-airflow-new-feature-you-should-know/
 
 Airflow introduced several changes in its second version a year ago. Since then we've had the opportunity to experience most of them. And we especially had a good time working with its new [Taskflow API](https://airflow.apache.org/docs/apache-airflow/stable/concepts/taskflow.html). After considering whether we should adopt this new feature, we finally decided to make Taskflow a part of our daily work. This blog post will show why you should too.
 

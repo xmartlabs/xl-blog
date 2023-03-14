@@ -4,7 +4,7 @@ date: 2017-10-02
 tags: [Android, Server, CI, Jenkins, Fabric]
 author: mirland
 
-category: android-development
+category: development
 permalink: /Release-Snapshot-Versions-In-Jenkins/
 ---
 

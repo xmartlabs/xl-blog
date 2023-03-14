@@ -3,7 +3,7 @@ title: Sign in with Apple with SwiftUI
 date: 2020-08-17
 excerpt: "In this blog post we talk about the benefits of providing Sign in with Apple in your app. We also provide a step by step integration guide!"
 tags: [Sign in with Apple, SwiftUI, Apple, Xmartlabs]
-category: ios-development
+category: development
 author: ceci
 thumbnail: images/apple-sign-in/signInWithApple.jpg
 permalink: /sign-in-with-apple-with-swiftui/

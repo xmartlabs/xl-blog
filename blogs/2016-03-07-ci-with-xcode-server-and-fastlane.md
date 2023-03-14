@@ -3,7 +3,7 @@ title: CI and automatic deployment to iTunes Connect with Xcode Server
 date: 2016-03-07
 tags: [Server, CI, Fastlane]
 author: remer
-category: ios-development
+category: development
 permalink: /ci-with-xcode-server-and-fastlane/
 ---
 

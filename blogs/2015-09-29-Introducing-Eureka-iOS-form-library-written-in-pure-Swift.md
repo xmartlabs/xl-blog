@@ -3,7 +3,7 @@ title: Introducing Eureka! - Elegant iOS forms in Pure Swift 2
 date: 2015-09-29
 tags: [Eureka, Forms]
 author: mtnBarreto
-category: ios-development
+category: development
 permalink: /Introducing-Eureka-iOS-form-library-written-in-pure-Swift/
 ---
 

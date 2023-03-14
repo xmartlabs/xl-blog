@@ -3,9 +3,8 @@ title: Design your strategy like Google
 date: 2021-10-15
 tags: [OKR framework, Company Strategy]
 author: vale
-
 category: business-agile
-thumbnail: images/okrs/image.png
+thumbnail: images/okrs/image.jpg
 permalink: /okr-framework/
 ---
 
