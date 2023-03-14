@@ -23,6 +23,7 @@ const BlogPost = ({ data }) => {
   const { setState } = useContext(AppContext);
   const [ disappearSocial, setDisappearSocial ] = useState(false);
   const refMoreFrom = useRef(null);
+
   const categoryBlog = useCategory(data.mdx.frontmatter.category);
 
   const checkWindow = () => {
@@ -81,16 +82,16 @@ const BlogPost = ({ data }) => {
   }, []);
 
   const handleScroll = () => {
-   const moreFromXlSize = refMoreFrom?.current?.clientHeight || 0;
-    const isInbottom = Math.ceil(window.innerHeight + window.scrollY + moreFromXlSize + 200) >= document.documentElement.scrollHeight;
-    if (isInbottom) {
-      setDisappearSocial(true);
-    } else {
-      if (!disappearSocial) {
-        setDisappearSocial(false);
-      }
-    };
-  };
+    const moreFromXlSize = refMoreFrom?.current?.clientHeight || 0;
+     const isInbottom = Math.ceil(window.innerHeight + window.scrollY + moreFromXlSize + 200) >= document.documentElement.scrollHeight;
+     if (isInbottom) {
+       setDisappearSocial(true);
+     } else {
+       if (!disappearSocial) {
+         setDisappearSocial(false);
+       }
+     };
+   }; 
   
   return (
     <div onScroll={handleScroll}>
@@ -117,7 +118,7 @@ const BlogPost = ({ data }) => {
         <span className={classnames('text__paragraph__bold__grayTwo', styles.sharePosition)}>Share:</span>
         <SocialElement className={classnames(styles.socialBottom, styles.blogIcons)} links={shareXlProfileLinks} />
       </div>
-      <MoreBlogsSection data={data} refMoreFrom={refMoreFrom} title="More From Xmartlabs Blog" />
+      <MoreBlogsSection data={data} refMoreFrom={refMoreFrom} title={categoryBlog.displayName} />
     </div>
   );
 };
@@ -131,26 +132,20 @@ export const query = graphql`
         author
         category
         tags
+        permalink
+        thumbnail
       }
       body
-    } allMdx (
-       sort: { fields: [frontmatter___date], order: DESC }
-        limit: 3
-    ) {
-      edges {
-        node {
-          frontmatter {
-            date(formatString: "MMMM D, YYYY")
-            title
-            author
-            category
-            tags
-            permalink
-            thumbnail
-          }
-          body
-          slug
-          id
+      slug
+      relatedPosts {
+        frontmatter {
+          title
+          date(formatString: "MMMM D, YYYY")
+          author
+          category
+          tags
+          permalink
+          thumbnail
         }
       }
     }

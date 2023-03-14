@@ -2,7 +2,7 @@
 title: Android Navigation Component - Expectations, Conclusions & Tips - Part 1
 date: 2020-05-25
 tags: [Android, Architecture Components, Jetpack, Navigation Component]
-category: android-development
+category: development
 author: mirland
 thumbnail: images/android_navigation_blog_part_one/navigation_banner.jpg
 permalink: /Android-Nav-Component-Part-1/

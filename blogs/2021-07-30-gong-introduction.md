@@ -2,7 +2,7 @@
 title: Kickstart your Android Project with Gong Base Project
 date: 2021-08-04
 tags: [Android App Template, Android Base project, Android Compose Base Project, Xmartlabs Android App, Jetpack Compose App Template, Jetpack Compose Base Project, Android Development, Kotlin Development, Jetpack Compose, Android, Kotlin]
-category: android-development
+category: development
 author: sante
 
 thumbnail: images/gong-introduction/banner.png
