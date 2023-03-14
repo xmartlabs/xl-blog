@@ -23,7 +23,6 @@ Although today it might be the norm, back in 2012, Uruguayan companies weren't t
 Staying close to your team, listening and being with them, not asking for things you wouldn't do; are all key to creating a horizontal work environment. Being intentional about it and bringing it up constantly, so it was on the team's top of mind, made it easier to maintain a good working environment.
 This approach made Xmartlabs what we believe is a great place to work. Our turnover rate pre-pandemic was less than 5-1% (on an industry that then had a 13+% turnover rate). This is also reflected in the longevity of some of our team. Many of the old Xmartlabers themselves recommend new people for us to hire.
 
-
 <figure>
   <img style="width: 40%" src="/images/10-lessons-in-tech-industry/xl-working-with-friends.jpg" alt="working among friends" />
 </figure>

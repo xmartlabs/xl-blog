@@ -72,7 +72,7 @@ And to our surprise, we were able to almost double the FPS we got from CoreML, a
 This improvement is possible because Bender uses only the GPU and therefore will run much quicker than running most parts on CPU.
 
 <p style="text-align:center;">
-    <img style="width: 100%"  />
+    <img style="width: 100%" src="/images/bender-is-the-best/benchmarks.jpg" />
 </p>
 
 This table shows the performance comparison running each framework using 1 or 2 concurrent threads, processing 384x768 images on iPhone 12 (the TFlite model was run on 384x384 images).
