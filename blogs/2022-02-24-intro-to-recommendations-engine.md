@@ -244,22 +244,22 @@ Taking Amazon as an example, several views show recommendations:
 ![Frequently bought together](/images/recommendation-engines/amazon-re-3.png)
 
  <br />
-    
-**When added a Kindle item to the card**
-    
-![Added a Kindle item to the card](/images/recommendation-engines/amazon-re-4.png)
+
+ **When added a Kindle item to the card**
+
+ ![ddd](/images/recommendation-engines/amazon-re-4.png)
 
  <br />
-    
-**During checkout process**
-    
-![During checkout process](/images/recommendation-engines/amazon-re-5.png)
+
+ **During checkout process**
+
+ ![add](/images/recommendation-engines/amazon-re-5.png)
 
  <br />
-    
-**Email**
 
-![Email](/images/recommendation-engines/amazon-re-6.png)
+ **Email**
+
+ ![add](/images/recommendation-engines/amazon-re-6.png)
 
  <br />
 
@@ -278,5 +278,3 @@ If you are considering leveraging recommendation engines...Don’t hesitate, get
   <div class="button-text no-pointer">Let's talk</div>
 </a>
 </div>
-<br />
-<br />

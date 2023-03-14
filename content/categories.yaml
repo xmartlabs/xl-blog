@@ -23,18 +23,18 @@
   display_name: Machine Learning
   url: /category/machine-learning
   color: #55555
-- category: data-engineering
+- category: development
   title: Data Engineering lessons learned on our journey.
-  display_name: Data Engineering
-  url: /category/data-engineering
+  display_name: Development
+  url: /category/development
   color: #55555
-- category: ios-development
+- category: development
   title: Swift lessons learned on our journey.
-  display_name: iOS Development
+  display_name: Development
   url: /category/ios-development
   color: #55555
-- category: android-development
+- category: development
   title: Android lessons learned on our journey.
-  display_name: Android Development
+  display_name: Development
   url: /category/android-development
   color: #55555

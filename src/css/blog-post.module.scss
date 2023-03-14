@@ -28,11 +28,20 @@
   display: flex;
   flex-direction: row;
   position: static;
+  align-items: center;
 }
 
 .sharePosition {
   align-self: center;
   margin-right: 1rem;
+}
+
+.blogIcons {
+  a {
+    display: flex;
+    align-items: center;
+    margin: 0.7rem;
+  }
 }
 
 // Header Blog Elements
@@ -141,6 +150,11 @@
     img {
       min-width: 100%;
     }
+  }
+
+  figcaption {
+    text-align: end;
+    margin: 1rem 0;
   }
 
   img {
@@ -253,5 +267,9 @@
   .socialBottomContainer {
     justify-content: start;
     padding-left: 1rem;
+  }
+  
+  .socialBottom {
+    width: auto;
   }
 }

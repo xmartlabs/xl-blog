@@ -3,7 +3,7 @@ title: Introducing Fountain Part One
 date: 2018-07-16
 tags: [Android, Android Jetpack, Android Paging Library, Live Data, Android Architecture Components, RxJava, Retrofit, Fountain]
 author: mirland
-category: android-development
+category: development
 permalink: /Introducing-Fountain-Part-One/
 ---
 

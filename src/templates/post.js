@@ -138,27 +138,7 @@ export const query = graphql`
         thumbnail
       }
       body
-<<<<<<< HEAD:src/pages/{mdx.frontmatter__permalink}.js
       timeToRead
-    } allMdx (
-       sort: { fields: [frontmatter___date], order: DESC }
-        limit: 3
-    ) {
-      edges {
-        node {
-          frontmatter {
-            date(formatString: "MMMM D, YYYY")
-            title
-            author
-            category
-            tags
-            permalink
-            thumbnail
-          }
-          body
-          slug
-          id
-=======
       slug
       relatedPosts {
         frontmatter {
@@ -169,7 +149,6 @@ export const query = graphql`
           tags
           permalink
           thumbnail
->>>>>>> 029e01afb29090687ad88980625d18e4d22f8599:src/templates/post.js
         }
       }
     }
