@@ -122,6 +122,12 @@ $text-colors: (
   font-weight: map-get($map: $font-weights, $key: lightWeight100);
 }
 
+@mixin text__link__blog {
+  font-size: map-get($map: $text-sizes, $key: pragraph);
+  line-height: map-get($map: $text-line-heights, $key: headingTwo);
+  font-weight: map-get($map: $font-weights, $key: boldWeight500);
+}
+
 //---- COLOR ---
 
 @mixin color-styles {
@@ -197,6 +203,11 @@ $text-colors: (
   &__placeholder {
     @include color-styles {
       @include text__placeholder;
+    }
+  }
+  &__link__blog {
+    @include color-styles {
+      @include text__link__blog;
     }
   }
 }

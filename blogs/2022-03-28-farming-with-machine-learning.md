@@ -17,7 +17,7 @@ Machine Learning and [Computer Vision](https://blog.xmartlabs.com/blog/computer-
  
 
 <aside>
-👉 If you’re struggling with high production costs, contact our team, and let’s see how we can leverage our ML knowledge to find a solution for you.
+If you’re struggling with high production costs, contact our team, and let’s see how we can leverage our ML knowledge to find a solution for you.
 
 </aside>
 
@@ -124,6 +124,6 @@ More custom solutions sometimes adapt better to systems you already have in plac
 
 <aside>
 
-👉 Improve your overall performance: save costs and materials by integrating AI technology into your process. Contact us [here](https://form.typeform.com/to/D1PhDJIR).
+Improve your overall performance: save costs and materials by integrating AI technology into your process. Contact us [here](https://form.typeform.com/to/D1PhDJIR).
 
 </aside>

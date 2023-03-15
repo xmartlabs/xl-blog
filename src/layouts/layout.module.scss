@@ -1,20 +1,23 @@
-@import "../css/typography.css";
-@import "/src/css/colors.scss";
+@import "../css/colors.scss";
+@import "/src/css/variables.scss";
 
 body {
-  font-family: 'gilroy', serif;
+  font-family: $primary-font, serif;
 }
 
 .blogBanner {
   background-image: url("../../static/images/banner-blog/banner-desktop.png");
-  background-repeat: no-repeat;
-  background-size: contain;
 }
 
 .homeBanner {
   background-image: url("../../static/images/home-banner/home-banner-desktop.png");
+}
+
+.homeBanner, .blogBanner {
   background-repeat: no-repeat;
   background-size: contain;
+  width: 100%;
+  height: 63.6rem;
 }
 
 .navMenuContainer {
@@ -47,5 +50,6 @@ body {
 
   .homeBanner {
     background-image: url("../../static/images/home-banner/home-banner-mobile.png");
+    min-width: 23.4rem;
   }
 }
