@@ -65,31 +65,31 @@ function Layout({ children }) {
     <>
       <AppContext.Provider value={{ state: contextState, setState: setContextState }}>
         <div className={styles[`${contextState}Banner`]}>
-        {isMobile && <MobileMenu />}
-          <StyledContainerNavBarXL>
-            <StyledContainerHeader>
-              <div className={styles.navMenuContainer}>
-                <Link
-                  to="/"
-                  id="logo-xl">
-                  <StaticImage 
-                    src="../../static/images/logo.png"
-                    alt=""
-                    width={56}
-                    height={56}
-                  />
-                </Link>
-                {!isMobile && <NavMenu />}
-              </div>
-              {!isMobile && 
-              <StyledGetStartedButton id="header-getintouch" href="#/" >
-                <StyledGetStartedTextButton>GET STARTED</StyledGetStartedTextButton>
-              </StyledGetStartedButton>
-              }
-            </StyledContainerHeader>
-          </StyledContainerNavBarXL>
-          {children}
+            <StyledContainerNavBarXL>
+            {isMobile && <MobileMenu />}
+              <StyledContainerHeader>
+                <div className={styles.navMenuContainer}>
+                  <Link
+                    to="/"
+                    id="logo-xl">
+                    <StaticImage 
+                      src="../../static/images/logo.png"
+                      alt=""
+                      width={56}
+                      height={56}
+                    />
+                  </Link>
+                  {!isMobile && <NavMenu />}
+                </div>
+                {!isMobile && 
+                <StyledGetStartedButton id="header-getintouch" href="#/" >
+                  <StyledGetStartedTextButton>GET STARTED</StyledGetStartedTextButton>
+                </StyledGetStartedButton>
+                }
+              </StyledContainerHeader>
+            </StyledContainerNavBarXL>
         </div>
+        {children}
       </AppContext.Provider>
       <Footer>
         <StyledFooterWrapper>

@@ -1,4 +1,5 @@
-import styled from 'styled-components';   
+import styled from 'styled-components';
+import '../css/variables.scss';
 
 export const StyledContainerWrapper = styled.div`
   height: 100%;
@@ -55,6 +56,9 @@ export const StyledContainerNavBarXL = styled.div`
   width: 100%;
   height: 95px;
   justify-content: center;
+  background-color: white;
+  position: fixed;
+  z-index: 1;
   
   @media ${props => props.theme.breakpoints.tablet} {
   }
