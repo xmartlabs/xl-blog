@@ -10,7 +10,7 @@ import { classnames, useCategory } from "../helpers";
 import { AuthorSerializer } from '../serializer';
 import { AppContext, BannerType } from '../config/context';
 import { SocialElement } from '../components/social-element';
-import { TwitterIcon, Facebook, Linkedin } from "../components/icons";
+import { TwitterIcon, Facebook, Linkedin, ClockIcon } from "../components/icons";
 import { MoreBlogsSection } from '../components/more-blogs-section';
 
 import * as styles from '../css/blog-post.module.scss';
@@ -108,7 +108,11 @@ const BlogPost = ({ data }) => {
             </div>
             <div className={styles.blogInfoContainer}>
               <label className={classnames(styles.postDate, "text__label__bold__grayTwo")} >{data.mdx.frontmatter.date}</label>
-              <label className={classnames("text__label__bold__grayTwo", styles.timeToRead)} >{data.mdx.timeToRead} min read</label></div>
+              <ClockIcon className={styles.clockIcon} />
+              <label className={classnames("text__label__bold__grayTwo", styles.timeToRead)} >
+                {data.mdx.timeToRead} min read
+              </label>
+            </div>
           </div>
         </div>
       <div className={styles.bodyPostContainer}>

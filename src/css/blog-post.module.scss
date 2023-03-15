@@ -94,7 +94,11 @@
 }
 
 .timeToRead {
-  width: 7rem;
+  width: 6rem;
+}
+
+.clockIcon {
+  margin-left: 1.5rem;
 }
 
 // Blog body
@@ -320,4 +324,8 @@
   .socialBottom {
     width: auto;
   }
+
+  .clockIcon {
+    margin: 0 1rem 0 0;
+  }  
 }
