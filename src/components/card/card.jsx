@@ -5,11 +5,11 @@ import _ from "lodash";
 import { Link } from "gatsby";
 
 import { Category } from "../category";
-import { useCategory } from '../../helpers';
+import { useCategory, classnames } from '../../helpers';
 
 import * as styles from "./card.module.scss";
 
-const Card = ({ data }) => {
+const Card = ({ data, className }) => {
   const categoryBlog = useCategory(data.frontmatter.category);
 
   const urlImages = () => {
@@ -21,7 +21,7 @@ const Card = ({ data }) => {
   }
 
   return (
-    <Link className={styles.styledLink} to={`/${_.kebabCase(data.frontmatter.permalink)}`}>
+    <Link className={classnames(styles.styledLink, className)} to={`/${_.kebabCase(data.frontmatter.permalink)}`}>
       <article key={data.id} className={styles.container}>
         <div className={styles.imageContainer}>
           <img className={styles.styledImage} src={urlImages()}/>
@@ -37,6 +37,11 @@ const Card = ({ data }) => {
 
 Card.propTypes = {
   data: PropTypes.object.isRequired,
+  classNsme: PropTypes.string,
+};
+
+Card.defaultProps = {
+  className: '',
 };
 
 export { Card };
