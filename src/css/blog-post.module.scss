@@ -78,11 +78,27 @@
   text-decoration: none;
 }
 
-.postDate {
+.blogInfoContainer {
   display: flex;
+  flex-direction: row;
+  align-items: center;
   justify-content: end;
   position: relative;
-  bottom: 1.7rem;
+  bottom: 1.3rem;
+  text-align: end;
+}
+
+.postDate {
+  min-width: 9rem;
+  margin-right: 1rem;
+}
+
+.timeToRead {
+  width: 6rem;
+}
+
+.clockIcon {
+  margin-left: 1.5rem;
 }
 
 .categoryTagsContainer {
@@ -264,11 +280,11 @@
     margin: 2rem 0;
   }
 
-  .postDate {
-    justify-content: start;
+  .blogInfoContainer {
     bottom: 0;
-    margin-top: 2rem;
-    position: static;
+    margin-top: 3rem;
+    justify-content: start;
+    text-align: start;
   }
 
   .bodyPostContainer {
@@ -325,4 +341,8 @@
   .socialBottom {
     width: auto;
   }
+
+  .clockIcon {
+    margin: 0 1rem 0 0;
+  }  
 }

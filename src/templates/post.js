@@ -10,7 +10,7 @@ import { classnames, useCategory } from "../helpers";
 import { AuthorSerializer } from '../serializer';
 import { AppContext, BannerType } from '../config/context';
 import { SocialElement } from '../components/social-element';
-import { TwitterIcon, Facebook, Linkedin } from "../components/icons";
+import { TwitterIcon, Facebook, Linkedin, ClockIcon } from "../components/icons";
 import { MoreBlogsSection } from '../components/more-blogs-section';
 import { Tags } from '../components/tags/tags';
 
@@ -110,7 +110,13 @@ const BlogPost = ({ data }) => {
               <img src={`images/${authorBlog.image}`} alt="" className={styles.authorImage} />
               <Link className={classnames(styles.authorName, "text__paragraph__bold__black")} to={`/authors/${ _.kebabCase(authorBlog.author) }`}>{ authorBlog.displayName }</Link>
             </div>
-            <label className={classnames(styles.postDate, "text__label__bold__grayTwo")} >{data.mdx.frontmatter.date}</label>
+            <div className={styles.blogInfoContainer}>
+              <label className={classnames(styles.postDate, "text__label__bold__grayTwo")} >{data.mdx.frontmatter.date}</label>
+              <ClockIcon className={styles.clockIcon} />
+              <label className={classnames("text__label__bold__grayTwo", styles.timeToRead)} >
+                {data.mdx.timeToRead} min read
+              </label>
+            </div>
           </div>
         </div>
       <div className={styles.bodyPostContainer}>
@@ -140,6 +146,7 @@ export const query = graphql`
         thumbnail
       }
       body
+      timeToRead
       slug
       relatedPosts {
         frontmatter {
