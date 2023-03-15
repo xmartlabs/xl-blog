@@ -5,7 +5,6 @@
 $font-weights: (
   boldWeight900: 900,
   boldWeight600: 600,
-  boldWeight500: 500,
   boldWeight300: 300,
   lightWeight100: 100,
 );
@@ -14,11 +13,11 @@ $text-line-heights: (
   headingOneBig: 7rem,
   headingOne: 3rem,
   aside: 2.2rem,
+  headingTwoSeparated: 2.5rem,
   headingTwoBig: 4.5rem,
   headingTwo: 2rem,
   headingThree: 1.5rem,
   headingFour: 1.3rem,
-  smallParagraph: 0.8rem,
   paragraphSmall: 1rem,
 );
 
@@ -27,11 +26,11 @@ $text-sizes: (
   headingOne: 2.8rem,
   headingTwoBig: 4rem,
   headingTwo: 1.9rem,
+  headingTwoSeparated: 1.8rem,
   headingThree: 1.6rem,
   headingFour: 1.3rem,
   authorName: 1.2rem,
   paragraph: 1.1rem,
-  smallParagraph: 0.9rem,
   paragraphSmall: 0.7rem,
 );
 
@@ -105,11 +104,12 @@ $text-colors: (
   line-height: map-get($map: $text-line-heights, $key: headingTwoBig);
 }
 
-@mixin text__small__paragraph {
-  font-size: map-get($map: $text-sizes, $key: smallParagraph);
-  line-height: map-get($map: $text-line-heights, $key: smallParagraph);
-  font-weight: map-get($map: $font-weights, $key: boldWeight900);
+@mixin text__heading__two__separated {
+  font-size: map-get($map: $text-sizes, $key: headingTwoSeparated);
+  line-height: map-get($map: $text-line-heights, $key: headingTwoSeparated);
+  font-weight: map-get($map: $font-weights, $key: boldWeight300);
 }
+
 @mixin text__paragraph__small {
   font-size: map-get($map: $text-sizes, $key: paragraphSmall);
   line-height: map-get($map: $text-line-heights, $key: paragraphSmall);
@@ -190,9 +190,9 @@ $text-colors: (
       @include text__heading__two__big;
     }
   }
-  &__small__paragraph {
+  &__heading__two__separated {
     @include color-styles {
-      @include text__small__paragraph;
+      @include text__heading__two__separated;
     }
   }
   &__paragraph__small {
