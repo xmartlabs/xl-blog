@@ -3,7 +3,7 @@ title: Introducing Xniffer, the Swift network profiler built on top of URLSessio
 date: 2017-11-01
 author: xl
 tags: [Swift, iOS, Tutorial, network]
-category: ios-development
+category: development
 permalink: /Introducing-to-Xniffer/
 ---
 

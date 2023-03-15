@@ -3,7 +3,7 @@ title: Introducing Android Snapshot Plugin
 date: 2019-04-18
 tags: [Android, Gradle Plugin, Snapshot, Google Play, Fabric Beta]
 author: mirland
-category: android-development
+category: development
 permalink: /Introducing-Android-Snapshot-Publisher/
 ---
 

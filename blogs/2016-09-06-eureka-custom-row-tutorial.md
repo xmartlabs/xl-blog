@@ -3,7 +3,7 @@ title:  Creating your own rows for Eureka
 date: 2016-09-06
 tags: [Swift, iOS, Eureka]
 author: mathias
-category: ios-development
+category: development
 permalink: /Eureka-custom-row-tutorial/
 ---
 

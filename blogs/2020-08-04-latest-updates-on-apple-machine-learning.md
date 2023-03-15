@@ -5,7 +5,7 @@ excerpt: "Discover the new updates on Apple Machine Learning frameworks at WWDC 
 tags: [Machine learning, CoreML, CreateML, Vision, WWDC20]
 author: nicolantean
 thumbnail: images/whats-new-on-apple-machine-learning-at-wwdc-2020/0-preview.png
-category: ios-development
+category: development
 permalink: /latest-updates-on-apple-machine-learning/
 ---
 

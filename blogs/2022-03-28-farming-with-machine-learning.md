@@ -10,7 +10,7 @@ permalink: /precision-agriculture-and-the-future-of-farming-with-machine-learnin
 
 Maintaining a plantation, whether it’s for forestry or crops, has never been more expensive ([costs per acre in the US have risen 170% since the 70s](https://www.extension.iastate.edu/agdm/crops/pdf/a1-21.pdf)). And this is partly due to the increasing costs of maintaining weed-free fields.
 
-Weed detection and control in small and large farms has become a challenge. Herbicide usage has increased ([527 million pounds in the last 20 years](https://enveurope.springeropen.com/articles/10.1186/2190-4715-24-24#:~:text=Herbicide%2Dresistant%20crop%20technology%20has,kilograms%20(123%20million%20pounds).))), and although its price has not necessarily decreased, never have people spent more on it (a whopping $6.6 billion yearly in the US alone).
+Weed detection and control in small and large farms has become a challenge. Herbicide usage has increased ([527 million pounds in the last 20 years](https://enveurope.springeropen.com/articles/10.1186/2190-4715-24-24#:~:text=Herbicide%2Dresistant%20crop%20technology%20has,kilograms%20(123%20million%20pounds).)), and although its price has not necessarily decreased, never have people spent more on it (a whopping $6.6 billion yearly in the US alone).
 
 Machine Learning and [Computer Vision](https://blog.xmartlabs.com/blog/computer-vision-techniques-for-body-detection/) have provided solutions to tackle the challenges producers face regarding weed control. In the following post, we’ll discuss the critical problems around herbicides and irrigation and how ML tech has helped reduce its economic and environmental costs.
 
@@ -51,11 +51,10 @@ Glyphosate resistance is perhaps the newest and more widespread type of resistan
 
 Common treatment recommendations go from managing the intensity of glyphosate to rotating or tank-mixing it with herbicides that have different modes of action. It is also recommended to scout the field to identify the weeds and record their locations. However, this also means incurring in further expenses, as tank mixes, for example, are not usually cheap.
 
-<figure>
+<figure style="text-align: end">
   <img style="width: 100%" src="/images/farming-ml/herbicidesxtime.png" />
+  <a href="https://blogs.cornell.edu/whatscroppingup/2020/03/23/statewide-herbicide-resistance-screening-to-start-in-2020-help-us-to-help-you/">Image Source</a>
 </figure>
-
-[Image source](https://blogs.cornell.edu/whatscroppingup/2020/03/23/statewide-herbicide-resistance-screening-to-start-in-2020-help-us-to-help-you/)
 
 ## How ML can solve these problems
 
@@ -89,7 +88,9 @@ AlexNet and other models were based on ImageNet, which is one of the visual data
 
 ![data set](/images/farming-ml/dataset.png)
 
-[Image source](https://www.imageclef.org/2013/plant)
+<p style="text-align: end">
+  <a href="https://www.imageclef.org/2013/plant">Image Source</a>
+</p>
 
 So no matter the dataset you choose (MS COCO, ImageNet, etc.), you won’t have to train your model from zero to recognize and classify plant images.
 
@@ -113,7 +114,9 @@ The system already comes integrated into their John Deere Sprayer, which minimiz
 
 ![See & Spray™ ([image source](https://johndeerevirtualpavilion.co.nz/see-and-spray-select/))](/images/farming-ml/See_Spray.gif)
 
-See & Spray™ ([image source](https://johndeerevirtualpavilion.co.nz/see-and-spray-select/))
+<p style="text-align: end">
+  <a href="https://johndeerevirtualpavilion.co.nz/see-and-spray-select/">See & Spray™</a>
+</p>
 
 Smart Spraying works similarly to the solution described throughout the post. By using cameras and AI, their system distinguishes plants from weeds and the software automatically selects and applies the correct type of herbicide where it’s needed. Smart Spraying works similarly to the solution described throughout the post. Using cameras and AI, their system distinguishes plants from weeds, and the software automatically selects and applies the correct type of herbicide where needed. This solution is broader than John Deere’s, meaning it can be used in other scenarios besides the fallow ground. It’s also extremely fast, recognizing and spraying the weed in 300 milliseconds.
 

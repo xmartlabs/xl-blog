@@ -3,7 +3,7 @@ title: Android logging with Crashlytics and Timber"\
 date: 2015-07-09
 tags: [Android, Logging, Timber, Crashlytics]
 author: santiago
-category: android-development
+category: development
 permalink: /Android-logging-with-Crashlytics-and-Timber/
 ---
 
