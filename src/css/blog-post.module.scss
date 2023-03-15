@@ -85,6 +85,19 @@
   bottom: 1.7rem;
 }
 
+.categoryTagsContainer {
+  display: flex;
+  flex-direction: row;
+  align-items: baseline;
+}
+
+.category {
+  min-width: 21%;
+  max-width: 62%;
+  height: 1rem;
+  margin-right: 2rem;
+}
+
 // Blog body
 
 .bodyPostContainer {
@@ -99,17 +112,17 @@
 
   h2 {
     @extend .text__heading__two__black;
-    margin: 3rem 0 2rem;
+    margin: 4.5rem 0 1.5rem;
   }
 
   h3 {
     @extend .text__heading__three__black;
-    margin: 2rem 0 1.5rem;
+    margin: 3rem 0 1.5rem;
   }
 
   h4 {
     @extend .text__heading__four__black;
-    margin: 1.5rem 0 1rem;
+    margin: 2rem 0 1.5rem;
   }
 
   p img {
@@ -303,6 +316,10 @@
   .socialBottomContainer {
     justify-content: start;
     padding: 0 0 0 1rem;
+  }
+
+  .categoryTagsContainer {
+    flex-direction: column;
   }
   
   .socialBottom {

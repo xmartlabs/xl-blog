@@ -12,6 +12,7 @@ import { AppContext, BannerType } from '../config/context';
 import { SocialElement } from '../components/social-element';
 import { TwitterIcon, Facebook, Linkedin } from "../components/icons";
 import { MoreBlogsSection } from '../components/more-blogs-section';
+import { Tags } from '../components/tags/tags';
 
 import * as styles from '../css/blog-post.module.scss';
 
@@ -97,7 +98,10 @@ const BlogPost = ({ data }) => {
     <div onScroll={handleScroll}>
       <SocialElement className={classnames(disappearSocial ? styles.socialDisappear : styles.socialAppear, styles.blogIcons)} links={shareBlogPostLinks} />
         <div className={styles.bannerContainer}>
-          <Category data={categoryBlog.displayName}/>
+          <div className={styles.categoryTagsContainer}>
+            <Category data={categoryBlog.displayName} className={styles.category}/>
+            <Tags blogTags={data.mdx.frontmatter.tags} />
+          </div>
           <h1 className={classnames(styles.titleContainer, "text__heading__one__black")}>
             { data.mdx.frontmatter.title }
           </h1>
