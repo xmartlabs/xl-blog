@@ -8,20 +8,20 @@
 }
 
 .imageContainer {
-  position: relative;
-  padding-top: 56.6%;
   display: block;
   margin-bottom: 1.5rem;
+  position: relative;
+  padding-bottom: 56.25%;
 }
 
 .styledImage {
+  width: 100%;
+  height: 100%;
   position: absolute;
   top: 0;
   left: 0;
-  height: 100%;
-  width: 100%;
   border-radius: 3%;
-  object-fit: fill;
+  object-fit: cover;
 }
 
 .styledLink {
@@ -35,6 +35,15 @@
 
   .styledLink {
     display: flex;
+    align-items: center;
     justify-content: center;
+  }
+
+  .styledImage {
+    height: 12rem;
+  }
+
+  .imageContainer {
+    width: 100%;
   }
 }

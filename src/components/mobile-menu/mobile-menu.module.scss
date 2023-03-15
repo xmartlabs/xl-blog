@@ -10,7 +10,7 @@
 // Menu Buttons
 
 .openMenu {
-  height: 49rem;
+  height: 60rem;
   background-color: $neutral100;
 }
 
@@ -34,13 +34,14 @@
 // Menu
 
 .menuContainer {
-  margin: 4rem 0 0 1.9rem;
+  margin: 3rem 0 0 1.9rem;
 }
 
 .menuOptions {
   display: flex;
   flex-direction: column;
   margin-left: 0;
+  margin-bottom: 1.3rem;
 }
 
 .partnerContainer {
@@ -48,14 +49,14 @@
 }
 
 .partnerButton {
-  width: 13rem;
+  width: 14rem;
   height: 2.8rem;
   display: flex;
   justify-content: center;
   align-items: center;
   background-color: $xlPink;
   color: $neutral100;
-  margin: 1.5rem 0 9.5rem;
+  margin: 1.5rem 0 4rem;
   text-decoration: none;
 
 }
