@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { useContext, useEffect, useState, useRef } from 'react';
+import { useContext, useEffect, useState } from 'react';
 
 import { MDXRenderer } from 'gatsby-plugin-mdx';
 import { graphql, Link } from 'gatsby';
@@ -23,8 +23,6 @@ const BlogPost = ({ data }) => {
   const authorBlog = AuthorSerializer.deSerialize(author);
   const { setState } = useContext(AppContext);
   const [ disappearSocial, setDisappearSocial ] = useState(false);
-  const refMoreFrom = useRef(null);
-  const [ selectLink, setSelectLink ] = useState(false);
 
   const categoryBlog = useCategory(data.mdx.frontmatter.category);
 
@@ -103,7 +101,9 @@ const BlogPost = ({ data }) => {
       titlesList.map((title) => title.setAttribute("id", title.innerHTML))
       return (
       <div className={styles.indexSubContainer}>
-        {titlesList.map((title) => <a href={"#" + title.innerHTML} onClick={setSelectLink(true)}>{title.innerHTML}</a>)}
+        {titlesList.map((title) => <a href={"#" + title.innerHTML}>
+          {title.innerHTML}
+          </a>)}
       </div>
       );    
     }
