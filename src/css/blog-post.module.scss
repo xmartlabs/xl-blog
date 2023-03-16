@@ -1,6 +1,7 @@
 @import "/src/css/colors.scss";
 @import "/src/css/text-styles.scss";
 @import "/src/css/variables.scss";
+@import "/src/css/variables.scss";
 
 // Social Media
 
@@ -43,6 +44,32 @@
     align-items: center;
     margin: 0.7rem;
   }
+}
+
+// Index
+
+.indexContainer {
+  display: flex;
+  justify-content: end;
+}
+
+.indexSubContainer {
+  position: fixed;
+  top: 16rem;
+  margin-right: 5rem;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  a {
+    @extend .text__index__blueTwo;
+    text-decoration: none;
+    font-family: $primary-font;
+    margin-bottom: 2.5rem;
+  }
+}
+
+.linkSelected {
+  font-weight: bold;
 }
 
 // Header Blog Elements

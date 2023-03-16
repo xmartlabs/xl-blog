@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { useContext, useEffect, useState, useRef } from 'react'
+import { useContext, useEffect, useState, useRef } from 'react';
 
 import { MDXRenderer } from 'gatsby-plugin-mdx';
 import { graphql, Link } from 'gatsby';
@@ -24,6 +24,7 @@ const BlogPost = ({ data }) => {
   const { setState } = useContext(AppContext);
   const [ disappearSocial, setDisappearSocial ] = useState(false);
   const refMoreFrom = useRef(null);
+  const [ selectLink, setSelectLink ] = useState(false);
 
   const categoryBlog = useCategory(data.mdx.frontmatter.category);
 
@@ -84,18 +85,36 @@ const BlogPost = ({ data }) => {
 
   const handleScroll = () => {
     const moreFromXlSize = refMoreFrom?.current?.clientHeight || 0;
-     const isInbottom = Math.ceil(window.innerHeight + window.scrollY + moreFromXlSize + 200) >= document.documentElement.scrollHeight;
-     if (isInbottom) {
-       setDisappearSocial(true);
-     } else {
-       if (!disappearSocial) {
-         setDisappearSocial(false);
-       }
-     };
-   }; 
-  
+    const isInbottom = Math.ceil(window.innerHeight + window.scrollY + moreFromXlSize + 200) >= document.documentElement.scrollHeight;
+    if (isInbottom) {
+      setDisappearSocial(true);
+    } else {
+      if (!disappearSocial) {
+        setDisappearSocial(false);
+      }
+    };
+  };
+
+  const getTitles = () => {
+    const postContainer = document.getElementById('postContainer');
+    if (postContainer !== null) {
+      const elementList = Array.from(postContainer.childNodes);
+      const titlesList = elementList.filter(title => title.nodeName === "H1" || title.nodeName === "H2");
+      titlesList.map((title) => title.setAttribute("id", title.innerHTML))
+      return (
+      <div className={styles.indexSubContainer}>
+        {titlesList.map((title) => <a href={"#" + title.innerHTML} onClick={setSelectLink(true)}>{title.innerHTML}</a>)}
+      </div>
+      );    
+    }
+    return null;
+  }; 
+
   return (
     <div onScroll={handleScroll}>
+      <div className={styles.indexContainer}>
+        {getTitles()}
+      </div>
       <SocialElement className={classnames(disappearSocial ? styles.socialDisappear : styles.socialAppear, styles.blogIcons)} links={shareBlogPostLinks} />
         <div className={styles.bannerContainer}>
           <div className={styles.categoryTagsContainer}>
@@ -119,7 +138,7 @@ const BlogPost = ({ data }) => {
             </div>
           </div>
         </div>
-      <div className={styles.bodyPostContainer}>
+      <div className={styles.bodyPostContainer} id="postContainer">
         <MDXRenderer>
           {data.mdx.body}
         </MDXRenderer>
