@@ -106,7 +106,7 @@ const BlogPost = ({ data }) => {
   };
 
   const getTitles = () => {
-    const postContainer = document.getElementById('postContainer');
+    const postContainer = document !== undefined && document.getElementById('postContainer');
     if (postContainer !== null) {
       const elementList = Array.from(postContainer.childNodes);
       const titlesList = findTitles(elementList);
