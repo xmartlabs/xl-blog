@@ -56,20 +56,34 @@
 .indexSubContainer {
   position: fixed;
   top: 16rem;
-  margin-right: 5rem;
+  bottom: 2rem;
+  width: 20rem;
+  margin-right: 6rem;
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  a {
-    @extend .text__index__blueTwo;
-    text-decoration: none;
-    font-family: $primary-font;
-    margin-bottom: 2.5rem;
-  }
+  width: 20rem;
 }
 
-.linkSelected {
-  font-weight: bold;
+.links {
+  @extend .text__index__blueTwo;
+  text-decoration: none;
+  font-family: $primary-font;
+  margin-bottom: 2.5rem;
+  height: 3rem;
+  overflow: hidden;
+}
+
+.selectedLink {
+  font-weight: 900;
+}
+
+.pinkCircle {
+  margin-right: 2rem;
+}
+
+.disappearIndex {
+  display: none
 }
 
 // Header Blog Elements

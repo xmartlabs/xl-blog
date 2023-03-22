@@ -9,3 +9,4 @@ export { InstagramIcon } from "./instagram";
 export { LinkedInIcon } from "./linked-in";
 export { CloseIcon } from "./close-icon";
 export { ClockIcon } from "./clock-icon";
+export { PinkCircle } from "./pink-circle";
