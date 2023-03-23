@@ -92,8 +92,8 @@ const BlogPost = ({ data }) => {
          setDisappearSocial(false);
        }
      };
-   }; 
-  
+   };
+
   return (
     <div onScroll={handleScroll}>
       <SocialElement className={classnames(disappearSocial ? styles.socialDisappear : styles.socialAppear, styles.blogIcons)} links={shareBlogPostLinks} />
@@ -118,6 +118,9 @@ const BlogPost = ({ data }) => {
               </label>
             </div>
           </div>
+          <div className={styles.bannerPictureContainer}>
+          <img src={data.mdx.frontmatter.thumbnail} />
+        </div>
         </div>
       <div className={styles.bodyPostContainer}>
         <MDXRenderer>
