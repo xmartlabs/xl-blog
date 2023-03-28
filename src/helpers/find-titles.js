@@ -15,6 +15,7 @@ const findTitles = (titles) => {
         h1List.push(title);
       }
     }
+    
     if (title.nodeName === "H2") {
       if (title.innerHTML.includes('<strong>')) {
         title.innerHTML = title.innerHTML.slice(8);

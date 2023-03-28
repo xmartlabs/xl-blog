@@ -128,7 +128,7 @@ $text-colors: (
   font-weight: map-get($map: $font-weights, $key: boldWeight500);
 }
 
-@mixin text__index {
+@mixin text__big__links {
   font-size: map-get($map: $text-sizes, $key: authorName);
   font-weight: map-get($map: $font-weights, $key: boldWeight300);
 }
@@ -215,9 +215,9 @@ $text-colors: (
       @include text__link__blog;
     }
   }
-  &__index {
+  &__big__links {
     @include color-styles {
-      @include text__index;
+      @include text__big__links;
     }
   }
 }

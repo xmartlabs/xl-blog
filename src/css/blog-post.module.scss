@@ -1,7 +1,6 @@
 @import "/src/css/colors.scss";
 @import "/src/css/text-styles.scss";
 @import "/src/css/variables.scss";
-@import "/src/css/variables.scss";
 
 // Social Media
 
@@ -62,11 +61,10 @@
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  width: 20rem;
 }
 
 .links {
-  @extend .text__index__blueTwo;
+  @extend .text__big__links__blueTwo;
   text-decoration: none;
   font-family: $primary-font;
   margin-bottom: 2.5rem;
@@ -75,7 +73,7 @@
 }
 
 .selectedLink {
-  font-weight: 900;
+  font-weight: $font-bold;
 }
 
 .pinkCircle {

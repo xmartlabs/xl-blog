@@ -102,13 +102,13 @@ const BlogPost = ({ data }) => {
       if (!disappearIndex) {
         setDisappearIndex(false);
       }
-    };
+    }
   };
 
   const getTitles = () => {
     if (typeof window !== 'undefined' && typeof window.document !== "undefined") {
       const postContainer = document.getElementById('postContainer');
-      if (postContainer !== null) {
+      if (postContainer) {
         const elementList = Array.from(postContainer.childNodes);
         const titlesList = findTitles(elementList);
         return (
@@ -121,7 +121,7 @@ const BlogPost = ({ data }) => {
           )}>
             {title.id === selectLink && <PinkCircle className={styles.pinkCircle}/>}
             {title.innerHTML.trim().split(/\s+/).length > 10 ? title.innerHTML.slice(0, 55) + "..." : title.innerHTML}
-            </a>)}
+          </a>)}
         </div>
         );    
       }
