@@ -119,8 +119,9 @@ const BlogPost = ({ data }) => {
             </div>
           </div>
         </div>
+        <div className={styles.separateImageFromAuthor} />
         <div>
-          <img src={data.mdx.frontmatter.thumbnail} onError={(event) => event.target.src = '../../images/image.png'} className={styles.blogMainImage} />
+        <img src={data.mdx.frontmatter.thumbnail} onError={(event) => event.target.src = '../../images/image.png'} className={styles.blogMainImage} />
           <div className={styles.bodyPostContainer}>
             <MDXRenderer>
               {data.mdx.body}

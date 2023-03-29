@@ -281,9 +281,15 @@
 
 @media screen and (max-width: 768px) {
   .blogMainImage {
-    width: 93%;
+    width: 89%;
     height: 11rem;
-    transform: translateY(48rem);
+    position: relative;
+    margin-bottom: 8rem;
+    transform: translateY(56rem);
+  }
+
+  .separateImageFromAuthor {
+    height: 3rem;
   }
 
   .bannerContainer {
