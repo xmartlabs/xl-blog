@@ -112,7 +112,7 @@ const BlogPost = ({ data }) => {
         const elementList = Array.from(postContainer.childNodes);
         const titlesList = findTitles(elementList);
         return (
-        <div className={classnames({[styles.disappearIndex]: disappearIndex},styles.indexSubContainer)}>
+        <div className={classnames({[styles.disappearIndex]: disappearIndex}, styles.indexSubContainer)}>
           {titlesList.map((title) => 
           <a href={"#" + title.id} key={title.id} onClick={() => setSelectLink(title.id)} 
             className={classnames(
