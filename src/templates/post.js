@@ -93,9 +93,9 @@ const BlogPost = ({ data }) => {
        }
      };
    };
-
+   
   return (
-    <div onScroll={handleScroll}>
+    <div onScroll={handleScroll} styles="display: flex">
       <SocialElement className={classnames(disappearSocial ? styles.socialDisappear : styles.socialAppear, styles.blogIcons)} links={shareBlogPostLinks} />
         <div className={styles.bannerContainer}>
           <div className={styles.categoryTagsContainer}>
@@ -118,15 +118,15 @@ const BlogPost = ({ data }) => {
               </label>
             </div>
           </div>
-          <div className={styles.bannerPictureContainer}>
-          <img src={data.mdx.frontmatter.thumbnail} />
         </div>
+        <div>
+          <img src={data.mdx.frontmatter.thumbnail} onError={(event) => event.target.src = '../../images/image.png'} className={styles.blogMainImage} />
+          <div className={styles.bodyPostContainer}>
+            <MDXRenderer>
+              {data.mdx.body}
+            </MDXRenderer>
+          </div>
         </div>
-      <div className={styles.bodyPostContainer}>
-        <MDXRenderer>
-          {data.mdx.body}
-        </MDXRenderer>
-      </div>
       <div className={styles.socialBottomContainer}>
         <span className={classnames('text__paragraph__bold__grayTwo', styles.sharePosition)}>Share:</span>
         <SocialElement className={classnames(styles.socialBottom, styles.blogIcons)} links={shareXlProfileLinks} />
