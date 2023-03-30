@@ -5,17 +5,13 @@ body {
   font-family: $primary-font, serif;
 }
 
-.blogBanner {
-  background-color: $blueSix;
-}
-
 .homeBanner {
   background-image: url("../../static/images/home-banner/home-banner-desktop.png");
   background-repeat: no-repeat;
   background-size: contain;
 }
 
-.homeBanner, .blogBanner {
+.homeBanner {
 
   width: 100%;
   height: 63.6rem;

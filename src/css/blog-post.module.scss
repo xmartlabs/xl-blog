@@ -48,10 +48,8 @@
 // Header Blog Elements
 
 .bannerContainer {
-  padding: 10rem 50rem 0 17rem;
-  position: absolute;
-  top: 0;
-  max-height: calc(1018px - 512px);
+  padding: 10rem 50rem 20rem 17rem;
+  background-color: $blueSix;
 }
 
 .titleContainer {
@@ -60,7 +58,6 @@
 
 .authorContainer {
   width: 100%;
-  max-height: 5.5rem;
 }
 
 .authorInformation {
@@ -287,12 +284,12 @@
     height: 12rem;
     transform: translateY(-3rem);
     margin-bottom: 0;
+    object-fit: cover;
   }
 
   .bannerContainer {
     min-height: 100%;
-    padding: 2rem 1rem 0 1rem;
-    margin-top: 6rem;
+    padding: 8rem 1rem 6rem 1rem;
   } 
 
   .titleContainer {
