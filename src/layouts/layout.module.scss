@@ -6,16 +6,17 @@ body {
 }
 
 .blogBanner {
-  background-image: url("../../static/images/banner-blog/banner-desktop.png");
+  background-color: $blueSix;
 }
 
 .homeBanner {
   background-image: url("../../static/images/home-banner/home-banner-desktop.png");
+  background-repeat: no-repeat;
+  background-size: contain;
 }
 
 .homeBanner, .blogBanner {
-  background-repeat: no-repeat;
-  background-size: contain;
+
   width: 100%;
   height: 63.6rem;
 }
@@ -34,6 +35,10 @@ body {
   width: 20%;
 }
 
+.mobileBanner {
+  background-color: $blueSix;
+}
+
 @media screen and (max-width: 768px) {
   
   .desktopLogo{
@@ -42,14 +47,6 @@ body {
 
   .footerCol {
     width: 30%;
-  }
-
-  .blogBanner {
-    background-image: url("../../static/images/banner-blog/banner-movile.png");
-    margin-bottom: 4rem;
-    height: 49rem;
-    position: absolute;
-    top: 0;
   }
 
   .homeBanner {

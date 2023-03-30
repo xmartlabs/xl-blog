@@ -10,6 +10,7 @@ import { NavMenu } from "../components/nav-menu";
 import { Footer } from "../components/footer";
 import { MobileMenu } from "../components/mobile-menu";
 import { StyledContainerHeader, StyledContainerNavBarXL } from "../elements";
+import { classnames } from "../helpers";
 import { AppContext, initialState } from "../config/context.js";
 import "../index.scss";
 
@@ -64,7 +65,7 @@ function Layout({ children }) {
   return (
     <>
       <AppContext.Provider value={{ state: contextState, setState: setContextState }}>
-        <div className={styles[`${contextState}Banner`]}>
+        <div className={classnames(styles[`${contextState}Banner`], {[styles.mobileBanner]: isMobile})}>
             <StyledContainerNavBarXL>
             {isMobile && <MobileMenu />}
               <StyledContainerHeader>
