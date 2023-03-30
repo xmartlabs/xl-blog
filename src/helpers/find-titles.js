@@ -1,25 +1,25 @@
 import React from "react";
 
-const findTitles = (titles) => {
+const findTitles = (htmlElements) => {
   const h1List = [];
   const h2List = [];
   const h3List = [];
-  titles.forEach(title => {
-    if (title.innerHTML.includes('<strong>')) {
-      title.innerHTML = title.innerHTML.slice(8);
+  htmlElements.forEach(element => {
+    if (element.innerHTML.includes('<strong>')) {
+      element.innerHTML = element.innerHTML.slice(8);
     } 
-    title.setAttribute("id", title.innerHTML);
+    element.setAttribute("id", element.innerHTML);
 
-    if (title.nodeName === "H1") {
-        h1List.push(title);
+    if (element.nodeName === "H1") {
+        h1List.push(element);
       }
     
-    if (title.nodeName === "H2") {
-        h2List.push(title);
+    if (element.nodeName === "H2") {
+        h2List.push(element);
       }
 
-    if (title.nodeName === "H3") {
-        h3List.push(title);
+    if (element.nodeName === "H3") {
+        h3List.push(element);
       }
   });
   if (h1List.length !== 0) {
