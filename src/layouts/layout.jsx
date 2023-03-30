@@ -65,9 +65,8 @@ function Layout({ children }) {
   return (
     <>
       <AppContext.Provider value={{ state: contextState, setState: setContextState }}>
-        {contextState === "blog" &&  
         <div className={styles[`${contextState}Banner`]}>
-          <StyledContainerNavBarXL>
+            <StyledContainerNavBarXL>
             {isMobile && <MobileMenu />}
               <StyledContainerHeader>
                 <div className={styles.navMenuContainer}>
@@ -90,8 +89,7 @@ function Layout({ children }) {
                 }
               </StyledContainerHeader>
             </StyledContainerNavBarXL>
-          </div>
-        }
+        </div>
         {children}
       </AppContext.Provider>
       <Footer>
