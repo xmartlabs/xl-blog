@@ -112,17 +112,19 @@ const BlogPost = ({ data }) => {
         const elementList = Array.from(postContainer.childNodes);
         const titlesList = findTitles(elementList);
         return (
-        <div className={classnames({[styles.disappearIndex]: disappearIndex}, styles.indexSubContainer)}>
-          {titlesList.map((title) => 
-          <a href={"#" + title.id} key={title.id} onClick={() => setSelectLink(title.id)} 
-            className={classnames(
-              {[styles.selectedLink]:title.id === selectLink}, 
-              styles.links, 
-          )}>
-            {title.id === selectLink && <PinkCircle className={styles.pinkCircle}/>}
-            {title.innerHTML.trim().split(/\s+/).length > 10 ? title.innerHTML.slice(0, 55) + "..." : title.innerHTML}
-          </a>)}
-        </div>
+          <div className={classnames({[styles.disappearIndex]: disappearIndex}, styles.indexSubContainer)}>
+            {titlesList.map((title) => 
+              <a href={"#" + title.id} key={title.id} onClick={() => setSelectLink(title.id)} 
+                className={classnames(
+                  {[styles.selectedLink]:title.id === selectLink}, 
+                  styles.links, 
+                )}
+              >
+                {title.id === selectLink && <PinkCircle className={styles.pinkCircle}/>}
+                {title.innerHTML.trim().split(/\s+/).length > 10 ? title.innerHTML.slice(0, 55) + "..." : title.innerHTML}
+             </a>
+            )}
+          </div>
         );    
       }
       return null;
