@@ -121,7 +121,7 @@ const BlogPost = ({ data }) => {
                 )}
               >
                 {title.id === selectLink && <PinkCircle className={styles.pinkCircle}/>}
-                {title.innerHTML.trim().split(/\s+/).length > 10 ? title.innerHTML.slice(0, 55) + "..." : title.innerHTML}
+                {title.innerHTML.length > 55 ? title.innerHTML.slice(0, 55) + "..." : title.innerHTML}
              </a>
             )}
           </div>
