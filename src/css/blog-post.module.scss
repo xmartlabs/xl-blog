@@ -9,10 +9,6 @@
   opacity: 0;
 }
 
-.socialDisappear::after {
-  display: none;
-}
-
 .socialAppear {
   transition: transform 0.5s ease-in-out, opacity 0.5s ease-in-out;
   opacity: 100;
@@ -274,8 +270,9 @@
   padding: 0 6rem 0 6rem;
   margin-bottom: 4rem;
   margin-top: 20rem;
+  
   .disqusTitle {
-    @extend .text__heading__one__black;
+    @extend .text__comment__title__grayFour;
   }
 }
 
@@ -355,5 +352,9 @@
 
   .clockIcon {
     margin: 0 1rem 0 0;
-  }  
+  }
+
+  .disqusSection {
+    padding: 0 1rem 0 1rem;
+  }
 }
