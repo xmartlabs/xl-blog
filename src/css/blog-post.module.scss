@@ -268,6 +268,17 @@
   }
 }
 
+// DISQUS
+
+.disqusSection {
+  padding: 0 6rem 0 6rem;
+  margin-bottom: 4rem;
+  margin-top: 20rem;
+  .disqusTitle {
+    @extend .text__heading__one__black;
+  }
+}
+
 // Responsive Design
 
 @media screen and (max-width: 768px) {

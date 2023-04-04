@@ -93,7 +93,19 @@ const BlogPost = ({ data }) => {
        }
      };
    }; 
-  
+
+   const disqusBody = () => {
+   /* * * CONFIGURATION VARIABLES * * */
+   var disqus_shortname = 'xmartlabs';
+
+   /* * * DON'T EDIT BELOW THIS LINE * * */
+   return (function() {
+       var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+       dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+       (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+   })();
+   }
+
   return (
     <div onScroll={handleScroll}>
       <SocialElement className={classnames(disappearSocial ? styles.socialDisappear : styles.socialAppear, styles.blogIcons)} links={shareBlogPostLinks} />
@@ -129,6 +141,12 @@ const BlogPost = ({ data }) => {
         <SocialElement className={classnames(styles.socialBottom, styles.blogIcons)} links={shareXlProfileLinks} />
       </div>
       <MoreBlogsSection data={data} refMoreFrom={refMoreFrom} title={categoryBlog.displayName} />
+      <div className={styles.disqusSection}>
+        <h3 className={styles.disqusTitle}>Comments:</h3>
+        <div id="disqus_thread"></div>
+          {disqusBody()}
+        <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript>
+      </div>
     </div>
   );
 };
