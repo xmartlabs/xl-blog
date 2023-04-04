@@ -45,6 +45,45 @@
   }
 }
 
+// Index
+
+.indexContainer {
+  display: flex;
+  justify-content: end;
+}
+
+.indexSubContainer {
+  position: fixed;
+  top: 16rem;
+  bottom: 2rem;
+  width: 20rem;
+  margin-right: 6rem;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.links {
+  @extend .text__big__links__blueTwo;
+  text-decoration: none;
+  font-family: $primary-font;
+  margin-bottom: 2.5rem;
+  height: 3rem;
+  overflow: hidden;
+}
+
+.selectedLink {
+  font-weight: $font-bold;
+}
+
+.pinkCircle {
+  margin-right: 2rem;
+}
+
+.disappearIndex {
+  display: none
+}
+
 // Header Blog Elements
 
 .bannerContainer {
@@ -344,5 +383,9 @@
 
   .clockIcon {
     margin: 0 1rem 0 0;
-  }  
+  }
+
+  .indexSubContainer {
+    display: none;
+  }
 }

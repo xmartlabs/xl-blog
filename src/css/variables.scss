@@ -1,5 +1,7 @@
 @import "/src/css/typography.css";
 
+// Fonts
+
 $tags-font-family: 'Gilroy';
 $tags-font: $tags-font-family, Arial, sans-serif;
 
@@ -17,4 +19,8 @@ $link-blog-font: $link-blog-font-family, serif;
 
 $code-font-family: "fira-code-bold";
 $code-font: $code-font-family, serif;
+
+// Bold Weight
+
+$font-bold: 900;
 
