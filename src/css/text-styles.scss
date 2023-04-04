@@ -135,6 +135,11 @@ $text-colors: (
   font-weight: map-get($map: $font-weights, $key: boldWeight900);
 }
 
+@mixin text__big__links {
+  font-size: map-get($map: $text-sizes, $key: authorName);
+  font-weight: map-get($map: $font-weights, $key: boldWeight300);
+}
+
 //---- COLOR ---
 
 @mixin color-styles {
@@ -220,6 +225,11 @@ $text-colors: (
   &__comment__title {
     @include color-styles {
       @include text__comment__title;
+    }
+  }
+  &__big__links {
+    @include color-styles {
+      @include text__big__links;
     }
   }
 }

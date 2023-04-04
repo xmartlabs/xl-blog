@@ -1,16 +1,16 @@
 import * as React from 'react';
-import { useContext, useEffect, useState, useRef } from 'react'
+import { useContext, useEffect, useState, useRef } from 'react';
 
 import { MDXRenderer } from 'gatsby-plugin-mdx';
 import { graphql, Link } from 'gatsby';
 
 import AuthorsYAMLData from "../../content/authors.yaml";
 import { Category } from "../components/category";
-import { classnames, useCategory } from "../helpers";
+import { classnames, findTitles, useCategory } from "../helpers";
 import { AuthorSerializer } from '../serializer';
 import { AppContext, BannerType } from '../config/context';
 import { SocialElement } from '../components/social-element';
-import { TwitterIcon, Facebook, Linkedin, ClockIcon } from "../components/icons";
+import { TwitterIcon, Facebook, Linkedin, ClockIcon, PinkCircle } from "../components/icons";
 import { MoreBlogsSection } from '../components/more-blogs-section';
 import { Tags } from '../components/tags/tags';
 
@@ -24,8 +24,9 @@ const BlogPost = ({ data }) => {
   const { setState } = useContext(AppContext);
   const [ disappearSocial, setDisappearSocial ] = useState(false);
   const refMoreFrom = useRef(null);
-
   const categoryBlog = useCategory(data.mdx.frontmatter.category);
+  const [ selectLink, setSelectLink ] = useState('');
+  const [ disappearIndex, setDisappearIndex ] = useState(false);
 
   const checkWindow = () => {
     if (typeof window !== 'undefined') {
@@ -72,7 +73,7 @@ const BlogPost = ({ data }) => {
 
   useEffect(() => {
     setState(BannerType.blog);
-    
+    setDisappearIndex(true)
     window.addEventListener('scroll', handleScroll, {
       passive: true
     });
@@ -82,30 +83,70 @@ const BlogPost = ({ data }) => {
     };
   }, []);
 
+
   const handleScroll = () => {
     const moreFromXlSize = refMoreFrom?.current?.clientHeight || 0;
-     const isInbottom = Math.ceil(window.innerHeight + window.scrollY + moreFromXlSize + 200) >= document.documentElement.scrollHeight;
-     if (isInbottom) {
-       setDisappearSocial(true);
-     } else {
-       if (!disappearSocial) {
-         setDisappearSocial(false);
-       }
-     };
-   }; 
+    const isInbottom = Math.ceil(window.innerHeight + window.scrollY + moreFromXlSize + 200) >= document.documentElement.scrollHeight;
+    const isInTop = document.documentElement.scrollTop < 800;
+    
+    if (isInbottom) {
+      setDisappearSocial(true);
+    } else {
+      if (!disappearSocial) {
+        setDisappearSocial(false);
+      }
+    };
+    if (isInTop || isInbottom) {
+      setDisappearIndex(true);
+    } else {
+      if (!disappearIndex) {
+        setDisappearIndex(false);
+      }
+    }
+  };
 
-   const disqusBody = () => {
+  const getTitles = () => {
+    if (typeof window !== 'undefined' && typeof window.document !== "undefined") {
+      const postContainer = document.getElementById('postContainer');
+      if (postContainer) {
+        const elementList = Array.from(postContainer.childNodes);
+        const titlesList = findTitles(elementList);
+        return (
+          <div className={classnames({[styles.disappearIndex]: disappearIndex}, styles.indexSubContainer)}>
+            {titlesList.map((title) => 
+              <a href={"#" + title.id} key={title.id} onClick={() => setSelectLink(title.id)} 
+                className={classnames(
+                  {[styles.selectedLink]:title.id === selectLink}, 
+                  styles.links, 
+                )}
+              >
+                {title.id === selectLink && <PinkCircle className={styles.pinkCircle}/>}
+                {title.innerHTML.length > 55 ? title.innerHTML.slice(0, 55) + "..." : title.innerHTML}
+             </a>
+            )}
+          </div>
+        );    
+      }
+      return null;
+    }
+    return null;
+  }; 
+
+  const disqusBody = () => {
     var disqus_shortname = 'xmartlabs';
     return (function() {
       var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
       dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
       (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
     })();
-   }
+  }
 
   return (
     <div onScroll={handleScroll}>
-      <SocialElement className={classnames(disappearSocial ? styles.socialDisappear : styles.socialAppear, styles.blogIcons)} links={shareBlogPostLinks} />
+      <div className={styles.indexContainer}>
+        {getTitles()}
+      </div>
+      <SocialElement className={classnames(disappearSocial ? styles.socialDisappear : styles.socialAppear, styles.blogIcons, {[styles.socialDisappear]: disappearIndex})} links={shareBlogPostLinks} />
         <div className={styles.bannerContainer}>
           <div className={styles.categoryTagsContainer}>
             <Category data={categoryBlog.displayName} className={styles.category}/>
@@ -128,7 +169,7 @@ const BlogPost = ({ data }) => {
             </div>
           </div>
         </div>
-      <div className={styles.bodyPostContainer}>
+      <div className={styles.bodyPostContainer} id="postContainer">
         <MDXRenderer>
           {data.mdx.body}
         </MDXRenderer>
