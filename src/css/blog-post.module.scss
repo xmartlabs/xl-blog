@@ -307,8 +307,7 @@
 
 .disqusSection {
   padding: 0 6rem 0 6rem;
-  margin-bottom: 4rem;
-  margin-top: 20rem;
+  margin: 2rem 0 4rem 0;
   
   .disqusTitle {
     @extend .text__comment__title__grayFour;
@@ -321,6 +320,7 @@
   .bannerContainer {
     min-height: 100%;
     padding: 2rem 1rem 16.8rem 1rem;
+    width: 100%;
   } 
 
   .titleContainer {
@@ -392,12 +392,12 @@
   .clockIcon {
     margin: 0 1rem 0 0;
   }
-
-  .disqusSection {
-    padding: 0 1rem 0 1rem;
-  }
   
   .indexSubContainer {
     display: none;
+  }
+
+  .disqusSection {
+    padding: 0 1rem;
   }
 }

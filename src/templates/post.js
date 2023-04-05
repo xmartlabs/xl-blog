@@ -1,5 +1,6 @@
 import * as React from 'react';
 import { useContext, useEffect, useState, useRef } from 'react';
+import { DiscussionEmbed } from "disqus-react";
 
 import { MDXRenderer } from 'gatsby-plugin-mdx';
 import { graphql, Link } from 'gatsby';
@@ -130,15 +131,12 @@ const BlogPost = ({ data }) => {
       return null;
     }
     return null;
-  }; 
+  };
 
-  var disqus_shortname = 'xmartlabs';
-
-  const disqusCharge = () => {
-    var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
-    dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
-    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
-  }
+  const disqusConfig = {
+    shortname: process.env.GATSBY_DISQUS_NAME,
+    config: { identifier: data.mdx.slug},
+  };
 
   return (
     <div onScroll={handleScroll}>
@@ -181,7 +179,7 @@ const BlogPost = ({ data }) => {
       <div className={styles.disqusSection}>
         <h3 className={styles.disqusTitle}>Comments:</h3>
         <div id="disqus_thread"></div>
-          {disqusCharge()}
+          <DiscussionEmbed {...disqusConfig} />
         <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript>
       </div>
     </div>
