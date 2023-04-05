@@ -317,10 +317,10 @@
 
 // Responsive Design
 
-@media screen and (max-width: 768px) {
+@media screen and (max-width: map-get($map: $screen-breakpoint, $key: sm)) {
   .blogMainImage {
     width: 93%;
-    height: 12rem;
+    max-height: 15rem;
     transform: translateY(-3rem);
     margin-bottom: 0;
     object-fit: cover;

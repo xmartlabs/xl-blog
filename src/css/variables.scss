@@ -24,3 +24,16 @@ $code-font: $code-font-family, serif;
 
 $font-bold: 900;
 
+// Screen Breakpoints
+
+$screen-breakpoint: (
+  xl: 1400px,
+  lg: 1200px,
+  md: 992px,
+  sm: 768px,
+  xs: 576px,
+);
+
+// Z-Index
+
+$z-index-1: 1;

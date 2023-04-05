@@ -1,5 +1,6 @@
 @import "/src/css/colors.scss";
 @import "/src/css/text-styles.scss";
+@import "/src/css/variables.scss";
 
 .container {
   width: 55rem;
@@ -75,7 +76,7 @@
   cursor: pointer;
 }
 
-@media screen and (max-width: 768px) {
+@media screen and (max-width: map-get($map: $screen-breakpoint, $key: sm)) {
   .container {
     width: 22rem;
     height: 33rem;

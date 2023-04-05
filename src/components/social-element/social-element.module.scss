@@ -1,3 +1,5 @@
+@import '/src/css/variables.scss';
+
 .container {
   display: flex;
   flex-direction: column;
@@ -5,7 +7,7 @@
   width: 14.8%;
   position: fixed;
   top: 16rem;
-  z-index: 1;
+  z-index: $z-index-1;
 }
 
 .socialIcon {
@@ -13,7 +15,7 @@
   height: 1.5rem;
 }
 
-@media screen and (max-width: 768px) {
+@media screen and (max-width: map-get($map: $screen-breakpoint, $key: sm)) {
   .container {
     display: none;
   }

@@ -1,4 +1,5 @@
 @import "/src/css/colors.scss";
+@import "/src/css/variables.scss";
 
 .pagerContainer {
   display: flex;
@@ -23,7 +24,7 @@
   color: $xlPink;
 }
 
-@media screen and (max-width: 768px) {
+@media screen and (max-width: map-get($map: $screen-breakpoint, $key: sm)) {
   .pagerContainer {
     margin: 80px 9%;
   }

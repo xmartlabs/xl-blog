@@ -1,4 +1,5 @@
-@import '../../css/colors.scss';
+@import '/src/css/colors.scss';
+@import '/src/css/variables.scss';
 
 .moreFromXlContainer {
   background-color: $blueSix;
@@ -29,7 +30,7 @@ span {
   margin-bottom: 5rem;
 }
 
-@media screen and (max-width: 768px) {
+@media screen and (max-width: map-get($map: $screen-breakpoint, $key: sm)) {
   .blogsContainer {
     flex-direction: column;
     align-items: center;
