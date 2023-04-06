@@ -87,8 +87,8 @@ const BlogPost = ({ data }) => {
 
   const handleScroll = () => {
     const moreFromXlSize = refMoreFrom?.current?.clientHeight || 0;
-    const isInbottom = Math.ceil(window.innerHeight + window.scrollY + moreFromXlSize + 200) >= document.documentElement.scrollHeight;
-    const isInTop = document.documentElement.scrollTop < 800;
+    const isInbottom = Math.ceil(window.innerHeight + window.scrollY + moreFromXlSize + 1000) >= document.documentElement.scrollHeight;
+    const isInTop = document.documentElement.scrollTop < 1200;
     
     if (isInbottom) {
       setDisappearSocial(true);
