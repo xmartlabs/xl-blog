@@ -135,9 +135,12 @@ const BlogPost = ({ data }) => {
 
   const disqusConfig = {
     shortname: process.env.GATSBY_DISQUS_NAME,
-    config: { identifier: data.mdx.slug},
+    config: { 
+      identifier: data.mdx.slug, 
+      url: '//' + process.env.GATSBY_DISQUS_NAME + '.disqus.com/embed.js'
+    },
   };
-
+  
   return (
     <div onScroll={handleScroll}>
       <div className={styles.indexContainer}>
