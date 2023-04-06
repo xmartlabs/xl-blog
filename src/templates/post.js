@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { useContext, useEffect, useState, useRef } from 'react';
-import { DiscussionEmbed } from "disqus-react";
+import { Disqus } from 'gatsby-plugin-disqus';
 
 import { MDXRenderer } from 'gatsby-plugin-mdx';
 import { graphql, Link } from 'gatsby';
@@ -133,14 +133,12 @@ const BlogPost = ({ data }) => {
     return null;
   };
 
-  const disqusConfig = {
-    shortname: process.env.GATSBY_DISQUS_NAME,
-    config: { 
-      identifier: data.mdx.slug, 
-      url: '//' + process.env.GATSBY_DISQUS_NAME + '.disqus.com/embed.js'
-    },
-  };
-  
+  let disqusConfig = {
+    url: `${data.mdx.frontmatter.permalink}`,
+    identifier: data.mdx.slug,
+    title: data.mdx.frontmatter.title,
+  }
+
   return (
     <div onScroll={handleScroll}>
       <div className={styles.indexContainer}>
@@ -181,9 +179,9 @@ const BlogPost = ({ data }) => {
       <MoreBlogsSection data={data} refMoreFrom={refMoreFrom} title={categoryBlog.displayName} />
       <div className={styles.disqusSection}>
         <h3 className={styles.disqusTitle}>Comments:</h3>
-        <div id="disqus_thread"></div>
-          <DiscussionEmbed {...disqusConfig} />
-        <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript>
+        <div id="disqus_thread">
+          <Disqus config={disqusConfig} />
+        </div>
       </div>
     </div>
   );

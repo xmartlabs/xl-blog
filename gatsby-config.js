@@ -13,6 +13,12 @@ module.exports = {
     "gatsby-plugin-sitemap",
     "gatsby-plugin-instagram-embed",
     {
+      resolve: `gatsby-plugin-disqus`,
+      options: {
+          shortname: `xmartlabs`
+      }
+    },
+    {
       resolve: "gatsby-plugin-manifest",
       options: {
         icon: "src/images/icon.png",
