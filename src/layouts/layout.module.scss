@@ -5,17 +5,14 @@ body {
   font-family: $primary-font, serif;
 }
 
-.blogBanner {
-  background-image: url("../../static/images/banner-blog/banner-desktop.png");
+.homeBanner {
+  background-image: url("../../static/images/home-banner/home-banner-desktop.png");
+  background-repeat: no-repeat;
+  background-size: contain;
 }
 
 .homeBanner {
-  background-image: url("../../static/images/home-banner/home-banner-desktop.png");
-}
 
-.homeBanner, .blogBanner {
-  background-repeat: no-repeat;
-  background-size: contain;
   width: 100%;
   height: 63.6rem;
 }
@@ -34,7 +31,11 @@ body {
   width: 20%;
 }
 
-@media screen and (max-width: 768px) {
+.mobileBanner {
+  background-color: $blueSix;
+}
+
+@media screen and (max-width: map-get($map: $screen-breakpoint, $key: sm)) {
   
   .desktopLogo{
     display: none;
@@ -42,10 +43,6 @@ body {
 
   .footerCol {
     width: 30%;
-  }
-
-  .blogBanner {
-    background-image: url("../../static/images/banner-blog/banner-movile.png");
   }
 
   .homeBanner {

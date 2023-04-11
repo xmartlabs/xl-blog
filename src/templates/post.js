@@ -167,11 +167,14 @@ const BlogPost = ({ data }) => {
             </div>
           </div>
         </div>
-      <div className={styles.bodyPostContainer} id="postContainer">
-        <MDXRenderer>
-          {data.mdx.body}
-        </MDXRenderer>
-      </div>
+        <div>
+          <img src={data.mdx.frontmatter.thumbnail} onError={(event) => event.target.src = '../../images/image.png'} className={styles.blogMainImage} />
+          <div className={styles.bodyPostContainer} id="postContainer">
+            <MDXRenderer>
+              {data.mdx.body}
+            </MDXRenderer>
+          </div>
+        </div>
       <div className={styles.socialBottomContainer}>
         <span className={classnames('text__paragraph__bold__grayTwo', styles.sharePosition)}>Share:</span>
         <SocialElement className={classnames(styles.socialBottom, styles.blogIcons)} links={shareXlProfileLinks} />
