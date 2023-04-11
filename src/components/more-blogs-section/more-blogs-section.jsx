@@ -13,7 +13,7 @@ const MoreBlogsSection = ({ data, refMoreFrom, title }) => {
   const { relatedPosts } = data.mdx;
 
   return (
-    <div className={styles.moreFromXlContainer} ref={refMoreFrom} >
+    <div ref={refMoreFrom} >
       <div className={styles.titleContainer}>
         <Link to="/" className={classnames("text__heading__three__blueTwo", styles.titleStyle)}>More from about <span>{title}</span>→</Link>
       </div>

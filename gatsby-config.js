@@ -19,6 +19,13 @@ module.exports = {
       },
     },
     {
+      resolve: 'gatsby-plugin-mailchimp',
+      options: {
+        endpoint: '',
+        timeout: 3500,
+      },
+    },
+    {
       resolve: `gatsby-transformer-yaml`,
       options: {
         typeName: `Yaml`, // a fixed string

@@ -13,6 +13,7 @@ import { SocialElement } from '../components/social-element';
 import { TwitterIcon, Facebook, Linkedin, ClockIcon, PinkCircle } from "../components/icons";
 import { MoreBlogsSection } from '../components/more-blogs-section';
 import { Tags } from '../components/tags/tags';
+import { XlNewsletter } from '../components/xl-newsletter';
 
 import * as styles from '../css/blog-post.module.scss';
 
@@ -130,7 +131,7 @@ const BlogPost = ({ data }) => {
       return null;
     }
     return null;
-  }; 
+  };
 
   return (
     <div onScroll={handleScroll}>
@@ -172,10 +173,13 @@ const BlogPost = ({ data }) => {
         <span className={classnames('text__paragraph__bold__grayTwo', styles.sharePosition)}>Share:</span>
         <SocialElement className={classnames(styles.socialBottom, styles.blogIcons)} links={shareXlProfileLinks} />
       </div>
-      <MoreBlogsSection data={data} refMoreFrom={refMoreFrom} title={categoryBlog.displayName} />
+      <div className={styles.newsletterAndMorBlogs}>
+        <MoreBlogsSection data={data} refMoreFrom={refMoreFrom} title={categoryBlog.displayName} />
+        <XlNewsletter />
+      </div>
     </div>
   );
-};
+}
 
 export const query = graphql`
   query ($id: String) {

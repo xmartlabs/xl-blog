@@ -315,6 +315,10 @@
   }
 }
 
+.newsletterAndMorBlogs {
+  background-color: $blueSix;
+ }
+
 // Responsive Design
 
 @media screen and (max-width: map-get($map: $screen-breakpoint, $key: sm)) {
