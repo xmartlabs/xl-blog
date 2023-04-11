@@ -133,8 +133,8 @@ const BlogPost = ({ data }) => {
     return null;
   };
 
-  let disqusConfig = {
-    url: `${data.mdx.frontmatter.permalink}`,
+  const disqusConfig = {
+    url: `${window.location.origin}${data.mdx.frontmatter.permalink}`,
     identifier: data.mdx.slug,
     title: data.mdx.frontmatter.title,
   }
@@ -184,6 +184,7 @@ const BlogPost = ({ data }) => {
         <h3 className={styles.disqusTitle}>Comments:</h3>
         <div id="disqus_thread">
           <Disqus config={disqusConfig} />
+          {console.log(<Disqus config={disqusConfig} />)}
         </div>
       </div>
     </div>
