@@ -36,6 +36,13 @@ const BlogPost = ({ data }) => {
     return '';
   }
 
+  const checkWindowOrigin = () => {
+    if (typeof window !== 'undefined') {
+      return window.location.origin;
+    }
+    return '';
+  }
+
   const shareBlogPostLinks = [
     {
       path: `https://twitter.com/intent/tweet?url=URL&text=${checkWindow()}`, 
@@ -134,7 +141,7 @@ const BlogPost = ({ data }) => {
   };
 
   const disqusConfig = {
-    url: `${window.location.origin}${data.mdx.frontmatter.permalink}`,
+    url: `${checkWindowOrigin()}${data.mdx.frontmatter.permalink}`,
     identifier: data.mdx.slug,
     title: data.mdx.frontmatter.title,
   }
