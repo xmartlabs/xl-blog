@@ -191,7 +191,6 @@ const BlogPost = ({ data }) => {
         <h3 className={styles.disqusTitle}>Comments:</h3>
         <div id="disqus_thread">
           <Disqus config={disqusConfig} />
-          {console.log(<Disqus config={disqusConfig} />)}
         </div>
       </div>
     </div>
