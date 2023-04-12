@@ -1,5 +1,6 @@
 import * as React from 'react';
 import { useContext, useEffect, useState, useRef } from 'react';
+import addToMailchimp from 'gatsby-plugin-mailchimp';
 
 import { MDXRenderer } from 'gatsby-plugin-mdx';
 import { graphql, Link } from 'gatsby';
@@ -13,7 +14,6 @@ import { SocialElement } from '../components/social-element';
 import { TwitterIcon, Facebook, Linkedin, ClockIcon, PinkCircle } from "../components/icons";
 import { MoreBlogsSection } from '../components/more-blogs-section';
 import { Tags } from '../components/tags/tags';
-import { XlNewsletter } from '../components/xl-newsletter';
 
 import * as styles from '../css/blog-post.module.scss';
 
@@ -133,6 +133,12 @@ const BlogPost = ({ data }) => {
     return null;
   };
 
+  const [ email, setEmail ] = useState('');
+
+  const _handleSubmit = async (e) => {
+    const result = await addToMailchimp(email)
+  };
+
   return (
     <div onScroll={handleScroll}>
       <div className={styles.indexContainer}>
@@ -175,8 +181,9 @@ const BlogPost = ({ data }) => {
       </div>
       <div className={styles.newsletterAndMorBlogs}>
         <MoreBlogsSection data={data} refMoreFrom={refMoreFrom} title={categoryBlog.displayName} />
-        <XlNewsletter />
       </div>
+      <form onSubmit={_handleSubmit(email)}>
+      </form>
     </div>
   );
 }
