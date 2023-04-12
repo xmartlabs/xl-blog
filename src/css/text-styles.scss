@@ -24,6 +24,7 @@ $text-line-heights: (
 $text-sizes: (
   headingOneBig: 4.5rem,
   headingOne: 2.8rem,
+  commentTitle: 2.4rem,
   headingTwoBig: 4rem,
   headingTwo: 1.9rem,
   headingTwoSeparated: 1.8rem,
@@ -41,7 +42,7 @@ $text-colors: (
   neutral100: $neutral100,
   defaultGray: $defaultGray,
   grayThree: $grayThree,
-
+  grayFour: $grayFour,
 );
 
 //---- TEXT ----
@@ -126,6 +127,12 @@ $text-colors: (
   font-size: map-get($map: $text-sizes, $key: pragraph);
   line-height: map-get($map: $text-line-heights, $key: headingTwo);
   font-weight: map-get($map: $font-weights, $key: boldWeight500);
+}
+
+@mixin text__comment__title {
+  font-size: map-get($map: $text-sizes, $key: commentTitle);
+  line-height: map-get($map: $text-line-heights, $key: headingOne);
+  font-weight: map-get($map: $font-weights, $key: boldWeight900);
 }
 
 @mixin text__big__links {
@@ -213,6 +220,11 @@ $text-colors: (
   &__link__blog {
     @include color-styles {
       @include text__link__blog;
+    }
+  }
+  &__comment__title {
+    @include color-styles {
+      @include text__comment__title;
     }
   }
   &__big__links {

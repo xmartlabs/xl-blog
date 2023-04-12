@@ -9,10 +9,6 @@
   opacity: 0;
 }
 
-.socialDisappear::after {
-  display: none;
-}
-
 .socialAppear {
   transition: transform 0.5s ease-in-out, opacity 0.5s ease-in-out;
   opacity: 100;
@@ -315,6 +311,17 @@
   }
 }
 
+// DISQUS
+
+.disqusSection {
+  padding: 0 6rem;
+  margin: 2rem 0 4rem 0;
+  
+  .disqusTitle {
+    @extend .text__comment__title__grayFour;
+  }
+}
+
 // Responsive Design
 
 @media screen and (max-width: map-get($map: $screen-breakpoint, $key: sm)) {
@@ -404,8 +411,12 @@
   .clockIcon {
     margin: 0 1rem 0 0;
   }
-
+  
   .indexSubContainer {
     display: none;
+  }
+
+  .disqusSection {
+    padding: 0 1rem;
   }
 }
