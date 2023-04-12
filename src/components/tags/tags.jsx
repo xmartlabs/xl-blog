@@ -5,8 +5,8 @@ import { classnames } from "../../helpers";
 
 import * as styles from "./tags.module.scss";
 
-const Tags = ({ blogTags }) => (
-  <div className={styles.tagsContainer}>
+const Tags = ({ blogTags, className }) => (
+  <div className={classnames(styles.tagsContainer, className)}>
     {blogTags && blogTags.slice(0, 4).map((post) => 
       <a className={classnames(styles.tag, "text__paragraph__small__grayTwo")}>
         {post}
@@ -17,6 +17,7 @@ const Tags = ({ blogTags }) => (
 
 Tags.propTypes = {
   blogTags: PropTypes.arrayOf(PropTypes.string).isRequired,
+  className: PropTypes.string,
 };
 
 Tags.defaultProps = {
