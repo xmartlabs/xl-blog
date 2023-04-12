@@ -25,8 +25,8 @@ const Card = ({ data, className }) => {
       <article key={data.id} className={styles.container}>
         <div className={styles.imageContainer}>
           <img className={styles.styledImage} src={urlImages()}/>
+          <Category data={categoryBlog.displayName} className={styles.blogListCategory} />
         </div>
-        <Category data={categoryBlog.displayName}/>
         <h1 className="text__heading__two__separated__black">
           {data.frontmatter.title}
         </h1>

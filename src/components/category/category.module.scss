@@ -1,17 +1,11 @@
 @import "/src/css/colors.scss";
+@import "/src/css/variables.scss";
 
 .categoryWrapper {
-  display: flex;
-  flex-direction: row;
-  gap: 0.3rem;
-  color: $defaultYellow;
-
-  margin-bottom: 1.5rem;
-  align-items: center;
-}
-
-.styledIcon {
-  top: 0.4em;
-  height: 0.438rem;
-  width: 0.438rem;
+  border: 0;
+  border-radius: 6.49875px;
+  height: 1.4rem;
+  margin-right: 2rem;
+  text-align: center;
+  font-family: "Gilroy", Arial, sans-serif;
 }

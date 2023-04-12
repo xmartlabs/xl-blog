@@ -1,5 +1,11 @@
 @import "/src/css/variables";
 
+.tagsContainer {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+
 .tag {
   border: 1.5px solid rgba(155, 155, 155, 0.5);
   border-radius: 6.49875px;
@@ -13,10 +19,4 @@
 
 .tag::first-letter {
   text-transform: capitalize;
-}
-
-.tagsContainer {
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
 }
