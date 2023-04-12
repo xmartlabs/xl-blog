@@ -1,6 +1,7 @@
 import * as React from 'react';
 import { useContext, useEffect, useState, useRef } from 'react';
 import addToMailchimp from 'gatsby-plugin-mailchimp';
+import { Disqus } from 'gatsby-plugin-disqus';
 
 import { MDXRenderer } from 'gatsby-plugin-mdx';
 import { graphql, Link } from 'gatsby';
@@ -32,6 +33,13 @@ const BlogPost = ({ data }) => {
   const checkWindow = () => {
     if (typeof window !== 'undefined') {
       return window.location.pathname;
+    }
+    return '';
+  }
+
+  const checkWindowOrigin = () => {
+    if (typeof window !== 'undefined') {
+      return window.location.origin;
     }
     return '';
   }
@@ -87,8 +95,8 @@ const BlogPost = ({ data }) => {
 
   const handleScroll = () => {
     const moreFromXlSize = refMoreFrom?.current?.clientHeight || 0;
-    const isInbottom = Math.ceil(window.innerHeight + window.scrollY + moreFromXlSize + 200) >= document.documentElement.scrollHeight;
-    const isInTop = document.documentElement.scrollTop < 800;
+    const isInbottom = Math.ceil(window.innerHeight + window.scrollY + moreFromXlSize + 1000) >= document.documentElement.scrollHeight;
+    const isInTop = document.documentElement.scrollTop < 1200;
     
     if (isInbottom) {
       setDisappearSocial(true);
@@ -138,6 +146,12 @@ const BlogPost = ({ data }) => {
   const _handleSubmit = async (e) => {
     const result = await addToMailchimp(email)
   };
+  
+  const disqusConfig = {
+    url: `${checkWindowOrigin()}${data.mdx.frontmatter.permalink}`,
+    identifier: data.mdx.slug,
+    title: data.mdx.frontmatter.title,
+  }
 
   return (
     <div onScroll={handleScroll}>
@@ -184,6 +198,12 @@ const BlogPost = ({ data }) => {
       </div>
       <form onSubmit={_handleSubmit(email)}>
       </form>
+      <div className={styles.disqusSection}>
+        <h3 className={styles.disqusTitle}>Comments:</h3>
+        <div id="disqus_thread">
+          <Disqus config={disqusConfig} />
+        </div>
+      </div>
     </div>
   );
 }
