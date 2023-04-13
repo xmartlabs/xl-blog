@@ -141,10 +141,8 @@ const BlogPost = ({ data }) => {
     return null;
   };
 
-  const [ email, setEmail ] = useState('');
-
   const _handleSubmit = async (e) => {
-    const result = await addToMailchimp(email)
+    const result = await addToMailchimp(email);
   };
   
   const disqusConfig = {
