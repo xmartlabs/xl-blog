@@ -29,6 +29,7 @@ const BlogPost = ({ data }) => {
   const categoryBlog = useCategory(data.mdx.frontmatter.category);
   const [ selectLink, setSelectLink ] = useState('');
   const [ disappearIndex, setDisappearIndex ] = useState(false);
+  const [result, setResult] = useState(null);
 
   const checkWindow = () => {
     if (typeof window !== 'undefined') {
@@ -142,7 +143,8 @@ const BlogPost = ({ data }) => {
   };
 
   const _handleSubmit = async (e) => {
-    const result = await addToMailchimp(email);
+    e.preventDefault();
+    setResult(await addToMailchimp(email));
   };
   
   const disqusConfig = {
