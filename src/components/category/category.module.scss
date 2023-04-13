@@ -1,5 +1,6 @@
 @import "/src/css/colors.scss";
 @import "/src/css/variables.scss";
+@import "/src/css/variables.scss";
 
 .categoryWrapper {
   border: 0;
@@ -7,5 +8,5 @@
   height: 1.4rem;
   margin-right: 2rem;
   text-align: center;
-  font-family: "Gilroy", Arial, sans-serif;
+  font-family: $primary-font, serif;
 }
