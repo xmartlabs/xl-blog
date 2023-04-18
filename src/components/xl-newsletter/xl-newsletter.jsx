@@ -28,7 +28,6 @@ const XlNewsletter = () => (
           <input 
             placeholder="Type your email..." 
             className={classnames(styles.inputNewsletter, "text__placeholder__grayThree")} 
-            onChange={() => {}}
             label="Email"
             type="email"
             name="email"
