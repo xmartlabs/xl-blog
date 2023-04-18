@@ -9,7 +9,7 @@ import { useCategory, classnames } from '../../helpers';
 
 import * as styles from "./card.module.scss";
 
-const Card = ({ data, className }) => {
+const Card = ({ data, className, category }) => {
   const categoryBlog = useCategory(data.frontmatter.category);
 
   const urlImages = () => {
@@ -25,7 +25,7 @@ const Card = ({ data, className }) => {
       <article key={data.id} className={styles.container}>
         <div className={styles.imageContainer}>
           <img className={styles.styledImage} src={urlImages()}/>
-          <Category data={categoryBlog.displayName} className={styles.blogListCategory} />
+          {category === "home" && <Category data={categoryBlog.displayName} className={styles.blogListCategory} />}
         </div>
         <h1 className="text__heading__two__separated__black">
           {data.frontmatter.title}

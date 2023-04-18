@@ -19,7 +19,7 @@ const BlogList = ({ pageContext, data }) => {
   return (
     <>
       <div className={blogListStyles.container} >
-        {edges.map(({ node }) => <Card data={node} key={node.id} /> )}
+        {edges.map(({ node }) => <Card data={node} key={node.id} category={BannerType.home} /> )}
       </div>
       <Pager pageContext={pageContext}/>
     </>

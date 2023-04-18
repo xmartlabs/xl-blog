@@ -26,6 +26,7 @@
   flex-direction: row;
   position: static;
   align-items: center;
+  width: 100%;
 }
 
 .sharePosition {
@@ -88,7 +89,7 @@
 }
 
 .titleContainer {
-  margin: 3rem 0;
+  margin: 0.5rem 0;
 }
 
 .authorContainer {
@@ -147,10 +148,6 @@
   width: 25%;
   line-height: 1.6rem;
   margin-bottom: 1rem;
-}
-
-.tags {
-  width: 75%;
 }
 
 // Main Image
@@ -317,6 +314,16 @@
   }
 }
 
+// Blog bottoms elements
+
+.blogBottomElements {
+  display: flex;
+  flex-direction: row-reverse;
+  width: 100%;
+  align-items: baseline;
+  justify-content: flex-start;
+}
+
 // DISQUS
 
 .disqusSection {
@@ -345,7 +352,7 @@
   } 
 
   .titleContainer {
-    margin: 2rem 0;
+    margin: 0;
   }
 
   .blogInfoContainer {
@@ -419,6 +426,8 @@
 
   .tags {
     width: 100%;
+    justify-content: center;
+    margin-top: 1rem;
   }
   
   .socialBottom {
@@ -431,6 +440,10 @@
   
   .indexSubContainer {
     display: none;
+  }
+
+  .blogBottomElements {
+    flex-direction: column;
   }
 
   .disqusSection {

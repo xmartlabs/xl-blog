@@ -155,7 +155,6 @@ const BlogPost = ({ data }) => {
         <div className={styles.bannerContainer}>
           <div className={styles.categoryTagsContainer}>
             <Category data={categoryBlog.displayName} className={styles.category}/>
-            <Tags blogTags={data.mdx.frontmatter.tags} className={styles.tags} />
           </div>
           <h1 className={classnames(styles.titleContainer, "text__heading__one__black")}>
             { data.mdx.frontmatter.title }
@@ -182,11 +181,14 @@ const BlogPost = ({ data }) => {
             </MDXRenderer>
           </div>
         </div>
-      <div className={styles.socialBottomContainer}>
-        <span className={classnames('text__paragraph__bold__grayTwo', styles.sharePosition)}>Share:</span>
-        <SocialElement className={classnames(styles.socialBottom, styles.blogIcons)} links={shareXlProfileLinks} />
-      </div>
-      <MoreBlogsSection data={data} refMoreFrom={refMoreFrom} title={categoryBlog.displayName} />
+        <div className={styles.blogBottomElements}>
+          <div className={styles.socialBottomContainer}>
+            <span className={classnames('text__paragraph__bold__grayTwo', styles.sharePosition)}>Share:</span>
+            <SocialElement className={classnames(styles.socialBottom, styles.blogIcons)} links={shareXlProfileLinks} />
+          </div>
+          <Tags blogTags={data.mdx.frontmatter.tags} className={styles.tags} />
+        </div>
+      <MoreBlogsSection data={data} refMoreFrom={refMoreFrom} title={categoryBlog.displayName} category={BannerType.blog}/>
       <div className={styles.disqusSection}>
         <h3 className={styles.disqusTitle}>Comments:</h3>
         <div id="disqus_thread">
