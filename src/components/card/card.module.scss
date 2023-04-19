@@ -1,5 +1,6 @@
 @import "/src/css/colors.scss";
 @import "/src/css/variables.scss";
+@import "/src/css/text-styles.scss";
 
 .container {
   width: 100%;
@@ -13,6 +14,22 @@
   margin-bottom: 1.5rem;
   position: relative;
   padding-bottom: 56.25%;
+
+  p {
+    position: absolute;
+    top: 14.5rem;
+    left: 1rem;
+  }
+}
+
+.blogListCategory {
+  @extend .text__category__bold__black;
+  border: 1.5px solid $neutral100;
+  background-color: $neutral100;
+  height: 1.8rem;
+  padding: 0 1rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1rem;
 }
 
 .styledImage {
@@ -40,11 +57,11 @@
     justify-content: center;
   }
 
-  .styledImage {
-    height: 12rem;
-  }
-
   .imageContainer {
     width: 100%;
+
+    p {
+      top: 9.5rem;
+    }
   }
 }

@@ -19,6 +19,7 @@ $text-line-heights: (
   headingThree: 1.5rem,
   headingFour: 1.3rem,
   paragraphSmall: 1rem,
+  categoryBold: 1.9rem,
 );
 
 $text-sizes: (
@@ -31,8 +32,9 @@ $text-sizes: (
   headingThree: 1.6rem,
   headingFour: 1.3rem,
   authorName: 1.2rem,
-  paragraph: 1.1rem,
-  paragraphSmall: 0.7rem,
+  paragraph: 1.4rem,
+  paragraphSmall: 1rem,
+  categoryBold: 0.8rem,
 );
 
 $text-colors: (  
@@ -73,7 +75,7 @@ $text-colors: (
 
 @mixin text__paragraph {
   font-size: map-get($map: $text-sizes, $key: paragraph);
-  line-height: map-get($map: $text-line-heights, $key: headingTwo);
+  line-height: map-get($map: $text-line-heights, $key: headingTwoSeparated);
 }
 
 @mixin text__paragraph__bold {
@@ -83,7 +85,7 @@ $text-colors: (
 }
 
 @mixin text__label__bold {
-  font-size: map-get($map: $text-sizes, $key: paragraph);
+  font-size: map-get($map: $text-sizes, $key: paragraphSmall);
   font-weight: map-get($map: $font-weights, $key: boldWeight900);
   line-height: map-get($map: $text-line-heights, $key: headingFour);
 }
@@ -138,6 +140,12 @@ $text-colors: (
 @mixin text__big__links {
   font-size: map-get($map: $text-sizes, $key: authorName);
   font-weight: map-get($map: $font-weights, $key: boldWeight300);
+}
+
+@mixin text__category__bold {
+  font-size: map-get($map: $text-sizes, $key: categoryBold);
+  font-weight: map-get($map: $font-weights, $key: boldWeight900);
+  line-height: map-get($map: $text-line-heights, $key: categoryBold);
 }
 
 //---- COLOR ---
@@ -230,6 +238,11 @@ $text-colors: (
   &__big__links {
     @include color-styles {
       @include text__big__links;
+    }
+  }
+  &__category__bold {
+    @include color-styles {
+      @include text__category__bold;
     }
   }
 }

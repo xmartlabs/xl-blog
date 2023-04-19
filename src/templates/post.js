@@ -155,7 +155,7 @@ const BlogPost = ({ data }) => {
         <div className={styles.bannerContainer}>
           <div className={styles.categoryTagsContainer}>
             <Category data={categoryBlog.displayName} className={styles.category}/>
-            <Tags blogTags={data.mdx.frontmatter.tags} />
+            <Tags blogTags={data.mdx.frontmatter.tags} className={styles.tags} />
           </div>
           <h1 className={classnames(styles.titleContainer, "text__heading__one__black")}>
             { data.mdx.frontmatter.title }
