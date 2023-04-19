@@ -52,7 +52,7 @@
   position: fixed;
   top: 16rem;
   bottom: 2rem;
-  width: 20rem;
+  width: 22rem;
   margin-right: 6rem;
   display: flex;
   flex-direction: column;
@@ -66,14 +66,15 @@
   margin-bottom: 2.5rem;
   height: 3rem;
   overflow: hidden;
+  padding-left: 1.5rem;
 }
 
 .selectedLink {
   font-weight: $font-bold;
-}
-
-.pinkCircle {
-  margin-right: 2rem;
+  background-image: url("/images/indexBlogDot.png");
+  background-position: 0 0.4rem;
+  background-size: 0.5rem 0.5rem;
+  background-repeat: no-repeat;
 }
 
 .disappearIndex {

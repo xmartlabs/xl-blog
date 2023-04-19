@@ -11,7 +11,7 @@ import { classnames, findTitles, useCategory } from "../helpers";
 import { AuthorSerializer } from '../serializer';
 import { AppContext, BannerType } from '../config/context';
 import { SocialElement } from '../components/social-element';
-import { TwitterIcon, Facebook, Linkedin, ClockIcon, PinkCircle } from "../components/icons";
+import { TwitterIcon, Facebook, Linkedin, ClockIcon} from "../components/icons";
 import { MoreBlogsSection } from '../components/more-blogs-section';
 import { Tags } from '../components/tags/tags';
 
@@ -28,6 +28,7 @@ const BlogPost = ({ data }) => {
   const categoryBlog = useCategory(data.mdx.frontmatter.category);
   const [ selectLink, setSelectLink ] = useState('');
   const [ disappearIndex, setDisappearIndex ] = useState(false);
+  const [ titleOnView, setTitleOnView ] = useState('');
 
   const checkWindow = () => {
     if (typeof window !== 'undefined') {
@@ -86,8 +87,13 @@ const BlogPost = ({ data }) => {
       passive: true
     });
 
+    window.addEventListener('scroll', getActiveTitle, {
+      passive: true
+    });
+
     return () => {
       window.removeEventListener('scroll', handleScroll);
+      window.removeEventListener('scroll', getActiveTitle);
     };
   }, []);
 
@@ -113,6 +119,26 @@ const BlogPost = ({ data }) => {
     }
   };
 
+  const getActiveTitle = () => {
+    if (typeof window !== 'undefined' && typeof window.document !== "undefined") {
+      const postContainer = document.getElementById('postContainer');
+      if (postContainer) {
+        const elementList = Array.from(postContainer.childNodes);
+        const titles = findTitles(elementList);
+        const scrollPosition = window.scrollY;
+        let activeTitle = titles[0];
+        titles.forEach(title => {
+          const titleTop = title.getBoundingClientRect().top + window.pageYOffset - 500;
+          if (scrollPosition >= titleTop) {
+            activeTitle = title;
+          }
+        });
+        setTitleOnView(activeTitle?.textContent);
+        setSelectLink('');
+      }
+    }
+  };
+
   const getTitles = () => {
     if (typeof window !== 'undefined' && typeof window.document !== "undefined") {
       const postContainer = document.getElementById('postContainer');
@@ -122,14 +148,14 @@ const BlogPost = ({ data }) => {
         return (
           <div className={classnames({[styles.disappearIndex]: disappearIndex}, styles.indexSubContainer)}>
             {titlesList.map((title) => 
-              <><div>{title.id === selectLink && <PinkCircle className={styles.pinkCircle} />}</div><a href={"#" + title.id} key={title.id} onClick={() => setSelectLink(title.id)}
+              <a href={"#" + title.id} key={title.id} onClick={() => setSelectLink(title.id)}
                 className={classnames(
-                  { [styles.selectedLink]: title.id === selectLink },
+                  { [styles.selectedLink]: title.id === selectLink || titleOnView === title.id},
                   styles.links
                 )}
               >
                 {title.innerHTML.length > 55 ? title.innerHTML.slice(0, 55) + "..." : title.innerHTML}
-              </a></>
+              </a>
             )}
           </div>
         );    
@@ -146,7 +172,7 @@ const BlogPost = ({ data }) => {
   }
 
   return (
-    <div onScroll={handleScroll}>
+    <div onScroll={handleScroll} id='containerDiv'>
       <div className={styles.indexContainer}>
         {getTitles()}
       </div>
