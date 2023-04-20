@@ -187,7 +187,8 @@ const BlogPost = ({ data }) => {
           <div className={styles.authorContainer}>
             <div className={styles.authorInformation}>
               <img src={`images/${authorBlog.image}`} alt="" className={styles.authorImage} />
-              <Link className={classnames(styles.authorName, "text__paragraph__bold__black")} to={`/authors/${ _.kebabCase(authorBlog.author) }`}>{ authorBlog.displayName }</Link>
+              <Link className={classnames(styles.authorName, "text__paragraph__bold__black")} to={null}>{ authorBlog.displayName }</Link>
+              {/* The author name links to a page which is not created yet, the link taht you will need to use is: `authors/${ _.kebabCase(authorBlog.author) }` */}
             </div>
             <div className={styles.blogInfoContainer}>
               <label className={classnames(styles.postDate, "text__label__bold__grayTwo")} >{data.mdx.frontmatter.date}</label>
