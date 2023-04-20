@@ -42,42 +42,40 @@ exports.createPages = async ({actions, graphql, reporter}) => {
     const authorTemplate = path.resolve("src/templates/authors.js")
     const postTemplate = path.resolve("src/templates/post.js")
 
-    const result = await graphql(`
-    {
-      tagsGroup: allMdx(limit: 2000) {
-        group(field: frontmatter___tags) {
-          fieldValue
+    const result = await graphql(`{
+  tagsGroup: allMdx(limit: 2000) {
+    group(field: {frontmatter: {tags: SELECT}}) {
+      fieldValue
+    }
+  }
+  categoriesGroup: allMdx(limit: 2000) {
+    group(field: {frontmatter: {category: SELECT}}) {
+      fieldValue
+    }
+  }
+  authorsGroup: allMdx(limit: 2000) {
+    group(field: {frontmatter: {author: SELECT}}) {
+      fieldValue
+    }
+  }
+  posts: allMdx(sort: {frontmatter: {date: DESC}}) {
+    edges {
+      node {
+        id
+        frontmatter {
+          date(formatString: "MMMM D, YYYY")
+          title
+          author
+          category
+          tags
+          permalink
         }
-      }
-      categoriesGroup: allMdx(limit: 2000) {
-        group(field: frontmatter___category) {
-          fieldValue
-        }
-      }
-      authorsGroup: allMdx(limit: 2000) {
-        group(field: frontmatter___author) {
-          fieldValue
-        }
-      }
-      posts: allMdx(sort: {fields: frontmatter___date, order: DESC})  {
-        edges {
-          node {
-            id
-            frontmatter {
-              date(formatString: "MMMM D, YYYY")
-              title
-              author
-              category
-              tags
-              permalink
-            }
-            body
-            slug
-          }
-        }
+        body
+        slug
       }
     }
-  `)
+  }
+}`)
     // handle errors
     if (result.errors) {
         reporter.panicOnBuild(`Error while running GraphQL query.`)

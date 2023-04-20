@@ -55,22 +55,20 @@ Authors.propTypes = {
 
 export default Authors
 
-export const pageQuery = graphql`
-  query($author: String) {
-    allMdx(
-      limit: 2000
-      sort: { fields: [frontmatter___date], order: DESC }
-      filter: { frontmatter: { author: { eq: $author } } }
-    ) {
-      totalCount
-      edges {
-        node {
-          frontmatter {
-            title
-            permalink
-          }
+export const pageQuery = graphql`query ($author: String) {
+  allMdx(
+    limit: 2000
+    sort: {frontmatter: {date: DESC}}
+    filter: {frontmatter: {author: {eq: $author}}}
+  ) {
+    totalCount
+    edges {
+      node {
+        frontmatter {
+          title
+          permalink
         }
       }
     }
   }
-`
+}`

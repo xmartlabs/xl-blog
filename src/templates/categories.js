@@ -55,21 +55,19 @@ Categories.propTypes = {
 
 export default Categories
 
-export const pageQuery = graphql`
-  query($category: String) {
-    allMdx(
-      limit: 2000
-      sort: { fields: [frontmatter___date], order: DESC }
-      filter: { frontmatter: { category: { eq: $category } } }
-    ) {
-      totalCount
-      edges {
-        node {
-          frontmatter {
-            title
-          }
+export const pageQuery = graphql`query ($category: String) {
+  allMdx(
+    limit: 2000
+    sort: {frontmatter: {date: DESC}}
+    filter: {frontmatter: {category: {eq: $category}}}
+  ) {
+    totalCount
+    edges {
+      node {
+        frontmatter {
+          title
         }
       }
     }
   }
-`
+}`
