@@ -82,7 +82,7 @@ function Layout({ children }) {
                   {!isMobile && <NavMenu />}
                 </div>
                 {!isMobile && 
-                <StyledGetStartedButton id="header-getintouch" href="https://form.typeform.com/to/c7G2RUWm" >
+                <StyledGetStartedButton id="header-getintouch" href={process.env.GATSBY_CONTACT_FORM}>
                   <StyledGetStartedTextButton>GET STARTED</StyledGetStartedTextButton>
                 </StyledGetStartedButton>
                 }
