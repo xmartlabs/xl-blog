@@ -214,7 +214,7 @@ const BlogPost = ({ data }) => {
           </div>
           <Tags blogTags={data.mdx.frontmatter.tags} className={styles.tags} />
         </div>
-      <MoreBlogsSection data={data} refMoreFrom={refMoreFrom} title={categoryBlog.displayName} withCategory={true}/>
+      <MoreBlogsSection data={data} refMoreFrom={refMoreFrom} title={categoryBlog.displayName} withCategory={false}/>
       <div className={styles.disqusSection}>
         <h3 className={styles.disqusTitle}>Comments:</h3>
         <div id="disqus_thread">
