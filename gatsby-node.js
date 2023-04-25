@@ -61,6 +61,9 @@ exports.createPages = async ({actions, graphql, reporter}) => {
   posts: allMdx(sort: {frontmatter: {date: DESC}}) {
     edges {
       node {
+        fields {
+          slug
+        }
         id
         frontmatter {
           date(formatString: "MMMM D, YYYY")
@@ -71,7 +74,6 @@ exports.createPages = async ({actions, graphql, reporter}) => {
           permalink
         }
         body
-        slug
       }
     }
   }
@@ -137,10 +139,11 @@ exports.createPages = async ({actions, graphql, reporter}) => {
         });
     });
 
+
     posts.forEach(post => {
       createPage({
         path: post.node.frontmatter.permalink,
-        component: postTemplate,
+        component: path.resolve(`./src/templates/post.js`),
         context: {
           id: post.node.id,
         }

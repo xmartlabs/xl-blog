@@ -200,31 +200,20 @@ const BlogPost = ({ data }) => {
 export const query = graphql`
   query ($id: String) {
     mdx(id: {eq: $id}) {
+      fields {
+        slug
+      }
       frontmatter {
         title
-        date(formatString: "MMMM D, YYYY")
         author
         category
         tags
         permalink
         thumbnail
-      }
-      body
-      timeToRead
-      slug
-      relatedPosts {
-        frontmatter {
-          title
-          date(formatString: "MMMM D, YYYY")
-          author
-          category
-          tags
-          permalink
-          thumbnail
-        }
+        date(formatString: "")
       }
     }
   }
 `
 
-export default BlogPost; 
+export {BlogPost}; 

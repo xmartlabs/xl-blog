@@ -33,6 +33,9 @@ export const blogListQuery = graphql`query blogListQuery($skip: Int!, $limit: In
     totalCount
     edges {
       node {
+        fields {
+          slug
+        }
         id
         frontmatter {
           date(formatString: "MMMM D, YYYY")
@@ -44,7 +47,6 @@ export const blogListQuery = graphql`query blogListQuery($skip: Int!, $limit: In
           thumbnail
         }
         body
-        slug
       }
     }
   }

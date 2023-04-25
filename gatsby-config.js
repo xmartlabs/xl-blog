@@ -12,6 +12,7 @@ module.exports = {
     "gatsby-plugin-react-helmet",
     "gatsby-plugin-sitemap",
     "gatsby-plugin-instagram-embed",
+    "gatsby-plugin-slug",
     {
       resolve: `gatsby-plugin-disqus`,
       options: {
