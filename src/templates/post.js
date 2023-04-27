@@ -1,9 +1,8 @@
 import * as React from 'react';
 import { useContext, useEffect, useState, useRef } from 'react';
 import { Disqus } from 'gatsby-plugin-disqus';
-
-import { MDXRenderer } from 'gatsby-plugin-mdx';
 import { graphql, Link } from 'gatsby';
+import { ReactMarkdown } from 'react-markdown/lib/react-markdown';
 
 import AuthorsYAMLData from "../../content/authors.yaml";
 import { Category } from "../components/category";
@@ -19,7 +18,7 @@ import * as styles from '../css/blog-post.module.scss';
 
 const _ = require("lodash");
 
-const BlogPost = ({ data }) => {
+const BlogPost = ({ data, children }) => {
   const author = AuthorsYAMLData.find(({ author }) => (author === data.mdx.frontmatter.author));
   const authorBlog = AuthorSerializer.deSerialize(author);
   const { setState } = useContext(AppContext);
@@ -169,7 +168,6 @@ const BlogPost = ({ data }) => {
               <label className={classnames(styles.postDate, "text__label__bold__grayTwo")} >{data.mdx.frontmatter.date}</label>
               <ClockIcon className={styles.clockIcon} />
               <label className={classnames("text__label__bold__grayTwo", styles.timeToRead)} >
-                {data.mdx.timeToRead} min read
               </label>
             </div>
           </div>
@@ -177,16 +175,14 @@ const BlogPost = ({ data }) => {
         <div>
           <img src={data.mdx.frontmatter.thumbnail} onError={(event) => event.target.src = '../../images/image.png'} className={styles.blogMainImage} />
           <div className={styles.bodyPostContainer} id="postContainer">
-            <MDXRenderer>
-              {data.mdx.body}
-            </MDXRenderer>
+            <ReactMarkdown>{data.mdx.body}</ReactMarkdown>
           </div>
         </div>
       <div className={styles.socialBottomContainer}>
         <span className={classnames('text__paragraph__bold__grayTwo', styles.sharePosition)}>Share:</span>
         <SocialElement className={classnames(styles.socialBottom, styles.blogIcons)} links={shareXlProfileLinks} />
       </div>
-      <MoreBlogsSection data={data} refMoreFrom={refMoreFrom} title={categoryBlog.displayName} />
+      <MoreBlogsSection relatedPosts={data.mdx.relatedPosts} refMoreFrom={refMoreFrom} title={categoryBlog.displayName} />
       <div className={styles.disqusSection}>
         <h3 className={styles.disqusTitle}>Comments:</h3>
         <div id="disqus_thread">
@@ -198,22 +194,34 @@ const BlogPost = ({ data }) => {
 };
 
 export const query = graphql`
-  query ($id: String) {
-    mdx(id: {eq: $id}) {
-      fields {
-        slug
-      }
+query ($id: String) {
+  mdx(id: {eq: $id}) {
+    frontmatter {
+      title
+      date(formatString: "MMMM D, YYYY")
+      author
+      category
+      tags
+      permalink
+      thumbnail
+    }
+    fields {
+      slug
+    }
+    body
+    relatedPosts {
       frontmatter {
         title
+        date(formatString: "MMMM D, YYYY")
         author
         category
         tags
         permalink
         thumbnail
-        date(formatString: "")
       }
     }
   }
+}
 `
 
-export {BlogPost}; 
+export default BlogPost; 

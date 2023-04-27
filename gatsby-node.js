@@ -12,8 +12,8 @@ exports.createResolvers = ({ createResolvers }) => {
     Mdx: {
       relatedPosts: {
         type: ['Mdx'],
-        resolve: (source, args, context, info) => {
-          return context.nodeModel.runQuery({
+        resolve: async (source, args, context, info) => {
+          return await context.nodeModel.runQuery({
             query: {
               filter: {
                 id: {
@@ -42,42 +42,45 @@ exports.createPages = async ({actions, graphql, reporter}) => {
     const authorTemplate = path.resolve("src/templates/authors.js")
     const postTemplate = path.resolve("src/templates/post.js")
 
-    const result = await graphql(`{
-  tagsGroup: allMdx(limit: 2000) {
-    group(field: {frontmatter: {tags: SELECT}}) {
-      fieldValue
-    }
-  }
-  categoriesGroup: allMdx(limit: 2000) {
-    group(field: {frontmatter: {category: SELECT}}) {
-      fieldValue
-    }
-  }
-  authorsGroup: allMdx(limit: 2000) {
-    group(field: {frontmatter: {author: SELECT}}) {
-      fieldValue
-    }
-  }
-  posts: allMdx(sort: {frontmatter: {date: DESC}}) {
-    edges {
-      node {
-        fields {
-          slug
+    const result = await graphql(`
+    {
+      tagsGroup: allMdx(limit: 2000) {
+        group(field: {frontmatter: {tags: SELECT}}) {
+          fieldValue
         }
-        id
-        frontmatter {
-          date(formatString: "MMMM D, YYYY")
-          title
-          author
-          category
-          tags
-          permalink
-        }
-        body
       }
-    }
-  }
-}`)
+      categoriesGroup: allMdx(limit: 2000) {
+        group(field: {frontmatter: {category: SELECT}}) {
+          fieldValue
+        }
+      }
+      authorsGroup: allMdx(limit: 2000) {
+        group(field: {frontmatter: {author: SELECT}}) {
+          fieldValue
+        }
+      }
+      posts: allMdx(sort: {frontmatter: {date: DESC}}) {
+        edges {
+          node {
+            id
+            frontmatter {
+              date(formatString: "MMMM D, YYYY")
+              title
+              author
+              category
+              tags
+              permalink
+            }
+            fields {
+              slug
+            }
+            body
+          }
+        }
+      }
+    }    
+  `)
+
     // handle errors
     if (result.errors) {
         reporter.panicOnBuild(`Error while running GraphQL query.`)
@@ -139,11 +142,10 @@ exports.createPages = async ({actions, graphql, reporter}) => {
         });
     });
 
-
     posts.forEach(post => {
       createPage({
         path: post.node.frontmatter.permalink,
-        component: path.resolve(`./src/templates/post.js`),
+        component: postTemplate,
         context: {
           id: post.node.id,
         }

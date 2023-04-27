@@ -9,9 +9,7 @@ import { Card } from "../card";
 
 import * as styles from './more-blogs-section.module.scss';
 
-const MoreBlogsSection = ({ data, refMoreFrom, title }) => {
-  const { relatedPosts } = data.mdx;
-
+const MoreBlogsSection = ({ relatedPosts, refMoreFrom, title }) => {
   return (
     <div className={styles.moreFromXlContainer} ref={refMoreFrom} >
       <div className={styles.titleContainer}>
