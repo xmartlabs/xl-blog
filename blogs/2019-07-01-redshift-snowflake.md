@@ -79,14 +79,15 @@ The solution that Redshift provides to control this concurrency problem is to co
 
 <img width="100%" src="/images/redshift-snowflake/redshift_WML_Queues.png" />
 <br />
-<p style="text-align: center;"> (source: <a href="https://www.slideshare.net/AmazonWebServices/getting-started-with-amazon-redshift-72473371">Amazon</a>)</p>
+
+<p style={{ textAlign: 'center' }}> (source: <a href="https://www.slideshare.net/AmazonWebServices/getting-started-with-amazon-redshift-72473371">Amazon</a>)</p>
 
 On Snowflake, the solution is much simpler, as the data and compute layers are independent.
 On this platform, you can **create different warehouses for different proposes** and give each one different compute capacities if needed. This way, different queries to different warehouses won't compete, as they have separated resources.
 
 <img width="100%" src="/images/redshift-snowflake/snowflake_warehouses.png" />
 <br />
-<p style="text-align: center;"> (source: <a href="https://www.cazena.com/resource-topic/data-mart">Snowflake</a>)</p>
+<p style={{ textAlign: 'center' }}> (source: <a href="https://www.cazena.com/resource-topic/data-mart">Snowflake</a>)</p>
 
 ## Semi-Structured data
 

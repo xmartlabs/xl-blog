@@ -8,13 +8,12 @@ category: product-design
 permalink: /linkedin-for-work/
 ---
 
-<div class="separator" style="clear: both; text-align: center;">
+<div class="separator" style={{ textAlign: 'center', clear: 'both' }}>
   <img border="0" src="https://1.bp.blogspot.com/-7F7ZbSYtELs/VLRD2OddXpI/AAAAAAAAGPA/z_C5KpCE_88/s1600/POS-POSTA_1-caratula.jpg" height="133" width="320" />
 </div>
 <br/>
-<p>Since you’re probably reading this article in-between checking feeds, you already know that social media is now very present in your day-to-day activities. It can certainly be overwhelming. LinkedIn has chosen to incorporate social features; perhaps,
-    we suspect, in the spirit of having users return more frequently and remain in their network for longer lengths of time. &nbsp;We feel that important value networks, such as LinkedIn, should strive to stay true to their purpose, and not seek to become
-    another newsfeed.
+<p>
+Since you’re probably reading this article in-between checking feeds, you already know that social media is now very present in your day-to-day activities. It can certainly be overwhelming. LinkedIn has chosen to incorporate social features; perhaps,we suspect, in the spirit of having users return more frequently and remain in their network for longer lengths of time. &nbsp;We feel that important value networks, such as LinkedIn, should strive to stay true to their purpose, and not seek to becomeanother newsfeed.
 </p>
 
 <h2>What is LinkedIn for?</h2>
@@ -31,7 +30,7 @@ permalink: /linkedin-for-work/
 <p>
   We then made screenshots of LinkedIn’s mobile app, rethought how some of the features should work and sketched how we thought they should look. We think better on paper:
 </p>
-<div class="separator" style="clear: both; text-align: center;">
+<div class="separator" style={{ textAlign: 'center', clear: 'both' }}>
   <a class="fluid-box" href="https://3.bp.blogspot.com/-Tn0eiaxC6MA/VJhOH7IIEeI/AAAAAAAAFeE/PBsIaxi_CGM/s1600/profile1.jpg" title="">
     <img src="https://3.bp.blogspot.com/-Tn0eiaxC6MA/VJhOH7IIEeI/AAAAAAAAFeE/PBsIaxi_CGM/s1600/profile1.jpg" alt="" height="226" width="320" />
   </a>
@@ -40,20 +39,20 @@ permalink: /linkedin-for-work/
 <p>
   We decided to adopt a card-based approach. This is how the profile would look without any social feeds and a reorganized navigation. Stats are private to the user.
 </p>
-<div class="separator" style="clear: both; text-align: center;">
-  <a class="fluid-box" href="https://4.bp.blogspot.com/-iWOw2hR_m_Y/VJhOFZ_pbwI/AAAAAAAAFd8/Q9TC2MhD4v0/s1600/jobs1.jpg" imageanchor="1" style="margin-left: 1em; margin-right: 1em;">
+<div class="separator" style={{ textAlign: 'center', clear: 'both' }}>
+  <a class="fluid-box" href="https://4.bp.blogspot.com/-iWOw2hR_m_Y/VJhOFZ_pbwI/AAAAAAAAFd8/Q9TC2MhD4v0/s1600/jobs1.jpg" imageanchor="1" style={{ marginLeft: '1em', marginRight: '1em' }}>
     <img border="0" src="https://4.bp.blogspot.com/-iWOw2hR_m_Y/VJhOFZ_pbwI/AAAAAAAAFd8/Q9TC2MhD4v0/s1600/jobs1.jpg" height="226" width="320" />
   </a>
 </div>
 <p>
 The abbreviated Job card, including only the essential information.
 </p>
-<div class="separator" style="clear: both; text-align: center;">
-  <a class="fluid-box" href="https://2.bp.blogspot.com/-fLD7Hg0S9qk/VJhOKG1s0xI/AAAAAAAAFeM/Hn2hJjGuBro/s1600/tinder.jpg" imageanchor="1" style="margin-left: 1em; margin-right: 1em;">
+<div class="separator" style={{ textAlign: 'center', clear: 'both' }}>
+  <a class="fluid-box" href="https://2.bp.blogspot.com/-fLD7Hg0S9qk/VJhOKG1s0xI/AAAAAAAAFeM/Hn2hJjGuBro/s1600/tinder.jpg" imageanchor="1" style={{ marginLeft: '1em', marginRight: '1em' }}>
     <img border="0" src="https://2.bp.blogspot.com/-fLD7Hg0S9qk/VJhOKG1s0xI/AAAAAAAAFeM/Hn2hJjGuBro/s1600/tinder.jpg" height="226" width="320" />
   </a>
 </div>
-<div class="separator" style="clear: both; text-align: center;"></div>
+<div class="separator" style={{ textAlign: 'center', clear: 'both' }}></div>
 <p>
 We also rethought how the Jobs You May Be Interested In section could work if it adopted a Tinder-like approach.
 </p>
@@ -73,7 +72,8 @@ We also rethought how the Jobs You May Be Interested In section could work if it
 <p>
 Stay tuned for our next post, where we’ll explain how we redesigned flow a.
 </p>
-<p>This post is part of a series where the XmartLabs Design Team tackles quick design challenges and lets you in on their process. Contact us at <a href="mailto:getintouch@xmartlabs.com">getintouch@xmartlabs.com</a>
+<p>
+This post is part of a series where the XmartLabs Design Team tackles quick design challenges and lets you in on their process. Contact us at <a href="mailto:getintouch@xmartlabs.com">getintouch@xmartlabs.com</a>
    if you would like to offer your users a better digital experience.
 </p>
 <p>

@@ -45,7 +45,7 @@ Currently, the available distribution sources are:
 
 
 Here's an illustration of the process:
-<div class="separator" style="clear: both; text-align: center;">
+<div class="separator" style={{ textAlign: 'center', clear:'both' }}>
     <img  border="0" src="/images/android-snapshot-plugin/snapshot-sample.png" />
 </div>
 <br/>

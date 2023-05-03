@@ -17,7 +17,7 @@ Lanthorn is an Occupancy Analytics product born during the Covid-19 pandemic as 
 Lanthorn's support of several devices and edge deployment that ensures data security and privacy compliance make it a perfect solution for several [use cases](https://lanthorn.ai/use-cases). This is why, after two years of constant development, and with the end of the pandemic nearing, we changed Lanthorn's product vision. We turned it into a complex occupancy analytics solution.
 
 <figure>
-  <img style="width: 100%" src="/images/object-detection/Lanthorn.jpg" alt="Lanrhorn.ai dashboard view" />
+  <img style={{ width:'100%'}} src="/images/object-detection/Lanthorn.jpg" alt="Lanrhorn.ai dashboard view" />
   <figcaption>Image source: Lanrhorn.ai.</figcaption>
 </figure>
 

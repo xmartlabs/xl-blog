@@ -15,7 +15,8 @@ When one of our projects called for an integration of sign in with [Line](https:
 
 <img src="/images/react-native-line/example1.png" alt="Example app main" width="300" />
 <img src="/images/react-native-line/example2.png" alt="Example app permissions" width="300" />
-<p style="text-align: center; color: gray; font-size: 14px; font-style: italic;">(Example app with <code>react-native-line</code> integration)</p>
+<p style={{ textAlign:'center', color: 'gray', fontSize: '14px', fontStyle: 'italic'}}
+>(Example app with <code>react-native-line</code> integration)</p>
 
 A few years after the first release, being more specific in 2019, an [issue](https://github.com/xmartlabs/react-native-line/issues/31) was reported asking us for supporting React Native versions greater than 0.58.
 The newest React Native version introduced some breaking changes so we spent some time making it compatible again with the latest libraries.

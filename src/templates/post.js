@@ -2,7 +2,6 @@ import * as React from 'react';
 import { useContext, useEffect, useState, useRef } from 'react';
 import { Disqus } from 'gatsby-plugin-disqus';
 import { graphql, Link } from 'gatsby';
-import { ReactMarkdown } from 'react-markdown/lib/react-markdown';
 
 import AuthorsYAMLData from "../../content/authors.yaml";
 import { Category } from "../components/category";
@@ -161,7 +160,7 @@ const BlogPost = ({ data, children }) => {
           </h1>
           <div className={styles.authorContainer}>
             <div className={styles.authorInformation}>
-              <img src={`images/${authorBlog.image}`} alt="" className={styles.authorImage} />
+              <img src={`/images/${authorBlog.image}`} alt="" className={styles.authorImage} />
               <Link className={classnames(styles.authorName, "text__paragraph__bold__black")} to={`/authors/${ _.kebabCase(authorBlog.author) }`}>{ authorBlog.displayName }</Link>
             </div>
             <div className={styles.blogInfoContainer}>
@@ -173,9 +172,9 @@ const BlogPost = ({ data, children }) => {
           </div>
         </div>
         <div>
-          <img src={data.mdx.frontmatter.thumbnail} onError={(event) => event.target.src = '../../images/image.png'} className={styles.blogMainImage} />
+          <img src={`/${data.mdx.frontmatter.thumbnail}`} onError={(event) => event.target.src = '../../images/image.png'} className={styles.blogMainImage} />
           <div className={styles.bodyPostContainer} id="postContainer">
-            <ReactMarkdown>{data.mdx.body}</ReactMarkdown>
+            {children}
           </div>
         </div>
       <div className={styles.socialBottomContainer}>
@@ -208,7 +207,6 @@ query ($id: String) {
     fields {
       slug
     }
-    body
     relatedPosts {
       frontmatter {
         title
