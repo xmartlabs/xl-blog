@@ -6,7 +6,7 @@ import { Link, graphql } from "gatsby";
 
 const Categories = ({ pageContext, data }) => {
   const { category } = pageContext
-  const { edges, totalCount } = data.allMdx
+  const { edges, totalCount } = data.allMarkdownRemark
   const categoryHeader = `${totalCount} post${
     totalCount === 1 ? "" : "s"
   } categorizewd with "${category}"`
@@ -38,7 +38,7 @@ Categories.propTypes = {
     category: PropTypes.string.isRequired,
   }),
   data: PropTypes.shape({
-    allMdx: PropTypes.shape({
+    allMarkdownRemark: PropTypes.shape({
       totalCount: PropTypes.number.isRequired,
       edges: PropTypes.arrayOf(
         PropTypes.shape({
@@ -56,7 +56,7 @@ Categories.propTypes = {
 export default Categories
 
 export const pageQuery = graphql`query ($category: String) {
-  allMdx(
+  allMarkdownRemark(
     limit: 2000
     sort: {frontmatter: {date: DESC}}
     filter: {frontmatter: {category: {eq: $category}}}

@@ -167,6 +167,7 @@ const BlogPost = ({ data, children }) => {
               <label className={classnames(styles.postDate, "text__label__bold__grayTwo")} >{data.mdx.frontmatter.date}</label>
               <ClockIcon className={styles.clockIcon} />
               <label className={classnames("text__label__bold__grayTwo", styles.timeToRead)} >
+                {data.mdx.fields.timeToRead.text}
               </label>
             </div>
           </div>
@@ -206,6 +207,9 @@ query ($id: String) {
     }
     fields {
       slug
+      timeToRead {
+        text
+      }
     }
     relatedPosts {
       frontmatter {

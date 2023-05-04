@@ -13,7 +13,7 @@ exports.createResolvers = ({ createResolvers }) => {
       relatedPosts: {
         type: ['Mdx'],
         resolve: async (source, args, context, info) => {
-          return await context.nodeModel.runQuery({
+          const {entries} = await context.nodeModel.findAll({
             query: {
               filter: {
                 id: {
@@ -28,12 +28,26 @@ exports.createResolvers = ({ createResolvers }) => {
             },
             type: 'Mdx',
           })
+          return entries;
         },
       },
     },
   }
   createResolvers(resolvers)
 };
+
+const readingTime = require(`reading-time`)
+
+exports.onCreateNode = ({ node, actions }) => {
+  const { createNodeField } = actions
+  if (node.internal.type === `Mdx`) {
+    createNodeField({
+      node,
+      name: `timeToRead`,
+      value: readingTime(node.body)
+    })
+  }
+}
 
 exports.createPages = async ({actions, graphql, reporter}) => {
     const {createPage} = actions
@@ -73,6 +87,9 @@ exports.createPages = async ({actions, graphql, reporter}) => {
             }
             fields {
               slug
+              timeToRead {
+                text
+              }
             }
             internal {
               contentFilePath
