@@ -5,7 +5,6 @@ module.exports = {
     descripton: "Blog description",
   },
   plugins: [
-    "gatsby-plugin-fontawesome-css",
     "gatsby-plugin-netlify-cms",
     "gatsby-plugin-styled-components",
     "gatsby-plugin-image",

@@ -24,7 +24,6 @@
     "disqus-react": "^1.1.5",
     "gatsby": "^5.9.0",
     "gatsby-plugin-disqus": "^1.2.6",
-    "gatsby-plugin-fontawesome-css": "^1.2.0",
     "gatsby-plugin-image": "^3.9.0",
     "gatsby-plugin-instagram-embed": "^4.0.0",
     "gatsby-plugin-manifest": "^5.9.0",
