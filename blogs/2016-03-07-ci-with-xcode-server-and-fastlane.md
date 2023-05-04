@@ -481,10 +481,10 @@ $ fastlane before_integration_staging
 ```
 
 On the output log appears next messages:
-
+```
     security: SecKeychainAddInternetPassword <NULL/>: User interaction is not allowed.
     Could not store password in keychain
-
+```
 We simply couldn't access the keychain when running Fastlane. We opted to just save the password as a system environment variable.
 
 #### CocoaPods is not able to update dependencies
@@ -512,9 +512,9 @@ $ ln -s `which pod` /Applications/Xcode.app/Contents/Developer/usr/bin/pod
 #### Fastlane - Sigh & Gym cannot access to keychain
 
 That's all, they cannot access to keychain. Seeing this message (or similar) when running `gym`or `sigh` is the symptom:
-
+```
     security: SecKeychainAddInternetPassword <NULL/>: User interaction is not allowed.
-
+```
 * They cannot access stored login password, you must pass the password through env variables to `sigh` using `FASTLANE_PASSWORD`.
 * `gym` cannot access to distribution certificates installed in keychain, so make the IPA using `xcrun xcodebuild` instead of `gym`.
 

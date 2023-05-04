@@ -13,9 +13,9 @@ Nowadays, lots of companies gather a huge amount of data as a result of differen
 Once you have this input, a key component in today's data-driven company is the data warehouse.
 There, a consolidated view of all the convenient business information is stored in one place and can be queried in-depth for complex analysis.
 
-<img width="100%" src="/images/redshift-snowflake/cloud-data-warehouse.jpg" />
+<img style={{ width: '100%' }} src="/images/redshift-snowflake/cloud-data-warehouse.jpg" />
 <br />
-<p style="text-align: center;"> (source: <a href="https://www.cazena.com/resource-topic/data-mart">Cazena</a>)</p>
+<p style={{ textAlign: 'center' }}> (source: <a href="https://www.cazena.com/resource-topic/data-mart">Cazena</a>)</p>
 
 **Cloud Data warehouses** are a popular choice among today's options.
 This type of warehouses are **easy-to-scale**, **highly performant** and **cheaper** than their in-house counterparts, as companies don't need to buy and maintain dedicated hardware nor hire highly specialized personnel.

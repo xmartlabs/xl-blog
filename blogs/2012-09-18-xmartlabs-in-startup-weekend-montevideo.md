@@ -62,7 +62,7 @@ KEFKE's main goal is to give true value to the students experience at universiti
 >
   <tbody>
     <tr>
-      <td style={{ extAlign: 'center' }}>
+      <td style={{ textAlign: 'center' }}>
         <img alt="Agustin and Enrique working" border="0" height="300" src="https://2.bp.blogspot.com/-8o2vkQ0i6Mk/UFeFaVFKyMI/AAAAAAAAABg/W2fFFhpb7Fo/s400/IMG_0467.JPG" title="Agustin and Enrique working" width="400" />
       </td>
     </tr>

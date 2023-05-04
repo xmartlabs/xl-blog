@@ -20,9 +20,9 @@ permalink: /linkedin-for-work-pt-2-finding/
   The following images illustrate our design work for <b>Flow a: User is looking for a candidate to fill a position</b>:
 </p>
 
-<H2>
+<h2>
 PROFILE SUMMARY AND NAVIGATION
-</H2>
+</h2>
 <p>
 This section provides the minimum amount of information required to prompt interest in a potential employer: Picture, current position, areas of interest and location. We revised the IA for quick navigation on mobile devices and decided a) To move Activity
     to the last position (since almost all 'social' activity has been ruled out) and b) To implement "scrollspy" navigation that allows the potential employer to scroll easily through the candidate's profile. We also decided to join Messages and Notifications
