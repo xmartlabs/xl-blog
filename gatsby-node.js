@@ -50,11 +50,14 @@ exports.onCreateNode = ({ node, actions }) => {
 }
 
 exports.createPages = async ({actions, graphql, reporter}) => {
-    const {createPage} = actions
-    const tagTemplate = path.resolve("src/templates/tags.js")
-    const categoryTemplate = path.resolve("src/templates/categories.js")
-    const authorTemplate = path.resolve("src/templates/authors.js")
-    const postTemplate = path.resolve("src/templates/post.js")
+    const {createPage} = actions;
+    const {createRedirect} = actions;
+    const tagTemplate = path.resolve("src/templates/tags.js");
+    const categoryTemplate = path.resolve("src/templates/categories.js");
+    const authorTemplate = path.resolve("src/templates/authors.js");
+    const postTemplate = path.resolve("src/templates/post.js");
+
+    createRedirect({ fromPath: '/blog/*', toPath: '/', isPermanent: true, redirectInBrowser: true});
 
     const result = await graphql(`
     {
