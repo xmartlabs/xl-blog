@@ -7,7 +7,7 @@ author: alberto
 category: product-design
 permalink: /linkedin-for-work-pt-2-finding/
 ---
-<div class="separator" style={{ clear: 'both', textAling: 'center' }}>
+<div class="separator" style={{ clear: 'both', textAlign: 'center' }}>
   <img border="0" src="https://1.bp.blogspot.com/-7F7ZbSYtELs/VLRD2OddXpI/AAAAAAAAGPA/z_C5KpCE_88/s1600/POS-POSTA_1-caratula.jpg" height="166" width="400" />
 </div>
 <br/>
@@ -28,7 +28,7 @@ This section provides the minimum amount of information required to prompt inter
     to the last position (since almost all 'social' activity has been ruled out) and b) To implement "scrollspy" navigation that allows the potential employer to scroll easily through the candidate's profile. We also decided to join Messages and Notifications
     in one single area, to keep all communications in one place.
 </p>
-<div class="separator" style={{ clear: 'both', textAling: 'center' }}>
+<div class="separator" style={{ clear: 'both', textAlign: 'center' }}>
   <a class="fluid-box" href="https://4.bp.blogspot.com/-_C7zjFDv1rI/VLgCHjAXO1I/AAAAAAAAGP8/n-zdF3YN23A/s1600/POST_2-Blog1.jpg" imageanchor="1" style={{ margin: 'auto 1em' }}>
     <img border="0" src="https://4.bp.blogspot.com/-_C7zjFDv1rI/VLgCHjAXO1I/AAAAAAAAGP8/n-zdF3YN23A/s1600/POST_2-Blog1.jpg" height="210" width="400" />
   </a>
@@ -54,7 +54,7 @@ ENDORSEMENTS ARE NOT REALISTIC
     and that only contacts that have worked together with you on a project where you applied those skills should be allowed to rate you. Skill ratings presented to potential employers are then the average of these two.
     The same goes for Recommendations. You should only be allowed to recommend contacts with whom you've worked.
 </p>
-<div class="separator" style={{ clear: 'both', textAling: 'center' }}>
+<div class="separator" style={{ clear: 'both', textAlign: 'center' }}>
   <a class="fluid-box" href="https://1.bp.blogspot.com/-ybtet_YKJrQ/VLgCKpekcII/AAAAAAAAGQE/6BUr_m6TcKs/s1600/POST_2-Blog3.jpg" imageanchor="1" style={{ margin: 'auto 1em' }}>
       <img border="0" src="https://1.bp.blogspot.com/-ybtet_YKJrQ/VLgCKpekcII/AAAAAAAAGQE/6BUr_m6TcKs/s1600/POST_2-Blog3.jpg" height="345" width="400" />
   </a>

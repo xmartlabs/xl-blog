@@ -113,9 +113,9 @@ Eureka uses Swift's [type safety] to help avoiding mistakes while developing. Ea
 
 For example in the code example shown above `$0` is an instance of `SegmentedRow<Emoji>` and its `value` property type is `Emoji` whereas NameRow's `value` property type is `String`. Similarly `SegmentedRow<Emoji>`'s `options` array property only stores `Emoji` instances and `options` is not available in `NameRow`.
 The same applies to any chainable method we invoke to set up a row, for example `cell` and `row` parameters of `cellUpdate` and `cellSetup` closure are also strongly typed.
-```
-Additionally Eureka makes sure that each new user defined `Row` has a specific value type and a specific TableViewCell type, this is possible combining Swift Generics and Type Constraints. By definition any `Row` must extend from **Row<T: Equatable, Cell: CellType where Cell: BaseCell, Cell.Value == T>** class ensuring that each `Row` has a defined value type `T` and works with a specific table view cell `Cell` which holds a row of type `T`.
-```
+
+Additionally Eureka makes sure that each new user defined `Row` has a specific value type and a specific TableViewCell type, this is possible combining Swift Generics and Type Constraints. By definition any `Row` must extend from `Row<T: Equatable, Cell: CellType where Cell: BaseCell, Cell.Value == T>` class ensuring that each `Row` has a defined value type `T` and works with a specific table view cell `Cell` which holds a row of type `T`.
+
 I can ensure Eureka is super safe either during form creation or when defining new row and cell types.
 
 ### Powerful and Flexible

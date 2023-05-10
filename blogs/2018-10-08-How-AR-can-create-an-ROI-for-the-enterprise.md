@@ -82,7 +82,7 @@ These capabilities would result in significant cost and time savings across thes
 To learn more about how AR communication can make your team more effective, [reach out to us today.](#JotFormIFrame-82355834626665)
 
 <div>
-<a data-mode="popup" data-hide-footer="true" target="_blank" href="https://form.typeform.com/to/D1PhDJIR" class="button is-nav ipad-hidden typeform-share w-inline-block header-getintouch" style={{ opcaity: '1' }}>
+<a data-mode="popup" data-hide-footer="true" target="_blank" href="https://form.typeform.com/to/D1PhDJIR" class="button is-nav ipad-hidden typeform-share w-inline-block header-getintouch" style={{ opacity: '1' }}>
   <div class="button-text no-pointer">Let's talk</div>
 </a>
 </div>
