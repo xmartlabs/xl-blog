@@ -25,7 +25,7 @@ const BlogPost = ({ data }) => {
   const { setState } = useContext(AppContext);
   const [ disappearSocial, setDisappearSocial ] = useState(false);
   const refMoreFrom = useRef(null);
-  const refIndexTiles = useRef(null);
+  const refIndexTitles = useRef(null);
   const categoryBlog = useCategory(data.mdx.frontmatter.category);
   const [ selectLink, setSelectLink ] = useState('');
   const [ disappearIndex, setDisappearIndex ] = useState(false);
@@ -144,7 +144,7 @@ const BlogPost = ({ data }) => {
     if (typeof window !== 'undefined' && typeof window.document !== "undefined") {
       const postContainer = document.getElementById('postContainer');
       if (postContainer) {
-        const elementList = Array.from(refIndexTiles.current.childNodes);
+        const elementList = Array.from(refIndexTitles.current.childNodes);
         const titlesList = findTitles(elementList);
         return (
           <div className={classnames({[styles.disappearIndex]: disappearIndex}, styles.indexSubContainer)}>
@@ -202,7 +202,7 @@ const BlogPost = ({ data }) => {
         </div>
         <div>
           <img src={data.mdx.frontmatter.thumbnail} onError={(event) => event.target.src = '../../images/image.png'} className={styles.blogMainImage} />
-          <div className={styles.bodyPostContainer} ref={refIndexTiles}>
+          <div className={styles.bodyPostContainer} ref={refIndexTitles}>
             <MDXRenderer>
               {data.mdx.body}
             </MDXRenderer>
