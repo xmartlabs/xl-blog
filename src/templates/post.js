@@ -144,7 +144,7 @@ const BlogPost = ({ data }) => {
     if (typeof window !== 'undefined' && typeof window.document !== "undefined") {
       const postContainer = document.getElementById('postContainer');
       if (postContainer) {
-        const elementList = Array.from(refIndexTiles?.current?.childNodes);
+        const elementList = Array.from(refIndexTiles.current.childNodes);
         const titlesList = findTitles(elementList);
         return (
           <div className={classnames({[styles.disappearIndex]: disappearIndex}, styles.indexSubContainer)}>
