@@ -4,7 +4,7 @@ date:   2017-11-27
 author: mcousillas
 tags: [React Native, JavaScript, Android, iOS, Tutorial]
 category: development
-permalink: /React-native-line/
+permalink: /react-native-line/
 ---
 
 A few days ago we released our very first React Native framework to the open source community.

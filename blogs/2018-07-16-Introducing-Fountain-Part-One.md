@@ -4,7 +4,7 @@ date: 2018-07-16
 tags: [Android, Android Jetpack, Android Paging Library, Live Data, Android Architecture Components, RxJava, Retrofit, Fountain]
 author: mirland
 category: development
-permalink: /Introducing-Fountain-Part-One/
+permalink: /introducing-fountain-part-one/
 ---
 
 There are plenty of articles out there talking about the amazing Android Architecture Components, how we can combine them in an MVVM architecture and make them work as a charm.

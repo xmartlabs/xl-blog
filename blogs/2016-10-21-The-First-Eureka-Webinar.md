@@ -4,7 +4,7 @@ date: 2016-10-21
 tags: [Swift, iOS, Eureka, Form]
 author: esanchez
 category: people-events
-permalink: /The-First-Eureka-Webinar/
+permalink: /the-first-eureka-webinar/
 ---
 
 [Eureka]:        https://github.com/xmartlabs/Eureka

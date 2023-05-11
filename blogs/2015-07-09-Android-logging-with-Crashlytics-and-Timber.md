@@ -4,7 +4,7 @@ date: 2015-07-09
 tags: [Android, Logging, Timber, Crashlytics]
 author: santiago
 category: development
-permalink: /Android-logging-with-Crashlytics-and-Timber/
+permalink: /android-logging-with-crashlytics-and-timber/
 ---
 
 It's an annoying problem to have crashes in your Android app. Obviously you want to avoid them, nobody wants their users getting mad at the app when it crashes. On top of that, you might also want to have some information on why the app crashes. Here is where the Android logging system is available to help you with this. So far, so good. However, there are some caveats.
