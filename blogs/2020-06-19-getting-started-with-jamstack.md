@@ -6,7 +6,7 @@ excerpt: "In this blogpost, we cover all you need to get started with Jamstack. 
 category: development
 author: mtnBarreto
 thumbnail: images/jamstack-intro/featured.jpeg
-permalink: /2020/06/22/getting-started-with-jamstack/
+permalink: /2020-06-22-getting-started-with-jamstack/
 ---
 
 MARTIN TO BE FIXED

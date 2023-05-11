@@ -4,7 +4,7 @@ date: 2017-12-04
 author: xl
 tags: [Design, Product, Sprint]
 category: product-design
-permalink: /Xmartlabs-Sam-McAfee/
+permalink: /xmartlabs-sam-mc-afee/
 ---
 
 <img src="/images/sam-mc-afee/Sam-Mc-Afee.jpg"/>
