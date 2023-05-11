@@ -122,9 +122,8 @@ const BlogPost = ({ data }) => {
 
   const getActiveTitle = () => {
     if (typeof window !== 'undefined' && typeof window.document !== "undefined") {
-      const postContainer = document.getElementById('postContainer');
-      if (postContainer) {
-        const elementList = Array.from(postContainer.childNodes);
+      if (refIndexTitles.current) {
+        const elementList = Array.from(refIndexTitles.current.childNodes);
         const titles = findTitles(elementList);
         const scrollPosition = window.scrollY;
         let activeTitle = titles[0];
@@ -142,8 +141,7 @@ const BlogPost = ({ data }) => {
 
   const getTitles = () => {
     if (typeof window !== 'undefined' && typeof window.document !== "undefined") {
-      const postContainer = document.getElementById('postContainer');
-      if (postContainer) {
+      if (refIndexTitles.current) {
         const elementList = Array.from(refIndexTitles.current.childNodes);
         const titlesList = findTitles(elementList);
         return (
