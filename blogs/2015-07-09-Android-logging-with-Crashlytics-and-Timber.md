@@ -63,6 +63,7 @@ To setup Crashlytics in your app you have to add this to your `build.gradle`:
             transitive = true;
         }
     }
+```
 
 This in your Application creation:
 

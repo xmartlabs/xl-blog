@@ -30,6 +30,6 @@ On the agenda:
 - Eureka case studies
 - Q&A
 
-Feel free to getintouch@xmartlabs.com if you have any questions or would like to make a special request for the webinar.
+Feel free to `<getintouch@xmartlabs.com>` if you have any questions or would like to make a special request for the webinar.
 
 See you there!
