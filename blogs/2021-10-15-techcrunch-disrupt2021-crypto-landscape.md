@@ -1,6 +1,6 @@
 ---
 title: What's going on with crypto? (TC Disrupt 2021)
-date: '2021-10-21T10:00:00.000-03:00'
+date: 2021-10-21
 tags: [TechCrunch Disrupt 2021, Crypto Landscape, Crypto 2021, TC Disrupt Recap]
 author: mtnBarreto
 category: people-events

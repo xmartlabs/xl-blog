@@ -1,6 +1,6 @@
 ---
 title: TypeScript Type Guards - An Introduction to Writing Safer Code
-date: '2023-04-13T09:00:00.000-03:00'
+date: 2023-04-13
 tags: [Typescript]
 author_id: solo
 category: development

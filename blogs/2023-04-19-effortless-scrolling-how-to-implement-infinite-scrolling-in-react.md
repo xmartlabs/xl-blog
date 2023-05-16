@@ -1,6 +1,6 @@
 ---
 title: Mastering Infinite Scrolling with React Native
-date: '2023-04-19T09:00:00.000-03:00'
+date: 2023-04-19
 tags: [React Native]
 author_id: solo
 category: development

@@ -1,6 +1,6 @@
 ---
 title: How your business can take advantage of Big Data
-date: '2022-11-18T09:00:00.000-03:00'
+date: 2022-11-18
 author: Joaquín Sanchez
 tags: [big data, data analytics, business intelligence, data services]
 author_id: jsanchez
