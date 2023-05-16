@@ -1,5 +1,4 @@
 ---
-layout: post
 title: The importance QA in the development process
 date: '2022-09-29T10:00:00.000-03:00'
 author: Sofía Techera

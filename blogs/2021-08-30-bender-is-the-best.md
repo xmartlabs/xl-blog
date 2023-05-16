@@ -1,10 +1,8 @@
 ---
 title: CoreML not fast enough? Use Bender!
 date: '2021-08-30T10:00:00.000-03:00'
-
 tags: [Machine Learning, iOS, CoreML, TFlite, MetalPerformanceShaders, Bender]
 author: mathias
-
 category: machine-learning
 thumbnail: images/bender-is-the-best/featured.jpg
 permalink: /how-to-get-the-best-performance-for-ml-models-on-ios/

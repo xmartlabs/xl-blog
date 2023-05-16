@@ -1,6 +1,5 @@
 ---
 title: "The XL Way — Closing the Gender Gap"
-layout: post
 permalink: /2022-05-11-the-xl-way-closing-the-gender-gap/
 date: '2022-05-12T10:00:00.000-03:00'
 category: [people-events]

@@ -1,6 +1,5 @@
 ---
 title: "Top EVM-compatible frameworks to build dApps - Truffle vs Hardhat"
-layout: post
 permalink: /best-blockchain-development-framework/
 date: '2022-06-28T10:00:00.000-03:00'
 category: [blockchain-development]

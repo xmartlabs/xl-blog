@@ -1,5 +1,4 @@
 ---
-layout: post
 title: Introducing stock
 date: '2022-10-05T09:00:00.000-03:00'
 author: Matías Irland

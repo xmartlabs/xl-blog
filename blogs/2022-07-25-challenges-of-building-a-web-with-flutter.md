@@ -1,6 +1,5 @@
 ---
 title: "Challenges of building a web with Flutter"
-layout: post
 permalink: /challenges-of-building-a-web-with-flutter/
 date: '2022-08-10T10:00:00.000-03:00'
 category: [development]

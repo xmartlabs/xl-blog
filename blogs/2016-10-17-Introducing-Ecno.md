@@ -1,5 +1,4 @@
 ---
-layout: post
 title:  Introducing Ecno!
 date:   2016-10-17 08:00:00
 author: Diego Ernst

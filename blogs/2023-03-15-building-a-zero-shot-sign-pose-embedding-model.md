@@ -1,5 +1,4 @@
 ---
-layout: post
 title: Building a zero-shot Sign Pose Embedding model
 date: '2023-03-16T09:00:00.000-03:00'
 tags: [machine-learning, pose estimation, pose embedding model, sign language recognition]

@@ -1,6 +1,5 @@
 ---
 title: "#OnlyOneEarth - The Impact of Tech On The Environment"
-layout: post
 permalink: /2022-06-06-the-impact-of-tech-on-the-environment/
 date: '2022-06-06T10:00:00.000-03:00'
 category: [people-events]

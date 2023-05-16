@@ -1,5 +1,4 @@
 ---
-layout: post
 title: Basic Infrastructure in AWS using Terraform
 date: '2022-08-01T10:00:00.000-03:00'
 author: Pablo Grill

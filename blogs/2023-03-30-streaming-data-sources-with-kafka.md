@@ -1,5 +1,4 @@
 ---
-layout: post
 title: Streaming data sources with Kafka
 date: '2023-03-30T09:00:00.000-03:00'
 tags: [kafka]

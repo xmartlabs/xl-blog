@@ -1,5 +1,4 @@
 ---
-layout: post
 title:  Creating your own rows for Eureka
 date:   2016-09-06 08:00:00
 author: Mathias Claassen

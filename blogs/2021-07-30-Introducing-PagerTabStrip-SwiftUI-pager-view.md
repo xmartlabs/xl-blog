@@ -1,5 +1,4 @@
 ---
-layout: post
 title: Introducing PagerTabStripView! - Finally a PagerView in pure SwiftUI
 date: '2021-08-06T10:00:00.000-03:00'
 author: Martin Barreto

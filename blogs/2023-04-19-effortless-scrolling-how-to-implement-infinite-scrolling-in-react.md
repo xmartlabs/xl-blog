@@ -1,5 +1,4 @@
 ---
-layout: post
 title: Mastering Infinite Scrolling with React Native
 date: '2023-04-19T09:00:00.000-03:00'
 tags: [React Native]

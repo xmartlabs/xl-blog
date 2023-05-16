@@ -1,6 +1,5 @@
 ---
 title: "Spoiler alert: User research is like a movie"
-layout: post
 permalink: /user-research-process/
 excerpt: I have two types of friends, the ones who don’t care for or even enjoy
   spoilers, and the ones (like me) who hate them. Read on to discover how this also adapts to the user research that goes into building a digital product.
