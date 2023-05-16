@@ -1,4 +1,5 @@
 ---
+layout: post
 title: Basic Infrastructure in AWS using Terraform
 date: '2022-08-01T10:00:00.000-03:00'
 author: Pablo Grill
@@ -6,7 +7,7 @@ tags: [aws, terraform, aws infraestructure]
 author_id: pablog
 category: [development, data-engineering]
 featured_image: /images/basic-infrastructure-in-AWS-using-terraform/Basic-Infrastructure-in-AWS-using-Terraform.png
-permalink: /basic-infrastructure-in-AWS-using-terraform/
+permalink: /blog/basic-infrastructure-in-AWS-using-terraform/
 ---
 
 Managing cloud infrastructure doesn’t always go smoothly for developers. Choosing which cloud provider to use, configuring the private and public networks, and the required security of the infrastructure aren’t easy tasks,  and they consume research, documentation, and implementation time. In addition to that, in that process, many questions arise:
@@ -92,26 +93,23 @@ Before starting to type terraform commands in a terminal, some resources inside 
 
 - **IAM user**: Required by Terraform to create and manage the resources. You can use any user with permission to manage resources in AWS (for example, the admin account). However, we suggest creating a new one (using that [link](https://us-east-1.console.aws.amazon.com/iam/home#/users$new?step=details)) exclusively for Terraform usage for security reasons. We also recommend giving this user **only programmatic access**.
 
-
-<video width="100%" preload autoplay loop muted>
-  <source src="/images/basic-infrastructure-in-AWS-using-terraform/I-Am-User.mp4" type="video/mp4">
-</video>
+<div class="videoWrapper">
+  <iframe src="/images/basic-infrastructure-in-AWS-using-terraform/I-Am-User.mp4" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen type="video/mp4"></iframe>
+</div>
 
 - **S3 bucket for state file storage:** One of the most important concepts related to Terraform is the state file. As documented in the [official documentation](https://www.terraform.io/language/state), the “state file” is used to store the state of your managed infrastructure and configuration. This state is used by Terraform to map real-world resources to your configuration, keep track of metadata, and improve performance for large infrastructures. By default, the state file is stored locally in a file called `terraform.tfstate`, but it can also be stored remotely, which works better in a team environment. We’ll use an S3 bucket to store the state file. Considering that the bucket’s names are globally unique, we recommend naming this bucket as `{account-id}-tfstate` because it’s rarely occupied, has contents of your account’s id, and the fact that there is where tfstate is allocated makes it intuitive.
 
-
-<video width="100%" preload autoplay loop muted>
-  <source src="/images/basic-infrastructure-in-AWS-using-terraform/I-Am-User.mp4" type="video/mp4">
-</video>
-
+<div class="videoWrapper">
+  <iframe src="/images/basic-infrastructure-in-AWS-using-terraform/I-Am-User.mp4" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen type="video/mp4"></iframe>
+</div>
 
 
 
 - **EC2 Key Pair:** to have ssh access to the EC2 instance created (to deploy your code, for example), you’ll need an RSA key pair. If you want, you can import an already created pair (for example, your personal ones) into AWS and configure the access to the EC2. We recommend **creating a new pair instead of using an existing one.** You can easily do it from the AWS console in this [link](https://console.aws.amazon.com/ec2/v2/home#KeyPairs). Make sure to **create this key in the same region as the rest of your infrastructure** (otherwise, you won’t be able to use it) and **store the .pem file in a secure place**.
 
-<video width="100%" preload autoplay loop muted>
-  <source src="/images/basic-infrastructure-in-AWS-using-terraform/Create-Key.mp4" type="video/mp4">
-</video>
+<div class="videoWrapper">
+  <iframe src="/images/basic-infrastructure-in-AWS-using-terraform/Create-Key.mp4" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen type="video/mp4"></iframe>
+</div>
 
 ## 3 - Cloning the repository
 
@@ -162,10 +160,9 @@ If everything is configured correctly, you should be able to run the init comman
 ```bash
 terraform init
 ```
-
-<video width="100%" preload autoplay loop muted>
-  <source src="/images/basic-infrastructure-in-AWS-using-terraform/terraform-init.mp4" type="video/mp4">
-</video>
+<div class="videoWrapper">
+  <iframe src="/images/basic-infrastructure-in-AWS-using-terraform/terraform-init.mp4" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen type="video/mp4"></iframe>
+</div>
 
 The init command is required by Terraform to initialize all the modules required for your solution. You need to execute it the first time you copy the code in your solution or if, for some reason, you change some modules.
 
@@ -177,10 +174,9 @@ One of the purposes of this template is to provide similar infrastructure to mul
 terraform workspace new <environment>
 terraform workspace select <environment>
 ```
-
-<video width="100%" preload autoplay loop muted>
-  <source src="/images/basic-infrastructure-in-AWS-using-terraform/ws-create.mp4" type="video/mp4">
-</video>
+<div class="videoWrapper">
+  <iframe src="/images/basic-infrastructure-in-AWS-using-terraform/ws-create.mp4" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen type="video/mp4"></iframe>
+</div>
 
 
 The workspaces are also stored in the S3 bucket, meaning that everyone in the project with access to it will have access, allowing your team to collaborate. The command to list all the environments is:
@@ -213,9 +209,10 @@ Some considerations that you need to keep in mind when you are configuring these
     - Do not choose to rotate the secrets.
     - Once the process ends, click “Store,” and your secret will have been created.
 
-<video width="100%" preload autoplay loop muted>
-  <source src="/images/basic-infrastructure-in-AWS-using-terraform/Store-scret.mp4" type="video/mp4">
-</video>
+<div class="videoWrapper">
+  <iframe src="/images/basic-infrastructure-in-AWS-using-terraform/Store-scret.mp4" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen type="video/mp4"></iframe>
+</div>
+
 
 ## 7 - Review what you did
 
@@ -225,10 +222,9 @@ Now that everything is configured, you can check the “plan” that Terraform w
 terraform plan --var-file=environments/<environment>.tfvars
 ```
 
-<video width="100%" preload autoplay loop muted>
-  <source src="/images/basic-infrastructure-in-AWS-using-terraform/terraform-plan.mp4" type="video/mp4">
-</video>
-
+<div class="videoWrapper">
+  <iframe src="/images/basic-infrastructure-in-AWS-using-terraform/terraform-plan.mp4" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen type="video/mp4"></iframe>
+</div>
 
 Make sure you’re pointing to the correct environment.
 
@@ -240,10 +236,9 @@ Once you have checked that everything fits your needs, you are ready to apply th
 terraform apply --var-file=environments/<environment>.tfvars
 ```
 
-
-<video width="100%" preload autoplay loop muted>
-  <source src="/images/basic-infrastructure-in-AWS-using-terraform/terraform-apply.mp4" type="video/mp4">
-</video>
+<div class="videoWrapper">
+  <iframe src="/images/basic-infrastructure-in-AWS-using-terraform/terraform-apply.mp4" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen type="video/mp4"></iframe>
+</div>
 
 
 After executing this command, you can go to the AWS console dashboard and see how all the resources were created.
