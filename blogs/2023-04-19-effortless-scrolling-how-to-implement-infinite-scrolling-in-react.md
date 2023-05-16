@@ -3,7 +3,7 @@ title: Mastering Infinite Scrolling with React Native
 date: '2023-04-19T09:00:00.000-03:00'
 tags: [React Native]
 author_id: solo
-category: [development, web-development]
+category: development
 permalink: /how-to-implement-infinite-scrolling-in-react-native/
 featured_image: /images/effortless-scrolling/Infinite_scrolling.png
 ---

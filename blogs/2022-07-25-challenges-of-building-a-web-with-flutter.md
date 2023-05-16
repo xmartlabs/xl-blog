@@ -2,7 +2,7 @@
 title: "Challenges of building a web with Flutter"
 permalink: /challenges-of-building-a-web-with-flutter/
 date: '2022-08-10T10:00:00.000-03:00'
-category: [development]
+category: development
 tags:
   - Flutter
   - Flutter web

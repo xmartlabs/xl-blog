@@ -4,7 +4,7 @@ date: '2022-11-18T09:00:00.000-03:00'
 author: Joaquín Sanchez
 tags: [big data, data analytics, business intelligence, data services]
 author_id: jsanchez
-category: [development]
+category: development
 featured_image: /images/data-analytics/data-analytics-cover.png
 permalink: /data-analytics/
 ---

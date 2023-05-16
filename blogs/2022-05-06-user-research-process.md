@@ -5,7 +5,7 @@ excerpt: I have two types of friends, the ones who don’t care for or even enjo
   spoilers, and the ones (like me) who hate them. Read on to discover how this also adapts to the user research that goes into building a digital product.
   goes into building a digital product.
 date: '2022-05-06T10:00:00.000-03:00'
-category: [product-design]
+category: product-design
 tags:
   - UX/UI
 author_id: alemachado

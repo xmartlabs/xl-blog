@@ -3,7 +3,7 @@ title: Streaming data sources with Kafka
 date: '2023-03-30T09:00:00.000-03:00'
 tags: [kafka]
 author_id: jsanchez
-category: [development, data-engineering]
+category: development
 permalink: /streaming-data-sources-with-kafka/
 featured_image: /images/streaming-data-sources-with-kafka/kafka-blogpost.png
 ---

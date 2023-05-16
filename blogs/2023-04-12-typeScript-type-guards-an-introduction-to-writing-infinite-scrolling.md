@@ -3,7 +3,7 @@ title: TypeScript Type Guards - An Introduction to Writing Safer Code
 date: '2023-04-13T09:00:00.000-03:00'
 tags: [Typescript]
 author_id: solo
-category: [development, web-development]
+category: development
 permalink: /typeScript-type-guards-writing-safer-code/
 featured_image: /images/typeScript-Type-Guards-An-Introduction-to-Writing/Infinite_scrolling.png
 ---
