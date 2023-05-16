@@ -1,6 +1,5 @@
 ---
 title: "#OnlyOneEarth - The Impact of Tech On The Environment"
-layout: post
 permalink: /2022-06-06-the-impact-of-tech-on-the-environment/
 date: 2022-06-06
 category: people-events
@@ -8,10 +7,8 @@ tags:
   - Ecology
   - Carbon Credits
   - E-waste
-author_id: coti
-author: Costanza Besozzi
-
-featured_image: /images/only-one-earth/OnlyOneEarth.png
+author: coti
+thumbnail: /images/only-one-earth/OnlyOneEarth.png
 ---
 # raw - #OnlyOneEarth
 

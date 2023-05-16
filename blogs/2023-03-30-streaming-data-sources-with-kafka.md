@@ -2,10 +2,10 @@
 title: Streaming data sources with Kafka
 date: 2023-03-30
 tags: [kafka]
-author_id: jsanchez
+author: jsanchez
 category: development
 permalink: /streaming-data-sources-with-kafka/
-featured_image: /images/streaming-data-sources-with-kafka/kafka-blogpost.png
+thumbnail: /images/streaming-data-sources-with-kafka/kafka-blogpost.png
 ---
 
 ![Neobanking-1.png](/images/streaming-data-sources-with-kafka/kafka-blogpost.png)

@@ -2,9 +2,9 @@
 title: Building a zero-shot Sign Pose Embedding model
 date: 2023-03-16
 tags: [machine-learning, pose estimation, pose embedding model, sign language recognition]
-author_id: mathias
+author: mathias
 category: machine-learning
-featured_image: /images/building-a-zero-shot-sign-pose-embedding-model/LSU.png
+thumbnail: /images/building-a-zero-shot-sign-pose-embedding-model/LSU.png
 permalink: /machine-learning-sign-language-recognition/
 ---
  

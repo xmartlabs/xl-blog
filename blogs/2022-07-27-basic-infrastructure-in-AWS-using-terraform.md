@@ -1,12 +1,10 @@
 ---
-layout: post
 title: Basic Infrastructure in AWS using Terraform
 date: 2022-08-01
-author: Pablo Grill
 tags: [aws, terraform, aws infraestructure]
-author_id: pablog
+author: pablog
 category: development
-featured_image: /images/basic-infrastructure-in-AWS-using-terraform/Basic-Infrastructure-in-AWS-using-Terraform.png
+thumbnail: /images/basic-infrastructure-in-AWS-using-terraform/Basic-Infrastructure-in-AWS-using-Terraform.png
 permalink: /blog/basic-infrastructure-in-AWS-using-terraform/
 ---
 

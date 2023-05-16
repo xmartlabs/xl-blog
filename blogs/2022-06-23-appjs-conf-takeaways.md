@@ -7,10 +7,8 @@ tags:
   - Mobile
   - Cross-Platform
   - React Native
-author_id: nicoh
-author: Nicolas Hernandez
-
-featured_image: /images/rn-future/app.js-takeaways-react-native.png
+author: nicoh
+thumbnail: /images/rn-future/app.js-takeaways-react-native.png
 ---
 
 ## **Introduction**

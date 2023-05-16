@@ -1,11 +1,10 @@
 ---
 title: "Going International - The Ups and Downs of Being a Distributed Team"
 date: 2022-07-25
-author: Fernanda Barrios
 tags: [Xmartlabs]
 category: people-events
-author_id: fer-barrios
-featured_image: /images/going-international/going-international.png
+author: fer-barrios
+thumbnail: /images/going-international/going-international.png
 permalink: /going-international/
 ---
 

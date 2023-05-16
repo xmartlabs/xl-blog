@@ -1,11 +1,10 @@
 ---
 title: Introducing stock
 date: 2022-10-05
-author: Matías Irland
 tags: [stock, flutter, dart, pub, package, plugin, hacktoberfest]
-author_id: mirland
+author: mirland
 category: development
-featured_image: /images/introducing-stock/banner.png
+thumbnail: /images/introducing-stock/banner.png
 permalink: /introducing-stock/
 ---
 

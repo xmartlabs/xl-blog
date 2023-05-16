@@ -8,10 +8,9 @@ tags:
   - Blockchain Development
   - DApp Development
   - Smart Contract Development
-author_id: mtnBarreto
-author: Martin Barreto
+author: mtnBarreto
 
-featured_image: /images/choosing-the-right-blockchain/CHOOSING_THE_RIGHT_BLOCKCHAIN.png
+thumbnail: /images/choosing-the-right-blockchain/CHOOSING_THE_RIGHT_BLOCKCHAIN.png
 ---
 
 

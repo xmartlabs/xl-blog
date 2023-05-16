@@ -1,11 +1,10 @@
 ---
 title: The importance QA in the development process
 date: 2022-09-29
-author: Sofía Techera
 tags: [QA, quality assurance, Testing, Software Test]
-author_id: sofitechera
+author: sofitechera
 category: development
-featured_image: /images/importance-qa/cover.png
+thumbnail: /images/importance-qa/cover.png
 permalink: /quality-assurance-development-process/
 ---
 

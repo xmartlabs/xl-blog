@@ -8,10 +8,8 @@ date: 2022-05-06
 category: product-design
 tags:
   - UX/UI
-author_id: alemachado
-author: Ale Machado
-
-featured_image: /images/user-research-is-like-a-movie/image.jpg
+author: alemachado
+thumbnail: /images/user-research-is-like-a-movie/image.jpg
 ---
 
 I have two types of friends, [the ones who don’t care for or even enjoy spoilers](https://www.psychologytoday.com/us/blog/thriving101/201108/the-spoiler-paradox), and the ones (like me) [who hate them](https://scholarscompass.vcu.edu/uresposters/38/).

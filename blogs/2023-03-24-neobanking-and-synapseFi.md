@@ -2,10 +2,10 @@
 title: Unleash the Power of Neobanking with SynapseFi - Your Guide to the Future of Finance
 date: 2023-03-24
 tags: [frontend-development, alpaca API, javascript development]
-author_id: christian-casaran
+author: christian-casaran
 category: development
 permalink: /the-power-of-neobanking-with-synapseFi/
-featured_image: /images/neobanking-and-synapseFi/Neobanking-1.png
+thumbnail: /images/neobanking-and-synapseFi/Neobanking-1.png
 ---
 
 ![Neobanking-1.png](/images/neobanking-and-synapseFi/Neobanking-1.png)

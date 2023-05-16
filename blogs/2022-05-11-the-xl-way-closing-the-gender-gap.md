@@ -5,10 +5,8 @@ date: 2022-05-12
 category: people-events
 tags:
   - 8M
-author_id: vale
-author: Valentina Bianco
-
-featured_image: /images/the-xl-way-closing-the-gender-gap/8m_cover.jpg
+author: vale
+thumbnail: /images/the-xl-way-closing-the-gender-gap/8m_cover.jpg
 ---
 
 ## Building a Company Culture To Be Proud Of

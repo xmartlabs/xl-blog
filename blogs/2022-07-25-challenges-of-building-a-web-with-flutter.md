@@ -7,10 +7,8 @@ tags:
   - Flutter
   - Flutter web
   - Web
-author_id: felipe
-author: Felipe de León
-
-featured_image: /images/building-a-web-with-flutter/featured.png
+author: felipe
+thumbnail: /images/building-a-web-with-flutter/featured.png
 ---
 ## Lessons learned from a nonconventional approach to flutter web development
 
