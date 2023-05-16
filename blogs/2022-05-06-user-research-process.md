@@ -46,11 +46,11 @@ If we were to learn something from that, is that we must be cautious of how much
 
 ![ ”Not everyone needs to know everything, Newt.”](/images/user-research-is-like-a-movie/03.jpg " Not everyone needs to know everything, Newt.")
 
-> <!--StartFragment-->
+>
 >
 > ”Not everyone needs to know everything, Newt.”
 >
-> <!--EndFragment-->
+>
 
 ## Building... a bridge?
 

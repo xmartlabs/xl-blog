@@ -11,7 +11,7 @@ permalink: /going-international/
 ---
 
 <div style="text-align: center"><img width="100%" src="/images/going-international/going-international.png" /></div>
-<br>
+<br />
 
 ## Uruguay: An over-saturated market
 
