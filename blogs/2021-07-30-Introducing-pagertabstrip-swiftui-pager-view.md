@@ -7,7 +7,7 @@ category: development
 thumbnail: images/pager-swiftui/Twitter-1.png
 social_image: /images/pager-swiftui/Twitter-1.png
 twitter_image: /images/pager-swiftui/Twitter-1.png
-permalink: /introducing-pagertabstripview-pager-view-in-swiftui//
+permalink: /introducing-pagertabstripview-pager-view-in-swiftui/
 ---
 
 <p style="text-align:left;width:100%">

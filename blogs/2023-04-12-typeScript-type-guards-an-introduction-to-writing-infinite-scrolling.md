@@ -4,7 +4,7 @@ date: 2023-04-13
 tags: [Typescript]
 author: solo
 category: development
-permalink: /typeScript-type-guards-writing-safer-code/
+permalink: /type-script-type-guards-writing-safer-code/
 thumbnail: /images/typeScript-Type-Guards-An-Introduction-to-Writing/Infinite_scrolling.png
 ---
 

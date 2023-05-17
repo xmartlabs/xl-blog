@@ -4,7 +4,7 @@ date: 2023-03-24
 tags: [frontend-development, alpaca API, javascript development]
 author: christian-casaran
 category: development
-permalink: /the-power-of-neobanking-with-synapseFi/
+permalink: /the-power-of-neobanking-with-synapse-fi/
 thumbnail: /images/neobanking-and-synapseFi/Neobanking-1.png
 ---
 

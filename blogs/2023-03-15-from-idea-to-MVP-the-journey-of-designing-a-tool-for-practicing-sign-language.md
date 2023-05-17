@@ -5,7 +5,7 @@ tags: [lean inception, product design, mvp]
 author: andres-zunini
 category: product-design
 thumbnail: /images/from-idea-to-mvp/LSU_Design.png
-permalink: /from-idea-to-MVP-the-lean-inception-process/
+permalink: /from-idea-to-mvp-the-lean-inception-process/
 ---
  
  <img width="100%" src="/images/from-idea-to-mvp/LSU_Design.png" />
