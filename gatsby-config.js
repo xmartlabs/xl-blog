@@ -16,6 +16,7 @@ module.exports = {
     "gatsby-plugin-slug",
     "gatsby-plugin-sitemap",
     "gatsby-plugin-meta-redirect",
+    "gatsby-plugin-netlify",
     {
       resolve: `gatsby-plugin-disqus`,
       options: {
