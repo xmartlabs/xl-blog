@@ -50,8 +50,7 @@ exports.onCreateNode = ({ node, actions }) => {
 }
 
 exports.createPages = async ({actions, graphql, reporter}) => {
-    const {createPage} = actions;
-    const {createRedirect} = actions;
+    const {createPage, createRedirect} = actions;
     const tagTemplate = path.resolve("src/templates/tags.js");
     const categoryTemplate = path.resolve("src/templates/categories.js");
     const authorTemplate = path.resolve("src/templates/authors.js");
