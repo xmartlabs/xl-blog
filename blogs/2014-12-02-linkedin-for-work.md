@@ -8,7 +8,7 @@ category: product-design
 permalink: /linkedin-for-work/
 ---
 
-<div class="separator" style="clear: both; text-align: center;">
+<div class="separator" style={{ clear:"both", textAlign:"center" }}
   <img border="0" src="https://1.bp.blogspot.com/-7F7ZbSYtELs/VLRD2OddXpI/AAAAAAAAGPA/z_C5KpCE_88/s1600/POS-POSTA_1-caratula.jpg" height="133" width="320" />
 </div>
 <br/>
@@ -31,7 +31,7 @@ permalink: /linkedin-for-work/
 <p>
   We then made screenshots of LinkedIn’s mobile app, rethought how some of the features should work and sketched how we thought they should look. We think better on paper:
 </p>
-<div class="separator" style="clear: both; text-align: center;">
+<div class="separator" style={{ clear:"both", textAlign:"center" }}
   <a class="fluid-box" href="https://3.bp.blogspot.com/-Tn0eiaxC6MA/VJhOH7IIEeI/AAAAAAAAFeE/PBsIaxi_CGM/s1600/profile1.jpg" title="">
     <img src="https://3.bp.blogspot.com/-Tn0eiaxC6MA/VJhOH7IIEeI/AAAAAAAAFeE/PBsIaxi_CGM/s1600/profile1.jpg" alt="" height="226" width="320" />
   </a>
@@ -40,20 +40,20 @@ permalink: /linkedin-for-work/
 <p>
   We decided to adopt a card-based approach. This is how the profile would look without any social feeds and a reorganized navigation. Stats are private to the user.
 </p>
-<div class="separator" style="clear: both; text-align: center;">
-  <a class="fluid-box" href="https://4.bp.blogspot.com/-iWOw2hR_m_Y/VJhOFZ_pbwI/AAAAAAAAFd8/Q9TC2MhD4v0/s1600/jobs1.jpg" imageanchor="1" style="margin-left: 1em; margin-right: 1em;">
+<div class="separator" style={{ clear:"both", textAlign:"center" }}
+  <a class="fluid-box" href="https://4.bp.blogspot.com/-iWOw2hR_m_Y/VJhOFZ_pbwI/AAAAAAAAFd8/Q9TC2MhD4v0/s1600/jobs1.jpg" imageanchor="1" style={{ marginLeft:"1em", marginRight:"1em" }}>
     <img border="0" src="https://4.bp.blogspot.com/-iWOw2hR_m_Y/VJhOFZ_pbwI/AAAAAAAAFd8/Q9TC2MhD4v0/s1600/jobs1.jpg" height="226" width="320" />
   </a>
 </div>
 <p>
 The abbreviated Job card, including only the essential information.
 </p>
-<div class="separator" style="clear: both; text-align: center;">
-  <a class="fluid-box" href="https://2.bp.blogspot.com/-fLD7Hg0S9qk/VJhOKG1s0xI/AAAAAAAAFeM/Hn2hJjGuBro/s1600/tinder.jpg" imageanchor="1" style="margin-left: 1em; margin-right: 1em;">
+<div class="separator" style={{ clear:"both", textAlign:"center" }}
+  <a class="fluid-box" href="https://2.bp.blogspot.com/-fLD7Hg0S9qk/VJhOKG1s0xI/AAAAAAAAFeM/Hn2hJjGuBro/s1600/tinder.jpg" imageanchor="1" style={{ marginLeft:"1em", marginRight:"1em" }}>
     <img border="0" src="https://2.bp.blogspot.com/-fLD7Hg0S9qk/VJhOKG1s0xI/AAAAAAAAFeM/Hn2hJjGuBro/s1600/tinder.jpg" height="226" width="320" />
   </a>
 </div>
-<div class="separator" style="clear: both; text-align: center;"></div>
+<div class="separator" style={{ clear:"both", textAlign:"center" }}</div>
 <p>
 We also rethought how the Jobs You May Be Interested In section could work if it adopted a Tinder-like approach.
 </p>

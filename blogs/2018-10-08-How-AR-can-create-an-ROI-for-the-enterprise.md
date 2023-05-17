@@ -19,7 +19,7 @@ Until recently, mobile AR was a single-device experience. However, the recent in
 
 <img width="100%" src="/images/how-ar-can-create-an-roi-for-the-enterprise/sephora-virtual-artist.png" />
 <br />
-<p style="text-align: center;"> (source: <a href="https://sephoravirtualartist.com">SephoraVirtualArtist</a>)</p>
+<p style={{ textAlign:"center" }} (source: <a href="https://sephoravirtualartist.com">SephoraVirtualArtist</a>)</p>
 
 #### 2 - AR has been subtly introduced as an add-on to existing platforms
 

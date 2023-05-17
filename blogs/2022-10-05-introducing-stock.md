@@ -12,7 +12,7 @@ permalink: /introducing-stock/
 October is a special month for Open Source contributors thanks to [Hacktoberfest] taking place.
 In this wonderful month, we are thrilled to announce [**Stock**][stock], Xmartlabs' latest Flutter Open Source Project.
 
-## What is [Stock]?
+## What is [Stock](https://pub.dev/packages/stock)?
 
 [Stock] is a dart package whose main feature is combining different data sources on Flutter.
 Most mobile projects need the same thing, to share data with a cloud service.

@@ -34,7 +34,7 @@ In September 2022, the same authors presented a [new paper](https://arxiv.org/ab
 
 ![ezgif.com-video-to-gif.gif](/images/building-a-zero-shot-sign-pose-embedding-model/ezgif.com-video-to-gif.gif)
 
-## Methodology — **Our Approach to Develop a Real-Time Sign Language Model**
+## Methodology—**Our Approach to Develop a Real-Time Sign Language Model**
 
 We required a model that could perform in real-time, either on mobile devices or browsers. We also wanted a model that would allow for fast iteration and faster training. The image-to-pose problem has been effectively addressed by various models, so we opted to use one of these models and work with a smaller model that takes keypoints as input. Some of these models have the added advantage of being able to run in real-time on edge devices.
 

@@ -10,6 +10,6 @@ category: people-events
 permalink: /summary-rubyconf-uy-2013/
 ---
 
-<div style="text-align: center;">
+<div style={{ textAlign:"center" }}
   <iframe allowfullscreen="" frameborder="0" height="315" src="https://www.youtube.com/embed/FCZs6Ijnyx8" width="560"></iframe>
 </div>

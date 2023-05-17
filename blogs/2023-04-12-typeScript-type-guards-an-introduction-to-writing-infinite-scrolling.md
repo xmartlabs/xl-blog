@@ -93,7 +93,7 @@ As we can notice, the `any` type is intended to be used when you desire to avo
 
 So if the `any` type doesn't work for typing something we have no information about, is there another type that allows us to do this?
 
-## The `unkonwn` type
+## The _unkonwn_ type
 
 In Typesscript 3.0 the `unkonwn` type was introduced. You can think of it as the type-safe counterpart of the `any` type. How? Although we use both of them to type those values we know nothing about, the main difference is that `unknown` is much more restrictive in the sense that any property you want to access or almost any kind of operator you want to use it with, will result in a compiler error.
 
@@ -110,7 +110,7 @@ The obvious thing would be to ask ourselves: if something of the `unknown` typ
 
 This gives us the ground to introduce the `type guards`.
 
-## **Introduction to `type guards`**
+## **Introduction to _type guards_**
 
 People often confuse a dynamically typed language with the absence of types.
 
