@@ -2,7 +2,7 @@
 title: "Choosing the right blockchain for your next NFT project"
 permalink: /right-blockchain-for-nft-platform/
 date: 2022-06-08
-category: blockchain-development
+category: blockchain
 tags:
   - NFT Development
   - Blockchain Development
