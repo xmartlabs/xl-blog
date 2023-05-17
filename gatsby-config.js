@@ -12,9 +12,10 @@ module.exports = {
     "gatsby-plugin-styled-components",
     "gatsby-plugin-image",
     "gatsby-plugin-react-helmet",
-    "gatsby-plugin-sitemap",
     "gatsby-plugin-instagram-embed",
     "gatsby-plugin-slug",
+    "gatsby-plugin-sitemap",
+    "gatsby-plugin-meta-redirect",
     {
       resolve: `gatsby-plugin-disqus`,
       options: {

@@ -161,7 +161,7 @@ const BlogPost = ({ data, children }) => {
           <div className={styles.authorContainer}>
             <div className={styles.authorInformation}>
               <img src={`/images/${authorBlog.image}`} alt="" className={styles.authorImage} />
-              <Link className={classnames(styles.authorName, "text__paragraph__bold__black")} to={`/authors/${ _.kebabCase(authorBlog.author) }`}>{ authorBlog.displayName }</Link>
+              <Link className={classnames(styles.authorName, "text__paragraph__bold__black")} to={author.profile_url}>{ authorBlog.displayName }</Link>
             </div>
             <div className={styles.blogInfoContainer}>
               <label className={classnames(styles.postDate, "text__label__bold__grayTwo")} >{data.mdx.frontmatter.date}</label>
