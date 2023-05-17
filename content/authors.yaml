@@ -79,7 +79,7 @@
   profile_url: https://github.com/xmartlabs
 - author: felipe
   display_name: Felipe de León
-  image: members/felipe.jpg
+  image: members/felipe.png
   github: f7deleon
   profile_url: https://github.com/f7deleon
 - author: mlorenzo
@@ -104,7 +104,7 @@
   profile_url: https://github.com/FerrariBruno
 - author: nicoh
   display_name: Nicolas Hernandez
-  image: members/nicoh.png
+  image: members/nicoher.png
   github: nicoache1
   profile_url: https://github.com/nicoache1
 - author: ceci
@@ -130,7 +130,7 @@
 - author: fer-barrios
   display_name: Fernanda Barrios
   image: members/fer-barrios.png
-  profile_url: https://www.linkedin.com/in/maría-fernanda-barrios-sánchez-560a08b1/
+  profile_url: https://www.linkedin.com/in/fernanda-barrios-560a08b1
 - author: nicolantean
   display_name: Nicolás Lantean
   image: members/nicolantean.jpg
@@ -176,3 +176,36 @@
   image: members/lazaro.jpeg
   github: pgrill
   profile_url: https://github.com/LazaroM2019
+- author: alemachado
+  display_name: Ale Machado
+  image: members/alemachado.jpeg
+  github: mralejandro
+  profile_url: https://www.linkedin.com/in/mralejandro/
+- author: coti
+  display_name: Coti Besozzi
+  image: members/coti.png
+  profile_url: https://www.linkedin.com/in/costanza-besozzi/
+- author: sofitechera
+  display_name: Sofia Techera
+  image: members/sofia-techera.png
+  profile_url: https://www.linkedin.com/in/sofia-techera/
+- author: jsanchez
+  display_name: Joaquín Sánchez
+  image: members/joaco-sanchez.png
+  profile_url: https://github.com/joacosnchz
+- author: sol-mendiola
+  display_name: Sol Mendiola
+  image: members/sol.png
+  profile_url: https://github.com/SolMendiola
+- author: andres-zunini
+  display_name: Andrés Zunini
+  image: members/andres-zunini.jpeg
+  profile_url: https://www.linkedin.com/in/andr%C3%A9s-zunini-870b75a7/
+- author: christian-casaran
+  display_name: Christian Casaran
+  image: members/christian-casaran.jpeg
+  profile_url: https://github.com/Kriz1618
+- author: solo
+  display_name: Juan Oliu
+  image: members/solo.jpeg
+  profile_url: https://github.com/jmoliugp
