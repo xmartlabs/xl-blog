@@ -4,16 +4,16 @@
 
 const postsPerPage = 9;
 
-const path = require("path")
-const _ = require("lodash")
+const path = require("path");
+const _ = require("lodash");
 
 exports.createResolvers = ({ createResolvers }) => {
   const resolvers = {
     Mdx: {
       relatedPosts: {
         type: ['Mdx'],
-        resolve: (source, args, context, info) => {
-          return context.nodeModel.runQuery({
+        resolve: async (source, args, context, info) => {
+          const {entries} = await context.nodeModel.findAll({
             query: {
               filter: {
                 id: {
@@ -28,6 +28,7 @@ exports.createResolvers = ({ createResolvers }) => {
             },
             type: 'Mdx',
           })
+          return entries;
         },
       },
     },
@@ -35,31 +36,53 @@ exports.createResolvers = ({ createResolvers }) => {
   createResolvers(resolvers)
 };
 
+const readingTime = require(`reading-time`)
+
+exports.onCreateNode = ({ node, actions }) => {
+  const { createNodeField } = actions;
+  if (node.internal.type === `Mdx`) {
+    createNodeField({
+      node,
+      name: `timeToRead`,
+      value: readingTime(node.body)
+    })
+  }
+}
+
+const redirects = require('./redirects.json');
+
 exports.createPages = async ({actions, graphql, reporter}) => {
-    const {createPage} = actions
-    const tagTemplate = path.resolve("src/templates/tags.js")
-    const categoryTemplate = path.resolve("src/templates/categories.js")
-    const authorTemplate = path.resolve("src/templates/authors.js")
-    const postTemplate = path.resolve("src/templates/post.js")
+    const {createPage, createRedirect} = actions;
+    const tagTemplate = path.resolve("src/templates/tags.js");
+    const categoryTemplate = path.resolve("src/templates/categories.js");
+    const authorTemplate = path.resolve("src/templates/authors.js");
+    const postTemplate = path.resolve("src/templates/post.js");
+
+    redirects.forEach(redirect => {
+      createRedirect({
+        fromPath: redirect.from,
+        toPath: redirect.to,
+      });
+    });
 
     const result = await graphql(`
     {
       tagsGroup: allMdx(limit: 2000) {
-        group(field: frontmatter___tags) {
+        group(field: {frontmatter: {tags: SELECT}}) {
           fieldValue
         }
       }
       categoriesGroup: allMdx(limit: 2000) {
-        group(field: frontmatter___category) {
+        group(field: {frontmatter: {category: SELECT}}) {
           fieldValue
         }
       }
       authorsGroup: allMdx(limit: 2000) {
-        group(field: frontmatter___author) {
+        group(field: {frontmatter: {author: SELECT}}) {
           fieldValue
         }
       }
-      posts: allMdx(sort: {fields: frontmatter___date, order: DESC})  {
+      posts: allMdx(sort: {frontmatter: {date: DESC}}) {
         edges {
           node {
             id
@@ -71,13 +94,22 @@ exports.createPages = async ({actions, graphql, reporter}) => {
               tags
               permalink
             }
+            fields {
+              slug
+              timeToRead {
+                text
+              }
+            }
+            internal {
+              contentFilePath
+            }
             body
-            slug
           }
         }
       }
-    }
+    }    
   `)
+
     // handle errors
     if (result.errors) {
         reporter.panicOnBuild(`Error while running GraphQL query.`)
@@ -142,7 +174,7 @@ exports.createPages = async ({actions, graphql, reporter}) => {
     posts.forEach(post => {
       createPage({
         path: post.node.frontmatter.permalink,
-        component: postTemplate,
+        component: `${postTemplate}?__contentFilePath=${post.node.internal.contentFilePath}`,
         context: {
           id: post.node.id,
         }

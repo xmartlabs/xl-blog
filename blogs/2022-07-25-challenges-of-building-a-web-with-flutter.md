@@ -22,8 +22,9 @@ In conventional web development, we always have a tree with nodes representing t
 <html>
     <head>...</head>
     <body flt-renderer="canvaskit (auto-selected)" flt-build-mode="release" spellcheck="false" style="...">
-        <flt-glass-pane style="position: absolute; inset: 0px; cursor: default;">
-            <flt-scene-host aria-hidden="true" style="pointer-events: none;">
+        <flt-glass-pane style={{ position:"absolute", inset:"0px", cursor:"default" }}
+        >
+            <flt-scene-host aria-hidden="true" style={{ pointerEvents:"none" }}>
                 <flt-scene>
                     <flt-canvas-container>
                         <canvas width="2400" height="1912" style="..."></canvas>
@@ -35,7 +36,7 @@ In conventional web development, we always have a tree with nodes representing t
 </html>
 ```
 
-<p style="color:gray; font-size:80%; font-style: italic;" align="center">
+<p style={{ color:"gray", fontSize:"80%", fontStyle:"italic", textAlign:"center" }}>
 The result of inspecting a web made in Flutter, as you can see there is only a canvas and thats it.
 </p>
 
@@ -54,7 +55,7 @@ Dart has two compilers for the web, one that supports debugging and hot reloadin
       );
 ```
 
-<p style="color:gray; font-size:80%; font-style: italic;" align="center">This should never work but it does in debug not in release.</p>
+<p style={{ color:"gray", fontSize:"80%", fontStyle:"italic", textAlign:"center" }}>This should never work but it does in debug not in release.</p>
 
 ## Challenge 3: Accessing hardware from Flutter
 
@@ -74,7 +75,7 @@ All platforms have different ways to access their hardware capabilities, and the
 await window.navigator.mediaDevices?.getUserMedia(videoConfig);
 ```
 
-<p style="color:gray; font-size:80%; font-style: italic;" align="center">This code can be used only on the web and would make the app crash on mobile.</p>
+<p style={{ color:"gray", fontSize:"80%", fontStyle:"italic", textAlign:"center" }}>This code can be used only on the web and would make the app crash on mobile.</p>
 
 ## Challenge 4: Using Html components with Flutter
 
@@ -107,7 +108,7 @@ To avoid this kind of behavior, HTML elements should be declared at the top of y
   });
 ```
 
-<p style="color:gray; font-size:80%; font-style: italic;" align="center">An example of a view factory registration for a video element.</p>
+<p style={{ color:"gray", fontSize:"80%", fontStyle:"italic", textAlign:"center" }}>An example of a view factory registration for a video element.</p>
 
 ## Challenge 5: Using js code in Dart
 

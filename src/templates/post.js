@@ -1,8 +1,6 @@
 import * as React from 'react';
 import { useContext, useEffect, useState, useRef } from 'react';
 import { Disqus } from 'gatsby-plugin-disqus';
-
-import { MDXRenderer } from 'gatsby-plugin-mdx';
 import { graphql, Link } from 'gatsby';
 
 import AuthorsYAMLData from "../../content/authors.yaml";
@@ -19,7 +17,7 @@ import * as styles from '../css/blog-post.module.scss';
 
 const _ = require("lodash");
 
-const BlogPost = ({ data }) => {
+const BlogPost = ({ data, children }) => {
   const author = AuthorsYAMLData.find(({ author }) => (author === data.mdx.frontmatter.author));
   const authorBlog = AuthorSerializer.deSerialize(author);
   const { setState } = useContext(AppContext);
@@ -185,35 +183,29 @@ const BlogPost = ({ data }) => {
           </h1>
           <div className={styles.authorContainer}>
             <div className={styles.authorInformation}>
-              <img src={`images/${authorBlog.image}`} alt="" className={styles.authorImage} />
-              <Link className={classnames(styles.authorName, "text__paragraph__bold__black")} to={null}>{ authorBlog.displayName }</Link>
-              {/* The author name links to a page which is not created yet, the link taht you will need to use is: `authors/${ _.kebabCase(authorBlog.author) }` */}
+              <img src={`/images/${authorBlog.image}`} alt="" className={styles.authorImage} />
+              <Link className={classnames(styles.authorName, "text__paragraph__bold__black")} to={author.profile_url}>{ authorBlog.displayName }</Link>
             </div>
             <div className={styles.blogInfoContainer}>
               <label className={classnames(styles.postDate, "text__label__bold__grayTwo")} >{data.mdx.frontmatter.date}</label>
               <ClockIcon className={styles.clockIcon} />
               <label className={classnames("text__label__bold__grayTwo", styles.timeToRead)} >
-                {data.mdx.timeToRead} min read
+                {data.mdx.fields.timeToRead.text}
               </label>
             </div>
           </div>
         </div>
         <div>
-          <img src={data.mdx.frontmatter.thumbnail} onError={(event) => event.target.src = '../../images/image.png'} className={styles.blogMainImage} />
-          <div className={styles.bodyPostContainer} ref={refIndexTitles}>
-            <MDXRenderer>
-              {data.mdx.body}
-            </MDXRenderer>
+          <img src={`/${data.mdx.frontmatter.thumbnail}`} onError={(event) => event.target.src = '../../images/image.png'} className={styles.blogMainImage} />
+          <div className={styles.bodyPostContainer} id="postContainer">
+            {children}
           </div>
         </div>
-        <div className={styles.blogBottomElements}>
-          <div className={styles.socialBottomContainer}>
-            <span className={classnames('text__paragraph__bold__grayTwo', styles.sharePosition)}>Share:</span>
-            <SocialElement className={classnames(styles.socialBottom, styles.blogIcons)} links={shareXlProfileLinks} />
-          </div>
-          <Tags blogTags={data.mdx.frontmatter.tags} className={styles.tags} />
-        </div>
-      <MoreBlogsSection data={data} refMoreFrom={refMoreFrom} title={categoryBlog.displayName} withCategory={false}/>
+      <div className={styles.socialBottomContainer}>
+        <span className={classnames('text__paragraph__bold__grayTwo', styles.sharePosition)}>Share:</span>
+        <SocialElement className={classnames(styles.socialBottom, styles.blogIcons)} links={shareXlProfileLinks} />
+      </div>
+      <MoreBlogsSection relatedPosts={data.mdx.relatedPosts} refMoreFrom={refMoreFrom} title={categoryBlog.displayName} />
       <div className={styles.disqusSection}>
         <h3 className={styles.disqusTitle}>Comments:</h3>
         <div id="disqus_thread">
@@ -225,8 +217,24 @@ const BlogPost = ({ data }) => {
 };
 
 export const query = graphql`
-  query ($id: String) {
-    mdx(id: {eq: $id}) {
+query ($id: String) {
+  mdx(id: {eq: $id}) {
+    frontmatter {
+      title
+      date(formatString: "MMMM D, YYYY")
+      author
+      category
+      tags
+      permalink
+      thumbnail
+    }
+    fields {
+      slug
+      timeToRead {
+        text
+      }
+    }
+    relatedPosts {
       frontmatter {
         title
         date(formatString: "MMMM D, YYYY")
@@ -236,22 +244,9 @@ export const query = graphql`
         permalink
         thumbnail
       }
-      body
-      timeToRead
-      slug
-      relatedPosts {
-        frontmatter {
-          title
-          date(formatString: "MMMM D, YYYY")
-          author
-          category
-          tags
-          permalink
-          thumbnail
-        }
-      }
     }
   }
+}
 `
 
 export default BlogPost; 

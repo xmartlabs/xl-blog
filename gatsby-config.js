@@ -8,14 +8,19 @@ module.exports = {
     title: "XL-Blog",
     descripton: "Blog description",
   },
+  flags: {
+    PARALLEL_QUERY_RUNNING: true
+  },
   plugins: [
-    "gatsby-plugin-fontawesome-css",
     "gatsby-plugin-netlify-cms",
     "gatsby-plugin-styled-components",
     "gatsby-plugin-image",
     "gatsby-plugin-react-helmet",
-    "gatsby-plugin-sitemap",
     "gatsby-plugin-instagram-embed",
+    "gatsby-plugin-slug",
+    "gatsby-plugin-sitemap",
+    "gatsby-plugin-meta-redirect",
+    "gatsby-plugin-netlify",
     {
       resolve: `gatsby-plugin-disqus`,
       options: {
@@ -73,6 +78,6 @@ module.exports = {
       },
     },
     "gatsby-transformer-remark",
-    "gatsby-plugin-sass"
+    "gatsby-plugin-sass",
   ],
 };

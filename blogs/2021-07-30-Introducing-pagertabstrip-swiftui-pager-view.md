@@ -10,7 +10,7 @@ twitter_image: /images/pager-swiftui/Twitter-1.png
 permalink: /introducing-pagertabstripview-pager-view-in-swiftui/
 ---
 
-<p style="text-align:left;width:100%">
+<p style={{ textAlign:'left', width: '100%'}}>
 <img src="/images/pager-swiftui/Blog-skinny.png" alt="Project banner" />
 </p>
 

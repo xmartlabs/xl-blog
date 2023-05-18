@@ -11,7 +11,7 @@ twitter_image: /images/gong-introduction/bannerTwitter.png
 permalink: /kickstart-your-new-android-project-with-gong-base-project/
 ---
 
-<p style={{ textAlign:"center"}}>
+<p style={{ textAlign:'center'}}>
 <img src="/images/gong-introduction/bannerInterno.png" alt="Project banner" />
 </p>
 
@@ -45,8 +45,8 @@ You can even provide your Git remote URL to set up your project pointing to your
 
 Let's see how easy it's below:
 
-<p style={{ textAlign:"center"}}>
-<img style={{ width:"100%" }} src="/images/gong-introduction/howto.gif" alt="How to start using it" />
+<p style={{ textAlign:'center'}}>
+<img style={{ width: '100%'}} src="/images/gong-introduction/howto.gif" alt="How to start using it" />
 </p>
 
 # The Generated base Android project
@@ -55,7 +55,7 @@ Once the script execution finishes, you can open the generated Android project i
 
 Checking out the generated project, you can find a well-constructed package structure to organize your files storing them where they belong. It also provides you with common build variants (dev, prod) ready to use.
 
-<p style={{ textAlign:"center"}}>
+<p style={{ textAlign:'center'}}>
 <img src="/images/gong-introduction/projectTree.png" alt="Generated project tree" />
 </p>
 

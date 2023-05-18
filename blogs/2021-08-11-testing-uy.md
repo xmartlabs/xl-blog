@@ -14,8 +14,8 @@ permalink: /our-take-on-testinguy-2021/
 Each year, Testing UY offers a variety of talks, workshops, and lightning talks (15 minutes duration). Due to the pandemic, this year is the first year where the event is 100% remote, but the good spirit and collaboration have been the same as in previous editions.
 For this edition, Xmartlabs is a Bronze Sponsor.
 
-<p style="text-align:right;">
-<img style="width: 100%" src="/images/our-take-on-testinguy/testing-uy-sala-antel.png" alt="Testing UY 2109" />
+<p style={{ textAlign:'right'}}>
+<img style={{ width: '100%'}} src="/images/our-take-on-testinguy/testing-uy-sala-antel.png" alt="Testing UY 2109" />
 Janet Gregory in the 2019 Testing UY edition.
 </p>
 
@@ -25,8 +25,8 @@ In this edition, Testing UY added a Challenge. It consisted in having a system u
 
 The system under test was provided by Abstracta, a channel via Discord was available during the event to ask questions to the Product Owner, and all the documentation was shared via Google Drive. We were able to perform Functional, Usability, and Accessibility testing while other testing techniques such as Performance (load, spike, soak) were not allowed due to the number of teams interacting with the system.
 
-<p style={{ textAlign:"center"}}>
-<img style="width: 100%" src="/images/our-take-on-testinguy/testing-uy.jpeg" alt="Testing UY" />
+<p style={{ textAlign:'center'}}>
+<img style={{ width: '100%'}} src="/images/our-take-on-testinguy/testing-uy.jpeg" alt="Testing UY" />
 </p>
 
 
@@ -36,8 +36,8 @@ The system under test was provided by Abstracta, a channel via Discord was avail
 In this talk, an introduction to how to perform performance tests using the tool is presented, as well as the necessary configurations in the browser to be able to carry out the tests. Adding assertions and timers to be able to measure and then analyze the results.
 The best thing about this workshop is that problems that arose among the attendees were being solved when using the tool, which gave a realistic vision of problems that we can find when performing performance tests and how to interpret and solve them.
 
-<p style={{ textAlign:"center"}}>
-<img style="width: 100%" src="/images/our-take-on-testinguy/testing-uy-taller.png" alt="Testing UY - taller" />
+<p style={{ textAlign:'center'}}>
+<img style={{ width: '100%'}} src="/images/our-take-on-testinguy/testing-uy-taller.png" alt="Testing UY - taller" />
 </p>
 
 **Accessibility Web Testing (Karen Amaro & Nicolás Marioni):**

@@ -13,9 +13,9 @@ Nowadays, lots of companies gather a huge amount of data as a result of differen
 Once you have this input, a key component in today's data-driven company is the data warehouse.
 There, a consolidated view of all the convenient business information is stored in one place and can be queried in-depth for complex analysis.
 
-<img width="100%" src="/images/redshift-snowflake/cloud-data-warehouse.jpg" />
+<img style={{ width: '100%' }} src="/images/redshift-snowflake/cloud-data-warehouse.jpg" />
 <br />
-<p style={{ textAlign:"left" }}> (source: <a href="https://www.cazena.com/resource-topic/data-mart">Cazena</a>)</p>
+<p style={{ textAlign: 'center' }}> (source: <a href="https://www.cazena.com/resource-topic/data-mart">Cazena</a>)</p>
 
 **Cloud Data warehouses** are a popular choice among today's options.
 This type of warehouses are **easy-to-scale**, **highly performant** and **cheaper** than their in-house counterparts, as companies don't need to buy and maintain dedicated hardware nor hire highly specialized personnel.
@@ -79,14 +79,23 @@ The solution that Redshift provides to control this concurrency problem is to co
 
 <img width="100%" src="/images/redshift-snowflake/redshift_WML_Queues.png" />
 <br />
+<<<<<<< HEAD
 <p style={{ textAlign:"left" }}> (source: <a href="https://www.slideshare.net/AmazonWebServices/getting-started-with-amazon-redshift-72473371">Amazon</a>)</p>
+=======
+
+<p style={{ textAlign: 'center' }}> (source: <a href="https://www.slideshare.net/AmazonWebServices/getting-started-with-amazon-redshift-72473371">Amazon</a>)</p>
+>>>>>>> 2e5168ec882c8e1192d625774ee2e29d07a3964b
 
 On Snowflake, the solution is much simpler, as the data and compute layers are independent.
 On this platform, you can **create different warehouses for different proposes** and give each one different compute capacities if needed. This way, different queries to different warehouses won't compete, as they have separated resources.
 
 <img width="100%" src="/images/redshift-snowflake/snowflake_warehouses.png" />
 <br />
+<<<<<<< HEAD
 <p style={{ textAlign:"left" }}> (source: <a href="https://www.cazena.com/resource-topic/data-mart">Snowflake</a>)</p>
+=======
+<p style={{ textAlign: 'center' }}> (source: <a href="https://www.cazena.com/resource-topic/data-mart">Snowflake</a>)</p>
+>>>>>>> 2e5168ec882c8e1192d625774ee2e29d07a3964b
 
 ## Semi-Structured data
 

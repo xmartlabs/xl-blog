@@ -36,7 +36,7 @@ So, we decided to try it out and see how it really works. You can find [the code
 In this blog post we will focus on image classification, although you can do many other tasks using ML Kit.
 We will try to do something like this:
 
-<div style={{ textAlign:"center", marginBottom:"20px" }}>
+<div style={{ textAlign: 'center', marginBottom: '20px' }}>
 <img src="/images/mlkit/demo.gif" width="220"/></div>
 
 Image classification models have improved considerably in recent years as neural networks have been used and constantly improved.
@@ -273,7 +273,7 @@ In this and the following test case we measured the time before invoking the run
 This means that other times, such as the time spent resizing the image, were not included.
 Therefore it does not reflect the total amount of frames actually processed in one second.
 
-<div style={{ textAlign:"center", marginBottom:"20px" }}><img src="/images/mlkit/fps_graph.png" alt="FPS comparison chart!" /><br />
+<div style={{ textAlign: 'center', marginBottom: '20px' }}><img src="/images/mlkit/fps_graph.png" alt="FPS comparison chart!" /><br />
 <em>Inference time in milliseconds for each framework model. Lower is better.</em>
 </div>
 
@@ -289,7 +289,7 @@ With other models this difference could also be bigger.
 When we allow up to two frames to be run at the same time we can see the per frame performance of these models change.
 In this test we show the results separately for the cases where the camera is set to 30 or 60 FPS.
 
-<div style={{ textAlign:"center", marginBottom:"20px" }}>
+<div style={{ textAlign: 'center', marginBottom: '20px' }}>
 <img src="/images/mlkit/two_frames.png" alt="FPS comparison chart!" /><br />
 <em>This chart shows the inference time of the models in milliseconds per frame, so lower is better. It also compares different camera frame rates.</em>
 </div>
@@ -307,7 +307,7 @@ However it is to be noted that both end in the same number of processed frames p
 
 Here we compare the wall time, i.e. how many frames the model really processes per second. This includes the time needed to resize the image frames from the camera as well as the time the GPU and CPU are idle in between frames.
 
-<div style={{ textAlign:"center", marginBottom:"20px" }}>
+<div style={{ textAlign: 'center', marginBottom: '20px' }}>
 <img src="/images/mlkit/real_fps.png" alt="FPS comparison chart!" /><br />
 <em>FPS comparison by framework. Higher is better.</em>
 </div>
@@ -322,7 +322,7 @@ Another factor which might influence a decision between these two frameworks is 
 In the tests we made, we could see that Core ML consumes more energy than ML Kit.
 You can see that in the following image, where Core ML is running during the first half and ML Kit during the second:
 
-<div style={{ textAlign:"center", marginBottom:"20px" }}>
+<div style={{ textAlign: 'center', marginBottom: '20px' }}>
 <img src="/images/mlkit/energy.png" alt="Energy comparison chart" /><br />
 <em>Energy consumption while running inference. Core ML is run during the first half and ML Kit during the second. You can see how energy consumption is higher during the first half.</em>
 </div>

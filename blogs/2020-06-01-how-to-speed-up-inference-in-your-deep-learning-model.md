@@ -11,7 +11,7 @@ permalink: /2020-06-01-how-to-speed-up-inference-in-your-deep-learning-model/
 
 Did you obtain good accuracy with your deep learning model only to find out that inference time isn't enough to deploy on production? Are you lost on how to optimize your model's inference speed? Then this post is for you.
 
-<div style={{ textAlign:"left" }}> }}><img width="100%" src="/images/how-to-speed-up-inference-in-your-deep-learning-model/speed-up.jpg" /></div>
+<div style={{ textAlign: 'center'}}><img width="100%" src="/images/how-to-speed-up-inference-in-your-deep-learning-model/speed-up.jpg" /></div>
 
 
 Data Science projects have the peculiarity that your focus must constantly shift across completely different requirements.

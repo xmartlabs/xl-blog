@@ -63,8 +63,8 @@ Be careful with the language you use, especially if you're an academic or Ph.D.,
 
 **Get them at "hello"**
 
-<p style={{ textAlign:"center"}}>
-    <img style="width: 100%" src="/images/tcd21-startup-landscape/hello.gif" alt="You had me at hello" />
+<p style={{ textAlign:'center'}}>
+    <img style={{ width:'100%'}} src="/images/tcd21-startup-landscape/hello.gif" alt="You had me at hello" />
 </p>
 Jerry Maguire (1999)  *[Source](https://i.gifer.com/origin/82/821cae4dd9ed6e9826feea3f0963dad6.gif)*
 
@@ -107,8 +107,8 @@ Romanow's company Clearco is an excellent example of RBF. They lend up to 10 mil
 
 As mentioned previously, remote reality significantly impacted founding, especially the pace at which rounds are closed. The exit environment has also increased, and it's now much faster. An increase in speed is not always good news when building relationships with investors, as it becomes harder to create one-on-one bonds between them and the founders. Faster times are not necessarily good, these relationships are like long-term marriages, and it's more important to find a partner that's right for you than to find one quickly.
 
-<p style="text-align:right;">
-    <img style="width: 100%" src="/images/tcd21-startup-landscape/GlobalVentureCapitalActivity.png" alt="Global Venture Capital Activity" />
+<p style={{ textAlign:'right'}}>
+    <img style={{ width:'center'}} src="/images/tcd21-startup-landscape/GlobalVentureCapitalActivity.png" alt="Global Venture Capital Activity" />
     <a href="https://www.google.com/url?sa=i&url=https%3A%2F%2Finsight.factset.com%2Fventure-capital-activity-skyrockets-in-the-first-half-of-2021&psig=AOvVaw2jh6caWGIGh-N3BodLRSH1&ust=1633801259917000&source=images&cd=vfe&ved=0CAsQjRxqFwoTCMCIpZCuu_MCFQAAAAAdAAAAABBM">Source</a>
 </p>
 
@@ -133,8 +133,8 @@ In the tech industry, there's always the question of whether or not to outsource
 - How valuable is your time: sometimes, it's better not to save those extra dollars and hire an agency hiring, so you don't have to do it all yourself, especially in this remote environment, where you don't even need to be in the same geographical location.
 - What's the big differentiation of your company: despite the costs, experts don't recommend outsourcing those critical technical aspects that differentiate your company from competitors. So think if what you're outsourcing will compromise your differentiator. Today, you can also consider the array of no-code solutions if a technical aspect is not critical but may be time-consuming or expensive to have in-house.
 
-<p style="text-align:right;">
-    <img style="width: 100%" src="/images/tcd21-startup-landscape/global-low-code-no-code-market.png" alt="global low code and no code market" />
+<p style={{ textAlign:'right'}}>
+    <img style={{ width:'100%'}} src="/images/tcd21-startup-landscape/global-low-code-no-code-market.png" alt="global low code and no code market" />
     <a href="https://www.spreadsheetweb.com/how-big-is-the-global-low-code-no-code-market-and-how-fast-is-it-growing/">Source</a>
 </p>
 

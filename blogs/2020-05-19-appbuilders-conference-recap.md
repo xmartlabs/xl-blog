@@ -27,7 +27,7 @@ That being said, now I want to share my thoughts about each talk, starting with 
 
 ### Small teams, Big OSS
 
-<div style={{ textAlign:"left" }}><img width="90%" src="/images/recap-appbuilders/featured.jpg" />
+<div style={{ textAlign: 'left'}}><img width="90%" src="/images/recap-appbuilders/featured.jpg" />
 <p class="small">Sketchnote: Courtesy of <a href="https://twitter.com/felibe444">@felibe444</a></p>
 </div>
 
@@ -40,7 +40,7 @@ So if you want to know our take on how to run a successful OSS project watch my 
 
 ### UITesting over the years
 
-<div style={{ textAlign:"left" }}><img width="90%" src="/images/recap-appbuilders/ui-testing.jpeg" />
+<div style={{ textAlign: 'left'}}><img width="90%" src="/images/recap-appbuilders/ui-testing.jpeg" />
 <p class="small">Sketchnote: Courtesy of <a href="https://twitter.com/felibe444">@felibe444</a></p>
 </div>
 
@@ -52,7 +52,11 @@ Finally, he shared a bunch of tips! For example how to speed up testing by speed
 
 ### Property Wrappers
 
+<<<<<<< HEAD
 <div style={{ textAlign:"left" }}><img width="90%" src="/images/recap-appbuilders/property-wrappers.jpeg" />
+=======
+<div style={{ textAlign: 'left'}}><img width="90%" src="/images/recap-appbuilders/property-wrappers.jpeg" />
+>>>>>>> 2e5168ec882c8e1192d625774ee2e29d07a3964b
 <p class="small">Sketchnote: Courtesy of <a href="https://twitter.com/felibe444">@felibe444</a></p>
 </div>
 
@@ -63,7 +67,11 @@ If you know nothing about property wrappers yet, this is a very comprehensive in
 
 ### Getting started with combine
 
+<<<<<<< HEAD
 <div style={{ textAlign:"left" }}><img width="90%" src="/images/recap-appbuilders/combine.jpeg" />
+=======
+<div style={{ textAlign: 'left'}}><img width="90%" src="/images/recap-appbuilders/combine.jpeg" />
+>>>>>>> 2e5168ec882c8e1192d625774ee2e29d07a3964b
 <p class="small">Sketchnote: Courtesy of <a href="https://twitter.com/felibe444">@felibe444</a></p>
 </div>
 
@@ -73,7 +81,11 @@ It went from reactive programming fundamentals to some async programming problem
 
 ### Going Quantum
 
+<<<<<<< HEAD
 <div style={{ textAlign:"left" }}>
+=======
+<div style={{ textAlign: 'left'}}>
+>>>>>>> 2e5168ec882c8e1192d625774ee2e29d07a3964b
 <img width="90%" src="/images/recap-appbuilders/quantum.jpeg" />
 <p class="small">Sketchnote: Courtesy of <a href="https://twitter.com/felibe444">@felibe444</a></p>
 </div>
@@ -86,7 +98,7 @@ A really mind-blowing talk about the state of quantum computers by Sebastian Wei
 
 ### Custom UI components in SwiftUI
 
-<div style={{ textAlign:"left" }}><img width="90%" src="/images/recap-appbuilders/swift-ui.jpeg" />
+<div style={{ textAlign: 'left'}}><img width="90%" src="/images/recap-appbuilders/swift-ui.jpeg" />
 <p class="small">Sketchnote: Courtesy of <a href="https://twitter.com/felibe444">@felibe444</a></p>
 </div>
 
@@ -95,7 +107,7 @@ In this talk, Chris Eidhof shared some tips on how to design custom components i
 
 ### Making your voice heard
 
-<div style={{ textAlign:"left" }}><img width="90%" src="/images/recap-appbuilders/voice-hear.jpeg" />
+<div style={{ textAlign: 'left'}}><img width="90%" src="/images/recap-appbuilders/voice-hear.jpeg" />
 <p class="small">Sketchnote: Courtesy of <a href="https://twitter.com/felibe444">@felibe444</a></p>
 </div>
 
@@ -104,7 +116,7 @@ Inspiring words by Erica Sadun on how we should constantly engage with the Swift
 
 ### Practical machine learning
 
-<div style={{ textAlign:"left" }}><img width="90%" src="/images/recap-appbuilders/machine-learning.jpeg" />
+<div style={{ textAlign: 'left'}}><img width="90%" src="/images/recap-appbuilders/machine-learning.jpeg" />
 <p class="small">Sketchnote: Courtesy of <a href="https://twitter.com/felibe444">@felibe444</a></p>
 </div>
 

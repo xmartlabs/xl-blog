@@ -20,7 +20,7 @@ The dataset has two sources of information, the videos, and the tracking informa
 
 The video training datasets consist of 60 short plays (around 10 seconds videos with 60 fps). Each play is filmed from two synchronized cameras, one located at the endzone and the other one at the sideline, concluding in a total of 120 videos in the training dataset.
 
-<p style={{ textAlign:"right" }}>
+<p style={{ textAlign:'right'}}>
 	<img src="/images/nfl-kaggle-competition/nfl_frame.png" />
 	Left image: SidelinView. Right image: Endzone view.
 </p>
@@ -31,7 +31,7 @@ The tracking information comes from a device located in the player's shoulder pa
 
 Other supplementary information given in tracking is speed, acceleration, distance traveled from the last point, and orientation. Below, you can see an example of the player's position at the beginning of a game.
 
-<div style="text-align: end">
+<div style={{ textAlign:'end'}}>
 	<img src="/images/nfl-kaggle-competition/nfl_trackingpositions.png" />
 </div>
 
@@ -48,7 +48,8 @@ The central part of this problem is mapping the helmet's positions in a given fr
 In our case, we used the method proposed in the paper "Robust Point Set Registration Using Gaussian Mixture Models," which has its [code](https://github.com/bing-jian/gmmreg-python) available in Python. With some minor changes, we were able to include it in our solution.
 
 
-<p style="text-align: end;font-style: italic;">
+<p style={{ textAlign:'end', fontStyle: 'italic'}}
+>
 	<img src="/images/nfl-kaggle-competition/nfl_2dmatching.png" />
 	Left: Example shown in code presentation, Right: Example of implementation in our solution.
 </p>
@@ -57,7 +58,7 @@ In our case, we used the method proposed in the paper "Robust Point Set Registra
 When passed two normalized clouds of points, the algorithm can return a correspondence between those cloud points. There are some issues; for example, when both sets have 22 points, the algorithm works really well, but when the video has a frame with fewer helmets, the results might have some errors. Because of this, we decided only to do 2D matching when there are 15 helmets or more in the image frame. Later we'll explain how we propagate the labels to the frames that don't have enough helmets. Besides this, we didn't run the matching on all frames, as variations in consecutive frames were almost none.
 
 
-<p style="text-align: end;font-style: italic;">
+<p style={{ textAlign:'end', fontStyle: 'italic'}}>
 	<img src="/images/nfl-kaggle-competition/nfl_helmetsinframe.png" />
 	Example of a low number of helmets in the frame.
 </p>
@@ -80,7 +81,7 @@ After fixing those simple errors, we matched each remaining frame with detectabl
 In some cases, this implementation gave impressive results. As seen in the following video, green bounding boxes are correctly labeled helmets and yellow when there is an impact (higher reward for the correct label while collision). The red bounding boxes are due to wrong labels during a collision.
 
 
-<p style="text-align: end;font-style: italic;">
+<p style={{ textAlign:'end', fontStyle: 'italic'}}>
 	<img src="/images/nfl-kaggle-competition/nfl_helmet.gif" />
 	Output of our solution applied to a Sideline video.
 </p>
@@ -97,7 +98,7 @@ As seen in the example of the two marked players, the bottom one appears to be m
 The rotation is done using the purple line, and the angle with the green one is the rotation angle.
 
 
-<p style="text-align: end;font-style: italic;">
+<p style={{ textAlign:'end', fontStyle: 'italic'}}>
 	<img src="/images/nfl-kaggle-competition/nfl_rotation.png" />
 	Image rotation example.
 </p>
@@ -109,7 +110,7 @@ Another issue we saw and addressed was the presence of off-field players/helmets
 
 To solve this, we detected sideline lines to differentiate these two types of helmets. One difference with image rotation is that, in this case, we looked for wider lines, like the one shown in the image.
 
-<div style={{ textAlign:"left" }}>
+<div style={{ textAlign:'center'}}>
 	<img src="/images/nfl-kaggle-competition/nfl_sideline.png" />
 </div>
 
@@ -119,7 +120,7 @@ Most of the detected helmets are field players, so considering all helmets as pl
 
 Each video was labeled "Sideline" or "Endzone," but it wasn't specified from which side or field end it was being recorded. There were two possibilities for each. Identifying this quickly and confidently can signify a correction before the matching, which facilitates it and means it needs fewer iterations.
 
-<p style="text-align: end;font-style: italic;">
+<p style={{ textAlign:'end', fontStyle: 'italic'}}>
 	<img src="/images/nfl-kaggle-competition/nfl_angle.png" />
 	Left: Endzone example. Right: Sideline example.
 </p>
@@ -132,7 +133,7 @@ For different reasons, not everything we tried made it into the final solution. 
 
 Team clustering is the idea of separating the helmets by each team. The idea was that the 2D matching algorithm worked better if it had to match 11 helmets with 11 labels twice instead of 22 with 22 once. Our first idea was to use the helmet's color as the colors are very different most of the time. We run tests trying three color spaces: [RGB](https://en.wikipedia.org/wiki/RGB_color_model), [HSV](https://en.wikipedia.org/wiki/HSL_and_HSV), and [CIELAB](https://en.wikipedia.org/wiki/CIELAB_color_space).
 
-<div style={{ textAlign:"left" }}>
+<div style={{ textAlign:'center'}}>
 	<img src="/images/nfl-kaggle-competition/nfl_CIELAB.png" />
 </div>
 
@@ -140,13 +141,13 @@ The use of HSV and CIELAB is to get values independent from illumination and oth
 
 Although cameras were fixed in a position, they still could rotate and zoom in or out during a play. We tried to capture this information to leverage it in the solution because if we know how the image is moving, we can predict which players are leaving the frame and discard their tracking information. Next, we look at the difference between the first frame of a video and the last.
 
-<p style={{ textAlign:"left" }}>
+<p style={{ textAlign:'center'}}>
 	<img src="/images/nfl-kaggle-competition/nfl_frame2.png" />
 </p>
 
 Calculating the size and number of the helmets in the frame, we can have a good approximation of how the zoom is going:
 
-<p style={{ textAlign:"left" }}>
+<p style={{ textAlign:'center'}}>
 	<img src="/images/nfl-kaggle-competition/nfl_endzone.png" />
 </p>
 

@@ -7,7 +7,8 @@ category: product-design
 permalink: /year-month-day-title/
 ---
 
-<p>There are no specific instructions to make something people love. At XmartLabs, we offer you an approach to developing a deep relationship between your product and your users through our UXD methodology and services. We’ll help you reduce the frustration
+<p>
+There are no specific instructions to make something people love. At XmartLabs, we offer you an approach to developing a deep relationship between your product and your users through our UXD methodology and services. We’ll help you reduce the frustration
     users experience when a product does not fulfill their expectations.You’ll also save time and effort, as together we will determine what to build before handing off the project to our development team. Here’s how we do it:
 </p>
 <h3>For Early Stage Products:</h3>

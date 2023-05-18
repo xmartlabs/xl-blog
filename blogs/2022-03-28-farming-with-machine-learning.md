@@ -51,8 +51,8 @@ Glyphosate resistance is perhaps the newest and more widespread type of resistan
 
 Common treatment recommendations go from managing the intensity of glyphosate to rotating or tank-mixing it with herbicides that have different modes of action. It is also recommended to scout the field to identify the weeds and record their locations. However, this also means incurring in further expenses, as tank mixes, for example, are not usually cheap.
 
-<figure style="text-align: end">
-  <img style="width: 100%" src="/images/farming-ml/herbicidesxtime.png" />
+<figure style={{ textAlign:'end'}}>
+  <img style={{ width:'100%'}} src="/images/farming-ml/herbicidesxtime.png" />
   <a href="https://blogs.cornell.edu/whatscroppingup/2020/03/23/statewide-herbicide-resistance-screening-to-start-in-2020-help-us-to-help-you/">Image Source</a>
 </figure>
 
@@ -88,7 +88,7 @@ AlexNet and other models were based on ImageNet, which is one of the visual data
 
 ![data set](/images/farming-ml/dataset.png)
 
-<p style="text-align: end">
+<p style={{ textAlign:'end'}}>
   <a href="https://www.imageclef.org/2013/plant">Image Source</a>
 </p>
 
@@ -114,7 +114,7 @@ The system already comes integrated into their John Deere Sprayer, which minimiz
 
 ![See & Spray™ ([image source](https://johndeerevirtualpavilion.co.nz/see-and-spray-select/))](/images/farming-ml/See_Spray.gif)
 
-<p style="text-align: end">
+<p style={{ textAlign:'end'}}>
   <a href="https://johndeerevirtualpavilion.co.nz/see-and-spray-select/">See & Spray™</a>
 </p>
 

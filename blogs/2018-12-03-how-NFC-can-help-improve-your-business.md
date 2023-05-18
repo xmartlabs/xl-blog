@@ -30,7 +30,7 @@ NFC chips are already being used to identify most of the people in the world! Si
 
 <img width="100%" src="/images/how-nfc-can-help-improve-your-business/linked-in.jpg" />
 <br />
-<p style={{ textAlign:"left" }}>(source: <a href="https://www.instructables.com/">Instructables</a>)</p>
+<p style={{ textAlign: 'center' }}> (source: <a href="https://www.instructables.com/">Instructables</a>)</p>
 
 In addition to that, some companies have decided to equip their business cards with this technology, providing an easy way to identify its employees and provide additional relevant information.
 
@@ -46,7 +46,7 @@ Some companies came up with lockers with a two factor authentication process lik
 
 <img width="100%" src="/images/how-nfc-can-help-improve-your-business/nfc-key.jpg" />
 <br />
-<p style={{ textAlign:"left" }}>(source: <a href="https://www.theverge.com">The Verge</a>)</p>
+<p style={{ textAlign: 'center' }}> (source: <a href="https://www.theverge.com">The Verge</a>)</p>
 
 In some events NFC cards are provided to allow attendees to access restricted areas.
 
@@ -58,7 +58,7 @@ Skylanders is a game that uses NFC interaction between devices to get the user e
 
 <img width="100%" src="/images/how-nfc-can-help-improve-your-business/skylanders-items.jpg" />
 <br />
-<p style={{ textAlign:"left" }}>(source: <a href="https://www.theverge.com">The Verge</a>)</p>
+<p style={{ textAlign: 'center' }}> (source: <a href="https://www.theverge.com">The Verge</a>)</p>
 
 There are also a variety of consoles that already have NFC integrated to them. In this case, developers have come up with apps that link devices in order to exchange in-game objects or share game play adding to it a more competitive and cooperative experience, respectively.
 

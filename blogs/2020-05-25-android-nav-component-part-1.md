@@ -74,8 +74,8 @@ Although I didn't get to use it a lot, I found it useful and easy to use wheneve
 
 ### Jetpack & Android Architecture Components
 
-<div style={{ display:"inline-block" }}>
-  <div style=  {{ float:"left", width:"20%", marginRight:"1em" }}>
+<div style={{ display:'inline-block' }}>
+  <div style={{ float:'left', width: '20%', marginRight: '1em' }}>
     <img src="/images/android_navigation_blog_part_one/jetpack_hero.svg" alt="" />
   </div>
   <div markdown="1">

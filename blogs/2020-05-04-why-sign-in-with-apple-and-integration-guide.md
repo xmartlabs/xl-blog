@@ -60,7 +60,7 @@ Now, we have the environment setup done, let's get into the code.
 Although you can use your custom button, we strongly recommend using those provided by Apple which offers multiple benefits shown [here](https://developer.apple.com/design/human-interface-guidelines/sign-in-with-apple/overview/buttons/).
 
 
-<div style={{ textAlign:"left" }}><img width="30%" src="/images/apple-sign-in/signInButton.png" /></div>
+<div style={{ textAlign: 'center'}}><img width="30%" src="/images/apple-sign-in/signInButton.png" /></div>
 <p></p>
 It's necessary to import `AuthenticationServices` framework which provides `ASAuthorizationAppleIDButton` button class. Adding this button is very simple, you just need to create a button instance and set up its `touchUpInside` handler. Remember to add the button to the view hierarchy.
 
@@ -94,7 +94,7 @@ Let's implement the button handler
 5. Perform the request and opens the authentication dialog shown below.
 
 
-<div style={{ textAlign:"left" }}><img width="60%" src="/images/apple-sign-in/AppleSignIn.gif" /></div>
+<div style={{ textAlign: 'center'}}><img width="60%" src="/images/apple-sign-in/AppleSignIn.gif" /></div>
 <p></p>
 As we can see in the code snippet above, it's required to conform to `ASAuthorizationControllerDelegate` and `ASAuthorizationControllerPresentationContextProviding` protocols.
 <p></p>
@@ -152,7 +152,7 @@ In order to recover from authentication errors and eventually show some feedback
 
 Users could revoke permission for your app in *Setting →  Apple ID →  Password & Security → Apps Using Your Apple ID*.
 
-<div style={{ textAlign:"left" }}><img width="60%" src="/images/apple-sign-in/revoke.png" /></div>
+<div style={{ textAlign: 'center'}}><img width="60%" src="/images/apple-sign-in/revoke.png" /></div>
 
 Apple provides a way to know when that happens through an explicit notification so our app can handle it.
 

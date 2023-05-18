@@ -226,7 +226,7 @@ Some takeaways from this post:
 The source code used in this tutorial can be found in [this GitHub gist](https://gist.github.com/mats-claassen/f76520dd32108b65d57113fd7ac99bf9).
 
 Need help with ML tasks like converting models to CoreML? We're glad to help!
-Get in touch at hi@xmartlabs.com
+Get in touch at <a href="mailto:hi@xmartlabs.com">hi@xmartlabs.com</a>
 
 We have also written other posts about ML topics.
 Is your CoreML or TFlite model not fast enough on iOS? Check out our post about [speeding up performance on iOS with MPS and Bender](https://blog.xmartlabs.com/2021/08/30/Bender-the-best).
