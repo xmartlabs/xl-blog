@@ -168,6 +168,14 @@ const BlogPost = ({ data, children }) => {
     title: data.mdx.frontmatter.title,
   }
 
+  const imgUrl = () => {
+    if (data.mdx.frontmatter.thumbnail.includes("/images")) {
+      return data.mdx.frontmatter.thumbnail;
+    } else {
+      return `/${data.mdx.frontmatter.thumbnail}`;
+    }
+  }
+
   return (
     <div onScroll={handleScroll} id='containerDiv'>
       <div className={styles.indexContainer}>
@@ -195,7 +203,7 @@ const BlogPost = ({ data, children }) => {
           </div>
         </div>
       </div>
-        <img src={`/${data.mdx.frontmatter.thumbnail}`} onError={(event) => event.target.src = '../../images/image.png'} className={styles.blogMainImage} />
+        <img src={imgUrl()} onError={(event) => event.target.src = '../../images/image.png'} className={styles.blogMainImage} />
         <div className={styles.bodyPostContainer} ref={refIndexTitles}>
           {children}
         </div>
