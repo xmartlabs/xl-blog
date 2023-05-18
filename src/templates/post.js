@@ -169,10 +169,14 @@ const BlogPost = ({ data, children }) => {
   }
 
   const imgUrl = () => {
-    if (data.mdx.frontmatter.thumbnail.includes("/images")) {
-      return data.mdx.frontmatter.thumbnail;
+    if(data.mdx.frontmatter.thumbnail) {
+      if (data.mdx.frontmatter.thumbnail.includes("/images")) {
+        return data.mdx.frontmatter.thumbnail;
+      } else {
+        return `/${data.mdx.frontmatter.thumbnail}`;
+      }
     } else {
-      return `/${data.mdx.frontmatter.thumbnail}`;
+      return '../../images/image.png';
     }
   }
 
