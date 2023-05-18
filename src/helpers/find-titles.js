@@ -8,10 +8,7 @@ const findTitles = (htmlElements) => {
   htmlElements.forEach(element => {
     if(element.nodeName === "H1" || element.nodeName === "H2" || element.nodeName === "H3") {
       
-      if (element.innerHTML.indexOf("<strong>") != -1) {
-        element.innerHTML = element.innerHTML.slice(8);
-      } 
-      element.setAttribute("id", element.innerHTML);
+      element.setAttribute("id", element.innerText);
   
       if (element.nodeName === "H1") {
         h1List.push(element);

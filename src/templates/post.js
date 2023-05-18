@@ -151,7 +151,7 @@ const BlogPost = ({ data, children }) => {
                   styles.links
                 )}
               >
-                {title.innerHTML.length > 55 ? title.innerHTML.slice(0, 55) + "..." : title.innerHTML}
+                {title.innerText.length > 55 ? title.innerText.slice(0, 55) + "..." : title.innerText}
               </a>
             )}
           </div>
