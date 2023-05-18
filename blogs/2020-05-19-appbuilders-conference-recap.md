@@ -52,11 +52,7 @@ Finally, he shared a bunch of tips! For example how to speed up testing by speed
 
 ### Property Wrappers
 
-<<<<<<< HEAD
-<div style={{ textAlign:"left" }}><img width="90%" src="/images/recap-appbuilders/property-wrappers.jpeg" />
-=======
 <div style={{ textAlign: 'left'}}><img width="90%" src="/images/recap-appbuilders/property-wrappers.jpeg" />
->>>>>>> 2e5168ec882c8e1192d625774ee2e29d07a3964b
 <p class="small">Sketchnote: Courtesy of <a href="https://twitter.com/felibe444">@felibe444</a></p>
 </div>
 
@@ -67,11 +63,7 @@ If you know nothing about property wrappers yet, this is a very comprehensive in
 
 ### Getting started with combine
 
-<<<<<<< HEAD
-<div style={{ textAlign:"left" }}><img width="90%" src="/images/recap-appbuilders/combine.jpeg" />
-=======
 <div style={{ textAlign: 'left'}}><img width="90%" src="/images/recap-appbuilders/combine.jpeg" />
->>>>>>> 2e5168ec882c8e1192d625774ee2e29d07a3964b
 <p class="small">Sketchnote: Courtesy of <a href="https://twitter.com/felibe444">@felibe444</a></p>
 </div>
 
@@ -81,11 +73,7 @@ It went from reactive programming fundamentals to some async programming problem
 
 ### Going Quantum
 
-<<<<<<< HEAD
-<div style={{ textAlign:"left" }}>
-=======
 <div style={{ textAlign: 'left'}}>
->>>>>>> 2e5168ec882c8e1192d625774ee2e29d07a3964b
 <img width="90%" src="/images/recap-appbuilders/quantum.jpeg" />
 <p class="small">Sketchnote: Courtesy of <a href="https://twitter.com/felibe444">@felibe444</a></p>
 </div>

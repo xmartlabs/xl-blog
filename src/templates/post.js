@@ -174,38 +174,39 @@ const BlogPost = ({ data, children }) => {
         {getTitles()}
       </div>
       <SocialElement className={classnames(disappearSocial ? styles.socialDisappear : styles.socialAppear, styles.blogIcons, {[styles.socialDisappear]: disappearIndex})} links={shareBlogPostLinks} />
-        <div className={styles.bannerContainer}>
-          <div className={styles.categoryTagsContainer}>
-            <Category data={categoryBlog.displayName} className={styles.category}/>
+      <div className={styles.bannerContainer}>
+        <div className={styles.categoryTagsContainer}>
+          <Category data={categoryBlog.displayName} className={styles.category}/>
+        </div>
+        <h1 className={classnames(styles.titleContainer, "text__heading__one__black")}>
+          { data.mdx.frontmatter.title }
+        </h1>
+        <div className={styles.authorContainer}>
+          <div className={styles.authorInformation}>
+            <img src={`/images/${authorBlog.image}`} alt="" className={styles.authorImage} />
+            <Link className={classnames(styles.authorName, "text__paragraph__bold__black")} to={author.profile_url}>{ authorBlog.displayName }</Link>
           </div>
-          <h1 className={classnames(styles.titleContainer, "text__heading__one__black")}>
-            { data.mdx.frontmatter.title }
-          </h1>
-          <div className={styles.authorContainer}>
-            <div className={styles.authorInformation}>
-              <img src={`/images/${authorBlog.image}`} alt="" className={styles.authorImage} />
-              <Link className={classnames(styles.authorName, "text__paragraph__bold__black")} to={author.profile_url}>{ authorBlog.displayName }</Link>
-            </div>
-            <div className={styles.blogInfoContainer}>
-              <label className={classnames(styles.postDate, "text__label__bold__grayTwo")} >{data.mdx.frontmatter.date}</label>
-              <ClockIcon className={styles.clockIcon} />
-              <label className={classnames("text__label__bold__grayTwo", styles.timeToRead)} >
-                {data.mdx.fields.timeToRead.text}
-              </label>
-            </div>
+          <div className={styles.blogInfoContainer}>
+            <label className={classnames(styles.postDate, "text__label__bold__grayTwo")} >{data.mdx.frontmatter.date}</label>
+            <ClockIcon className={styles.clockIcon} />
+            <label className={classnames("text__label__bold__grayTwo", styles.timeToRead)} >
+              {data.mdx.fields.timeToRead.text}
+            </label>
           </div>
         </div>
-        <div>
-          <img src={`/${data.mdx.frontmatter.thumbnail}`} onError={(event) => event.target.src = '../../images/image.png'} className={styles.blogMainImage} />
-          <div className={styles.bodyPostContainer} id="postContainer">
-            {children}
-          </div>
-        </div>
-      <div className={styles.socialBottomContainer}>
-        <span className={classnames('text__paragraph__bold__grayTwo', styles.sharePosition)}>Share:</span>
-        <SocialElement className={classnames(styles.socialBottom, styles.blogIcons)} links={shareXlProfileLinks} />
       </div>
-      <MoreBlogsSection relatedPosts={data.mdx.relatedPosts} refMoreFrom={refMoreFrom} title={categoryBlog.displayName} />
+        <img src={`/${data.mdx.frontmatter.thumbnail}`} onError={(event) => event.target.src = '../../images/image.png'} className={styles.blogMainImage} />
+        <div className={styles.bodyPostContainer} ref={refIndexTitles}>
+          {children}
+        </div>
+        <div className={styles.blogBottomElements}>
+          <div className={styles.socialBottomContainer}>
+            <span className={classnames('text__paragraph__bold__grayTwo', styles.sharePosition)}>Share:</span>
+            <SocialElement className={classnames(styles.socialBottom, styles.blogIcons)} links={shareXlProfileLinks} />
+          </div>
+          <Tags blogTags={data.mdx.frontmatter.tags} className={styles.tags} />
+        </div>
+        <MoreBlogsSection relatedPosts={data.mdx.relatedPosts} refMoreFrom={refMoreFrom} title={categoryBlog.displayName} />
       <div className={styles.disqusSection}>
         <h3 className={styles.disqusTitle}>Comments:</h3>
         <div id="disqus_thread">

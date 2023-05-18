@@ -37,11 +37,7 @@ To perform a body pose request provides its **body pose-detection** capabilities
 
 The result of human body detection, is a struct data with 19 unique body points as shown in the figure below.
 
-<<<<<<< HEAD
-<div style={{ textAlign:"left" }}><img width="60%" src="/images/whats-new-on-apple-machine-learning-at-wwdc-2020/1-body-pose.png" /><p class="small">A human body with all the 19 unique body points illustrated.</p></div>
-=======
 <div style={{ textAlign: 'center'}}><img width="60%" src="/images/whats-new-on-apple-machine-learning-at-wwdc-2020/1-body-pose.png" /><p class="small">A human body with all the 19 unique body points illustrated.</p></div>
->>>>>>> 2e5168ec882c8e1192d625774ee2e29d07a3964b
 
 There are different applications that might be interested in using this data.
 For example, in a **[Swing Profile Golf Analyzer](https://apps.apple.com/us/app/swing-profile-golf-analyzer/id1039981052)** app, you can obtain the form of the person at the exact time of the shot, and then do analysis to rank how well it was, and what suggestions could improve the technique.
@@ -114,11 +110,7 @@ Similar to the body pose request, you can perform a **hand pose-detection** thro
 
 The response provides 21 landmarks in total, four landmarks for each finger and one for the wrist.
 
-<<<<<<< HEAD
-<div style={{ textAlign:"left" }}><img width="60%" src="/images/whats-new-on-apple-machine-learning-at-wwdc-2020/2-hand-pose.png" /><p class="small">A hand with the 21 landmarks illustrated.</p></div>
-=======
 <div style={{ textAlign: 'center'}}><img width="60%" src="/images/whats-new-on-apple-machine-learning-at-wwdc-2020/2-hand-pose.png" /><p class="small">A hand with the 21 landmarks illustrated.</p></div>
->>>>>>> 2e5168ec882c8e1192d625774ee2e29d07a3964b
 
 If you'd like to detect more than one hand, you can set the **maximumHandCount** to the number of hands you wish to detect.
 Consider that this variable will affect the performance of your app, especially on older devices.
@@ -139,15 +131,9 @@ You can have two different calendars for updates, which will be independent of e
 As the model is uploaded in the cloud, the first time you try to get it with the new Core ML API, the app will try to download the new model in background.
 You will have to manage the error if the download fails due to network connection issues, for example, a common solution for this is to use the default bundle model and log the error.
 
-<<<<<<< HEAD
-<div style={{ textAlign:"left" }}><img width="70%" src="/images/whats-new-on-apple-machine-learning-at-wwdc-2020/3-without-model-deployment.png" /><p class="small">Without Model Deployment.</p></div>
-
-<div style={{ textAlign:"left" }}><img width="70%" src="/images/whats-new-on-apple-machine-learning-at-wwdc-2020/4-with-model-deployment.png" /><p class="small">With Model Deployment.</p></div>
-=======
 <div style={{ textAlign: 'center'}}><img width="70%" src="/images/whats-new-on-apple-machine-learning-at-wwdc-2020/3-without-model-deployment.png" /><p class="small">Without Model Deployment.</p></div>
 
 <div style={{ textAlign: 'center'}}><img width="70%" src="/images/whats-new-on-apple-machine-learning-at-wwdc-2020/4-with-model-deployment.png" /><p class="small">With Model Deployment.</p></div>
->>>>>>> 2e5168ec882c8e1192d625774ee2e29d07a3964b
 
 To prepare your model for Model Deployment Xcode has now an option to create a Model Archive from your CoreML model. Then you only have to upload the archive through the Model Deployment Dashboard.
 Additionally, before making the deployment you can add some targeting rules to assign different models to specific device class (iPhone / iPad / TV / Watch).
@@ -163,11 +149,7 @@ In regards to CoreML models security, Xcode is now able to encrypt your model at
 With this new feature, you can distribute your models knowing that they are encrypted end to end.
 The only time where the model is decrypted its when it is loaded on the device's memory to be used by the app.
 
-<<<<<<< HEAD
-<div style={{ textAlign:"left" }}><img width="70%" src="/images/whats-new-on-apple-machine-learning-at-wwdc-2020/5-model-encryption.png" /><p class="small">Model encryption.</p></div>
-=======
 <div style={{ textAlign: 'center'}}><img width="70%" src="/images/whats-new-on-apple-machine-learning-at-wwdc-2020/5-model-encryption.png" /><p class="small">Model encryption.</p></div>
->>>>>>> 2e5168ec882c8e1192d625774ee2e29d07a3964b
 
 But how do we take this new encryption capabilities to our app?
 
@@ -175,11 +157,7 @@ But how do we take this new encryption capabilities to our app?
 
 First, create a key (.mlmodelkey file) for the model in the **Utilities** section at the model file in Xcode.
 
-<<<<<<< HEAD
-<div style={{ textAlign:"left" }}><img width="85%" src="/images/whats-new-on-apple-machine-learning-at-wwdc-2020/6-model-key.png" /></div>
-=======
 <div style={{ textAlign: 'center'}}><img width="85%" src="/images/whats-new-on-apple-machine-learning-at-wwdc-2020/6-model-key.png" /></div>
->>>>>>> 2e5168ec882c8e1192d625774ee2e29d07a3964b
 
 Then, to encrypt your model you can add `—encrypt <path to .mlmodelkey>` to the model's Compiler Flags, or if you are using the new Model Deployment service, you need to use this key while creating the Model Archive.
 
@@ -208,11 +186,7 @@ We learned a bunch from security so far, but what about building our own CoreML 
 There are some new models you can train in **[Create ML](https://developer.apple.com/documentation/createml)**, for example, if you want to classify different types of actions from videos now you can do it.
 This new feature is powered by Vision's body pose estimation, so humans are the target of these actions, not animals or objects.
 
-<<<<<<< HEAD
-<div style={{ textAlign:"left" }}><img width="70%" src="/images/whats-new-on-apple-machine-learning-at-wwdc-2020/7-action-classifier.png" /><p class="small">How to create an Action Classifier.</p></div>
-=======
 <div style={{ textAlign: 'center'}}><img width="70%" src="/images/whats-new-on-apple-machine-learning-at-wwdc-2020/7-action-classifier.png" /><p class="small">How to create an Action Classifier.</p></div>
->>>>>>> 2e5168ec882c8e1192d625774ee2e29d07a3964b
 
 The videos must have one action type per video, several seconds per video and, only one person, and framing the entire body.
 If you have a video with different types of actions, you can split up the video with a video editor application, or also you can create an annotation file indicating the time of the different actions in the video.

@@ -71,6 +71,7 @@ This improvement is possible because Bender uses only the GPU and therefore will
 
 <p style={{ textAlign:"center"}}>
     <img style={{ width:"100%" }} src="/images/bender-is-the-best/benchmarks.jpg" />
+</p>
 <p style={{ textAlign:'center'}}>
     <img style={{ width: '100%'}} src="/images/bender-is-the-best/benchmarks.jpg" />
 </p>
