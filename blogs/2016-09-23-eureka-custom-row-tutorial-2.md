@@ -26,13 +26,13 @@ We will support the following features:
 
 The result will be a row (as you can see below) which has a strength function and a way to let the user know how strong his password is.
 
-<img src="/images/eureka-custom-row-2/GenericPasswordRow.gif" style="margin: 0 auto; display: block"/>
+<img src="/images/eureka-custom-row-2/GenericPasswordRow.gif" style={{ margin: '0 auto', display: 'block' }}/>
 
 ## Architecture
 
 Before start coding, since we want our row to be as reusable as we can, we should think about the architecture that will empower this…
 
-<img src="/images/eureka-custom-row-2/GenericPasswordRow-Diagram.svg" style="margin: 0 auto; display: block"/>
+<img src="/images/eureka-custom-row-2/GenericPasswordRow-Diagram.svg" style={{ margin: '0 auto', display: 'block' }}/>
 
 As you may have learned from our [previous post](https://blog.xmartlabs.com/2016/09/06/Eureka-custom-row-tutorial/), any custom row in Eureka will have a `Row` and `Cell` as primary components, in this case, `GenericPasswordRow` and `GenericPasswordCell` will map with those respectively. For the customizable UI side, we will be adding a custom nib file (which you can replace or use our default one). On the other hand, we will have a `PasswordValidator` component that will be responsible for the password validation process, here is where you (as a programmer) could be as creative as you want.
 
@@ -167,7 +167,7 @@ As we mentioned earlier, we will also provide our custom design in `GenericPassw
 * password strength view: **subclass** of PasswordStrengthView
 * hint label: UILabel
 
-<img src="/images/eureka-custom-row-2/Nib-outlets.svg" style="margin: 0 auto; display: block"/>
+<img src="/images/eureka-custom-row-2/Nib-outlets.svg" style={{ margin: '0 auto', display: 'block' }}/>
 
 
 Thinking ahead a little bit, we need to design this cell having in mind that the `hintLabel` will be toggling its hidden state depending on the return values of `func hintForPassword(password: String) -> String?` (whether being `nil` or not) on the `passwordValidator` instance of our `GenericPasswordRow`.
@@ -184,11 +184,11 @@ class PasswordStrengthView: UIView {
 
 and implementing your desired behavior in those methods. In this implementation we'll be using the [DefaultPasswordStrengthView](https://github.com/EurekaCommunity/GenericPasswordRow/blob/master/Sources/DefaultPasswordStrengthView.swift). We are not going to explain the details of this implementation but basically, once the `setPasswordValidator(...)` function gets called, we are adding subviews to generate the "empty state" drawing the strength ranges and their colors (since we know the `validator` to access this information):
 
-<img src="/images/eureka-custom-row-2/strength-view-empty.png" style="margin: 0 auto; display: block"/>
+<img src="/images/eureka-custom-row-2/strength-view-empty.png" style={{ margin: '0 auto', display: 'block' }}/>
 
 and then, every time `updateStrength(...)` function gets called (while the user is typing) we use the `validator` to calculate the actual strength and then update the strength view.
 
-<img src="/images/eureka-custom-row-2/strength-loading.gif" style="margin: 0 auto; display: block"/>
+<img src="/images/eureka-custom-row-2/strength-loading.gif" style={{ margin: '0 auto', display: 'block' }}/>
 
 
 ### GenericPasswordCell

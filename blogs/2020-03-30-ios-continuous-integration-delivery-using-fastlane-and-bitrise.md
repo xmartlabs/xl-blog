@@ -111,7 +111,7 @@ Here is the entire workflow already created in Bitrise.
 At this point, the `test` lane will be executed whenever a pull request is created/updated. Cool right? Bitrise integrates with GitHub/Bitbucket and many other git solutions to indicate if everything goes well or not.
 
 
-Another automated task we strongly use is the release of new versions. Basically we send a new build to TestFlight whenever a new tag (named <version_*>) is created in . As we said Bitrise provides us with push, pull request and tag triggers, this time we are going to use a tag trigger.
+Another automated task we strongly use is the release of new versions. Basically we send a new build to TestFlight whenever a new tag (named `<version_*>`) is created in . As we said Bitrise provides us with push, pull request and tag triggers, this time we are going to use a tag trigger.
 
 Let's create the Bitrise `testflight` workflow first.
 

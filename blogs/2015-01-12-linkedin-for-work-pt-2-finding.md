@@ -7,8 +7,7 @@ author: alberto
 category: product-design
 permalink: /linkedin-for-work-pt-2-finding/
 ---
-
-<div class="separator" style="clear: both; text-align: center;">
+<div class="separator" style={{ clear: 'both', textAlign: 'center' }}>
   <img border="0" src="https://1.bp.blogspot.com/-7F7ZbSYtELs/VLRD2OddXpI/AAAAAAAAGPA/z_C5KpCE_88/s1600/POS-POSTA_1-caratula.jpg" height="166" width="400" />
 </div>
 <br/>
@@ -21,32 +20,42 @@ permalink: /linkedin-for-work-pt-2-finding/
   The following images illustrate our design work for <b>Flow a: User is looking for a candidate to fill a position</b>:
 </p>
 
-<H2>PROFILE SUMMARY AND NAVIGATION</H2>
-<p>This section provides the minimum amount of information required to prompt interest in a potential employer: Picture, current position, areas of interest and location. We revised the IA for quick navigation on mobile devices and decided a) To move Activity
+<h2>
+PROFILE SUMMARY AND NAVIGATION
+</h2>
+<p>
+This section provides the minimum amount of information required to prompt interest in a potential employer: Picture, current position, areas of interest and location. We revised the IA for quick navigation on mobile devices and decided a) To move Activity
     to the last position (since almost all 'social' activity has been ruled out) and b) To implement "scrollspy" navigation that allows the potential employer to scroll easily through the candidate's profile. We also decided to join Messages and Notifications
     in one single area, to keep all communications in one place.
 </p>
-<div class="separator" style="clear: both; text-align: center;">
-  <a class="fluid-box" href="https://4.bp.blogspot.com/-_C7zjFDv1rI/VLgCHjAXO1I/AAAAAAAAGP8/n-zdF3YN23A/s1600/POST_2-Blog1.jpg" imageanchor="1" style="margin-left: 1em; margin-right: 1em;">
+<div class="separator" style={{ clear: 'both', textAlign: 'center' }}>
+  <a class="fluid-box" href="https://4.bp.blogspot.com/-_C7zjFDv1rI/VLgCHjAXO1I/AAAAAAAAGP8/n-zdF3YN23A/s1600/POST_2-Blog1.jpg" imageanchor="1" style={{ margin: 'auto 1em' }}>
     <img border="0" src="https://4.bp.blogspot.com/-_C7zjFDv1rI/VLgCHjAXO1I/AAAAAAAAGP8/n-zdF3YN23A/s1600/POST_2-Blog1.jpg" height="210" width="400" />
   </a>
 </div>
-<h2>PROJECTS AND RECOMMENDATIONS</h2>
+<h2>
+PROJECTS AND RECOMMENDATIONS
+</h2>
 <p>
   We have added buttons that indicate at a glance how many projects the candidate has worked on and the recommendations he/she has received while occupying a particular position . Employers can view detailed information by clicking on these buttons.
 </p>
-<h2>PERSISTENT CONTACT BUTTONS</h2>
-<p>It's possible for the employer to have an 'a-ha' moment and decide to contact the candidate right away without having to look at every single section his/her online profile. Why not make it easy? These contact buttons allow the employer to connect
+<h2>
+PERSISTENT CONTACT BUTTONS
+</h2>
+<p>
+It's possible for the employer to have an 'a-ha' moment and decide to contact the candidate right away without having to look at every single section his/her online profile. Why not make it easy? These contact buttons allow the employer to connect
       or message the candidate at any point during their profile "visit".
 </p>
-<h2>ENDORSEMENTS ARE NOT REALISTIC</h2>
+<h2>
+ENDORSEMENTS ARE NOT REALISTIC
+</h2>
 <p>
   We also rethought how Skills and Endorsements should work. If any of your LinkedIn contacts can endorse you on a skill, the endorsement loses value, as there is no working proof. We feel you should be allowed to rate yourself on the skills you have,
     and that only contacts that have worked together with you on a project where you applied those skills should be allowed to rate you. Skill ratings presented to potential employers are then the average of these two.
     The same goes for Recommendations. You should only be allowed to recommend contacts with whom you've worked.
 </p>
-<div class="separator" style="clear: both; text-align: center;">
-  <a class="fluid-box" href="https://1.bp.blogspot.com/-ybtet_YKJrQ/VLgCKpekcII/AAAAAAAAGQE/6BUr_m6TcKs/s1600/POST_2-Blog3.jpg" imageanchor="1" style="margin-left: 1em; margin-right: 1em;">
+<div class="separator" style={{ clear: 'both', textAlign: 'center' }}>
+  <a class="fluid-box" href="https://1.bp.blogspot.com/-ybtet_YKJrQ/VLgCKpekcII/AAAAAAAAGQE/6BUr_m6TcKs/s1600/POST_2-Blog3.jpg" imageanchor="1" style={{ margin: 'auto 1em' }}>
       <img border="0" src="https://1.bp.blogspot.com/-ybtet_YKJrQ/VLgCKpekcII/AAAAAAAAGQE/6BUr_m6TcKs/s1600/POST_2-Blog3.jpg" height="345" width="400" />
   </a>
 </div>

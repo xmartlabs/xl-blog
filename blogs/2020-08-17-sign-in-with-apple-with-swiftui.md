@@ -24,7 +24,7 @@ First, we'll cover the benefits of integrating *Sign in with Apple* in your app,
 It provides a one-tap frictionless login and authentication system to your app, which means more users will log in after downloading your app, securing a faster growth in the number of app users, especially for Apple device owners who only need to check their identity through Touch Id or Face Id. By using *Sign in with Apple*, users don’t need to remember app credentials, apps don’t need to provide a password reset and identity and validation workflow in the app, neither provide a specific register nor login form.
 
 
-<div style="text-align: center"><img width="60%" src="/images/sign-in-with-apple-swiftui/sign-in-with-apple.gif" /></div>
+<div style={{ textAlign: 'center'}}><img width="60%" src="/images/sign-in-with-apple-swiftui/sign-in-with-apple.gif" /></div>
 <p></p>
 
 *Sign in with Apple* is FIDO U2F standard complaint, which means security aspects are met and we don’t need to care about it. Apple adds two-factor authentication support by default, providing an extra layer of security.
@@ -161,7 +161,7 @@ If something goes wrong the error is shown to the user by Apple SDK through a di
 
 Users could revoke permission for your app from *Setting → Apple ID → Password & Security → Apps Using Your Apple ID*.
 
-<div style="text-align: center"><img width="60%" src="/images/sign-in-with-apple-swiftui/revoke.png" /></div>
+<div style={{ textAlign: 'center'}}><img width="60%" src="/images/sign-in-with-apple-swiftui/revoke.png" /></div>
 
 Apple provides a way to know when an authentication change happens through `ASAuthorizationAppleIDProvider.credentialRevokedNotification`  notification.
 
@@ -222,7 +222,7 @@ If the user previously decided to use a private email relay for their account yo
 
 Here we can see how this JWT looks like:
 
-<div style="text-align: center"><img width="60%" src="/images/sign-in-with-apple-swiftui/JWT-server-to-server-notification.png" /></div>
+<div style={{ textAlign: 'center'}}><img width="60%" src="/images/sign-in-with-apple-swiftui/JWT-server-to-server-notification.png" /></div>
 
 ## Register your email domains
 

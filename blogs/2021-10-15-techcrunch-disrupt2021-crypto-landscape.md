@@ -10,7 +10,7 @@ permalink: /crypto-landscape-2021/
 
 [TechCrunch Disrupt](https://blog.xmartlabs.com/blog/techcrunch-disrupt-2021-takeaways-for-entrepreneurs-and-founders/) is synonymous with trends and innovation. Fintech is an industry with considerable excitement since blockchain evolution is creating opportunities that startups are trying to leverage daily, and investors are trying to get that significant return. This hype comes with a lot of capital availability that accelerates innovation even more.
 
-<p style="text-align:left;width:100%">
+<p style={{ textAlign:'center', width: '100%'}}>
 <img src="/images/tcd21-crypto-landscape/disrupt2021.png" alt="Project banner" />
 </p>
 

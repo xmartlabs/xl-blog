@@ -34,13 +34,13 @@ The main reason to adopt a recommendation engine is simple: **increasing your re
 
 
 
-<!-- ![Don't take our word for it, trust the numbers.](/images/recommendation-engines/REC-SYSTEMS.png) -->
+![Don't take our word for it, trust the numbers.](/images/recommendation-engines/REC-SYSTEMS.png)
 
 > Is it worth investing in a recommendation system for my business? How much time or money will it take? Will I be able to see results quickly? Our experts can answer these and many other questions for you. [Schedule a free consultation call](https://xmartlabs.com/) to learn more opportunities you might be missing.
 
 
 <figure>
-  <img style="width: 100%" src="/images/recommendation-engines/REC-SYSTEMS.png" alt="recommendation engines impact" />
+  <img style={{ width:'100%'}} src="/images/recommendation-engines/REC-SYSTEMS.png" alt="recommendation engines impact" />
   <figcaption>Don't take our word for it, trust the numbers.</figcaption>
 </figure>
 
@@ -78,7 +78,7 @@ Each platform and business is unique, so gathered data should be analyzed carefu
 Luckily, there are several SaaS solutions out there to seamlessly gather end-user activity and preferences, such as [Segment](https://segment.com/), [Firebase](https://firebase.google.com/) or [Google Enhanced Ecommerce](https://developers.google.com/analytics/devguides/collection/ua/gtm/enhanced-ecommerce). These tools don't require much effort to integrate since tracked events and data can be configured rather than coded. 
 
 <figure>
-  <img style="width: 100%" src="/images/recommendation-engines/enhanced_ecommerce.png" alt="Google Enhanced Ecommerce" />
+  <img style={{ width:'100%'}} src="/images/recommendation-engines/enhanced_ecommerce.png" alt="Google Enhanced Ecommerce" />
   <figcaption>Google Enhanced Ecommerce.</figcaption>
 </figure>
 
@@ -103,7 +103,7 @@ Basically, this approach uses item features to suggest other items with similar 
 
 
 <figure>
-  <img style="width: 80%" src="/images/recommendation-engines/content-filtering.png" alt="Content-based Fitering" />
+  <img style={{ width:'80%'}} src="/images/recommendation-engines/content-filtering.png" alt="Content-based Fitering" />
   <figcaption>Content-based Fitering.</figcaption>
 </figure>
 
@@ -167,7 +167,7 @@ People's tastes evolve, so solutions should adapt the RE to provide newer recomm
 Its model should be constantly trained, evaluated, and deployed to improve the RE performance. It's likely some data preparation needs to be done too. MLOps, which are essentially DevOps for machine learning, could handle these tasks and automate most of the process, if not all.
 
 <figure>
-  <img style="width: 80%" src="/images/recommendation-engines/mlops-pipeline.jpg" alt="ML pipeline using Apache Airflow" />
+  <img style={{ width:'80%'}} src="/images/recommendation-engines/mlops-pipeline.jpg" alt="ML pipeline using Apache Airflow" />
   <figcaption>Recommendation Engine ML pipeline using Apache Airflow</figcaption>
 </figure>
 
@@ -274,7 +274,7 @@ In the upcoming blog posts, we'll be going into details on how to implement them
 If you are considering leveraging recommendation engines...Don’t hesitate, get in touch to get a free consultation with our specialists. 
 
 <div>
-<a data-mode="popup" data-hide-footer="true" target="_blank" href="https://form.typeform.com/to/D1PhDJIR" class="button is-nav ipad-hidden typeform-share w-inline-block header-getintouch" style="opacity: 1;">
+<a data-mode="popup" data-hide-footer="true" target="_blank" href="https://form.typeform.com/to/D1PhDJIR" class="button is-nav ipad-hidden typeform-share w-inline-block header-getintouch" style={{ opacity:'1'}}>
   <div class="button-text no-pointer">Let's talk</div>
 </a>
 </div>

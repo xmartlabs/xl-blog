@@ -24,7 +24,7 @@ Staying close to your team, listening and being with them, not asking for things
 This approach made Xmartlabs what we believe is a great place to work. Our turnover rate pre-pandemic was less than 5-1% (on an industry that then had a 13+% turnover rate). This is also reflected in the longevity of some of our team. Many of the old Xmartlabers themselves recommend new people for us to hire.
 
 <figure>
-  <img style="width: 40%" src="/images/10-lessons-in-tech-industry/xl-working-with-friends.jpg" alt="working among friends" />
+  <img style={{ width:'40%'}} src="/images/10-lessons-in-tech-industry/xl-working-with-friends.jpg" alt="working among friends" />
 </figure>
 
 ## 2. First team members set the company culture
@@ -51,7 +51,7 @@ Clients also helped us to adopt a *modus operandi* and a work ethic based on e
 
 
 <figure>
-  <img style="width: 40%" src="/images/10-lessons-in-tech-industry/Learn-From-Your-Clients.png" alt="Learn From Your Clients" />
+  <img style={{ width:'40%'}} src="/images/10-lessons-in-tech-industry/Learn-From-Your-Clients.png" alt="Learn From Your Clients" />
   <figcaption>Soccer match along with client</figcaption>
 </figure>
 
@@ -73,7 +73,7 @@ There’s always time for improvements. Our first website was honestly a bit emb
 
 
 <figure>
-  <img style="width: 100%" src="/images/10-lessons-in-tech-industry/first-website.png" alt="Xmartlabs’ website during those first years." />
+  <img style={{ width:'100%'}} src="/images/10-lessons-in-tech-industry/first-website.png" alt="Xmartlabs’ website during those first years." />
   <figcaption>Xmartlabs’ website during those first years.</figcaption>
 </figure>
 
@@ -104,7 +104,7 @@ How do we try every day to stay ourselves? We are willing to listen to each othe
 
 
 <figure>
-  <img style="width: 100%" src="/images/10-lessons-in-tech-industry/team.png" alt="XL team" />
+  <img style={{ width:'100%'}} src="/images/10-lessons-in-tech-industry/team.png" alt="XL team" />
   <figcaption>XL team at the 2019 year-end retreat</figcaption>
 </figure>
 

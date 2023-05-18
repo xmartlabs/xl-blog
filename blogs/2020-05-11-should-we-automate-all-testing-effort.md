@@ -11,7 +11,7 @@ permalink: /should-we-automate-all-testing-effort/
 
 Have you ever found yourself wanting full automation testing? Have you ever thought that everything should be automated? Then this post is for you.
 
-<div style="text-align: center"><img width="100%" src="/images/automate-manual-testing/featured2.png" /></div>
+<div style={{ textAlign: 'center'}}><img width="100%" src="/images/automate-manual-testing/featured2.png" /></div>
 
 # **What is testing?**
 

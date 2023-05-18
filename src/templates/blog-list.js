@@ -28,30 +28,26 @@ const BlogList = ({ pageContext, data }) => {
 
 export default BlogList;
 
-export const blogListQuery = graphql`
-  query blogListQuery($skip: Int!, $limit: Int!) {
-    allMdx(
-    sort: { fields: [frontmatter___date], order: DESC }
-    limit: $limit
-    skip: $skip
-    ) {
-      totalCount
-      edges {
-        node {
-          id
-          frontmatter {
-            date(formatString: "MMMM D, YYYY")
-            title
-            author
-            category
-            tags
-            permalink
-            thumbnail
-          }
-          body
+export const blogListQuery = graphql`query blogListQuery($skip: Int!, $limit: Int!) {
+  allMdx(sort: {frontmatter: {date: DESC}}, limit: $limit, skip: $skip) {
+    totalCount
+    edges {
+      node {
+        fields {
           slug
         }
+        id
+        frontmatter {
+          date(formatString: "MMMM D, YYYY")
+          title
+          author
+          category
+          tags
+          permalink
+          thumbnail
+        }
+        body
       }
     }
   }
-`
+}`

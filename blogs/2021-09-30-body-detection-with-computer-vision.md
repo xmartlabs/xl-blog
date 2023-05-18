@@ -28,7 +28,7 @@ But if you think about it, what would those creations be if they couldn't see? S
 A sub-study or branch of AI, it aims to provide machines with the capacity not only to see but also to *look*. Its aim is for machines to extract valuable information from digital videos and images and use it to gain a deeper understanding, to think and act as we do.
 
 <figure>
-  <img style="width: 100%" src="/images/body-detection-with-computer-vision/intro.gif" alt="intro" />
+  <img style={{ width: '100%'}} src="/images/body-detection-with-computer-vision/intro.gif" alt="intro" />
   <figcaption>Image: Bicentennial Man (1999).</figcaption>
 </figure>
 
@@ -46,7 +46,7 @@ Computer vision relies basically on two Machine Learning concepts to interpret a
 - **Convolutional Neural Network:** Deep learning is often comprised of neural networks. Inspired by the human brain, it's a general-purpose layered function that can solve a problem by learning from a labeled dataset.
 
 <figure>
-  <img style="width: 100%" src="/images/body-detection-with-computer-vision/ML-DeepLearning-Neural Networks-AI.png" alt="ML, DeepLearning, Neural Networks, AI" />
+  <img style={{ width: '100%'}} src="/images/body-detection-with-computer-vision/ML-DeepLearning-Neural Networks-AI.png" alt="ML, DeepLearning, Neural Networks, AI" />
   <figcaption>ML, Deep Learning, and Neural Networks are all subfields of AI (<a href="https://lh4.googleusercontent.com/9gORhD6V2G7XBya2mSKVgZitf09o0n97JqQ20yuew4Fo8YfpUT1RO6voAqTOPMQDoorjJtKmI80vLVvltF6JIOK0IOB2F7tA7VgLJxZIUJf-mF2cW80jjPHNtWIZ-FZu2eEC2ePu" target="_blank">image source</a>).</figcaption>
 </figure>
 
@@ -67,7 +67,7 @@ It's believed the first thing our brain tends to do when presented with an image
 - **Instance Segmentation:** the process that takes part when the image has multiple objects. In which case the objects are masked with different colors and treated as separate entities, all the pixels associated with each object are given the same color.
 
 <figure>
-  <img style="width: 100%" src="/images/body-detection-with-computer-vision/image-segmentation.jpg" alt="Image Segmentation" />
+  <img style={{ width: '100%'}} src="/images/body-detection-with-computer-vision/image-segmentation.jpg" alt="Image Segmentation" />
   <figcaption>This picture clearly shows the difference between semantic and instance segmentation (<a href="https://ai-pool.com/d/could-you-explain-me-how-instance-segmentation-works" target="_blank">image source</a>).</figcaption>
 </figure>
 
@@ -88,7 +88,7 @@ After applying an OD model, your image should look like the one below: a boundin
 It used to take 20 seconds to process an image and determine where an object was. Now it's about 1000 times faster (20 milliseconds per image) in a couple of years, thanks to contributions such as open-sourced [YOLO](https://pjreddie.com/darknet/yolo/) (bounding boxes and class probabilities simultaneously). This means object detection can be made in real-time.
 
 <figure>
-  <img style="width: 100%" src="/images/body-detection-with-computer-vision/object-detection.png" alt="Object Detection" />
+  <img style={{ width: '100%'}} src="/images/body-detection-with-computer-vision/object-detection.png" alt="Object Detection" />
   <figcaption>(<a href="https://medium.datadriveninvestor.com/deep-learning-for-image-segmentation-d10d19131113" target="_blank">image source</a>).</figcaption>
 </figure>
 
@@ -97,7 +97,7 @@ It used to take 20 seconds to process an image and determine where an object was
 So what happens when the object we need to identify is not on a static image but a video? That is, how can we keep track of a thing that's moving? This would be the case if, for example, we wanted to identify a particular person or persons in a security camera footage. That's when object tracking comes in to save the day! This process follows a certain object/s over time in the video, and it keeps track of it (or them) through each frame.
 
 <figure>
-  <img style="width: 100%" src="/images/body-detection-with-computer-vision/object-tracking.gif" alt="Object Tracking" />
+  <img style={{ width: '100%'}} src="/images/body-detection-with-computer-vision/object-tracking.gif" alt="Object Tracking" />
   <figcaption>(<a href="https://towardsdatascience.com/what-even-is-computer-vision-531e4f07d7d0" target="_blank">image source</a>).</figcaption>
 </figure>
 
@@ -108,7 +108,7 @@ Tracking works with objects that change in size, shape, and position depending o
 Tracking works with objects that change in size, shape, and position depending on the angle they are being captured from if they are moving, the light, etc. Tracking algorithms also contain motion estimation models that understand the dynamic behaviors of objects to predict their trajectory, i.e., the areas where the object is likely to be found in later frames.
 
 <figure>
-  <img style="width: 100%" src="/images/body-detection-with-computer-vision/pose-estimation.gif" alt="Pose Estimation" />
+  <img style={{ width: '100%'}} src="/images/body-detection-with-computer-vision/pose-estimation.gif" alt="Pose Estimation" />
 </figure>
 
 Image or video streaming can be used as the model input. Its output provides information about each body keypoint's position, generally in the form of a 2D space coordinate and a confidence score between 0 and 1.
@@ -149,7 +149,7 @@ Tools like [lanthorn.ai](http://lanthorn.ai/) have helped this process by making
 **Retail stores** have also been applying CV to improve their customer's experience by gathering information of their movements within the store, where they spend more time, where they gaze directs to the most, etc. This helps them understand their customers/users better and has also become key in marketing and sales strategies, layout optimization, and overall efficiency of the stores.
 
 <figure>
-  <img style="width: 100%" src="/images/body-detection-with-computer-vision/retail-store.gif" />
+  <img style={{ width: '100%'}} src="/images/body-detection-with-computer-vision/retail-store.gif" />
   <figcaption>With masks becoming the new normal and being compulsory in many public spaces, monitoring their proper usage has become a matter of public health (<a href="https://towardsdatascience.com/a-social-distancing-and-mask-detector-using-a-tensorflow-object-detection-model-python-and-opencv-dfe5f7a8bace" target="_blank">image source</a>).</figcaption>
 </figure>
 
@@ -181,7 +181,7 @@ Human pose estimation is, as the name hints, a branch of pose estimation. Unlike
 Human pose estimation is used to build a human body representation (a pose) from visual input data. Features and key points are extracted from this data and represented through human body modeling.
 
 <figure>
-  <img style="width: 100%" src="/images/body-detection-with-computer-vision/human-model-representation.png" />
+  <img style={{ width: '100%'}} src="/images/body-detection-with-computer-vision/human-model-representation.png" />
   <figcaption>There are three main human body representation models: Kinematic and Planar are used for 2d pose estimation, , and Volumetric for 3d pose estimation (<a href="https://arxiv.org/abs/2012.13392" target="_blank">image source</a>).</figcaption>
 </figure>
 
@@ -200,7 +200,7 @@ This last application has undergone a significant increase in popularity in the 
 Pose estimation can be categorized into two groups: **single-person** pose estimation and **multi-person** pose estimation. Most practical applications of pose estimation are made in environments with several people, making the job more difficult for algorithms. There are two ways to go around multi-person applications: **top-down** and **bottom-up** algorithms. Top-down methods run a person detector, put bounding boxes around them, and then estimate the body joints of each box; they usually perform better. Bottom-up approaches tend to estimate the keypoint first and then group them into a unique pose.
 
 <figure>
-  <img style="width: 100%" src="/images/body-detection-with-computer-vision/top-down-approach.png" />
+  <img style={{ width: '100%'}} src="/images/body-detection-with-computer-vision/top-down-approach.png" />
   <figcaption>Top image: a top-down approach. Bottom image: a bottom-up approach. (<a href="https://miro.medium.com/max/1400/1*DMdb6SwPEeQBvqbFF6bXNg.jpeg" target="_blank">image source</a>).</figcaption>
 </figure>
 
@@ -223,7 +223,7 @@ Like image segmentation, human body or person segmentation groups pixels within 
 Body segmentation can be used for many things by itself, but its use to improve performance on tasks like pose recovery or gesture recognition cannot be undermined. And although it has its challenges, some of which we mentioned previously, like changes in body pose, shape, clothes, etc., it has evolved considerably in the last couple of years, and its application has been incrementing in several industries.
 
 <figure>
-  <img style="width: 100%" src="/images/body-detection-with-computer-vision/body-pix.png" />
+  <img style={{ width: '100%'}} src="/images/body-detection-with-computer-vision/body-pix.png" />
   <figcaption>BodyPix by TensorFlow can segment the person into 24 body parts (<a href="https://blog.tensorflow.org/2019/11/updated-bodypix-2.html" target="_blank">image source</a>).</figcaption>
 </figure>
 
@@ -241,7 +241,7 @@ Photography editing is also much easier with segmentation. Not only its easier t
 
 
 <figure>
-  <img style="width: 100%" src="/images/body-detection-with-computer-vision/face-image-editing.png" />
+  <img style={{ width: '100%'}} src="/images/body-detection-with-computer-vision/face-image-editing.png" />
   <figcaption>Face image editing is controlled via style images and segmentation masks (<a href="https://www.researchgate.net/figure/Face-image-editing-controlled-via-style-images-and-segmentation-masks-a-source-images_fig1_337671230" target="_blank">image source</a>).</figcaption>
 </figure>
 

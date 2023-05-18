@@ -9,7 +9,7 @@ thumbnail: images/dealing-with-covid/dealing-with-covid.jpg
 permalink: /2020/06/08/how-to-deal-with-coronavirus/
 ---
 
-<div style="text-align: center"><img width="100%" src="/images/dealing-with-covid/dealing-with-covid.jpg" /></div>
+<div style={{ textAlign: 'center'}}><img width="100%" src="/images/dealing-with-covid/dealing-with-covid.jpg" /></div>
 <br />
 
 We are now in the midst of a globalized pandemic, which is pretty much new for all of us.

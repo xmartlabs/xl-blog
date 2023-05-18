@@ -122,7 +122,7 @@ Besides, it perfectly describes what the pattern introduces into the code!
 Let's start with a representation of how this pattern comes into play in an imaginary scenario.
 Our e-commerce needs to show products, so this next diagram represents how our frontend app would fetch them.
 
-<div style="text-align: center"><img width="100%" src="/images/2020-07-08/architecture-diagram.png" /></div>
+<div style={{ textAlign: 'center'}}><img width="100%" src="/images/2020-07-08/architecture-diagram.png" /></div>
 
 Let's break down what's going on and then explain what each piece of the pattern is.
 
