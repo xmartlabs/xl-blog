@@ -20,7 +20,7 @@ The dataset has two sources of information, the videos, and the tracking informa
 
 The video training datasets consist of 60 short plays (around 10 seconds videos with 60 fps). Each play is filmed from two synchronized cameras, one located at the endzone and the other one at the sideline, concluding in a total of 120 videos in the training dataset.
 
-<p style="text-align: right">
+<p style={{ textAlign:"right" }}>
 	<img src="/images/nfl-kaggle-competition/nfl_frame.png" />
 	Left image: SidelinView. Right image: Endzone view.
 </p>
@@ -109,7 +109,7 @@ Another issue we saw and addressed was the presence of off-field players/helmets
 
 To solve this, we detected sideline lines to differentiate these two types of helmets. One difference with image rotation is that, in this case, we looked for wider lines, like the one shown in the image.
 
-<div style="text-align: center">
+<div style={{ textAlign:"left" }}>
 	<img src="/images/nfl-kaggle-competition/nfl_sideline.png" />
 </div>
 
@@ -132,7 +132,7 @@ For different reasons, not everything we tried made it into the final solution. 
 
 Team clustering is the idea of separating the helmets by each team. The idea was that the 2D matching algorithm worked better if it had to match 11 helmets with 11 labels twice instead of 22 with 22 once. Our first idea was to use the helmet's color as the colors are very different most of the time. We run tests trying three color spaces: [RGB](https://en.wikipedia.org/wiki/RGB_color_model), [HSV](https://en.wikipedia.org/wiki/HSL_and_HSV), and [CIELAB](https://en.wikipedia.org/wiki/CIELAB_color_space).
 
-<div style="text-align: center">
+<div style={{ textAlign:"left" }}>
 	<img src="/images/nfl-kaggle-competition/nfl_CIELAB.png" />
 </div>
 
@@ -140,13 +140,13 @@ The use of HSV and CIELAB is to get values independent from illumination and oth
 
 Although cameras were fixed in a position, they still could rotate and zoom in or out during a play. We tried to capture this information to leverage it in the solution because if we know how the image is moving, we can predict which players are leaving the frame and discard their tracking information. Next, we look at the difference between the first frame of a video and the last.
 
-<p style="text-align: center">
+<p style={{ textAlign:"left" }}>
 	<img src="/images/nfl-kaggle-competition/nfl_frame2.png" />
 </p>
 
 Calculating the size and number of the helmets in the frame, we can have a good approximation of how the zoom is going:
 
-<p style="text-align: center">
+<p style={{ textAlign:"left" }}>
 	<img src="/images/nfl-kaggle-competition/nfl_endzone.png" />
 </p>
 

@@ -134,7 +134,8 @@ So if we apply this in a simple example this is how it looks.
     };
 ```
 
-<img style="display: block;margin-left: auto;margin-right: auto;width: 50%;height: 80%;" src="/images/powerful-animations-rn/hide_and_show.gif" />
+<img style=style={{ display:"block", marginLeft:"auto", marginRight:"auto", width:"50%", height:"80%" }} src="/images/
+powerful-animations-rn/hide_and_show.gif" />
 
 ### **Conclusions**
 

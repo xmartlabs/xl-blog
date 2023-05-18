@@ -25,7 +25,7 @@ In this edition, Testing UY added a Challenge. It consisted in having a system u
 
 The system under test was provided by Abstracta, a channel via Discord was available during the event to ask questions to the Product Owner, and all the documentation was shared via Google Drive. We were able to perform Functional, Usability, and Accessibility testing while other testing techniques such as Performance (load, spike, soak) were not allowed due to the number of teams interacting with the system.
 
-<p style="text-align:center;">
+<p style={{ textAlign:"center"}}>
 <img style="width: 100%" src="/images/our-take-on-testinguy/testing-uy.jpeg" alt="Testing UY" />
 </p>
 
@@ -36,7 +36,7 @@ The system under test was provided by Abstracta, a channel via Discord was avail
 In this talk, an introduction to how to perform performance tests using the tool is presented, as well as the necessary configurations in the browser to be able to carry out the tests. Adding assertions and timers to be able to measure and then analyze the results.
 The best thing about this workshop is that problems that arose among the attendees were being solved when using the tool, which gave a realistic vision of problems that we can find when performing performance tests and how to interpret and solve them.
 
-<p style="text-align:center;">
+<p style={{ textAlign:"center"}}>
 <img style="width: 100%" src="/images/our-take-on-testinguy/testing-uy-taller.png" alt="Testing UY - taller" />
 </p>
 

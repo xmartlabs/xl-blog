@@ -8,7 +8,7 @@ thumbnail: /images/going-international/going-international.png
 permalink: /going-international/
 ---
 
-<div style="text-align: center"><img width="100%" src="/images/going-international/going-international.png" /></div>
+<div style={{ textAlign:"left" }}><img width="100%" src="/images/going-international/going-international.png" /></div>
 <br />
 
 ## Uruguay: An over-saturated market

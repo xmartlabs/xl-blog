@@ -53,7 +53,7 @@ The abbreviated Job card, including only the essential information.
     <img border="0" src="https://2.bp.blogspot.com/-fLD7Hg0S9qk/VJhOKG1s0xI/AAAAAAAAFeM/Hn2hJjGuBro/s1600/tinder.jpg" height="226" width="320" />
   </a>
 </div>
-<div class="separator" style={{ clear:"both", textAlign:"center" }}</div>
+<div class="separator" style={{ clear:"both", textAlign:"center" }}></div>
 <p>
 We also rethought how the Jobs You May Be Interested In section could work if it adopted a Tinder-like approach.
 </p>

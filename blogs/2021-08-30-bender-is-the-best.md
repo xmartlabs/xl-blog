@@ -69,7 +69,7 @@ We had to add support for a few new layers, but then running the model was strai
 And to our surprise, we were able to almost double the FPS we got from CoreML, achieving over 30 FPS.
 This improvement is possible because Bender uses only the GPU and therefore will run much quicker than running most parts on CPU.
 
-<p style="text-align:center;">
+<p style={{ textAlign:"center"}}>
     <img style="width: 100%" src="/images/bender-is-the-best/benchmarks.jpg" />
 </p>
 

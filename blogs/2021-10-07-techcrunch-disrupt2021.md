@@ -63,7 +63,7 @@ Be careful with the language you use, especially if you're an academic or Ph.D.,
 
 **Get them at "hello"**
 
-<p style="text-align:center;">
+<p style={{ textAlign:"center"}}>
     <img style="width: 100%" src="/images/tcd21-startup-landscape/hello.gif" alt="You had me at hello" />
 </p>
 Jerry Maguire (1999)  *[Source](https://i.gifer.com/origin/82/821cae4dd9ed6e9826feea3f0963dad6.gif)*

@@ -17,7 +17,7 @@ It was mid January when we decided as a team to participate in conferences aroun
 
 Our goal was to communicate that through the expression of these pivotal characteristics in your work, you would  be able to accomplish greater achievements. For instance, we became one of the **Top 10 Swift Github accounts** and one of the most engaging ones. So with that in mind we sent pitches to different conferences and were overjoyed to hear we had been accepted.
 
-<div style="text-align: center"><img width="100%" src="/images/appbuilders2020/conference.jpeg" /></div>
+<div style={{ textAlign:"left" }}><img width="100%" src="/images/appbuilders2020/conference.jpeg" /></div>
 
 ## Handling the pandemic
 

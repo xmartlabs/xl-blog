@@ -57,12 +57,12 @@ href="https://www.cuti.org.uy/" target="_blank">CUTI</a>. In the whole world, it
 <table align="center" cellpadding="0" cellspacing="0" class="tr-caption-container" style={{ marginLeft:"auto", marginRight:"auto", textAlign:"center" }}>
   <tbody>
     <tr>
-      <td style={{ textAlign:"center" }}
+      <td style={{ textAlign:"left" }}>
         <img alt="Agustin and Enrique working" border="0" height="300" src="https://2.bp.blogspot.com/-8o2vkQ0i6Mk/UFeFaVFKyMI/AAAAAAAAABg/W2fFFhpb7Fo/s400/IMG_0467.JPG" title="Agustin and Enrique working" width="400" />
       </td>
     </tr>
     <tr>
-      <td class="tr-caption" style={{ textAlign:"center" }}Agustín and Enrique working</td>
+      <td class="tr-caption" style={{ textAlign:"left" }}>Agustín and Enrique working</td>
     </tr>
   </tbody>
 </table>
@@ -70,12 +70,12 @@ href="https://www.cuti.org.uy/" target="_blank">CUTI</a>. In the whole world, it
 <table align="center" cellpadding="0" cellspacing="0" class="tr-caption-container" style={{ marginLeft:"auto", marginRight:"auto", textAlign:"center" }}>
   <tbody>
     <tr>
-      <td style={{ textAlign:"center" }}
+      <td style={{ textAlign:"left" }}>
           <img border="0" height="300" src="https://3.bp.blogspot.com/-jQtnFWRDhek/UFeGPMqRC4I/AAAAAAAAABw/GgH_MUhV3pc/s400/IMG_0471.JPG" style={{ cursor:"move" }} width="400" />
       </td>
     </tr>
     <tr>
-      <td class="tr-caption" style={{ textAlign:"center" }}Agustín giving the talk with the Enrique's assistance</td>
+      <td class="tr-caption" style={{ textAlign:"left" }}>Agustín giving the talk with the Enrique's assistance</td>
     </tr>
   </tbody>
 </table>
@@ -86,12 +86,12 @@ href="https://www.cuti.org.uy/" target="_blank">CUTI</a>. In the whole world, it
 <table align="center" cellpadding="0" cellspacing="0" class="tr-caption-container" style={{ marginLeft:"auto", marginRight:"auto", textAlign:"center" }}>
   <tbody>
     <tr>
-      <td style={{ textAlign:"center" }}
+      <td style={{ textAlign:"left" }}>
           <img alt="Staff of the Monvevideo Startup Weekend " border="0" height="300" src="https://4.bp.blogspot.com/-OzhqnidFgsc/UFeF_BcJrCI/AAAAAAAAABo/3SXZEpGih24/s400/IMG_0475.JPG" title="Staff of the Monvevideo Startup Weekend " width="400" />
       </td>
     </tr>
     <tr>
-      <td class="tr-caption" style={{ textAlign:"center" }}Staff of the Monvevideo Startup Weekend</td>
+      <td class="tr-caption" style={{ textAlign:"left" }}>Staff of the Monvevideo Startup Weekend</td>
     </tr>
   </tbody>
 </table>
