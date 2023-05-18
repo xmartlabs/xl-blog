@@ -97,5 +97,5 @@ We hope that Ahoy will be as useful for you as it was for us and that you create
 
 
 Need other quick but powerful solutions?
-Visit us on [GitHub](https://github.com/xmartlabs), we’re one of the top 10 GitHub Swift developers :), or drop us a line at `<hi@xmartlabs.com>`.
+Visit us on [GitHub](https://github.com/xmartlabs), we’re one of the top 10 GitHub Swift developers :), or drop us a line at <a href="mailto:hi@xmartlabs.com">hi@xmartlabs.com</a>
 
