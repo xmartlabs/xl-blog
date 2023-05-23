@@ -18,7 +18,6 @@
   display: flex;
   flex-direction: row;
   justify-content: end;
-  padding-right: 34rem;
 }
 
 .socialBottom {
@@ -26,6 +25,7 @@
   flex-direction: row;
   position: static;
   align-items: center;
+  width: 100%;
 }
 
 .sharePosition {
@@ -52,7 +52,7 @@
   position: fixed;
   top: 16rem;
   bottom: 2rem;
-  width: 20rem;
+  width: 22rem;
   margin-right: 6rem;
   display: flex;
   flex-direction: column;
@@ -66,14 +66,15 @@
   padding-bottom: 2.5rem;
   height: auto;
   overflow: hidden;
+  padding-left: 1.5rem;
 }
 
 .selectedLink {
   font-weight: $font-bold;
-}
-
-.pinkCircle {
-  margin-right: 2rem;
+  background-image: url("/images/index-blog-dot.png");
+  background-position: 0 0.4rem;
+  background-size: 0.5rem 0.5rem;
+  background-repeat: no-repeat;
 }
 
 .disappearIndex {
@@ -88,7 +89,7 @@
 }
 
 .titleContainer {
-  margin: 3rem 0;
+  margin: 0.5rem 0;
 }
 
 .authorContainer {
@@ -98,6 +99,7 @@
 .authorInformation {
   display: flex;
   flex-direction: row;
+  margin-top: 2rem;
 }
 
 .authorImage {
@@ -147,10 +149,6 @@
   width: 25%;
   line-height: 1.6rem;
   margin-bottom: 1rem;
-}
-
-.tags {
-  width: 75%;
 }
 
 // Main Image
@@ -317,6 +315,16 @@
   }
 }
 
+// Blog bottoms elements
+
+.blogBottomElements {
+  display: flex;
+  flex-direction: row-reverse;
+  align-items: baseline;
+  justify-content: flex-start;
+  padding: 5rem 38rem 2rem 17rem;
+}
+
 // DISQUS
 
 .disqusSection {
@@ -345,7 +353,7 @@
   } 
 
   .titleContainer {
-    margin: 2rem 0;
+    margin: 0;
   }
 
   .blogInfoContainer {
@@ -409,7 +417,6 @@
 
   .socialBottomContainer {
     justify-content: start;
-    padding: 0 0 0 1rem;
   }
 
   .categoryTagsContainer {
@@ -418,7 +425,9 @@
   }
 
   .tags {
-    width: 100%;
+    width: 90%;
+    margin-top: 1rem;
+    margin-left: 1rem;
   }
   
   .socialBottom {
@@ -431,6 +440,11 @@
   
   .indexSubContainer {
     display: none;
+  }
+
+  .blogBottomElements {
+    flex-direction: column;
+    padding: 0;
   }
 
   .disqusSection {

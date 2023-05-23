@@ -98,6 +98,14 @@ collections:
           - { value: "vale", label: "Valentina Bianco" }
           - { value: "pablog", label: "Pablo Grill" }
           - { value: "lazaro", label: "Lázaro" }
+          - { value: "alemachado", label: "Ale Machado"}
+          - {value: "coti", label: "Coti Besozzi"}
+          - {value: "sofitechera", label: "Sofia Techera"}
+          - {value: "jsanchez", label: "Joaquín Sánchez"}
+          - {value: "sol-mendiola", label: "Sol Mendiola"}
+          - {value: "andres-zunini", label: "Andrés Zunini"}
+          - {value: "christian-casaran", label: "Christian Casaran"}
+          - {value: "solo", label: "Juan Oliu"}
       - { name: body, label: Body, widget: markdown }
     identifier_field: title
 

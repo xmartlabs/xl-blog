@@ -4,7 +4,7 @@ date: 2017-10-11
 tags: [Design, Product, Sprint]
 author: xl
 category: product-design
-permalink: /DesignSprint1/
+permalink: /design-sprint-1/
 ---
 
 <img src="/images/sprint1/cover.jpg"/>

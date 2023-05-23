@@ -1,10 +1,8 @@
 ---
 title: CoreML not fast enough? Use Bender!
-date: '2021-08-30T10:00:00.000-03:00'
-
+date: 2021-08-30
 tags: [Machine Learning, iOS, CoreML, TFlite, MetalPerformanceShaders, Bender]
 author: mathias
-
 category: machine-learning
 thumbnail: images/bender-is-the-best/featured.jpg
 permalink: /how-to-get-the-best-performance-for-ml-models-on-ios/
@@ -71,8 +69,8 @@ We had to add support for a few new layers, but then running the model was strai
 And to our surprise, we were able to almost double the FPS we got from CoreML, achieving over 30 FPS.
 This improvement is possible because Bender uses only the GPU and therefore will run much quicker than running most parts on CPU.
 
-<p style={{ textAlign:'center'}}>
-    <img style={{ width: '100%'}} src="/images/bender-is-the-best/benchmarks.jpg" />
+<p style={{ textAlign:"center"}}>
+    <img style={{ width:"100%" }} src="/images/bender-is-the-best/benchmarks.jpg" />
 </p>
 
 This table shows the performance comparison running each framework using 1 or 2 concurrent threads, processing 384x768 images on iPhone 12 (the TFlite model was run on 384x384 images).

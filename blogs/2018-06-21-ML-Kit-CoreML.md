@@ -5,7 +5,7 @@ tags: [ML Kit, Core ML, iOS]
 author: mathias
 thumbnail: images/mlkit/featured.png
 category: machine-learning
-permalink: /ML-Kit-CoreML/
+permalink: /ml-kit-core-ml/
 ---
 
 At Xmartlabs we have been closely involved in the nascent field of on-device Machine Learning.

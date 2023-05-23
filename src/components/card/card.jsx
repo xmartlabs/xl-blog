@@ -9,7 +9,7 @@ import { useCategory, classnames } from '../../helpers';
 
 import * as styles from "./card.module.scss";
 
-const Card = ({ data, className }) => {
+const Card = ({ data, className, withCategory }) => {
   const categoryBlog = useCategory(data.frontmatter.category);
 
   const urlImages = () => {
@@ -24,8 +24,8 @@ const Card = ({ data, className }) => {
     <Link className={classnames(styles.styledLink, className)} to={`/${_.kebabCase(data.frontmatter.permalink)}`}>
       <article key={data.id} className={styles.container}>
         <div className={styles.imageContainer}>
-          <img className={styles.styledImage} src={urlImages()}/>
-          <Category data={categoryBlog.displayName} className={styles.blogListCategory} />
+          <img className={styles.styledImage} src={urlImages()} onError={(event) => event.target.src = '../../images/genericCover.jpg'} />
+          {withCategory && <Category data={categoryBlog.displayName} className={styles.blogListCategory} />}
         </div>
         <h1 className="text__heading__two__separated__black">
           {data.frontmatter.title}
@@ -38,10 +38,12 @@ const Card = ({ data, className }) => {
 Card.propTypes = {
   data: PropTypes.object.isRequired,
   classNsme: PropTypes.string,
+  withCategory: PropTypes.bool,
 };
 
 Card.defaultProps = {
   className: '',
+  withCategory: false,
 };
 
 export { Card };

@@ -4,7 +4,7 @@ date: 2017-11-01
 author: xl
 tags: [Swift, iOS, Tutorial, network]
 category: development
-permalink: /Introducing-to-Xniffer/
+permalink: /introducing-to-xniffer/
 ---
 
 Do you often want to debug or monitor external service responses in you app, recognize latency and work with the data you receive back? Same happens to us!

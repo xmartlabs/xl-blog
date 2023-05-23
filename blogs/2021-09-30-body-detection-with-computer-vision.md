@@ -3,7 +3,6 @@ title: Body Detection using Computer Vision
 date: 2021-10-19
 tags: [Pose Estimation, Body Segmentation, Human Detection, Machine Learning, Computer Vision]
 author: vale
-
 category: machine-learning
 thumbnail: images/body-detection-with-computer-vision/body-detection-with-computer-vision.jpg
 permalink: /computer-vision-techniques-for-body-detection/

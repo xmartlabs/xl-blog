@@ -9,14 +9,14 @@ import { Card } from "../card";
 
 import * as styles from './more-blogs-section.module.scss';
 
-const MoreBlogsSection = ({ relatedPosts, refMoreFrom, title }) => {
+const MoreBlogsSection = ({ relatedPosts, refMoreFrom, title, category }) => {
   return (
     <div className={styles.moreFromXlContainer} ref={refMoreFrom} >
       <div className={styles.titleContainer}>
-        <Link to="/" className={classnames("text__heading__three__blueTwo", styles.titleStyle)}>More from about <span>{title}</span>→</Link>
+        <Link to="" className={classnames("text__heading__three__blueTwo", styles.titleStyle)}>More from about <span>{title}</span>→</Link>
       </div>
       <div className={styles.blogsContainer}>
-        {relatedPosts.slice(0, 3).map((post) => <Card data={post} key={post.frontmatter.title} className={styles.cardStyles} />)}
+        {relatedPosts.slice(0, 3).map((post) => <Card data={post} key={post.frontmatter.title} className={styles.cardStyles} category={category} />)}
       </div>
     </div>
   );

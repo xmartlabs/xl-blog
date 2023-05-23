@@ -4,7 +4,7 @@ date: 2016-10-17
 tags: [Swift, iOS]
 author: dernst
 category: development
-permalink: /Introducing-Ecno/
+permalink: /introducing-ecno/
 ---
 
 [Ecno]:        https://github.com/xmartlabs/Ecno

@@ -47,8 +47,12 @@
 }
 
 @media only screen and (max-width: map-get($map: $screen-breakpoint, $key: sm)) {
-  .container { 
-    width: 96%;
+  .container {
+    width: 90%;
+
+    h1 {
+      font-size: 1.6rem;
+    }
   }
 
   .styledLink {

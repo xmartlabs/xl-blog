@@ -25,9 +25,9 @@ const Authors = ({ pageContext, data }) => {
         })}
       </ul>
       {/*
-              This links to a page that does not yet exist.
-              You'll come back to it!
-            */}
+        This links to a page that does not yet exist.
+        You'll come back to it!
+      */}
       <Link to="/">back to home</Link>
     </div>
   )

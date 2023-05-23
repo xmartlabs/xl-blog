@@ -9,7 +9,7 @@ import { classnames, findTitles, useCategory } from "../helpers";
 import { AuthorSerializer } from '../serializer';
 import { AppContext, BannerType } from '../config/context';
 import { SocialElement } from '../components/social-element';
-import { TwitterIcon, Facebook, Linkedin, ClockIcon, PinkCircle } from "../components/icons";
+import { TwitterIcon, Facebook, Linkedin, ClockIcon} from "../components/icons";
 import { MoreBlogsSection } from '../components/more-blogs-section';
 import { Tags } from '../components/tags/tags';
 
@@ -23,9 +23,11 @@ const BlogPost = ({ data, children }) => {
   const { setState } = useContext(AppContext);
   const [ disappearSocial, setDisappearSocial ] = useState(false);
   const refMoreFrom = useRef(null);
+  const refIndexTitles = useRef(null);
   const categoryBlog = useCategory(data.mdx.frontmatter.category);
   const [ selectLink, setSelectLink ] = useState('');
   const [ disappearIndex, setDisappearIndex ] = useState(false);
+  const [ titleOnView, setTitleOnView ] = useState('');
 
   const checkWindow = () => {
     if (typeof window !== 'undefined') {
@@ -84,8 +86,13 @@ const BlogPost = ({ data, children }) => {
       passive: true
     });
 
+    window.addEventListener('scroll', getActiveTitle, {
+      passive: true
+    });
+
     return () => {
       window.removeEventListener('scroll', handleScroll);
+      window.removeEventListener('scroll', getActiveTitle);
     };
   }, []);
 
@@ -93,7 +100,7 @@ const BlogPost = ({ data, children }) => {
   const handleScroll = () => {
     const moreFromXlSize = refMoreFrom?.current?.clientHeight || 0;
     const isInbottom = Math.ceil(window.innerHeight + window.scrollY + moreFromXlSize + 1000) >= document.documentElement.scrollHeight;
-    const isInTop = document.documentElement.scrollTop < 1200;
+    const isInTop = document.documentElement.scrollTop < 1000;
     
     if (isInbottom) {
       setDisappearSocial(true);
@@ -111,24 +118,41 @@ const BlogPost = ({ data, children }) => {
     }
   };
 
+  const getActiveTitle = () => {
+    if (typeof window !== 'undefined') {
+      if (refIndexTitles.current) {
+        const elementList = Array.from(refIndexTitles.current.childNodes);
+        const titles = findTitles(elementList);
+        const scrollPosition = window.scrollY;
+        let activeTitle = titles[0];
+        titles.forEach(title => {
+          const titleTop = title.getBoundingClientRect().top + window.pageYOffset - 500;
+          if (scrollPosition >= titleTop) {
+            activeTitle = title;
+          }
+        });
+        setTitleOnView(activeTitle?.textContent);
+        setSelectLink('');
+      }
+    }
+  };
+
   const getTitles = () => {
     if (typeof window !== 'undefined' && typeof window.document !== "undefined") {
-      const postContainer = document.getElementById('postContainer');
-      if (postContainer) {
-        const elementList = Array.from(postContainer.childNodes);
+      if (refIndexTitles.current) {
+        const elementList = Array.from(refIndexTitles.current.childNodes);
         const titlesList = findTitles(elementList);
         return (
           <div className={classnames({[styles.disappearIndex]: disappearIndex}, styles.indexSubContainer)}>
             {titlesList.map((title) => 
-              <a href={"#" + title.id} key={title.id} onClick={() => setSelectLink(title.id)} 
+              <a href={"#" + title.id} key={title.id} onClick={() => setSelectLink(title.id)}
                 className={classnames(
-                  {[styles.selectedLink]:title.id === selectLink}, 
-                  styles.links, 
+                  { [styles.selectedLink]: title.id === selectLink || titleOnView === title.id},
+                  styles.links
                 )}
               >
-                {title.id === selectLink && <PinkCircle className={styles.pinkCircle}/>}
-                {title.innerHTML.length > 55 ? title.innerHTML.slice(0, 55) + "..." : title.innerHTML}
-             </a>
+                {title.innerText.length > 55 ? title.innerText.slice(0, 55) + "..." : title.innerText}
+              </a>
             )}
           </div>
         );    
@@ -144,45 +168,57 @@ const BlogPost = ({ data, children }) => {
     title: data.mdx.frontmatter.title,
   }
 
+  const imgUrl = () => {
+    if(data.mdx.frontmatter.thumbnail) {
+      if (data.mdx.frontmatter.thumbnail.includes("/images")) {
+        return data.mdx.frontmatter.thumbnail;
+      } else {
+        return `/${data.mdx.frontmatter.thumbnail}`;
+      }
+    } else {
+      return '../../images/image.png';
+    }
+  }
+
   return (
-    <div onScroll={handleScroll}>
+    <div onScroll={handleScroll} id='containerDiv'>
       <div className={styles.indexContainer}>
         {getTitles()}
       </div>
       <SocialElement className={classnames(disappearSocial ? styles.socialDisappear : styles.socialAppear, styles.blogIcons, {[styles.socialDisappear]: disappearIndex})} links={shareBlogPostLinks} />
-        <div className={styles.bannerContainer}>
-          <div className={styles.categoryTagsContainer}>
-            <Category data={categoryBlog.displayName} className={styles.category}/>
-            <Tags blogTags={data.mdx.frontmatter.tags} className={styles.tags} />
+      <div className={styles.bannerContainer}>
+        <div className={styles.categoryTagsContainer}>
+          <Category data={categoryBlog.displayName} className={styles.category}/>
+        </div>
+        <h1 className={classnames(styles.titleContainer, "text__heading__one__black")}>
+          { data.mdx.frontmatter.title }
+        </h1>
+        <div className={styles.authorContainer}>
+          <div className={styles.authorInformation}>
+            <img src={`/images/${authorBlog.image}`} alt="" className={styles.authorImage} />
+            <Link className={classnames(styles.authorName, "text__paragraph__bold__black")} to={author.profile_url}>{ authorBlog.displayName }</Link>
           </div>
-          <h1 className={classnames(styles.titleContainer, "text__heading__one__black")}>
-            { data.mdx.frontmatter.title }
-          </h1>
-          <div className={styles.authorContainer}>
-            <div className={styles.authorInformation}>
-              <img src={`/images/${authorBlog.image}`} alt="" className={styles.authorImage} />
-              <Link className={classnames(styles.authorName, "text__paragraph__bold__black")} to={author.profile_url}>{ authorBlog.displayName }</Link>
-            </div>
-            <div className={styles.blogInfoContainer}>
-              <label className={classnames(styles.postDate, "text__label__bold__grayTwo")} >{data.mdx.frontmatter.date}</label>
-              <ClockIcon className={styles.clockIcon} />
-              <label className={classnames("text__label__bold__grayTwo", styles.timeToRead)} >
-                {data.mdx.fields.timeToRead.text}
-              </label>
-            </div>
+          <div className={styles.blogInfoContainer}>
+            <label className={classnames(styles.postDate, "text__label__bold__grayTwo")} >{data.mdx.frontmatter.date}</label>
+            <ClockIcon className={styles.clockIcon} />
+            <label className={classnames("text__label__bold__grayTwo", styles.timeToRead)} >
+              {data.mdx.fields.timeToRead.text}
+            </label>
           </div>
         </div>
-        <div>
-          <img src={`/${data.mdx.frontmatter.thumbnail}`} onError={(event) => event.target.src = '../../images/image.png'} className={styles.blogMainImage} />
-          <div className={styles.bodyPostContainer} id="postContainer">
-            {children}
-          </div>
-        </div>
-      <div className={styles.socialBottomContainer}>
-        <span className={classnames('text__paragraph__bold__grayTwo', styles.sharePosition)}>Share:</span>
-        <SocialElement className={classnames(styles.socialBottom, styles.blogIcons)} links={shareXlProfileLinks} />
       </div>
-      <MoreBlogsSection relatedPosts={data.mdx.relatedPosts} refMoreFrom={refMoreFrom} title={categoryBlog.displayName} />
+        <img src={imgUrl()} onError={(event) => event.target.src = '../../images/image.png'} className={styles.blogMainImage} />
+        <div className={styles.bodyPostContainer} ref={refIndexTitles}>
+          {children}
+        </div>
+        <div className={styles.blogBottomElements}>
+          <div className={styles.socialBottomContainer}>
+            <span className={classnames('text__paragraph__bold__grayTwo', styles.sharePosition)}>Share:</span>
+            <SocialElement className={classnames(styles.socialBottom, styles.blogIcons)} links={shareXlProfileLinks} />
+          </div>
+          <Tags blogTags={data.mdx.frontmatter.tags} className={styles.tags} />
+        </div>
+        <MoreBlogsSection relatedPosts={data.mdx.relatedPosts} refMoreFrom={refMoreFrom} title={categoryBlog.displayName} />
       <div className={styles.disqusSection}>
         <h3 className={styles.disqusTitle}>Comments:</h3>
         <div id="disqus_thread">

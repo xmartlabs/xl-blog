@@ -5,7 +5,7 @@ tags: [machine learning, tflite, coreml, xmartlabs]
 author: mathias
 thumbnail: images/tflite_coreml/featured.png
 category: machine-learning
-permalink: /TFlite-to-CoreML/
+permalink: /t-flite-to-core-ml/
 ---
 
 It's been over a year since Apple has introduced [Create ML](https://developer.apple.com/documentation/createml), a framework that allows you to build neural network models in Swift and use them on iPhones and iPads with Core ML.

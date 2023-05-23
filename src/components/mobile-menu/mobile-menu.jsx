@@ -54,7 +54,7 @@ const MobileMenu = () => {
               <NavMenu className={styles.menuOptions}  openMenu={showMenu}/>
               <div className={styles.partnerContainer}>
                 <h4 className="text__label__bold__black">Ready to partner?</h4>
-                <a href="https://form.typeform.com/to/c7G2RUWm" target="_blank" rel="noopener noreferrer" className={styles.partnerButton}>Lets's talk</a>
+                <a href={process.env.GATSBY_CONTACT_FORM} target="_blank" rel="noopener noreferrer" className={styles.partnerButton}>Lets's talk</a>
               </div>
                 <SocialElement links={mobileLinks} className={styles.socialContainer} />
             </div>

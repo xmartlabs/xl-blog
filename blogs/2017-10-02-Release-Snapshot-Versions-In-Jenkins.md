@@ -5,7 +5,7 @@ tags: [Android, Server, CI, Jenkins, Fabric]
 author: mirland
 
 category: development
-permalink: /Release-Snapshot-Versions-In-Jenkins/
+permalink: /release-snapshot-versions-in-jenkins/
 ---
 
 Today I want to show how we can release Android *SNAPSHOT* versions using [Beta by Fabric](https://docs.fabric.io/android/beta/overview.html).

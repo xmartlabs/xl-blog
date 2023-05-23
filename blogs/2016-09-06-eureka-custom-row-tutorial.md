@@ -4,7 +4,7 @@ date: 2016-09-06
 tags: [Swift, iOS, Eureka]
 author: mathias
 category: development
-permalink: /Eureka-custom-row-tutorial/
+permalink: /eureka-custom-row-tutorial/
 ---
 
 It's been almost a year since Eureka's first release and many developers have been using it since then. We are thankful for all the valuable support and contributions received.

@@ -38,3 +38,8 @@
   display_name: Development
   url: /category/android-development
   color: #55555
+- category: blockchain
+  title: Blockchain learned on our journey.
+  display_name: Blockchain
+  url: /category/blockchain
+  color: #55555

@@ -4,7 +4,7 @@ date: 2014-11-25
 tags: []
 author: alberto
 category: product-design
-permalink: /:year/:month/:day/:title/
+permalink: /year-month-day-title/
 ---
 
 <p>

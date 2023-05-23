@@ -9,10 +9,6 @@ body {
   background-image: url("../../static/images/home-banner/home-banner-desktop.png");
   background-repeat: no-repeat;
   background-size: contain;
-}
-
-.homeBanner {
-
   width: 100%;
   height: 63.6rem;
 }
@@ -48,5 +44,6 @@ body {
   .homeBanner {
     background-image: url("../../static/images/home-banner/home-banner-mobile.png");
     min-width: 23.4rem;
+    max-height: 54rem;
   }
 }
