@@ -119,7 +119,7 @@ const BlogPost = ({ data, children }) => {
   };
 
   const getActiveTitle = () => {
-    if (typeof window !== 'undefined' && typeof window.document !== "undefined") {
+    if (typeof window !== 'undefined') {
       if (refIndexTitles.current) {
         const elementList = Array.from(refIndexTitles.current.childNodes);
         const titles = findTitles(elementList);
