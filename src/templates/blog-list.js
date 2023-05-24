@@ -1,25 +1,58 @@
-import React, { useEffect, useContext } from "react";
+import React, { useEffect, useContext, useState } from "react";
 import { graphql } from "gatsby";
 
 import { Card } from '../components/card';
 import { Pager } from '../components/pager';
 import { AppContext, BannerType } from '../config/context';
 
-import * as blogListStyles from "./blog-list.module.scss";
+import { classnames } from "../helpers";
+
+import * as styles from "./blog-list.module.scss";
 
 const BlogList = ({ pageContext, data }) => {
   const _ = require("lodash")    
   const { edges, totalCount } = data.allMdx;
   const { setState } = useContext(AppContext);
+  const [ category, setCategory ] = useState("all");
 
   useEffect(() => {
     setState(BannerType.home);
   }, []);
+  
+  const filterLinks = () => {
+    const filters = [
+      {name: "all", display_name: "All"},
+      {name: "development", display_name: "Development"},
+      {name: "product-design", display_name: "Design"},
+      {name: "machine-learning", display_name: "Machine Learning"},
+      {name: "blockchain", display_name: "Blockchain"},
+      {name: "people-events", display_name: "People"},
+    ];
+    return (
+      <div className={styles.filterContainer} >
+          {filters.map((filter) =>
+          <li onClick={() => {setCategory(filter.name)}} className={classnames(styles.filterElement, "text__filter__grayFive", filter.name === category && styles.selectedLink)}>
+            {filter.display_name}
+          </li>
+          )}
+      </div>
+    );
+  }
+
+  const filters = () => {
+    if (category !== "all") {
+      const blogsCategory = edges.filter(({ node }) => node.frontmatter.category === category);
+      return blogsCategory.map(({ node }) => <Card data={node} key={node.id} withCategory={true} />);
+    } else {
+      return edges.map(({ node }) => <Card data={node} key={node.id} withCategory={true} />);
+    }
+  };
 
   return (
     <>
-      <div className={blogListStyles.container} >
-        {edges.map(({ node }) => <Card data={node} key={node.id} withCategory={true} /> )}
+      {filterLinks()}
+      <div className={styles.container} >
+        {filters()}
       </div>
       <Pager pageContext={pageContext}/>
     </>
