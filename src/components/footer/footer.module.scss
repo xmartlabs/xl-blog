@@ -1,4 +1,5 @@
 @import "../../css/colors.scss";
+@import "../../css/variables.scss";
 
 .container {
   justify-content: center;
@@ -9,3 +10,10 @@
   flex-direction: column;
   align-items: center;
 }
+
+@media screen and (max-width: map-get($map: $screen-breakpoint, $key: sm)) {
+  .container {
+    min-width: 23.4rem;
+  }
+}
+
