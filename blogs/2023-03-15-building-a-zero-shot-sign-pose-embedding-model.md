@@ -8,7 +8,6 @@ thumbnail: /images/building-a-zero-shot-sign-pose-embedding-model/LSU.png
 permalink: /machine-learning-sign-language-recognition/
 ---
  
-<img width="100%" src="/images/building-a-zero-shot-sign-pose-embedding-model/LSU.png" />
 
 At Xmartlabs, our machine learning team set out to develop an innovative ML product last year. After careful consideration and collaboration with our Design team, we decided to focus on building **a sign language practice assist system** instead of a full-fledged sign language translator. Read more about our thought process (including the product definition and market research) in this [blog post](/blog/from-idea-to-MVP-the-lean-inception-process/) by our design team.
 

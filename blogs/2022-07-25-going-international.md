@@ -8,9 +8,6 @@ thumbnail: /images/going-international/going-international.png
 permalink: /going-international/
 ---
 
-<div style={{ textAlign:"left" }}><img width="100%" src="/images/going-international/going-international.png" /></div>
-<br />
-
 ## Uruguay: An over-saturated market
 
 Uruguay’s position as a market leader in digital development in LATAM can be (and has been) explained by several factors:

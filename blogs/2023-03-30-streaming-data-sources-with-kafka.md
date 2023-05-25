@@ -8,7 +8,6 @@ permalink: /streaming-data-sources-with-kafka/
 thumbnail: /images/streaming-data-sources-with-kafka/kafka-blogpost.png
 ---
 
-![Neobanking-1.png](/images/streaming-data-sources-with-kafka/kafka-blogpost.png)
 
 ### Introduction
 

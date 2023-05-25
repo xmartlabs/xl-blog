@@ -8,7 +8,6 @@ thumbnail: /images/from-idea-to-mvp/LSU_Design.png
 permalink: /from-idea-to-mvp-the-lean-inception-process/
 ---
  
- <img width="100%" src="/images/from-idea-to-mvp/LSU_Design.png" />
 
 Initiatives are a big part of our work life here at Xmartlabs. From time to time, we’re encouraged to take a break from our normal work duties and dedicate some time to research, develop or study something that interests us, especially if it might have an impact on our community.
 

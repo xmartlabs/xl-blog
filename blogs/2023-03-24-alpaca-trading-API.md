@@ -8,7 +8,6 @@ permalink: /a-comprehensive-guide-to-alpaca-trading-api/
 thumbnail: /images/alpaca-trading-API/Alpaca_trading.png
 ---
 
-![Alpaca trading.png](/images/alpaca-trading-API/Alpaca_trading.png)
 
 
 # What is Alpaca Trading API?

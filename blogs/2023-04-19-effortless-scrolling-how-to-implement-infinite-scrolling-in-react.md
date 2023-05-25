@@ -8,8 +8,6 @@ permalink: /how-to-implement-infinite-scrolling-in-react-native/
 thumbnail: /images/effortless-scrolling/Infinite_scrolling.png
 ---
 
-![Infinite scrolling.png](/images/effortless-scrolling/Infinite_scrolling.png)
-
 ## Introduction
 
 In today's world of mobile apps, user experience is everything. And when it comes to delivering a seamless and engaging experience, infinite scrolling can be a game-changer. Whether it's browsing through social media feeds, product lists, or news websites, infinite scrolling can make it easier for users to consume more content without having to click through pages.
