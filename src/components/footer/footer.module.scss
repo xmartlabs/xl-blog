@@ -9,3 +9,9 @@
   flex-direction: column;
   align-items: center;
 }
+
+@media screen and (max-width: 768px) {
+  .container {
+    min-width: 23.4rem;
+  }
+}
