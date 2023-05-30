@@ -1,28 +1,46 @@
-import React from "react"
-import PropTypes from "prop-types"
+import React, { useState } from "react";
+import PropTypes from "prop-types";
+import { Link, graphql } from "gatsby";
 
-// Utilities
-import kebabCase from "lodash/kebabCase"
+import { classnames } from "../helpers";
+import { Pager } from '../components/pager';
 
-// Components
-import { Link, graphql } from "gatsby"
+import * as styles from "./categories.module.scss";
 
-const CategoriesPage = ({ data }) => (
-  <>
-    <div>
-      <h1>CategoriesPage</h1>
-      <ul>
-        {data.allMdx.group.map(category => (
-          <li key={category.fieldValue}>
-            <Link to={`/categories/${kebabCase(category.fieldValue)}/`}>
-              {category.fieldValue} ({category.totalCount})
+const CategoriesPage = () => {
+  const [ category, setCategory ] = useState("all");
+
+  const filterLinks = () => {
+    const filters = [
+      {name: "all", display_name: "All"},
+      {name: "development", display_name: "Development"},
+      {name: "product-design", display_name: "Design"},
+      {name: "machine-learning", display_name: "Machine Learning"},
+      {name: "blockchain", display_name: "Blockchain"},
+      {name: "people-events", display_name: "People"},
+    ];
+    return (
+      <div className={styles.filterContainer} >
+          {filters.map((filter) =>
+            <Link 
+              onClick={() => {setCategory(filter.name)}} 
+              className={classnames(styles.filterElement, "text__filter__grayFive", filter.name === category && styles.selectedLink)} 
+              to={filter.name === 'all' ? '/' : `/categories/${filter.name}/`}>
+              {filter.display_name}
             </Link>
-          </li>
-        ))}
-      </ul>
-    </div>
-  </>
-)
+          )}
+      </div>
+    );
+  }
+
+  return (
+    <>
+      <div>
+        {filterLinks()}
+      </div>
+    </>
+  )
+};
 
 CategoriesPage.propTypes = {
   data: PropTypes.shape({
@@ -37,13 +55,26 @@ CategoriesPage.propTypes = {
   }),
 }
 
-export default CategoriesPage
+export default CategoriesPage;
 
 export const pageQuery = graphql`{
   allMdx(limit: 2000) {
     group(field: {frontmatter: {category: SELECT}}) {
       fieldValue
-      totalCount
+      edges {
+        node {
+          id
+          frontmatter {
+            date(formatString: "MMMM D, YYYY")
+            title
+            author
+            category
+            tags
+            permalink
+            thumbnail
+          }
+        }
+      }
     }
   }
 }`

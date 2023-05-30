@@ -1,34 +1,19 @@
-import React from "react";
+import React, { useState } from "react";
 import PropTypes from "prop-types";
-
-// Components
 import { Link, graphql } from "gatsby";
 
-const Categories = ({ pageContext, data }) => {
-  const { category } = pageContext
-  const { edges, totalCount } = data.allMarkdownRemark
-  const categoryHeader = `${totalCount} post${
-    totalCount === 1 ? "" : "s"
-  } categorizewd with "${category}"`
+import { Card } from '../components/card';
+
+import * as styles from "./categories.module.scss";
+
+const Categories = ({ data }) => {
+
+  console.log(data)
+  const { edges } = data.allMdx;
 
   return (
-    <div>
-      <h1>{categoryHeader}</h1>
-      <ul>
-        {edges.map(({ node }) => {
-          const { title } = node.frontmatter
-          return (
-            <li key={node.slug}>
-              <Link to={node.slug}>{title}</Link>
-            </li>
-          )
-        })}
-      </ul>
-      {/*
-              This links to a page that does not yet exist.
-              You'll come back to it!
-            */}
-      <Link to="/categories">All categories</Link>
+    <div className={styles.container}>
+      {edges.map(({ node }) => <Card data={node} key={node.id} withCategory={true} />)}
     </div>
   )
 }
@@ -53,10 +38,10 @@ Categories.propTypes = {
   }),
 }
 
-export default Categories
+export default  Categories;
 
 export const pageQuery = graphql`query ($category: String) {
-  allMarkdownRemark(
+  allMdx(
     limit: 2000
     sort: {frontmatter: {date: DESC}}
     filter: {frontmatter: {category: {eq: $category}}}
@@ -64,8 +49,15 @@ export const pageQuery = graphql`query ($category: String) {
     totalCount
     edges {
       node {
+        id
         frontmatter {
+          date(formatString: "MMMM D, YYYY")
           title
+          author
+          category
+          tags
+          permalink
+          thumbnail
         }
       }
     }

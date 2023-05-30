@@ -16,6 +16,7 @@ import "../index.scss";
 import { useMediaQuery } from "../hooks";
 
 import * as styles from "./layout.module.scss";
+import CategoriesPage from "../pages/categories";
 
 export const StyledGetStartedButton = styled.a`
   width: 147px;
@@ -89,6 +90,7 @@ function Layout({ children }) {
               </StyledContainerHeader>
             </StyledContainerNavBarXL>
         </div>
+        {<CategoriesPage data={null} />}
         {children}
       </AppContext.Provider>
       <Footer>

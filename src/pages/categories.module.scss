@@ -1,0 +1,40 @@
+@import "/src/css/variables.scss";
+@import "/src/css/colors.scss";
+
+.filterContainer {
+  margin: 6% 0 0 0;
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+}
+
+.filterElement {
+  list-style: none;
+  margin: 0 2.8125rem;
+  font-family: $primary-font, serif;
+  text-decoration: none;
+}
+
+.filterElement:hover {
+  cursor: pointer;
+}
+
+.selectedLink {
+  color: $xlPink;
+  min-width: 3rem;
+  border-bottom: 4px solid $xlPink;
+  text-align: center;
+}
+
+@media only screen and (max-width: map-get($map: $screen-breakpoint, $key: sm)) {
+  .filterContainer {
+    flex-wrap: wrap;
+    justify-content: flex-start;
+  }
+
+  .filterElement {
+    margin: 1.3rem;
+  }
+}

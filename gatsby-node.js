@@ -75,6 +75,20 @@ exports.createPages = async ({actions, graphql, reporter}) => {
       categoriesGroup: allMdx(limit: 2000) {
         group(field: {frontmatter: {category: SELECT}}) {
           fieldValue
+          edges {
+            node {
+              id
+              frontmatter {
+                date(formatString: "MMMM D, YYYY")
+                title
+                author
+                category
+                tags
+                permalink
+                thumbnail
+              }
+            }
+          }
         }
       }
       authorsGroup: allMdx(limit: 2000) {
