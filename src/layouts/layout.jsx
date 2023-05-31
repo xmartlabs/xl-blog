@@ -58,34 +58,41 @@ export const StyledFooterText = styled.label`
   size: 17px;
   line-height: 38px;    
 `
+const filters = [
+  {name: "all", display_name: "All"},
+  {name: "development", display_name: "Development"},
+  {name: "product-design", display_name: "Design"},
+  {name: "machine-learning", display_name: "Machine Learning"},
+  {name: "blockchain", display_name: "Blockchain"},
+  {name: "people-events", display_name: "People"},
+];
+
+const getPath = () => {
+  console.log(window.location.href)
+  if (window.location.href === '') {
+    return 'all';
+  }
+  const categoryNames = filters.map(({ name }) => name);
+  return categoryNames.find((name) => window.location.href.includes(name));
+}
 
 function Layout({ children }) {  
   const [contextState, setContextState] = useState(initialState);
   const isMobile = useMediaQuery("(max-width: 768px)");
-  const [ category, setCategory ] = useState("all");
+  const [ category, setCategory ] = useState(getPath());
 
-  const filterLinks = () => {
-    const filters = [
-      {name: "all", display_name: "All"},
-      {name: "development", display_name: "Development"},
-      {name: "product-design", display_name: "Design"},
-      {name: "machine-learning", display_name: "Machine Learning"},
-      {name: "blockchain", display_name: "Blockchain"},
-      {name: "people-events", display_name: "People"},
-    ];
-    return (
-      <div className={styles.filterContainer} >
-          {filters.map((filter) =>
-            <Link 
-              onClick={() => {setCategory(filter.name)}} 
-              className={classnames(styles.filterElement, "text__filter__grayFive", filter.name === category && styles.selectedLink)} 
-              to={filter.name === 'all' ? '/' : `/categories/${filter.name}/`}>
-              {filter.display_name}
-            </Link>
-          )}
-      </div>
-    );
-  }
+  const filterLinks = () => (
+    <div className={styles.filterContainer} >
+        {filters.map((filter) =>
+          <Link 
+            onClick={() => {setCategory(filter.name)}} 
+            className={classnames(styles.filterElement, "text__filter__grayFive", filter.name === category && styles.selectedLink)} 
+            to={filter.name === 'all' ? '/' : `/categories/${filter.name}/`}>
+            {filter.display_name}
+          </Link>
+        )}
+    </div>
+  );
   
   return (
     <>
