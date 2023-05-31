@@ -6,6 +6,8 @@ import PropTypes from "prop-types";
 import styled from "styled-components";
 import { StaticImage } from "gatsby-plugin-image";
 
+import { classnames } from "../helpers";
+
 import { NavMenu } from "../components/nav-menu";
 import { Footer } from "../components/footer";
 import { MobileMenu } from "../components/mobile-menu";
@@ -16,7 +18,6 @@ import "../index.scss";
 import { useMediaQuery } from "../hooks";
 
 import * as styles from "./layout.module.scss";
-import CategoriesPage from "../pages/categories";
 
 export const StyledGetStartedButton = styled.a`
   width: 147px;
@@ -61,6 +62,30 @@ export const StyledFooterText = styled.label`
 function Layout({ children }) {  
   const [contextState, setContextState] = useState(initialState);
   const isMobile = useMediaQuery("(max-width: 768px)");
+  const [ category, setCategory ] = useState("all");
+
+  const filterLinks = () => {
+    const filters = [
+      {name: "all", display_name: "All"},
+      {name: "development", display_name: "Development"},
+      {name: "product-design", display_name: "Design"},
+      {name: "machine-learning", display_name: "Machine Learning"},
+      {name: "blockchain", display_name: "Blockchain"},
+      {name: "people-events", display_name: "People"},
+    ];
+    return (
+      <div className={styles.filterContainer} >
+          {filters.map((filter) =>
+            <Link 
+              onClick={() => {setCategory(filter.name)}} 
+              className={classnames(styles.filterElement, "text__filter__grayFive", filter.name === category && styles.selectedLink)} 
+              to={filter.name === 'all' ? '/' : `/categories/${filter.name}/`}>
+              {filter.display_name}
+            </Link>
+          )}
+      </div>
+    );
+  }
   
   return (
     <>
@@ -90,7 +115,7 @@ function Layout({ children }) {
               </StyledContainerHeader>
             </StyledContainerNavBarXL>
         </div>
-        {<CategoriesPage data={null} />}
+        {contextState === "home" && filterLinks()}
         {children}
       </AppContext.Provider>
       <Footer>

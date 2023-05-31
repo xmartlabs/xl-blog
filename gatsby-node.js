@@ -54,7 +54,7 @@ const redirects = require('./redirects.json');
 exports.createPages = async ({actions, graphql, reporter}) => {
     const {createPage, createRedirect} = actions;
     const tagTemplate = path.resolve("src/templates/tags.js");
-    const categoryTemplate = path.resolve("src/templates/categories.js");
+    const categoryTemplate = path.resolve("src/pages/categories.js");
     const authorTemplate = path.resolve("src/templates/authors.js");
     const postTemplate = path.resolve("src/templates/post.js");
 
@@ -144,18 +144,24 @@ exports.createPages = async ({actions, graphql, reporter}) => {
     })
 
 
-    // Extract tag data from query
+     // Extract tag data from query
     const categories = result.data.categoriesGroup.group
-    // Make tag pages
-    categories.forEach(category => {
+    categories.forEach((category) => {
+      const numPagesCat = Math.ceil(category.edges.length / postsPerPage);
+      Array.from({length: numPagesCat}).forEach((_, index) => {
         createPage({
-            path: `/categories/${_.kebabCase(category.fieldValue)}/`,
-            component: categoryTemplate,
-            context: {
-                category: category.fieldValue,
-            },
-        })
-    })
+          path: `/categories/${category.fieldValue}${index === 0 ? `` : `/page/${index + 1}`}`,
+          component: categoryTemplate,
+          context: {
+            limit: postsPerPage,
+            skip: index * postsPerPage,
+            numPages: numPagesCat,
+            currentPage: index + 1,
+            category: category.fieldValue,
+          },
+        });
+      });
+    });
 
     // Extract tag data from query
     const authors = result.data.authorsGroup.group
@@ -195,32 +201,3 @@ exports.createPages = async ({actions, graphql, reporter}) => {
       })
     })
 }
-
-
-// exports.onCreatePage = ({ page, actions, getNode }) => {
-//   const { createPage } = actions
-
-// // Change the node internal type from 'allMarkdownRemark' to 'MarkdownRemark'
-// if (node.internal.type === `MarkdownRemark`) {
-//   const value = createFilePath({ page, getNode })
-//   createNodeField({
-//     name: `slug`,
-//     node,
-//     value,
-//   })
-// }
-// else {
-//   createPage(page)
-// }
-
-// page.matchPath is a special key that's used for matching pages
-// only on the client.
-//if (page.path.match(/^\/app/)) {
-//  page.matchPath = "/app/*"
-//}
-
-// if (page.path.match(/special-page/)) {
-//page.context.layout = "main"
-
-// }
-// }
