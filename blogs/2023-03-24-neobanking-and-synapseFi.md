@@ -8,7 +8,6 @@ permalink: /the-power-of-neobanking-with-synapse-fi/
 thumbnail: /images/neobanking-and-synapseFi/Neobanking-1.png
 ---
 
-![Neobanking-1.png](/images/neobanking-and-synapseFi/Neobanking-1.png)
 
 During the last couple of years and as a result of the digital transformation, Neobanks have grown and expanded rapidly. Their low-cost, seamless, and user-friendly digital experiences have secured its adoption throughout the world, and increasingly more business and traditional banks are riding the neobaniking wave. Providing a digital layer on top of traditional banking, they promise a streamlined and hassle-free experience.
 

@@ -198,6 +198,7 @@
   }
 
   ul, li {
+    @extend .text__paragraph__blueTwo;
     margin: 0rem 1.5rem 1rem;
   }
 
@@ -207,7 +208,6 @@
 
   aside {
     @extend .text__paragraph__two__blueTwo;
-    text-transform: uppercase;
     margin: 3rem 0 2rem;
     border-left: 0.3rem solid $xlPink;
     padding-left: 2rem;
