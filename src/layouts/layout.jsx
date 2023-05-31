@@ -69,7 +69,7 @@ const filters = [
 
 const getPath = () => {
   if (window.type !== "undefined") {
-    if (window.location.href === '') {
+    if (window.location.href === 'http://localhost:8000/') {
       return 'all';
     }
   }
