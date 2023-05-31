@@ -68,9 +68,10 @@ const filters = [
 ];
 
 const getPath = () => {
-  console.log(window.location.href)
-  if (window.location.href === '') {
-    return 'all';
+  if (window.type !== "undefined") {
+    if (window.location.href === '') {
+      return 'all';
+    }
   }
   const categoryNames = filters.map(({ name }) => name);
   return categoryNames.find((name) => window.location.href.includes(name));
