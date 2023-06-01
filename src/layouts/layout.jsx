@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 
 import Helmet from "react-helmet";
 import { withPrefix, Link} from "gatsby";
@@ -58,6 +58,7 @@ export const StyledFooterText = styled.label`
   size: 17px;
   line-height: 38px;    
 `
+
 const filters = [
   {name: "all", displayName: "All"},
   {name: "development", displayName: "Development"},
@@ -74,13 +75,16 @@ const getPath = () => {
     }
     return filters.find(({ name }) => window.location.href.includes(name))?.name;
   }
-  return "all";
 }
 
 function Layout({ children }) {  
   const [contextState, setContextState] = useState(initialState);
   const isMobile = useMediaQuery("(max-width: 768px)");
   const [ category, setCategory ] = useState(getPath());
+  
+  useEffect(() => {
+    setCategory(getPath());
+  }, []);
 
   const filterLinks = () => (
     <div className={styles.filterContainer} >
