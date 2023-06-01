@@ -80,11 +80,7 @@ const getPath = () => {
 function Layout({ children }) {  
   const [contextState, setContextState] = useState(initialState);
   const isMobile = useMediaQuery("(max-width: 768px)");
-  const [ category, setCategory ] = useState(getPath());
-  
-  useEffect(() => {
-    setCategory(getPath());
-  }, []);
+  const [ category, setCategory ] = useState(typeof window === 'undefined' ? 'all' : getPath());
 
   const filterLinks = () => (
     <div className={styles.filterContainer} >
