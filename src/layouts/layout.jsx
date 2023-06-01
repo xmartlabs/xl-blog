@@ -59,12 +59,12 @@ export const StyledFooterText = styled.label`
   line-height: 38px;    
 `
 const filters = [
-  {name: "all", display_name: "All"},
-  {name: "development", display_name: "Development"},
-  {name: "product-design", display_name: "Design"},
-  {name: "machine-learning", display_name: "Machine Learning"},
-  {name: "blockchain", display_name: "Blockchain"},
-  {name: "people-events", display_name: "People"},
+  {name: "all", displayName: "All"},
+  {name: "development", displayName: "Development"},
+  {name: "product-design", displayName: "Design"},
+  {name: "machine-learning", displayName: "Machine Learning"},
+  {name: "blockchain", displayName: "Blockchain"},
+  {name: "people-events", displayName: "People"},
 ];
 
 const getPath = () => {
@@ -73,8 +73,7 @@ const getPath = () => {
       return 'all';
     }
   }
-  const categoryNames = filters.map(({ name }) => name);
-  return categoryNames.find((name) => window.location.href.includes(name));
+  return filters.find(({ name }) => window.location.href.includes(name))?.name;
 }
 
 function Layout({ children }) {  
@@ -89,7 +88,7 @@ function Layout({ children }) {
             onClick={() => {setCategory(filter.name)}} 
             className={classnames(styles.filterElement, "text__filter__grayFive", filter.name === category && styles.selectedLink)} 
             to={filter.name === 'all' ? '/' : `/categories/${filter.name}/`}>
-            {filter.display_name}
+            {filter.displayName}
           </Link>
         )}
     </div>

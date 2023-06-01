@@ -21,9 +21,9 @@ const Pages = ({ data }) => {
           const windowLocation = window.location.href;
 
           if (windowLocation.includes("categories") && page > 1) {
-            const patron = new RegExp('\\b(' + ['/page/', `${page-1}`, `${page+1}`].join('|') + ')\\b', 'gi');
-            const resultado = windowLocation.replace(patron, '');
-            return `${resultado}page/${page}`
+            const pattern = new RegExp('\\b(' + ['/page/', `${page-1}`, `${page+1}`].join('|') + ')\\b', 'gi');
+            const result = windowLocation.replace(pattern, '');
+            return `${result}page/${page}`
           }
           
           return `/page/${page}`

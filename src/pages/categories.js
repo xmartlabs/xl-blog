@@ -1,6 +1,6 @@
-import React, { useState } from "react";
+import React from "react";
 import PropTypes from "prop-types";
-import { Link, graphql } from "gatsby";
+import { graphql } from "gatsby";
 
 import { Pager } from '../components/pager';
 import { Card } from "../components/card";
@@ -14,7 +14,7 @@ const CategoriesPage = ({pageContext, data}) => {
   return (
     <>
       <div className={styles.container}>
-        {edges.map(({ node }) => <Card data={node} key={node.id} withCategory={true} />)}
+        {edges.map(({ node }) => <Card data={node} key={node.id} withCategory />)}
       </div>
       <Pager pageContext={pageContext}/>
     </>
@@ -36,10 +36,9 @@ CategoriesPage.propTypes = {
 
 export default CategoriesPage;
 
-export const pageQuery = graphql`query($category: String, $skip: Int!, $limit: Int!) {
+export const pageQuery = graphql`query($category: String, $limit: Int!) {
   allMdx(
     limit: $limit
-    skip: $skip
     sort: {frontmatter: {date: DESC}}
     filter: {frontmatter: {category: {eq: $category}}}
   ) {

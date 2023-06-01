@@ -154,7 +154,6 @@ exports.createPages = async ({actions, graphql, reporter}) => {
           component: categoryTemplate,
           context: {
             limit: postsPerPage,
-            skip: index * postsPerPage,
             numPages: numPagesCat,
             currentPage: index + 1,
             category: category.fieldValue,
