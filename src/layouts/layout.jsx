@@ -72,8 +72,8 @@ const getPath = () => {
     if (window.location.href === 'http://localhost:8000/') {
       return 'all';
     }
+    return filters.find(({ name }) => window.location.href.includes(name))?.name;
   }
-  return filters.find(({ name }) => window.location.href.includes(name))?.name;
 }
 
 function Layout({ children }) {  

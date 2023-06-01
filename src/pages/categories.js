@@ -36,8 +36,9 @@ CategoriesPage.propTypes = {
 
 export default CategoriesPage;
 
-export const pageQuery = graphql`query($category: String) {
+export const pageQuery = graphql`query($category: String, $limit: Int!) {
   allMdx(
+    limit: $limit
     sort: {frontmatter: {date: DESC}}
     filter: {frontmatter: {category: {eq: $category}}}
   ) {
