@@ -69,7 +69,7 @@ const filters = [
 
 const getPath = () => {
   if (typeof window !== 'undefined') {
-    if (window.location.href === 'http://localhost:8000/') {
+    if (window.location.pathname === '/') {
       return 'all';
     }
     return filters.find(({ name }) => window.location.href.includes(name))?.name;
