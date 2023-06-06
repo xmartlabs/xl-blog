@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { Link } from "gatsby";
 
 import PropTypes from "prop-types";
@@ -70,7 +70,7 @@ const Pager = ({ pageContext }) => {
       <Link className={currentPage === 1 ? styles.disabledPagerLink : styles.pagerLink} to={prevPage} rel="prev">
         ← Prev
       </Link>
-      <Pages data={pagesData} linksDisabled={linkDisabled} />
+      <Pages data={pagesData} />
       <Link className={currentPage === numPages ? styles.disabledPagerLink : styles.pagerLink} to={nextPage} rel="next">
         Next →
       </Link>

@@ -5,10 +5,10 @@ import * as pagerStyles from "../pager/pager.module.scss";
 
 import { Link } from "gatsby";
 
-const Pages = ({ data, linksDisabled }) => {
+const Pages = ({ data }) => {
   const { firstPage,  secondPage, thirdPage, lastPage, currentPage } = data;
   const firstLink = firstPage === 1 ?  '/' : `/page/${firstPage}`.toString();
-  console.log(linksDisabled)
+  
   return(
   <>
     <Link className={firstPage === currentPage ? pagerStyles.selectedPage : pagerStyles.pagerLink} to={firstLink}>
