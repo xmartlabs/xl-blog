@@ -1,14 +1,14 @@
-import React, { useState } from "react";
+import React from "react";
 import PropTypes from "prop-types";
 
 import * as pagerStyles from "../pager/pager.module.scss";
 
 import { Link } from "gatsby";
 
-const Pages = ({ data }) => {
+const Pages = ({ data, linksDisabled }) => {
   const { firstPage,  secondPage, thirdPage, lastPage, currentPage } = data;
   const firstLink = firstPage === 1 ?  '/' : `/page/${firstPage}`.toString();
-  
+  console.log(linksDisabled)
   return(
   <>
     <Link className={firstPage === currentPage ? pagerStyles.selectedPage : pagerStyles.pagerLink} to={firstLink}>
@@ -42,6 +42,7 @@ const Pages = ({ data }) => {
 
 Pages.propTypes = {
   data: PropTypes.object.isRequired,
+  linkDisabled: PropTypes.bool.isRequired,
 };
 
 export { Pages };

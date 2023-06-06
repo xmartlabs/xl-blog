@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { Link } from "gatsby";
 
 import PropTypes from "prop-types";
@@ -23,7 +23,7 @@ const setPrevPage = ({currentPage}) => {
 
 const setNextPage = ({numPages, currentPage}) => {
   if (currentPage === numPages) {
-    return 'javascript:void(0)'
+    return 'javascript:void(0)';
   }
 
   return `/page/${(currentPage + 1)}`
@@ -32,10 +32,10 @@ const setNextPage = ({numPages, currentPage}) => {
 const setPagesData = ({numPages, currentPage}) => {
   if (currentPage + 2 >= numPages) {
     return {
-      firstPage: (numPages - 3),
-      secondPage: (numPages - 2),
-      thirdPage: (numPages - 1),
-      lastPage: numPages,
+      firstPage: 1,
+      secondPage: 2,
+      thirdPage: 3,
+      lastPage: 4,
       currentPage: currentPage
     };
   } 
@@ -64,13 +64,13 @@ const Pager = ({ pageContext }) => {
   const pagesData = setPagesData({numPages, currentPage});
   const prevPage = setPrevPage({currentPage});
   const nextPage = setNextPage({numPages, currentPage});
-  
+
   return(
     <div className={styles.pagerContainer}>
       <Link className={currentPage === 1 ? styles.disabledPagerLink : styles.pagerLink} to={prevPage} rel="prev">
         ← Prev
       </Link>
-      <Pages data={pagesData}/>
+      <Pages data={pagesData} linksDisabled={linkDisabled} />
       <Link className={currentPage === numPages ? styles.disabledPagerLink : styles.pagerLink} to={nextPage} rel="next">
         Next →
       </Link>

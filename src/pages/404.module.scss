@@ -1,0 +1,15 @@
+@import "../css/colors.scss";
+@import "../css/variables.scss";
+
+.page {
+  display: flex;
+  flex-direction: column;
+  margin: 4rem 0 2rem 2.5rem;
+}
+
+.heading {
+  color: $xlPink;
+  font-family: $link-font;
+  margin-bottom: 1.5rem;
+  letter-spacing: 0.1rem;
+}

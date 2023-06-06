@@ -80,13 +80,13 @@ const getPath = () => {
 function Layout({ children }) {  
   const [contextState, setContextState] = useState(initialState);
   const isMobile = useMediaQuery("(max-width: 768px)");
-  const [ category, setCategory ] = useState(typeof window === 'undefined' ? 'all' : getPath());
+  const [ category, setCategory ] = useState(getPath());
 
   const filterLinks = () => (
     <div className={styles.filterContainer} >
         {filters.map((filter) =>
-          <Link 
-            onClick={() => {setCategory(filter.name)}} 
+          <Link
+            onClick={() => setCategory(filter.name)}
             className={classnames(styles.filterElement, "text__filter__grayFive", filter.name === category && styles.selectedLink)} 
             to={filter.name === 'all' ? '/' : `/categories/${filter.name}/`}>
             {filter.displayName}

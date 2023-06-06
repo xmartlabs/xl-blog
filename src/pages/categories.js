@@ -14,7 +14,7 @@ const CategoriesPage = ({pageContext, data}) => {
   return (
     <>
       <div className={styles.container}>
-        {edges.map(({ node }) => <Card data={node} key={node.id} withCategory />)}
+        {edges.map(({ node }) => <Card data={node} key={node.id} withCategory={false} />)}
       </div>
       <Pager pageContext={pageContext}/>
     </>
