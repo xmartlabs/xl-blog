@@ -86,7 +86,7 @@ function Layout({ children }) {
   useEffect(() => {
     setCategory(getPath());
     if (typeof window !== 'undefined') {
-      window.scrollTo( 0, 1000 );
+      window.scrollTo( 0, 0 );
     }
   }, [category]);
 

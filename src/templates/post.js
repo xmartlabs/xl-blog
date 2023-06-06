@@ -90,6 +90,10 @@ const BlogPost = ({ data, children }) => {
       passive: true
     });
 
+    if (typeof window !== 'undefined') {
+      window.scrollTo( 0, 0 );
+    }
+    
     return () => {
       window.removeEventListener('scroll', handleScroll);
       window.removeEventListener('scroll', getActiveTitle);
