@@ -75,6 +75,7 @@ const getPath = () => {
     }
     return filters.find(({ name }) => window.location.href.includes(name))?.name;
   }
+  return 'all';
 }
 
 function Layout({ children }) {  
