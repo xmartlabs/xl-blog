@@ -73,7 +73,7 @@ const getPath = () => {
     if (window.location.pathname === '/') {
       return 'all';
     }
-    return filters.find(({ name }) => window.location.href.includes(name))?.name;
+    return filters.find(({ name }) => window.location.href.includes(name)).name;
   }
   return 'all';
 }
