@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect, useState } from "react";
 
 import Helmet from "react-helmet";
 import { withPrefix, Link} from "gatsby";
@@ -73,7 +73,7 @@ const getPath = () => {
     if (window.location.pathname === '/') {
       return 'all';
     }
-    return filters.find(({ name }) => window.location.href.includes(name)).name;
+    return filters.find(({ name }) => window.location.href.includes(name))?.name;
   }
   return 'all';
 }
@@ -81,7 +81,14 @@ const getPath = () => {
 function Layout({ children }) {  
   const [contextState, setContextState] = useState(initialState);
   const isMobile = useMediaQuery("(max-width: 768px)");
-  const [ category, setCategory ] = useState(getPath());
+  const [ category, setCategory ] = useState('all');
+
+  useEffect(() => {
+    setCategory(getPath());
+    if (typeof window !== 'undefined') {
+      window.scrollTo( 0, 1000 );
+    }
+  }, [category]);
 
   const filterLinks = () => (
     <div className={styles.filterContainer} >
