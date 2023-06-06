@@ -80,6 +80,11 @@ const BlogPost = ({ data, children }) => {
   ];
 
   useEffect(() => {
+
+    if (typeof window !== 'undefined') {
+      window.scrollTo( 0, 1000 );
+    }
+    
     setState(BannerType.blog);
     setDisappearIndex(true)
     window.addEventListener('scroll', handleScroll, {
@@ -90,10 +95,6 @@ const BlogPost = ({ data, children }) => {
       passive: true
     });
 
-    if (typeof window !== 'undefined') {
-      window.scrollTo( 0, 0 );
-    }
-    
     return () => {
       window.removeEventListener('scroll', handleScroll);
       window.removeEventListener('scroll', getActiveTitle);
@@ -187,7 +188,6 @@ const BlogPost = ({ data, children }) => {
   return (
     <div onScroll={handleScroll} id='containerDiv'>
       <div className={styles.indexContainer}>
-        {getTitles()}
       </div>
       <SocialElement className={classnames(disappearSocial ? styles.socialDisappear : styles.socialAppear, styles.blogIcons, {[styles.socialDisappear]: disappearIndex})} links={shareBlogPostLinks} />
       <div className={styles.bannerContainer}>
