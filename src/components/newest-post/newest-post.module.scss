@@ -1,0 +1,45 @@
+@import "/src/css/colors.scss";
+@import "/src/css/text-styles.scss";
+
+.container {
+  width: 80%;
+}
+
+.imgContainer {
+  display: block;
+  margin-bottom: 1.5rem;
+  position: relative;
+  padding-bottom: 56.25%;
+}
+
+.img {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  border-radius: 3%;
+  object-fit: cover;
+  object-position: left;
+}
+
+.categoryContainer {
+  display: flex;
+  flex-direction: row;
+  justify-content: left;
+  align-items: center;
+  margin-bottom: 1.5rem;
+}
+
+.category {
+  @extend .text__category__bold__black;
+  border: 1.5px solid $neutral100;
+  background-color: $neutral100;
+  height: 1.8rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1rem;
+}
+
+.title {
+  margin-bottom: 1.5rem;
+}

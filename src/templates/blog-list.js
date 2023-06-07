@@ -4,8 +4,9 @@ import { graphql } from "gatsby";
 import { Card } from '../components/card';
 import { Pager } from '../components/pager';
 import { AppContext, BannerType } from '../config/context';
+import { NewestPost } from "../components/newest-post/newest-post";
 
-import * as blogListStyles from "./blog-list.module.scss";
+import * as styles from "./blog-list.module.scss";
 
 const BlogList = ({ pageContext, data }) => {
   const _ = require("lodash")    
@@ -16,9 +17,14 @@ const BlogList = ({ pageContext, data }) => {
     setState(BannerType.home);
   }, []);
 
+
   return (
     <>
-      <div className={blogListStyles.container} >
+      <div className={styles.topPostsContainer}>
+        <div className={styles.newestContainer}><NewestPost data={edges[0].node} /></div>
+        <div className={styles.topPost}><p>Otra seccion</p></div>
+      </div>
+      <div className={styles.container} >
         {edges.map(({ node }) => <Card data={node} key={node.id} withCategory={true} /> )}
       </div>
       <Pager pageContext={pageContext}/>
