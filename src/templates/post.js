@@ -188,6 +188,7 @@ const BlogPost = ({ data, children }) => {
   return (
     <div onScroll={handleScroll} id='containerDiv'>
       <div className={styles.indexContainer}>
+        {getTitles()}
       </div>
       <SocialElement className={classnames(disappearSocial ? styles.socialDisappear : styles.socialAppear, styles.blogIcons, {[styles.socialDisappear]: disappearIndex})} links={shareBlogPostLinks} />
       <div className={styles.bannerContainer}>
