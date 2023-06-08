@@ -8,9 +8,10 @@ body {
 .homeBanner {
   background-image: url("../../static/images/home-banner/home-banner-desktop.png");
   background-repeat: no-repeat;
-  background-size: contain;
+  background-size: cover;
   width: 100%;
-  height: 63.6rem;
+  height: 67rem;
+  background-position: center center;
 }
 
 .navMenuContainer {
@@ -73,6 +74,7 @@ body {
     background-image: url("../../static/images/home-banner/home-banner-mobile.png");
     min-width: 23.4rem;
     max-height: 54rem;
+    background-size: contain;
   }
 
   .filterContainer {
