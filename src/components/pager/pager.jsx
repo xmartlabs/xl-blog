@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Link } from "gatsby";
 
 import PropTypes from "prop-types";
@@ -64,6 +64,14 @@ const Pager = ({ pageContext }) => {
   const pagesData = setPagesData({numPages, currentPage});
   const prevPage = setPrevPage({currentPage});
   const nextPage = setNextPage({numPages, currentPage});
+
+  useEffect(() => {
+    const windowScrollTimeout = setTimeout(() => {
+      window.scrollTo(0, 0)
+      clearTimeout(windowScrollTimeout)
+    }, 1);
+    
+  }, []);
 
   return(
     <div className={styles.pagerContainer}>
