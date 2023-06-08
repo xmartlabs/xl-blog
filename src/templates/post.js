@@ -90,11 +90,16 @@ const BlogPost = ({ data, children }) => {
       passive: true
     });
 
+    let windowScrollTimeout = setTimeout(() => {
+      window.scrollTo(0, 0)
+      clearTimeout(windowScrollTimeout)
+    }, 1)
+
     return () => {
       window.removeEventListener('scroll', handleScroll);
       window.removeEventListener('scroll', getActiveTitle);
     };
-  }, []);
+  }, [])
 
 
   const handleScroll = () => {

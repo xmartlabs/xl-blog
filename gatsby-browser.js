@@ -5,10 +5,6 @@ import Theme from "./src/themes/theme";
 import { AppContextProviderComponent } from "./src/context/context";
 import Layout from "./src/layouts/layout";
 
-export const onInitialClientRender = () => {
-  window.scrollTo(0, 0);
-};
-
 // Logs when the client route changes
 export const onRouteUpdate = ({ location, prevLocation }) => {
   console.log("new pathname", location.pathname)
