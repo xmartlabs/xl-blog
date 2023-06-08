@@ -82,7 +82,7 @@ const BlogPost = ({ data, children }) => {
   useEffect(() => {
 
     if (typeof window !== 'undefined') {
-      window.scrollTo( 0, 1000 );
+      window.scrollTo( 0, 0 );
     }
     
     setState(BannerType.blog);
