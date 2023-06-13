@@ -1,5 +1,6 @@
 @import "/src/css/colors.scss";
 @import "/src/css/text-styles.scss";
+@import "/src/css/variables.scss";
 
 .container {
   width: 80%;
@@ -42,4 +43,19 @@
 
 .title {
   margin-bottom: 1.5rem;
+}
+
+.cardLabel {
+  margin: 3rem 0 1.5rem 0;
+  text-align: justify;
+}
+
+.readBlog {
+  text-decoration: none;
+}
+
+@media screen and (max-width: map-get($map: $screen-breakpoint, $key: sm)) {
+  .container {
+    width: 100%;
+  }
 }

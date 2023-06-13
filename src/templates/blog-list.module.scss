@@ -1,19 +1,14 @@
 @import "/src/css/variables.scss";
 
 .container {
-  margin: 7% 7% 0;
+  padding: 7% 7% 0;
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(23.4rem, 1fr));
   gap: 6rem 3.4rem;
-
-  @media only screen and (max-width: map-get($map: $screen-breakpoint, $key: sm)) {
-    margin: 5rem 0rem;
-    gap: 4rem 0;
-  }
 }
 
 .topPostsContainer {
-  margin: 7% 7% 0;
+  padding: 7% 7% 0;
   display: flex;
   flex-direction: row;
 }
@@ -25,3 +20,21 @@
 .topPost {
   width: 50%;
 }
+
+@media only screen and (max-width: map-get($map: $screen-breakpoint, $key: sm)) {
+    .container {
+      padding: 5rem 0rem;
+      gap: 4rem 0;
+  }
+    .topPostsContainer {
+      flex-direction: column;
+    }
+
+    .newestContainer {
+      width: 90%;
+    }
+
+    .topPost {
+      width: 90%;
+    }
+  }

@@ -35,6 +35,7 @@ $text-sizes: (
   paragraph: 1.4rem,
   paragraphSmall: 1rem,
   categoryBold: 0.8rem,
+  linkBig: 1.25rem,
 );
 
 $text-colors: (  
@@ -45,6 +46,7 @@ $text-colors: (
   defaultGray: $defaultGray,
   grayThree: $grayThree,
   grayFour: $grayFour,
+  xlPink: $xlPink,
 );
 
 //---- TEXT ----
@@ -148,6 +150,11 @@ $text-colors: (
   line-height: map-get($map: $text-line-heights, $key: categoryBold);
 }
 
+@mixin text__link__big {
+  font-size: map-get($map: $text-sizes, $key: linkBig);
+  line-height: map-get($map: $text-line-heights, $key: headingOne);
+}
+
 //---- COLOR ---
 
 @mixin color-styles {
@@ -243,6 +250,11 @@ $text-colors: (
   &__category__bold {
     @include color-styles {
       @include text__category__bold;
+    }
+  }
+  &__link__big {
+    @include color-styles {
+      @include text__link__big;
     }
   }
 }

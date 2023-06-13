@@ -22,7 +22,6 @@ const BlogList = ({ pageContext, data }) => {
     <>
       <div className={styles.topPostsContainer}>
         <div className={styles.newestContainer}><NewestPost data={edges[0].node} /></div>
-        <div className={styles.topPost}><p>Otra seccion</p></div>
       </div>
       <div className={styles.container} >
         {edges.map(({ node }) => <Card data={node} key={node.id} withCategory={true} /> )}
