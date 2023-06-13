@@ -11,17 +11,21 @@
 .pagerLink {
   text-decoration: none;
   color:  $defaultGray;
+  padding: 1rem;
 }
 
 .disabledPagerLink {
   text-decoration: none;
   color:  $disabledGray;
   cursor: not-allowed;
+  align-self: center;
 }
 
 .selectedPage {
   text-decoration: none;
   color: $xlPink;
+  align-self: center;
+  padding: 1rem;
 }
 
 @media screen and (max-width: map-get($map: $screen-breakpoint, $key: sm)) {
