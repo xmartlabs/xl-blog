@@ -84,9 +84,8 @@ function Layout({ children }) {
   const [ category, setCategory ] = useState('all');
 
   useEffect(() => {
-    const windowScrollTimeout = setTimeout(() => {
+    setTimeout(() => {
       window.scrollTo(0, 0)
-      clearTimeout(windowScrollTimeout)
     }, 1);
     setCategory(getPath());
   }, [category]);

@@ -30,17 +30,7 @@ const setNextPage = ({numPages, currentPage}) => {
 };
 
 const setPagesData = ({numPages, currentPage}) => {
-  if (currentPage + 2 >= numPages) {
-    return {
-      firstPage: 1,
-      secondPage: 2,
-      thirdPage: 3,
-      lastPage: 4,
-      currentPage: currentPage
-    };
-  } 
-  
-  if (currentPage - 2 <= 1) {
+  if (currentPage <= 3 || currentPage + 2 >= numPages) {
     return {
       firstPage: 1,
       secondPage: 2,
@@ -66,9 +56,8 @@ const Pager = ({ pageContext }) => {
   const nextPage = setNextPage({numPages, currentPage});
 
   useEffect(() => {
-    const windowScrollTimeout = setTimeout(() => {
+    setTimeout(() => {
       window.scrollTo(0, 0)
-      clearTimeout(windowScrollTimeout)
     }, 1);
     
   }, []);

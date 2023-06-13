@@ -90,9 +90,8 @@ const BlogPost = ({ data, children }) => {
       passive: true
     });
 
-    const windowScrollTimeout = setTimeout(() => {
+    setTimeout(() => {
       window.scrollTo(0, 0)
-      clearTimeout(windowScrollTimeout)
     }, 1);
 
     return () => {
