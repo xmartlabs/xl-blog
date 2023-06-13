@@ -1,28 +1,25 @@
-import React from "react"
-import PropTypes from "prop-types"
+import React from "react";
+import PropTypes from "prop-types";
+import { graphql } from "gatsby";
 
-// Utilities
-import kebabCase from "lodash/kebabCase"
+import { Pager } from '../components/pager';
+import { Card } from "../components/card";
 
-// Components
-import { Link, graphql } from "gatsby"
+import * as styles from "./categories.module.scss";
 
-const CategoriesPage = ({ data }) => (
-  <>
-    <div>
-      <h1>CategoriesPage</h1>
-      <ul>
-        {data.allMdx.group.map(category => (
-          <li key={category.fieldValue}>
-            <Link to={`/categories/${kebabCase(category.fieldValue)}/`}>
-              {category.fieldValue} ({category.totalCount})
-            </Link>
-          </li>
-        ))}
-      </ul>
-    </div>
-  </>
-)
+const CategoriesPage = ({pageContext, data}) => {
+  const { edges } = data.allMdx;
+
+
+  return (
+    <>
+      <div className={styles.container}>
+        {edges.map(({ node }) => <Card data={node} key={node.id} withCategory={false} />)}
+      </div>
+      <Pager pageContext={pageContext}/>
+    </>
+  )
+};
 
 CategoriesPage.propTypes = {
   data: PropTypes.shape({
@@ -37,13 +34,27 @@ CategoriesPage.propTypes = {
   }),
 }
 
-export default CategoriesPage
+export default CategoriesPage;
 
-export const pageQuery = graphql`{
-  allMdx(limit: 2000) {
-    group(field: {frontmatter: {category: SELECT}}) {
-      fieldValue
-      totalCount
+export const pageQuery = graphql`query($category: String, $limit: Int) {
+  allMdx(
+    limit: $limit
+    sort: {frontmatter: {date: DESC}}
+    filter: {frontmatter: {category: {eq: $category}}}
+  ) {
+    edges {
+      node {
+        id
+        frontmatter {
+          date(formatString: "MMMM D, YYYY")
+          title
+          author
+          category
+          tags
+          permalink
+          thumbnail
+        }
+      }
     }
   }
 }`

@@ -81,7 +81,7 @@ const BlogPost = ({ data, children }) => {
 
   useEffect(() => {
     setState(BannerType.blog);
-    setDisappearIndex(true)
+    setDisappearIndex(true);
     window.addEventListener('scroll', handleScroll, {
       passive: true
     });
@@ -90,11 +90,15 @@ const BlogPost = ({ data, children }) => {
       passive: true
     });
 
+    setTimeout(() => {
+      window.scrollTo(0, 0)
+    }, 1);
+
     return () => {
       window.removeEventListener('scroll', handleScroll);
       window.removeEventListener('scroll', getActiveTitle);
     };
-  }, []);
+  }, [])
 
 
   const handleScroll = () => {

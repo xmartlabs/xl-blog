@@ -1,10 +1,12 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 
 import Helmet from "react-helmet";
 import { withPrefix, Link} from "gatsby";
 import PropTypes from "prop-types";
 import styled from "styled-components";
 import { StaticImage } from "gatsby-plugin-image";
+
+import { classnames } from "../helpers";
 
 import { NavMenu } from "../components/nav-menu";
 import { Footer } from "../components/footer";
@@ -57,9 +59,49 @@ export const StyledFooterText = styled.label`
   line-height: 38px;    
 `
 
+const filters = [
+  {name: "all", displayName: "All"},
+  {name: "development", displayName: "Development"},
+  {name: "product-design", displayName: "Design"},
+  {name: "machine-learning", displayName: "Machine Learning"},
+  {name: "blockchain", displayName: "Blockchain"},
+  {name: "people-events", displayName: "People"},
+];
+
+const getPath = () => {
+  if (typeof window !== 'undefined') {
+    if (window.location.pathname === '/') {
+      return 'all';
+    }
+    return filters.find(({ name }) => window.location.href.includes(name))?.name;
+  }
+  return 'all';
+}
+
 function Layout({ children }) {  
   const [contextState, setContextState] = useState(initialState);
   const isMobile = useMediaQuery("(max-width: 768px)");
+  const [ category, setCategory ] = useState('all');
+
+  useEffect(() => {
+    setTimeout(() => {
+      window.scrollTo(0, 0)
+    }, 1);
+    setCategory(getPath());
+  }, [category]);
+
+  const filterLinks = () => (
+    <div className={styles.filterContainer} >
+        {filters.map((filter) =>
+          <Link
+            onClick={() => setCategory(filter.name)}
+            className={classnames(styles.filterElement, "text__filter__grayFive", filter.name === category && styles.selectedLink)} 
+            to={filter.name === 'all' ? '/' : `/categories/${filter.name}/`}>
+            {filter.displayName}
+          </Link>
+        )}
+    </div>
+  );
   
   return (
     <>
@@ -89,6 +131,7 @@ function Layout({ children }) {
               </StyledContainerHeader>
             </StyledContainerNavBarXL>
         </div>
+        {contextState === "home" && filterLinks()}
         {children}
       </AppContext.Provider>
       <Footer>

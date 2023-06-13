@@ -1,11 +1,12 @@
-import React, { useEffect, useContext } from "react";
-import { graphql } from "gatsby";
+import React, { useEffect, useContext, useState } from "react";
+import { Link, graphql } from "gatsby";
 
-import { Card } from '../components/card';
 import { Pager } from '../components/pager';
 import { AppContext, BannerType } from '../config/context';
 
-import * as blogListStyles from "./blog-list.module.scss";
+import { Card } from '../components/card';
+
+import * as styles from "./blog-list.module.scss";
 
 const BlogList = ({ pageContext, data }) => {
   const _ = require("lodash")    
@@ -18,8 +19,8 @@ const BlogList = ({ pageContext, data }) => {
 
   return (
     <>
-      <div className={blogListStyles.container} >
-        {edges.map(({ node }) => <Card data={node} key={node.id} withCategory={true} /> )}
+      <div className={styles.container} >
+        {edges.map(({ node }) => <Card data={node} key={node.id} withCategory={true} />)}     
       </div>
       <Pager pageContext={pageContext}/>
     </>
