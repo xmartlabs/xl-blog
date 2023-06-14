@@ -1,12 +1,42 @@
 import React from "react";
+import { useStaticQuery, graphql } from "gatsby";
 
 import { classnames, useCategory } from '../../helpers';
+import { useMediaQuery } from "../../hooks";
 
 import { Category } from "../category";
 
 import * as styles from "./newest-post.module.scss";
 
-const NewestPost = ({ data }) => {
+const NewestPost = ({ dataCat }) => {
+  const isMobile = useMediaQuery("(max-width: 768px)");
+
+  const dataNP = useStaticQuery(graphql`
+    query NewestPost {
+      allMdx(limit: 1, sort: {frontmatter: {date: DESC}}) {
+        edges {
+          node {
+            fields {
+              slug
+            }
+            id
+            frontmatter {
+              title
+              category
+              permalink
+              thumbnail
+              excerpt
+            }
+            body
+          }
+        }
+      }
+    }
+  `)
+
+  const { edges } = dataNP.allMdx;
+  const data = dataCat || edges[0].node;
+
   const categoryBlog = useCategory(data.frontmatter.category);
   
   const urlImages = () => {
@@ -24,7 +54,7 @@ const NewestPost = ({ data }) => {
           <Category data={categoryBlog.displayName} className={styles.category} />
           <label className="text__paragraph__small__xlPink">New Post</label>
         </div>
-        <h1 className={classnames("text__comment__title__black", styles.title)}>
+        <h1 className={classnames(isMobile ? "text__heading__two__black" :"text__comment__title__black", styles.title)}>
           {data.frontmatter.title}
         </h1>
         <div className={styles.imgContainer}>

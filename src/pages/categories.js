@@ -6,6 +6,7 @@ import { Pager } from '../components/pager';
 import { Card } from "../components/card";
 
 import * as styles from "./categories.module.scss";
+import { NewestPost } from "../components/newest-post/newest-post";
 
 const CategoriesPage = ({pageContext, data}) => {
   const { edges } = data.allMdx;
@@ -13,6 +14,9 @@ const CategoriesPage = ({pageContext, data}) => {
 
   return (
     <>
+      <div className="topPostsContainer">
+        <div className="newestContainer"><NewestPost dataCat={edges[0].node} /></div>
+      </div>
       <div className={styles.container}>
         {edges.map(({ node }) => <Card data={node} key={node.id} withCategory={false} />)}
       </div>

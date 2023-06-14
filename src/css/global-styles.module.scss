@@ -1,1 +1,24 @@
 @import "text-styles.scss";
+@import "variables.scss";
+
+.topPostsContainer {
+  padding: 7% 7% 0;
+  display: flex;
+  flex-direction: row;
+}
+
+.newestContainer {
+  width: 50%;
+}
+
+@media only screen and (max-width: map-get($map: $screen-breakpoint, $key: sm)) {
+  .topPostsContainer {
+    flex-direction: column;
+    padding: 7% 1%;
+    align-items: center;
+  }
+
+  .newestContainer {
+    width: 90%;
+  }
+}
