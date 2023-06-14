@@ -18,7 +18,6 @@ const BlogList = ({ pageContext, data }) => {
     setState(BannerType.home);
   }, []);
 
-
   return (
     <>
       <div className={styles.topPostsContainer}>
@@ -51,6 +50,7 @@ export const blogListQuery = graphql`query blogListQuery($skip: Int!, $limit: In
           tags
           permalink
           thumbnail
+          excerpt
         }
         body
       }

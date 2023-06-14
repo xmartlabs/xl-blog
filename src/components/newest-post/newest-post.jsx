@@ -31,8 +31,7 @@ const NewestPost = ({ data }) => {
           <img src={urlImages()} onError={(event) => event.target.src = '../../images/generic.jpg'} className={styles.img} />
         </div>
         <p className={classnames("text__paragraph__two__blueTwo", styles.cardLabel)}>
-          Xmartlabs provided development services to improve the performance
-          of machine learning models for a wine cellar management system.
+          {data.frontmatter.excerpt}
         </p>
         <a href={data.frontmatter.permalink} className={classnames("text__link__big__xlPink", styles.readBlog)}> → Read Article</a>
       </article>

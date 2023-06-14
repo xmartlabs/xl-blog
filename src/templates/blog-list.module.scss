@@ -2,7 +2,7 @@
 @import "/src/css/colors.scss";
 
 .container {
-  padding: 7% 7% 0;
+  padding: 5rem 7% 0;
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(23.4rem, 1fr));
   gap: 6rem 3.4rem;
@@ -14,13 +14,6 @@
   flex-direction: row;
 }
 
-.newestContainer {
-  width: 50%;
-}
-
-.topPost {
-  width: 50%;
-}
 
 @media only screen and (max-width: map-get($map: $screen-breakpoint, $key: sm)) {
     .container {
@@ -34,10 +27,6 @@
     }
 
     .newestContainer {
-      width: 90%;
-    }
-
-    .topPost {
       width: 90%;
     }
   }
