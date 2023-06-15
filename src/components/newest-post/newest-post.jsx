@@ -8,7 +8,7 @@ import { Category } from "../category";
 
 import * as styles from "./newest-post.module.scss";
 
-const NewestPost = ({ dataCat }) => {
+const NewestPost = () => {
   const isMobile = useMediaQuery("(max-width: 768px)");
 
   const dataNP = useStaticQuery(graphql`
@@ -35,7 +35,7 @@ const NewestPost = ({ dataCat }) => {
   `)
 
   const { edges } = dataNP.allMdx;
-  const data = dataCat || edges[0].node;
+  const data = edges[0].node;
 
   const categoryBlog = useCategory(data.frontmatter.category);
   
