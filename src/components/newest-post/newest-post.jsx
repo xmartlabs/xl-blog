@@ -48,24 +48,22 @@ const NewestPost = () => {
   }
 
   return (
-    <>
-      <article className={styles.container}>
-        <div className={styles.categoryContainer}>
-          <Category data={categoryBlog.displayName} className={styles.category} />
-          <label className="text__paragraph__small__xlPink">New Post</label>
-        </div>
-        <h1 className={classnames(isMobile ? "text__heading__two__black" :"text__comment__title__black", styles.title)}>
-          {data.frontmatter.title}
-        </h1>
-        <div className={styles.imgContainer}>
-          <img src={urlImages()} onError={(event) => event.target.src = '../../images/generic.jpg'} className={styles.img} />
-        </div>
-        <p className={classnames("text__paragraph__two__blueTwo", styles.cardLabel)}>
-          {data.frontmatter.excerpt}
-        </p>
-        <a href={data.frontmatter.permalink} className={classnames("text__link__big__xlPink", styles.readBlog)}> → Read Article</a>
-      </article>
-    </>
+    <article className={styles.container}>
+      <div className={styles.categoryContainer}>
+        <Category data={categoryBlog.displayName} className={styles.category} />
+        <label className="text__paragraph__small__xlPink">New Post</label>
+      </div>
+      <h1 className={classnames(isMobile ? "text__heading__two__black" :"text__comment__title__black", styles.title)}>
+        {data.frontmatter.title}
+      </h1>
+      <div className={styles.imgContainer}>
+        <img src={urlImages()} onError={(event) => event.target.src = '../../images/generic.jpg'} className={styles.img} />
+      </div>
+      <p className={classnames("text__paragraph__two__blueTwo", styles.cardLabel)}>
+        {data.frontmatter.excerpt}
+      </p>
+      <a href={data.frontmatter.permalink} className={classnames("text__link__big__xlPink", styles.readBlog)}> → Read Article</a>
+    </article>
   );
 };
 

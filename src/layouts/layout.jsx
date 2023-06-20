@@ -73,7 +73,7 @@ const getPath = () => {
     if (window.location.pathname === '/') {
       return 'all';
     }
-    return filters.find(({ name }) => window.location.href.includes(name))?.name;
+    return filters.find(({ name }) => window.location.href.includes(name))?.name || "all";
   }
   return 'all';
 }
@@ -102,8 +102,6 @@ function Layout({ children }) {
         )}
     </div>
   );
-
-  category === undefined && setCategory("all");
   
   return (
     <>
