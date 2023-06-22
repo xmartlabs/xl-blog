@@ -8,7 +8,6 @@ thumbnail: /images/data-analytics/data-analytics-cover.png
 permalink: /data-analytics/
 ---
 
-
 Businesses and startups are constantly increasing in quantity, so the search for distinguishing from competitors and looking for competitive advantage is more critical than ever.
 Big Data and Analytics have presented themselves as one of the most effective ways to stand apart from competitors and lead and grow your business as smartly as possible.
 

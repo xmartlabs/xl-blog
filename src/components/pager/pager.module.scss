@@ -30,7 +30,7 @@
 
 @media screen and (max-width: map-get($map: $screen-breakpoint, $key: sm)) {
   .pagerContainer {
-    margin: 80px 9%;
+    margin: 80px auto;
   }
 
   .selectedPage {

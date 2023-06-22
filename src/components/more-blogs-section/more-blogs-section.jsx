@@ -9,14 +9,25 @@ import { Card } from "../card";
 
 import * as styles from './more-blogs-section.module.scss';
 
-const MoreBlogsSection = ({ relatedPosts, refMoreFrom, title, category }) => {
+const MoreBlogsSection = ({ relatedPosts, refMoreFrom, title }) => {
+  const filters = [
+    {name: "all", displayName: "All"},
+    {name: "development", displayName: "Development"},
+    {name: "product-design", displayName: "Design"},
+    {name: "machine-learning", displayName: "Machine Learning"},
+    {name: "blockchain", displayName: "Blockchain"},
+    {name: "people-events", displayName: "People"},
+  ];
+
+  const findFilter = filters.find(item => item.displayName.includes(title))
+
   return (
     <div className={styles.moreFromXlContainer} ref={refMoreFrom} >
       <div className={styles.titleContainer}>
-        <Link to="" className={classnames("text__heading__three__blueTwo", styles.titleStyle)}>More from about <span>{title}</span>→</Link>
+        <Link to={`/categories/${findFilter.name}`} className={classnames("text__heading__three__blueTwo", styles.titleStyle)}>More from <span>{title}</span>→</Link>
       </div>
       <div className={styles.blogsContainer}>
-        {relatedPosts.slice(0, 3).map((post) => <Card data={post} key={post.frontmatter.title} className={styles.cardStyles} category={category} />)}
+        {relatedPosts.slice(0, 3).map((post) => <Card data={post} key={post.frontmatter.title} className={styles.cardStyles} />)}
       </div>
     </div>
   );
@@ -38,7 +49,6 @@ MoreBlogsSection.propTypes = {
           body: PropTypes.string,
           frontmatter: PropTypes.shape({
             author: PropTypes.string,
-            category: PropTypes.string.isRequired,
             date: PropTypes.string,
             permalink: PropTypes.string.isRequired,
             tags: PropTypes.array,
@@ -51,7 +61,6 @@ MoreBlogsSection.propTypes = {
     mdx: PropTypes.shape({
       frontmatter: PropTypes.shape({
         author: PropTypes.string,
-        category: PropTypes.string,
         date: PropTypes.string,
         tags: PropTypes.array,
         title: PropTypes.string,
