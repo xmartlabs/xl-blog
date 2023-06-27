@@ -42,7 +42,6 @@ collections:
         widget: "select"
         options:
           - { label: "People & Events", value: "people-events" } 
-          - { label: "Business & Agile", value: "business-agile" }
           - { label: "Product Design", value: "product-design" }
           - { label: "Development", value: "development" }
           - { label: "Machine Learning", value: "machine-learning" }

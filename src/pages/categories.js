@@ -10,7 +10,6 @@ import * as styles from "./categories.module.scss";
 const CategoriesPage = ({pageContext, data}) => {
   const { edges } = data.allMdx;
 
-
   return (
     <>
       <div className={styles.container}>

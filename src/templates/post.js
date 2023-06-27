@@ -130,7 +130,7 @@ const BlogPost = ({ data, children }) => {
         const scrollPosition = window.scrollY;
         let activeTitle = titles[0];
         titles.forEach(title => {
-          const titleTop = title.getBoundingClientRect().top + window.pageYOffset - 500;
+          const titleTop = title.getBoundingClientRect().top + window.scrollY - 500;
           if (scrollPosition >= titleTop) {
             activeTitle = title;
           }
@@ -222,7 +222,7 @@ const BlogPost = ({ data, children }) => {
           </div>
           <Tags blogTags={data.mdx.frontmatter.tags} className={styles.tags} />
         </div>
-        <MoreBlogsSection relatedPosts={data.mdx.relatedPosts} refMoreFrom={refMoreFrom} title={categoryBlog.displayName} />
+        <MoreBlogsSection relatedPosts={data.mdx.relatedPosts} refMoreFrom={refMoreFrom} title={categoryBlog.category}/>
       <div className={styles.disqusSection}>
         <h3 className={styles.disqusTitle}>Comments:</h3>
         <div id="disqus_thread">

@@ -20,36 +20,153 @@ One of the key benefits of Alpaca is its supervision by the Securities and Excha
 
 If you're considering using the Alpaca Trading API, it's essential to weigh the pros and cons to decide if it's the right choice for you. To assist you in making an informed decision, we've assembled a table highlighting the advantages and disadvantages of using the Alpaca Trading API. This table provides a comprehensive overview of the benefits and drawbacks of Alpaca Trading API, allowing you to make an informed decision that suits your needs.
 
-|                                         Pros |                                         Cons |
-| --- | --- |
-| Commission-free.  | Customer support is limited to email. |
-| Excellent charting tools. | Limited options for deposits and withdrawals. |
-| Allows the construction of an automated trading system. | Only US stocks and ETFs (Exchange Traded Funds). |
-| Operations are subject to supervision by both the SEC and FINRA.  | Complex process to integrate third-party tools.  |
-| Integration with different platforms. |  |
+<table>
+	<thead>
+		<tr>
+			<th>Pros</th>
+			<th>Cons</th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr>
+			<td>Commission-free.</td>
+			<td>Customer support is limited to email.</td>
+		</tr>
+		<tr>
+			<td>Excellent charting tools.</td>
+			<td>Limited options for deposits and withdrawals. </td>
+		</tr>
+		<tr>
+			<td>Allows the construction of an automated trading system.</td>
+			<td>Only US stocks and ETFs (Exchange Traded Funds).</td>
+		</tr>
+		<tr>
+			<td>Operations are subject to supervision by both the SEC and FINRA.</td>
+			<td>Complex process to integrate third-party tools.</td>
+		</tr>
+		<tr>
+			<td>Integration with different platforms.</td>
+			<td>Cell 2x5</td>
+		</tr>
+	</tbody>
+</table>
 
 # Alternatives to Alpaca Trading API
 
 If you're considering using Alpaca Trading API, you might also be interested in exploring other options. To help you compare and evaluate them, we've compiled a table that outlines the features and specifications of various trading APIs, including Alpaca. With this comparison, you can easily identify the strengths and limitations of each API, and make an informed decision on which one is right for you.
 
-
 <div class="table-wrapper" markdown="block">
 
-
-|  | [alpaca-trading](https://brokerchooser.com/broker-reviews/alpaca-trading-review) | [moomoo](https://brokerchooser.com/broker-reviews/alpaca-trading-review/alpaca-trading-alternatives#moomoo) | [webull](https://brokerchooser.com/broker-reviews/alpaca-trading-review/alpaca-trading-alternatives#webull) | [sofi-invest](https://brokerchooser.com/broker-reviews/alpaca-trading-review/alpaca-trading-alternatives#sofi-invest) | [robinhood](https://brokerchooser.com/broker-reviews/alpaca-trading-review/alpaca-trading-alternatives#robinhood) |
-| --- | --- | --- | --- | --- | --- |
-| **Overall score** | 4.7 | 4.7 | 4.8 | 4.7 | 4.5 |
-| **Fees score** | 4.8 | 4.7 | 4.8 | 5.0 | 4.6 |
-| **Account opening score** | 4.8 | 4.2 | 5.0 | 4.2 | 5.0 |
-| **Deposit and withdrawal score** | 1.8 | 1.9 | 1.9 | 2.2 | 1.8 |
-| **Web platform score** | 3.7 | 0.0 | 5.0 | 3.2 | 4.5 |
-| **Markets and products score** | 2.6 | 2.4 | 2.9 | 2.2 | 2.9 |
-| **Founded in** | 2015 | 2018 | 2017 | 2011 | 2013 |
-| **Headquarter** | US | US | US | US | US |
-| **Investor protection**  | $500,000 | $500,000 | $500,000 | $500,000 | $500,000 |
-| **Zero commission** | yes | yes | yes | yes | yes |
-| **Regulated by** | sipc.org finra.org  | sec.gov sipc.org finra.org | sec.gov sfc.hk | finra.org sec.gov | finra.org sec.gov |
-| **Main services** | Crypto&nbsp;trading Stock&nbsp;trading | Stock&nbsp;trading | Stock&nbsp;trading Crypto&nbsp;trading Recurring&nbsp;Investment | Stocks&nbsp;trading | Stocks&nbsp;trading Cash&nbsp;Management |
+<table>
+	<thead>
+		<tr>
+      <th></th>
+			<th>[alpaca-trading](https://brokerchooser.com/broker-reviews/alpaca-trading-review)</th>
+			<th>[moomoo](https://brokerchooser.com/broker-reviews/alpaca-trading-review/alpaca-trading-alternatives#moomoo)</th>
+      <th>[webull](https://brokerchooser.com/broker-reviews/alpaca-trading-review/alpaca-trading-alternatives#webull)</th>
+      <th>[sofi-invest](https://brokerchooser.com/broker-reviews/alpaca-trading-review/alpaca-trading-alternatives#sofi-invest)</th>
+      <th>[robinhood](https://brokerchooser.com/broker-reviews/alpaca-trading-review/alpaca-trading-alternatives#robinhood)</th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr>
+			<td>**Overall score**</td>
+			<td>4.7</td>
+			<td>4.7</td>
+      <td>4.8</td>
+			<td>4.7</td>
+      <td>4.5</td>
+		</tr>
+		<tr>
+			<td>**Fees score**</td>
+			<td>4.8</td>
+			<td>4.7</td>
+      <td>4.8</td>
+			<td>5.0</td>
+      <td>4.6</td>
+		</tr>
+    <tr>
+			<td>**Account opening score**</td>
+			<td>4.8</td>
+			<td>4.2</td>
+      <td>5.0</td>
+			<td>4.2</td>
+      <td>5.0</td>
+		</tr>
+		<tr>
+			<td>**Deposit and withdrawal score**</td>
+			<td>1.8</td>
+			<td>1.9</td>
+      <td>1.9</td>
+			<td>2.2</td>
+      <td>1.8</td>
+		</tr>
+		<tr>
+			<td>**Web platform score**</td>
+			<td>3.7</td>
+			<td>0.0</td>
+      <td>5.0</td>
+			<td>3.2</td>
+      <td>4.5</td>
+		</tr>
+		<tr>
+			<td>**Markets and products score**</td>
+			<td>2.6</td>
+			<td>2.4</td>
+      <td>2.9</td>
+			<td>2.2</td>
+      <td>2.9</td>
+		</tr>
+    <tr>
+			<td>**Founded in**</td>
+			<td>2015</td>
+			<td>2018</td>
+      <td>2017</td>
+			<td>2011</td>
+      <td>2013</td>
+		</tr>
+    <tr>
+			<td>**Headquarter**</td>
+			<td>US</td>
+			<td>US</td>
+      <td>US</td>
+			<td>US</td>
+      <td>US</td>
+		</tr>
+    <tr>
+			<td>**Investor protection**</td>
+			<td>$500,000</td>
+			<td>$500,000</td>
+      <td>$500,000</td>
+			<td>$500,000</td>
+      <td>$500,000</td>
+		</tr>
+    <tr>
+			<td>**Zero commission**</td>
+			<td>yes</td>
+			<td>yes</td>
+      <td>yes</td>
+			<td>yes</td>
+      <td>yes</td>
+		</tr>
+    <tr>
+			<td>**Regulated by**</td>
+			<td>sipc.org finra.org</td>
+			<td>sec.gov sipc.org finra.org</td>
+      <td>sec.gov sfc.hk</td>
+			<td>finra.org sec.gov</td>
+      <td>finra.org sec.gov</td>
+		</tr>
+    <tr>
+			<td>**Main services**</td>
+			<td>Crypto&nbsp;trading Stock&nbsp;trading</td>
+			<td>Stock&nbsp;trading </td>
+      <td>Stock&nbsp;trading Crypto&nbsp;trading Recurring&nbsp;Investment</td>
+			<td>Stocks&nbsp;trading</td>
+      <td>Stocks&nbsp;trading Cash&nbsp;Management</td>
+		</tr>
+	</tbody>
+</table>
 
 </div>
 
@@ -57,9 +174,22 @@ If you're considering using Alpaca Trading API, you might also be interested in 
 
 Alpaca Trading API has gained popularity among developers and financial services providers due to its ease of use and flexible interface that enables the creation of automated trading systems. In this section, we showcase some success stories of apps and platforms that have integrated Alpaca Trading API to provide trading and financial services to their users. These examples highlight the diverse ways in which Alpaca Trading API can be utilized to create innovative and successful trading solutions.
 
-| [algotraders.ai](https://www.algotraders.ai/) | This platform performs algorithmic trading, using the Alpaca API, to allow its users to automate their trading strategies. |
-| [quantconnect.com](https://www.quantconnect.com/) | This is a backtesting and trading strategy development platform that uses the Alpaca API to provide real-time data and order execution for buying and selling. |
-| [tradingview.com](https://es.tradingview.com/) | This trading technical analysis platform uses the Alpaca API to allow users to trade directly from their charts and trading tools. |
+<table>
+	<tbody>
+		<tr>
+			<td>[algotraders.ai](https://www.algotraders.ai/)</td>
+			<td>This platform performs algorithmic trading, using the Alpaca API, to allow its users to automate their trading strategies.</td>
+		</tr>
+		<tr>
+			<td>[quantconnect.com](https://www.quantconnect.com/)</td>
+			<td>This is a backtesting and trading strategy development platform that uses the Alpaca API to provide real-time data and order execution for buying and selling.</td>
+		</tr>
+		<tr>
+			<td>[tradingview.com](https://es.tradingview.com/)</td>
+			<td>This trading technical analysis platform uses the Alpaca API to allow users to trade directly from their charts and trading tools.</td>
+		</tr>
+	</tbody>
+</table>
 
 # Getting Started with Alpaca API using NodeJS
 

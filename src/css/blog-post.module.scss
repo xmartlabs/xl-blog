@@ -26,6 +26,7 @@
   position: static;
   align-items: center;
   width: 100%;
+  z-index: 0;
 }
 
 .sharePosition {
@@ -52,8 +53,8 @@
   position: fixed;
   top: 16rem;
   bottom: 2rem;
-  width: 22rem;
-  margin-right: 6rem;
+  width: 20%;
+  margin-right: 5%;
   display: flex;
   flex-direction: column;
   align-items: flex-start;
@@ -84,7 +85,7 @@
 // Header Blog Elements
 
 .bannerContainer {
-  padding: 10rem 50rem 20rem 17rem;
+  padding: 10rem 44% 20rem 17rem;
   background-color: $blueSix;
 }
 
@@ -147,8 +148,10 @@
   color: $neutral100;
   justify-content: center;
   width: 25%;
-  line-height: 1.6rem;
   margin-bottom: 1rem;
+  width: auto;
+  padding: 0.5rem 2.5rem;
+  line-height: 0.5rem;
 }
 
 // Main Image
@@ -163,24 +166,28 @@
 // Blog body
 
 .bodyPostContainer {
-  padding: 5rem 38rem 2rem 17rem;
+  padding: 5rem 33% 2rem 15%;  
   text-align: justify;
   font-family: $blog-font;
   margin-top: -22rem;
+  scroll-padding-top: 3rem;
 
   h1 {
     @extend .text__heading__one__black;
     margin: 3rem 0;
+    scroll-margin-top: 6rem; 
   }
 
   h2 {
     @extend .text__heading__two__black;
     margin: 4.5rem 0 1.5rem;
+    scroll-margin-top: 6rem; 
   }
 
   h3 {
     @extend .text__heading__three__black;
     margin: 3rem 0 1.5rem;
+    scroll-margin-top: 6rem; 
   }
 
   h4 {
@@ -228,10 +235,10 @@
   }
 
   img {
-    max-height: 30rem;
     border-radius: 5px;
     display: block;
     margin: auto;
+    width: 100%;
   }
 
   div {
@@ -366,6 +373,7 @@
     width: auto;
     padding: 0 1rem;
     height: 1.5rem;
+    line-height: 1.7rem;
   }
 
   .bodyPostContainer {
@@ -411,6 +419,10 @@
 
     p code {
       word-break: break-all;
+    }
+
+    a {
+      word-break: break-word;
     }
   }
 

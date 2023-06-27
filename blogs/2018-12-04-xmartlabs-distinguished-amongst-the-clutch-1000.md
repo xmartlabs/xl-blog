@@ -3,7 +3,7 @@ title: Xmartlabs distinguished as top 10 mobile app developer in LATAM
 date: 2018-12-11
 tags: [Marketing]
 author: xl
-category: business-agile
+category: development
 permalink: /xmartlabs-distinguished-amongst-the-clutch-1000/
 ---
 
