@@ -170,20 +170,24 @@
   text-align: justify;
   font-family: $blog-font;
   margin-top: -22rem;
+  scroll-padding-top: 3rem;
 
   h1 {
     @extend .text__heading__one__black;
     margin: 3rem 0;
+    scroll-margin-top: 6rem; 
   }
 
   h2 {
     @extend .text__heading__two__black;
     margin: 4.5rem 0 1.5rem;
+    scroll-margin-top: 6rem; 
   }
 
   h3 {
     @extend .text__heading__three__black;
     margin: 3rem 0 1.5rem;
+    scroll-margin-top: 6rem; 
   }
 
   h4 {
