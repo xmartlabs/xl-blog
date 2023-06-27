@@ -10,6 +10,7 @@ import { Card } from "../card";
 import * as styles from './more-blogs-section.module.scss';
 
 const MoreBlogsSection = ({ relatedPosts, refMoreFrom, title }) => {
+  
   const filters = [
     {name: "all", displayName: "All"},
     {name: "development", displayName: "Development"},
