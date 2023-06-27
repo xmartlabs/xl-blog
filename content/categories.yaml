@@ -3,11 +3,6 @@
   display_name: People & Events
   url: /category/people-events
   color: #55555
-- category: business-agile
-  title: Lessons learned on our journey.
-  display_name: Business & Agile
-  url: /category/business-and-agile
-  color: #55555
 - category: product-design
   title: Product Design lessons learned on our journey.
   display_name: Product Design
