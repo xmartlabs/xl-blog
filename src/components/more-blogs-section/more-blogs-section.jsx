@@ -19,7 +19,7 @@ const MoreBlogsSection = ({ relatedPosts, refMoreFrom, title }) => {
     {name: "people-events", displayName: "People"},
   ];
 
-  const findFilter = filters.find(item => item.displayName.includes(title))
+  const findFilter = filters.find(item => item.name.includes(title))
 
   return (
     <div className={styles.moreFromXlContainer} ref={refMoreFrom} >
