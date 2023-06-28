@@ -72,9 +72,9 @@ body {
 
   .homeBanner {
     background-image: url("../../static/images/home-banner/home-banner-mobile.png");
-    min-width: 23.4rem;
+    min-width: 22.4rem;
     max-height: 54rem;
-    background-size: contain;
+    background-size: none;
   }
 
   .filterContainer {

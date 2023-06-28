@@ -96,7 +96,7 @@ collections:
           - { value: "andresh", label: "Andrés Herrera" }
           - { value: "vale", label: "Valentina Bianco" }
           - { value: "pablog", label: "Pablo Grill" }
-          - { value: "lazaro", label: "Lázaro" }
+          - { value: "lazaro", label: "Lázaro Martín" }
           - { value: "alemachado", label: "Ale Machado"}
           - {value: "coti", label: "Coti Besozzi"}
           - {value: "sofitechera", label: "Sofia Techera"}
