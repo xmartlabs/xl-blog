@@ -8,7 +8,6 @@ import { Pages } from "../pages";
 import * as styles from "./pager.module.scss";
 
 
-
 const setPrevPage = ({currentPage}) => {
   if (currentPage === 1) {
     return 'javascript:void(0)'
@@ -23,19 +22,29 @@ const setPrevPage = ({currentPage}) => {
 
 const setNextPage = ({numPages, currentPage}) => {
   if (currentPage === numPages) {
-    return 'javascript:void(0)';
+    return '';
   }
 
   return `/page/${(currentPage + 1)}`
 };
 
 const setPagesData = ({numPages, currentPage}) => {
-  if (currentPage <= 3 || currentPage + 2 >= numPages) {
+  if (currentPage <= 3) {
     return {
       firstPage: 1,
       secondPage: 2,
       thirdPage: 3,
       lastPage: 4,
+      currentPage: currentPage
+    };
+  }
+
+  if (currentPage === numPages) {
+    return {
+      firstPage: currentPage,
+      secondPage: 1,
+      thirdPage: 2,
+      lastPage: 3,
       currentPage: currentPage
     };
   }
