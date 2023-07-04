@@ -11,8 +11,11 @@ import { classnames } from "../helpers";
 import { NavMenu } from "../components/nav-menu";
 import { Footer } from "../components/footer";
 import { MobileMenu } from "../components/mobile-menu";
+import { SocialElement } from "../components/social-element";
 import { StyledContainerHeader, StyledContainerNavBarXL } from "../elements";
 import { AppContext, initialState } from "../config/context.js";
+import { TwitterIcon, Facebook, Linkedin, InstagramIcon, XlFooter} from "../components/icons";
+
 import "../index.scss";
 
 import { useMediaQuery } from "../hooks";
@@ -36,16 +39,6 @@ export const StyledGetStartedTextButton = styled.div`
   font-weight: 700;
   letter-spacing: .5px;
   max-height: 17px;
-`
-export const StyledFooterWrapper = styled.div`
-  display: flex;
-  flex-wrap: wrap;
-  width: 85%;
-  justify-content: center;
-  @media (max-width: 768px) {
-  justify-content: flex-end;
-  width: 100%;
-  }
 `
 export const StyledFooterTextTitle = styled.label`
   color: #959595;
@@ -102,6 +95,29 @@ function Layout({ children }) {
         )}
     </div>
   );
+
+  const shareXlProfileLinks = [
+    {
+      path: "https://www.instagram.com/xmartlabs", 
+      icon: <InstagramIcon />,
+      id: "socialMenuInstagram"
+    },
+    {
+      path: "https://www.linkedin.com/company/xmartlabs/mycompany/", 
+      icon: <Linkedin />,
+      id: "socialProfileLinkedIn"
+    },
+    {
+      path: "https://twitter.com/xmartlabs", 
+      icon: <TwitterIcon />,
+      id: "socialProfileTwitter"
+    },
+    {
+      path: "https://es-la.facebook.com/xmartlabs/", 
+      icon: <Facebook />,
+      id: "socialProfileFacebook"
+    },
+  ];
   
   return (
     <>
@@ -135,8 +151,7 @@ function Layout({ children }) {
         {children}
       </AppContext.Provider>
       <Footer>
-        <StyledFooterWrapper>
-          <div className={styles.desktopLogo}>
+          <div>
             <Link
               to="/"
               id="logo-xl-white">
@@ -148,52 +163,27 @@ function Layout({ children }) {
               />
             </Link>
           </div>
+          <div className={styles.columnSocialContainer}>
+            <div className={styles.columnContainer}>
+              <div className={styles.columnFooter}>
+                <StyledFooterTextTitle>Company</StyledFooterTextTitle>
+                <StyledFooterText>Services</StyledFooterText>
+                <StyledFooterText>Work</StyledFooterText>
+                <StyledFooterText>Our Company</StyledFooterText>
+              </div>                        
             
-          <div className={styles.footerCol}>
-            <div>
-              <StyledFooterTextTitle>Company</StyledFooterTextTitle>
+              <div className={styles.columnFooter}>
+                <StyledFooterTextTitle>Community</StyledFooterTextTitle>
+                <StyledFooterText>Community</StyledFooterText>
+                <StyledFooterText>Open Positions</StyledFooterText>
+                <StyledFooterText>Blog</StyledFooterText>
+              </div>
             </div>
             <div>
-              <StyledFooterText>Services</StyledFooterText>
-            </div>
-            <div>
-              <StyledFooterText>Work</StyledFooterText>
-            </div>                        
-            <div>
-              <StyledFooterText>Our Company</StyledFooterText>
-            </div>
-          </div>                        
-            
-          <div className={styles.footerCol}>
-            <div>
-              <StyledFooterTextTitle>Community</StyledFooterTextTitle>
-            </div>
-            <div>
-              <StyledFooterText>Community</StyledFooterText>
-            </div>
-            <div>
-              <StyledFooterText>Open Positions</StyledFooterText>
-            </div>                        
-            <div>
-              <StyledFooterText>Blog</StyledFooterText>
+            {isMobile && <XlFooter />}
+            <SocialElement className={classnames(styles.socialBottom, styles.blogIcons)} links={shareXlProfileLinks} />
             </div>
           </div>
-
-          <div className={styles.footerCol}>
-            <div>
-              <StyledFooterTextTitle>Media</StyledFooterTextTitle>
-            </div>
-            <div>
-              <StyledFooterText>Linkedin</StyledFooterText>
-            </div>
-            <div>
-              <StyledFooterText>Instagram</StyledFooterText>
-            </div>                        
-            <div>
-              <StyledFooterText>Github</StyledFooterText>
-            </div>
-          </div>
-        </StyledFooterWrapper>
       </Footer>
       <Helmet>
         <script src={withPrefix('identity.js')} type="text/javascript"></script>

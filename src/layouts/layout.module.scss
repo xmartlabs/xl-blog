@@ -22,6 +22,10 @@ body {
 
 .footerCol {
   width: 20%;
+  display: flex;
+  flex-direction: column;
+  justify-content: end;
+  align-items: flex-start;
 }
 
 .desktopLogo {
@@ -60,14 +64,43 @@ body {
   text-align: center;
 }
 
+.socialBottom {
+  display: flex;
+  flex-direction: row;
+  position: static;
+  align-items: center;
+  width: 100%;
+  z-index: 0;
+  justify-content: end;
+}
+
+.blogIcons {
+  a {
+    display: flex;
+    align-items: center;
+    margin: 0.7rem;
+  }
+}
+
+.columnFooter {
+  display: flex;
+  flex-direction: column;
+}
+
+.columnContainer {
+  display: flex;
+  flex-direction: row;
+}
+
+.columnSocialContainer {
+  display: flex;
+  flex-direction: row;
+}
+
 @media screen and (max-width: map-get($map: $screen-breakpoint, $key: sm)) {
   
   .desktopLogo{
     display: none;
-  }
-
-  .footerCol {
-    width: 30%;
   }
 
   .homeBanner {
@@ -84,5 +117,9 @@ body {
 
   .filterElement {
     margin: 1.3rem;
+  }
+
+  .socialBottom {
+    width: auto;
   }
 }

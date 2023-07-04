@@ -29,11 +29,6 @@
   z-index: 0;
 }
 
-.sharePosition {
-  align-self: center;
-  margin-right: 1rem;
-}
-
 .blogIcons {
   a {
     display: flex;
@@ -437,6 +432,10 @@
     }
 
     a {
+      word-break: break-word;
+    }
+    
+    p {
       word-break: break-word;
     }
   }
