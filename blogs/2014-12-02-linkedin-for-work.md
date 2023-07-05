@@ -2,16 +2,12 @@
 title: LinkedIn for Work
 date: 2014-12-02
 tags: []
-thumbnail: https://1.bp.blogspot.com/-7F7ZbSYtELs/VLRD2OddXpI/AAAAAAAAGPA/z_C5KpCE_88/s72-c/POS-POSTA_1-caratula.jpg
+thumbnail: /images/linkedin-for-work-pt-2/cover.jpg
 author: alberto
 category: product-design
 permalink: /linkedin-for-work/
 ---
 
-<div class="separator" style={{ textAlign: 'center', clear: 'both' }}>
-  <img border="0" src="https://1.bp.blogspot.com/-7F7ZbSYtELs/VLRD2OddXpI/AAAAAAAAGPA/z_C5KpCE_88/s1600/POS-POSTA_1-caratula.jpg" height="133" width="320" />
-</div>
-<br/>
 <p>
 Since you’re probably reading this article in-between checking feeds, you already know that social media is now very present in your day-to-day activities. It can certainly be overwhelming. LinkedIn has chosen to incorporate social features; perhaps,we suspect, in the spirit of having users return more frequently and remain in their network for longer lengths of time. &nbsp;We feel that important value networks, such as LinkedIn, should strive to stay true to their purpose, and not seek to becomeanother newsfeed.
 </p>

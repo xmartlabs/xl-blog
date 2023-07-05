@@ -5,9 +5,8 @@ tags: [Design, Product, Sprint]
 author: xl
 category: product-design
 permalink: /design-sprint-1/
+thumbnail: /images/sprint1/cover.jpg
 ---
-
-<img src="/images/sprint1/cover.jpg"/>
 
 # First Part
 
