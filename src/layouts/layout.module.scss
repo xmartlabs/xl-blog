@@ -82,19 +82,38 @@ body {
   }
 }
 
+.logoMobile {
+  display: none;
+}
+
 .columnFooter {
   display: flex;
   flex-direction: column;
+  width: auto;
 }
 
 .columnContainer {
   display: flex;
   flex-direction: row;
+  width: 80%;
 }
 
 .columnSocialContainer {
   display: flex;
   flex-direction: row;
+  margin-left: 12.5rem;
+  width: 65%;
+}
+
+.socialFirst {
+  margin-right: 12.5rem;
+}
+
+.socialElementContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  width: 20%;
 }
 
 @media screen and (max-width: map-get($map: $screen-breakpoint, $key: sm)) {
@@ -121,5 +140,16 @@ body {
 
   .socialBottom {
     width: auto;
+  }
+
+  .columnSocialContainer {
+    display: flex;
+    flex-direction: column;
+    margin-left: 0;
+    width: 100%;
+  }
+
+  .socialFirst {
+    margin-left: 3.5rem;
   }
 }

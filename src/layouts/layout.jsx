@@ -43,13 +43,13 @@ export const StyledGetStartedTextButton = styled.div`
 export const StyledFooterTextTitle = styled.label`
   color: #959595;
   size: 17px;
-  line-height: 38px;
+  line-height: 30px;
 `
 
 export const StyledFooterText = styled.label`
   color: #fff;
   size: 17px;
-  line-height: 38px;    
+  line-height: 50px;    
 `
 
 const filters = [
@@ -151,7 +151,7 @@ function Layout({ children }) {
         {children}
       </AppContext.Provider>
       <Footer>
-          <div>
+          <div className={isMobile && styles.logoMobile}>
             <Link
               to="/"
               id="logo-xl-white">
@@ -165,7 +165,7 @@ function Layout({ children }) {
           </div>
           <div className={styles.columnSocialContainer}>
             <div className={styles.columnContainer}>
-              <div className={styles.columnFooter}>
+              <div className={classnames(styles.columnFooter, styles.socialFirst)}>
                 <StyledFooterTextTitle>Company</StyledFooterTextTitle>
                 <StyledFooterText>Services</StyledFooterText>
                 <StyledFooterText>Work</StyledFooterText>
@@ -179,7 +179,7 @@ function Layout({ children }) {
                 <StyledFooterText>Blog</StyledFooterText>
               </div>
             </div>
-            <div>
+            <div className={styles.socialElementContainer}>
             {isMobile && <XlFooter />}
             <SocialElement className={classnames(styles.socialBottom, styles.blogIcons)} links={shareXlProfileLinks} />
             </div>
