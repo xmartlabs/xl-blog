@@ -139,7 +139,17 @@ body {
   }
 
   .socialBottom {
-    width: auto;
+    width: 70%;
+
+    svg {
+      width: 1.1rem;
+    }
+  }
+
+  .blogIcons {
+    a {
+      margin: 0.4rem;
+    }
   }
 
   .columnSocialContainer {
@@ -147,9 +157,23 @@ body {
     flex-direction: column;
     margin-left: 0;
     width: 100%;
+    margin-left: 2rem;
   }
 
   .socialFirst {
-    margin-left: 3.5rem;
+    margin-right: 3rem;
+  }
+
+  .socialElementContainer {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    width: 100%;
+    align-items: center;
+    margin-top: 3rem;
+  }
+
+  .footerMobileLogo {
+    width: 65%;
   }
 }

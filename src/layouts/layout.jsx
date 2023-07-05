@@ -180,7 +180,7 @@ function Layout({ children }) {
               </div>
             </div>
             <div className={styles.socialElementContainer}>
-            {isMobile && <XlFooter />}
+            {isMobile && <XlFooter className={styles.footerMobileLogo}/>}
             <SocialElement className={classnames(styles.socialBottom, styles.blogIcons)} links={shareXlProfileLinks} />
             </div>
           </div>

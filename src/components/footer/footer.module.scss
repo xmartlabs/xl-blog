@@ -10,3 +10,10 @@
   flex-direction: row;
   align-items: center;
 }
+
+@media screen and (max-width: map-get($map: $screen-breakpoint, $key: sm)) {
+  .container {
+    height: 100%;
+    padding: 5rem 0 5rem 0;  
+  }
+}
