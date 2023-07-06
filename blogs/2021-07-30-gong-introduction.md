@@ -11,10 +11,6 @@ twitter_image: /images/gong-introduction/bannerTwitter.png
 permalink: /kickstart-your-new-android-project-with-gong-base-project/
 ---
 
-<p style={{ textAlign:'center'}}>
-<img src="/images/gong-introduction/bannerInterno.png" alt="Project banner" />
-</p>
-
 Starting a software project is not an easy task, and Android is no exception.
 There's a bunch of complex decisions to make, such as code conventions, app architecture, frameworks, libraries, continuous integrations, and best practices, to mention a few.
 That's why we created [Gong][gong], to consolidate all our discussions and research in one base project that we could use to boost our productivity and give other teams a solid base from which to start their projects.

@@ -2,15 +2,12 @@
 title: "LinkedIn for Work, pt. 2 : Finding candidates."
 date: 2015-01-12
 tags: []
-thumbnail: https://1.bp.blogspot.com/-7F7ZbSYtELs/VLRD2OddXpI/AAAAAAAAGPA/z_C5KpCE_88/s72-c/POS-POSTA_1-caratula.jpg
+thumbnail: /images/linkedin-for-work-pt-2/cover.jpg
 author: alberto
 category: product-design
 permalink: /linkedin-for-work-pt-2-finding/
 ---
-<div class="separator" style={{ clear: 'both', textAlign: 'center' }}>
-  <img border="0" src="https://1.bp.blogspot.com/-7F7ZbSYtELs/VLRD2OddXpI/AAAAAAAAGPA/z_C5KpCE_88/s1600/POS-POSTA_1-caratula.jpg" height="166" width="400" />
-</div>
-<br/>
+
 <p>
   The decision to hire a candidate is usually based more on intuition than on raw information analysis. A digital tool like LinkedIn becomes essential to that analysis. We felt we could contribute a few ideas to improve the way the information is ordered
   and presented on LinkedIn today, so this analysis (think of the amount of candidates applying to the same position) is more streamlined and efficient. We've also incorporated esthetic decisions that we feel are not too disruptive, but do bring LinkedIn's
