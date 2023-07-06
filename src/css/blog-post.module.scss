@@ -274,14 +274,14 @@
     margin: auto;
     margin-bottom: 2rem;
     border-collapse: collapse;
-    word-break: break-all;
     width: 100%;
+    hyphens: auto;
 
     tbody th, td {
       @extend .text__paragraph__two__blueTwo;
       border: none;
-      padding: 1rem 1rem;
-
+      padding: 1rem 1.2rem;
+      line-height: 1.7rem
     }
 
     thead {
@@ -305,6 +305,10 @@
       tr:nth-child(odd) {
         background-color: $blueFive;
       }
+
+      th, td {
+        hyphens: auto;
+      }
     }
 
     tr {
@@ -316,6 +320,10 @@
       height: auto;
       max-height: 100%;
     }
+  }
+
+  div:has(table) {
+    overflow: auto;
   }
 
   pre {
