@@ -29,11 +29,6 @@
   z-index: 0;
 }
 
-.sharePosition {
-  align-self: center;
-  margin-right: 1rem;
-}
-
 .blogIcons {
   a {
     display: flex;
@@ -342,9 +337,7 @@
     justify-content: center;
     background-color: #ee1a64;
     text-decoration: none;
-    display: flex;
     align-items: center;
-    justify-content: center;
   }
 
   a p {
@@ -458,6 +451,10 @@
     }
 
     a {
+      word-break: break-word;
+    }
+    
+    p {
       word-break: break-word;
     }
   }

@@ -11,3 +11,4 @@ export { CloseIcon } from "./close-icon";
 export { ClockIcon } from "./clock-icon";
 export { PinkCircle } from "./pink-circle";
 export { ErrorImage } from "./404-image";
+export { XlFooter } from "./xl-footer";
