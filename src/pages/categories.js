@@ -12,6 +12,8 @@ const CategoriesPage = ({pageContext, data}) => {
 
   return (
     <>
+    {console.log(`Blogs in category`)}
+    {console.log(edges)}
       <div className={styles.container}>
         {edges.map(({ node }) => <Card data={node} key={node.id} withCategory={false} />)}
       </div>

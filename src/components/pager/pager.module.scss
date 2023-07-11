@@ -6,12 +6,15 @@
   flex-direction: row;
   justify-content: center;
   margin: 80px 0;
+
+  a {
+    padding: 1rem;
+  }
 }
 
 .pagerLink {
   text-decoration: none;
   color:  $defaultGray;
-  padding: 1rem;
 }
 
 .disabledPagerLink {
@@ -25,7 +28,6 @@
   text-decoration: none;
   color: $xlPink;
   align-self: center;
-  padding: 1rem;
 }
 
 @media screen and (max-width: map-get($map: $screen-breakpoint, $key: sm)) {

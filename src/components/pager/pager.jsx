@@ -7,17 +7,32 @@ import { Pages } from "../pages";
 
 import * as styles from "./pager.module.scss";
 
+const actualCategory = (currentPage) => {
+  if (typeof window !== 'undefined') {
+    const windowLocation = window.location.href;
+    if (windowLocation.includes("categories")) {
+      const pattern = new RegExp('\\b(' + ['/page/', `${currentPage}`].join('|') + ')\\b', 'gi');
+      const result = windowLocation.replace(pattern, '');
+      return result;
+    }
+  }
+}
 
-const setPrevPage = ({currentPage}) => {
+
+const setPrevPage = ({currentPage, category}) => {
   if (currentPage === 1) {
     return 'javascript:void(0)'
   }
   
-  if ((currentPage - 1) === 1) {
+  if (!category && (currentPage - 1) === 1) {
     return '/'
   }
 
-  return `/page/${(currentPage - 1)}`
+  if (category && (currentPage - 1) === 1) {
+    return `/categories/${category}`;
+  }
+
+  return actualCategory() ? `${actualCategory(currentPage)}page/${(currentPage - 1)}` : `/page/${(currentPage - 1)}`;
 };
 
 const setNextPage = ({numPages, currentPage}) => {
@@ -25,43 +40,19 @@ const setNextPage = ({numPages, currentPage}) => {
     return '';
   }
 
-  return `/page/${(currentPage + 1)}`
+  return actualCategory() ? `${actualCategory(currentPage)}page/${(currentPage + 1)}` : `/page/${(currentPage + 1)}`;
 };
 
-const setPagesData = ({numPages, currentPage}) => {
-  if (currentPage <= 3) {
-    return {
-      firstPage: 1,
-      secondPage: 2,
-      thirdPage: 3,
-      lastPage: 4,
-      currentPage: currentPage
-    };
-  }
-
-  if (currentPage === numPages) {
-    return {
-      firstPage: currentPage,
-      secondPage: 1,
-      thirdPage: 2,
-      lastPage: 3,
-      currentPage: currentPage
-    };
-  }
-
+const setPagesData = ({ currentPage }) => {
   return {
-    firstPage: (currentPage - 2),
-    secondPage: (currentPage - 1),
-    thirdPage: currentPage,
-    lastPage: (currentPage + 1),
     currentPage: currentPage
   };
 };
 
 const Pager = ({ pageContext }) => {
-  const {numPages,  currentPage} = pageContext;
+  const {numPages,  currentPage, category} = pageContext;
   const pagesData = setPagesData({numPages, currentPage});
-  const prevPage = setPrevPage({currentPage});
+  const prevPage = setPrevPage({currentPage, category});
   const nextPage = setNextPage({numPages, currentPage});
 
   useEffect(() => {
@@ -76,7 +67,7 @@ const Pager = ({ pageContext }) => {
       <Link className={currentPage === 1 ? styles.disabledPagerLink : styles.pagerLink} to={prevPage} rel="prev">
         ← Prev
       </Link>
-      <Pages data={pagesData} />
+        <Link to={pagesData.currentPage}>{pagesData.currentPage}</Link>
       <Link className={currentPage === numPages ? styles.disabledPagerLink : styles.pagerLink} to={nextPage} rel="next">
         Next →
       </Link>
