@@ -3,8 +3,6 @@ import { Link } from "gatsby";
 
 import PropTypes from "prop-types";
 
-import { Pages } from "../pages";
-
 import * as styles from "./pager.module.scss";
 
 const actualCategory = (currentPage) => {
