@@ -65,7 +65,7 @@ const Pager = ({ pageContext }) => {
       <Link className={currentPage === 1 ? styles.disabledPagerLink : styles.pagerLink} to={prevPage} rel="prev">
         ← Prev
       </Link>
-        <Link to={pagesData.currentPage}>{pagesData.currentPage}</Link>
+        <Link to={pagesData.currentPage} className={styles.linkNumber}>{pagesData.currentPage}</Link>
       <Link className={currentPage === numPages ? styles.disabledPagerLink : styles.pagerLink} to={nextPage} rel="next">
         Next →
       </Link>

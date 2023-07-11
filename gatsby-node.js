@@ -157,6 +157,7 @@ exports.createPages = async ({actions, graphql, reporter}) => {
             numPages: numPagesCat,
             currentPage: index + 1,
             category: category.fieldValue,
+            skip: index * postsPerPage,
           },
         });
       });
