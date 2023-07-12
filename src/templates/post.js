@@ -102,6 +102,7 @@ const BlogPost = ({ data, children }) => {
     return () => {
       window.removeEventListener('scroll', handleScroll);
       window.removeEventListener('scroll', getActiveTitle);
+      setState(BannerType.home)
     };
   }, [])
 
