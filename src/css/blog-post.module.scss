@@ -151,7 +151,8 @@
 // Main Image
 
 .blogMainImage {
-  width: 66.5%;
+  width: auto;
+  max-width: 80%;
   height: 32rem;
   transform: translateY(-256px);
   margin-bottom: 5rem;
@@ -232,7 +233,8 @@
     border-radius: 5px;
     display: block;
     margin: auto;
-    width: 100%;
+    width: auto;
+    max-width: 100%;
   }
 
   div {
