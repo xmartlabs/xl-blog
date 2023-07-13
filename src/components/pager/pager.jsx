@@ -2,20 +2,9 @@ import React, { useEffect } from "react";
 import { Link } from "gatsby";
 
 import PropTypes from "prop-types";
+import { actualCategory } from "../../helpers/actual-category";
 
 import * as styles from "./pager.module.scss";
-
-const actualCategory = (currentPage) => {
-  if (typeof window !== 'undefined') {
-    const windowLocation = window.location.href;
-    if (windowLocation.includes("categories")) {
-      const pattern = new RegExp('\\b(' + ['/page/', `${currentPage}`].join('|') + ')\\b', 'gi');
-      const result = windowLocation.replace(pattern, '');
-      return result;
-    }
-  }
-}
-
 
 const setPrevPage = ({currentPage, category}) => {
   if (currentPage === 1) {
@@ -30,7 +19,7 @@ const setPrevPage = ({currentPage, category}) => {
     return `/categories/${category}`;
   }
 
-  return actualCategory() ? `${actualCategory(currentPage)}page/${(currentPage - 1)}` : `/page/${(currentPage - 1)}`;
+  return actualCategory() ? `/categories/${actualCategory()}/page/${(currentPage - 1)}` : `/page/${(currentPage - 1)}`;
 };
 
 const setNextPage = ({numPages, currentPage}) => {
@@ -38,7 +27,7 @@ const setNextPage = ({numPages, currentPage}) => {
     return '';
   }
 
-  return actualCategory() ? `${actualCategory(currentPage)}page/${(currentPage + 1)}` : `/page/${(currentPage + 1)}`;
+  return actualCategory() ? `/categories/${actualCategory()}/page/${(currentPage + 1)}` : `/page/${(currentPage + 1)}`;
 };
 
 const setPagesData = ({ currentPage }) => {
