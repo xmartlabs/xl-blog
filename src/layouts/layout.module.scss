@@ -117,10 +117,11 @@ body {
   width: 20%;
 }
 
-@media screen and (max-width: map-get($map: $screen-breakpoint, $key: lg)) {
+@media screen and (max-width: map-get($map: $screen-breakpoint, $key: xl)) {
   .homeBanner {
     background-image: url("../../static/images/home-banner/home-banner-desktop-small.png");
-    height: 41rem;
+    height: 35rem;
+    background-position-y: 3rem;
   }
 }
 
