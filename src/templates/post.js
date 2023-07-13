@@ -210,8 +210,8 @@ const BlogPost = ({ data, children }) => {
               <Link className={classnames(styles.authorName, "text__paragraph__bold__black")} to={author.profile_url}>{ authorBlog.displayName }</Link>
               <div className={styles.blogInfoContainer}>
                 <label className={classnames(styles.postDate, "text__label__bold__grayTwo")} >{data.mdx.frontmatter.date}</label>
-                  <ClockIcon className={styles.clockIcon} />
                 <label className={classnames("text__label__bold__grayTwo", styles.timeToRead)} >
+                  <ClockIcon className={styles.clockIcon} />
                   {data.mdx.fields.timeToRead.text}
                 </label>
               </div>

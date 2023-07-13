@@ -109,20 +109,23 @@
 }
 
 .blogInfoContainer {
-  text-align: end;
+  display: flex;
+  flex-direction: row;
+  align-items: baseline;
+  text-align: start;
 }
 
 .postDate {
-  min-width: 9rem;
-  margin-right: 1rem;
+  width: auto;
 }
 
 .timeToRead {
-  width: 6rem;
+  width: auto;
 }
 
 .clockIcon {
-  margin-left: 1rem;
+  margin-left: 2rem;
+  margin-right: 0.5rem;
 }
 
 .nameDateTimeContainer {
@@ -391,10 +394,12 @@
   }
 
   .blogInfoContainer {
-    bottom: 0;
-    margin-top: 3rem;
-    justify-content: start;
-    text-align: start;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .timeToRead {
+    margin-top: 0.5rem;
   }
 
   .category {
