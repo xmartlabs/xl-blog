@@ -1,0 +1,62 @@
+@import "/src/css/colors.scss";
+@import "/src/css/text-styles.scss";
+@import "/src/css/variables.scss";
+
+.container {
+  width: 80%;
+}
+
+.imgContainer {
+  display: block;
+  margin-bottom: 1.5rem;
+  position: relative;
+  padding-bottom: 41.25%;
+}
+
+.img {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  border-radius: 3%;
+  object-fit: cover;
+  object-position: left;
+}
+
+.categoryContainer {
+  display: flex;
+  flex-direction: row;
+  justify-content: left;
+  align-items: center;
+  margin-bottom: 1.5rem;
+}
+
+.category {
+  @extend .text__category__bold__neutral100;
+  background-color: $xlPink;
+  border: 1.5px solid $neutral100;
+  height: 1.8rem;
+  padding: 0 1rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1rem;
+}
+
+.title {
+  margin-bottom: 1.5rem;
+}
+
+.cardLabel {
+  margin: 3rem 0 1.5rem 0;
+  text-align: justify;
+}
+
+.readBlog {
+  text-decoration: none;
+}
+
+@media screen and (max-width: map-get($map: $screen-breakpoint, $key: sm)) {
+  .container {
+    width: 100%;
+  }
+}

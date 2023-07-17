@@ -3,6 +3,7 @@ import { Link, graphql } from "gatsby";
 
 import { Pager } from '../components/pager';
 import { AppContext, BannerType } from '../config/context';
+import { NewestPost } from "../components/newest-post/newest-post";
 
 import { Card } from '../components/card';
 
@@ -19,8 +20,11 @@ const BlogList = ({ pageContext, data }) => {
 
   return (
     <>
+      <div className={styles.topPostsContainer}>
+        <div className={styles.newestContainer}><NewestPost /></div>
+      </div>
       <div className={styles.container} >
-        {edges.map(({ node }) => <Card data={node} key={node.id} withCategory={true} />)}     
+        {edges.map(({ node }) => <Card data={node} key={node.id} withCategory={true} /> )}
       </div>
       <Pager pageContext={pageContext}/>
     </>
@@ -46,6 +50,7 @@ export const blogListQuery = graphql`query blogListQuery($skip: Int!, $limit: In
           tags
           permalink
           thumbnail
+          excerpt
         }
         body
       }
