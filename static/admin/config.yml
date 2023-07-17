@@ -42,7 +42,6 @@ collections:
         widget: "select"
         options:
           - { label: "People & Events", value: "people-events" } 
-          - { label: "Business & Agile", value: "business-agile" }
           - { label: "Product Design", value: "product-design" }
           - { label: "Development", value: "development" }
           - { label: "Machine Learning", value: "machine-learning" }
@@ -97,7 +96,7 @@ collections:
           - { value: "andresh", label: "Andrés Herrera" }
           - { value: "vale", label: "Valentina Bianco" }
           - { value: "pablog", label: "Pablo Grill" }
-          - { value: "lazaro", label: "Lázaro" }
+          - { value: "lazaro", label: "Lázaro Martín" }
           - { value: "alemachado", label: "Ale Machado"}
           - {value: "coti", label: "Coti Besozzi"}
           - {value: "sofitechera", label: "Sofia Techera"}

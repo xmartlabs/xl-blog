@@ -62,15 +62,48 @@ We cannot use if-else, Views neither the + * == operators because they live in t
 
 > Explaining each parameter and details of each `Reanimated API` is out of the scope of this blogpost.
 
-| Javascript Thread      | UI Thread/Reanimated API | 
-| :---        |    :----:   |
-| render()  | Frame  |
-| View   | Animated.View  |
-| setState()  | set()  |
-| if() {} | cond()  |
-| Statement1;Statement2;Statement3 | block([Statement1,Statement2,Statement3])  |
-| +, *, ==, ...  | add(), multiply(), eq(), ...  |
-| Math.sin(), Math.pow(), Math.floor()  | sin(), pow(), floor()  |
+<table>
+	<thead>
+		<tr>
+			<th>Javascript Thread</th>
+			<th>UI Thread/Reanimated API</th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr>
+			<td>render()</td>
+			<td>Frame</td>
+		</tr>
+		<tr>
+			<td>View</td>
+			<td>Animated.View</td>
+		</tr>
+		<tr>
+			<td>setState()</td>
+			<td>set()</td>
+		</tr>
+		<tr>
+			<td>if() {}</td>
+			<td>cond()</td>
+		</tr>
+		<tr>
+			<td>Statement1;Statement2;Statement3</td>
+			<td>block([Statement1,Statement2,Statement3])</td>
+		</tr>
+    <tr>
+			<td>Statement1;Statement2;Statement3</td>
+			<td>block([Statement1,Statement2,Statement3])</td>
+		</tr>
+    <tr>
+			<td>+, *, ==, ...</td>
+			<td>add(), multiply(), eq(), ...</td>
+		</tr>
+    <tr>
+			<td>Math.sin(), Math.pow(), Math.floor()</td>
+			<td>sin(), pow(), floor()</td>
+		</tr>
+	</tbody>
+</table>
 
 So if we apply this in a simple example this is how it looks.
 

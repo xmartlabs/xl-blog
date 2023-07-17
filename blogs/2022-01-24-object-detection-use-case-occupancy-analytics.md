@@ -151,10 +151,30 @@ For example, let's talk about performance. The following table shows the measure
 
 We can also include some pose estimation models.
 
-| Device | Model | Resolution | FPS |
-| --- | --- | --- | --- |
-| X86 with Coral Accelerator (Intel Core™ i7-10510U 16 GB) | posenet | 481,353,3 | 13.4 |
-| GPU cloud (AWS G4 instance) | openpifpaf optimized with tensorrt | 641,369,3 | 19.3 |
+<table>
+	<thead>
+		<tr>
+			<th>Device</th>
+			<th>Model</th>
+      <th>Resolution</th>
+      <th>FPS</th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr>
+			<td>X86 with Coral Accelerator (Intel Core™ i7-10510U 16 GB)</td>
+			<td>posenet</td>
+      <td>481,353,3</td>
+      <td>13.4</td>
+		</tr>
+		<tr>
+			<td>GPU cloud (AWS G4 instance)</td>
+			<td>openpifpaf optimized with tensorrt</td>
+      <td>641,369,3</td>
+      <td>19.3</td>
+		</tr>
+	</tbody>
+</table>
 
 ![Object Detection table1.2.png](/images/object-detection/Object_Detection_table1.2.png)
 

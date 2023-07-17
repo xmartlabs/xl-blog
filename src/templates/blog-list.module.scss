@@ -4,7 +4,7 @@
 .container {
   padding: 5rem 7% 0;
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(23.4rem, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(30%, 1fr));
   gap: 6rem 3.4rem;
 }
 
@@ -23,6 +23,8 @@
   .container {
     padding: 5rem 0rem;
     gap: 4rem 0;
+    display: grid;
+    grid-template-columns: auto;
   }
 
   .topPostsContainer {

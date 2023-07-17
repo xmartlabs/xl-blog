@@ -9,7 +9,7 @@ import { classnames, findTitles, useCategory } from "../helpers";
 import { AuthorSerializer } from '../serializer';
 import { AppContext, BannerType } from '../config/context';
 import { SocialElement } from '../components/social-element';
-import { TwitterIcon, Facebook, Linkedin, ClockIcon} from "../components/icons";
+import { TwitterIcon, Facebook, Linkedin, ClockIcon, InstagramIcon} from "../components/icons";
 import { MoreBlogsSection } from '../components/more-blogs-section';
 import { Tags } from '../components/tags/tags';
 
@@ -63,6 +63,16 @@ const BlogPost = ({ data, children }) => {
   
   const shareXlProfileLinks = [
     {
+      path: "https://www.instagram.com/xmartlabs", 
+      icon: <InstagramIcon />,
+      id: "socialMenuInstagram"
+    },
+    {
+      path: "https://www.linkedin.com/company/xmartlabs/mycompany/", 
+      icon: <Linkedin />,
+      id: "socialProfileLinkedIn"
+    },
+    {
       path: "https://twitter.com/xmartlabs", 
       icon: <TwitterIcon />,
       id: "socialProfileTwitter"
@@ -72,11 +82,6 @@ const BlogPost = ({ data, children }) => {
       icon: <Facebook />,
       id: "socialProfileFacebook"
     },
-    {
-      path: "https://www.linkedin.com/company/xmartlabs/mycompany/", 
-      icon: <Linkedin />,
-      id: "socialProfileLinkedIn"
-    }
   ];
 
   useEffect(() => {
@@ -130,7 +135,7 @@ const BlogPost = ({ data, children }) => {
         const scrollPosition = window.scrollY;
         let activeTitle = titles[0];
         titles.forEach(title => {
-          const titleTop = title.getBoundingClientRect().top + window.pageYOffset - 500;
+          const titleTop = title.getBoundingClientRect().top + window.scrollY - 500;
           if (scrollPosition >= titleTop) {
             activeTitle = title;
           }
@@ -217,12 +222,11 @@ const BlogPost = ({ data, children }) => {
         </div>
         <div className={styles.blogBottomElements}>
           <div className={styles.socialBottomContainer}>
-            <span className={classnames('text__paragraph__bold__grayTwo', styles.sharePosition)}>Share:</span>
             <SocialElement className={classnames(styles.socialBottom, styles.blogIcons)} links={shareXlProfileLinks} />
           </div>
           <Tags blogTags={data.mdx.frontmatter.tags} className={styles.tags} />
         </div>
-        <MoreBlogsSection relatedPosts={data.mdx.relatedPosts} refMoreFrom={refMoreFrom} title={categoryBlog.displayName} />
+        <MoreBlogsSection relatedPosts={data.mdx.relatedPosts} refMoreFrom={refMoreFrom} title={categoryBlog.category}/>
       <div className={styles.disqusSection}>
         <h3 className={styles.disqusTitle}>Comments:</h3>
         <div id="disqus_thread">

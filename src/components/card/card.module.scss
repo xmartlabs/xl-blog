@@ -64,9 +64,13 @@
 
   .imageContainer {
     width: 100%;
+    margin-bottom: 3.5rem;
 
     p {
-      top: 78%;
+      top: 109%;
+      left: 0;
+      background-color: $xlPink;
+      color: $neutral100;
     }
   }
 }

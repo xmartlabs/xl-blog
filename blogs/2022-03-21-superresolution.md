@@ -92,21 +92,96 @@ Our quality criteria for the original images in RCAN and SwinIR was the followin
 - 2-Low
 - 1 -Horrible
 
-| RCAN time GPU | SwinIR time GPU | Res_original | Quality evaluation |
-| --- | --- | --- | --- |
-| 17.24s | 31s | 160x160(LD) | 2 |
-| 19.01s | 53s | 492x712(LD) | 3.3 |
-| 22.48s | 58s | 497x712(LD) | 3.7 |
-| 16.63s | 41s | 500x400(HD) | 4 |
-| 16.86s | 49s | 800x400(MD) | 4 |
-| 56.22s | 1m | 800x600(HD) | 4 |
-| 36.49s | 1m | 1024x683(HD) | 4 |
-| 36.49s | 1m | 1024x683(HD) | 4 |
-| 30.55s | 1m | 1024x720(HD) | 3.6 |
-| 36.83s | 1m | 1024x720(HD) | 4 |
-|  | 52s | 1024x720(HD) | 4 |
-| 51.50s | 1m | 1024x720(LD) | 3.3 |
-| 51.01s | 1m | 1024x720(LD) | 2 |
+<table>
+	<thead>
+		<tr>
+			<th>RCAN time GPU</th>
+			<th>SwinIR time GPU</th>
+      <th>Res_original</th>
+      <th>Quality evaluation</th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr>
+			<td>17.24s</td>
+			<td>31s</td>
+      <td>160x160(LD)</td>
+      <td>2</td>
+		</tr>
+		<tr>
+			<td>19.01s</td>
+			<td>53s</td>
+      <td>492x712(LD)</td>
+      <td>3.3</td>
+		</tr>
+		<tr>
+			<td>22.48s</td>
+			<td>58s</td>
+      <td>497x712(LD)</td>
+      <td>3.7</td>
+		</tr>
+		<tr>
+			<td>16.63s</td>
+			<td>41s</td>
+      <td>500x400(HD)</td>
+      <td>4</td>
+		</tr>
+		<tr>
+			<td>16.86s</td>
+			<td>49s</td>
+      <td>800x400(MD)</td>
+      <td>4</td>
+		</tr>
+		<tr>
+			<td>56.22s</td>
+			<td>1m</td>
+      <td>800x600(HD)</td>
+      <td>4</td>
+		</tr>
+		<tr>
+			<td>36.49s</td>
+			<td>1m</td>
+      <td>1024x683(HD)</td>
+      <td>4</td>
+		</tr>
+  	<tr>
+			<td>36.49s</td>
+			<td>1m</td>
+      <td>1024x683(HD)</td>
+      <td>4</td>
+		</tr>
+  	<tr>
+			<td>30.55s</td>
+			<td>1m</td>
+      <td>1024x720(HD)</td>
+      <td>3.6</td>
+		</tr>
+  	<tr>
+			<td>36.83s</td>
+			<td>1m</td>
+      <td>1024x720(HD)</td>
+      <td>4</td>
+		</tr>
+  	<tr>
+			<td></td>
+			<td>52s</td>
+      <td>1024x720(HD)</td>
+      <td>4</td>
+		</tr>
+  	<tr>
+			<td>51.50s</td>
+			<td>1m</td>
+      <td>1024x720(LD)</td>
+      <td>3.3</td>
+		</tr>
+  	<tr>
+			<td>51.01s</td>
+			<td>1m</td>
+      <td>1024x720(LD)</td>
+      <td>2</td>
+		</tr>
+	</tbody>
+</table>
 
 After seeing similar results of academic papers, we can conclude that almost all algorithms have identical numerical results. However, SwinIR is slightly better. Regarding the predicted time, it's better in GPU, but we need to keep in mind that we can't use this algorithm in real-time applications. The mean time for RCAN was 30 seconds and 54 seconds for SwinIR, depending on the size and quality of the image.
 

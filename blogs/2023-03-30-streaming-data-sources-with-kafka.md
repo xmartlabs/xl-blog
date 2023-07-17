@@ -59,11 +59,42 @@ Of course, when choosing a messaging system for your streaming data pipeline, Ka
 
 <div class="table-wrapper" markdown="block">
 
-|  | Application size | Hosting | Message delivery | Message order | Goal |
-| --- | --- | --- | --- | --- | --- |
-| **Kafka** | Big to Huge | Self-hosted | At least one delivery | Order may change | Scalability & Performance |
-| **RabbitMQ** | Medium to Big | Self-hosted | Guarantees only once delivery | Order may change | Scalability & Performance |
-| **Amazon SQS** | Small to Medium | Managed | Guarantees only once delivery | Maintained on FIFO queues | Simplicity |
+<table>
+  <thead>
+    <th></th>
+    <th>Application size</th>
+    <th>Hosting</th>
+    <th>Message delivery</th>
+    <th>Message order</th>
+    <th>Goal</th>
+  </thead>
+	<tbody>
+		<tr>
+			<td>**Kafka** </td>
+			<td>Big to Huge</td>
+      <td>Self-hosted</td>
+      <td>At least one delivery</td>
+      <td>Order may change</td>
+      <td>Scalability & Performance</td>
+		</tr>
+		<tr>
+			<td>**RabbitMQ**</td>
+			<td>Medium to Big</td>
+      <td>Self-hosted</td>
+      <td>Guarantees only once delivery</td>
+      <td>Order may change</td>
+      <td>Scalability & Performance</td>
+		</tr>
+		<tr>
+			<td>**Amazon SQS**</td>
+			<td>Small to Medium</td>
+      <td>Managed</td>
+      <td>Guarantees only once delivery</td>
+      <td>Maintained on FIFO queues</td>
+      <td>Simplicity</td>
+		</tr>
+	</tbody>
+</table>
 
 </div>
 

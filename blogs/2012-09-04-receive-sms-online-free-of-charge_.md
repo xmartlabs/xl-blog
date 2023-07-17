@@ -9,7 +9,6 @@ category: development
 permalink: /receive-sms-online-free-of-charge-4/
 ---
 
-
 <p>
 It is a common practice nowadays to be asked for a SMS number while registering to a site. Most of us do not want to share our phone number on the net to avoid being spammed, making it impossible to complete a registration process.
 </p>

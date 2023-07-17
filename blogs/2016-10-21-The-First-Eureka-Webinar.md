@@ -5,11 +5,11 @@ tags: [Swift, iOS, Eureka, Form]
 author: esanchez
 category: people-events
 permalink: /the-first-eureka-webinar/
+thumbnail: /images/eureka-webinar/eureka.jpg
 ---
 
 [Eureka]:        https://github.com/xmartlabs/Eureka
 [Xmartlabs]:     https://xmartlabs.com/
-<img src="/images/eureka-webinar/eureka.jpg" alt="Screenshot of hiding rows" />
 
 [Eureka] is Xmartlabs’ elegant form builder for Swift iOS, built and refined for the open source community to accelerate the development cycle and produce cleaner code.
 
