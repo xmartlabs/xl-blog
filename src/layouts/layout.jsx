@@ -66,7 +66,7 @@ const getPath = () => {
     if (window.location.pathname === '/') {
       return 'all';
     }
-    return filters.find(({ name }) => window.location.href.includes(name))?.name || "all";
+    return filters.find(({ name }) => window.location.href.includes(name))?.name;
   }
   return 'all';
 }
@@ -90,7 +90,7 @@ function Layout({ children }) {
             onClick={() => setCategory(filter.name)}
             className={classnames(styles.filterElement, "text__filter__grayFive", filter.name === category && styles.selectedLink)} 
             to={filter.name === 'all' ? '/' : `/categories/${filter.name}/`}>
-              {filter.displayName}
+            {filter.displayName}
           </Link>
         )}
     </div>

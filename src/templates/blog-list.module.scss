@@ -2,38 +2,17 @@
 @import "/src/css/colors.scss";
 
 .container {
-  padding: 5rem 7% 0;
+  margin: 5% 7% 0;
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(30%, 1fr));
   gap: 6rem 3.4rem;
 }
 
-.topPostsContainer {
-  padding: 7% 7% 0;
-  display: flex;
-  flex-direction: row;
-}
-
-.newestContainer {
-  width: 50%;
-}
-
-
 @media only screen and (max-width: map-get($map: $screen-breakpoint, $key: sm)) {
   .container {
-    padding: 5rem 0rem;
+    margin: 5rem 0rem;
     gap: 4rem 0;
     display: grid;
     grid-template-columns: auto;
-  }
-
-  .topPostsContainer {
-    flex-direction: column;
-    padding: 7% 1%;
-    align-items: center;
-  }
-
-  .newestContainer {
-    width: 90%;
   }
 }
