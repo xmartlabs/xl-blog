@@ -70,7 +70,7 @@ function Layout({ children }) {
     setTimeout(() => {
       window.scrollTo(0, 0)
     }, 1);
-    setCategory(actualCategory(true));
+    setCategory(actualCategory(true, filters));
   }, [category]);
 
   const filterLinks = () => (

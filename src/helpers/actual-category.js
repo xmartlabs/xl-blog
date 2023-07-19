@@ -1,15 +1,6 @@
 import React from "react";
 
-const actualCategory = (isLayout) => {
-  const filters = [
-    {name: "all"},
-    {name: "development"},
-    {name: "product-design"},
-    {name: "machine-learning"},
-    {name: "blockchain"},
-    {name: "people-events"},
-  ];
-  
+const actualCategory = (isLayout, filters) => {  
   if (typeof window !== 'undefined') {
     if (window.location.pathname === '/') {
       return isLayout ? 'all' : '';

@@ -2,7 +2,6 @@ import React, { useEffect } from "react";
 import { Link } from "gatsby";
 
 import PropTypes from "prop-types";
-import { actualCategory } from "../../helpers/actual-category";
 
 import * as styles from "./pager.module.scss";
 
@@ -19,15 +18,15 @@ const setPrevPage = ({currentPage, category}) => {
     return `/categories/${category}`;
   }
 
-  return actualCategory() ? `/categories/${actualCategory()}/page/${(currentPage - 1)}` : `/page/${(currentPage - 1)}`;
+  return category ? `/categories/${category}/page/${(currentPage - 1)}` : `/page/${(currentPage - 1)}`;
 };
 
-const setNextPage = ({numPages, currentPage}) => {
+const setNextPage = ({numPages, currentPage, category}) => {
   if (currentPage === numPages) {
     return '';
   }
 
-  return actualCategory() ? `/categories/${actualCategory()}/page/${(currentPage + 1)}` : `/page/${(currentPage + 1)}`;
+  return category ? `/categories/${category}/page/${(currentPage + 1)}` : `/page/${(currentPage + 1)}`;
 };
 
 const setPagesData = ({ currentPage }) => {
@@ -40,7 +39,7 @@ const Pager = ({ pageContext }) => {
   const {numPages,  currentPage, category} = pageContext;
   const pagesData = setPagesData({numPages, currentPage});
   const prevPage = setPrevPage({currentPage, category});
-  const nextPage = setNextPage({numPages, currentPage});
+  const nextPage = setNextPage({numPages, currentPage, category});
 
   useEffect(() => {
     setTimeout(() => {
