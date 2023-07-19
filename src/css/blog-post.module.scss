@@ -405,8 +405,15 @@
     padding: 0 1rem 8rem;
     margin-top: 0rem;
 
+    a {
+      word-break: break-word;
+    }
+
     img {
       max-height: 16rem;
+      width: 100%;
+      width: -moz-available;
+      width: -webkit-fill-available;
     }
 
     img[src$='.gif'] {
