@@ -29,17 +29,19 @@ const setNextPage = ({numPages, currentPage, category}) => {
   return category ? `/categories/${category}/page/${(currentPage + 1)}` : `/page/${(currentPage + 1)}`;
 };
 
-const setPagesData = ({ currentPage }) => {
-  return {
-    currentPage: currentPage
-  };
-};
+const setActualPage = ({currentPage, category}) => {
+  if (currentPage === 1) {
+    return category ? `/categories/${category}/` : `/`
+  }
+
+  return category ? `/categories/${category}/page/${(currentPage)}` : `/page/${(currentPage)}`;
+}
 
 const Pager = ({ pageContext }) => {
   const {numPages,  currentPage, category} = pageContext;
-  const pagesData = setPagesData({numPages, currentPage});
   const prevPage = setPrevPage({currentPage, category});
   const nextPage = setNextPage({numPages, currentPage, category});
+  const actualPage = setActualPage({currentPage, category});
 
   useEffect(() => {
     setTimeout(() => {
@@ -53,7 +55,7 @@ const Pager = ({ pageContext }) => {
       <Link className={currentPage === 1 ? styles.disabledPagerLink : styles.pagerLink} to={prevPage} rel="prev">
         ← Prev
       </Link>
-        <Link to={pagesData.currentPage} className={styles.linkNumber}>{pagesData.currentPage}</Link>
+        <Link to={actualPage} className={styles.linkNumber}>{currentPage}</Link>
       <Link className={currentPage === numPages ? styles.disabledPagerLink : styles.pagerLink} to={nextPage} rel="next">
         Next →
       </Link>
