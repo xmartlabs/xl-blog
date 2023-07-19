@@ -35,7 +35,6 @@ $text-sizes: (
   paragraph: 1.4rem,
   paragraphSmall: 1rem,
   categoryBold: 0.8rem,
-  linkBig: 1.25rem,
 );
 
 $text-colors: (  
@@ -151,11 +150,6 @@ $text-colors: (
   line-height: map-get($map: $text-line-heights, $key: categoryBold);
 }
 
-@mixin text__link__big {
-  font-size: map-get($map: $text-sizes, $key: linkBig);
-  line-height: map-get($map: $text-line-heights, $key: headingOne);
-}
-
 @mixin text__filter {
   font-size: map-get($map: $text-sizes, $key: paragraph);
   font-weight: map-get($map: $font-weights, $key: boldWeight900);
@@ -259,12 +253,6 @@ $text-colors: (
       @include text__category__bold;
     }
   }
-  &__link__big {
-    @include color-styles {
-      @include text__link__big;
-    }
-  }
-  
   &__filter {
     @include color-styles {
       @include text__filter;

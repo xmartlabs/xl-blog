@@ -107,7 +107,6 @@ exports.createPages = async ({actions, graphql, reporter}) => {
               category
               tags
               permalink
-              excerpt
             }
             fields {
               slug

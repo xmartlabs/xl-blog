@@ -20,7 +20,7 @@ const BlogList = ({ pageContext, data }) => {
   return (
     <>
       <div className={styles.container} >
-        {edges.map(({ node }) => <Card data={node} key={node.id} withCategory={true} /> )}
+        {edges.map(({ node }) => <Card data={node} key={node.id} withCategory={true} />)}     
       </div>
       <Pager pageContext={pageContext}/>
     </>
@@ -46,7 +46,6 @@ export const blogListQuery = graphql`query blogListQuery($skip: Int!, $limit: In
           tags
           permalink
           thumbnail
-          excerpt
         }
         body
       }
