@@ -5,49 +5,29 @@ import PropTypes from "prop-types";
 
 import * as styles from "./pager.module.scss";
 
-const setPrevPage = ({currentPage, category}) => {
-  if (currentPage === 1) {
-    return 'javascript:void(0)'
-  }
-  
-  if (!category && (currentPage - 1) === 1) {
-    return '/'
-  }
-
-  if (category && (currentPage - 1) === 1) {
-    return `/categories/${category}`;
-  }
-
-  return category ? `/categories/${category}/page/${(currentPage - 1)}` : `/page/${(currentPage - 1)}`;
-};
-
-const setNextPage = ({numPages, currentPage, category}) => {
-  if (currentPage === numPages) {
+const buildPageLocation = ({ numPages, page, category }) => {
+  if (page === numPages) {
     return '';
   }
 
-  return category ? `/categories/${category}/page/${(currentPage + 1)}` : `/page/${(currentPage + 1)}`;
-};
-
-const setActualPage = ({currentPage, category}) => {
-  if (currentPage === 1) {
-    return category ? `/categories/${category}/` : `/`;
+  if (!category && page === 1) {
+    return '/'
   }
 
-  return category ? `/categories/${category}/page/${(currentPage)}` : `/page/${(currentPage)}`;
-}
+  return category ? `/categories/${category}/page/${page}` : `/page/${page}`;
+};
 
 const Pager = ({ pageContext }) => {
   const {numPages,  currentPage, category} = pageContext;
-  const prevPage = setPrevPage({currentPage, category});
-  const nextPage = setNextPage({numPages, currentPage, category});
-  const actualPage = setActualPage({currentPage, category});
+  const prevPage = buildPageLocation({ page: currentPage - 1, category});
+  const nextPage = buildPageLocation({ numPages, page: currentPage + 1, category});
+  const actualPage = buildPageLocation({ page: currentPage, category });
 
   useEffect(() => {
     setTimeout(() => {
       window.scrollTo(0, 0);
     }, 1);
-    
+
   }, []);
 
   return(
