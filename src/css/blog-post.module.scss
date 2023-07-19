@@ -111,24 +111,28 @@
 .blogInfoContainer {
   display: flex;
   flex-direction: row;
-  align-items: center;
-  justify-content: end;
-  position: relative;
-  bottom: 1.3rem;
-  text-align: end;
+  align-items: baseline;
+  text-align: start;
 }
 
 .postDate {
-  min-width: 9rem;
-  margin-right: 1rem;
+  width: auto;
 }
 
 .timeToRead {
-  width: 6rem;
+  width: auto;
 }
 
 .clockIcon {
-  margin-left: 1.5rem;
+  margin-left: 2rem;
+  margin-right: 0.5rem;
+}
+
+.nameDateTimeContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: flex-start;
 }
 
 .categoryTagsContainer {
@@ -151,7 +155,8 @@
 // Main Image
 
 .blogMainImage {
-  width: 66.5%;
+  width: auto;
+  max-width: 80%;
   height: 32rem;
   transform: translateY(-256px);
   margin-bottom: 5rem;
@@ -232,7 +237,8 @@
     border-radius: 5px;
     display: block;
     margin: auto;
-    width: 100%;
+    width: auto;
+    max-width: 100%;
   }
 
   div {
@@ -388,10 +394,12 @@
   }
 
   .blogInfoContainer {
-    bottom: 0;
-    margin-top: 3rem;
-    justify-content: start;
-    text-align: start;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .timeToRead {
+    margin-top: 0.5rem;
   }
 
   .category {
@@ -410,7 +418,7 @@
     }
 
     img[src$='.gif'] {
-      max-width: 36rem;
+      width: 100%;
     }
 
     div {

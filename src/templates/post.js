@@ -102,6 +102,7 @@ const BlogPost = ({ data, children }) => {
     return () => {
       window.removeEventListener('scroll', handleScroll);
       window.removeEventListener('scroll', getActiveTitle);
+      setState(BannerType.home)
     };
   }, [])
 
@@ -205,14 +206,16 @@ const BlogPost = ({ data, children }) => {
         <div className={styles.authorContainer}>
           <div className={styles.authorInformation}>
             <img src={`/images/${authorBlog.image}`} alt="" className={styles.authorImage} />
-            <Link className={classnames(styles.authorName, "text__paragraph__bold__black")} to={author.profile_url}>{ authorBlog.displayName }</Link>
-          </div>
-          <div className={styles.blogInfoContainer}>
-            <label className={classnames(styles.postDate, "text__label__bold__grayTwo")} >{data.mdx.frontmatter.date}</label>
-            <ClockIcon className={styles.clockIcon} />
-            <label className={classnames("text__label__bold__grayTwo", styles.timeToRead)} >
-              {data.mdx.fields.timeToRead.text}
-            </label>
+            <div className={styles.nameDateTimeContainer}>
+              <Link className={classnames(styles.authorName, "text__paragraph__bold__black")} to={author.profile_url}>{ authorBlog.displayName }</Link>
+              <div className={styles.blogInfoContainer}>
+                <label className={classnames(styles.postDate, "text__label__bold__grayTwo")} >{data.mdx.frontmatter.date}</label>
+                <label className={classnames("text__label__bold__grayTwo", styles.timeToRead)} >
+                  <ClockIcon className={styles.clockIcon} />
+                  {data.mdx.fields.timeToRead.text}
+                </label>
+              </div>
+            </div>
           </div>
         </div>
       </div>

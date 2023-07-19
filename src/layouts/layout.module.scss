@@ -10,10 +10,9 @@ body {
   background-repeat: no-repeat;
   background-size: cover;
   width: 100%;
-  height: 48rem;
   background-position: center center;
-  height: 40rem;
-  max-height: 50rem;
+  height: 47rem;
+  max-height: 47rem;
 }
 
 .navMenuContainer {
@@ -116,6 +115,14 @@ body {
   flex-direction: column;
   justify-content: flex-end;
   width: 20%;
+}
+
+@media screen and (max-width: map-get($map: $screen-breakpoint, $key: xxl)) {
+  .homeBanner {
+    background-image: url("../../static/images/home-banner/home-banner-desktop-small.png");
+    height: 33rem;
+    background-position-y: 3rem;
+  }
 }
 
 @media screen and (max-width: map-get($map: $screen-breakpoint, $key: sm)) {

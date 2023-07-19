@@ -95,10 +95,6 @@ In the last years, front-end development ecosystem has changed drastically. Mode
 
 Git has become more popular, not only for version control but also as a way developers collaborate, communicate and publish apps. At the same time, FTP lost many users to it.
 
-
-GitGrowthTrend To be fixed Martin
-
-
 ### Browser capabilities & Front-end build tools
 
 Browsers have become really powerful. Nowadays a browser is way more than a document viewer, it's also a JS application runtime. Moreover, the front-end build ecosystem has evolved rapidly based on open-source tools primarily. All these tools completely changed the front-end developers' workflow. Building and compiling stuff is becoming an essential part of the modern web development workflow.
