@@ -31,7 +31,7 @@ const setNextPage = ({numPages, currentPage, category}) => {
 
 const setActualPage = ({currentPage, category}) => {
   if (currentPage === 1) {
-    return category ? `/categories/${category}/` : `/`
+    return category ? `/categories/${category}/` : `/`;
   }
 
   return category ? `/categories/${category}/page/${(currentPage)}` : `/page/${(currentPage)}`;
@@ -45,7 +45,7 @@ const Pager = ({ pageContext }) => {
 
   useEffect(() => {
     setTimeout(() => {
-      window.scrollTo(0, 0)
+      window.scrollTo(0, 0);
     }, 1);
     
   }, []);
