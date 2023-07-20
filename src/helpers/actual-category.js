@@ -1,5 +1,3 @@
-import React from "react";
-
 const actualCategory = (isLayout, filters) => {  
   if (typeof window !== 'undefined') {
     if (window.location.pathname === '/') {
