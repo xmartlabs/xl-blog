@@ -6,7 +6,7 @@ import PropTypes from "prop-types";
 import styled from "styled-components";
 import { StaticImage } from "gatsby-plugin-image";
 
-import { classnames } from "../helpers";
+import { actualCategory, classnames } from "../helpers";
 
 import { NavMenu } from "../components/nav-menu";
 import { Footer } from "../components/footer";
@@ -61,16 +61,6 @@ const filters = [
   {name: "people-events", displayName: "People"},
 ];
 
-const getPath = () => {
-  if (typeof window !== 'undefined') {
-    if (window.location.pathname === '/') {
-      return 'all';
-    }
-    return filters.find(({ name }) => window.location.href.includes(name))?.name;
-  }
-  return 'all';
-}
-
 function Layout({ children }) {  
   const [contextState, setContextState] = useState(initialState);
   const isMobile = useMediaQuery("(max-width: 768px)");
@@ -80,7 +70,7 @@ function Layout({ children }) {
     setTimeout(() => {
       window.scrollTo(0, 0)
     }, 1);
-    setCategory(getPath());
+    setCategory(actualCategory(true, filters));
   }, [category]);
 
   const filterLinks = () => (

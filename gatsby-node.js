@@ -144,7 +144,7 @@ exports.createPages = async ({actions, graphql, reporter}) => {
     })
 
 
-     // Extract tag data from query
+     // Extract category data from query
     const categories = result.data.categoriesGroup.group
     categories.forEach((category) => {
       const numPagesCat = Math.ceil(category.edges.length / postsPerPage);
@@ -157,6 +157,7 @@ exports.createPages = async ({actions, graphql, reporter}) => {
             numPages: numPagesCat,
             currentPage: index + 1,
             category: category.fieldValue,
+            skip: index * postsPerPage,
           },
         });
       });
