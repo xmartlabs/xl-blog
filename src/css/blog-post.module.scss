@@ -375,13 +375,23 @@
 
 // Responsive Design
 
+@media screen and (max-width: map-get($map: $screen-breakpoint, $key: lg)) {
+  .bannerContainer {
+    padding: 10rem 27% 20rem 12rem;
+  }
+
+  .blogMainImage {
+    height: 21rem;
+  }
+}
+
 @media screen and (max-width: map-get($map: $screen-breakpoint, $key: sm)) {
   .blogMainImage {
     width: 93%;
-    height: 12rem;
+    max-width: 93%;
+    height: 11rem;
     transform: translateY(-3rem);
     margin-bottom: 0;
-    object-fit: cover;
   }
 
   .bannerContainer {

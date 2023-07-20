@@ -15,10 +15,9 @@ import { SocialElement } from "../components/social-element";
 import { StyledContainerHeader, StyledContainerNavBarXL } from "../elements";
 import { AppContext, initialState } from "../config/context.js";
 import { TwitterIcon, Facebook, Linkedin, InstagramIcon, XlFooter} from "../components/icons";
+import { useMediaQuery } from "../hooks";
 
 import "../index.scss";
-
-import { useMediaQuery } from "../hooks";
 
 import * as styles from "./layout.module.scss";
 
