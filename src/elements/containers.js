@@ -41,7 +41,7 @@ export const StyledContainerHeader = styled.div`
   justify-content: space-between;
   display: flex;
   position: static;
-  width: 85%;
+  width: 90%;
   max-width: 1300px;
   
   @media ${props => props.theme.breakpoints.tablet} {

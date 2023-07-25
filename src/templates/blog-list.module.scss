@@ -5,7 +5,7 @@
   margin: 5% 7% 0;
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(30%, 1fr));
-  gap: 6rem 3.4rem;
+  gap: 4rem 3.4rem;
 }
 
 @media only screen and (max-width: map-get($map: $screen-breakpoint, $key: sm)) {

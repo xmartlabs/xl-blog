@@ -125,17 +125,6 @@ body {
   }
 }
 
-@media screen and (max-width: map-get($map: $screen-breakpoint, $key: lg)) {
-  .filterContainer {
-    justify-content: start;
-    flex-wrap: wrap;
-  }
-
-  .filterElement {
-    margin-bottom: 2rem;
-  }
-}
-
 @media screen and (max-height: map-get($map: $screen-breakpoint, $key: md)) {
   .homeBanner {
     background-image: url("../../static/images/home-banner/home-banner-desktop-small.png");
@@ -143,14 +132,13 @@ body {
     max-height: 40rem;
     background-size: none;
   }
-}
 
-@media screen and (max-width: map-get($map: $screen-breakpoint, $key: sm)) {
-  .homeBanner {
-    background-image: url("../../static/images/home-banner/home-banner-desktop-small.png");
-    min-width: 22.4rem;
-    max-height: 26rem;
-    background-size: none;
+  .filterContainer {
+    flex-wrap: wrap;
+  }
+
+  .filterElement {
+    margin-bottom: 2rem;
   }
 }
 
@@ -170,8 +158,9 @@ body {
   }
 
   .filterContainer {
-    flex-wrap: wrap;
-    justify-content: flex-start;
+    overflow-x: scroll;
+    flex-wrap: unset;    
+    justify-content: unset;
   }
 
   .filterElement {
@@ -215,5 +204,9 @@ body {
 
   .footerMobileLogo {
     width: 65%;
+  }
+
+  .selectedLink {
+    min-width:auto
   }
 }

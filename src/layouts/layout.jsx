@@ -62,7 +62,7 @@ const filters = [
 
 function Layout({ children }) {  
   const [contextState, setContextState] = useState(initialState);
-  const isMobile = useMediaQuery("(max-width: 768px)");
+  const isMobile = useMediaQuery("(max-width: 992px)");
   const [ category, setCategory ] = useState('all');
 
   useEffect(() => {
@@ -122,8 +122,8 @@ function Layout({ children }) {
                     <StaticImage 
                       src="../../static/images/logo.png"
                       alt=""
-                      width={56}
-                      height={56}
+                      width={44}
+                      height={44}
                     />
                   </Link>
                   {!isMobile && <NavMenu />}
