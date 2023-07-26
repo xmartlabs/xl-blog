@@ -65,14 +65,15 @@
     align-items: center;
     justify-content: center;
   }
+}
 
+@media only screen and (max-width: map-get($map: $screen-breakpoint, $key: sm)) {
   .imageContainer {
     width: 100%;
+    padding-bottom: 41%;
 
     p {
-      background-color: $xlPink;
-      color: $neutral100;
-      border: none;
+      top: calc(96% - 1.5rem - 8%);
     }
   }
 }

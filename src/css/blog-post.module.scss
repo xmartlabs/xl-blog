@@ -277,6 +277,7 @@
     border-collapse: collapse;
     width: 100%;
     hyphens: auto;
+    text-align: left;
 
     tbody th, td {
       @extend .text__paragraph__two__blueTwo;
@@ -375,6 +376,17 @@
 }
 
 // Responsive Design
+
+@media screen and (min-width: map-get($map: $screen-breakpoint, $key: xxl)) {
+  .bodyPostContainer {
+    padding-right: 41%;
+  }
+
+  .bodyPostContainer p {
+    line-height: 2rem;
+  }
+
+}
 
 @media screen and (max-width: map-get($map: $screen-breakpoint, $key: lg)) {
   .bannerContainer {
