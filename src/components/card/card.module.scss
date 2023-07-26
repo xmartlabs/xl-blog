@@ -21,7 +21,7 @@
 
   p {
     position: absolute;
-    top: calc(100% - 1.5rem - 8%);
+    bottom: 1rem;
     left: 1rem;
   }
 }
@@ -71,9 +71,5 @@
   .imageContainer {
     width: 100%;
     padding-bottom: 41%;
-
-    p {
-      top: calc(96% - 1.5rem - 8%);
-    }
   }
 }
