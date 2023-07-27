@@ -1,0 +1,44 @@
+@import "../../css/variables.scss";
+@import "../../css/text-styles.scss";
+
+.indexSubContainer {
+  position: fixed;
+  top: 20%;
+  width: 20%;
+  margin-right: 5%;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.disappearIndex {
+  display: none;
+}
+
+.selectedLink {
+  font-weight: $font-bold;
+  background-image: url("/images/index-blog-dot.png");
+  background-position: 0 0.4rem;
+  background-size: 0.5rem 0.5rem;
+  background-repeat: no-repeat;
+}
+
+.links {
+  @extend .text__big__links__blueTwo;
+  text-decoration: none;
+  font-family: $primary-font;
+  padding-bottom: 2.5rem;
+  height: auto;
+  overflow: hidden;
+  padding-left: 1.5rem;
+}
+
+
+// Media
+
+@media screen and (max-width: map-get($map: $screen-breakpoint, $key: sm)) {
+  .indexSubContainer {
+    display: none;
+  }
+}
+

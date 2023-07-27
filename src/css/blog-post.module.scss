@@ -44,38 +44,6 @@
   justify-content: end;
 }
 
-.indexSubContainer {
-  position: fixed;
-  top: 20%;
-  width: 20%;
-  margin-right: 5%;
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-}
-
-.links {
-  @extend .text__big__links__blueTwo;
-  text-decoration: none;
-  font-family: $primary-font;
-  padding-bottom: 2.5rem;
-  height: auto;
-  overflow: hidden;
-  padding-left: 1.5rem;
-}
-
-.selectedLink {
-  font-weight: $font-bold;
-  background-image: url("/images/index-blog-dot.png");
-  background-position: 0 0.4rem;
-  background-size: 0.5rem 0.5rem;
-  background-repeat: no-repeat;
-}
-
-.disappearIndex {
-  display: none
-}
-
 // Header Blog Elements
 
 .bannerContainer {
@@ -507,10 +475,6 @@
 
   .clockIcon {
     margin: 0 1rem 0 0;
-  }
-  
-  .indexSubContainer {
-    display: none;
   }
 
   .blogBottomElements {
