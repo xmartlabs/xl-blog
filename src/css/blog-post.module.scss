@@ -142,22 +142,22 @@
 }
 
 .category {
+  @extend .text__category__bold__neutral100;
   background-color: $xlPink;
-  color: $neutral100;
   justify-content: center;
-  width: 25%;
   margin-bottom: 1rem;
   width: auto;
-  padding: 0.5rem 2.5rem;
-  line-height: 0.5rem;
+  padding: 0 1rem;
+  height: 1.8rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1rem;
 }
 
 // Main Image
 
 .blogMainImage {
-  width: auto;
-  max-width: 80%;
-  height: 32rem;
+  width: 70%;
+  height: 70%;
   transform: translateY(-256px);
   margin-bottom: 5rem;
 }
@@ -277,6 +277,7 @@
     border-collapse: collapse;
     width: 100%;
     hyphens: auto;
+    text-align: left;
 
     tbody th, td {
       @extend .text__paragraph__two__blueTwo;
@@ -334,6 +335,7 @@
     padding: 3rem;
     font-family: $code-font;
     overflow-x: scroll;
+    font-size: 1rem;
   }
 
   a:has(> p) {
@@ -375,13 +377,29 @@
 
 // Responsive Design
 
+@media screen and (min-width: map-get($map: $screen-breakpoint, $key: xxl)) {
+  .bodyPostContainer {
+    padding-right: 41%;
+  }
+
+  .bodyPostContainer p {
+    line-height: 2rem;
+  }
+
+}
+
+@media screen and (max-width: map-get($map: $screen-breakpoint, $key: lg)) {
+  .bannerContainer {
+    padding: 10rem 27% 20rem 12rem;
+  }
+}
+
 @media screen and (max-width: map-get($map: $screen-breakpoint, $key: sm)) {
   .blogMainImage {
-    width: 93%;
-    height: 12rem;
     transform: translateY(-3rem);
     margin-bottom: 0;
-    object-fit: cover;
+    width: 80%;
+    height: 80%;
   }
 
   .bannerContainer {
@@ -419,6 +437,7 @@
 
     img[src$='.gif'] {
       width: 100%;
+      max-height: 37rem;
     }
 
     div {

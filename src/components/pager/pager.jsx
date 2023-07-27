@@ -11,7 +11,7 @@ const buildPageLocation = ({ numPages, page, category }) => {
     return category ? `/categories/${category}` : `/`;
   }
 
-  if (page + 1 === numPages) {
+  if (page - 1 === numPages) {
     return '';
   }
 

@@ -7,6 +7,10 @@
   display: flex;
   flex-direction: column;
   flex-wrap: wrap;
+
+  h1 {
+    line-height: 2.5rem;
+  }
 }
 
 .imageContainer {
@@ -17,7 +21,7 @@
 
   p {
     position: absolute;
-    top: 85%;
+    bottom: 1rem;
     left: 1rem;
   }
 }
@@ -49,7 +53,7 @@
 
 @media only screen and (max-width: map-get($map: $screen-breakpoint, $key: sm)) {
   .container {
-    width: 90%;
+    width: 80%;
 
     h1 {
       font-size: 1.6rem;
@@ -61,16 +65,11 @@
     align-items: center;
     justify-content: center;
   }
+}
 
+@media only screen and (max-width: map-get($map: $screen-breakpoint, $key: sm)) {
   .imageContainer {
     width: 100%;
-    margin-bottom: 3.5rem;
-
-    p {
-      top: 109%;
-      left: 0;
-      background-color: $xlPink;
-      color: $neutral100;
-    }
+    padding-bottom: 41%;
   }
 }

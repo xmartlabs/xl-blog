@@ -15,10 +15,9 @@ import { SocialElement } from "../components/social-element";
 import { StyledContainerHeader, StyledContainerNavBarXL } from "../elements";
 import { AppContext, initialState } from "../config/context.js";
 import { TwitterIcon, Facebook, Linkedin, InstagramIcon, XlFooter} from "../components/icons";
+import { useMediaQuery } from "../hooks";
 
 import "../index.scss";
-
-import { useMediaQuery } from "../hooks";
 
 import * as styles from "./layout.module.scss";
 
@@ -63,7 +62,7 @@ const filters = [
 
 function Layout({ children }) {  
   const [contextState, setContextState] = useState(initialState);
-  const isMobile = useMediaQuery("(max-width: 768px)");
+  const isMobile = useMediaQuery("(max-width: 992px)");
   const [ category, setCategory ] = useState('all');
 
   useEffect(() => {
@@ -121,10 +120,10 @@ function Layout({ children }) {
                     to="/"
                     id="logo-xl">
                     <StaticImage 
-                      src="../../static/images/logo.png"
+                      src="../../static/images/logo.svg"
                       alt=""
-                      width={56}
-                      height={56}
+                      width={44}
+                      height={44}
                     />
                   </Link>
                   {!isMobile && <NavMenu />}
