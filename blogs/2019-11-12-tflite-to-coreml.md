@@ -24,7 +24,7 @@ We will use an MNIST model from the [TF Lite examples](https://github.com/tensor
 
 So for example, for the following image, we want our model to predict "0":
 
-<img width="100px" src="/images/tflite_coreml/zero.png" />
+<img width="343px" src="/images/tflite_coreml/zero.png" />
 
 
 ## Inspecting the model
