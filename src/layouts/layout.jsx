@@ -39,16 +39,11 @@ export const StyledGetStartedTextButton = styled.div`
   letter-spacing: .5px;
   max-height: 17px;
 `
-export const StyledFooterTextTitle = styled.label`
-  color: #959595;
+export const StyledFooterText = styled.a`
+  color: #FFF;
   size: 17px;
-  line-height: 30px;
-`
-
-export const StyledFooterText = styled.label`
-  color: #fff;
-  size: 17px;
-  line-height: 50px;    
+  line-height: 50px;
+  text-decoration: none;
 `
 
 const filters = [
@@ -129,7 +124,7 @@ function Layout({ children }) {
                   {!isMobile && <NavMenu />}
                 </div>
                 {!isMobile && 
-                <StyledGetStartedButton id="header-getintouch" href={process.env.GATSBY_CONTACT_FORM}>
+                <StyledGetStartedButton className={styles.getStarted} id="header-getintouch" href={process.env.GATSBY_CONTACT_FORM}>
                   <StyledGetStartedTextButton>GET STARTED</StyledGetStartedTextButton>
                 </StyledGetStartedButton>
                 }
@@ -144,7 +139,7 @@ function Layout({ children }) {
             <Link
               to="/"
               id="logo-xl-white">
-              <StaticImage 
+              <StaticImage
                 src="../../static/images/logo-white.svg"
                 alt="Xmartlabs"
                 width={90}
@@ -155,14 +150,12 @@ function Layout({ children }) {
           <div className={styles.columnSocialContainer}>
             <div className={styles.columnContainer}>
               <div className={classnames(styles.columnFooter, styles.socialFirst)}>
-                <StyledFooterTextTitle>Company</StyledFooterTextTitle>
                 <StyledFooterText>Services</StyledFooterText>
                 <StyledFooterText>Work</StyledFooterText>
                 <StyledFooterText>Our Company</StyledFooterText>
               </div>                        
             
               <div className={styles.columnFooter}>
-                <StyledFooterTextTitle>Community</StyledFooterTextTitle>
                 <StyledFooterText>Community</StyledFooterText>
                 <StyledFooterText>Open Positions</StyledFooterText>
                 <StyledFooterText>Blog</StyledFooterText>

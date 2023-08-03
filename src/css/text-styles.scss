@@ -15,8 +15,6 @@ $text-line-heights: (
   headingOne: 3rem,
   headingTwoSeparated: 2rem,
   aside: 2.2rem,
-  headingTwo: 2rem,
-  categoryBold: 2rem,
   paragraph: 1.7rem,
   headingThree: 1.5rem,
   headingFour: 1.3rem,
@@ -29,7 +27,7 @@ $text-sizes: (
   headingOne: 2.5rem,
   commentTitle: 2.4rem,
   headingTwo: 1.9rem,
-  headingTwoSeparated: 2.2rem,
+  headingTwoSeparated: 1.8rem,
   headingThree: 1.6rem,
   paragraph: 1.4rem,
   headingFour: 1.3rem,
@@ -61,7 +59,7 @@ $text-colors: (
 @mixin text__heading__two {
   font-size: map-get($map: $text-sizes, $key: headingTwo);
   font-weight: map-get($map: $font-weights, $key: boldWeight900);
-  line-height: map-get($map: $text-line-heights, $key: headingTwo);
+  line-height: map-get($map: $text-line-heights, $key: headingTwoSeparated);
 }
 
 @mixin text__heading__three {
@@ -84,7 +82,7 @@ $text-colors: (
 @mixin text__paragraph__bold {
   font-size: map-get($map: $text-sizes, $key: authorName);
   font-weight: map-get($map: $font-weights, $key: boldWeight600);
-  line-height: map-get($map: $text-line-heights, $key: headingTwo);
+  line-height: map-get($map: $text-line-heights, $key: headingTwoSeparated);
 }
 
 @mixin text__label__bold {
@@ -107,7 +105,7 @@ $text-colors: (
 @mixin text__heading__two__big {
   font-size: map-get($map: $text-sizes, $key: headingTwoBig);
   font-weight: map-get($map: $font-weights, $key: lightWeight100);
-  line-height: map-get($map: $text-line-heights, $key: headingTwoBig);
+  line-height: map-get($map: $text-line-heights, $key: headingTwoSeparated);
 }
 
 @mixin text__heading__two__separated {
@@ -130,7 +128,7 @@ $text-colors: (
 
 @mixin text__link__blog {
   font-size: map-get($map: $text-sizes, $key: authorName);
-  line-height: map-get($map: $text-line-heights, $key: headingTwo);
+  line-height: map-get($map: $text-line-heights, $key: headingTwoSeparated);
   font-weight: map-get($map: $font-weights, $key: boldWeight500);
 }
 
@@ -148,7 +146,7 @@ $text-colors: (
 @mixin text__category__bold {
   font-size: map-get($map: $text-sizes, $key: categoryBold);
   font-weight: map-get($map: $font-weights, $key: boldWeight900);
-  line-height: map-get($map: $text-line-heights, $key: categoryBold);
+  line-height: map-get($map: $text-line-heights, $key: headingTwoSeparated);
 }
 
 @mixin text__filter {

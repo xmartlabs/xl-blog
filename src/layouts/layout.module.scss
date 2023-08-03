@@ -21,6 +21,16 @@ body {
   align-items: center;
 }
 
+.getStarted {
+  position: relative;
+  top: 0;
+  transition: top ease 0.2s;
+}
+
+.getStarted:hover {
+  top: -4px;
+}
+
 .footerCol {
   width: 20%;
   display: flex;
@@ -56,6 +66,7 @@ body {
 
 .filterElement:hover {
   cursor: pointer;
+  color: $graySix;
 }
 
 .selectedLink {
@@ -81,6 +92,10 @@ body {
     align-items: center;
     margin: 0.7rem;
   }
+}
+
+.blogIcons a:hover {
+  filter: brightness(1.5);
 }
 
 .logoMobile {

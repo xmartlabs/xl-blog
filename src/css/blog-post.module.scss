@@ -134,7 +134,7 @@
 
 .bodyPostContainer {
   padding: 5rem 33% 2rem 15%;  
-  text-align: justify;
+  text-align: left;
   font-family: $blog-font;
   margin-top: -22rem;
   scroll-padding-top: 3rem;
@@ -178,6 +178,8 @@
 
   a {
     @extend .text__link__blog__blueTwo;
+    font-family: $blog-font;
+    color: $xlPink;
   } 
 
   aside {
