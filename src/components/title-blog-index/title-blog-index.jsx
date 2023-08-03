@@ -1,6 +1,6 @@
 import React, { useEffect, useState, useRef, useCallback } from "react";
 
-import { ArrowIndexIcon } from '../icons';
+import { ArrowIcon } from '../icons';
 import { SeeMoreTitles } from "../see-more-titles/see-more-titles";
 
 import { classnames, findTitles } from "../../helpers";
@@ -18,13 +18,11 @@ const TitleBlogIndex = ({ data, refIndexTitles, disappearIndex }) => {
   useEffect(() => {
     window.addEventListener('scroll', getActiveTitle, { passive: true });
 
-    checkOverflow();
-    const handleResize = () => checkOverflow();
-    window.addEventListener('resize', handleResize);
+    window.addEventListener('resize', checkOverflow);
 
     return () => {
       window.removeEventListener('scroll', getActiveTitle);
-      window.removeEventListener('resize', handleResize);
+      window.removeEventListener('resize', checkOverflow);
     };
   }, []);
 
@@ -80,14 +78,14 @@ const TitleBlogIndex = ({ data, refIndexTitles, disappearIndex }) => {
         <SeeMoreTitles 
           onClick={scrollToBottom} 
           className={classnames({[styles.disappearIndex]: disappearIndex})} 
-          children={<ArrowIndexIcon className={styles.topArrow}/>}  
+          children={<ArrowIcon className={styles.topArrow}/>}  
         /> 
       }
       {isBottomArrow && 
         <SeeMoreTitles 
           onClick={scrollToTop} 
           className={classnames({[styles.disappearIndex]: disappearIndex})} 
-          children={<ArrowIndexIcon className={styles.bottomArrow}/>}  
+          children={<ArrowIcon className={styles.bottomArrow}/>}  
         /> 
       }
       <div className={styles.heightContainer} ref={viewContainerRef}>

@@ -3,13 +3,6 @@ import React, { useState, useEffect} from "react";
 const useMediaQuery = (query) => {
   const [matches, setMatches] = useState(false);
 
-  const handleWindowSizeChange = () => {
-    if (window) {
-      const match = window.matchMedia(query);
-      setMatches(match.matches);
-    }
-  };
-
   useEffect(() => {
     handleWindowSizeChange();
   }, [query]);
@@ -21,6 +14,12 @@ const useMediaQuery = (query) => {
     }
   }, []);
 
+  const handleWindowSizeChange = () => {
+    if (window) {
+      const match = window.matchMedia(query);
+      setMatches(match.matches);
+    }
+  };
   return matches;
 };
 
