@@ -40,9 +40,8 @@ export const StyledGetStartedTextButton = styled.div`
   max-height: 17px;
 `
 export const StyledFooterText = styled.a`
-  color: #FFF;
   size: 17px;
-  line-height: 50px;
+  line-height: 40px;
   text-decoration: none;
 `
 
@@ -135,37 +134,30 @@ function Layout({ children }) {
         {children}
       </AppContext.Provider>
       <Footer>
-          <div className={isMobile && styles.logoMobile}>
+        <div className={styles.container}>
+          <div className={styles.logo}>
             <Link
               to="/"
               id="logo-xl-white">
               <StaticImage
-                src="../../static/images/logo-white.svg"
+                src="../../static/images/logo-white.png"
                 alt="Xmartlabs"
-                width={90}
-                height={150}
+                width={155}
+                height={45}
               />
             </Link>
           </div>
-          <div className={styles.columnSocialContainer}>
-            <div className={styles.columnContainer}>
-              <div className={classnames(styles.columnFooter, styles.socialFirst)}>
-                <StyledFooterText>Services</StyledFooterText>
-                <StyledFooterText>Work</StyledFooterText>
-                <StyledFooterText>Our Company</StyledFooterText>
-              </div>                        
-            
-              <div className={styles.columnFooter}>
-                <StyledFooterText>Community</StyledFooterText>
-                <StyledFooterText>Open Positions</StyledFooterText>
-                <StyledFooterText>Blog</StyledFooterText>
-              </div>
+          <div className={styles.linkContainer}>
+            <div className={styles.optionContainer}>
+              <StyledFooterText className={styles.firstLink}>Work</StyledFooterText>
+              <StyledFooterText>Services</StyledFooterText>
+              <StyledFooterText>Our Company</StyledFooterText>
+              <StyledFooterText>Community</StyledFooterText>
+              <StyledFooterText>Blog</StyledFooterText>
             </div>
-            <div className={styles.socialElementContainer}>
-            {isMobile && <XlFooter className={styles.footerMobileLogo}/>}
             <SocialElement className={classnames(styles.socialBottom, styles.blogIcons)} links={shareXlProfileLinks} />
-            </div>
           </div>
+        </div>
       </Footer>
       <Helmet>
         <script src={withPrefix('identity.js')} type="text/javascript"></script>

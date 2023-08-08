@@ -2,18 +2,18 @@
 @import "../../css/variables.scss";
 
 .container {
-  justify-content: center;
+  justify-content: start;
   display: flex;
-  overflow: hidden;
-  height: 40vh;
+  overflow: none;
+  height: auto;
   background-color: $darkOne;
   flex-direction: row;
-  align-items: center;
+  padding: 5rem 0 4rem 7rem;
 }
 
 @media screen and (max-width: map-get($map: $screen-breakpoint, $key: sm)) {
   .container {
     height: 100%;
-    padding: 5rem 0 5rem 0;  
+    padding: 4rem 0 3rem 1rem;  
   }
 }
