@@ -1,0 +1,68 @@
+@import "../../css/variables.scss";
+@import "../../css/colors.scss";
+@import "../../css/text-styles.scss";
+
+// Container
+
+.container {
+  background-color: $blueSix;
+  height: 47rem;
+  max-height: 47rem;
+  padding-top: 6rem;
+  display: flex;
+  flex-direction: column;
+}
+
+.contentContainer {
+  display: flex;
+  flex-direction: row;
+}
+
+.textContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: start;
+  justify-content: center;
+  margin-top: 15%;
+  margin-left: 6rem;
+
+  h1 {
+    width: 50%;
+  }
+}
+
+.bottomTextContainer {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  overflow: hidden;
+}
+
+// Components
+
+.circleIcon {
+  width: 5rem;
+  height: 5rem;
+  background-color: pink;
+}
+
+@media screen and (max-width: map-get($map: $screen-breakpoint, $key: xxl)) {
+  .container {
+    height: 33rem;
+  }
+}
+
+@media screen and (max-height: map-get($map: $screen-breakpoint, $key: md)) {
+  .container {
+    min-width: 22.4rem;
+    max-height: 40rem;
+  }
+}
+
+@media screen and (max-width: map-get($map: $screen-breakpoint, $key: xs)) {
+  .container {
+    min-width: 22.4rem;
+    max-height: 54rem;
+    height: 46rem;
+  }
+}

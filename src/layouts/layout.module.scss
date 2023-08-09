@@ -5,16 +5,6 @@ body {
   font-family: $primary-font, serif;
 }
 
-.homeBanner {
-  background-image: url("../../static/images/home-banner/home-banner-desktop.png");
-  background-repeat: no-repeat;
-  background-size: cover;
-  width: 100%;
-  background-position: center center;
-  height: 47rem;
-  max-height: 47rem;
-}
-
 .navMenuContainer {
   display: flex;
   flex-direction: row;
@@ -134,22 +124,7 @@ body {
 
 // Media
 
-@media screen and (max-width: map-get($map: $screen-breakpoint, $key: xxl)) {
-  .homeBanner {
-    background-image: url("../../static/images/home-banner/home-banner-desktop-small.png");
-    height: 33rem;
-    background-position-y: 3rem;
-  }
-}
-
 @media screen and (max-height: map-get($map: $screen-breakpoint, $key: md)) {
-  .homeBanner {
-    background-image: url("../../static/images/home-banner/home-banner-desktop-small.png");
-    min-width: 22.4rem;
-    max-height: 40rem;
-    background-size: none;
-  }
-
   .filterContainer {
     flex-wrap: wrap;
   }
@@ -160,18 +135,8 @@ body {
 }
 
 @media screen and (max-width: map-get($map: $screen-breakpoint, $key: xs)) {
-  
   .desktopLogo{
     display: none;
-  }
-
-  .homeBanner {
-    background-image: url("../../static/images/home-banner/home-banner-mobile.png");
-    min-width: 22.4rem;
-    max-height: 54rem;
-    background-position: center;
-    background-size: none;
-    height: 46rem;
   }
 
   .filterContainer {

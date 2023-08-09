@@ -8,6 +8,7 @@ import { StaticImage } from "gatsby-plugin-image";
 
 import { actualCategory, classnames } from "../helpers";
 
+import { HeaderBanner } from "../components/header-banner/header-banner";
 import { NavMenu } from "../components/nav-menu";
 import { Footer } from "../components/footer";
 import { MobileMenu } from "../components/mobile-menu";
@@ -129,6 +130,7 @@ function Layout({ children }) {
                 }
               </StyledContainerHeader>
             </StyledContainerNavBarXL>
+            {contextState === "home" && <HeaderBanner />}
         </div>
         {contextState === "home" && filterLinks()}
         {children}
