@@ -6,7 +6,7 @@ import { classnames } from "../../helpers";
 import * as styles from "./see-more-titles.module.scss";
 
 const SeeMoreTitles = ({ onClick, className, children}) => (
-  <a onClick={onClick} className={classnames(className, styles.arrow)} >
+  <a onClick={onClick} className={classnames(className, styles.container)} >
     {children}
   </a>
 );

@@ -30,15 +30,8 @@ const TitleBlogIndex = ({ data, refIndexTitles, disappearIndex }) => {
     if (refIndexTitles.current) {
       const elementList = Array.from(refIndexTitles.current.childNodes);
       const titles = findTitles(elementList);
-      const scrollPosition = window.scrollY;
-      let activeTitle = titles[0];
-      titles.forEach(title => {
-        const titleTop = title.getBoundingClientRect().top + window.scrollY - 500;
-        if (scrollPosition >= titleTop) {
-          activeTitle = title;
-        }
-      });
-      setTitleOnView(activeTitle?.textContent);
+      const activeTitle = titles.findLast((title) => title.getBoundingClientRect().top <= 500) || titles[0];
+      setTitleOnView(activeTitle.textContent);
       setSelectLink('');
     }
   };

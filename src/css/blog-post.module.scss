@@ -99,8 +99,8 @@
 .nameDateTimeContainer {
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
   align-items: flex-start;
+  justify-content: end;
 }
 
 .categoryTagsContainer {
@@ -336,7 +336,7 @@
 // DISQUS
 
 .disqusSection {
-  padding: 0 6rem;
+  padding: 0 16%;
   margin: 2rem 0 4rem 0;
   
   .disqusTitle {

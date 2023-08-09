@@ -192,13 +192,13 @@ const BlogPost = ({ data, children }) => {
           </div>
           <Tags blogTags={data.mdx.frontmatter.tags} className={styles.tags} />
         </div>
-        <MoreBlogsSection relatedPosts={data.mdx.relatedPosts} refMoreFrom={refMoreFrom} title={categoryBlog.category}/>
-      <div className={styles.disqusSection}>
-        <h3 className={styles.disqusTitle}>Comments:</h3>
-        <div id="disqus_thread">
-          <Disqus config={disqusConfig} />
+        <div className={styles.disqusSection}>
+          <h3 className={styles.disqusTitle}>Comments:</h3>
+          <div id="disqus_thread">
+            <Disqus config={disqusConfig} />
+          </div>
         </div>
-      </div>
+        <MoreBlogsSection relatedPosts={data.mdx.relatedPosts} refMoreFrom={refMoreFrom} title={categoryBlog.category}/>
     </div>
   );
 };

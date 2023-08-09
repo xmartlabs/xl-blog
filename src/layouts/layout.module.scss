@@ -58,13 +58,13 @@ body {
 
 .filterElement:hover {
   cursor: pointer;
-  color: $graySix;
+  color: $xlPink;
 }
 
 .selectedLink {
   color: $xlPink;
   min-width: 3rem;
-  border-bottom: 4px solid $xlPink;
+  border-bottom: 2px solid $xlPink;
   text-align: center;
 }
 
