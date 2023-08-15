@@ -13,12 +13,11 @@ const HeaderBanner = () => (
       </div>
     </div>
     <div className={styles.bottomTextContainer}>
-      <p>topic 1</p>
-      <p>topic 2</p>
-      <p>topic 3</p>
-      <p>topic 4</p>
-      <p>topic 5</p>
-      <p>topic 6</p>
+      <p>Development</p>
+      <p>Design</p>
+      <p>Machine Learning</p>
+      <p>Blockchain</p>
+      <p>People</p>
     </div>
   </div>
 );
