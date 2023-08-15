@@ -8,12 +8,18 @@
   height: auto;
   background-color: $darkOne;
   flex-direction: row;
-  padding: 5rem 0 4rem 7rem;
+  padding: 5rem 0 4rem 15.5%;
+}
+
+@media only screen and (max-width: map-get($map: $screen-breakpoint, $key: xxl)) {
+  .container {
+    padding-left: 8.5%;
+  }
 }
 
 @media screen and (max-width: map-get($map: $screen-breakpoint, $key: sm)) {
   .container {
     height: 100%;
-    padding: 4rem 0 3rem 1rem;  
+    padding: 4rem 0 3rem 1.5rem;  
   }
 }

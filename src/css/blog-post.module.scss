@@ -47,7 +47,7 @@
 // Header Blog Elements
 
 .bannerContainer {
-  padding: 10rem 44% 20rem 17rem;
+  padding: 10rem 44% 20rem 16%;
   background-color: $blueSix;
 }
 
@@ -124,16 +124,16 @@
 // Main Image
 
 .blogMainImage {
-  width: 70%;
+  width: 68%;
   height: 70%;
-  transform: translateY(-256px);
+  transform: translate(23.4%, -256px);
   margin-bottom: 5rem;
 }
 
 // Blog body
 
 .bodyPostContainer {
-  padding: 5rem 33% 2rem 15%;  
+  padding: 5rem 33% 2rem 16%;  
   text-align: left;
   font-family: $blog-font;
   margin-top: -22rem;
@@ -330,7 +330,7 @@
   flex-direction: row-reverse;
   justify-content: flex-start;
   align-items: baseline;
-  padding: 5rem 40.5% 2rem 15%;
+  padding: 5rem 33% 2rem 16%;
 }
 
 // DISQUS
@@ -347,7 +347,7 @@
 // Responsive Design
 
 @media screen and (min-width: map-get($map: $screen-breakpoint, $key: xxl)) {
-  .bodyPostContainer {
+  .bodyPostContainer, .blogBottomElements {
     padding-right: 41%;
   }
 
@@ -361,19 +361,24 @@
   .bannerContainer {
     padding: 10rem 27% 20rem 12rem;
   }
+
+  .blogMainImage {
+    transform: translate(191px, -256px);
+  }  
+
 }
 
 @media screen and (max-width: map-get($map: $screen-breakpoint, $key: sm)) {
   .blogMainImage {
     transform: translateY(-3rem);
     margin-bottom: 0;
-    width: 80%;
-    height: 80%;
+    width: 100%;
+    height: auto;
   }
 
   .bannerContainer {
     min-height: 100%;
-    padding: 8rem 1rem 6rem 1rem;
+    padding: 8rem 1rem 6rem 5%;
   } 
 
   .titleContainer {

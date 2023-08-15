@@ -142,10 +142,10 @@ function Layout({ children }) {
               to="/"
               id="logo-xl-white">
               <StaticImage
-                src="../../static/images/logo-white.png"
+                src="../../static/images/logo-white.svg"
                 alt="Xmartlabs"
-                width={155}
-                height={45}
+                width={193}
+                height={53}
               />
             </Link>
           </div>
