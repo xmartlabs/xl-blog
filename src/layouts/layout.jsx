@@ -39,16 +39,10 @@ export const StyledGetStartedTextButton = styled.div`
   letter-spacing: .5px;
   max-height: 17px;
 `
-export const StyledFooterTextTitle = styled.label`
-  color: #959595;
+export const StyledFooterText = styled.a`
   size: 17px;
-  line-height: 30px;
-`
-
-export const StyledFooterText = styled.label`
-  color: #fff;
-  size: 17px;
-  line-height: 50px;    
+  line-height: 40px;
+  text-decoration: none;
 `
 
 const filters = [
@@ -129,7 +123,7 @@ function Layout({ children }) {
                   {!isMobile && <NavMenu />}
                 </div>
                 {!isMobile && 
-                <StyledGetStartedButton id="header-getintouch" href={process.env.GATSBY_CONTACT_FORM}>
+                <StyledGetStartedButton className={styles.getStarted} id="header-getintouch" href={process.env.GATSBY_CONTACT_FORM}>
                   <StyledGetStartedTextButton>GET STARTED</StyledGetStartedTextButton>
                 </StyledGetStartedButton>
                 }
@@ -140,39 +134,30 @@ function Layout({ children }) {
         {children}
       </AppContext.Provider>
       <Footer>
-          <div className={isMobile && styles.logoMobile}>
+        <div className={styles.container}>
+          <div className={styles.logo}>
             <Link
               to="/"
               id="logo-xl-white">
-              <StaticImage 
-                src="../../static/images/logo-white.svg"
+              <StaticImage
+                src="../../static/images/logo-white.png"
                 alt="Xmartlabs"
-                width={90}
-                height={150}
+                width={155}
+                height={45}
               />
             </Link>
           </div>
-          <div className={styles.columnSocialContainer}>
-            <div className={styles.columnContainer}>
-              <div className={classnames(styles.columnFooter, styles.socialFirst)}>
-                <StyledFooterTextTitle>Company</StyledFooterTextTitle>
-                <StyledFooterText>Services</StyledFooterText>
-                <StyledFooterText>Work</StyledFooterText>
-                <StyledFooterText>Our Company</StyledFooterText>
-              </div>                        
-            
-              <div className={styles.columnFooter}>
-                <StyledFooterTextTitle>Community</StyledFooterTextTitle>
-                <StyledFooterText>Community</StyledFooterText>
-                <StyledFooterText>Open Positions</StyledFooterText>
-                <StyledFooterText>Blog</StyledFooterText>
-              </div>
+          <div className={styles.linkContainer}>
+            <div className={styles.optionContainer}>
+              <StyledFooterText className={styles.firstLink}>Work</StyledFooterText>
+              <StyledFooterText>Services</StyledFooterText>
+              <StyledFooterText>Our Company</StyledFooterText>
+              <StyledFooterText>Community</StyledFooterText>
+              <StyledFooterText>Blog</StyledFooterText>
             </div>
-            <div className={styles.socialElementContainer}>
-            {isMobile && <XlFooter className={styles.footerMobileLogo}/>}
             <SocialElement className={classnames(styles.socialBottom, styles.blogIcons)} links={shareXlProfileLinks} />
-            </div>
           </div>
+        </div>
       </Footer>
       <Helmet>
         <script src={withPrefix('identity.js')} type="text/javascript"></script>

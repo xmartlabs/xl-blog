@@ -2,15 +2,11 @@
 @import "/src/css/variables.scss";
 @import "/src/css/text-styles.scss";
 
-.container {
+.container {  
   width: 100%;
   display: flex;
   flex-direction: column;
   flex-wrap: wrap;
-
-  h1 {
-    line-height: 2.5rem;
-  }
 }
 
 .imageContainer {
@@ -49,6 +45,18 @@
 
 .styledLink {
   text-decoration: none;
+  transition: all .2s cubic-bezier(.25,.46,.45,.94);
+
+  h1 {
+    @extend .text__heading__two__separated__black;
+  }
+}
+
+.styledLink:hover {
+  h1 {
+    color: $xlPink;
+  }
+  transform: translateY(-15px);
 }
 
 @media only screen and (max-width: map-get($map: $screen-breakpoint, $key: sm)) {

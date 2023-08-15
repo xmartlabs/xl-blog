@@ -12,10 +12,59 @@ import { SocialElement } from '../components/social-element';
 import { TwitterIcon, Facebook, Linkedin, ClockIcon, InstagramIcon} from "../components/icons";
 import { MoreBlogsSection } from '../components/more-blogs-section';
 import { Tags } from '../components/tags/tags';
+import { TitleBlogIndex } from '../components/title-blog-index/title-blog-index';
 
 import * as styles from '../css/blog-post.module.scss';
 
 const _ = require("lodash");
+
+const getPathname = () => {
+  if (typeof window !== 'undefined') {
+    return window.location.pathname;
+  }
+  return '';
+}
+
+const shareBlogPostLinks = [
+  {
+    path: `https://twitter.com/intent/tweet?url=URL&text=${getPathname()}`, 
+    icon: <TwitterIcon />,
+    id: "socialSharePostTwitter"
+  },
+  {
+    path: `https://www.facebook.com/sharer/sharer.php?u=https://blog.xmartlabs.com/blog${getPathname()}`, 
+    icon: <Facebook />,
+    id: "socialSharePostFacebook"
+  },
+  {
+    path: `https://www.linkedin.com/sharing/share-offsite/?url=https%3A%2F%2Fblog.xmartlabs.com%2Fblog%2F${getPathname()}%2F`,
+    icon: <Linkedin />,
+    id: "socialSharePostLinkedIn"
+  }
+];
+
+const shareXlProfileLinks = [
+  {
+    path: "https://www.instagram.com/xmartlabs", 
+    icon: <InstagramIcon />,
+    id: "socialMenuInstagram"
+  },
+  {
+    path: "https://www.linkedin.com/company/xmartlabs/mycompany/", 
+    icon: <Linkedin />,
+    id: "socialProfileLinkedIn"
+  },
+  {
+    path: "https://twitter.com/xmartlabs", 
+    icon: <TwitterIcon />,
+    id: "socialProfileTwitter"
+  },
+  {
+    path: "https://es-la.facebook.com/xmartlabs/", 
+    icon: <Facebook />,
+    id: "socialProfileFacebook"
+  },
+];
 
 const BlogPost = ({ data, children }) => {
   const author = AuthorsYAMLData.find(({ author }) => (author === data.mdx.frontmatter.author));
@@ -25,16 +74,7 @@ const BlogPost = ({ data, children }) => {
   const refMoreFrom = useRef(null);
   const refIndexTitles = useRef(null);
   const categoryBlog = useCategory(data.mdx.frontmatter.category);
-  const [ selectLink, setSelectLink ] = useState('');
   const [ disappearIndex, setDisappearIndex ] = useState(false);
-  const [ titleOnView, setTitleOnView ] = useState('');
-
-  const checkWindow = () => {
-    if (typeof window !== 'undefined') {
-      return window.location.pathname;
-    }
-    return '';
-  }
 
   const checkWindowOrigin = () => {
     if (typeof window !== 'undefined') {
@@ -43,55 +83,10 @@ const BlogPost = ({ data, children }) => {
     return '';
   }
 
-  const shareBlogPostLinks = [
-    {
-      path: `https://twitter.com/intent/tweet?url=URL&text=${checkWindow()}`, 
-      icon: <TwitterIcon />,
-      id: "socialSharePostTwitter"
-    },
-    {
-      path: `https://www.facebook.com/sharer/sharer.php?u=https://blog.xmartlabs.com/blog${checkWindow()}`, 
-      icon: <Facebook />,
-      id: "socialSharePostFacebook"
-    },
-    {
-      path: `https://www.linkedin.com/sharing/share-offsite/?url=https%3A%2F%2Fblog.xmartlabs.com%2Fblog%2F${checkWindow()}%2F`,
-      icon: <Linkedin />,
-      id: "socialSharePostLinkedIn"
-    }
-  ];
-  
-  const shareXlProfileLinks = [
-    {
-      path: "https://www.instagram.com/xmartlabs", 
-      icon: <InstagramIcon />,
-      id: "socialMenuInstagram"
-    },
-    {
-      path: "https://www.linkedin.com/company/xmartlabs/mycompany/", 
-      icon: <Linkedin />,
-      id: "socialProfileLinkedIn"
-    },
-    {
-      path: "https://twitter.com/xmartlabs", 
-      icon: <TwitterIcon />,
-      id: "socialProfileTwitter"
-    },
-    {
-      path: "https://es-la.facebook.com/xmartlabs/", 
-      icon: <Facebook />,
-      id: "socialProfileFacebook"
-    },
-  ];
-
   useEffect(() => {
     setState(BannerType.blog);
     setDisappearIndex(true);
     window.addEventListener('scroll', handleScroll, {
-      passive: true
-    });
-
-    window.addEventListener('scroll', getActiveTitle, {
       passive: true
     });
 
@@ -101,7 +96,6 @@ const BlogPost = ({ data, children }) => {
 
     return () => {
       window.removeEventListener('scroll', handleScroll);
-      window.removeEventListener('scroll', getActiveTitle);
       setState(BannerType.home)
     };
   }, [])
@@ -128,44 +122,12 @@ const BlogPost = ({ data, children }) => {
     }
   };
 
-  const getActiveTitle = () => {
-    if (typeof window !== 'undefined') {
-      if (refIndexTitles.current) {
-        const elementList = Array.from(refIndexTitles.current.childNodes);
-        const titles = findTitles(elementList);
-        const scrollPosition = window.scrollY;
-        let activeTitle = titles[0];
-        titles.forEach(title => {
-          const titleTop = title.getBoundingClientRect().top + window.scrollY - 500;
-          if (scrollPosition >= titleTop) {
-            activeTitle = title;
-          }
-        });
-        setTitleOnView(activeTitle?.textContent);
-        setSelectLink('');
-      }
-    }
-  };
-
   const getTitles = () => {
     if (typeof window !== 'undefined' && typeof window.document !== "undefined") {
       if (refIndexTitles.current) {
         const elementList = Array.from(refIndexTitles.current.childNodes);
         const titlesList = findTitles(elementList);
-        return (
-          <div className={classnames({[styles.disappearIndex]: disappearIndex}, styles.indexSubContainer)}>
-            {titlesList.map((title) => 
-              <a href={"#" + title.id} key={title.id} onClick={() => setSelectLink(title.id)}
-                className={classnames(
-                  { [styles.selectedLink]: title.id === selectLink || titleOnView === title.id},
-                  styles.links
-                )}
-              >
-                {title.innerText.length > 55 ? title.innerText.slice(0, 55) + "..." : title.innerText}
-              </a>
-            )}
-          </div>
-        );    
+        return titlesList;
       }
       return null;
     }
@@ -190,10 +152,11 @@ const BlogPost = ({ data, children }) => {
     }
   }
 
+
   return (
     <div onScroll={handleScroll} id='containerDiv'>
       <div className={styles.indexContainer}>
-        {getTitles()}
+        <TitleBlogIndex data={getTitles()} disappearIndex={disappearIndex} refIndexTitles={refIndexTitles} />
       </div>
       <SocialElement className={classnames(disappearSocial ? styles.socialDisappear : styles.socialAppear, styles.blogIcons, {[styles.socialDisappear]: disappearIndex})} links={shareBlogPostLinks} />
       <div className={styles.bannerContainer}>
@@ -229,13 +192,13 @@ const BlogPost = ({ data, children }) => {
           </div>
           <Tags blogTags={data.mdx.frontmatter.tags} className={styles.tags} />
         </div>
-        <MoreBlogsSection relatedPosts={data.mdx.relatedPosts} refMoreFrom={refMoreFrom} title={categoryBlog.category}/>
-      <div className={styles.disqusSection}>
-        <h3 className={styles.disqusTitle}>Comments:</h3>
-        <div id="disqus_thread">
-          <Disqus config={disqusConfig} />
+        <div className={styles.disqusSection}>
+          <h3 className={styles.disqusTitle}>Comments:</h3>
+          <div id="disqus_thread">
+            <Disqus config={disqusConfig} />
+          </div>
         </div>
-      </div>
+        <MoreBlogsSection relatedPosts={data.mdx.relatedPosts} refMoreFrom={refMoreFrom} title={categoryBlog.category}/>
     </div>
   );
 };
