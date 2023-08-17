@@ -62,6 +62,7 @@
   animation: category-move 15s linear infinite;
   -webkit-animation: category-move 15s linear infinite;
   justify-content: flex-end;
+  margin-top: 0.2rem;
 
   p:nth-child(even) {
     margin: 0 2rem;
