@@ -104,7 +104,7 @@ const BlogPost = ({ data, children }) => {
   const handleScroll = () => {
     const moreFromXlSize = refMoreFrom?.current?.clientHeight || 0;
     const isInbottom = Math.ceil(window.innerHeight + window.scrollY + moreFromXlSize + 1000) >= document.documentElement.scrollHeight;
-    const isInTop = document.documentElement.scrollTop < 1000;
+    const isInTop = document.documentElement.scrollTop < 650;
     
     if (isInbottom) {
       setDisappearSocial(true);

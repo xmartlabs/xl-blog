@@ -10,7 +10,7 @@ $font-weights: (
 );
 
 $text-line-heights: (
-  headingOneBig: 7rem,
+  headingOneBig: 5.6rem,
   headingTwoBig: 4.5rem,
   headingOne: 3rem,
   headingTwoSeparated: 2rem,
@@ -22,7 +22,7 @@ $text-line-heights: (
 );
 
 $text-sizes: (
-  headingOneBig: 4.5rem,
+  headingOneBig: 5.6rem,
   headingTwoBig: 4rem,
   headingOne: 2.5rem,
   commentTitle: 2.4rem,
@@ -155,6 +155,12 @@ $text-colors: (
   line-height: map-get($map: $text-line-heights, $key: aside);
 }
 
+@mixin text__header__categories {
+  font-size: map-get($map: $text-sizes, $key: headingTwoSeparated);
+  font-weight: map-get($map: $font-weights, $key: boldWeight600);
+  line-height: map-get($map: $text-line-heights, $key: headingOne);
+}
+
 //---- COLOR ---
 
 @mixin color-styles {
@@ -255,6 +261,11 @@ $text-colors: (
   &__filter {
     @include color-styles {
       @include text__filter;
+    }
+  }
+  &__header__categories {
+    @include color-styles {
+      @include text__header__categories;
     }
   }
 }

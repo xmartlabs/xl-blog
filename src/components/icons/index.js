@@ -13,3 +13,4 @@ export { PinkCircle } from "./pink-circle";
 export { ErrorImage } from "./404-image";
 export { XlFooter } from "./xl-footer";
 export { ArrowIcon } from "./arrow-icon";
+export { HeaderCircleIcon } from "./header-circle-icon";

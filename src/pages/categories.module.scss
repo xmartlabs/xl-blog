@@ -4,22 +4,14 @@
 .container {
   margin: 5% 16% 0;
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(25%, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(28%, 1fr));
   gap: 4rem 4rem;
 }
-
-@media only screen and (max-width: map-get($map: $screen-breakpoint, $key: xxl)) {
-  .container {
-    grid-template-columns: repeat(auto-fill, minmax(30%, 1fr));
-  }
-}
-
 
 @media only screen and (max-width: map-get($map: $screen-breakpoint, $key: sm)) {
   .container {
     margin: 5rem 0rem;
     gap: 4rem 0;
-    display: grid;
     grid-template-columns: auto;
   }
 }

@@ -6,7 +6,7 @@
 
 .container {
   background-color: $blueSix;
-  height: 47rem;
+  height: 80vh;
   max-height: 47rem;
   padding-top: 6rem;
   display: flex;
@@ -16,6 +16,8 @@
 .contentContainer {
   display: flex;
   flex-direction: row;
+  width: 100%;
+  height: 100%;
 }
 
 .textContainer {
@@ -23,46 +25,100 @@
   flex-direction: column;
   align-items: start;
   justify-content: center;
-  margin-top: 15%;
-  margin-left: 6rem;
+  height: 100%;
+  padding-left: 16%;
+  font-family: $primary-font;
 
   h1 {
-    width: 50%;
+    @extend .text__heading__one__big__xlPink;
+    width: 41rem;
+    letter-spacing: 0.2rem;
+    margin-bottom: 1.5rem;
+  }
+
+  p {
+    @extend .text__heading__two__xlPink;
+    font-weight: normal;
+    text-transform: uppercase;
   }
 }
 
 .bottomTextContainer {
+  background-color: $yellowThree;
+  height: 3.125rem; 
+  width: 100%;
+}
+
+.bottomTextSubContainer {
+  @extend .text__header__categories__blueTwo;
   display: flex;
   flex-direction: row;
   align-items: center;
-  overflow: hidden;
+  height: 100%;
+  letter-spacing: 0.11rem;
+  text-transform: uppercase;
+  white-space: nowrap;
+  width: 100%;
+  animation: category-move 15s linear infinite;
+  -webkit-animation: category-move 15s linear infinite;
+  justify-content: flex-end;
+
+  p:nth-child(even) {
+    margin: 0 2rem;
+  }
 }
+
+@keyframes category-move {
+  0% {
+    left: 100%;
+    -webkit-transform: translateX(0);
+    transform: translateX(0);
+  }
+  100% {
+    left: 0;
+    -webkit-transform: translateX(-100%);
+    transform: translateX(-100%);
+  }
+}
+
 
 // Components
 
-.circleIcon {
-  width: 5rem;
-  height: 5rem;
-  background-color: pink;
+.gradientElement {
+  transform: rotate(90deg);
+  background: radial-gradient(circle, rgba(219,255,0,1) 0%, rgba(244,247,252,1) 78%); 
+}
+
+.pinkCircle,.pinkCircle:after{ 
+  display: block;
+}
+
+.pinkCircle {
+  width: fit-content;
+  height: fit-content;
+  animation-iteration-count: infinite;
+  animation-timing-function: linear;
+  animation-duration: 25s;
+  animation-name: pink-cirlce-move;
+  position: absolute;
+  right: 35rem;
+  top: 12rem;
+}
+
+@keyframes pink-cirlce-move{
+  0% {
+      transform: rotate(0deg)
+  } to {
+      transform: rotate(1turn)
+  }
 }
 
 @media screen and (max-width: map-get($map: $screen-breakpoint, $key: xxl)) {
-  .container {
-    height: 33rem;
-  }
 }
 
 @media screen and (max-height: map-get($map: $screen-breakpoint, $key: md)) {
-  .container {
-    min-width: 22.4rem;
-    max-height: 40rem;
-  }
 }
 
 @media screen and (max-width: map-get($map: $screen-breakpoint, $key: xs)) {
-  .container {
-    min-width: 22.4rem;
-    max-height: 54rem;
-    height: 46rem;
-  }
+
 }
