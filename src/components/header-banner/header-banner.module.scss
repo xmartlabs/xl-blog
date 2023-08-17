@@ -18,6 +18,8 @@
   flex-direction: row;
   width: 100%;
   height: 100%;
+  background-size: 15%;
+  background: radial-gradient(circle, rgba(219,255,0,1) 0%, rgba(244,247,252,1) 78%); 
 }
 
 .textContainer {
@@ -85,11 +87,6 @@
 
 // Components
 
-.gradientElement {
-  transform: rotate(90deg);
-  background: radial-gradient(circle, rgba(219,255,0,1) 0%, rgba(244,247,252,1) 78%); 
-}
-
 .pinkCircle,.pinkCircle:after{ 
   display: block;
 }
@@ -102,8 +99,8 @@
   animation-duration: 25s;
   animation-name: pink-cirlce-move;
   position: absolute;
-  right: 35rem;
-  top: 12rem;
+  top: 20%;
+  left: 58%;
 }
 
 @keyframes pink-cirlce-move{
@@ -114,12 +111,42 @@
   }
 }
 
-@media screen and (max-width: map-get($map: $screen-breakpoint, $key: xxl)) {
-}
-
 @media screen and (max-height: map-get($map: $screen-breakpoint, $key: md)) {
+  .textContainer {
+    padding-left: 5%;
+
+    p {
+      width: 70%;
+    }
+  }
+
+
 }
 
 @media screen and (max-width: map-get($map: $screen-breakpoint, $key: xs)) {
+  .pinkCircle {
+    display: none;
+  }
 
+  .textContainer {
+    padding-left: 5%;
+
+    h1 {
+      font-size: 2.875rem;
+      line-height: 3rem;
+      width: 100%;
+    }
+
+    p {
+      font-size: 1.125rem;
+      line-height: 1.625rem;
+      width: 100%;
+    }
+  }
+
+  .bottomTextSubContainer {
+    font-size: 1.125rem;
+    line-height: 1.625rem;
+    letter-spacing: 0.0675rem;
+  }
 }

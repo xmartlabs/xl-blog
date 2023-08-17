@@ -1,4 +1,5 @@
 @import "/src/css/colors.scss";
+@import "/src/css/variables.scss";
 
 .linkTextContainer {
   margin: 10px 0 10px 50px;
@@ -7,10 +8,11 @@
 }
 
 .link {
+  font-family: $primary-font;
   color: $black;
   font-size: 16px;
   line-height: 20px;
-  font-weight: 700;
+  font-weight: 900;
 }
 
 .link:hover {
