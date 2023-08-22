@@ -19,7 +19,8 @@
   width: 100%;
   height: 100%;
   background-size: 15%;
-  background: radial-gradient(circle, rgba(219,255,0,1) 0%, rgba(244,247,252,1) 78%); 
+  background: radial-gradient(circle at right, rgb(219, 255, 0) -3%, rgb(244, 247, 252) 17%);
+  background-repeat: no-repeat;
 }
 
 .textContainer {
@@ -33,7 +34,7 @@
 
   h1 {
     @extend .text__heading__one__big__xlPink;
-    width: 41rem;
+    width: 60%;
     letter-spacing: 0.2rem;
     margin-bottom: 1.5rem;
   }
@@ -42,13 +43,18 @@
     @extend .text__heading__two__xlPink;
     font-weight: normal;
     text-transform: uppercase;
+    width: auto;
   }
 }
 
 .bottomTextContainer {
-  background-color: $yellowThree;
-  height: 3.125rem; 
+  background-color: #DBFF00;
+  height: 3.125rem;
   width: 100%;
+  position: absolute;
+  left: 0;
+  overflow: hidden;
+  bottom: 20%
 }
 
 .bottomTextSubContainer {
@@ -65,6 +71,7 @@
   -webkit-animation: category-move 15s linear infinite;
   justify-content: flex-end;
   margin-top: 0.2rem;
+  position: relative;
 
   p:nth-child(even) {
     margin: 0 2rem;
@@ -113,23 +120,27 @@
 
 @media screen and (max-height: map-get($map: $screen-breakpoint, $key: md)) {
   .textContainer {
-    padding-left: 5%;
-
-    p {
-      width: 70%;
-    }
+    padding-left: 15%;
   }
 
+  .contentContainer {
+    background: radial-gradient(circle at right, rgb(219, 255, 0) -15%, rgb(244, 247, 252) 25%);
+  }
 
 }
 
 @media screen and (max-width: map-get($map: $screen-breakpoint, $key: xs)) {
+  .container {
+    height: auto;
+  }
+
   .pinkCircle {
     display: none;
   }
 
   .textContainer {
     padding-left: 5%;
+    margin: 7rem 0;
 
     h1 {
       font-size: 2.875rem;
@@ -142,6 +153,14 @@
       line-height: 1.625rem;
       width: 100%;
     }
+  }
+
+  .contentContainer {
+    background: radial-gradient(circle at right, rgb(219, 255, 0) -60%, rgb(244, 247, 252) 50%);
+  }
+
+  .bottomTextContainer {
+    top: 30.6rem
   }
 
   .bottomTextSubContainer {

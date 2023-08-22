@@ -30,7 +30,7 @@ body {
 }
 
 .filterContainer {
-  margin: 6% 0 0 0;
+  margin: 8% 0 5% 0;
   width: 100%;
   display: flex;
   flex-direction: row;
@@ -143,6 +143,7 @@ body {
     overflow-x: scroll;
     flex-wrap: unset;    
     justify-content: unset;
+    margin: 5rem 0;
   }
 
   .filterElement {
