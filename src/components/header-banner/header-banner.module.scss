@@ -72,9 +72,11 @@
   justify-content: flex-end;
   margin-top: 0.2rem;
   position: relative;
+  gap: 2rem;
 
-  p:nth-child(even) {
-    margin: 0 2rem;
+  span {
+    @extend .text__header__categories__blueTwo;
+    margin: 0;
   }
 }
 

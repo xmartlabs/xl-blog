@@ -17,15 +17,15 @@ const HeaderBanner = () => (
     </div>
     <div className={styles.bottomTextContainer}>    
       <div className={styles.bottomTextSubContainer}>
-        <p>Development</p>
-        <p>•</p>
-        <p>Design</p>
-        <p>•</p>
-        <p>Machine Learning</p>
-        <p>•</p>
-        <p>Blockchain</p>
-        <p>•</p>
-        <p>People</p>
+        <span>Development</span>
+        <span>•</span>
+        <span>Design</span>
+        <span>•</span>
+        <span>Machine Learning</span>
+        <span>•</span>
+        <span>Blockchain</span>
+        <span>•</span>
+        <span>People</span>
       </div>
     </div>
   </div>
