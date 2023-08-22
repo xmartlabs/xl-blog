@@ -163,14 +163,14 @@ const BlogPost = ({ data, children }) => {
         <div className={styles.categoryTagsContainer}>
           <Category data={categoryBlog.displayName} className={styles.category}/>
         </div>
-        <h1 className={classnames(styles.titleContainer, "text__heading__one__black")}>
+        <h1 className={classnames(styles.titleContainer, "text__heading__one__blueThree")}>
           { data.mdx.frontmatter.title }
         </h1>
         <div className={styles.authorContainer}>
           <div className={styles.authorInformation}>
             <img src={`/images/${authorBlog.image}`} alt="" className={styles.authorImage} />
             <div className={styles.nameDateTimeContainer}>
-              <Link className={classnames(styles.authorName, "text__paragraph__bold__black")} to={author.profile_url}>{ authorBlog.displayName }</Link>
+              <Link className={classnames(styles.authorName, "text__paragraph__bold__blueThree")} to={author.profile_url}>{ authorBlog.displayName }</Link>
               <div className={styles.blogInfoContainer}>
                 <label className={classnames(styles.postDate, "text__label__bold__grayTwo")} >{data.mdx.frontmatter.date}</label>
                 <label className={classnames("text__label__bold__grayTwo", styles.timeToRead)} >
