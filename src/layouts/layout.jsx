@@ -61,9 +61,6 @@ function Layout({ children }) {
   const [ category, setCategory ] = useState('all');
 
   useEffect(() => {
-    setTimeout(() => {
-      window.scrollTo(0, 0)
-    }, 1);
     setCategory(actualCategory(true, filters));
   }, [category]);
 
