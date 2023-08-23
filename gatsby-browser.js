@@ -23,10 +23,6 @@ const GlobalStyles = createGlobalStyle`
         background-color: ${prop => prop.theme.colors.main1};
     }
 
-    body:has(#containerDiv) {
-      scroll-behavior: smooth;
-    }
-
     form > h2 {
       text-align: center;
       display: block;
