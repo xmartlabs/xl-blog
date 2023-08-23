@@ -93,8 +93,8 @@ const BlogPost = ({ data, children }) => {
 
     setTimeout(() => {
       window.scrollTo(0, 0)
-    }, 1);
-
+    }, 0);
+    
     return () => {
       window.removeEventListener('scroll', handleScroll);
       setState(BannerType.home)

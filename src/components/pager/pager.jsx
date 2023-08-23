@@ -24,14 +24,7 @@ const Pager = ({ pageContext }) => {
   const prevPage = buildPageLocation({ page: currentPage - 1, category});
   const nextPage = buildPageLocation({ numPages, page: currentPage + 1, category});
   const actualPage = buildPageLocation({ page: currentPage, category });
-
-  useEffect(() => {
-    setTimeout(() => {
-      window.scrollTo(0, 0);
-    }, 1);
-
-  }, []);
-
+  
   return(
     <div className={styles.pagerContainer}>
       <Link className={currentPage <= 1 ? styles.disabledPagerLink : styles.pagerLink} to={prevPage} rel="prev">

@@ -1,11 +1,11 @@
 - category: people-events
   title: Lessons learned on our journey.
-  display_name: People & Events
+  display_name: People
   url: /category/people-events
   color: #55555
 - category: product-design
   title: Product Design lessons learned on our journey.
-  display_name: Product Design
+  display_name: Design
   url: /category/product-design
   color: #55555
 - category: development
