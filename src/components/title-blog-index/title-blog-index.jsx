@@ -42,6 +42,9 @@ const TitleBlogIndex = ({ data, refIndexTitles, disappearIndex }) => {
       const subContainerHeight = subContainerRef.current.scrollHeight;
       setIsTopArrow(subContainerHeight > viewContainerHeight);
       setIsBottomArrow(subContainerRef.current.scrollTop > 0);
+
+      console.log("Sub" + subContainerHeight)
+      console.log("Container" + viewContainerHeight)
     }
   }
 
