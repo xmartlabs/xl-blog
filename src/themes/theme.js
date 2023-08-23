@@ -2,7 +2,7 @@ const Theme = {
     fonts: {
         titles: "gilroy, serif",
         main: "gilroy, serif",
-        links: "gilroy-bold, serif"
+        links: "gilroy, serif"
     },
     colors: {
         main1: "#FFFFFF",

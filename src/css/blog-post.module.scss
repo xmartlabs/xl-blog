@@ -181,7 +181,11 @@
     @extend .text__link__blog__blueTwo;
     font-family: $blog-font;
     color: $xlPink;
-  } 
+  }
+  
+  a:hover {
+    color: $xlPinkThree;
+  }
 
   aside {
     @extend .text__paragraph__two__blueTwo;
@@ -322,6 +326,7 @@
     @extend .text__paragraph__bold__neutral100;
     margin: 0;
   }
+
 }
 
 // Blog bottoms elements

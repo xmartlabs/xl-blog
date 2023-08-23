@@ -15,10 +15,12 @@ body {
   position: relative;
   top: 0;
   transition: top ease 0.2s;
+  font-family: $link-font;
 }
 
 .getStarted:hover {
   top: -4px;
+  background-color: $xlPinkThree;
 }
 
 .desktopLogo {

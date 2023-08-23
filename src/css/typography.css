@@ -9,6 +9,11 @@
 }
 
 @font-face {
+  font-family: "gilroy-semi-bold";
+  src: url("../fonts/Gilroy-SemiBold.ttf");
+}
+
+@font-face {
   font-family: "work-sans";
   src: url("../fonts/WorkSans-Light.ttf");
 }
