@@ -105,6 +105,7 @@ collections:
           - {value: "andres-zunini", label: "Andrés Zunini"}
           - {value: "christian-casaran", label: "Christian Casaran"}
           - {value: "solo", label: "Juan Oliu"}
+          - {value: "belu", label: "Belen Carozo"}
       - { name: body, label: Body, widget: markdown }
     identifier_field: title
 
