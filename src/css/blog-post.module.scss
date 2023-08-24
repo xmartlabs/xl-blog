@@ -110,8 +110,8 @@
 }
 
 .category {
-  @extend .text__category__bold__neutral100;
-  background-color: $xlPink;
+  @extend .text__category__bold__blueTwo;
+  background-color: $neutral100;
   justify-content: center;
   margin-bottom: 1rem;
   width: auto;
@@ -413,6 +413,10 @@
     padding: 0 1rem 8rem;
     margin-top: 0rem;
 
+    h1, h2 {
+      line-height: 2.4rem;
+    }
+
     img {
       max-height: 16rem;
     }
@@ -465,6 +469,7 @@
     
     p {
       word-break: break-word;
+      font-size: 1rem;
     }
   }
 

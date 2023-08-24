@@ -4,7 +4,6 @@ import Helmet from "react-helmet";
 import { withPrefix, Link} from "gatsby";
 import PropTypes from "prop-types";
 import styled from "styled-components";
-import { StaticImage } from "gatsby-plugin-image";
 
 import { actualCategory, classnames } from "../helpers";
 
@@ -15,12 +14,13 @@ import { MobileMenu } from "../components/mobile-menu";
 import { SocialElement } from "../components/social-element";
 import { StyledContainerHeader, StyledContainerNavBarXL } from "../elements";
 import { AppContext, initialState } from "../config/context.js";
-import { TwitterIcon, Facebook, Linkedin, InstagramIcon, XlFooter} from "../components/icons";
+import { TwitterIcon, Facebook, Linkedin, InstagramIcon, LogoWhite, Logo} from "../components/icons";
 import { useMediaQuery } from "../hooks";
 
 import "../index.scss";
 
 import * as styles from "./layout.module.scss";
+
 
 export const StyledGetStartedButton = styled.a`
   width: 147px;
@@ -111,12 +111,7 @@ function Layout({ children }) {
                   <Link
                     to="/"
                     id="logo-xl">
-                    <StaticImage 
-                      src="../../static/images/logo.svg"
-                      alt=""
-                      width={44}
-                      height={44}
-                    />
+                    <Logo />
                   </Link>
                   {!isMobile && <NavMenu />}
                 </div>
@@ -138,12 +133,7 @@ function Layout({ children }) {
             <Link
               to="/"
               id="logo-xl-white">
-              <StaticImage
-                src="../../static/images/logo-white.svg"
-                alt="Xmartlabs"
-                width={193}
-                height={53}
-              />
+              <LogoWhite />
             </Link>
           </div>
           <div className={styles.linkContainer}>
