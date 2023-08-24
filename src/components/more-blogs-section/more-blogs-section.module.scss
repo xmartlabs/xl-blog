@@ -13,6 +13,9 @@
 .titleContainer {
   margin: 0 0 4rem 19em;
   padding-top: 4rem;
+  a {
+    font-family: $title-font;
+  }
 }
 
 span {
