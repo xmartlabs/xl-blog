@@ -60,6 +60,23 @@ body {
   text-align: center;
 }
 
+.filterMobileContainer {
+  overflow-x: scroll;
+  margin: 5rem 0;
+  max-width: 100%;
+
+  .filterContainer {
+    flex-wrap: unset;
+    justify-content: unset;
+    margin: 0;
+    width: 53rem;
+  }
+
+  .filterElement {
+    margin: 2.1rem 1.3rem;
+  }
+}
+
 .socialBottom {
   display: flex;
   flex-direction: row;
@@ -139,17 +156,6 @@ body {
 @media screen and (max-width: map-get($map: $screen-breakpoint, $key: xs)) {
   .desktopLogo{
     display: none;
-  }
-
-  .filterContainer {
-    overflow-x: scroll;
-    flex-wrap: unset;    
-    justify-content: unset;
-    margin: 5rem 0;
-  }
-
-  .filterElement {
-    margin: 1.3rem;
   }
 
   .socialBottom {

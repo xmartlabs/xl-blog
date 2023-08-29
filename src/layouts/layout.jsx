@@ -99,6 +99,21 @@ function Layout({ children }) {
       id: "socialProfileFacebook"
     },
   ];
+
+  const filterMobileDesktop = () => {
+    if (contextState === "home") {
+      if (isMobile) {
+        return (
+          <div className={styles.filterMobileContainer}>
+            {filterLinks()}
+          </div>
+        );
+      } else {
+        return filterLinks();
+      }
+    }
+    return null;
+  };
   
   return (
     <>
@@ -124,7 +139,7 @@ function Layout({ children }) {
             </StyledContainerNavBarXL>
             {contextState === "home" && <HeaderBanner />}
         </div>
-        {contextState === "home" && filterLinks()}
+        {filterMobileDesktop()}
         {children}
       </AppContext.Provider>
       <Footer>
