@@ -34,9 +34,8 @@
   h1 {
     @extend .text__heading__one__big__xlPink;
     width: 60%;
-    letter-spacing: 0.2rem;
     margin-bottom: 1.5rem;
-    font-family: $title-font;
+    font-family: $link-font;
   }
 
   p {
@@ -75,6 +74,7 @@
   margin-top: 0.2rem;
   position: relative;
   gap: 2rem;
+  font-family: $title-font;
 
   span {
     @extend .text__header__categories__blueTwo;
@@ -150,7 +150,6 @@
       font-size: 2.875rem;
       line-height: 3rem;
       width: 100%;
-      letter-spacing: 0.1rem;
     }
 
     p {

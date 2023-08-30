@@ -2,26 +2,26 @@
 
 // Fonts
 
-$tags-font-family: 'Gilroy';
-$tags-font: $tags-font-family, Arial, sans-serif;
-
-$primary-font-family: "gilroy";
+$primary-font-family: "gilroy-normal";
 $primary-font: $primary-font-family, sans-serif;
+
+$title-font-family: "gilroy-semi-bold";
+$title-font: $title-font-family, serif;
 
 $link-font-family: "gilroy-bold";
 $link-font: $link-font-family, serif;
 
-$blog-font-family: "work-sans";
+$link-light-font-family: "gilroy-soft-bold";
+$link-light-fint: $link-light-font-family;
+
+$blog-font-family: "work-sans-light";
 $blog-font: $blog-font-family, serif;
 
-$link-blog-font-family: "work-sans-bold";
+$link-blog-font-family: "work-sans-semi-bold";
 $link-blog-font: $link-blog-font-family, serif;
 
 $code-font-family: "fira-code-bold";
 $code-font: $code-font-family, serif;
-
-$title-font-family: "gilroy-semi-bold";
-$title-font: $title-font-family, serif;
 
 // Bold Weight
 
