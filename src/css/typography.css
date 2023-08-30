@@ -1,25 +1,38 @@
 @font-face {
-  font-family: "gilroy";
+  font-family: "gilroy-normal";
   src: url("../fonts/Gilroy-Regular.ttf");
+  font-weight: 400;
+  font-style: normal;
 }
 
 @font-face {
   font-family: "gilroy-bold";
   src: url("../fonts/Gilroy-Bold.ttf");
+  font-weight: 700;
+  font-style: normal;
 }
 
 @font-face {
   font-family: "gilroy-semi-bold";
   src: url("../fonts/Gilroy-SemiBold.ttf");
+  font-weight: 600;
+  font-style: normal;
 }
 
 @font-face {
-  font-family: "work-sans";
+  font-family: "gilroy-soft-bold";
+  src: url("../fonts/Gilroy-Medium.ttf");
+  font-weight: 500;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "work-sans-light";
   src: url("../fonts/WorkSans-Light.ttf");
 }
 
 @font-face {
-  font-family: "work-sans-bold";
+  font-family: "work-sans-semi-bold";
   src: url("../fonts/WorkSans-SemiBold.ttf");
 }
 

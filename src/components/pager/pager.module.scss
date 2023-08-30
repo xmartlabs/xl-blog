@@ -15,6 +15,7 @@
 .pagerLink {
   text-decoration: none;
   color:  $defaultGray;
+  font-family: $link-light-fint;
 }
 
 .disabledPagerLink {
@@ -22,12 +23,14 @@
   color:  $disabledGray;
   cursor: not-allowed;
   align-self: center;
+  font-family: $link-light-fint;
 }
 
 .linkNumber {
   text-decoration: none;
   color: $xlPink;
   align-self: center;
+  font-family: $link-font;
 }
 
 @media screen and (max-width: map-get($map: $screen-breakpoint, $key: sm)) {

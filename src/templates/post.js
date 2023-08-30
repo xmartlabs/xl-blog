@@ -172,13 +172,11 @@ const BlogPost = ({ data, children }) => {
             <img src={`/images/${authorBlog.image}`} alt="" className={styles.authorImage} />
             <div className={styles.nameDateTimeContainer}>
               <Link className={classnames(styles.authorName, "text__paragraph__bold__blueThree")} to={author.profile_url}>{ authorBlog.displayName }</Link>
-              <div className={styles.blogInfoContainer}>
                 <label className={classnames(styles.postDate, "text__label__bold__grayTwo")} >{data.mdx.frontmatter.date}</label>
                 <label className={classnames("text__label__bold__grayTwo", styles.timeToRead)} >
                   <ClockIcon className={styles.clockIcon} />
                   {data.mdx.fields.timeToRead.text}
                 </label>
-              </div>
             </div>
           </div>
         </div>

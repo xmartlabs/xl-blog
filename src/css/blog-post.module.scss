@@ -53,6 +53,7 @@
 
 .titleContainer {
   margin: 0.5rem 0;
+  font-family: $link-font;
 }
 
 .authorContainer {
@@ -74,14 +75,7 @@
 
 .authorName {
   text-decoration: none;
-  font-family: $title-font;
-}
-
-.blogInfoContainer {
-  display: flex;
-  flex-direction: row;
-  align-items: baseline;
-  text-align: start;
+  font-family: $link-font;
 }
 
 .postDate {
@@ -93,15 +87,18 @@
 }
 
 .clockIcon {
-  margin-left: 2rem;
   margin-right: 0.5rem;
+}
+
+.timeToRead, .postDate {
+  font-family: $title-font;
 }
 
 .nameDateTimeContainer {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  justify-content: end;
+  justify-content: space-between;
 }
 
 .categoryTagsContainer {
@@ -348,6 +345,7 @@
   
   .disqusTitle {
     @extend .text__comment__title__grayFour;
+    font-family: $link-font;
   }
 }
 
@@ -392,11 +390,6 @@
 
   .titleContainer {
     margin: 0;
-  }
-
-  .blogInfoContainer {
-    display: flex;
-    flex-direction: column;
   }
 
   .timeToRead {
