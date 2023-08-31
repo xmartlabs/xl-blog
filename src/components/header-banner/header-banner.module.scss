@@ -65,7 +65,7 @@
   white-space: nowrap;
   width: 67%;
   animation: category-move 15s linear infinite;
-  -webkit-animation: category-move 15s   infinite;
+  -webkit-animation: category-move 15s linear  infinite;
   justify-content: flex-end;
   margin-top: 0.2rem;
   position: relative;
