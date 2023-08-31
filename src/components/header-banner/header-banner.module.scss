@@ -51,11 +51,7 @@
   background-color: #DBFF00;
   height: 3.125rem;
   width: 100%;
-  position: absolute;
-  left: 0;
-  overflow: hidden;
-  bottom: 0;
-  top: 75%;
+  overflow: hidden
 }
 
 .bottomTextSubContainer {
@@ -67,9 +63,9 @@
   letter-spacing: 0.11rem;
   text-transform: uppercase;
   white-space: nowrap;
-  width: 100%;
+  width: 67%;
   animation: category-move 15s linear infinite;
-  -webkit-animation: category-move 15s linear infinite;
+  -webkit-animation: category-move 15s   infinite;
   justify-content: flex-end;
   margin-top: 0.2rem;
   position: relative;
@@ -94,7 +90,6 @@
     transform: translateX(-100%);
   }
 }
-
 
 // Components
 
@@ -162,11 +157,7 @@
   .contentContainer {
     background: radial-gradient(circle at right, rgb(219, 255, 0) -60%, rgb(244, 247, 252) 50%);
   }
-
-  .bottomTextContainer {
-    top: 30.6rem
-  }
-
+  
   .bottomTextSubContainer {
     span {
       font-size: 1.125rem;
