@@ -7,7 +7,7 @@ import * as styles from "./header-banner.module.scss";
 const repeatCategories = () => {
   for (let i = 0; i < 10; i++) {
     return (
-      <di className={styles.bottomTextSubContainer}>
+      <div className={styles.bottomTextSubContainer}>
         <span>Development</span>
         <span>•</span>
         <span>Design</span>
@@ -17,7 +17,7 @@ const repeatCategories = () => {
         <span>Blockchain</span>
         <span>•</span>
         <span>People</span>
-      </di>
+      </div>
     )
   }  
 }
