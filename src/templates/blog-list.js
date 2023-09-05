@@ -1,6 +1,6 @@
-import React, { useEffect, useContext, useState } from "react";
+import React, { useEffect, useContext } from "react";
 
-import { Link, graphql } from "gatsby";
+import { graphql } from "gatsby";
 
 import { Pager } from '../components/pager';
 import { AppContext, BannerType } from '../config/context';
@@ -11,7 +11,7 @@ import * as styles from "./blog-list.module.scss";
 
 const BlogList = ({ pageContext, data }) => {
   const _ = require("lodash")    
-  const { edges, totalCount } = data.allMdx;
+  const { edges } = data.allMdx;
   const { setState } = useContext(AppContext);
 
   useEffect(() => {
