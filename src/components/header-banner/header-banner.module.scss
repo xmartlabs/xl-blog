@@ -23,6 +23,8 @@
   background-repeat: no-repeat;
 }
 
+// Title Header
+
 .textContainer {
   display: flex;
   flex-direction: column;
@@ -47,51 +49,44 @@
   }
 }
 
+// Bottom Text Header
+
 .bottomTextContainer {
   background-color: #DBFF00;
   height: 3.125rem;
-  width: 100%;
-  overflow: hidden
+  overflow: hidden;
+  max-width: 100%;
 }
 
 .bottomTextSubContainer {
-  @extend .text__header__categories__blueTwo;
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  height: 100%;
+  animation: t 10s linear infinite;
+  width: min-content;
+  margin-top: 0.1rem;
+}
+
+.bottomText, .dupContent {
   letter-spacing: 0.11rem;
   text-transform: uppercase;
-  white-space: nowrap;
-  width: 67%;
-  animation: category-move 15s linear infinite;
-  -webkit-animation: category-move 15s linear  infinite;
-  justify-content: flex-end;
-  margin-top: 0.2rem;
-  position: relative;
-  gap: 2rem;
   font-family: $title-font;
+  display: inline-flex;
+  white-space: nowrap;
 
   span {
     @extend .text__header__categories__blueTwo;
-    margin: 0;
   }
 }
 
-@keyframes category-move {
-  0% {
-    left: 100%;
-    -webkit-transform: translateX(0);
-    transform: translateX(0);
-  }
-  100% {
-    left: 0;
-    -webkit-transform: translateX(-100%);
+.dupContent {
+  position: absolute;
+}
+
+@keyframes t {
+  to {
     transform: translateX(-100%);
   }
 }
 
-// Components
+// Circle
 
 .pinkCircle,.pinkCircle:after{ 
   display: block;
@@ -116,6 +111,8 @@
       transform: rotate(1turn)
   }
 }
+
+// Media Query
 
 @media screen and (max-height: map-get($map: $screen-breakpoint, $key: md)) {
   .textContainer {
@@ -157,8 +154,13 @@
   .contentContainer {
     background: radial-gradient(circle at right, rgb(219, 255, 0) -60%, rgb(244, 247, 252) 50%);
   }
+
+  .bottomTextContainer {
+    height: 2.75rem;
+  }
   
   .bottomTextSubContainer {
+    margin-top: 2.5%;
     span {
       font-size: 1.125rem;
       line-height: 1.625rem;
