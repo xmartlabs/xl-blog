@@ -153,7 +153,7 @@ function Layout({ children }) {
           </div>
           <div className={styles.linkContainer}>
             <div className={styles.optionContainer}>
-              <StyledFooterText className={styles.firstLink}>Work</StyledFooterText>
+              <StyledFooterText>Work</StyledFooterText>
               <StyledFooterText>Services</StyledFooterText>
               <StyledFooterText>Our Company</StyledFooterText>
               <StyledFooterText>Community</StyledFooterText>
