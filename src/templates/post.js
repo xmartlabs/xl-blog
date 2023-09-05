@@ -78,7 +78,7 @@ const BlogPost = ({ data, children }) => {
 
   const checkWindowOrigin = () => {
     if (typeof window !== 'undefined') {
-      require("smooth-scroll")('a[href*="#"]')
+      require("smooth-scroll")('a[href*="#"]');
       return window.location.origin;
     }
     return '';
