@@ -13,6 +13,7 @@ const SeeMoreTitles = ({ onClick, className, children}) => (
 
 SeeMoreTitles.propTypes = {
   className: PropTypes.string,
+  onClick: PropTypes.func
 };
 
 SeeMoreTitles.defaultProps = {

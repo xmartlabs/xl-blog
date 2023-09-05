@@ -23,7 +23,7 @@
 }
 
 .blogListCategory {
-  @extend .text__category__bold__black;
+  @extend .text__category__bold__blueThree;
   border: 1.5px solid $neutral100;
   background-color: $neutral100;
   height: 1.8rem;
@@ -48,7 +48,8 @@
   transition: all .2s cubic-bezier(.25,.46,.45,.94);
 
   h1 {
-    @extend .text__heading__two__separated__black;
+    @extend .text__heading__two__separated__blueThree;
+    font-family: $title-font;
   }
 }
 
@@ -61,7 +62,7 @@
 
 @media only screen and (max-width: map-get($map: $screen-breakpoint, $key: sm)) {
   .container {
-    width: 80%;
+    width: 90%;
 
     h1 {
       font-size: 1.6rem;

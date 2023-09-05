@@ -4,13 +4,14 @@
 
 $font-weights: (
   boldWeight900: 900,
+  boldWeight700: 700,
   boldWeight600: 600,
   boldWeight300: 300,
   lightWeight100: 100,
 );
 
 $text-line-heights: (
-  headingOneBig: 7rem,
+  headingOneBig: 5.6rem,
   headingTwoBig: 4.5rem,
   headingOne: 3rem,
   headingTwoSeparated: 2rem,
@@ -22,7 +23,7 @@ $text-line-heights: (
 );
 
 $text-sizes: (
-  headingOneBig: 4.5rem,
+  headingOneBig: 5.6rem,
   headingTwoBig: 4rem,
   headingOne: 2.5rem,
   commentTitle: 2.4rem,
@@ -37,7 +38,6 @@ $text-sizes: (
 );
 
 $text-colors: (  
-  black: $black,
   blueTwo: $blueTwo,
   grayTwo: $grayTwo,
   neutral100: $neutral100,
@@ -46,6 +46,7 @@ $text-colors: (
   grayFour: $grayFour,
   grayFive: $grayFive,
   xlPink: $xlPink,
+  blueThree: $blueThree,
 );
 
 //---- TEXT ----
@@ -111,7 +112,7 @@ $text-colors: (
 @mixin text__heading__two__separated {
   font-size: map-get($map: $text-sizes, $key: headingTwoSeparated);
   line-height: map-get($map: $text-line-heights, $key: headingTwoSeparated);
-  font-weight: map-get($map: $font-weights, $key: boldWeight300);
+  font-weight: map-get($map: $font-weights, $key: boldWeight700);
 }
 
 @mixin text__paragraph__small {
@@ -153,6 +154,12 @@ $text-colors: (
   font-size: map-get($map: $text-sizes, $key: authorName);
   font-weight: map-get($map: $font-weights, $key: boldWeight900);
   line-height: map-get($map: $text-line-heights, $key: aside);
+}
+
+@mixin text__header__categories {
+  font-size: map-get($map: $text-sizes, $key: headingTwoSeparated);
+  font-weight: map-get($map: $font-weights, $key: boldWeight600);
+  line-height: map-get($map: $text-line-heights, $key: headingOne);
 }
 
 //---- COLOR ---
@@ -255,6 +262,11 @@ $text-colors: (
   &__filter {
     @include color-styles {
       @include text__filter;
+    }
+  }
+  &__header__categories {
+    @include color-styles {
+      @include text__header__categories;
     }
   }
 }

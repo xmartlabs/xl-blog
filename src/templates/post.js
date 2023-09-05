@@ -78,6 +78,7 @@ const BlogPost = ({ data, children }) => {
 
   const checkWindowOrigin = () => {
     if (typeof window !== 'undefined') {
+      require("smooth-scroll")('a[href*="#"]');
       return window.location.origin;
     }
     return '';
@@ -92,8 +93,8 @@ const BlogPost = ({ data, children }) => {
 
     setTimeout(() => {
       window.scrollTo(0, 0)
-    }, 1);
-
+    }, 0);
+    
     return () => {
       window.removeEventListener('scroll', handleScroll);
       setState(BannerType.home)
@@ -104,7 +105,7 @@ const BlogPost = ({ data, children }) => {
   const handleScroll = () => {
     const moreFromXlSize = refMoreFrom?.current?.clientHeight || 0;
     const isInbottom = Math.ceil(window.innerHeight + window.scrollY + moreFromXlSize + 1000) >= document.documentElement.scrollHeight;
-    const isInTop = document.documentElement.scrollTop < 1000;
+    const isInTop = document.documentElement.scrollTop < 650;
     
     if (isInbottom) {
       setDisappearSocial(true);
@@ -163,14 +164,14 @@ const BlogPost = ({ data, children }) => {
         <div className={styles.categoryTagsContainer}>
           <Category data={categoryBlog.displayName} className={styles.category}/>
         </div>
-        <h1 className={classnames(styles.titleContainer, "text__heading__one__black")}>
+        <h1 className={classnames(styles.titleContainer, "text__heading__one__blueThree")}>
           { data.mdx.frontmatter.title }
         </h1>
         <div className={styles.authorContainer}>
           <div className={styles.authorInformation}>
             <img src={`/images/${authorBlog.image}`} alt="" className={styles.authorImage} />
             <div className={styles.nameDateTimeContainer}>
-              <Link className={classnames(styles.authorName, "text__paragraph__bold__black")} to={author.profile_url}>{ authorBlog.displayName }</Link>
+              <Link className={classnames(styles.authorName, "text__paragraph__bold__blueThree")} to={author.profile_url}>{ authorBlog.displayName }</Link>
               <div className={styles.blogInfoContainer}>
                 <label className={classnames(styles.postDate, "text__label__bold__grayTwo")} >{data.mdx.frontmatter.date}</label>
                 <label className={classnames("text__label__bold__grayTwo", styles.timeToRead)} >

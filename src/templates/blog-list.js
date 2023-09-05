@@ -1,4 +1,5 @@
 import React, { useEffect, useContext, useState } from "react";
+
 import { Link, graphql } from "gatsby";
 
 import { Pager } from '../components/pager';
@@ -19,7 +20,7 @@ const BlogList = ({ pageContext, data }) => {
 
   return (
     <>
-      <div className={styles.container} >
+      <div className={styles.container}>
         {edges.map(({ node }) => <Card data={node} key={node.id} withCategory={true} />)}     
       </div>
       <Pager pageContext={pageContext}/>

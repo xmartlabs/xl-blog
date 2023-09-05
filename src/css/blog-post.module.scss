@@ -47,7 +47,7 @@
 // Header Blog Elements
 
 .bannerContainer {
-  padding: 10rem 44% 20rem 17rem;
+  padding: 10rem 44% 20rem 16%;
   background-color: $blueSix;
 }
 
@@ -124,41 +124,42 @@
 // Main Image
 
 .blogMainImage {
-  width: 70%;
-  height: 70%;
-  transform: translateY(-256px);
+  transform: translate(39%, -230px);
   margin-bottom: 5rem;
+  width: 48.5rem;
+  max-width: 78vh;
+  height: auto;
 }
 
 // Blog body
 
 .bodyPostContainer {
-  padding: 5rem 33% 2rem 15%;  
+  padding: 5rem 33% 2rem 16%;  
   text-align: left;
   font-family: $blog-font;
   margin-top: -22rem;
   scroll-padding-top: 3rem;
 
   h1 {
-    @extend .text__heading__one__black;
+    @extend .text__heading__one__blueThree;
     margin: 3rem 0;
     scroll-margin-top: 6rem; 
   }
 
   h2 {
-    @extend .text__heading__two__black;
+    @extend .text__heading__two__blueThree;
     margin: 4.5rem 0 1.5rem;
     scroll-margin-top: 6rem; 
   }
 
   h3 {
-    @extend .text__heading__three__black;
+    @extend .text__heading__three__blueThree;
     margin: 3rem 0 1.5rem;
     scroll-margin-top: 6rem; 
   }
 
   h4 {
-    @extend .text__heading__four__black;
+    @extend .text__heading__four__blueThree;
     margin: 2rem 0 1.5rem;
   }
 
@@ -180,7 +181,11 @@
     @extend .text__link__blog__blueTwo;
     font-family: $blog-font;
     color: $xlPink;
-  } 
+  }
+  
+  a:hover {
+    color: $xlPinkThree;
+  }
 
   aside {
     @extend .text__paragraph__two__blueTwo;
@@ -321,6 +326,7 @@
     @extend .text__paragraph__bold__neutral100;
     margin: 0;
   }
+
 }
 
 // Blog bottoms elements
@@ -328,9 +334,9 @@
 .blogBottomElements {
   display: flex;
   flex-direction: row-reverse;
-  align-items: baseline;
   justify-content: flex-start;
-  padding: 5rem 33% 2rem 15%;  
+  align-items: baseline;
+  padding: 5rem 33% 2rem 16%;
 }
 
 // DISQUS
@@ -347,19 +353,26 @@
 // Responsive Design
 
 @media screen and (min-width: map-get($map: $screen-breakpoint, $key: xxl)) {
-  .bodyPostContainer {
+  .bodyPostContainer, .blogBottomElements {
     padding-right: 41%;
   }
 
   .bodyPostContainer p {
     line-height: 2rem;
   }
-
 }
 
 @media screen and (max-width: map-get($map: $screen-breakpoint, $key: lg)) {
   .bannerContainer {
     padding: 10rem 27% 20rem 12rem;
+  }
+
+  .blogMainImage {
+    transform: translate(191px, -256px);
+  }  
+
+  .disqusSection {
+    padding: 0 5%;
   }
 }
 
@@ -367,13 +380,13 @@
   .blogMainImage {
     transform: translateY(-3rem);
     margin-bottom: 0;
-    width: 80%;
-    height: 80%;
+    width: 100%;
+    height: auto;
   }
 
   .bannerContainer {
     min-height: 100%;
-    padding: 8rem 1rem 6rem 1rem;
+    padding: 8rem 1rem 6rem 5%;
   } 
 
   .titleContainer {
@@ -475,7 +488,7 @@
   }
 
   .clockIcon {
-    margin: 0 1rem 0 0;
+    margin: 0 0.5rem 0 0;  
   }
 
   .blogBottomElements {

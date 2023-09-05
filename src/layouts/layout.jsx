@@ -8,6 +8,7 @@ import { StaticImage } from "gatsby-plugin-image";
 
 import { actualCategory, classnames } from "../helpers";
 
+import { HeaderBanner } from "../components/header-banner/header-banner";
 import { NavMenu } from "../components/nav-menu";
 import { Footer } from "../components/footer";
 import { MobileMenu } from "../components/mobile-menu";
@@ -60,9 +61,6 @@ function Layout({ children }) {
   const [ category, setCategory ] = useState('all');
 
   useEffect(() => {
-    setTimeout(() => {
-      window.scrollTo(0, 0)
-    }, 1);
     setCategory(actualCategory(true, filters));
   }, [category]);
 
@@ -129,6 +127,7 @@ function Layout({ children }) {
                 }
               </StyledContainerHeader>
             </StyledContainerNavBarXL>
+            {contextState === "home" && <HeaderBanner />}
         </div>
         {contextState === "home" && filterLinks()}
         {children}
@@ -140,10 +139,10 @@ function Layout({ children }) {
               to="/"
               id="logo-xl-white">
               <StaticImage
-                src="../../static/images/logo-white.png"
+                src="../../static/images/logo-white.svg"
                 alt="Xmartlabs"
-                width={155}
-                height={45}
+                width={193}
+                height={53}
               />
             </Link>
           </div>

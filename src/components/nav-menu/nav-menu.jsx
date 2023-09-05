@@ -34,7 +34,7 @@ const NavMenu = ({ className, openMenu }) => {
           {...commonProps}
           className={classnames(styles.linkTextContainer, className)}
         >
-          <h5 className={classnames(styles.link, {["text__heading__two__separated__black"]: openMenu})}>{commonProps.key}</h5>
+          <h5 className={classnames(styles.link, {["text__heading__two__separated__blueThree"]: openMenu})}>{commonProps.key}</h5>
         </Link>
       )
     })

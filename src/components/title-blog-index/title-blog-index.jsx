@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useRef, useCallback } from "react";
+import React, { useEffect, useState, useRef } from "react";
 
 import { ArrowIcon } from '../icons';
 import { SeeMoreTitles } from "../see-more-titles/see-more-titles";

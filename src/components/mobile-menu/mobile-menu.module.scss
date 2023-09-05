@@ -19,7 +19,7 @@
   background-color: transparent;
   border: transparent;
   margin-top: 2.5rem;
-  margin: 2.5rem 3.5rem 0 0;
+  margin: 2.5rem 5% 0 0;
 }
 
 .buttonIconPosition {
@@ -43,6 +43,10 @@
   flex-direction: column;
   margin-left: 0;
   margin-bottom: 1.5rem;
+
+  h5 {
+    font-weight: bolder;
+  }
 }
 
 .partnerContainer {
@@ -74,6 +78,6 @@
 }
 
 .closeIconMobile {
-  fill: $black;
+  fill: $blueThree;
   width: 1.5rem;
 }

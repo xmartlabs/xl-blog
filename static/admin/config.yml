@@ -41,8 +41,8 @@ collections:
         label: Category
         widget: "select"
         options:
-          - { label: "People & Events", value: "people-events" } 
-          - { label: "Product Design", value: "product-design" }
+          - { label: "People", value: "people-events" } 
+          - { label: "Design", value: "product-design" }
           - { label: "Development", value: "development" }
           - { label: "Machine Learning", value: "machine-learning" }
           - { label: "Data Engineering", value: "data-engineering" }
@@ -105,6 +105,7 @@ collections:
           - {value: "andres-zunini", label: "Andrés Zunini"}
           - {value: "christian-casaran", label: "Christian Casaran"}
           - {value: "solo", label: "Juan Oliu"}
+          - {value: "belu", label: "Belen Carozo"}
       - { name: body, label: Body, widget: markdown }
     identifier_field: title
 
