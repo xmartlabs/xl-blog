@@ -4,23 +4,20 @@ import { HeaderCircleIcon } from "../icons";
 
 import * as styles from "./header-banner.module.scss";
 
-const repeatCategories = () => {
-  for (let i = 0; i < 10; i++) {
-    return (
-      <div className={styles.bottomTextSubContainer}>
-        <span>Development</span>
-        <span>•</span>
-        <span>Design</span>
-        <span>•</span>
-        <span>Machine Learning</span>
-        <span>•</span>
-        <span>Blockchain</span>
-        <span>•</span>
-        <span>People</span>
-      </div>
-    )
-  }  
-}
+const repeatCategories = () => (
+  <>
+    <span>Development</span>
+    <span>•</span>
+    <span>Design</span>
+    <span>•</span>
+    <span>Machine Learning</span>
+    <span>•</span>
+    <span>Blockchain</span>
+    <span>•</span>
+    <span>People</span>
+    <span>•</span>
+  </>
+);
 
 const HeaderBanner = () => (
   <div className={styles.container}>
@@ -33,8 +30,16 @@ const HeaderBanner = () => (
         <HeaderCircleIcon/>
       </div>
     </div>
-    <div className={styles.bottomTextContainer}>    
-      { repeatCategories() }
+    <div className={styles.bottomTextContainer}>
+      <div className={styles.bottomTextSubContainer}>
+        <div className={styles.bottomText}>
+          {repeatCategories()}
+        </div>
+        <div className={styles.dupContent}>
+          {repeatCategories()}
+          {repeatCategories()}
+        </div>
+      </div>
     </div>
   </div>
 );
