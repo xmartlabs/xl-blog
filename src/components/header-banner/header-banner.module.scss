@@ -59,7 +59,7 @@
 }
 
 .bottomTextSubContainer {
-  animation: t 10s linear infinite;
+  animation: textMove 10s linear infinite;
   width: min-content;
   margin-top: 0.1rem;
 }
@@ -80,7 +80,7 @@
   position: absolute;
 }
 
-@keyframes t {
+@keyframes textMove {
   to {
     transform: translateX(-100%);
   }
