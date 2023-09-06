@@ -359,6 +359,10 @@
   .bodyPostContainer p {
     line-height: 2rem;
   }
+
+  .disqusSection {
+    padding: 0 5%;
+  }
 }
 
 @media screen and (max-width: map-get($map: $screen-breakpoint, $key: lg)) {
@@ -458,6 +462,7 @@
     }
 
     a {
+      font-size: 1rem;
       word-break: break-word;
     }
     
