@@ -4,7 +4,7 @@ import { HeaderCircleIcon } from "../icons";
 
 import * as styles from "./header-banner.module.scss";
 
-const repeatCategories = () => (
+const reuseCat = () => (
   <>
     <span>Development</span>
     <span>•</span>
@@ -33,11 +33,11 @@ const HeaderBanner = () => (
     <div className={styles.bottomTextContainer}>
       <div className={styles.bottomTextSubContainer}>
         <div className={styles.bottomText}>
-          {repeatCategories()}
+          {reuseCat()}
         </div>
         <div className={styles.dupContent}>
-          {repeatCategories()}
-          {repeatCategories()}
+          {reuseCat()}
+          {reuseCat()}
         </div>
       </div>
     </div>

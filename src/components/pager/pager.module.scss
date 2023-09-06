@@ -15,7 +15,7 @@
 .pagerLink {
   text-decoration: none;
   color:  $defaultGray;
-  font-family: $link-light-fint;
+  font-family: $link-light-font;
 }
 
 .disabledPagerLink {
@@ -23,7 +23,7 @@
   color:  $disabledGray;
   cursor: not-allowed;
   align-self: center;
-  font-family: $link-light-fint;
+  font-family: $link-light-font;
 }
 
 .linkNumber {
