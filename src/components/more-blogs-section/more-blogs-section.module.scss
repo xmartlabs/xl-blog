@@ -4,6 +4,7 @@
 .moreFromXlContainer {
   background-color: $blueSix;
   margin-top: 4rem;
+  padding: 0 16%;
 }
 
 .titleStyle {
@@ -11,7 +12,7 @@
 }
 
 .titleContainer {
-  margin: 0 0 4rem 19em;
+  margin: 0 0 4rem 0;
   padding-top: 4rem;
   a {
     font-family: $link-font;
@@ -26,7 +27,7 @@ span {
 .blogsContainer {
   display: flex;
   flex-direction: row;
-  justify-content: space-evenly;
+  justify-content: space-between;
   align-items: baseline;
   width: 92.5rem;
   margin: auto;
@@ -43,14 +44,9 @@ span {
   }
 }
 
-@media screen and (max-width: map-get($map: $screen-breakpoint, $key: xl)) {
-  .blogsContainer {
-    width: 98%;
-    justify-content: space-around;
-  }
-
-  .titleContainer {
-    margin-left: 3.6rem;
+@media screen and (max-width: map-get($map: $screen-breakpoint, $key: xxl)) {
+  .moreFromXlContainer {
+    padding: 0 5%;
   }
 }
 
@@ -62,7 +58,7 @@ span {
   }
 
   .titleContainer {
-    margin: 0 5rem 4rem 1.2rem;
+    margin: 0 0 4rem 0;
   }
 
   .titleStyle {
@@ -71,6 +67,10 @@ span {
 
   .cardStyles {
     width: 100%;
+
+    article {
+      width: 100%;
+    }
 
     p {
       top: 74%;
