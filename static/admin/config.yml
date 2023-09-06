@@ -106,6 +106,7 @@ collections:
           - {value: "christian-casaran", label: "Christian Casaran"}
           - {value: "solo", label: "Juan Oliu"}
           - {value: "belu", label: "Belen Carozo"}
+          - {value: "maximol", label: "Maximo Lionello"}
       - { name: body, label: Body, widget: markdown }
     identifier_field: title
 
