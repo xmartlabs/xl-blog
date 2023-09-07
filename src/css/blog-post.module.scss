@@ -351,7 +351,7 @@
 
 // Responsive Design
 
-@media screen and (min-width: map-get($map: $screen-breakpoint, $key: xxl)) {
+@media screen and (max-width: map-get($map: $screen-breakpoint, $key: xxl)) {
   .bodyPostContainer, .blogBottomElements {
     padding-right: 41%;
   }

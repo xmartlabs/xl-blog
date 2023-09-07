@@ -27,15 +27,15 @@ span {
 .blogsContainer {
   display: flex;
   flex-direction: row;
-  justify-content: space-between;
   align-items: baseline;
   width: 92.5rem;
   margin: auto;
   max-width: 100%;
+  gap: 5rem;
 }
 
 .cardStyles {
-  width: 25%;
+  width: 30%;
   margin-bottom: 5rem;
 
   p {
@@ -55,6 +55,7 @@ span {
     flex-direction: column;
     align-items: center;
     width: auto;
+    justify-content: space-between;
   }
 
   .titleContainer {
