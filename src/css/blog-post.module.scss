@@ -76,6 +76,7 @@
 .authorName {
   text-decoration: none;
   font-family: $link-font;
+  font-weight: 700;
 }
 
 .postDate {
@@ -84,6 +85,10 @@
 
 .timeToRead {
   width: auto;
+}
+
+.postDate, .timeToRead {
+  font-weight: 600;
 }
 
 .clockIcon {
@@ -159,6 +164,11 @@
   h4 {
     @extend .text__heading__four__blueThree;
     margin: 2rem 0 1.5rem;
+  }
+
+  h1, h2, h3, h4 {
+    font-family: $primary-font;
+    font-weight: 700;
   }
 
   p img {
