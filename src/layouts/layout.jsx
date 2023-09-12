@@ -36,7 +36,7 @@ export const StyledGetStartedButton = styled.a`
 export const StyledGetStartedTextButton = styled.div`
   line-height: 22px;
   font-size: 14px;
-  font-weight: 700;
+  font-weight: 900;
   letter-spacing: .5px;
   max-height: 17px;
 `
