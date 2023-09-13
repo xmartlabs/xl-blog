@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 
 import Helmet from "react-helmet";
 import { withPrefix, Link} from "gatsby";
@@ -62,10 +62,14 @@ function Layout({ children }) {
 
   useEffect(() => {
     setCategory(actualCategory(true, filters));
+    setTimeout(() => {
+      window.scrollTo(0, 0)
+    }, 0);
   }, [category]);
 
+  console.log(window.scrollY)
   const filterLinks = () => (
-    <div className={styles.filterContainer} >
+    <div className={styles.filterContainer}>
         {filters.map((filter) =>
           <Link
             onClick={() => setCategory(filter.name)}
@@ -114,7 +118,7 @@ function Layout({ children }) {
     }
     return null;
   };
-  
+
   return (
     <>
       <AppContext.Provider value={{ state: contextState, setState: setContextState }}>

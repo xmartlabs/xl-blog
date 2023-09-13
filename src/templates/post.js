@@ -153,7 +153,6 @@ const BlogPost = ({ data, children }) => {
     }
   }
 
-
   return (
     <div onScroll={handleScroll} id='containerDiv'>
       <div className={styles.indexContainer}>
