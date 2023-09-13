@@ -67,11 +67,11 @@ function Layout({ children }) {
     }, 0);
   }, [category]);
 
-  console.log(window.scrollY)
   const filterLinks = () => (
     <div className={styles.filterContainer}>
         {filters.map((filter) =>
           <Link
+            key={filter.name}
             onClick={() => setCategory(filter.name)}
             className={classnames(styles.filterElement, "text__filter__grayFive", filter.name === category && styles.selectedLink)} 
             to={filter.name === 'all' ? '/' : `/categories/${filter.name}/`}>
