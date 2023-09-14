@@ -127,7 +127,8 @@
 // Main Image
 
 .blogMainImage {
-  transform: translate(39%, -230px);
+  transform: translate(0, -230px);
+  margin-left: 16%;
   margin-bottom: 5rem;
   width: 48.5rem;
   max-width: 78vh;
@@ -377,12 +378,12 @@
 
 @media screen and (max-width: map-get($map: $screen-breakpoint, $key: lg)) {
   .bannerContainer {
-    padding: 10rem 27% 20rem 12rem;
+    padding: 10rem 27% 20rem 16%;
   }
 
-  .blogMainImage {
-    transform: translate(191px, -256px);
-  }  
+  .bodyPostContainer, .blogBottomElements {
+    padding-right: 10%;
+  }
 
   .disqusSection {
     padding: 0 5%;
@@ -395,6 +396,7 @@
     margin-bottom: 0;
     width: 100%;
     height: auto;
+    margin: 0;
   }
 
   .bannerContainer {
