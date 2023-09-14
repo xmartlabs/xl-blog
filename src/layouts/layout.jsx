@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useRef } from "react";
+import React, { useEffect, useState } from "react";
 
 import Helmet from "react-helmet";
 import { withPrefix, Link} from "gatsby";
@@ -62,9 +62,6 @@ function Layout({ children }) {
 
   useEffect(() => {
     setCategory(actualCategory(true, filters));
-    setTimeout(() => {
-      window.scrollTo(0, 0)
-    }, 0);
   }, [category]);
 
   const filterLinks = () => (
@@ -74,7 +71,7 @@ function Layout({ children }) {
             key={filter.name}
             onClick={() => setCategory(filter.name)}
             className={classnames(styles.filterElement, "text__filter__grayFive", filter.name === category && styles.selectedLink)} 
-            to={filter.name === 'all' ? '/' : `/categories/${filter.name}/`}>
+            href={filter.name === 'all' ? '/' : `/categories/${filter.name}/`}>
             {filter.displayName}
           </Link>
         )}
