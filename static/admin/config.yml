@@ -107,6 +107,7 @@ collections:
           - {value: "solo", label: "Juan Oliu"}
           - {value: "belu", label: "Belen Carozo"}
           - {value: "maximol", label: "Maximo Lionello"}
+          - {value: "mikaela", label: "Mikaela Márquez"}
       - { name: body, label: Body, widget: markdown }
     identifier_field: title
 
