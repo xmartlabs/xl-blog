@@ -8,6 +8,9 @@ module.exports = {
     title: "XL-Blog",
     descripton: "Blog description",
   },
+  flags: {
+    PARALLEL_QUERY_RUNNING: true
+  },
   plugins: [
     "gatsby-plugin-netlify-cms",
     "gatsby-plugin-styled-components",
