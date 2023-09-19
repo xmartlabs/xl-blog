@@ -66,12 +66,13 @@ function Layout({ children }) {
   }, [category]);
 
   const filterLinks = () => (
-    <div className={styles.filterContainer} >
+    <div className={styles.filterContainer}>
         {filters.map((filter) =>
           <Link
+            key={filter.name}
             onClick={() => setCategory(filter.name)}
             className={classnames(styles.filterElement, "text__filter__grayFive", filter.name === category && styles.selectedLink)} 
-            to={filter.name === 'all' ? '/' : `/categories/${filter.name}/`}>
+            href={filter.name === 'all' ? '/' : `/categories/${filter.name}/`}>
             {filter.displayName}
           </Link>
         )}
@@ -115,7 +116,7 @@ function Layout({ children }) {
     }
     return null;
   };
-  
+
   return (
     <>
       <AppContext.Provider value={{ state: contextState, setState: setContextState }}>

@@ -19,7 +19,6 @@ module.exports = {
     "gatsby-plugin-instagram-embed",
     "gatsby-plugin-slug",
     "gatsby-plugin-sitemap",
-    "gatsby-plugin-meta-redirect",
     "gatsby-plugin-netlify",
     {
       resolve: `gatsby-plugin-disqus`,
