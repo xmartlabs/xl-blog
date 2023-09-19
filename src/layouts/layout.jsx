@@ -63,6 +63,9 @@ function Layout({ children }) {
 
   useEffect(() => {
     setCategory(actualCategory(true, filters));
+    setTimeout(() => {
+      window.scrollTo(0, 0)
+    }, 0);
   }, [category]);
 
   const filterLinks = () => (
