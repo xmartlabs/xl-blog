@@ -5,6 +5,36 @@ body {
   font-family: $primary-font, serif;
 }
 
+.formContainer {
+  position: fixed;
+  z-index: 10;
+  top: 2%;
+  left: 0%;
+  width: 100%;
+  height: 98%;
+  display: flex;
+  flex-direction: column;
+  align-items: end;
+  padding: 0 2.5%;
+}
+
+.closeForm {
+  width: 0%;
+  height: 2.5%;
+  margin-bottom: 1rem;
+  margin-left: 1rem;
+}
+
+.closeFormIcon {
+  fill: black;
+  height: 100%;
+}
+
+.typeForm {
+  height: 100%;
+  width: 100%;
+}
+
 .navMenuContainer {
   display: flex;
   flex-direction: row;
@@ -16,6 +46,8 @@ body {
   top: 0;
   transition: top ease 0.2s;
   font-family: $link-font;
+  border: none;
+  cursor: pointer;
 }
 
 .getStarted:hover {

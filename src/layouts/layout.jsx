@@ -15,7 +15,7 @@ import { MobileMenu } from '../components/mobile-menu';
 import { SocialElement } from '../components/social-element';
 import { StyledContainerHeader, StyledContainerNavBarXL } from '../elements';
 import { AppContext, initialState } from '../config/context.js';
-import { TwitterIcon, Facebook, Linkedin, InstagramIcon, LogoWhite, Logo} from '../components/icons';
+import { TwitterIcon, Facebook, Linkedin, InstagramIcon, LogoWhite, Logo, CloseIcon} from '../components/icons';
 import { useMediaQuery } from '../hooks';
 
 import '../index.scss';
@@ -23,7 +23,7 @@ import '../index.scss';
 import * as styles from './layout.module.scss';
 
 
-export const StyledGetStartedButton = styled.a`
+export const StyledGetStartedButton = styled.button`
   width: 147px;
   height: 44px;
   display: flex;
@@ -60,6 +60,7 @@ function Layout({ children }) {
   const [contextState, setContextState] = useState(initialState);
   const isMobile = useMediaQuery("(max-width: 992px)");
   const [ category, setCategory ] = useState('all');
+  const [ showTypeForm, setShowTypeForm ] = useState(false);
 
   useEffect(() => {
     setCategory(actualCategory(true, filters));
@@ -120,26 +121,37 @@ function Layout({ children }) {
   return (
     <>
       <AppContext.Provider value={{ state: contextState, setState: setContextState }}>
+        {showTypeForm &&
+          <div className={styles.formContainer}>
+            <div onClick={() => setShowTypeForm(false)} className={styles.closeForm}><CloseIcon className={styles.closeFormIcon} /></div>
+            <iframe
+              src="https://form.typeform.com/to/c7G2RUWm?typeform-embed=popup-blank&typeform-source=blog.xmartlabs.com&typeform-medium=embed-sdk&embed-hide-footer=true&typeform-embed-id=rclfl" 
+              frameborder="0"
+              className={styles.typeForm}
+            >
+            </iframe>
+          </div>
+        }
         <div className={styles[`${contextState}Banner`]}>
-            <StyledContainerNavBarXL>
+          <StyledContainerNavBarXL>
             {isMobile && <MobileMenu />}
-              <StyledContainerHeader>
-                <div className={styles.navMenuContainer}>
-                  <Link
-                    to="/"
-                    id="logo-xl">
-                    <Logo />
-                  </Link>
-                  {!isMobile && <NavMenu />}
-                </div>
-                {!isMobile && 
-                <StyledGetStartedButton className={styles.getStarted} id="header-getintouch" href="https://form.typeform.com/to/c7G2RUWm">
+            <StyledContainerHeader>
+              <div className={styles.navMenuContainer}>
+                <Link
+                  to="/"
+                  id="logo-xl">
+                  <Logo />
+                </Link>
+                {!isMobile && <NavMenu />}
+              </div>
+              {!isMobile && 
+                <StyledGetStartedButton className={styles.getStarted} id="header-getintouch" onClick={() => setShowTypeForm(true)}>
                   <StyledGetStartedTextButton>GET STARTED</StyledGetStartedTextButton>
                 </StyledGetStartedButton>
-                }
-              </StyledContainerHeader>
-            </StyledContainerNavBarXL>
-            {contextState === "home" && <HeaderBanner />}
+              }
+            </StyledContainerHeader>
+          </StyledContainerNavBarXL>
+          {contextState === "home" && <HeaderBanner />}
         </div>
         {filterMobileDesktop()}
         {children}
