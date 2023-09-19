@@ -1,25 +1,26 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState } from 'react';
 
-import Helmet from "react-helmet";
-import { withPrefix, Link} from "gatsby";
-import PropTypes from "prop-types";
-import styled from "styled-components";
 
-import { actualCategory, classnames } from "../helpers";
+import Helmet from 'react-helmet';
+import { withPrefix, Link} from 'gatsby';
+import PropTypes from 'prop-types';
+import styled from 'styled-components';
 
-import { HeaderBanner } from "../components/header-banner/header-banner";
-import { NavMenu } from "../components/nav-menu";
-import { Footer } from "../components/footer";
-import { MobileMenu } from "../components/mobile-menu";
-import { SocialElement } from "../components/social-element";
-import { StyledContainerHeader, StyledContainerNavBarXL } from "../elements";
-import { AppContext, initialState } from "../config/context.js";
-import { TwitterIcon, Facebook, Linkedin, InstagramIcon, LogoWhite, Logo} from "../components/icons";
-import { useMediaQuery } from "../hooks";
+import { actualCategory, classnames } from '../helpers';
 
-import "../index.scss";
+import { HeaderBanner } from '../components/header-banner/header-banner';
+import { NavMenu } from '../components/nav-menu';
+import { Footer } from '../components/footer';
+import { MobileMenu } from '../components/mobile-menu';
+import { SocialElement } from '../components/social-element';
+import { StyledContainerHeader, StyledContainerNavBarXL } from '../elements';
+import { AppContext, initialState } from '../config/context.js';
+import { TwitterIcon, Facebook, Linkedin, InstagramIcon, LogoWhite, Logo} from '../components/icons';
+import { useMediaQuery } from '../hooks';
 
-import * as styles from "./layout.module.scss";
+import '../index.scss';
+
+import * as styles from './layout.module.scss';
 
 
 export const StyledGetStartedButton = styled.a`
@@ -79,29 +80,29 @@ function Layout({ children }) {
 
   const shareXlProfileLinks = [
     {
-      path: "https://www.instagram.com/xmartlabs", 
+      path: 'https://www.instagram.com/xmartlabs', 
       icon: <InstagramIcon />,
-      id: "socialMenuInstagram"
+      id: 'socialMenuInstagram'
     },
     {
-      path: "https://www.linkedin.com/company/xmartlabs/mycompany/", 
+      path: 'https://www.linkedin.com/company/xmartlabs/mycompany/', 
       icon: <Linkedin />,
-      id: "socialProfileLinkedIn"
+      id: 'socialProfileLinkedIn'
     },
     {
-      path: "https://twitter.com/xmartlabs", 
+      path: 'https://twitter.com/xmartlabs', 
       icon: <TwitterIcon />,
-      id: "socialProfileTwitter"
+      id: 'socialProfileTwitter'
     },
     {
-      path: "https://es-la.facebook.com/xmartlabs/", 
+      path: 'https://es-la.facebook.com/xmartlabs/', 
       icon: <Facebook />,
-      id: "socialProfileFacebook"
+      id: 'socialProfileFacebook'
     },
   ];
 
   const filterMobileDesktop = () => {
-    if (contextState === "home") {
+    if (contextState === 'home') {
       if (isMobile) {
         return (
           <div className={styles.filterMobileContainer}>
