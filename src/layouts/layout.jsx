@@ -72,7 +72,7 @@ function Layout({ children }) {
             key={filter.name}
             onClick={() => setCategory(filter.name)}
             className={classnames(styles.filterElement, "text__filter__grayFive", filter.name === category && styles.selectedLink)} 
-            href={filter.name === 'all' ? '/' : `/categories/${filter.name}/`}>
+            to={filter.name === 'all' ? '/' : `/categories/${filter.name}/`}>
             {filter.displayName}
           </Link>
         )}
