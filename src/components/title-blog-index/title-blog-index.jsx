@@ -10,7 +10,7 @@ import * as styles from "./title-blog-index.module.scss";
 const TitleBlogIndex = ({ data, refIndexTitles, disappearIndex }) => {
   const [titleOnView, setTitleOnView] = useState('');
   const [selectLink, setSelectLink] = useState('');
-  const [isTopArrow, setIsTopArrow] = useState(false);
+  const [isTopArrow, setIsTopArrow] = useState(true);
   const [isBottomArrow, setIsBottomArrow] = useState(false);
   const subContainerRef = useRef(null);
   const viewContainerRef = useRef(null);
