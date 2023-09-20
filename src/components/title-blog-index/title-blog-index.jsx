@@ -20,18 +20,17 @@ const TitleBlogIndex = ({ data, refIndexTitles, disappearIndex }) => {
   useEffect(() => {
     window.addEventListener('scroll', getActiveTitle, { passive: true });
     
-    if (linksContainerRef.current) {
+    if (linksContainerRef.current && indexContainerRef.current) {
       setIndexHeight(indexContainerRef.current.clientHeight);
       setLinksHeight(linksContainerRef.current.clientHeight);
+      setIsTopArrow(linksHeight > indexHeight);
+      setIsBottomArrow(linksContainerRef.current.scrollTop > 0);
     }
 
-    setIsTopArrow(linksHeight > indexHeight);
-    setIsBottomArrow(linksContainerRef.current.scrollTop > 0);
     return () => {
       window.removeEventListener('scroll', getActiveTitle);
     };
-  }, [linksHeight]);
-  
+  }, [linksContainerRef]);
 
   const getActiveTitle = () => {
     if (refIndexTitles.current) {
@@ -59,9 +58,6 @@ const TitleBlogIndex = ({ data, refIndexTitles, disappearIndex }) => {
     setIsTopArrow(true);
     setIsBottomArrow(false);
   };
-
-  console.log("Index Height>>>>" +   indexHeight);
-  console.log("Links Height>>>>" +   linksHeight);
 
   return (
     <>
