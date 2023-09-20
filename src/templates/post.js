@@ -168,7 +168,7 @@ const BlogPost = ({ data, children }) => {
         </h1>
         <div className={styles.authorContainer}>
           <div className={styles.authorInformation}>
-            <img src={`/images/${authorBlog.image}`} alt="" className={styles.authorImage} />
+            <img src={`/images/${authorBlog.image}`} alt={authorBlog.displayName} className={styles.authorImage} />
             <div className={styles.nameDateTimeContainer}>
               <Link className={classnames(styles.authorName, "text__paragraph__bold__blueThree")} to={author.profile_url}>{ authorBlog.displayName }</Link>
                 <label className={classnames(styles.postDate, "text__label__bold__grayTwo")} >{data.mdx.frontmatter.date}</label>
@@ -180,7 +180,7 @@ const BlogPost = ({ data, children }) => {
           </div>
         </div>
       </div>
-        <img src={imgUrl()} onError={(event) => event.target.src = '../../images/image.png'} className={styles.blogMainImage} />
+        <img src={imgUrl()} alt='Blog Main Image' onError={(event) => event.target.src = '../../images/image.png'} className={styles.blogMainImage} />
         <div className={styles.bodyPostContainer} ref={refIndexTitles}>
           {children}
         </div>

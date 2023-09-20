@@ -128,6 +128,7 @@ function Layout({ children }) {
               src="https://form.typeform.com/to/c7G2RUWm?typeform-embed=popup-blank&typeform-source=blog.xmartlabs.com&typeform-medium=embed-sdk&embed-hide-footer=true&typeform-embed-id=rclfl" 
               frameborder="0"
               className={styles.typeForm}
+              title="typeform embed"
             >
             </iframe>
           </div>
