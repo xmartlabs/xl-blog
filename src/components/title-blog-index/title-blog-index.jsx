@@ -1,4 +1,4 @@
-import React, { useState, useRef, useLayoutEffect } from "react";
+import React, { useState, useRef, useEffect } from "react";
 
 import { ArrowIcon } from '../icons';
 import { SeeMoreTitles } from "../see-more-titles/see-more-titles";
@@ -17,19 +17,22 @@ const TitleBlogIndex = ({ data, refIndexTitles, disappearIndex }) => {
   const [indexHeight, setIndexHeight] = useState(0);
   const [linksHeight, setLinksHeight] = useState(0);
 
-  useLayoutEffect(() => {
+  useEffect(() => {
     window.addEventListener('scroll', getActiveTitle, { passive: true });
     
-      setIndexHeight(indexContainerRef.current.clientHeight);
-      setLinksHeight(linksContainerRef.current.clientHeight);
+    if (linksContainerRef.current && indexContainerRef.current) {
+      const indexHeightTwo = indexContainerRef.current.getBoundingClientRect();
+      const linksHeightTwo = linksContainerRef.current.getBoundingClientRect();
+      setIndexHeight(indexHeightTwo.height);
+      setLinksHeight(linksHeightTwo.height);
       setIsTopArrow(linksHeight > indexHeight);
       setIsBottomArrow(linksContainerRef.current.scrollTop > 0);
+    }
 
     return () => {
       window.removeEventListener('scroll', getActiveTitle);
     };
-  }, [linksContainerRef]);
-
+  }, [linksContainerRef.current, indexContainerRef.current]);
 
   const getActiveTitle = () => {
     if (refIndexTitles.current) {
