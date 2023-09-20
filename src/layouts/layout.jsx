@@ -146,7 +146,7 @@ function Layout({ children }) {
               </div>
               {!isMobile && 
                 <StyledGetStartedButton className={styles.getStarted} id="header-getintouch" onClick={() => setShowTypeForm(true)}>
-                  <StyledGetStartedTextButton>GET STARTED</StyledGetStartedTextButton>
+                  <StyledGetStartedTextButton>Let's Talk</StyledGetStartedTextButton>
                 </StyledGetStartedButton>
               }
             </StyledContainerHeader>
