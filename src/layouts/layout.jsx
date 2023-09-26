@@ -123,7 +123,7 @@ function Layout({ children }) {
       <AppContext.Provider value={{ state: contextState, setState: setContextState }}>
         {showTypeForm &&
           <div className={styles.formContainer}>
-            <div onClick={() => setShowTypeForm(false)} className={styles.closeForm}><CloseIcon className={styles.closeFormIcon} /></div>
+            <button onClick={() => setShowTypeForm(false)} className={styles.closeForm}><CloseIcon className={styles.closeFormIcon} /></button>
             <iframe
               src="https://form.typeform.com/to/c7G2RUWm?typeform-embed=popup-blank&typeform-source=blog.xmartlabs.com&typeform-medium=embed-sdk&embed-hide-footer=true&typeform-embed-id=rclfl" 
               frameborder="0"
