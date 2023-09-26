@@ -65,7 +65,7 @@ const MobileMenu = () => {
             <div className={styles.menuContainer} >
               <NavMenu className={styles.menuOptions}  openMenu={showMenu}/>
               <div className={styles.partnerContainer}>
-                <h4 className="text__label__bold__blueThree">Ready to partner?</h4>
+                <h4 className="text__label__bold__blueOne">Ready to partner?</h4>
                 <button onClick={() => setShowTypeForm(true)} target="_blank" rel="noopener noreferrer" className={styles.partnerButton}>Let's talk</button>
               </div>
                 <SocialElement links={mobileLinks} className={styles.socialContainer} />

@@ -113,7 +113,7 @@
 }
 
 .category {
-  @extend .text__category__bold__blueTwo;
+  @extend .text__category__bold__blueOne;
   background-color: $neutral100;
   justify-content: center;
   margin-bottom: 1rem;
@@ -145,25 +145,25 @@
   scroll-padding-top: 3rem;
 
   h1 {
-    @extend .text__heading__one__blueThree;
+    @extend .text__heading__one__blueOne;
     margin: 3rem 0;
     scroll-margin-top: 6rem; 
   }
 
   h2 {
-    @extend .text__heading__two__blueThree;
+    @extend .text__heading__two__blueOne;
     margin: 4.5rem 0 1.5rem;
     scroll-margin-top: 6rem; 
   }
 
   h3 {
-    @extend .text__heading__three__blueThree;
+    @extend .text__heading__three__blueOne;
     margin: 3rem 0 1.5rem;
     scroll-margin-top: 6rem; 
   }
 
   h4 {
-    @extend .text__heading__four__blueThree;
+    @extend .text__heading__four__blueOne;
     margin: 2rem 0 1.5rem;
   }
 
@@ -177,17 +177,17 @@
   }
 
   p {
-    @extend .text__paragraph__blueTwo;
+    @extend .text__paragraph__blueOne;
     margin-bottom: 2rem;
   }
 
   ul, li {
-    @extend .text__paragraph__blueTwo;
+    @extend .text__paragraph__blueOne;
     margin: 0rem 1.5rem 1rem;
   }
 
   a {
-    @extend .text__link__blog__blueTwo;
+    @extend .text__link__blog__blueOne;
     font-family: $blog-font;
     color: $xlPink;
   }
@@ -197,7 +197,7 @@
   }
 
   aside {
-    @extend .text__paragraph__two__blueTwo;
+    @extend .text__paragraph__two__blueOne;
     margin: 3rem 0 2rem;
     border-left: 0.3rem solid $xlPink;
     padding-left: 2rem;
@@ -263,14 +263,14 @@
     text-align: left;
 
     tbody th, td {
-      @extend .text__paragraph__two__blueTwo;
+      @extend .text__paragraph__two__blueOne;
       border: none;
       padding: 1rem 1.2rem;
       line-height: 1.7rem
     }
 
     thead {
-      @extend .text__heading__four__blueTwo;
+      @extend .text__heading__four__blueOne;
       background-color: $yellowOne;
 
       th {
@@ -314,7 +314,7 @@
   pre {
     @extend .text__paragraph__neutral100;
     margin-bottom: 2rem;
-    background-color: $blueThree;
+    background-color: $blueOne;
     padding: 3rem;
     font-family: $code-font;
     overflow-x: scroll;

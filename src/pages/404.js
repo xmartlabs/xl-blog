@@ -12,8 +12,8 @@ const NotFoundPage = () => {
      <a href="/"><ErrorImage className={styles.img} /></a>
       <div className={styles.subContainer}>
         <title>Not found</title>
-        <h1 className={classnames(styles.heading, "text__heading__one__blueThree")}>You've reached the land of lost URLs.</h1>
-        <p className="text__paragraph__blueThree">
+        <h1 className={classnames(styles.heading, "text__heading__one__blueOne")}>You've reached the land of lost URLs.</h1>
+        <p className="text__paragraph__blueOne">
           While we dust off the treasure map,<br /> why not explore some other hidden gems on our blog? 💎
         </p>
         <a className={classnames("text__paragraph__xlPink", styles.link)} href="/">Show me those golden insights</a>
