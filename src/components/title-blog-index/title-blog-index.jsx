@@ -14,8 +14,8 @@ const TitleBlogIndex = ({ data, refIndexTitles, disappearIndex }) => {
   const [isBottomArrow, setIsBottomArrow] = useState(false);
   const linksContainerRef = useRef(null);
   const indexContainerRef = useRef(null);
-  const [indexHeight, setIndexHeight] = useState(0);
-  const [linksHeight, setLinksHeight] = useState(0);
+
+  const [ heightVariation, setHeightVariation ] = useState();
 
   useEffect(() => {
     window.addEventListener('scroll', getActiveTitle, { passive: true });
@@ -23,9 +23,9 @@ const TitleBlogIndex = ({ data, refIndexTitles, disappearIndex }) => {
     if (linksContainerRef.current && indexContainerRef.current) {
       const indexHeightTwo = indexContainerRef.current.getBoundingClientRect();
       const linksHeightTwo = linksContainerRef.current.getBoundingClientRect();
-      setIndexHeight(indexHeightTwo.height);
-      setLinksHeight(linksHeightTwo.height);
-      setIsTopArrow(linksHeight > indexHeight);
+
+      setHeightVariation(indexHeightTwo - linksHeightTwo);
+      setIsTopArrow(indexHeightTwo.height > linksHeightTwo.height);
       setIsBottomArrow(linksContainerRef.current.scrollTop > 0);
     }
 
@@ -44,9 +44,9 @@ const TitleBlogIndex = ({ data, refIndexTitles, disappearIndex }) => {
     }
   };
   
-  const scrollToBottom = () => {      
+  const scrollToBottom = () => {    
     linksContainerRef.current.scrollTo({
-      top: linksHeight - indexHeight,
+      top: heightVariation,
       behavior: 'smooth',
   });
 

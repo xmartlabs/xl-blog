@@ -19,6 +19,7 @@ import { AppContext, initialState } from '../config/context.js';
 import { TwitterIcon, Facebook, Linkedin, InstagramIcon, LogoWhite, Logo} from '../components/icons';
 import { TypeForm } from '../components/typeform/typeform';
 
+import "../index.scss";
 import * as styles from './layout.module.scss';
 
 
