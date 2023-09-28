@@ -6,6 +6,7 @@ import { GithubIcon, TwitterIcon, InstagramIcon, LinkedInIcon, CloseIcon, MenuMo
 
 import { classnames } from "../../helpers";
 import { SocialElement } from "../social-element";
+import { TypeForm } from "../typeform/typeform";
 
 import * as styles from "./mobile-menu.module.scss";
 
@@ -39,17 +40,7 @@ const MobileMenu = () => {
   return (
     <>
       <div className={classnames(styles.container, { [styles.openMenu]: showMenu })} >
-        {showTypeForm &&
-          <div className={styles.formContainer}>
-            <div onClick={() => setShowTypeForm(false)} className={styles.closeForm}><CloseIcon className={styles.closeFormIcon} /></div>
-            <iframe
-              src="https://form.typeform.com/to/c7G2RUWm?typeform-embed=popup-blank&typeform-source=blog.xmartlabs.com&typeform-medium=embed-sdk&embed-hide-footer=true&typeform-embed-id=rclfl" 
-              frameborder="0"
-              className={styles.typeForm}
-            >
-            </iframe>
-          </div>
-        }
+        {showTypeForm && <TypeForm onClick={() => setShowTypeForm(false)}/>}
         <div className={classnames(styles.buttonIconPosition, { [styles.openButton]: showMenu })}>
           <button onClick={() => setShowMenu(!showMenu)} className={styles.buttonIconStyles} >
             <MenuMobileIcon />

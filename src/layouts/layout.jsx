@@ -7,6 +7,7 @@ import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
 import { actualCategory, classnames } from '../helpers';
+import { useMediaQuery } from '../hooks';
 
 import { HeaderBanner } from '../components/header-banner/header-banner';
 import { NavMenu } from '../components/nav-menu';
@@ -15,8 +16,8 @@ import { MobileMenu } from '../components/mobile-menu';
 import { SocialElement } from '../components/social-element';
 import { StyledContainerHeader, StyledContainerNavBarXL } from '../elements';
 import { AppContext, initialState } from '../config/context.js';
-import { TwitterIcon, Facebook, Linkedin, InstagramIcon, LogoWhite, Logo, CloseIcon} from '../components/icons';
-import { useMediaQuery } from '../hooks';
+import { TwitterIcon, Facebook, Linkedin, InstagramIcon, LogoWhite, Logo} from '../components/icons';
+import { TypeForm } from '../components/typeform/typeform';
 
 import '../index.scss';
 
@@ -121,18 +122,7 @@ function Layout({ children }) {
   return (
     <>
       <AppContext.Provider value={{ state: contextState, setState: setContextState }}>
-        {showTypeForm &&
-          <div className={styles.formContainer}>
-            <button onClick={() => setShowTypeForm(false)} className={styles.closeForm}><CloseIcon className={styles.closeFormIcon} /></button>
-            <iframe
-              src="https://form.typeform.com/to/c7G2RUWm?typeform-embed=popup-blank&typeform-source=blog.xmartlabs.com&typeform-medium=embed-sdk&embed-hide-footer=true&typeform-embed-id=rclfl" 
-              frameborder="0"
-              className={styles.typeForm}
-              title="typeform embed"
-            >
-            </iframe>
-          </div>
-        }
+        {showTypeForm && <TypeForm onClick={() => setShowTypeForm(false)}/>}
         <div className={styles[`${contextState}Banner`]}>
           <StyledContainerNavBarXL>
             {isMobile && <MobileMenu />}
