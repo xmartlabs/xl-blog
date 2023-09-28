@@ -32,7 +32,7 @@
   height: 100%;
 }
 
-@media screen and (max-height: map-get($map: $screen-breakpoint, $key: md)) {
+@media screen and (max-height: map-get($map: $screen-breakpoint, $key: sm)) {
   .formContainer {
     padding: 0;
   }

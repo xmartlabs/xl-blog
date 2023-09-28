@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+import React from "react";
+import PropTypes from "prop-types";
 
 import { CloseIcon } from "../icons";
 
@@ -17,5 +18,16 @@ const TypeForm = ({ onClick }) => {
     </div>
   );
 }
+
+
+TypeForm.propTypes = {
+  onCkick: PropTypes.func
+};
+
+TypeForm.defaultProps = {
+  onClick: () => {}
+
+};
+
 
 export { TypeForm };
