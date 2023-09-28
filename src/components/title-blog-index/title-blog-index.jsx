@@ -14,26 +14,27 @@ const TitleBlogIndex = ({ data, refIndexTitles, disappearIndex }) => {
   const [isBottomArrow, setIsBottomArrow] = useState(false);
   const linksContainerRef = useRef(null);
   const indexContainerRef = useRef(null);
-
   const [ heightVariation, setHeightVariation ] = useState();
 
   useEffect(() => {
     window.addEventListener('scroll', getActiveTitle, { passive: true });
-    
-    if (linksContainerRef.current && indexContainerRef.current) {
-      const indexHeightTwo = indexContainerRef.current.getBoundingClientRect();
-      const linksHeightTwo = linksContainerRef.current.getBoundingClientRect();
-
-      setHeightVariation(indexHeightTwo - linksHeightTwo);
-      setIsTopArrow(indexHeightTwo.height > linksHeightTwo.height);
-      setIsBottomArrow(linksContainerRef.current.scrollTop > 0);
-    }
-
+  
     return () => {
       window.removeEventListener('scroll', getActiveTitle);
     };
-  }, [linksContainerRef.current, indexContainerRef.current]);
-
+  }, []);
+  
+  useEffect(() => {
+    if (linksContainerRef.current && indexContainerRef.current) {
+      const indexHeightTwo = indexContainerRef.current.clientHeight;
+      const linksHeightTwo = linksContainerRef.current.clientHeight;
+  
+      setHeightVariation(indexHeightTwo - linksHeightTwo);
+      setIsTopArrow(indexHeightTwo > linksHeightTwo);
+      setIsBottomArrow(linksContainerRef.current.scrollTop > 0);
+    }
+  }, [heightVariation]);
+  
   const getActiveTitle = () => {
     if (refIndexTitles.current) {
       const elementList = Array.from(refIndexTitles.current.childNodes);
@@ -48,15 +49,15 @@ const TitleBlogIndex = ({ data, refIndexTitles, disappearIndex }) => {
     linksContainerRef.current.scrollTo({
       top: heightVariation,
       behavior: 'smooth',
-  });
-
+    });
+  
     setIsTopArrow(false);
     setIsBottomArrow(true);
   };
-
+  
   const scrollToTop = () => {
     linksContainerRef.current.scrollTo({ top: 0, behavior: 'smooth' });
-
+  
     setIsTopArrow(true);
     setIsBottomArrow(false);
   };
