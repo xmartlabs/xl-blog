@@ -2,15 +2,17 @@
 @import "../../css/text-styles.scss";
 
 // Containers
-
 .heightContainer {
-  display: fixed;
   width: 20%;
   margin-right: 5%;
   align-items: flex-start;
   flex-wrap: wrap;
   flex-direction: row;
   scroll-behavior: smooth;
+  position: fixed;
+  max-height: 70vh; /* Establece una altura máxima para el primer contenedor */
+  overflow-y: auto; /* Agrega una barra de desplazamiento vertical si es necesario */
+  overflow-x: hidden;
 }
 
 .indexSubContainer {
@@ -21,9 +23,10 @@
   display: flex;
   align-items: flex-start;
   flex-wrap: wrap;
-  flex-direction: row;
-  max-height: 76vh;
-  overflow-y: hidden;
+  flex-direction: column;
+  max-height: 76vh; /* Establece una altura máxima para el segundo contenedor */
+  overflow-y: auto; /* Agrega una barra de desplazamiento vertical si es necesario */
+  overflow-x: hidden;
   scroll-behavior: smooth;
 }
 

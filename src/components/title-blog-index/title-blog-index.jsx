@@ -23,17 +23,19 @@ const TitleBlogIndex = ({ data, refIndexTitles, disappearIndex }) => {
       window.removeEventListener('scroll', getActiveTitle);
     };
   }, []);
-  
+
   useEffect(() => {
     if (linksContainerRef.current && indexContainerRef.current) {
-      const indexHeightTwo = indexContainerRef.current.clientHeight;
-      const linksHeightTwo = linksContainerRef.current.clientHeight;
+      const indexHeight = indexContainerRef.current.clientHeight;
+      const linksHeight = linksContainerRef.current.clientHeight;
   
-      setHeightVariation(indexHeightTwo - linksHeightTwo);
-      setIsTopArrow(indexHeightTwo > linksHeightTwo);
+      const heightDifference = indexHeight - linksHeight;
+  
+      setHeightVariation(heightDifference);
+      setIsTopArrow(heightDifference > 0);
       setIsBottomArrow(linksContainerRef.current.scrollTop > 0);
     }
-  }, [heightVariation]);
+  });
   
   const getActiveTitle = () => {
     if (refIndexTitles.current) {
