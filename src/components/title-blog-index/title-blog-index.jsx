@@ -18,7 +18,7 @@ const TitleBlogIndex = ({ data, refIndexTitles, disappearIndex }) => {
 
   useEffect(() => {
     window.addEventListener('scroll', getActiveTitle, { passive: true });
-  
+
     return () => {
       window.removeEventListener('scroll', getActiveTitle);
     };
@@ -32,8 +32,7 @@ const TitleBlogIndex = ({ data, refIndexTitles, disappearIndex }) => {
       const heightDifference = indexHeight - linksHeight;
   
       setHeightVariation(heightDifference);
-      setIsTopArrow(heightDifference > 0);
-      setIsBottomArrow(linksContainerRef.current.scrollTop > 0);
+      setIsTopArrow(heightDifference < 0);
     }
   });
   
@@ -58,7 +57,10 @@ const TitleBlogIndex = ({ data, refIndexTitles, disappearIndex }) => {
   };
   
   const scrollToTop = () => {
-    linksContainerRef.current.scrollTo({ top: 0, behavior: 'smooth' });
+    linksContainerRef.current.scrollTo({ 
+      top: 0, 
+      behavior: 'smooth' 
+    });
   
     setIsTopArrow(true);
     setIsBottomArrow(false);
