@@ -8,6 +8,7 @@ import { AppContext, BannerType } from '../config/context';
 import { Card } from '../components/card';
 
 import * as styles from "./blog-list.module.scss";
+import { TopThreePosts } from "../components/top-three-posts/top-three-posts";
 
 const BlogList = ({ pageContext, data }) => {
   const _ = require("lodash")    
@@ -20,6 +21,10 @@ const BlogList = ({ pageContext, data }) => {
 
   return (
     <>
+      <div>
+        <p>Top Posts</p>
+        <TopThreePosts posts={edges} />
+      </div>
       <div className={styles.container}>
         {edges.map(({ node }) => <Card data={node} key={node.id} withCategory={true} />)}     
       </div>
