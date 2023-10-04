@@ -7,6 +7,8 @@ tags:
   - 8M
 author: vale
 thumbnail: /images/the-xl-way-closing-the-gender-gap/8m_cover.jpg
+featured: false
+all: false
 ---
 
 ## Building a Company Culture To Be Proud Of

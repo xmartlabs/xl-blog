@@ -8,6 +8,8 @@ thumbnail: https://4.bp.blogspot.com/-A7kzBv8QgCE/UFd7hpYoKrI/AAAAAAAAABI/l0v_Ih
 author: enrique
 category: people-events
 permalink: /xmartlabs-in-startup-weekend-montevideo/
+featured: false
+all: false
 ---
 <p>
 <a href="https://montevideo.startupweekend.org/" target="_blank">Startup Weekend Montevideo</a>&nbsp;took place: an event organized all over the world in which local entrepreneurs participate in the process of making a startup in

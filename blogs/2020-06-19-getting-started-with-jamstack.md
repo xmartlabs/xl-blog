@@ -7,6 +7,8 @@ category: development
 author: mtnBarreto
 thumbnail: images/jamstack-intro/featured.jpeg
 permalink: /2020-06-22-getting-started-with-jamstack/
+featured: false
+all: false
 ---
 
 Jamstack is a top trend in web development nowadays. Everyone is talking about the modern web development architecture. In this blogpost, I'm gonna cover what caused JAMSTack quick's adoption, how's the JAMStack community and ecosystem, and of course, what does JAMStack mean.

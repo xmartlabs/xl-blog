@@ -9,6 +9,8 @@ tags:
   - E-waste
 author: coti
 thumbnail: /images/only-one-earth/OnlyOneEarth.png
+featured: false
+all: false
 ---
 # raw - #OnlyOneEarth
 

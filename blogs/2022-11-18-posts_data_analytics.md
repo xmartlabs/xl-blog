@@ -6,6 +6,8 @@ author: jsanchez
 category: development
 thumbnail: /images/data-analytics/data-analytics-cover.png
 permalink: /data-analytics/
+featured: false
+all: false
 ---
 
 Businesses and startups are constantly increasing in quantity, so the search for distinguishing from competitors and looking for competitive advantage is more critical than ever.

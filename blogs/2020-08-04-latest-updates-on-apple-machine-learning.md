@@ -7,6 +7,8 @@ author: nicolantean
 thumbnail: images/whats-new-on-apple-machine-learning-at-wwdc-2020/0-preview.png
 category: development
 permalink: /latest-updates-on-apple-machine-learning/
+featured: false
+all: false
 ---
 
 Every day we have greater incorporation of machine learning tools into the mobile world.

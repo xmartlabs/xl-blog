@@ -6,6 +6,8 @@ author: vale
 category: development
 thumbnail: images/okrs/image.jpg
 permalink: /okr-framework/
+featured: false
+all: false
 ---
 
 Google owes its success to OKRs. At least that was what its former CEO, Larry Page, stated. As you may know, Google was not the first search engine, they got pretty late to the game (1996, whereas the first search engine, was introduced six years earlier). So it's worth wondering how they ended up at the top. They definitely weren't running on a new or innovative idea. Their differentiator was in how they **executed** it.

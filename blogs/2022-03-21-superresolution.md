@@ -6,6 +6,8 @@ author: lazaro
 category: machine-learning
 thumbnail: images/ml-superresolution/Superresolution-blog.jpg
 permalink: /machine-learning-super-resolution-algorithms/
+featured: false
+all: false
 ---
 
 Nowadays, everyone is exposed to artificial intelligence (AI) in one way or another. [Computer vision](https://blog.xmartlabs.com/blog/computer-vision-techniques-for-body-detection/) is a popular application of AI through cellphones, video conference platforms, and video vigilance cameras, among other [use cases](https://blog.xmartlabs.com/blog/computer-vision-and-object-detection-use-case/). One fascinating problem to solve within the computer vision field is super-resolution (SR). 

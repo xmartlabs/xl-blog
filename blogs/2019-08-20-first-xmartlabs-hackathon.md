@@ -6,6 +6,8 @@ category: people-events
 author: bruno
 thumbnail: images/xmartlabs-first-hackathon/general_view_bbq.jpg
 permalink: /first-xmartlabs-hackathon/
+featured: false
+all: false
 ---
 
 Last month Xmartlabs held its very first hackathon!

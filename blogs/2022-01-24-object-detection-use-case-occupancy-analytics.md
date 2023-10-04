@@ -6,6 +6,8 @@ author: pablog
 category: machine-learning
 thumbnail: images/object-detection/ObjectDetecion_Blog.jpg
 permalink: /computer-vision-and-object-detection-use-case/
+featured: false
+all: false
 ---
 
 In a previous [post](https://blog.xmartlabs.com/blog/computer-vision-techniques-for-body-detection/), we covered computer vision and its application to body detection. Today, we’ll go a little bit deeper into the object detection problem showing an actual use case scenario: [Lanthorn](https://lanthorn.ai/).

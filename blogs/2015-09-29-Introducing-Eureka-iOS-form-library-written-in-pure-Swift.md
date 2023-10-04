@@ -5,6 +5,8 @@ tags: [Eureka, Forms]
 author: mtnBarreto
 category: development
 permalink: /introducing-eureka-i-os-form-library-written-in-pure-swift/
+featured: false
+all: false
 ---
 
 We are incredibly excited to announce [Eureka!], our first Swift open source project designed to easily build dynamic table-view forms.

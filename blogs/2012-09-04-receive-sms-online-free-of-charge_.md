@@ -7,6 +7,8 @@ blogger_orig_url: https://blog.xmartlabs.com/2012/09/receive-sms-online-free-of-
 author: enrique
 category: development
 permalink: /receive-sms-online-free-of-charge-4/
+featured: false
+all: false
 ---
 
 <p>

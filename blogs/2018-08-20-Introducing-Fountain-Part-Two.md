@@ -5,6 +5,8 @@ tags: [Android, Android Jetpack, Android Paging Library, Live Data, Android Arch
 author: mirland
 category: development
 permalink: /introducing-fountain-part-two/
+featured: false
+all: false
 ---
 
 In the [previous part] we presented **[Fountain]** and shown a way, using the `Listing` component, to make the paging as cool and simple as possible.

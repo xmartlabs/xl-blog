@@ -6,6 +6,8 @@ thumbnail: /images/linkedin-for-work-pt-2/cover.jpg
 author: alberto
 category: product-design
 permalink: /linkedin-for-work-pt-2-finding/
+featured: false
+all: false
 ---
 
 <p>

@@ -7,6 +7,8 @@ category: development
 author: emi
 thumbnail: images/react-native-line/banner2.png
 permalink: /react-native-line-2/
+featured: false
+all: false
 ---
 
 We are happy to announce a new [react-native-line](https://github.com/xmartlabs/react-native-line) version that supports the latest updates on the [LINE SDK](https://developers.line.biz/en/docs/line-login/overview/) and it's available to download via [npm](https://www.npmjs.com/package/@xmartlabs/react-native-line)!

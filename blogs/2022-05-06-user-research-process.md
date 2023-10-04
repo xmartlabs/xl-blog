@@ -10,6 +10,8 @@ tags:
   - UX/UI
 author: alemachado
 thumbnail: /images/user-research-is-like-a-movie/image.jpg
+featured: false
+all: false
 ---
 
 I have two types of friends, [the ones who don’t care for or even enjoy spoilers](https://www.psychologytoday.com/us/blog/thriving101/201108/the-spoiler-paradox), and the ones (like me) [who hate them](https://scholarscompass.vcu.edu/uresposters/38/).

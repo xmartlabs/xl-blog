@@ -8,6 +8,8 @@ tags:
 author: agustin
 category: people-events
 permalink: /speakers-at-jiap-2013/
+featured: false
+all: false
 ---
 
 <p>

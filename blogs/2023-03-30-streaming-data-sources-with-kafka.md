@@ -6,6 +6,8 @@ author: jsanchez
 category: development
 permalink: /streaming-data-sources-with-kafka/
 thumbnail: /images/streaming-data-sources-with-kafka/kafka-blogpost.png
+featured: false
+all: false
 ---
 
 

@@ -5,6 +5,8 @@ tags: [Android, Android Jetpack, Android Paging Library, Live Data, Android Arch
 author: mirland
 category: development
 permalink: /introducing-fountain-part-one/
+featured: false
+all: false
 ---
 
 There are plenty of articles out there talking about the amazing Android Architecture Components, how we can combine them in an MVVM architecture and make them work as a charm.

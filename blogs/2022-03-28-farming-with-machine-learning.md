@@ -6,6 +6,8 @@ author: vale
 category: machine-learning
 thumbnail: images/farming-ml/MLAgriculture.jpg
 permalink: /precision-agriculture-and-the-future-of-farming-with-machine-learning/
+featured: false
+all: false
 ---
 
 Maintaining a plantation, whether it’s for forestry or crops, has never been more expensive ([costs per acre in the US have risen 170% since the 70s](https://www.extension.iastate.edu/agdm/crops/pdf/a1-21.pdf)). And this is partly due to the increasing costs of maintaining weed-free fields.

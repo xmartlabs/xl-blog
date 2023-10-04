@@ -6,6 +6,8 @@ author: xl
 category: people-events
 thumbnail: images/10-lessons-in-tech-industry/10_things_cover.jpg
 permalink: /10-years-in-the-tech-industry/
+featured: false
+all: false
 ---
 
 Choosing to pursue a business in technology is often a difficult road with many changes and challenges. And if you think about it, startups have a flop rate of 90%; getting discouraged can be easy. Yet, the tech industry continues to grow yearly, and entrepreneurs worldwide overlook failure to pursue their ideas.

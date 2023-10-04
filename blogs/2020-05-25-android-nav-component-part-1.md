@@ -6,6 +6,8 @@ category: development
 author: mirland
 thumbnail: images/android_navigation_blog_part_one/navigation_banner.jpg
 permalink: /Android-Nav-Component-Part-1/
+featured: false
+all: false
 ---
 
 This year the [Google I/O](https://events.google.com/io/) conference was canceled, so I think it's a good time to talk about one of [Jetpack's](https://developer.android.com/jetpack) biggest Architecture component introduced last year, the [Android Navigation Component](https://developer.android.com/guide/navigation).

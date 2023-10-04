@@ -6,6 +6,8 @@ author: mathias
 category: machine-learning
 permalink: /deploying-a-recommendation-system-using-fastapi-tf-serving-and-feast/
 thumbnail: /images/deploying-a-recommendation-system-using-fastapi-tf-serving-and-feast/featured_image.png
+featured: false
+all: false
 ---
 
 ### Introduction

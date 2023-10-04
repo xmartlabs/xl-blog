@@ -7,6 +7,8 @@ category: development
 author: ceci
 thumbnail: images/apple-sign-in/signInWithApple.jpg
 permalink: /sign-in-with-apple-with-swiftui/
+featured: false
+all: false
 ---
 
 Apple recently updated Swift UI so that integrating *Sign In With Apple* through it is as seamless as it gets. This and all other new SwiftUI improvements are an indication that Apple is taking seriously the new state-driven, reactive, and declarative way of creating Apple apps. Which also motivates us to update [our guide](https://blog.xmartlabs.com/2020/05/04/Why-Sign-in-with-Apple-and-integration-guide/) about integrating Sign in with Apple, but now using SwiftUI.

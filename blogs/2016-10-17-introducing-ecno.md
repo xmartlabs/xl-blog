@@ -5,6 +5,8 @@ tags: [Swift, iOS]
 author: dernst
 category: development
 permalink: /introducing-ecno/
+featured: false
+all: false
 ---
 
 [Ecno]:        https://github.com/xmartlabs/Ecno

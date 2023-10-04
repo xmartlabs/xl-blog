@@ -7,6 +7,8 @@ category: development
 author: mtnBarreto
 thumbnail: images/ios-fastlane-ci/featured.png
 permalink: /ios-continuous-integration-delivery-using-fastlane-and-bitrise/
+featured: false
+all: false
 ---
 
 In this post I'll walk you through the Continuous Integration and Deployment set up used by Xmartlabs iOS team. We will configure [Fastlane](https://fastlane.tools/) and [Bitrise](https://www.bitrise.io/) to automate the app release process to [TestFlight](https://developer.apple.com/testflight/).

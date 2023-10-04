@@ -6,6 +6,8 @@ author: mikaela
 category: product-design
 permalink: /atomic-design-systems-on-figma/
 thumbnail: /images/atomic-design-systems-on-figma/Atomic_design.png
+featured: false
+all: false
 ---
 
 If you're a designer who's ever struggled to keep track of complex interfaces, then Atomic Design is something you'll want to know. 

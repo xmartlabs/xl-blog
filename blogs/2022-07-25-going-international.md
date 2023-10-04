@@ -6,6 +6,8 @@ category: people-events
 author: fer-barrios
 thumbnail: /images/going-international/going-international.png
 permalink: /going-international/
+featured: false
+all: false
 ---
 
 ## Uruguay: An over-saturated market

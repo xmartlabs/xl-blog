@@ -6,6 +6,8 @@ author: pbt
 thumbnail: images/redshift-snowflake/data_center_cloud.jpg
 category: development
 permalink: /redshift-snowflake/
+featured: false
+all: false
 ---
 
 Well-informed, objective decisions have always been a key aspect of every successful business.

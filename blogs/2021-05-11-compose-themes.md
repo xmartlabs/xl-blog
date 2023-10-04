@@ -8,6 +8,8 @@ thumbnail: images/extending-material-theme-in-jetpack-compose/banner.jpeg
 social_image: /images/extending-material-theme-in-jetpack-compose/banner_social.jpeg
 twitter_image: /images/extending-material-theme-in-jetpack-compose/banner_twitter.jpeg
 permalink: /extending-material-theme-in-jetpack-compose/
+featured: false
+all: false
 ---
 
 Building Android UIs with a consistent look and feel is easier than ever by using the new [Jetpack Compose] framework and setting up [themes](https://developer.android.com/jetpack/compose/themes).

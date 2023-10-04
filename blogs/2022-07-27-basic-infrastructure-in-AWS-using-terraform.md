@@ -6,6 +6,8 @@ author: pablog
 category: development
 thumbnail: /images/basic-infrastructure-in-AWS-using-terraform/Basic-Infrastructure-in-AWS-using-Terraform.png
 permalink: /blog-basic-infrastructure-in-aws-using-terraform/
+featured: false
+all: false
 ---
 
 Managing cloud infrastructure doesn’t always go smoothly for developers. Choosing which cloud provider to use, configuring the private and public networks, and the required security of the infrastructure aren’t easy tasks,  and they consume research, documentation, and implementation time. In addition to that, in that process, many questions arise:

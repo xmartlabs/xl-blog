@@ -8,6 +8,8 @@ thumbnail: https://img.youtube.com/vi/FCZs6Ijnyx8/default.jpg
 author: agustin
 category: people-events
 permalink: /summary-rubyconf-uy-2013/
+featured: false
+all: false
 ---
 
 <div style={{ textAlign: 'center' }}>

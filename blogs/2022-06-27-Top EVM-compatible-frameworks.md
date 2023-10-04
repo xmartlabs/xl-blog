@@ -9,6 +9,8 @@ tags:
   - Hardhat
 author: mtnBarreto
 thumbnail: /images/evm-compatible-frameworks/TopEVM-compatible-frameworks-to-build-dApps-Truffle-vs-Hardhat.png
+featured: false
+all: false
 ---
 
 Web3.0 space is exploding right now. There's an unprecedented demand for blockchain developers to build the next revolutionary dApp. But for those giving their first steps in the field, choosing a framework from all those available can be overwhelming.

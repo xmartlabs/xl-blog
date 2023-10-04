@@ -6,6 +6,8 @@ author: christian-casaran
 category: development
 permalink: /a-comprehensive-guide-to-alpaca-trading-api/
 thumbnail: /images/alpaca-trading-API/Alpaca_trading.png
+featured: false
+all: false
 ---
 
 

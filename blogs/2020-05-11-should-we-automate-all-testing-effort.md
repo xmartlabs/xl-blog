@@ -7,6 +7,8 @@ category: development
 author: tabu
 thumbnail: images/automate-manual-testing/featured2.png
 permalink: /should-we-automate-all-testing-effort/
+featured: false
+all: false
 ---
 
 Have you ever found yourself wanting full automation testing? Have you ever thought that everything should be automated? Then this post is for you.

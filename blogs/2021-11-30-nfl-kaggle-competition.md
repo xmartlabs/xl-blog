@@ -6,6 +6,8 @@ author: andresh
 category: machine-learning
 thumbnail: images/nfl-kaggle-competition/nfl_cover.jpg
 permalink: /kaggle-competition-2021/
+featured: false
+all: false
 ---
 
 Kaggle competitions attract thousands of data science and machine learning enthusiasts by providing access to various datasets and infrastructure with GPU availability and discussion forums to share ideas; this is very important for practitioners looking for a starting point.

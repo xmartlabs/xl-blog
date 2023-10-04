@@ -6,6 +6,8 @@ author: sofitechera
 category: development
 thumbnail: /images/importance-qa/cover.png
 permalink: /quality-assurance-development-process/
+featured: false
+all: false
 ---
 
 Would you deliver an untested product to a customer? That's a question every single company should be asking.

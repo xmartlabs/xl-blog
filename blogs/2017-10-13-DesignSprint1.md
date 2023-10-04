@@ -6,6 +6,8 @@ author: xl
 category: product-design
 permalink: /design-sprint-1/
 thumbnail: /images/sprint1/cover.jpg
+featured: false
+all: false
 ---
 
 # First Part

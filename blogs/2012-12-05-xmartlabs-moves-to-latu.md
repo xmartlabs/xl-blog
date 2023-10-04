@@ -4,6 +4,8 @@ date: 2012-12-05
 author: agustin
 category: people-events
 permalink: /xmartlabs-moves-to-latu/
+featured: false
+all: false
 ---
 
 <p>

@@ -9,6 +9,8 @@ tags:
   - React Native
 author: nicoh
 thumbnail: /images/rn-future/app.js-takeaways-react-native.png
+featured: false
+all: false
 ---
 
 ## **Introduction**

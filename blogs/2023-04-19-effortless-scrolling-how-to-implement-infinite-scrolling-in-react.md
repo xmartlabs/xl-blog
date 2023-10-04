@@ -6,6 +6,8 @@ author: solo
 category: development
 permalink: /how-to-implement-infinite-scrolling-in-react-native/
 thumbnail: /images/effortless-scrolling/Infinite_scrolling.png
+featured: false
+all: false
 ---
 
 ## Introduction

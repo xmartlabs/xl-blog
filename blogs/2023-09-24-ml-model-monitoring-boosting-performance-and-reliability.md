@@ -15,6 +15,8 @@ author: maximol
 category: machine-learning
 permalink: /ml-model-monitoring-boosting-performance-and-reliability/
 thumbnail: /images/ml-model-monitoring-boosting-performance-and-reliability/featured.png
+featured: false
+all: false
 ---
 
 # ML Model Monitoring: Boosting Performance & Reliability

@@ -6,6 +6,8 @@ author: mirland
 category: development
 thumbnail: /images/introducing-stock/banner.png
 permalink: /introducing-stock/
+featured: false
+all: false
 ---
 
 

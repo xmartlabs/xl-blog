@@ -5,6 +5,8 @@ tags: []
 author: alberto
 category: product-design
 permalink: /2014-11-25-now-with-more-uxd/
+featured: false
+all: false
 ---
 
 <p>

@@ -6,6 +6,8 @@ author: belu
 category: development
 permalink: /i-tested-react-native-new-architecture-improvements/
 thumbnail: /images/i-tested-react-native-new-architecture-improvements/featured.png
+featured: false
+all: false
 ---
 
 ## Introduction

@@ -7,6 +7,8 @@ category: people-events
 author: fer-barrios
 thumbnail: images/dealing-with-covid/dealing-with-covid.jpg
 permalink: /2020-06-08-how-to-deal-with-coronavirus/
+featured: false
+all: false
 ---
 
 We are now in the midst of a globalized pandemic, which is pretty much new for all of us.

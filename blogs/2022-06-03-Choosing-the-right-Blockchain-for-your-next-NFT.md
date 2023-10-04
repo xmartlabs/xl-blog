@@ -11,6 +11,8 @@ tags:
 author: mtnBarreto
 
 thumbnail: /images/choosing-the-right-blockchain/CHOOSING_THE_RIGHT_BLOCKCHAIN.png
+featured: false
+all: false
 ---
 
 

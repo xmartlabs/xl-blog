@@ -13,6 +13,8 @@ author: mathias
 category: machine-learning
 permalink: /tf-recommenders-encode-user-watch-history-using-openai-embeddings/
 thumbnail: /images/tf-recommenders-encode-user-watch-history-using-openai-embeddings/featured.png
+featured: false
+all: false
 ---
 
 ### Introduction

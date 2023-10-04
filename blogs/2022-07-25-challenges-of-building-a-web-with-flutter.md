@@ -9,6 +9,8 @@ tags:
   - Web
 author: felipe
 thumbnail: /images/building-a-web-with-flutter/featured.png
+featured: false
+all: false
 ---
 ## Lessons learned from a nonconventional approach to flutter web development
 

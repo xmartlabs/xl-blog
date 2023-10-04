@@ -9,6 +9,8 @@ thumbnail: images/gong-introduction/banner.png
 social_image: /images/gong-introduction/bannerSocial.png
 twitter_image: /images/gong-introduction/bannerTwitter.png
 permalink: /kickstart-your-new-android-project-with-gong-base-project/
+featured: false
+all: false
 ---
 
 Starting a software project is not an easy task, and Android is no exception.

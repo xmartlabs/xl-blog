@@ -5,6 +5,8 @@ tags:
 author: agustin
 category: people-events
 permalink: /xmartlabs-at-rubyconf-uruguay-2013/
+featured: false
+all: false
 ---
 
 <p>

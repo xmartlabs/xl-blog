@@ -7,6 +7,8 @@ thumbnail: https://2.bp.blogspot.com/-oBzMmMrIAL8/UbOS9KL0qxI/AAAAAAAAAK4/v8CNWD
 author: mtnBarreto
 category: people-events
 permalink: /wwdc-2013-apple-worldwide-developers/
+featured: false
+all: false
 ---
 
 <p>

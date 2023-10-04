@@ -6,6 +6,8 @@ author: esanchez
 category: people-events
 permalink: /the-first-eureka-webinar/
 thumbnail: /images/eureka-webinar/eureka.jpg
+featured: false
+all: false
 ---
 
 [Eureka]:        https://github.com/xmartlabs/Eureka

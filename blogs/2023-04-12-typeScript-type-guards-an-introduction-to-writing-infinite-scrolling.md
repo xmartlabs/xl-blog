@@ -6,6 +6,8 @@ author: solo
 category: development
 permalink: /type-script-type-guards-writing-safer-code/
 thumbnail: /images/typeScript-Type-Guards-An-Introduction-to-Writing/Infinite_scrolling.png
+featured: false
+all: false
 ---
 
 

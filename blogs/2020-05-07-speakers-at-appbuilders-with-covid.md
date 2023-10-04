@@ -7,6 +7,8 @@ category: people-events
 author: arsu
 thumbnail: images/appbuilders2020/featured.png
 permalink: /speakers-at-appbuilders-with-covid/
+featured: false
+all: false
 ---
 
 ## AppBuilders Speakers!

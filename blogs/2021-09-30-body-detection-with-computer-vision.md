@@ -6,6 +6,8 @@ author: vale
 category: machine-learning
 thumbnail: images/body-detection-with-computer-vision/body-detection-with-computer-vision.jpg
 permalink: /computer-vision-techniques-for-body-detection/
+featured: false
+all: false
 ---
 
 Being able to infer human bodies in images automatically has opened avenues for an array of real-life applications.

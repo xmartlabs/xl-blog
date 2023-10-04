@@ -7,6 +7,8 @@ category: people-events
 author: arsu
 thumbnail: images/recap-appbuilders/featured.jpg
 permalink: /appbuilders-conference-recap/
+featured: false
+all: false
 ---
 
 After months of the uncertainty of how a fully online conference would work, and a lot of hard work from multiple teams around the world in order to make it work.

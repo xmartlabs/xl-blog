@@ -6,6 +6,8 @@ author: mathias
 category: machine-learning
 thumbnail: /images/building-a-zero-shot-sign-pose-embedding-model/LSU.png
 permalink: /machine-learning-sign-language-recognition/
+featured: false
+all: false
 ---
  
 

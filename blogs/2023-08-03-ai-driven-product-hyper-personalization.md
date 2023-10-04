@@ -12,6 +12,8 @@ author: vale
 category: product-design
 permalink: /ai-driven-product-hyper-personalization/
 thumbnail: /images/ai-driven-product-hyper-personalization/featured.png
+featured: false
+all: false
 ---
 
 > **"The personal touch is what makes people feel valued and appreciated."** - Dale Carnegie

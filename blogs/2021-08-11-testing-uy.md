@@ -8,6 +8,8 @@ thumbnail: images/our-take-on-testinguy/blogpost3.png
 social_image: /images/our-take-on-testinguy/testing-uy-twitter.png
 twitter_image: /images/our-take-on-testinguy/testing-uy-twitter.png
 permalink: /our-take-on-testinguy-2021/
+featured: false
+all: false
 ---
 
 [Testing UY](https://testinguy.org/) emerges in the year 2014 as a way to promote Testing in Uruguay and the region. The conference is 100% free and gathers groups of experts in different areas of knowledge, such as SQA, UI/UX, Management, among others. The main focus is, share experience, acquire new tools and have a great time.

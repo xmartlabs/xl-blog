@@ -8,6 +8,8 @@ thumbnail: images/pager-swiftui/Twitter-1.png
 social_image: /images/pager-swiftui/Twitter-1.png
 twitter_image: /images/pager-swiftui/Twitter-1.png
 permalink: /introducing-pagertabstripview-pager-view-in-swiftui/
+featured: false
+all: false
 ---
 
 <p style={{ textAlign:'left', width: '100%'}}>

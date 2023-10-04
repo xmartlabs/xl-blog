@@ -6,6 +6,8 @@ author: mathias
 category: machine-learning
 thumbnail: images/bender-is-the-best/featured.jpg
 permalink: /how-to-get-the-best-performance-for-ml-models-on-ios/
+featured: false
+all: false
 ---
 
 Have you ever wanted to run a neural network model on iOS and found out that it runs too slow for your use case?

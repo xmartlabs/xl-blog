@@ -5,6 +5,8 @@ tags: [JavaScript, Plugin, Widget, CORS, Ruby, Rails, CSS]
 author: remer
 category: development
 permalink: /making-a-js-plug-in-a-full-stack-approach/
+featured: false
+all: false
 ---
 
 In this occasion we will introduce a way to create a client side JavaScript plug-in that can be easily integrated in any third party websites.

@@ -6,6 +6,8 @@ author: mtnBarreto
 category: machine-learning
 thumbnail: images/recommendation-engines/RecEngine.jpg
 permalink: /recommendations-engines-what-they-do-and-why-they-are-useful/
+featured: false
+all: false
 ---
 
 Recommendation engines can rapidly increase online business revenue and boost customer loyalty, both crucial for sustainable growth. In this blog post, we’ll go through the main challenges, and pros and cons we faced implementing and deploying such solutions for a big apparel brand, the different approaches to implement recommendation engines, and best practices.

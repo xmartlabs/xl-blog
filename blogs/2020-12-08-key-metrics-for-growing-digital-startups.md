@@ -7,6 +7,8 @@ category: development
 author: robert
 thumbnail: images/key-metrics-for-growing-digital-startups/featured.png
 permalink: /key-metrics-for-growing-digital-startups/
+featured: false
+all: false
 ---
 
 Ever since the bigger tech companies like Google, Amazon and Facebook realized the powerful role data plays in designing impactful products that attracts new users and retains older ones, they started paying more attention to which metrics they should be tracking in order to refine their products and take assertive business decisions. This resulted in the investment of these huge companies in developing analytics solutions with more reasonable pricing so smaller companies and startups could have the benefit of using data.

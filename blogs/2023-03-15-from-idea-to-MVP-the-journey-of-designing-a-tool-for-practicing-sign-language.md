@@ -6,6 +6,8 @@ author: andres-zunini
 category: product-design
 thumbnail: /images/from-idea-to-mvp/LSU_Design.png
 permalink: /from-idea-to-mvp-the-lean-inception-process/
+featured: false
+all: false
 ---
  
 

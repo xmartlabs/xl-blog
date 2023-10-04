@@ -5,6 +5,8 @@ tags: [XLForm, iOS]
 author: mathias
 category: development
 permalink: /xl-form-using-nspredicates-to-change-form-structure/
+featured: false
+all: false
 ---
 
 In almost every app you might ever build you will have a profile and settings view and they may also have many forms. Using [XLForm](https://github.com/xmartlabs/XLForm) we speed up the development time spent on these view controllers. XLForm allows us to define and manipulate forms dealing with a high level DSL abstraction (XLFormDescriptor, XLSectionDescriptor, XLRowDescriptor) to define any customized table-view form with a flexibility you might have never imagined before.

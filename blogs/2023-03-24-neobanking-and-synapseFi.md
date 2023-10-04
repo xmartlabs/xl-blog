@@ -6,6 +6,8 @@ author: christian-casaran
 category: development
 permalink: /the-power-of-neobanking-with-synapse-fi/
 thumbnail: /images/neobanking-and-synapseFi/Neobanking-1.png
+featured: false
+all: false
 ---
 
 
