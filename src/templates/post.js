@@ -9,14 +9,14 @@ import { classnames, findTitles, useCategory } from "../helpers";
 import { AuthorSerializer } from '../serializer';
 import { AppContext, BannerType } from '../config/context';
 import { SocialElement } from '../components/social-element';
-import { TwitterIcon, Facebook, Linkedin, ClockIcon, InstagramIcon} from "../components/icons";
+import { TwitterIcon, Facebook, Linkedin, ClockIcon, InstagramIcon} from '../components/icons';
 import { MoreBlogsSection } from '../components/more-blogs-section';
 import { Tags } from '../components/tags/tags';
 import { TitleBlogIndex } from '../components/title-blog-index/title-blog-index';
 
 import * as styles from '../css/blog-post.module.scss';
 
-const _ = require("lodash");
+const _ = require('lodash');
 
 const getPathname = () => {
   if (typeof window !== 'undefined') {
@@ -29,40 +29,40 @@ const shareBlogPostLinks = [
   {
     path: `https://twitter.com/intent/tweet?url=URL&text=${getPathname()}`, 
     icon: <TwitterIcon />,
-    id: "socialSharePostTwitter"
+    id: 'socialSharePostTwitter'
   },
   {
     path: `https://www.facebook.com/sharer/sharer.php?u=https://blog.xmartlabs.com/blog${getPathname()}`, 
     icon: <Facebook />,
-    id: "socialSharePostFacebook"
+    id: 'socialSharePostFacebook'
   },
   {
     path: `https://www.linkedin.com/sharing/share-offsite/?url=https%3A%2F%2Fblog.xmartlabs.com%2Fblog%2F${getPathname()}%2F`,
     icon: <Linkedin />,
-    id: "socialSharePostLinkedIn"
+    id: 'socialSharePostLinkedIn'
   }
 ];
 
 const shareXlProfileLinks = [
   {
-    path: "https://www.instagram.com/xmartlabs", 
+    path: 'https://www.instagram.com/xmartlabs', 
     icon: <InstagramIcon />,
-    id: "socialMenuInstagram"
+    id: 'socialMenuInstagram'
   },
   {
-    path: "https://www.linkedin.com/company/xmartlabs/mycompany/", 
+    path: 'https://www.linkedin.com/company/xmartlabs/mycompany/', 
     icon: <Linkedin />,
-    id: "socialProfileLinkedIn"
+    id: 'socialProfileLinkedIn'
   },
   {
-    path: "https://twitter.com/xmartlabs", 
+    path: 'https://twitter.com/xmartlabs', 
     icon: <TwitterIcon />,
-    id: "socialProfileTwitter"
+    id: 'socialProfileTwitter'
   },
   {
-    path: "https://es-la.facebook.com/xmartlabs/", 
+    path: 'https://es-la.facebook.com/xmartlabs/', 
     icon: <Facebook />,
-    id: "socialProfileFacebook"
+    id: 'socialProfileFacebook'
   },
 ];
 
@@ -78,7 +78,7 @@ const BlogPost = ({ data, children }) => {
 
   const checkWindowOrigin = () => {
     if (typeof window !== 'undefined') {
-      require("smooth-scroll")('a[href*="#"]');
+      require('smooth-scroll')('a[href*="#"]');
       return window.location.origin;
     }
     return '';
@@ -124,7 +124,7 @@ const BlogPost = ({ data, children }) => {
   };
 
   const getTitles = () => {
-    if (typeof window !== 'undefined' && typeof window.document !== "undefined") {
+    if (typeof window !== 'undefined' && typeof window.document !== 'undefined') {
       if (refIndexTitles.current) {
         const elementList = Array.from(refIndexTitles.current.childNodes);
         const titlesList = findTitles(elementList);
@@ -143,7 +143,7 @@ const BlogPost = ({ data, children }) => {
 
   const imgUrl = () => {
     if(data.mdx.frontmatter.thumbnail) {
-      if (data.mdx.frontmatter.thumbnail.includes("/images")) {
+      if (data.mdx.frontmatter.thumbnail.includes('/images')) {
         return data.mdx.frontmatter.thumbnail;
       } else {
         return `/${data.mdx.frontmatter.thumbnail}`;
@@ -163,16 +163,16 @@ const BlogPost = ({ data, children }) => {
         <div className={styles.categoryTagsContainer}>
           <Category data={categoryBlog.displayName} className={styles.category}/>
         </div>
-        <h1 className={classnames(styles.titleContainer, "text__heading__one__blueThree")}>
+        <h1 className={classnames(styles.titleContainer, 'text__heading__one__blueOne')}>
           { data.mdx.frontmatter.title }
         </h1>
         <div className={styles.authorContainer}>
           <div className={styles.authorInformation}>
             <img src={`/images/${authorBlog.image}`} alt={authorBlog.displayName} className={styles.authorImage} />
             <div className={styles.nameDateTimeContainer}>
-              <Link className={classnames(styles.authorName, "text__paragraph__bold__blueThree")} to={author.profile_url}>{ authorBlog.displayName }</Link>
-                <label className={classnames(styles.postDate, "text__label__bold__grayTwo")} >{data.mdx.frontmatter.date}</label>
-                <label className={classnames("text__label__bold__grayTwo", styles.timeToRead)} >
+              <Link className={classnames(styles.authorName, 'text__paragraph__bold__blueOne')} to={author.profile_url}>{ authorBlog.displayName }</Link>
+                <label className={classnames(styles.postDate, 'text__label__bold__grayTwo')} >{data.mdx.frontmatter.date}</label>
+                <label className={classnames('text__label__bold__grayTwo', styles.timeToRead)} >
                   <ClockIcon className={styles.clockIcon} />
                   {data.mdx.fields.timeToRead.text}
                 </label>
@@ -192,7 +192,7 @@ const BlogPost = ({ data, children }) => {
         </div>
         <div className={styles.disqusSection}>
           <h3 className={styles.disqusTitle}>Comments:</h3>
-          <div id="disqus_thread">
+          <div id='disqus_thread'>
             <Disqus config={disqusConfig} />
           </div>
         </div>
