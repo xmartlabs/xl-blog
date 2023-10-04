@@ -1,0 +1,29 @@
+@import "../../css/variables.scss";
+@import "../../css/text-styles.scss";
+
+// Containers
+
+.container {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+}
+
+.image {
+  width: 10%;
+  object-fit: cover;
+}
+
+.infoContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: start;
+  font-family: $primary-font;
+  font-weight: 700;
+
+  a {
+    @extend .text__filter__blueTwo;
+    text-decoration: none;
+  }
+}
