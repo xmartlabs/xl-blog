@@ -18,23 +18,27 @@ const TitleBlogIndex = ({ data, refIndexTitles, disappearIndex }) => {
 
   useEffect(() => {
     window.addEventListener('scroll', getActiveTitle, { passive: true });
-  
+
     return () => {
       window.removeEventListener('scroll', getActiveTitle);
     };
   }, []);
-  
+
   useEffect(() => {
     if (linksContainerRef.current && indexContainerRef.current) {
-      const indexHeightTwo = indexContainerRef.current.clientHeight;
-      const linksHeightTwo = linksContainerRef.current.clientHeight;
+      const indexHeight = indexContainerRef.current.clientHeight;
+      const linksHeight = linksContainerRef.current.clientHeight;
   
-      setHeightVariation(indexHeightTwo - linksHeightTwo);
-      setIsTopArrow(indexHeightTwo > linksHeightTwo);
-      setIsBottomArrow(linksContainerRef.current.scrollTop > 0);
+      const heightDifference = indexHeight - linksHeight;
+
+      if (heightDifference < 650) {
+        setHeightVariation(heightDifference);
+        setIsTopArrow(heightDifference < 0 || heightDifference > 0);
+        setIsBottomArrow(linksContainerRef.current.scrollToTop == 0);
+      }
     }
-  }, [heightVariation]);
-  
+  }, [linksContainerRef, indexContainerRef]);
+
   const getActiveTitle = () => {
     if (refIndexTitles.current) {
       const elementList = Array.from(refIndexTitles.current.childNodes);
@@ -56,7 +60,10 @@ const TitleBlogIndex = ({ data, refIndexTitles, disappearIndex }) => {
   };
   
   const scrollToTop = () => {
-    linksContainerRef.current.scrollTo({ top: 0, behavior: 'smooth' });
+    linksContainerRef.current.scrollTo({ 
+      top: 0, 
+      behavior: 'smooth' 
+    });
   
     setIsTopArrow(true);
     setIsBottomArrow(false);

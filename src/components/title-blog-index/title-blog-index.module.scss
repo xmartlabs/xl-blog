@@ -4,13 +4,14 @@
 // Containers
 
 .heightContainer {
-  display: fixed;
   width: 20%;
   margin-right: 5%;
   align-items: flex-start;
-  flex-wrap: wrap;
   flex-direction: row;
   scroll-behavior: smooth;
+  position: fixed;
+  top: 22%;
+  height: 70vh;
 }
 
 .indexSubContainer {
