@@ -30,12 +30,15 @@ const TitleBlogIndex = ({ data, refIndexTitles, disappearIndex }) => {
       const linksHeight = linksContainerRef.current.clientHeight;
   
       const heightDifference = indexHeight - linksHeight;
-  
-      setHeightVariation(heightDifference);
-      setIsTopArrow(heightDifference < 0);
+
+      if (heightDifference < 650) {
+        setHeightVariation(heightDifference);
+        setIsTopArrow(heightDifference < 0 || heightDifference > 0);
+        setIsBottomArrow(linksContainerRef.current.scrollToTop == 0);
+      }
     }
-  });
-  
+  }, []);
+
   const getActiveTitle = () => {
     if (refIndexTitles.current) {
       const elementList = Array.from(refIndexTitles.current.childNodes);
