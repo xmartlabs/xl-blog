@@ -14,26 +14,27 @@ const TitleBlogIndex = ({ data, refIndexTitles, disappearIndex }) => {
   const [isBottomArrow, setIsBottomArrow] = useState(false);
   const linksContainerRef = useRef(null);
   const indexContainerRef = useRef(null);
-  const [indexHeight, setIndexHeight] = useState(0);
-  const [linksHeight, setLinksHeight] = useState(0);
+  const [ heightVariation, setHeightVariation ] = useState();
 
   useEffect(() => {
     window.addEventListener('scroll', getActiveTitle, { passive: true });
-    
-    if (linksContainerRef.current && indexContainerRef.current) {
-      const indexHeightTwo = indexContainerRef.current.getBoundingClientRect();
-      const linksHeightTwo = linksContainerRef.current.getBoundingClientRect();
-      setIndexHeight(indexHeightTwo.height);
-      setLinksHeight(linksHeightTwo.height);
-      setIsTopArrow(linksHeight > indexHeight);
-      setIsBottomArrow(linksContainerRef.current.scrollTop > 0);
-    }
-
+  
     return () => {
       window.removeEventListener('scroll', getActiveTitle);
     };
-  }, [linksContainerRef.current, indexContainerRef.current]);
-
+  }, []);
+  
+  useEffect(() => {
+    if (linksContainerRef.current && indexContainerRef.current) {
+      const indexHeightTwo = indexContainerRef.current.clientHeight;
+      const linksHeightTwo = linksContainerRef.current.clientHeight;
+  
+      setHeightVariation(indexHeightTwo - linksHeightTwo);
+      setIsTopArrow(indexHeightTwo > linksHeightTwo);
+      setIsBottomArrow(linksContainerRef.current.scrollTop > 0);
+    }
+  }, [heightVariation]);
+  
   const getActiveTitle = () => {
     if (refIndexTitles.current) {
       const elementList = Array.from(refIndexTitles.current.childNodes);
@@ -44,19 +45,19 @@ const TitleBlogIndex = ({ data, refIndexTitles, disappearIndex }) => {
     }
   };
   
-  const scrollToBottom = () => {      
+  const scrollToBottom = () => {    
     linksContainerRef.current.scrollTo({
-      top: linksHeight - indexHeight,
+      top: heightVariation,
       behavior: 'smooth',
-  });
-
+    });
+  
     setIsTopArrow(false);
     setIsBottomArrow(true);
   };
-
+  
   const scrollToTop = () => {
     linksContainerRef.current.scrollTo({ top: 0, behavior: 'smooth' });
-
+  
     setIsTopArrow(true);
     setIsBottomArrow(false);
   };

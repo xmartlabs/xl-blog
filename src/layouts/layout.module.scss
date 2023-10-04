@@ -5,37 +5,6 @@ body {
   font-family: $primary-font, serif;
 }
 
-.formContainer {
-  position: fixed;
-  z-index: 10;
-  top: 0%;
-  left: 0%;
-  width: 100%;
-  height: 100%;
-  display: flex;
-  flex-direction: column;
-  align-items: end;
-  padding: 1% 2%;
-  background-color: $darkThree;
-}
-
-.typeForm {
-  height: 95%;
-  width: 100%;
-}
-
-.closeForm {
-  width: 0%;
-  height: 2%;
-  margin: 0 1rem 1rem 1rem;
-  cursor: pointer;
-}
-
-.closeFormIcon {
-  fill: $neutral100;
-  height: 100%;
-}
-
 .navMenuContainer {
   display: flex;
   flex-direction: row;
