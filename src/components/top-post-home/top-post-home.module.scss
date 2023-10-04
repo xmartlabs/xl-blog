@@ -7,12 +7,15 @@
   display: flex;
   flex-direction: row;
   align-items: center;
-  justify-content: center;
+  justify-content: flex-start;
+  margin-top: 2.2rem;
 }
 
 .image {
-  width: 10%;
+  width: 30%;
   object-fit: cover;
+  border-radius: 0.625rem;
+  margin-right: 2.5rem;
 }
 
 .infoContainer {
@@ -25,5 +28,18 @@
   a {
     @extend .text__filter__blueTwo;
     text-decoration: none;
+    width: 90%;
+    margin-bottom: 5%;
   }
+}
+
+.category {
+  @extend .text__category__bold__neutral100;
+  border: 1.5px solid $neutral100;
+  background-color: $xlPink;
+  height: 1.8rem;
+  padding: 0 1rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1rem;
+  font-weight: 600;
 }

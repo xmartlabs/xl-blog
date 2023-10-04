@@ -24,7 +24,7 @@ const TopPostHome = ({ data }) => {
       <img alt="Blog Cover" className={styles.image} src={urlImages()} onError={(event) => event.target.src = '../../images/generic.jpg'} />
       <div className={styles.infoContainer}>
         <Link to={`/${_.kebabCase(data.frontmatter.permalink)}`}>{data.frontmatter.title}</Link>
-        <Category data={categoryBlog.displayName} />
+        <Category data={categoryBlog.displayName} className={styles.category} />
       </div>
     </article>
   );

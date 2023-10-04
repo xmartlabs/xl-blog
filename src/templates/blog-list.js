@@ -21,10 +21,7 @@ const BlogList = ({ pageContext, data }) => {
 
   return (
     <>
-      <div>
-        <p>Top Posts</p>
-        <TopThreePosts edges={edges} />
-      </div>
+      <TopThreePosts edges={edges} />
       <div className={styles.container}>
         {edges.map(({ node }) => <Card data={node} key={node.id} withCategory={true} />)}     
       </div>
