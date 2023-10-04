@@ -37,7 +37,7 @@ const TitleBlogIndex = ({ data, refIndexTitles, disappearIndex }) => {
         setIsBottomArrow(linksContainerRef.current.scrollToTop == 0);
       }
     }
-  }, []);
+  }, [linksContainerRef, indexContainerRef]);
 
   const getActiveTitle = () => {
     if (refIndexTitles.current) {
