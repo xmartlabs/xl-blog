@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 
 
 import Helmet from 'react-helmet';
@@ -61,13 +61,15 @@ function Layout({ children }) {
   const isMobile = useMediaQuery("(max-width: 992px)");
   const [ category, setCategory ] = useState('all');
   const [ showTypeForm, setShowTypeForm ] = useState(false);
+  const filtersLinksRef = useRef(null);
+  const [ loaded, setLoaded ] = useState(false);
 
   useEffect(() => {
     setCategory(actualCategory(true, filters));
   }, [category]);
 
   const filterLinks = () => (
-    <div className={styles.filterContainer}>
+    <div className={styles.filterContainer} ref={filtersLinksRef}>
         {filters.map((filter) =>
           <Link
             key={filter.name}
@@ -117,6 +119,18 @@ function Layout({ children }) {
     }
     return null;
   };
+
+  useEffect(() => {
+    if (filtersLinksRef.current && loaded) {
+      const offsetTop = filtersLinksRef.current.offsetTop;
+      window.scrollTo({ behavior: 'smooth', top: offsetTop - 120 }); 
+    } 
+    
+    if (!loaded) {
+      setLoaded(true);
+      window.scrollTo({ behavior: 'instant', top: 0 }); 
+    }
+  }, [category]);
 
   return (
     <>
