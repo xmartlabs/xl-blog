@@ -23,7 +23,7 @@
 }
 
 .blogListCategory {
-  @extend .text__category__bold__blueThree;
+  @extend .text__category__bold__blueOne;
   border: 1.5px solid $neutral100;
   background-color: $neutral100;
   height: 1.8rem;
@@ -49,7 +49,7 @@
   transition: all .2s cubic-bezier(.25,.46,.45,.94);
 
   h1 {
-    @extend .text__heading__two__separated__blueThree;
+    @extend .text__heading__two__separated__blueOne;
     font-family: $link-font;
   }
 }
@@ -80,6 +80,6 @@
 @media only screen and (max-width: map-get($map: $screen-breakpoint, $key: sm)) {
   .imageContainer {
     width: 100%;
-    padding-bottom: 41%;
+    padding-bottom: 43%;
   }
 }

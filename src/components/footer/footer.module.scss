@@ -6,20 +6,20 @@
   display: flex;
   overflow: none;
   height: auto;
-  background-color: $blueThree;
+  background-color: $blueOne;
   flex-direction: row;
   padding: 5rem 0 4rem 15.5%;
 }
 
 @media only screen and (max-width: map-get($map: $screen-breakpoint, $key: xxl)) {
   .container {
-    padding-left: 5%;
+    padding-left: 4%;
   }
 }
 
 @media screen and (max-width: map-get($map: $screen-breakpoint, $key: sm)) {
   .container {
     height: 100%;
-    padding: 4rem 0 3rem 1.5rem;  
+    padding: 4rem 0 3rem 1.3rem;  
   }
 }

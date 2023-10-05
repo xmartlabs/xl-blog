@@ -59,6 +59,7 @@ export const StyledContainerNavBarXL = styled.div`
   background-color: white;
   position: fixed;
   z-index: 1;
+  box-shadow: 0px 2px 8px 0px rgba(0, 0, 0, 0.14); 
   
   @media ${props => props.theme.breakpoints.tablet} {
   }

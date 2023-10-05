@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Link } from "gatsby";
 
 import PropTypes from "prop-types";
@@ -25,6 +25,12 @@ const Pager = ({ pageContext }) => {
   const nextPage = buildPageLocation({ numPages, page: currentPage + 1, category});
   const actualPage = buildPageLocation({ page: currentPage, category });
   
+  useEffect(() => {
+    setTimeout(() => {
+      window.scrollTo(0, 0)
+    }, 0);
+  }, []);
+
   return(
     <div className={styles.pagerContainer}>
       <Link className={currentPage <= 1 ? styles.disabledPagerLink : styles.pagerLink} to={prevPage} rel="prev">

@@ -65,7 +65,9 @@
   color: $neutral100;
   margin: 1.5rem 0 4rem;
   text-decoration: none;
-  font-family: $link-font;
+  font-family: $primary-font;
+  font-weight: 900;
+  border: none;
 
 }
 
@@ -81,6 +83,6 @@
 }
 
 .closeIconMobile {
-  fill: $blueThree;
+  fill: $blueOne;
   width: 1.5rem;
 }

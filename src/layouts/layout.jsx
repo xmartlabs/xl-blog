@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 
 
 import Helmet from 'react-helmet';
@@ -7,6 +7,7 @@ import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
 import { actualCategory, classnames } from '../helpers';
+import { useMediaQuery } from '../hooks';
 
 import { HeaderBanner } from '../components/header-banner/header-banner';
 import { NavMenu } from '../components/nav-menu';
@@ -16,14 +17,13 @@ import { SocialElement } from '../components/social-element';
 import { StyledContainerHeader, StyledContainerNavBarXL } from '../elements';
 import { AppContext, initialState } from '../config/context.js';
 import { TwitterIcon, Facebook, Linkedin, InstagramIcon, LogoWhite, Logo} from '../components/icons';
-import { useMediaQuery } from '../hooks';
+import { TypeForm } from '../components/typeform/typeform';
 
-import '../index.scss';
-
+import "../index.scss";
 import * as styles from './layout.module.scss';
 
 
-export const StyledGetStartedButton = styled.a`
+export const StyledGetStartedButton = styled.button`
   width: 147px;
   height: 44px;
   display: flex;
@@ -60,19 +60,22 @@ function Layout({ children }) {
   const [contextState, setContextState] = useState(initialState);
   const isMobile = useMediaQuery("(max-width: 992px)");
   const [ category, setCategory ] = useState('all');
+  const [ showTypeForm, setShowTypeForm ] = useState(false);
+  const filtersLinksRef = useRef(null);
+  const [ loaded, setLoaded ] = useState(false);
 
   useEffect(() => {
     setCategory(actualCategory(true, filters));
   }, [category]);
 
   const filterLinks = () => (
-    <div className={styles.filterContainer}>
+    <div className={styles.filterContainer} ref={filtersLinksRef}>
         {filters.map((filter) =>
           <Link
             key={filter.name}
             onClick={() => setCategory(filter.name)}
             className={classnames(styles.filterElement, "text__filter__grayFive", filter.name === category && styles.selectedLink)} 
-            href={filter.name === 'all' ? '/' : `/categories/${filter.name}/`}>
+            to={filter.name === 'all' ? '/' : `/categories/${filter.name}/`}>
             {filter.displayName}
           </Link>
         )}
@@ -117,29 +120,42 @@ function Layout({ children }) {
     return null;
   };
 
+  useEffect(() => {
+    if (filtersLinksRef.current && loaded) {
+      const offsetTop = filtersLinksRef.current.offsetTop;
+      window.scrollTo({ behavior: 'smooth', top: offsetTop - 120 }); 
+    } 
+    
+    if (!loaded) {
+      setLoaded(true);
+      window.scrollTo({ behavior: 'instant', top: 0 }); 
+    }
+  }, [category]);
+
   return (
     <>
       <AppContext.Provider value={{ state: contextState, setState: setContextState }}>
+        {showTypeForm && <TypeForm onClick={() => setShowTypeForm(false)}/>}
         <div className={styles[`${contextState}Banner`]}>
-            <StyledContainerNavBarXL>
+          <StyledContainerNavBarXL>
             {isMobile && <MobileMenu />}
-              <StyledContainerHeader>
-                <div className={styles.navMenuContainer}>
-                  <Link
-                    to="/"
-                    id="logo-xl">
-                    <Logo />
-                  </Link>
-                  {!isMobile && <NavMenu />}
-                </div>
-                {!isMobile && 
-                <StyledGetStartedButton className={styles.getStarted} id="header-getintouch" href={process.env.GATSBY_CONTACT_FORM}>
-                  <StyledGetStartedTextButton>GET STARTED</StyledGetStartedTextButton>
+            <StyledContainerHeader>
+              <div className={styles.navMenuContainer}>
+                <Link
+                  to="/"
+                  id="logo-xl">
+                  <Logo />
+                </Link>
+                {!isMobile && <NavMenu />}
+              </div>
+              {!isMobile && 
+                <StyledGetStartedButton className={styles.getStarted} id="header-getintouch" onClick={() => setShowTypeForm(true)}>
+                  <StyledGetStartedTextButton>Let's Talk</StyledGetStartedTextButton>
                 </StyledGetStartedButton>
-                }
-              </StyledContainerHeader>
-            </StyledContainerNavBarXL>
-            {contextState === "home" && <HeaderBanner />}
+              }
+            </StyledContainerHeader>
+          </StyledContainerNavBarXL>
+          {contextState === "home" && <HeaderBanner />}
         </div>
         {filterMobileDesktop()}
         {children}
