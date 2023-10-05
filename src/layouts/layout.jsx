@@ -62,7 +62,7 @@ function Layout({ children }) {
   const [ category, setCategory ] = useState('all');
   const [ showTypeForm, setShowTypeForm ] = useState(false);
   const filtersLinksRef = useRef(null);
-  const [loaded, setLoaded] = useState(false);
+  const [ loaded, setLoaded ] = useState(false);
 
   useEffect(() => {
     setCategory(actualCategory(true, filters));
