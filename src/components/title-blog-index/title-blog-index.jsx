@@ -45,7 +45,24 @@ const TitleBlogIndex = ({ data, refIndexTitles, disappearIndex }) => {
       const titles = findTitles(elementList);
       const activeTitle = titles.findLast((title) => title.getBoundingClientRect().top <= 500) || titles[0];
       setTitleOnView(activeTitle.textContent);
-      setSelectLink('');
+      setSelectLink('');      
+
+      if (titles[titles.length -2].textContent == activeTitle.textContent || titles[titles.length -1].textContent  == activeTitle.textContent) {
+        linksContainerRef.current.scrollTo({
+          top: 600,
+          behavior: 'smooth',
+        });
+
+        setIsTopArrow(false);
+        setIsBottomArrow(true);
+      } else {
+        linksContainerRef.current.scrollTo({
+          top: 0,
+          behavior: 'smooth',
+        });
+        setIsTopArrow(true);
+        setIsBottomArrow(false);
+      }
     }
   };
   
@@ -90,7 +107,7 @@ const TitleBlogIndex = ({ data, refIndexTitles, disappearIndex }) => {
           {data?.map((title) => 
             <a href={"#" + title.id} key={title.id} onClick={() => setSelectLink(title.id)}
               className={classnames(
-                { [styles.selectedLink]: title.id === selectLink || titleOnView === title.id},
+                {[styles.selectedLink]: title.id === selectLink || titleOnView === title.id},
                 styles.links
               )}
             >
