@@ -47,22 +47,24 @@ const TitleBlogIndex = ({ data, refIndexTitles, disappearIndex }) => {
       setTitleOnView(activeTitle.textContent);
       setSelectLink('');      
 
-      if (titles[titles.length -2].textContent == activeTitle.textContent || titles[titles.length -1].textContent  == activeTitle.textContent) {
-        linksContainerRef.current.scrollTo({
-          top: 600,
-          behavior: 'smooth',
-        });
-
-        setIsTopArrow(false);
-        setIsBottomArrow(true);
-      } else {
-        linksContainerRef.current.scrollTo({
-          top: 0,
-          behavior: 'smooth',
-        });
-        setIsTopArrow(true);
-        setIsBottomArrow(false);
-      }
+      if (titles.length > 8) {
+        if (titles[titles.length -2].textContent == activeTitle.textContent || titles[titles.length -1].textContent  == activeTitle.textContent) {
+          linksContainerRef.current.scrollTo({
+            top: 600,
+            behavior: 'smooth',
+          });
+  
+          setIsTopArrow(false);
+          setIsBottomArrow(true);
+        } else {
+          linksContainerRef.current.scrollTo({
+            top: 0,
+            behavior: 'smooth',
+          });
+          setIsTopArrow(true);
+          setIsBottomArrow(false);
+        }
+      } 
     }
   };
   
