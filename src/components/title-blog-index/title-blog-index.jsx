@@ -48,7 +48,7 @@ const TitleBlogIndex = ({ data, refIndexTitles, disappearIndex }) => {
       setSelectLink('');      
 
       if (titles.length > 8) {
-        if (titles[titles.length -2].textContent == activeTitle.textContent || titles[titles.length -1].textContent  == activeTitle.textContent) {
+        if (titles[titles.length -2].textContent === activeTitle.textContent || titles[titles.length -1].textContent === activeTitle.textContent) {
           linksContainerRef.current.scrollTo({
             top: 600,
             behavior: 'smooth',
