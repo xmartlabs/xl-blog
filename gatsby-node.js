@@ -55,10 +55,11 @@ exports.createPages = async ({actions, graphql, reporter}) => {
     const categoryTemplate = path.resolve("src/pages/categories.js");
     const authorTemplate = path.resolve("src/templates/authors.js");
     const postTemplate = path.resolve("src/templates/post.js");
+    const {to, from} = require("./redirects.json");
 
     createRedirect({
-      fromPath: "/blog/*/",
-      toPath: "/:splat",
+      fromPath: from,
+      toPath: to,
       isPermanent: true, 
       force: true, 
       redirectInBrowser: true
