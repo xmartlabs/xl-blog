@@ -75,14 +75,18 @@
   .indexSubContainer {
     display: none;
   }
+
+  .topArrow, .bottomArrow {
+    display: none;
+  }
 }
 
 @media screen and (max-height: map-get($map: $screen-breakpoint, $key: md)) {
-  .indexSubContainer {
+  .indeSubContainer {
     margin-top: 3%;
   }
 
-  .arrow {
+  .topArrow, .bottomArrow {
     margin-top: 1%;
   }
 }
