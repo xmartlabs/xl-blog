@@ -21,7 +21,7 @@ const Card = ({ data, className, withCategory }) => {
   }
 
   return (
-    <Link className={classnames(styles.styledLink, className)} to={`/${_.kebabCase(data.frontmatter.permalink)}`}>
+    <Link className={classnames(styles.styledLink, className)} to={`/blog/${_.kebabCase(data.frontmatter.permalink)}`}>
       <article key={data.id} className={styles.container}>
         <div className={styles.imageContainer}>
           <img alt="Blog Cover" className={styles.styledImage} src={urlImages()} onError={(event) => event.target.src = '../../images/generic.jpg'} />
