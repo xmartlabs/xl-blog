@@ -64,11 +64,7 @@ function Layout({ children }) {
   const filtersLinksRef = useRef(null);
   const [ loaded, setLoaded ] = useState(false);
 
-  useEffect(() => {
-    setCategory(actualCategory(true, filters));
-  }, [category]);
-
-  const filterLinks = () => (
+  const filterLinks = (
     <div className={styles.filterContainer} ref={filtersLinksRef}>
         {filters.map((filter) =>
           <Link
@@ -110,15 +106,19 @@ function Layout({ children }) {
       if (isMobile) {
         return (
           <div className={styles.filterMobileContainer}>
-            {filterLinks()}
+            {filterLinks}
           </div>
         );
       } else {
-        return filterLinks();
+        return filterLinks;
       }
     }
     return null;
   };
+
+  useEffect(() => {
+    setCategory(actualCategory(true, filters));
+  }, []);
 
   useEffect(() => {
     if (filtersLinksRef.current && loaded) {
