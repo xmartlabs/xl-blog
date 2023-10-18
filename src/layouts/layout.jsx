@@ -118,7 +118,7 @@ function Layout({ children }) {
 
   useEffect(() => {
     setCategory(actualCategory(true, filters));
-  }, []);
+  }, [category]);
 
   useEffect(() => {
     if (filtersLinksRef.current && loaded) {
