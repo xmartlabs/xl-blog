@@ -49,22 +49,13 @@ exports.onCreateNode = ({ node, actions }) => {
   }
 }
 
-const redirects = require('./redirects.json');
-
 exports.createPages = async ({actions, graphql, reporter}) => {
     const {createPage, createRedirect} = actions;
     const tagTemplate = path.resolve("src/templates/tags.js");
     const categoryTemplate = path.resolve("src/pages/categories.js");
     const authorTemplate = path.resolve("src/templates/authors.js");
     const postTemplate = path.resolve("src/templates/post.js");
-
-    redirects.forEach(redirect => {
-      createRedirect({
-        fromPath: redirect.from,
-        toPath: redirect.to,
-      });
-    });
-
+     
     const result = await graphql(`
     {
       tagsGroup: allMdx(limit: 2000) {
