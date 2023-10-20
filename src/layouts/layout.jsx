@@ -142,7 +142,7 @@ function Layout({ children }) {
             <StyledContainerHeader>
               <div className={styles.navMenuContainer}>
                 <Link
-                  to="/"
+                  to="https://xmartlabs.com/"
                   id="logo-xl">
                   <Logo />
                 </Link>
@@ -164,7 +164,7 @@ function Layout({ children }) {
         <div className={styles.container}>
           <div className={styles.logo}>
             <Link
-              to="/"
+              to="https://xmartlabs.com/"
               id="logo-xl-white">
               <LogoWhite />
             </Link>

@@ -1,7 +1,7 @@
 ---
 title: "How to Estimate an Accurate Budget for Your Product Development Project "
 subtitle: " "
-permalink: estimating-accurate-budgets-for-dev
+permalink: /estimating-accurate-budgets-for-dev/
 featured: true
 date: 2023-10-20
 category: product-design
