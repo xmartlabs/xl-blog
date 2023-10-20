@@ -184,7 +184,7 @@ exports.createPages = async ({actions, graphql, reporter}) => {
 
     posts.forEach(post => {
       createPage({
-        path: `/blog${post.node.frontmatter.permalink}`,
+        path: post.node.frontmatter.permalink.startsWith('/') ? `/blog${post.node.frontmatter.permalink}` : `/blog/${post.node.frontmatter.permalink}`,
         component: `${postTemplate}?__contentFilePath=${post.node.internal.contentFilePath}`,
         context: {
           id: post.node.id,
