@@ -5,7 +5,7 @@ permalink: apple-vision-pro
 featured: true
 date: 2023-11-20
 category: ios-development
-thumbnail: /images/frame-2608226.png
+thumbnail: /images/apple-vision-pro.png
 tags:
   - AppleVision
   - iOS
@@ -14,9 +14,7 @@ tags:
   - ARKit
 author: nicolantean
 ---
-By following these guidelines, you can maximize the potential of visionOS, creating apps that provide users with a truly immersive and user-friendly experience. These considerations are instrumental in making the most of this cutting-edge platform and ensuring that your apps stand out in the world of extended reality.
-
-<!-- notionvc: 938e035a-1e07-4ef9-981f-0029c593f48f -->In this blog, we’ll take you on a journey through Apple Vision Pro, an exciting technology that brings digital experiences to life. We’ll share our experience and discoveries while working on a Proof of Concept (PoC) project and explore the process of moving existing apps to this new platform. We’ll also discuss which types of apps are best suited for this technology. During our exploration, we’ll tell you about what we’ve noticed, the challenges we’ve faced, and the exciting things we’ve learned, giving you a clear picture of how this amazing technology works.
+In this blog, we’ll take you on a journey through Apple Vision Pro, an exciting technology that brings digital experiences to life. We’ll share our experience and discoveries while working on a Proof of Concept (PoC) project and explore the process of moving existing apps to this new platform. We’ll also discuss which types of apps are best suited for this technology. During our exploration, we’ll tell you about what we’ve noticed, the challenges we’ve faced, and the exciting things we’ve learned, giving you a clear picture of how this amazing technology works.
 
 ## The Technology Behind Apple Vision Pro
 
@@ -36,6 +34,8 @@ In our exploration of Apple Vision, we set out to implement a Proof of Concept (
 4. **Texture Troubles in 3D Model Conversion:** Reality Converter offers a streamlined process while transitioning 3D models, such as switching from .obj to .usdz. However, we encountered challenges, notably in dealing with texture-related issues during this conversion process.
 
 Our Apple Vision journey showcases the dynamic nature of technology development. While we've faced challenges, these obstacles have only served as stepping stones for further exploration and understanding. We look forward to embracing more insights, overcoming hurdles, and unlocking Apple Vision's exciting possibilities.
+
+![](/images/screenshot-xl.png)
 
 It's important to acknowledge that getting a physical device for testing can be a logistical challenge in certain regions, thus emphasizing the reliance on the simulator. In the context of ARKit apps on iOS, we've traditionally favored real device testing due to the simulator's limitations in replicating real-world AR experiences. So, until Vision Pro becomes more accessible, this is a limitation of developing this type of app. 
 
@@ -64,6 +64,8 @@ While the compatibility checklist is essential for migration to visionOS, certai
 
 By following these guidelines, you can maximize the potential of visionOS, creating apps that provide users with a truly immersive and user-friendly experience. These considerations are instrumental in making the most of this cutting-edge platform and ensuring that your apps stand out in the world of extended reality.
 
+![](/images/compatibility-checklist.png)
+
 ## Adapting ARKit-Based Apps for visionOS: Key Considerations.
 
 When transitioning ARKit-based apps to visionOS, it's important to consider more than just the compatibility checklist. Here are key considerations to ensure a seamless integration of ARKit technology in visionOS:
@@ -87,6 +89,8 @@ Migrating apps to visionOS isn't a one-size-fits-all approach; it's about identi
 3. **Visualizing Architecture and Design**: Apps related to architecture, interior design, or real estate can leverage visionOS to offer users a 3D view of spaces, enabling them to explore designs, layouts, and structures. This immersive visualization can aid in decision-making and planning.
 4. **Collaborative and Social Apps**: Apps that focus on collaboration and social interaction can use visionOS to create shared virtual spaces where users can meet, work, or play together. These experiences go beyond traditional video conferencing or chat applications.
 5. **Gaming and Entertainment**: Games and entertainment apps can benefit from the immersive nature of visionOS. Whether it's creating augmented reality (AR) games that blend seamlessly with the real world or providing users with interactive storytelling experiences, visionOS adds a new layer of engagement.
+
+![](/images/where-visionos-shines.png)
 
 By identifying these features and use cases, you can pinpoint which apps benefit most from migration to visionOS. It's an opportunity to transform user experiences and harness the potential of extended reality in various industries and applications.
 
