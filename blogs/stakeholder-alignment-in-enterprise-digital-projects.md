@@ -16,7 +16,7 @@ author: vale
 ---
 In the dynamic world of digital projects within enterprises, the intricacies of stakeholder collaboration serve as a compass, guiding ventures toward success. As the heartbeat of organizational initiatives, stakeholders bring diverse perspectives, making alignment a strategic imperative. This blog delves into the landscape of stakeholder alignment in enterprise digital projects, unraveling the complexities, challenges, and strategic methodologies.
 
-## Stakeholder Alignment 
+## Stakeholder Alignment
 
 ### Understanding Stakeholders in the Enterprise Context
 
@@ -59,6 +59,8 @@ In navigating new projects, enterprises benefit from the inception deck methodol
 ## Benefits of Stakeholder Alignment
 
 In our years of experience, we have find that projects that begin with these types of exercise to ensure stakeholer alignment,  usually run smoother than those who don't. We have already explained the reasons why alignment is important, especially among large, enterprise-y teams. But how does having this sort of clear, strategic document actually reflect in reality?
+
+![](/images/benefits-of-sha.png)
 
 ### Shared Ownership: Upholding Transparency and Legitimacy
 
