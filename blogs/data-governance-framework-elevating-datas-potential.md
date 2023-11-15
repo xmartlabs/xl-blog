@@ -3,7 +3,7 @@ title: "Data Governance Framework: Elevating Data's Potential"
 subtitle: " "
 permalink: data-governance
 featured: true
-date: 2023-10-28
+date: 2023-11-16
 category: machine-learning
 thumbnail: /images/data-gov-cover.png
 tags:
@@ -14,7 +14,7 @@ tags:
   - bigdata
 author: jsanchez
 ---
-Envision Data Governance as the silent architect behind the AI revolution. Much like electricity without power, AI lacks substance without quality data. Your data quality becomes the cornerstone determining the success of your AI solution.
+Much like electricity without power, AI lacks substance without quality data. Your data quality becomes the cornerstone determining the success of your AI solution. Envision Data Governance as the silent architect behind the AI revolution.
 
 In this blog post, we highlight the critical role of data governance— the custodian ensuring every AI endeavor's reliability, ethics, and efficacy.
 
