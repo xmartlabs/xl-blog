@@ -3,7 +3,7 @@ title: Stakeholder Alignment in Enterprise Digital Projects
 subtitle: " "
 permalink: stakeholder-alignment-enterprise
 featured: true
-date: 2023-11-20
+date: 2023-11-25
 category: development
 thumbnail: /images/stakeholder.png
 tags:
