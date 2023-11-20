@@ -3,7 +3,7 @@ title: "Designing Effective ML Projects: Best Practices"
 subtitle: " "
 permalink: effective-ml-project-design
 featured: true
-date: 2023-11-15
+date: 2023-11-20
 category: machine-learning
 thumbnail: /images/blogpost-cover.png
 tags:
