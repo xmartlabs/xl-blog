@@ -1,13 +1,19 @@
 ---
-title: "Deploying a Recommendation system using FastAPI, TF Serving and Feast"
-date: 2023-08-24
-tags: [Recommendation Systems, FastAPI, TF Serving, Feast, Machine Learning]
-author: mathias
-category: machine-learning
+title: Deploying a Recommendation system using FastAPI, TF Serving and Feast
+subtitle: " "
 permalink: /deploying-a-recommendation-system-using-fastapi-tf-serving-and-feast/
+featured: true
+date: 2023-08-24
+category: machine-learning
 thumbnail: /images/deploying-a-recommendation-system-using-fastapi-tf-serving-and-feast/featured_image.png
+tags:
+  - Recommendation Systems
+  - FastAPI
+  - TF Serving
+  - Feast
+  - Machine Learning
+author: mathias
 ---
-
 ### Introduction
 
 In today's fast-paced and highly competitive business landscape, staying ahead of the curve is not just a goal but a necessity for
@@ -30,9 +36,9 @@ experiences, enhance customer satisfaction, and ultimately drive revenue growth.
 <br />
 Recommendation systems typically consist of multiple models, which are either
 composed by combining their outputs or chained in a pipeline. One common
-approach involves having a **retrieval model** to select a subset of several
-hundred or thousand candidates from the entire set. Subsequently, a **ranking
-model** is applied to these selected candidates to rank them.
+approach involves having a \*\*retrieval model\*\* to select a subset of several
+hundred or thousand candidates from the entire set. Subsequently, a \*\*ranking
+model\*\* is applied to these selected candidates to rank them.
 
 In this blog, we will demonstrate **how we designed a complete movie recommendation system**,
 diving into the details of the different components that we used, like Redis, TF
@@ -47,17 +53,17 @@ Modern systems often comprise multiple components or services, and this architec
 is particularly well-suited for recommendation systems and machine learning (ML) models,
 especially when they involve multiple steps of processing.
 
-In our case, the inference request [1] will be handled by the [FastAPI](https://fastapi.tiangolo.com/)
+In our case, the inference request \[1] will be handled by the [FastAPI](https://fastapi.tiangolo.com/)
 ML Controller, which will then retrieve a list of candidates by calling a set of retrieval models or candidate
-generators [2]. Here, we generate candidates from 2 sources: a TFRS retrieval
+generators \[2]. Here, we generate candidates from 2 sources: a TFRS retrieval
 model, and by looking up the closest embeddings to the user's most liked movies
 in a Redis VSS instance.
 
 After this, the controller will fetch additional
-metadata for the candidate movies from the Feast Feature store [3]. After
+metadata for the candidate movies from the Feast Feature store \[3]. After
 getting features for these candidates, the ML Controller can choose to filter
 out some options based on business logic. Finally, the candidates with rich
-features will be passed to the Ranking model [4], which will return a ranking
+features will be passed to the Ranking model \[4], which will return a ranking
 score for each movie to sort them.
 
 After all of this, we can include some
@@ -78,16 +84,16 @@ We designed a system that holds all the
 recommender-related business logic in one place (FastAPI Controller), which is
 separate from the main application backend. This has several advantages:
 
-- It allows the ML Engineering team to integrate the different components of the
+* It allows the ML Engineering team to integrate the different components of the
   recommendation system themselves and in Python (or their preferred language).
   This is especially useful when some pre- or post-processing is done in the
   controller.
-- A separate release process will allow this component to be updated
+* A separate release process will allow this component to be updated
   without the database migrations and related rollbacks and downtime of the main
   backend. Possibly the ML Controller could be released more often as well.
-- Allows scaling the main backend and the ML Controller independently. You can
+* Allows scaling the main backend and the ML Controller independently. You can
   also choose cloud instance types that better suit each of their work.
-- The main backend does not need to know all the services (Redis, TF Serving, Feast)
+* The main backend does not need to know all the services (Redis, TF Serving, Feast)
   connected to the controller and must not integrate those dependencies.
 
 The ML Controller is not only the glue that sticks the other components together; it
@@ -203,3 +209,9 @@ recommendation systems for your business, our team is here to help. [Contact
 us](https://form.typeform.com/to/D1PhDJIR) today, and let us assist you in
 building a tailored recommendation system that will propel your business to new
 heights.
+
+
+
+> 🔍 Exploring Rec Systems? Don't Miss Our Exclusive LLMs Webinar – Your Gateway to the Future of AI! [Sign Up Now](https://lu.ma/bwu0nrt0)!
+
+![](/images/blog-footer.png)
