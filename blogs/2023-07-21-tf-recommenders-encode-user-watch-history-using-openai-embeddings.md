@@ -171,6 +171,8 @@ We have not talked about the other half of the two-tower model: the movie model.
 
 Want a powerful recommender model for your own business? Our experts specialize in developing tailored recommendation systems that drive engagement and boost revenue. [Contact us](https://form.typeform.com/to/D1PhDJIR) today to discuss your needs, and we'll become your trusted partner in creating a personalized solution.
 
-> 🔍 Exploring Rec Systems? Don't Miss Our Exclusive LLMs Webinar – Your Gateway to the Future of AI! [Sign Up Now](https://lu.ma/bwu0nrt0)! 
+> 🔍 Exploring Rec Systems? Don't Miss Our Exclusive LLMs Roundtable – Your Gateway to the Future of AI! [Sign Up Now](https://lu.ma/bwu0nrt0)!
+>
+> ![](/images/blog-footer.png)
 
 ![](/images/blog-footer.png)
