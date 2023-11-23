@@ -184,8 +184,8 @@ In conclusion, model monitoring requires continuous improvement and adaptation. 
 
 If you're interested in optimizing your own rec system, our team can help you elevate your performance and overall user experience. Don't hesitate to [reach out](https://form.typeform.com/to/D1PhDJIR)!
 
-
-
-> 🔍 Exploring ML Models? Don't Miss Our Exclusive LLMs Webinar – Your Gateway to the Future of AI! [Sign Up Now](https://lu.ma/bwu0nrt0)!
+> 🔍 Exploring ML Models? Don't Miss Our Exclusive LLMs Roundtable – Your Gateway to the Future of AI! [Sign Up Now](https://lu.ma/bwu0nrt0)!
+>
+> ![](/images/blog-footer.png)
 
 ![](/images/blog-footer.png)
