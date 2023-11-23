@@ -100,3 +100,7 @@ Stay tuned if you liked this brand new data team post. We will be writing about 
 If you're interested in a custom-made solution or would like to learn the most efficient way to handle your company's data, don't hesitate to [reach out to our team](https://form.typeform.com/to/D1PhDJIR)!
 
 Thanks for reading 🙂
+
+> 🔍 Exploring Data and its AI possibilities? Don't Miss Our Exclusive LLMs Webinar – Your Gateway to the Future of AI! [Sign Up Now](https://lu.ma/bwu0nrt0)!
+
+![](/images/blog-footer.png)
