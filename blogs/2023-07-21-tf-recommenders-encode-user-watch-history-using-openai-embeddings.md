@@ -170,3 +170,7 @@ In this blog post, we demonstrate how to build a user model using a two-tower ar
 We have not talked about the other half of the two-tower model: the movie model. We might write about that in the future, so **let us know if you would like to hear about it!**
 
 Want a powerful recommender model for your own business? Our experts specialize in developing tailored recommendation systems that drive engagement and boost revenue. [Contact us](https://form.typeform.com/to/D1PhDJIR) today to discuss your needs, and we'll become your trusted partner in creating a personalized solution.
+
+> 🔍 Exploring Rec Systems? Don't Miss Our Exclusive LLMs Webinar – Your Gateway to the Future of AI! [Sign Up Now](https://lu.ma/bwu0nrt0)! 
+
+![](/images/blog-footer.png)
