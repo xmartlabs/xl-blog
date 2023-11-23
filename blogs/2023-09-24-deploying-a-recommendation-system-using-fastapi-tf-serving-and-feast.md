@@ -36,9 +36,9 @@ experiences, enhance customer satisfaction, and ultimately drive revenue growth.
 <br />
 Recommendation systems typically consist of multiple models, which are either
 composed by combining their outputs or chained in a pipeline. One common
-approach involves having a \*\*retrieval model\*\* to select a subset of several
-hundred or thousand candidates from the entire set. Subsequently, a \*\*ranking
-model\*\* is applied to these selected candidates to rank them.
+approach involves having a \\*\\*retrieval model\\*\\* to select a subset of several
+hundred or thousand candidates from the entire set. Subsequently, a \\*\\*ranking
+model\\*\\* is applied to these selected candidates to rank them.
 
 In this blog, we will demonstrate **how we designed a complete movie recommendation system**,
 diving into the details of the different components that we used, like Redis, TF
@@ -210,8 +210,8 @@ us](https://form.typeform.com/to/D1PhDJIR) today, and let us assist you in
 building a tailored recommendation system that will propel your business to new
 heights.
 
-
-
-> 🔍 Exploring Rec Systems? Don't Miss Our Exclusive LLMs Webinar – Your Gateway to the Future of AI! [Sign Up Now](https://lu.ma/bwu0nrt0)!
+> 🔍 Exploring Rec Systems? Don't Miss Our Exclusive LLMs Roundtable – Your Gateway to the Future of AI! [Sign Up Now](https://lu.ma/bwu0nrt0)!
+>
+> ![](/images/blog-footer.png)
 
 ![](/images/blog-footer.png)
