@@ -3,7 +3,7 @@ title: "Exploring Apple Vision Pro: Key Takeaways From Our Devs"
 subtitle: " "
 permalink: apple-vision-pro
 featured: true
-date: 2023-11-29
+date: 2023-11-28
 category: ios-development
 thumbnail: /images/apple-vision-pro.png
 tags:
