@@ -82,6 +82,6 @@ Mitigating the risks of misalignment proves vital, as the ripple effects impact 
 
 As enterprises navigate the intricate terrain of digital initiatives, the collaborative synergy achieved through stakeholder alignment becomes the key to unlocking success in the ever-evolving landscape of digital innovation.
 
-If you're looking for smooth collaborations defined by team sinergy or are looking to define a specific tech problem within your organization, don't hesitate to reach our team!
+If you're looking for smooth collaborations defined by team sinergy or are looking to define a specific tech problem within your organization, don't hesitate to [reach our team](https://form.typeform.com/to/D1PhDJIR)!
 
 Thanks for reading 😊
