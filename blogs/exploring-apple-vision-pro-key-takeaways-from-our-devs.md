@@ -4,7 +4,7 @@ subtitle: " "
 permalink: apple-vision-pro
 featured: true
 date: 2023-11-28
-category: ios-development
+category: development
 thumbnail: /images/apple-vision-pro.png
 tags:
   - AppleVision
