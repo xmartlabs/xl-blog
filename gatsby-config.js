@@ -76,6 +76,14 @@ module.exports = {
         path: `${__dirname}/content/`,
       },
     },
+    {
+      resolve: "gatsby-plugin-google-tagmanager",
+      options: {
+        id: "GTM-5J7PXXS",
+        includeInDevelopment: false,
+        routeChangeEventName: "route-change",
+      },
+    },
     "gatsby-transformer-remark",
     "gatsby-plugin-sass",
   ],
