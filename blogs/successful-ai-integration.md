@@ -18,13 +18,15 @@ The importance and impact of artificial intelligence have been debated endlessly
 
 ###### Source: Google Trends
 
+
+
 And why wouldn't you want to incorporate AI? A recent Deloitte report stated, "Enterprises with an AI strategy are 1.7 times more likely to achieve their goals than those without such a vision”. **1** and According to research carried out by the Massachusetts Institute of Technology, almost 85% of executives believe AI will provide and sustain their company's competitive advantage. **2**
 
 Yet, it's not merely a matter of desiring or incorporating AI into your workflow; it's about how willing and prepared your team is to embrace and harmonize with it. It's like getting a new musical instrument—owning it is one thing, but knowing how to tune it, play the melodies, and orchestrate its full potential is another. The businesses that will excel will be those that know how to use AI efficiently.
 
 After conducting thorough research and engaging in extensive discussions with our experts, we've compiled a list of key aspects for you to consider when preparing your team to embrace this powerful technology, regardless of your industry or area of expertise. In the following sections, we will delve deeper and offer valuable insights and advice.
 
-## Overcome Prejudices 
+## Overcome Prejudices
 
 Like every topic under the sun, AI is not welcomed unanimously by everyone, and just like it has fierce supporters, there are also people feeling the exact opposite. There might still be team members looking at AI suspiciously, and this is not only true for those working in non-tech-related industries; even software developers or tech-savvy individuals might have hesitancies when incorporating AI. 
 
@@ -115,3 +117,8 @@ AI possibilities are limitless, as we've heard a thousand times, but human capab
 We recognize that reaching a point where your team is fully equipped to handle and develop AI solutions is a long-term goal. At Xmartlabs, we are here to offer ongoing guidance and assistance throughout this journey. Whether you're looking to pave the way for future internal teams or develop AI use cases tailored to your business, you can rely on our experts to support your endeavors. 
 
 With the pace at which AI changes things, it's easy to feel constantly overwhelmed or like you're lagging. Contact us to start working with our team of AI experts, who will assess your business's journey towards AI integration.
+
+- - -
+
+1. <https://www.deloitte.com/content/dam/assets-shared/legacy/docs/services/consulting/2022/DI_State-of-AI.pdf>
+2. <https://mitsloan.mit.edu/ideas-made-to-matter/how-big-firms-leverage-artificial-intelligence-competitive-advantage>
