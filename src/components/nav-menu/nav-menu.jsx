@@ -11,7 +11,7 @@ const NavMenu = ({ className, openMenu }) => {
     {label: 'Services', path:'https://xmartlabs.com/services' },
     {label: 'Our Company', path:'https://xmartlabs.com/company' },
     {label: 'Community', path:'https://xmartlabs.com/community' },
-    {label: 'Blog', path:'https://blog.xmartlabs.com/'},
+    {label: 'Blog', path:'/'},
     {label: 'Work with us', path:'https://xmartlabs.com/careers'},
   ];
   
