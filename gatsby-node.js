@@ -36,7 +36,7 @@ exports.createResolvers = ({ createResolvers }) => {
   createResolvers(resolvers)
 };
 
-const readingTime = require(`reading-time`)
+const readingTime = require(`reading-time`);
 
 exports.onCreateNode = ({ node, actions }) => {
   const { createNodeField } = actions;

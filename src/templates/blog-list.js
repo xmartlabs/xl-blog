@@ -1,55 +1,35 @@
-import React, { useEffect, useContext } from "react";
-
+import React from "react";
 import { graphql } from "gatsby";
 
-import { Pager } from '../components/pager';
-import { AppContext, BannerType } from '../config/context';
+import { BlogList as BlogListComponent } from "../components/blog-list/blog-list"
 
-import { Card } from '../components/card';
-
-import * as styles from "./blog-list.module.scss";
-
-const BlogList = ({ pageContext, data }) => {
-  const _ = require("lodash")    
-  const { edges } = data.allMdx;
-  const { setState } = useContext(AppContext);
-
-  useEffect(() => {
-    setState(BannerType.home);
-  }, []);
-
-  return (
-    <>
-      <div className={styles.container}>
-        {edges.map(({ node }) => <Card data={node} key={node.id} withCategory={true} />)}     
-      </div>
-      <Pager pageContext={pageContext}/>
-    </>
-  );
+const BlogList = (props) => {
+  return <BlogListComponent {...props} />;
 };
-
 export default BlogList;
 
-export const blogListQuery = graphql`query blogListQuery($skip: Int!, $limit: Int!) {
-  allMdx(sort: {frontmatter: {date: DESC}}, limit: $limit, skip: $skip) {
-    totalCount
-    edges {
-      node {
-        fields {
-          slug
+export const blogListQuery = graphql`
+  query($category: String, $limit: Int, $skip: Int) {
+    allMdx(
+      limit: $limit
+      sort: {frontmatter: {date: DESC}}
+      filter: {frontmatter: {category: {eq: $category}}}
+      skip: $skip
+    ) {
+      edges {
+        node {
+          id
+          frontmatter {
+            date(formatString: "MMMM D, YYYY")
+            title
+            author
+            category
+            tags
+            permalink
+            thumbnail
+          }
         }
-        id
-        frontmatter {
-          date(formatString: "MMMM D, YYYY")
-          title
-          author
-          category
-          tags
-          permalink
-          thumbnail
-        }
-        body
       }
     }
   }
-}`
+`
