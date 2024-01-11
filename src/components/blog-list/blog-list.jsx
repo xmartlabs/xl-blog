@@ -4,11 +4,11 @@ import { Link } from "gatsby";
 
 import { Pager } from '../pager';
 import { Card } from "../card";
+import { ErrorSafeLocalStorage, classnames } from "../../helpers";
 
 import * as styles from "./blog-list.module.scss";
-import { classnames } from "../../helpers";
-import { ErrorSafeLocalStorage, ErrorSafeSessionStorage } from "../../helpers/local-storage";
 
+// { value: label }
 const Categories = {
   all: "All",
   development: "Development",
@@ -32,6 +32,7 @@ export const BlogList = ({ pageContext, data, location: { pathname } }) => {
     ErrorSafeLocalStorage.removeItem('scrollTo');
 
     if (scrollTo === 'categories' && categoryFiltersRef.current) {
+      // Place filters at the top of the viewport and scroll down to account for the navbar
       categoryFiltersRef.current.scrollIntoView({ behavior: 'instant' });
       window.scrollBy(0,-140);
     } else

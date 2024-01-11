@@ -17,24 +17,15 @@ const NavMenu = ({ className, openMenu }) => {
   
   return (
     menuElements.map(({label, path}) => {
+      const text = <h5 className={classnames(styles.link, {text__heading__two__separated__blueOne: openMenu})}>{label}</h5>;
+      const mergedClassName = classnames(styles.linkTextContainer, className);
+
       if (path.charAt(0) === '/')
         // Local link, use <Link> component
-        return (
-          <Link className={classnames(styles.linkTextContainer, className)} key={label} to={path} rel="noopener noreferrer">
-            <h5 className={classnames(styles.link, {text__heading__two__separated__blueOne: openMenu})}>{label}</h5>
-          </Link>
-        );
+        return <Link key={label} to={path} rel="noopener noreferrer" className={mergedClassName}>{text}</Link>;
       
-      return (
-        // External link, use <a> tag
-        <a
-          key={label}
-          href={path}
-          className={classnames(styles.linkTextContainer, className)}
-        >
-          <h5 className={classnames(styles.link, {text__heading__two__separated__blueOne: openMenu})}>{label}</h5>
-        </a>
-      );
+      // External link, use <a> tag
+      return <a key={label} href={path} className={mergedClassName}>{text}</a>;
     })
   );
 }
