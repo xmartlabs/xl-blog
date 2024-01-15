@@ -38,6 +38,8 @@ Our quest to improve accessibility to our vast documentation led us to develop a
 
 This approach ensures that the answers are closely related to the user's question, making our extensive documentation more accessible and user-friendly.
 
+![](/images/asset-1.png)
+
 ## Breakdown of the AI Solution and Some Considerations
 
 In creating our AI assistant, we went through a detailed process, ensuring each part was made carefully to be efficient and accurate. From collecting all the documents to finally showing the answers, we paid attention to the technical details and how easy it would be for users to interact with it.
@@ -55,7 +57,7 @@ These enhanced steps underscore the complexity and thoughtfulness behind the dev
 
 In this section, we showcase our AI assistant's practical application and effectiveness. To illustrate its capabilities, we tested it with real-world questions directly related to our documentation. These tests were designed to evaluate how accurately the assistant could interpret and respond to technical queries. The following example highlights the assistant's proficiency in extracting relevant information from our extensive documentation and presenting it in a clear, actionable format. Let's dive into some specific queries and compare the assistant's responses with the corresponding sections of the playbook:
 
-
+![](/images/asset-2.png)
 
 **User's Question**: "How can I implement push notifications on mobile?"
 
