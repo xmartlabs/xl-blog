@@ -55,6 +55,8 @@ These enhanced steps underscore the complexity and thoughtfulness behind the dev
 
 In this section, we showcase our AI assistant's practical application and effectiveness. To illustrate its capabilities, we tested it with real-world questions directly related to our documentation. These tests were designed to evaluate how accurately the assistant could interpret and respond to technical queries. The following example highlights the assistant's proficiency in extracting relevant information from our extensive documentation and presenting it in a clear, actionable format. Let's dive into some specific queries and compare the assistant's responses with the corresponding sections of the playbook:
 
+
+
 **User's Question**: "How can I implement push notifications on mobile?"
 
 **Documentation Reference**: (From the 'Setup' section of the Push Notifications Playbook)
@@ -92,6 +94,8 @@ This section delves into how various industries utilize AI assistants similar to
 Incorporating AI assistants in these fields underscores a shift towards AI-enhanced workflows, illustrating these tools' broad applicability and value in addressing industry-specific information needs.
 
 ## Conclusion
+
+![](/images/asset-3.png)
 
 Reflecting on the journey of creating our AI assistant, its transformative impact becomes evident not just for us but as a beacon for others facing data inundation. This tool has revolutionized our approach to vast information repositories, swiftly delivering the needed insights. Its effectiveness serves as a testament to the potential of AI in simplifying the retrieval and utilization of complex data.
 
