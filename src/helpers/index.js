@@ -1,4 +1,5 @@
 export { classnames } from "./utils";
 export { useCategory } from "./use-category";
 export { findTitles } from "./find-titles";
-export { ErrorSafeLocalStorage, ErrorSafeSessionStorage } from "./local-storage";
+export { ErrorSafeLocalStorage } from "./local-storage";
+export { ErrorSafeSessionStorage } from "./session-storage";

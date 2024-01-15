@@ -51,13 +51,16 @@ const GlobalStyles = createGlobalStyle`
 `
 
 export const wrapRootElement = ({element}) => {
+    return (
+    <ThemeProvider theme={Theme}>
+      <GlobalStyles />
+      <AppContextProviderComponent>
+        <Layout>
+          {element}
+        </Layout>
+      </AppContextProviderComponent>
+    </ThemeProvider>
+  );
+};
 
-  return (<ThemeProvider theme={Theme}>
-    <GlobalStyles />
-    <AppContextProviderComponent>
-      <Layout>
-        {element}
-      </Layout>
-    </AppContextProviderComponent>
-  </ThemeProvider>)
-}
+export const shouldUpdateScroll = () => { console.log('testttt'); return false; }

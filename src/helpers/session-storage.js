@@ -1,21 +1,21 @@
-export const ErrorSafeLocalStorage = {
+export const ErrorSafeSessionStorage = {
   setItem: (key, value) => {
     try {
-      localStorage.setItem(key, value);
+      sessionStorage.setItem(key, value);
     } catch {
       return;
     }
   },
   getItem: (key) => {
     try {
-      return localStorage.getItem(key);
+      return sessionStorage.getItem(key);
     } catch {
       return null;
     }
   },
   removeItem: (key) => {
     try {
-      localStorage.removeItem(key);
+      sessionStorage.removeItem(key);
     } catch {
       return;
     }

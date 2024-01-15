@@ -31,12 +31,17 @@ export const BlogList = ({ pageContext, data, location: { pathname } }) => {
 
     ErrorSafeLocalStorage.removeItem('scrollTo');
 
-    if (scrollTo === 'categories' && categoryFiltersRef.current) {
+    const timeout = setTimeout(() => {
+    if (scrollTo === 'categories') {
       // Place filters at the top of the viewport and scroll down to account for the navbar
-      categoryFiltersRef.current.scrollIntoView({ behavior: 'instant' });
-      window.scrollBy(0,-140);
-    } else
-      window.scrollTo(0, Number(scrollTo));
+        categoryFiltersRef.current?.scrollIntoView({ behavior: 'instant' });
+        window.scrollBy(0,-140);
+      } else {
+        window.scrollTo(0, Number(scrollTo));
+      }
+    }, 0);
+
+    return () => clearTimeout(timeout);
   }, [pathname]);
 
   return (

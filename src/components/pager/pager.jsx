@@ -1,10 +1,9 @@
 import React from "react";
+import PropTypes from "prop-types";
 import { Link } from "gatsby";
 
-import PropTypes from "prop-types";
-
+import { ErrorSafeLocalStorage } from "../../helpers";
 import * as styles from "./pager.module.scss";
-import { ErrorSafeLocalStorage } from "../../helpers/local-storage";
 
 const buildPageLocation = ({ numPages, page, category }) => {
   if (page - 1 < 1) return category ? `/categories/${category}` : `/`;
@@ -18,7 +17,6 @@ const Pager = ({ pageContext }) => {
   const { numPages,  currentPage, category } = pageContext;
   const prevPage = buildPageLocation({ page: currentPage - 1, category});
   const nextPage = buildPageLocation({ numPages, page: currentPage + 1, category});
-  const actualPage = buildPageLocation({ page: currentPage, category });
 
   const onClick = () => {
     ErrorSafeLocalStorage.setItem('scrollTo', 'categories');
