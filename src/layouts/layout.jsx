@@ -182,6 +182,7 @@ function Layout({ children }) {
         </div>
       </Footer>
       <Helmet>
+        <title>XL Blog</title>
         <script src={withPrefix('identity.js')} type="text/javascript"></script>
       </Helmet>
     </>
