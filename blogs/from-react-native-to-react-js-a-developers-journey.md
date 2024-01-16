@@ -23,7 +23,7 @@ In this blog, I'll share my experience of transitioning from RN to React JS, det
 
 ## How To Transition From React Native to React JS: First-Hand Experience
 
-I found the transition from React Native to React to be quite smooth. Essentially, React Native utilizes React to work, hence sharing many paradigms. For instance, both are oriented toward creating reusable components, employing hooks, and using the same language, primarily JavaScript (and, in this case, TypeScript).
+I found the transition from React Native to React to be quite smooth. Essentially, React Native utilizes React to work, hence sharing many paradigms. For instance, both are oriented toward creating reusable components, employing hooks, and using the same base language, primarily JavaScript (and, in this case, TypeScript).
 
 However, there are noticeable differences. Some of the most basic distinctions I encountered were the **names of basic components**. In React, we use HTML tags like <div>, <h1>, <img>, whereas in React Native, we use <View>, <Text>, <Image>. This may seem uncomplicated, but it requires some adjustment when you've been employing the same RN components for a while. After programming extensively in RN, it's natural at first to attempt to write  <View> in React instead of <div>, which would result in an error.
 
@@ -33,7 +33,7 @@ The **navigation between screens** was another fundamental difference (and chall
 
 A  positive aspect of this transition was the **ease and speed of setting up a web app** compared to the time required to set up Metro + Xcode + Android Studio along with their simulators or emulators for a mobile app. Along with this, it's worth mentioning that setting up a web app requires significantly fewer applications and libraries compared to a mobile app.
 
-In summary, learning the language isn't the most challenging aspect you'll encounter in this transition; knowing RN greatly eases this process. However, it can lead to confusion as both languages have many similarities, such as components and styles, but they aren't exactly the same and don't function identically. Therefore, careful attention is necessary in this regard.
+In summary, learning the technology isn't the most challenging aspect you'll encounter in this transition; knowing RN greatly eases this process. However, it can lead to confusion as both frameworks have many similarities, such as components and styles, but they aren't exactly the same and don't function identically. Therefore, careful attention is necessary in this regard.
 
 ![](/images/basic-component-comparison.png)
 
