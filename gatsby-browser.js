@@ -62,5 +62,3 @@ export const wrapRootElement = ({element}) => {
     </ThemeProvider>
   );
 };
-
-export const shouldUpdateScroll = () => { console.log('testttt'); return false; }
