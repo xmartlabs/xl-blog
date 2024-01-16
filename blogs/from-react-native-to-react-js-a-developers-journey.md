@@ -25,7 +25,7 @@ In this blog, I'll share my experience of transitioning from RN to React JS, det
 
 I found the transition from React Native to React to be quite smooth. Essentially, React Native utilizes React to work, hence sharing many paradigms. For instance, both are oriented toward creating reusable components, employing hooks, and using the same base language, primarily JavaScript (and, in this case, TypeScript).
 
-However, there are noticeable differences. Some of the most basic distinctions I encountered were the **names of basic components**. In React, we use HTML tags like <div>, <h1>, <img>, whereas in React Native, we use <View>, <Text>, <Image>. This may seem uncomplicated, but it requires some adjustment when you've been employing the same RN components for a while. After programming extensively in RN, it's natural at first to attempt to write  <View> in React instead of <div>, which would result in an error.
+However, there are noticeable differences. Some of the most basic distinctions I encountered were the **names of basic components**. In React, we use HTML tags like `<div>, <h1>, <img>,` whereas in React Native, we use `<View>, <Text>, <Image>`. This may seem uncomplicated, but it requires some adjustment when you've been employing the same RN components for a while. After programming extensively in RN, it's natural at first to attempt to write  `<View>` in React instead of `<div>`, which would result in an error.
 
 Another significant difference was the **change in component styling**. In RN, we use the 'style' prop, whereas in web development, 'className' is more conventional, and while CSS has props similar to RN, they don't work in exactly the same way. This is crucial to consider; otherwise, styling can become quite challenging.
 
