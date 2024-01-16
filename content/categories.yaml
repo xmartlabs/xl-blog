@@ -24,14 +24,9 @@
   url: /category/development
   color: #55555
 - category: development
-  title: Swift lessons learned on our journey.
+  title: Mobile development lessons learned on our journey.
   display_name: Development
-  url: /category/ios-development
-  color: #55555
-- category: development
-  title: Android lessons learned on our journey.
-  display_name: Development
-  url: /category/android-development
+  url: /category/mobile-development
   color: #55555
 - category: blockchain
   title: Blockchain learned on our journey.
