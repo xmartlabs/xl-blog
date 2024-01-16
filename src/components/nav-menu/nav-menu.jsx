@@ -11,31 +11,21 @@ const NavMenu = ({ className, openMenu }) => {
     {label: 'Services', path:'https://xmartlabs.com/services' },
     {label: 'Our Company', path:'https://xmartlabs.com/company' },
     {label: 'Community', path:'https://xmartlabs.com/community' },
-    {label: 'Blog', path:'https://blog.xmartlabs.com/'},
+    {label: 'Blog', path:'/'},
     {label: 'Work with us', path:'https://xmartlabs.com/careers'},
   ];
   
   return (
     menuElements.map(({label, path}) => {
-      let commonProps = {
-        key: label, 
-        to: path
-      }
+      const text = <h5 className={classnames(styles.link, {text__heading__two__separated__blueOne: openMenu})}>{label}</h5>;
+      const mergedClassName = classnames(styles.linkTextContainer, className);
 
-      if (path.charAt(0) !== '/') {
-        commonProps = {
-          ...commonProps,
-          rel: 'noopener noreferrer'
-        }
-      }
-      return (
-        <Link
-          {...commonProps}
-          className={classnames(styles.linkTextContainer, className)}
-        >
-          <h5 className={classnames(styles.link, {text__heading__two__separated__blueOne: openMenu})}>{commonProps.key}</h5>
-        </Link>
-      )
+      if (path.charAt(0) === '/')
+        // Local link, use <Link> component
+        return <Link key={label} to={path} rel="noopener noreferrer" className={mergedClassName}>{text}</Link>;
+      
+      // External link, use <a> tag
+      return <a key={label} href={path} className={mergedClassName}>{text}</a>;
     })
   );
 }

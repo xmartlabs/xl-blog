@@ -5,12 +5,6 @@ import Theme from "./src/themes/theme";
 import { AppContextProviderComponent } from "./src/context/context";
 import Layout from "./src/layouts/layout";
 
-// Logs when the client route changes
-export const onRouteUpdate = ({ location, prevLocation }) => {
-  console.log("new pathname", location.pathname)
-  console.log("old pathname", prevLocation ? prevLocation.pathname : null)
-}
-
 const GlobalStyles = createGlobalStyle`    
     * {
         box-sizing: border-box;
@@ -57,13 +51,14 @@ const GlobalStyles = createGlobalStyle`
 `
 
 export const wrapRootElement = ({element}) => {
-
-  return (<ThemeProvider theme={Theme}>
-    <GlobalStyles />
-    <AppContextProviderComponent>
-      <Layout>
-        {element}
-      </Layout>
-    </AppContextProviderComponent>
-  </ThemeProvider>)
-}
+    return (
+    <ThemeProvider theme={Theme}>
+      <GlobalStyles />
+      <AppContextProviderComponent>
+        <Layout>
+          {element}
+        </Layout>
+      </AppContextProviderComponent>
+    </ThemeProvider>
+  );
+};

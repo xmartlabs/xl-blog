@@ -6,32 +6,31 @@
   flex-direction: row;
   justify-content: center;
   margin: 80px 0;
-
-  a {
-    padding: 1rem;
-    font-weight: 500;
-  }
+  font-weight: 500;
+  padding: 1rem 0;
+  gap: 2rem;
+  font-weight: 500;
 }
 
 .pagerLink {
+  font-family: $link-light-font;
   text-decoration: none;
   color:  $defaultGray;
-  font-family: $link-light-font;
 }
 
-.disabledPagerLink {
+.pagerLink[disabled] {
   text-decoration: none;
   color:  $disabledGray;
   cursor: not-allowed;
   align-self: center;
-  font-family: $link-light-font;
+  pointer-events: none;
 }
 
 .linkNumber {
+  font-family: $link-font;
   text-decoration: none;
   color: $xlPink;
   align-self: center;
-  font-family: $link-font;
 }
 
 @media screen and (max-width: map-get($map: $screen-breakpoint, $key: sm)) {

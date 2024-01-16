@@ -33,53 +33,6 @@ body {
   background-color: $blueSix;
 }
 
-.filterContainer {
-  margin: 8% 0 5% 0;
-  width: 100%;
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: center;
-}
-
-.filterElement {
-  list-style: none;
-  margin: 0 2.8125rem;
-  font-family: $primary-font, serif;
-  text-decoration: none;
-  letter-spacing: 1px;
-  font-weight: 500;
-}
-
-.filterElement:hover {
-  cursor: pointer;
-  color: $xlPink;
-}
-
-.selectedLink {
-  color: $xlPink;
-  min-width: 3rem;
-  border-bottom: 2px solid $xlPink;
-  text-align: center;
-}
-
-.filterMobileContainer {
-  overflow-x: scroll;
-  margin: 2rem 0;
-  max-width: 100%;
-
-  .filterContainer {
-    flex-wrap: unset;
-    justify-content: unset;
-    margin: 0;
-    width: 53rem;
-  }
-
-  .filterElement {
-    margin: 2.1rem 1.3rem;
-  }
-}
-
 .socialBottom {
   display: flex;
   flex-direction: row;

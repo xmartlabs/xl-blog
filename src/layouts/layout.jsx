@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useRef } from 'react';
+import React, { useState } from 'react';
 
 
 import Helmet from 'react-helmet';
@@ -6,7 +6,7 @@ import { withPrefix, Link} from 'gatsby';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
-import { actualCategory, classnames } from '../helpers';
+import { classnames } from '../helpers';
 import { useMediaQuery } from '../hooks';
 
 import { HeaderBanner } from '../components/header-banner/header-banner';
@@ -47,36 +47,10 @@ export const StyledFooterText = styled.a`
   text-decoration: none;
 `
 
-const filters = [
-  {name: "all", displayName: "All"},
-  {name: "development", displayName: "Development"},
-  {name: "product-design", displayName: "Design"},
-  {name: "machine-learning", displayName: "Machine Learning"},
-  {name: "blockchain", displayName: "Blockchain"},
-  {name: "people-events", displayName: "People"},
-];
-
 function Layout({ children }) {  
   const [contextState, setContextState] = useState(initialState);
   const isMobile = useMediaQuery("(max-width: 992px)");
-  const [ category, setCategory ] = useState('all');
   const [ showTypeForm, setShowTypeForm ] = useState(false);
-  const filtersLinksRef = useRef(null);
-  const [ loaded, setLoaded ] = useState(false);
-
-  const filterLinks = (
-    <div className={styles.filterContainer} ref={filtersLinksRef}>
-        {filters.map((filter) =>
-          <Link
-            key={filter.name}
-            onClick={() => setCategory(filter.name)}
-            className={classnames(styles.filterElement, "text__filter__grayFive", filter.name === category && styles.selectedLink)} 
-            to={filter.name === 'all' ? '/' : `/categories/${filter.name}/`}>
-            {filter.displayName}
-          </Link>
-        )}
-    </div>
-  );
 
   const shareXlProfileLinks = [
     {
@@ -101,37 +75,6 @@ function Layout({ children }) {
     },
   ];
 
-  const filterMobileDesktop = () => {
-    if (contextState === 'home') {
-      if (isMobile) {
-        return (
-          <div className={styles.filterMobileContainer}>
-            {filterLinks}
-          </div>
-        );
-      } else {
-        return filterLinks;
-      }
-    }
-    return null;
-  };
-
-  useEffect(() => {
-    setCategory(actualCategory(true, filters));
-  }, [category]);
-
-  useEffect(() => {
-    if (filtersLinksRef.current && loaded) {
-      const offsetTop = filtersLinksRef.current.offsetTop;
-      window.scrollTo({ behavior: 'smooth', top: offsetTop - 120 }); 
-    } 
-    
-    if (!loaded) {
-      setLoaded(true);
-      window.scrollTo({ behavior: 'instant', top: 0 }); 
-    }
-  }, [category]);
-
   return (
     <>
       <AppContext.Provider value={{ state: contextState, setState: setContextState }}>
@@ -141,11 +84,11 @@ function Layout({ children }) {
             {isMobile && <MobileMenu />}
             <StyledContainerHeader>
               <div className={styles.navMenuContainer}>
-                <Link
-                  to="https://xmartlabs.com/"
+                <a
+                  href="https://xmartlabs.com/"
                   id="logo-xl">
                   <Logo />
-                </Link>
+                </a>
                 {!isMobile && <NavMenu />}
               </div>
               {!isMobile && 
@@ -157,17 +100,16 @@ function Layout({ children }) {
           </StyledContainerNavBarXL>
           {contextState === "home" && <HeaderBanner />}
         </div>
-        {filterMobileDesktop()}
         {children}
       </AppContext.Provider>
       <Footer>
         <div className={styles.container}>
           <div className={styles.logo}>
-            <Link
-              to="https://xmartlabs.com/"
+            <a
+              href="https://xmartlabs.com/"
               id="logo-xl-white">
               <LogoWhite />
-            </Link>
+            </a>
           </div>
           <div className={styles.linkContainer}>
             <div className={styles.optionContainer}>

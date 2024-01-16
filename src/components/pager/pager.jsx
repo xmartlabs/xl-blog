@@ -1,43 +1,34 @@
-import React, { useEffect } from "react";
+import React from "react";
+import PropTypes from "prop-types";
 import { Link } from "gatsby";
 
-import PropTypes from "prop-types";
-
+import { ErrorSafeLocalStorage } from "../../helpers";
 import * as styles from "./pager.module.scss";
 
 const buildPageLocation = ({ numPages, page, category }) => {
+  if (page - 1 < 1) return category ? `/categories/${category}` : `/`;
 
-  if (page - 1 < 1) {
-    return category ? `/categories/${category}` : `/`;
-  }
-
-  if (page - 1 === numPages) {
-    return null;
-  }
+  if (page - 1 === numPages) return '';
 
   return category ? `/categories/${category}/page/${page}` : `/page/${page}`;
 };
 
-
 const Pager = ({ pageContext }) => {
-  const {numPages,  currentPage, category} = pageContext;
+  const { numPages,  currentPage, category } = pageContext;
   const prevPage = buildPageLocation({ page: currentPage - 1, category});
   const nextPage = buildPageLocation({ numPages, page: currentPage + 1, category});
-  const actualPage = buildPageLocation({ page: currentPage, category });
-  
-  useEffect(() => {
-    setTimeout(() => {
-      window.scrollTo(0, 0)
-    }, 0);
-  }, []);
+
+  const onClick = () => {
+    ErrorSafeLocalStorage.setItem('scrollTo', 'categories');
+  };
 
   return(
     <div className={styles.pagerContainer}>
-      <Link className={currentPage <= 1 ? styles.disabledPagerLink : styles.pagerLink} to={prevPage} rel="prev">
+      <Link className={styles.pagerLink} disabled={currentPage <= 1} onClick={onClick} to={prevPage} rel="prev">
         ← Prev
       </Link>
-        <Link to={actualPage} className={styles.linkNumber}>{currentPage}</Link>
-      <Link className={currentPage === numPages ? styles.disabledPagerLink : styles.pagerLink} to={nextPage} rel="next">
+      <div className={styles.linkNumber}>{currentPage}</div>
+      <Link className={styles.pagerLink} disabled={currentPage >= numPages} onClick={onClick} to={nextPage} rel="next">
         Next →
       </Link>
     </div>
