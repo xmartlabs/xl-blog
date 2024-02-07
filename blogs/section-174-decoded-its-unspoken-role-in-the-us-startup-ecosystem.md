@@ -29,7 +29,7 @@ However, it all gave a turn in 2017 with the “Tax Cuts and Jobs Act”. Said a
 
 This section changes R&D costs from regular expenses that could be subtracted immediately to expenses that could only be amortized over five years (15 if the R&D was done abroad). But even more surprising was that Congress couldn't reach an agreement, and what was supposed to be a temporary measure became permanent.
 
-<span style="color:gray">*filibuster: a political strategy where legislative members prolong a debate to stall or stop a decision on a proposed law.</span>
+<span style={{ color: 'gray' }}>*filibuster: a political strategy where legislative members prolong a debate to stall or stop a decision on a proposed law.</span>
 
 ### Implications in the software industry
 
