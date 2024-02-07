@@ -3,7 +3,7 @@ title: "Section 174 Decoded: Its Unspoken Role in the US Startup Ecosystem"
 subtitle: " "
 permalink: Section-174-US-startup-regulations
 featured: true
-date: 2024-02-07
+date: 2024-02-08
 category: development
 thumbnail: /images/portada-section-174.png
 tags:
