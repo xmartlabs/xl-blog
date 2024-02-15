@@ -16,7 +16,7 @@ export const Seo = ({ title, description, pathname, children }) => {
       <meta property="og:title" content={seo.title} />
       <meta property="og:url" content={seo.url} />
       <meta property="og:description" content={seo.description} />
-      <meta property="og:image" content="og.png" />
+      <meta property="og:image" content={`${window.location.origin}/images/og-thumbnail.png`} />
       <title>{seo.title}</title>
       <meta name="description" content={seo.description} />
       <script src={withPrefix('identity.js')} type="text/javascript"></script>
