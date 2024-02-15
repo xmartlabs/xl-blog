@@ -1,11 +1,18 @@
 import React from "react";
 import { graphql } from "gatsby";
 
-import { BlogList } from "../components/blog-list/blog-list"
+import { BlogList } from "/src/components/blog-list/blog-list"
+import { HeaderBanner } from "/src/components/header-banner"
 
 const CategoriesPage = (props) => {
-  return <BlogList {...props} />;
+  return (
+    <>
+      <HeaderBanner />
+      <BlogList {...props} />;
+    </>
+  );
 };
+
 export default CategoriesPage;
 
 export const blogListQuery = graphql`

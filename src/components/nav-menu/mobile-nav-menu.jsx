@@ -1,16 +1,16 @@
 import React, { useState } from "react";
 import PropTypes from "prop-types";
 
-import { NavMenu } from "../nav-menu";
+import { NavMenuElements } from "./nav-menu-elements";
 import { GithubIcon, TwitterIcon, InstagramIcon, LinkedInIcon, CloseIcon, MenuMobileIcon } from "../icons";
 
 import { classnames } from "../../helpers";
 import { SocialElement } from "../social-element";
 import { TypeForm } from "../typeform/typeform";
 
-import * as styles from "./mobile-menu.module.scss";
+import * as styles from "./mobile-nav-menu.module.scss";
 
-const MobileMenu = () => {
+const MobileNavMenu = () => {
   const [ showMenu, setShowMenu ] = useState(false);
   const [ showTypeForm, setShowTypeForm ] = useState(false);
 
@@ -54,7 +54,7 @@ const MobileMenu = () => {
               </button>
             </div>
             <div className={styles.menuContainer} >
-              <NavMenu className={styles.menuOptions}  openMenu={showMenu}/>
+              <NavMenuElements className={styles.menuOptions}  openMenu={showMenu}/>
               <div className={styles.partnerContainer}>
                 <h4 className="text__label__bold__blueOne">Ready to partner?</h4>
                 <button onClick={() => setShowTypeForm(true)} target="_blank" rel="noopener noreferrer" className={styles.partnerButton}>Let's talk</button>
@@ -68,14 +68,14 @@ const MobileMenu = () => {
   );
 };
 
-export { MobileMenu };
+export { MobileNavMenu as MobileMenu };
 
-MobileMenu.propTypes = {
+MobileNavMenu.propTypes = {
   onClick: PropTypes.func,
   showMenu: PropTypes.bool,
 };
 
-MobileMenu.defaultProps = {
+MobileNavMenu.defaultProps = {
   onClick: () => {},
   showMenu: false,
 };

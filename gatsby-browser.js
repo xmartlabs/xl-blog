@@ -3,7 +3,7 @@ import React from "react";
 import { ThemeProvider, createGlobalStyle } from "styled-components";
 import Theme from "./src/themes/theme";
 import { AppContextProviderComponent } from "./src/context/context";
-import Layout from "./src/layouts/layout";
+import MainLayout from "/src/layouts/main-layout";
 
 const GlobalStyles = createGlobalStyle`    
     * {
@@ -55,9 +55,9 @@ export const wrapRootElement = ({element}) => {
     <ThemeProvider theme={Theme}>
       <GlobalStyles />
       <AppContextProviderComponent>
-        <Layout>
+        <MainLayout>
           {element}
-        </Layout>
+        </MainLayout>
       </AppContextProviderComponent>
     </ThemeProvider>
   );

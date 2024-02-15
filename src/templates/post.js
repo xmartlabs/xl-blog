@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { useContext, useEffect, useState, useRef } from 'react';
+import { useEffect, useState, useRef } from 'react';
 import { Disqus } from 'gatsby-plugin-disqus';
 import { graphql, Link } from 'gatsby';
 
@@ -7,7 +7,6 @@ import AuthorsYAMLData from "../../content/authors.yaml";
 import { Category } from "../components/category";
 import { classnames, findTitles, useCategory } from "../helpers";
 import { AuthorSerializer } from '../serializer';
-import { AppContext, BannerType } from '../config/context';
 import { SocialElement } from '../components/social-element';
 import { TwitterIcon, Facebook, Linkedin, ClockIcon, InstagramIcon} from '../components/icons';
 import { MoreBlogsSection } from '../components/more-blogs-section';
@@ -69,7 +68,6 @@ const shareXlProfileLinks = [
 const BlogPost = ({ data, children }) => {
   const author = AuthorsYAMLData.find(({ author }) => (author === data.mdx.frontmatter.author));
   const authorBlog = AuthorSerializer.deSerialize(author);
-  const { setState } = useContext(AppContext);
   const [ disappearSocial, setDisappearSocial ] = useState(false);
   const refMoreFrom = useRef(null);
   const refIndexTitles = useRef(null);
@@ -85,7 +83,6 @@ const BlogPost = ({ data, children }) => {
   }
 
   useEffect(() => {
-    setState(BannerType.blog);
     setDisappearIndex(true);
     window.addEventListener('scroll', handleScroll, {
       passive: true
@@ -97,7 +94,6 @@ const BlogPost = ({ data, children }) => {
     
     return () => {
       window.removeEventListener('scroll', handleScroll);
-      setState(BannerType.home)
     };
   }, [])
 
