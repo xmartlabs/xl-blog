@@ -1,5 +1,3 @@
-import React from "react";
-
 const findTitles = (htmlElements) => {
   const h1List = [];
   const h2List = [];

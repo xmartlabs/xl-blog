@@ -1,10 +1,11 @@
-import React, { useState, useEffect} from "react";
+import { useState, useEffect} from "react";
 
 const useMediaQuery = (query) => {
   const [matches, setMatches] = useState(false);
 
   useEffect(() => {
     handleWindowSizeChange();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [query]);
 
   useEffect(() => {
@@ -12,6 +13,7 @@ const useMediaQuery = (query) => {
     return () => {
       window.removeEventListener('resize', handleWindowSizeChange);
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const handleWindowSizeChange = () => {

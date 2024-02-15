@@ -22,6 +22,7 @@ const TitleBlogIndex = ({ data, refIndexTitles, disappearIndex }) => {
     return () => {
       window.removeEventListener('scroll', getActiveTitle);
     };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   useEffect(() => {
@@ -34,7 +35,7 @@ const TitleBlogIndex = ({ data, refIndexTitles, disappearIndex }) => {
       if (heightDifference < 650) {
         setHeightVariation(heightDifference);
         setIsTopArrow(heightDifference < 0 || heightDifference > 0);
-        setIsBottomArrow(linksContainerRef.current.scrollToTop == 0);
+        setIsBottomArrow(linksContainerRef.current.scrollToTop === 0);
       }
     }
   }, [linksContainerRef, indexContainerRef]);

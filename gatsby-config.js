@@ -4,9 +4,9 @@ require('dotenv').config({
 
 module.exports = {
   siteMetadata: {
+    title: "Xmartlabs | Blog",
+    description: "Explore Xmartlabs' blog for the latest in tech and business insights",
     siteUrl: "https://blog.xmartlabs.com",
-    title: "XL-Blog",
-    descripton: "Blog description",
   },
   flags: {
     PARALLEL_QUERY_RUNNING: true
@@ -15,7 +15,6 @@ module.exports = {
     "gatsby-plugin-netlify-cms",
     "gatsby-plugin-styled-components",
     "gatsby-plugin-image",
-    "gatsby-plugin-react-helmet",
     "gatsby-plugin-instagram-embed",
     "gatsby-plugin-slug",
     "gatsby-plugin-sitemap",

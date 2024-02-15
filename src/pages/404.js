@@ -9,7 +9,9 @@ import * as styles from './404.module.scss';
 const NotFoundPage = () => {
   return (
     <main className={styles.page}>
-     <a href='/'><ErrorImage className={styles.img} /></a>
+      <a href='/'>
+        <ErrorImage className={styles.img} />
+      </a>
       <div className={styles.subContainer}>
         <title>Not found</title>
         <h1 className={classnames(styles.heading, 'text__heading__one__blueOne')}>You've reached the land of lost URLs.</h1>
