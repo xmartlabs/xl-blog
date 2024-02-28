@@ -46,8 +46,7 @@ collections:
           - { label: "Development", value: "development" }
           - { label: "Machine Learning", value: "machine-learning" }
           - { label: "Data Engineering", value: "data-engineering" }
-          - { label: "iOS Development", value: "ios-development" }
-          - { label: "Android Development", value: "android-development" }
+          - { label: "Mobile Development", value: "mobile-development" }
       - label: "Thumbnail Image"
         hint: "image ratio must be .... "
         name: "thumbnail"
@@ -109,6 +108,8 @@ collections:
           - {value: "maximol", label: "Maximo Lionello"}
           - {value: "mikaela", label: "Mikaela Márquez"}
           - {value: "vir-rivedieu", label: "Virginia Rivedieu"}
+          - {value: "carolina-berastegui", label: "Carolina Berastegui"}
+          - {value: "vir-bacigalupe", label: "Virginia Bacigalupe"}
       - { name: body, label: Body, widget: markdown }
     identifier_field: title
 
