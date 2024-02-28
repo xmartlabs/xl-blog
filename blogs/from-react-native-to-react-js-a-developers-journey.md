@@ -11,7 +11,7 @@ tags:
   - ReactJS
   - MobileDevelopment
   - WebDevelopment
-author: vir-rivedieu
+author: vir-bacigalupe
 ---
 After a year and a half of programming in React Native, the clients of the project we are working on proposed we create a web application in addition to the mobile app we already had. That proposal was really interesting because it implied a challenge for the team and the excitement of incurring into a new technology. However, none of the four people who made up the frontend team was a web developer, despite all of us being familiar with the language through our college experience.
 
