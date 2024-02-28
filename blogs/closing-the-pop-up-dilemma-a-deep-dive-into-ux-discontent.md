@@ -12,7 +12,7 @@ tags:
   - UX
   - UserExperience
   - UX/UI
-author: vale
+author: carolina-berastegui
 ---
 Have you ever found yourself closing pop-ups faster than you can say "annoying"? Turns out, you're not alone. With the idea of analyzing this phenomenon, we decided to dig into this whole pop-up situation: we've read various studies, looked at user tests and statistics, and guess what we discovered? **Pop-ups are widely disliked in the field of user experience (UX).**
 
