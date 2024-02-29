@@ -12,7 +12,7 @@ import * as styles from './more-blogs-section.module.scss';
 const MoreBlogsSection = ({ relatedPosts, refMoreFrom, title }) => (
   <div className={styles.moreFromXlContainer} ref={refMoreFrom} >
     <div className={styles.titleContainer}>
-      <Link to={`/categories/${title}`} className={classnames("text__heading__two__separated__blueOne", styles.titleStyle)}>More from <span>{title}</span>→</Link>
+      <Link to={`/categories/${title}`} className={classnames("text__heading__two__separated__blueOne", styles.titleStyle)}>More from <span className={styles.title}>{title}</span> →</Link>
     </div>
     <div className={styles.blogsContainer}>
       {relatedPosts.slice(0, 3).map((post) => <Card data={post} key={post.frontmatter.title} className={styles.cardStyles} />)}
