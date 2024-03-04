@@ -2,11 +2,10 @@ import * as React from "react";
 
 import styled from 'styled-components';
 import { SocialElement } from '/src/components/social-element';
-import { TwitterIcon, Facebook, Linkedin, InstagramIcon, LogoWhite } from '/src/components/icons';
+import { TwitterIcon, Facebook, Linkedin, InstagramIcon, XmartlabsTextLogoWhite } from '/src/components/icons';
 
 import * as styles from "./footer.module.scss";
 import { classnames } from "/src/helpers";
-
 const StyledFooterText = styled.a`
   size: 17px;
   line-height: 40px;
@@ -40,10 +39,8 @@ export const Footer = () => {
   return (
     <div className={styles.container}>
       <div className={styles.logo}>
-        <a
-          href="https://xmartlabs.com/"
-          id="logo-xl-white">
-          <LogoWhite />
+        <a href="https://xmartlabs.com/" id="logo-xl-white" aria-label='Xmartlabs Homepage'>
+          <XmartlabsTextLogoWhite />
         </a>
       </div>
       <div className={styles.linkContainer}>

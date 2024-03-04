@@ -7,7 +7,7 @@ import { MobileMenu } from './mobile-nav-menu';
 
 import * as styles from './nav-menu.module.scss';
 import { useMediaQuery } from '../../hooks';
-import { Logo } from '../icons';
+import { XmartlabsLogo } from '../icons';
 import { TypeForm } from '../typeform/typeform';
 
 
@@ -62,10 +62,8 @@ export const NavMenu = () => {
           {isMobile && <MobileMenu />}
           <StyledContainerHeader>
             <div className={styles.navMenuContainer}>
-              <a
-                href="https://xmartlabs.com/"
-                id="logo-xl">
-                <Logo />
+              <a href="/" id="logo-xl" aria-label='Blog Home'>
+                <XmartlabsLogo />
               </a>
               {!isMobile && <NavMenuElements />}
             </div>
