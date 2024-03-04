@@ -23,7 +23,6 @@ const MoreBlogsSection = ({ relatedPosts, refMoreFrom, title }) => (
 export { MoreBlogsSection };
 
 MoreBlogsSection.propTypes = {
-  refMoreFrom: PropTypes.object,
   title: PropTypes.string,
   refMoreFrom: PropTypes.shape({
     current: PropTypes.object,

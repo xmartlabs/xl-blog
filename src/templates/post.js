@@ -141,17 +141,9 @@ const BlogPost = ({ data, children }) => {
     title: data.mdx.frontmatter.title,
   }
 
-  const imgUrl = () => {
-    if(data.mdx.frontmatter.thumbnail) {
-      if (data.mdx.frontmatter.thumbnail.includes('/images')) {
-        return data.mdx.frontmatter.thumbnail;
-      } else {
-        return `/${data.mdx.frontmatter.thumbnail}`;
-      }
-    } else {
-      return '../../images/image.png';
-    }
-  }
+  const imgUrl = data.mdx.frontmatter.thumbnail ? (
+    data.mdx.frontmatter.thumbnail.includes('/images') ? data.mdx.frontmatter.thumbnail : `/${data.mdx.frontmatter.thumbnail}`
+  ) : '../../images/image.png';
 
   return (
     <div onScroll={handleScroll} id='containerDiv'>
@@ -180,7 +172,7 @@ const BlogPost = ({ data, children }) => {
           </div>
         </div>
       </div>
-        <img src={imgUrl()} alt='Blog Main Image' onError={(event) => event.target.src = '../../images/image.png'} className={styles.blogMainImage} />
+        <img src={imgUrl} alt='Blog Main Image' onError={(event) => event.target.src = '../../images/image.png'} className={styles.blogMainImage} />
         <div className={styles.bodyPostContainer} ref={refIndexTitles}>
           {children}
         </div>

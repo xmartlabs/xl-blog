@@ -8,9 +8,12 @@ import * as styles from "./typeform.module.scss";
 const TypeForm = ({ onClick }) => {
   return (
     <div className={styles.formContainer}>
-      <button onClick={onClick} className={styles.closeForm}><CloseIcon className={styles.closeFormIcon} /></button>
+      <button onClick={onClick} className={styles.closeForm}>
+        <CloseIcon className={styles.closeFormIcon} />
+      </button>
       <iframe
         src={process.env.GATSBY_FORM_URL}
+        title="typeform"
         frameborder="0"
         className={styles.typeForm}
       >

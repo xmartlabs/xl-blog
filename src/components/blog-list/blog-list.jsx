@@ -8,7 +8,6 @@ import { ErrorSafeLocalStorage, classnames } from "../../helpers";
 
 import * as styles from "./blog-list.module.scss";
 
-// { value: label }
 const Categories = {
   all: "All",
   development: "Development",

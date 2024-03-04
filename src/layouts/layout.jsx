@@ -1,8 +1,5 @@
 import React, { useState } from 'react';
 
-
-import Helmet from 'react-helmet';
-import { withPrefix, Link} from 'gatsby';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
@@ -21,6 +18,7 @@ import { TypeForm } from '../components/typeform/typeform';
 
 import "../index.scss";
 import * as styles from './layout.module.scss';
+import { Seo } from '../components/seo/seo.jsx';
 
 
 export const StyledGetStartedButton = styled.button`
@@ -77,6 +75,7 @@ function Layout({ children }) {
 
   return (
     <>
+      <Seo />
       <AppContext.Provider value={{ state: contextState, setState: setContextState }}>
         {showTypeForm && <TypeForm onClick={() => setShowTypeForm(false)}/>}
         <div className={styles[`${contextState}Banner`]}>
@@ -123,10 +122,6 @@ function Layout({ children }) {
           </div>
         </div>
       </Footer>
-      <Helmet>
-        <title>XL Blog</title>
-        <script src={withPrefix('identity.js')} type="text/javascript"></script>
-      </Helmet>
     </>
   );
 }
