@@ -47,6 +47,7 @@ collections:
           - { label: "Machine Learning", value: "machine-learning" }
           - { label: "Data Engineering", value: "data-engineering" }
           - { label: "Mobile Development", value: "mobile-development" }
+          - { label: "Strategy", value: "strategy" }
       - label: "Thumbnail Image"
         hint: "image ratio must be .... "
         name: "thumbnail"

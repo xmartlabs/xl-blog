@@ -1,35 +1,24 @@
 - category: people-events
-  title: Lessons learned on our journey.
   display_name: People
   url: /category/people-events
-  color: #55555
 - category: product-design
-  title: Product Design lessons learned on our journey.
   display_name: Design
   url: /category/product-design
-  color: #55555
 - category: development
-  title: Engineering lessons learned on our journey.
   display_name: Development
   url: /category/product-development
-  color: #55555
 - category: machine-learning
-  title: Machine Learning lessons learned on our journey.
   display_name: Machine Learning
   url: /category/machine-learning
-  color: #55555
 - category: development
-  title: Data Engineering lessons learned on our journey.
   display_name: Development
   url: /category/development
-  color: #55555
 - category: development
-  title: Mobile development lessons learned on our journey.
   display_name: Development
   url: /category/mobile-development
-  color: #55555
 - category: blockchain
-  title: Blockchain learned on our journey.
   display_name: Blockchain
   url: /category/blockchain
-  color: #55555
+- category: strategy
+  display_name: Strategy
+  url: /category/strategy
