@@ -59,7 +59,7 @@ export const BlogList = ({ pageContext, data, location: { pathname } }) => {
       <div className={styles.container}>
         {posts.map(({ node }) => <Card data={node} key={node.id} withCategory={false} />)}
       </div>
-      <Pager pageContext={pageContext}/>
+      <Pager {...pageContext}/>
     </>
   )
 };

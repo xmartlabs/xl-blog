@@ -8,29 +8,40 @@
   margin: 80px 0;
   font-weight: 500;
   padding: 1rem 0;
-  gap: 2rem;
   font-weight: 500;
 }
 
-.pagerLink {
+.pagerItem {
   font-family: $link-light-font;
   text-decoration: none;
+  min-width: 32px;
+  text-align: center;
   color:  $defaultGray;
 }
 
+.pagerLink {
+  @extend .pagerItem;
+}
+
 .pagerLink[disabled] {
-  text-decoration: none;
   color:  $disabledGray;
   cursor: not-allowed;
-  align-self: center;
   pointer-events: none;
 }
 
-.linkNumber {
-  font-family: $link-font;
-  text-decoration: none;
+.currentPage {
+  @extend .pagerItem;
   color: $xlPink;
-  align-self: center;
+  cursor: default;
+}
+
+.ellipsis {
+  @extend .pagerItem;
+  cursor: default;
+}
+
+.spacer {
+  width: 10px;
 }
 
 @media screen and (max-width: map-get($map: $screen-breakpoint, $key: sm)) {

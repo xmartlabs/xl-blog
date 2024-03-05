@@ -8,9 +8,6 @@ module.exports = {
     description: "Explore Xmartlabs' blog for the latest in tech and business insights",
     siteUrl: "https://blog.xmartlabs.com",
   },
-  flags: {
-    PARALLEL_QUERY_RUNNING: true
-  },
   plugins: [
     "gatsby-plugin-netlify-cms",
     "gatsby-plugin-styled-components",
