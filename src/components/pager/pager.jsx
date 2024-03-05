@@ -56,7 +56,7 @@ const Pager = ({ numPages, currentPage, category }) => {
         item === currentPage ? (
           <span key={item} className={styles.currentPage}>{item}</span>
         ) : item === '' ? (
-          <span key={item} className={styles.pagerItem}>...</span>
+          <span key={item} className={styles.ellipsis}>...</span>
         ) : (
           <PagerLink
             key={item}

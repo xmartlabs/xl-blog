@@ -32,6 +32,12 @@
 .currentPage {
   @extend .pagerItem;
   color: $xlPink;
+  cursor: default;
+}
+
+.ellipsis {
+  @extend .pagerItem;
+  cursor: default;
 }
 
 .spacer {
