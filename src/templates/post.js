@@ -1,6 +1,5 @@
 import * as React from 'react';
 import { useEffect, useState, useRef } from 'react';
-import { Disqus } from 'gatsby-plugin-disqus';
 import { graphql, Link } from 'gatsby';
 
 import AuthorsYAMLData from "../../content/authors.yaml";
@@ -74,14 +73,6 @@ const BlogPost = ({ data, children }) => {
   const categoryBlog = useCategory(data.mdx.frontmatter.category);
   const [ disappearIndex, setDisappearIndex ] = useState(false);
 
-  const checkWindowOrigin = () => {
-    if (typeof window !== 'undefined') {
-      require('smooth-scroll')('a[href*="#"]');
-      return window.location.origin;
-    }
-    return '';
-  }
-
   useEffect(() => {
     setDisappearIndex(true);
     window.addEventListener('scroll', handleScroll, {
@@ -131,12 +122,6 @@ const BlogPost = ({ data, children }) => {
     return null;
   };
 
-  const disqusConfig = {
-    url: `${checkWindowOrigin()}${data.mdx.frontmatter.permalink}`,
-    identifier: data.mdx.slug,
-    title: data.mdx.frontmatter.title,
-  }
-
   const imgUrl = data.mdx.frontmatter.thumbnail ? (
     data.mdx.frontmatter.thumbnail.includes('/images') ? data.mdx.frontmatter.thumbnail : `/${data.mdx.frontmatter.thumbnail}`
   ) : '../../images/image.png';
@@ -178,13 +163,7 @@ const BlogPost = ({ data, children }) => {
           </div>
           <Tags blogTags={data.mdx.frontmatter.tags} className={styles.tags} />
         </div>
-        <div className={styles.disqusSection}>
-          <h3 className={styles.disqusTitle}>Comments:</h3>
-          <div id='disqus_thread'>
-            <Disqus config={disqusConfig} />
-          </div>
-        </div>
-        <MoreBlogsSection relatedPosts={data.mdx.relatedPosts} refMoreFrom={refMoreFrom} title={categoryBlog.category}/>
+        <MoreBlogsSection relatedPosts={data.mdx.relatedPosts} refMoreFrom={refMoreFrom} title={categoryBlog.displayName}/>
     </div>
   );
 };
