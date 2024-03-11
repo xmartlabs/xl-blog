@@ -3,7 +3,7 @@ title: "From React Native to React JS: A Developer's Journey"
 subtitle: " "
 permalink: ReactNative-ReactJS-Guideline
 featured: true
-date: 2024-01-24
+date: 2024-03-12
 category: development
 thumbnail: /images/react-native-to-react-js.png
 tags:
