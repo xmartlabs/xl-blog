@@ -5,7 +5,7 @@ permalink: pop-up-ux-design
 featured: true
 date: 2024-03-16
 category: product-design
-thumbnail: /images/portada.png
+thumbnail: /images/portada-popups.png
 tags:
   - Design
   - PopUps
