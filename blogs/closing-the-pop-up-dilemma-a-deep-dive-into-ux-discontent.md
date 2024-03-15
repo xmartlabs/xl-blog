@@ -3,7 +3,7 @@ title: "Closing the Pop-Up Dilemma: A Deep Dive into UX Discontent"
 subtitle: " "
 permalink: pop-up-ux-design
 featured: true
-date: 2024-01-16
+date: 2024-03-16
 category: product-design
 thumbnail: /images/portada.png
 tags:
