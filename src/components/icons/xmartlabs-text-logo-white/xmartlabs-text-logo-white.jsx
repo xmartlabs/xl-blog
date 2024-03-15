@@ -1,6 +1,6 @@
 import React from "react";
 
-export const LogoWhite = () => (
+export const XmartlabsTextLogoWhite = () => (
   <svg width="194" height="54" viewBox="0 0 194 54" fill="none" xmlns="http://www.w3.org/2000/svg">
     <path fillRule="evenodd" clipRule="evenodd" d="M43 0H0V38.1334L22.9333 14.7401H7.16667V7.2601H35.8333V36.7401H28.595V20.5334L5.73343 44H43V0Z" fill="white"/>
     <path d="M56.0001 18.0001L63.2425 7.67866L63.2189 11.1029L56.2604 1.00009H61.5384L65.9881 7.58152L63.7396 7.6058L68.1182 1.00009H73.1832L66.2247 10.9087V7.50866L73.5619 18.0001H68.1655L63.6449 11.0787H65.7987L61.3491 18.0001H56.0001Z" fill="white"/>

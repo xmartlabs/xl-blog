@@ -17,12 +17,6 @@ module.exports = {
     "gatsby-plugin-sitemap",
     "gatsby-plugin-netlify",
     {
-      resolve: `gatsby-plugin-disqus`,
-      options: {
-        shortname: `xmartlabs`
-      }
-    },
-    {
       resolve: "gatsby-plugin-manifest",
       options: {
         icon: "static/favicon.png",

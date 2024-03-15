@@ -348,18 +348,6 @@
   padding: 5rem 33% 2rem 16%;
 }
 
-// DISQUS
-
-.disqusSection {
-  padding: 0 16%;
-  margin: 2rem 0 4rem 0;
-  
-  .disqusTitle {
-    @extend .text__comment__title__grayFour;
-    font-family: $link-font;
-  }
-}
-
 // Responsive Design
 
 @media screen and (max-width: map-get($map: $screen-breakpoint, $key: xxl)) {
@@ -370,10 +358,6 @@
   .bodyPostContainer p {
     line-height: 2rem;
   }
-
-  .disqusSection {
-    padding: 0 5%;
-  }
 }
 
 @media screen and (max-width: map-get($map: $screen-breakpoint, $key: lg)) {
@@ -383,10 +367,6 @@
 
   .bodyPostContainer, .blogBottomElements {
     padding-right: 10%;
-  }
-
-  .disqusSection {
-    padding: 0 5%;
   }
 }
 
@@ -510,9 +490,5 @@
   .blogBottomElements {
     flex-direction: column;
     padding: 0;
-  }
-
-  .disqusSection {
-    padding: 0 1rem;
   }
 }
