@@ -79,7 +79,7 @@ These initiatives, rooted in the passion and commitment of the women at Xmartlab
 
 ## Not a Smooth Ride: Anticipating Challenges
 
-While our committee's achievements are significant, they were not without their challenges. We've confronted deep-seated prejudices, biases, and beliefs that affect not just organizational cultures but society at large. Here, we outline the obstacles we've faced and anticipate the challenges that lie ahead.
+When dealing with gender issues, it’s common to confront deep-seated prejudices, biases, and beliefs that affect not just organizational cultures but society at large. Here, we outline the obstacles we've faced and anticipate the challenges ahead.
 
 ### **Challenges in Establishing a Gender Commission**
 
