@@ -2,7 +2,7 @@
 title: "Building Bridges: How We're Crafting a Woman-Safe Workplace"
 subtitle: " "
 permalink: gender-equality-it
-featured: false
+featured: true
 date: 2024-03-27
 category: people-events
 thumbnail: /images/linkedin-comision.png
