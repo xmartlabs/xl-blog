@@ -111,6 +111,7 @@ collections:
           - {value: "vir-rivedieu", label: "Virginia Rivedieu"}
           - {value: "carolina-berastegui", label: "Carolina Berastegui"}
           - {value: "vir-bacigalupe", label: "Virginia Bacigalupe"}
+          - {value: "gabriel-lema", label: "Gabriel Lema"}
       - { name: body, label: Body, widget: markdown }
     identifier_field: title
 
