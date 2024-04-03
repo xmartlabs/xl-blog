@@ -12,7 +12,7 @@ tags:
   - MLmodel
   - MLFlow
   - ClearML
-author: mathias
+author: gabriel-lema
 ---
 ## What is experiment tracking (and why is it important)
 
