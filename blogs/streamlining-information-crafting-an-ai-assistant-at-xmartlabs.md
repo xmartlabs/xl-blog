@@ -5,7 +5,7 @@ permalink: custom-AI-assistant
 featured: true
 date: 2024-01-18
 category: development
-thumbnail: /images/portada.png
+thumbnail: /images/portada-ai-assistant.png
 tags:
   - DigitalTransformation
   - DataAccess
