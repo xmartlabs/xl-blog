@@ -109,7 +109,7 @@ Even after having all this info available in your experiments' metadata, a coupl
 
 **Missing files in your repo**
 
-* You designed and implemented an experiment. I wrote some functions and forgot to commit some new (untracked) files. If you run the experiment locally, this would go unnoticed.
+* You designed and implemented an experiment. You wrote some functions and forgot to commit some new (untracked) files. If you run the experiment locally, this would go unnoticed.
 * You locally created a branch and ran all your experiments successfully but never pushed it.
 * You loaded a dataset that is only present on your computer, in some relative folder inside or outside your repo.
 
@@ -124,9 +124,10 @@ You might have run a training script locally pointing to data on your disk that 
 
 ### ClearML’s solution
 
-To tackle all of these problems, ClearML provides a utility called `agent` that allows you to reproduce experiments by recreating the environment specified in the task's metadata.
+To tackle all of these problems, ClearML provides a utility called `agent` that allows you to: 
 
-Scale your workflow by running several jobs in parallel. This, combined with the ease of changing the parameters in the UI, has a major impact on your development speed.
+* Reproduce experiments by recreating the environment specified in the task's metadata.
+* Scale your workflow by running several jobs in parallel. This, combined with the ease of changing the parameters in the UI, has a major impact on your development speed.
 
 When running a task through an agent, it will go through the following steps:
 
