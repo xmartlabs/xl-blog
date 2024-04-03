@@ -3,7 +3,7 @@ title: "Experiment Tracking Done Right: Relevancy and Best Practices"
 subtitle: " "
 permalink: experiment-tracking-machine-learning
 featured: true
-date: 2024-03-06
+date: 2024-04-04
 category: machine-learning
 thumbnail: /images/portada-experiment-tracking.png
 tags:
