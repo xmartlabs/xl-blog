@@ -138,7 +138,10 @@ When running a task through an agent, it will go through the following steps:
 
 Basically, an agent will get all the information of the task that was stored in ClearML and try to run the task. Therefore, we make sure that if an agent is able to reproduce your experiment, any team member would be able to do so, too.
 
-Pro tip: once you’re sure your task works properly in your local machine, you can set the task to run remotely, and if you're unable to run the task remotely, then you've caught a future headache early (a great win for your team!)
+<aside>
+💡 Pro tip: once you’re sure your task works properly in your local machine, you can set the task to run remotely, and if you're unable to run the task remotely, then you've caught a future headache early (a great win for your team!)
+
+</aside>
 
 On the other hand, if the agent is able to run the experiment, it means you have everything you need stored in the experiment metadata in ClearML.
 
