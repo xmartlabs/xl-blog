@@ -75,11 +75,9 @@ If no existing tool matches your requirements, then you might be tempted to deve
 
 At Xmartlabs, we've been mainly working with [ClearML](http://clear.ml/). It allows you to start tracking your experiments by adding two lines of code.
 
-```jsx
-from clearml import Task
-
-task = Task.init(project_name='your project name',
-							   task_name='your task name')
+```
+from clearml import Task 
+task = Task.init(project_name='your project name',							   task_name='your task name')
 ```
 
 It works out of the box with most common ML frameworks (PyTorch / Tensorflow / ScikitLearn / XGBoost), meaning you don't need to change your code to automatically start logging metrics, plots, and models. For cases that are not supported for automatic logging, you can still use some functionalities to manually log anything.
