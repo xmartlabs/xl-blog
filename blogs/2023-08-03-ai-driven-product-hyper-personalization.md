@@ -1,17 +1,18 @@
 ---
-title: "AI-Driven Hyper-Personalization: Elevating Product Lifecycle Management (PLM) to New Heights"
-date: 2023-08-03
-tags:
-  [
-    AI Personalization,
-    Product Lifecycle Management,
-    Customer Experience,
-    Hyper-Personalization,
-  ]
-author: vale
-category: product-design
+title: "AI-Driven Hyper-Personalization: Elevating Product Lifecycle Management
+  (PLM) to New Heights"
+subtitle: " "
 permalink: /ai-driven-product-hyper-personalization/
+featured: true
+date: 2023-08-03
+category: data-engineering
 thumbnail: /images/ai-driven-product-hyper-personalization/featured.png
+tags:
+  - AI Personalization
+  - Product Lifecycle Management
+  - Customer Experience
+  - Hyper-Personalization
+author: vale
 ---
 
 > **"The personal touch is what makes people feel valued and appreciated."** - Dale Carnegie
