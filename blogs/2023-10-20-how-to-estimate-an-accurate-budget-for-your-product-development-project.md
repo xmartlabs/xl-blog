@@ -4,7 +4,7 @@ subtitle: " "
 permalink: /estimating-accurate-budgets-for-dev/
 featured: true
 date: 2023-10-20
-category: product-design
+category: strategy
 thumbnail: /images/frame-2608226.png
 tags:
   - Product
