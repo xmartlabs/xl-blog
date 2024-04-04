@@ -1,19 +1,18 @@
 ---
-title: "Securing Development and Ensuring Compliance: Tips, Guidance, and Best Practices"
-date: 2023-10-06
-tags:
-  [
-    Security Compliance,
-    Secure Development Practices,
-    Compliance Best Practices,
-    Secure Coding,
-    Risk Assessment,
-    Vulnerability Scanning,
-  ]
-author: vir-rivedieu
-category: product-design 
+title: "Securing Development and Ensuring Compliance: Tips, Guidance, and Best
+  Practices"
+subtitle: " "
 permalink: /2023-10-05-securing-development-and-ensuring-compliance/
+featured: true
+date: 2023-10-06
+category: strategy
 thumbnail: /images/securing-development-and-ensuring-compliance/featured.png
+tags:
+  - Security Compliance
+  - Secure Development Practices
+  - Compliance Best Practices
+  - Secure Coding
+author: vir-rivedieu
 ---
 
 # Securing Development and Ensuring Compliance: Tips, Guidance, and Best Practices
