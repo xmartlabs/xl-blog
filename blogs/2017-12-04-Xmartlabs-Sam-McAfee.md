@@ -1,11 +1,16 @@
 ---
 title: Sam McAfee - how to develop a game changer business idea in just 12 weeks?
-date: 2017-12-04
-author: xl
-tags: [Design, Product, Sprint]
-category: product-design
+subtitle: " "
 permalink: /xmartlabs-sam-mc-afee/
+featured: true
+date: 2017-12-04
+category: strategy
 thumbnail: /images/sam-mc-afee/Sam-Mc-Afee.jpg
+tags:
+  - Design
+  - Product
+  - Sprint
+author: xl
 ---
 
 About 9 of every 10 of your business ideas are going to fail. Would you try to reduce this percentage, or instead try to invalidate the non-viable ones and move on with THE great game changer idea? In order to convince you to do the latter, we interviewed the writer and business model innovation consultant Sam McAfee. After being part of dozens of failures, a handful of successes, and working for companies such as Adobe, Sharethrough, Teach for America, and PG&E, Sam shared with us the key concepts and takeaways that will help you to take your business to the next level.
