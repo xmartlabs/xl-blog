@@ -1,11 +1,17 @@
 ---
 title: "LinkedIn for Work, pt. 2 : Finding candidates."
-date: 2015-01-12
-tags: []
-thumbnail: /images/linkedin-for-work-pt-2/cover.jpg
-author: alberto
-category: product-design
+subtitle: " "
 permalink: /linkedin-for-work-pt-2-finding/
+featured: true
+date: 2015-01-12
+category: strategy
+thumbnail: /images/linkedin-for-work-pt-2/cover.jpg
+tags:
+  - LinkedIn
+  - HR
+  - ITJobs
+  - LinkedInProfile
+author: alberto
 ---
 
 <p>
