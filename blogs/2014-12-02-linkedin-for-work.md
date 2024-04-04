@@ -1,11 +1,17 @@
 ---
 title: LinkedIn for Work
-date: 2014-12-02
-tags: []
-thumbnail: /images/linkedin-for-work-pt-2/cover.jpg
-author: alberto
-category: product-design
+subtitle: " "
 permalink: /linkedin-for-work/
+featured: true
+date: 2014-12-02
+category: strategy
+thumbnail: /images/linkedin-for-work-pt-2/cover.jpg
+tags:
+  - LinkedIn
+  - HR
+  - ITJob
+  - ProfessionalProfile
+author: alberto
 ---
 
 <p>
