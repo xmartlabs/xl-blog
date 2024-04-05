@@ -3,7 +3,7 @@ title: "Power Dynamics: The Founder-Investor Relationship in the Startup Industr
 subtitle: " "
 permalink: startup-founder-investors
 featured: true
-date: 2024-04-06
+date: 2024-04-05
 category: development
 thumbnail: /images/founders.png
 tags:
