@@ -4,7 +4,7 @@ subtitle: " "
 permalink: testing-testing
 featured: true
 date: 2024-04-08
-category: strategy
+category: people-events
 thumbnail: /images/ai-integration.png
 tags:
   - test
