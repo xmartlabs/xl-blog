@@ -4,7 +4,7 @@ subtitle: " "
 permalink: startup-founder-investors-relationship
 featured: true
 date: 2024-04-09
-category: development
+category: strategy
 thumbnail: /images/founders.png
 tags:
   - startup
