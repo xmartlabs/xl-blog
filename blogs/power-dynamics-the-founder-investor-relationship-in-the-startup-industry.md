@@ -18,15 +18,11 @@ At the heart of the startup ecosystem lies the relationship between founders and
 
 This blog draws on insights from various resources to shed light on the complexities of this relationship, offering guidance for both parties to navigate their partnership effectively.
 
-![](/images/founder-investor-relationship-model.png)
-
 ## The Initial Engagement: Setting the Stage
 
 The journey begins with initial engagements where founders and investors test the waters. Founders present their vision, hoping to ignite interest, while investors evaluate the growth potential and assess risks. This stage is crucial for building a foundation of trust and alignment, with investors looking for teams that not only have a compelling vision but are also capable of executing it.
 
 According to [Christian Knott's model](https://capnamic.com/post/power-dynamics-in-investor-founder-relations), at this point, stakes are not that high for any party; for investors, it is “just another pitching session,” and founders are probably looking for funding in other places and are not putting all eggs in one basket. Knott mentions how the BATNA (best alternative to no agreement) for the investor at this stage is simply walking away. Parties are not related, and so he represents them with simply two dots “floating” in space and looking for their best fit, with no strings attached yet.
-
-![](/images/the-initial-engagement.png)
 
 ## Dynamics at Play: Power Shifts and Engagement Begins
 
@@ -34,23 +30,17 @@ As the relationship progresses, the dynamics of power begin to shift. Initially,
 
 This is good news for the founder, who has the strongest increase in their position due to the decrease in the investor's bargaining power. Becoming “closer to eye level, “ as represented graphically by Knott's model.
 
-![](/images/engagement-begins.png)
-
 ## The Investment: A Turning Point
 
 The act of wiring funds marks a pivotal shift in the relationship. Investors transition from potential backers to committed partners, trading their most potent leverage for a stake in the company's future. This transition changes roles, with investors stepping back from operational involvement and relying more on the founders' expertise and transparency to drive growth. For the founder, this is a time to put all their hard work in, and it might seem more attractive to do this than to “waste” time reporting to investors. However, as we'll see later, having clear and transparent communication is key for the relationship's (and to some extent, the company's) success.
 
 Investors now should play the role of mentoring the founder, guiding them through the good, the bad, and the ugly. They come to represent experienced guides with vast experience and can even be a sounding board for those greener founders.
 
-![](/images/the-investment-stage.png)
-
 ## Navigating Operational Realities: The Awakening
 
 Post-investment, the dynamics evolve as operational challenges emerge. And more often than not, founders may need additional funds, facing less mystery and more scrutiny in their relationship with investors. This phase tests the strength of the relationship, highlighting the importance of maintaining open lines of communication and managing power imbalances thoughtfully to avoid detrimental negotiation cycles in future rounds.
 
 This will probably happen many times during the lifespan of the investor-founder relationship, which is why it is so key to guard it. Furthermore, during the initial round, it is key to keep this scenario in mind, as the more the investor uses his power in negotiating an initial deal, the less information the founder will provide thereafter, and the worse the conditions in the next financing round, and so on and so forth.
-
-![](/images/the-operations-stage.png)
 
 ## Strategies for Mitigating Imbalances
 
@@ -68,8 +58,6 @@ Investors can play a pivotal role in calming these fears by demonstrating the ta
 
 Founders and investors alike argue that the best formula is to keep investors informed and allow them access so founders get the freedom to act and solid advice on their part.
 
-![](/images/clear-communication.png)
-
 ## Building a Lasting Partnership
 
 The ultimate goal of this dynamic relationship is to build a lasting partnership that withstands the ups and downs of the startup journey. This requires mutual respect, understanding, and a shared commitment to the startup's vision and growth. Both founders and investors must be willing to invest time and effort into this relationship, recognizing that their success is deeply intertwined.
@@ -77,8 +65,6 @@ The ultimate goal of this dynamic relationship is to build a lasting partnership
 In building a lasting partnership, founders should view investors not merely as financial backers but as integral members of their extended team. Proactivity in engaging investors, sharing insights into the startup's progress, and involving them beyond financial reporting can foster a sense of shared mission and mutual investment in the startup's success. Founders should leverage this relationship to gain from the investors' experience, networks, and insights, understanding that an investor's push for performance and introduction to new opportunities is beneficial and necessary. Recognizing that the journey is a collaborative effort helps maintain a healthy relationship, which is vital for times when additional funding becomes crucial.
 
 On the other side, investors should aim to add value beyond their financial contributions and contractual obligations. This includes offering strategic guidance, understanding and supporting through challenges, assisting with budgeting, and leveraging their networks to bring new leads and opportunities. Building a relationship where open communication prevails allows immediate addressing of issues while respecting the founder's autonomy to lead the business. Investors should also practice empathy, especially those from backgrounds different from entrepreneurship, to bridge trust gaps. Demonstrating an understanding of the founder's perspective and enriching their vision with diverse insights can strengthen the partnership, making it resilient through the ups and downs of the startup journey.
-
-![](/images/bulding-partnerships.png)
 
 ## Conclusion: A Path to Mutual Success
 
