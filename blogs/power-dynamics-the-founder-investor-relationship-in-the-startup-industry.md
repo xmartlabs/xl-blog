@@ -4,7 +4,7 @@ subtitle: " "
 permalink: founder-investors-startup-funding
 featured: true
 date: 2024-04-09
-category: strategy
+category: development
 thumbnail: /images/founders.png
 tags:
   - founder
