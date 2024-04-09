@@ -13,8 +13,8 @@
 - category: development
   display_name: Development
   url: /category/development
-- category: development
-  display_name: Development
+- category: mobile-development
+  display_name: Mobile Development
   url: /category/mobile-development
 - category: blockchain
   display_name: Blockchain
@@ -22,3 +22,6 @@
 - category: strategy
   display_name: Strategy
   url: /category/strategy
+- category: data-engineering
+  display_name: Data Engineering
+  url: /category/data-engineering

@@ -5,7 +5,7 @@ subtitle: " "
 permalink: /ai-driven-product-hyper-personalization/
 featured: true
 date: 2023-08-03
-category: product-design
+category: data-engineering
 thumbnail: /images/ai-driven-product-hyper-personalization/featured.png
 tags:
   - AI Personalization
