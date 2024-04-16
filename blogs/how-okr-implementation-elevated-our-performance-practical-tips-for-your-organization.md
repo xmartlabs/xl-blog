@@ -17,13 +17,13 @@ author: vale
 ---
 Embarking on our OKR journey three years ago marked a key moment in our path to achieving organizational efficiency. At that point, we needed a **robust but flexible** **framework.** A system that would foster collaboration, translate long-term aspirations into actionable short-term objectives, and have the flexibility to adapt to the diverse needs of all our teams. Transparency, organization, and an agile approach were non-negotiable elements on our checklist, and the OKR framework introduced by Andrew Grove in the 1970s for Intel checked all the boxes.
 
-Even before introducing the framework, we were conscious of the inherent challenges, particularly in introducing a company-wide framework designed to set priorities and manage goals. The initial resistance to change is a common hurdle, but for frameworks like OKRs, where a smooth adoption translates into achieving company and team goals, overcoming this resistance it’s non negotiable.
+Even before introducing the framework, we were conscious of the inherent challenges, particularly in introducing a company-wide framework designed to set priorities and manage goals. The initial resistance to change is a common hurdle, but for frameworks like OKRs, where a smooth adoption translates into achieving company and team goals, overcoming this resistance is a must.
 
 Keep reading this blog post to uncover how we navigated through challenges and overcame resistance to implement a framework that has become essential to our daily operations. Don’t miss the insights and lessons learned over our three-year journey, which could be invaluable for your own path.
 
 ## **The first step: Putting theory into practice**
 
-At first, adapting OKRs to our needs took more work than we thought. In the first two cycles, we experimented with approaches that weren't the best fit for our organization. Yet, thanks to its agile nature, we pivoted and found a way that made OKRs work for us. Throughout this process, **trial and error** became our guiding principle: **analyze, adapt, and iterate.**
+At first, adapting OKRs to our needs took more work than we thought. In the first two quarterly cycles, we experimented with approaches that weren't the best fit for our organization. Yet, thanks to its agile nature, we pivoted and found a way that made OKRs work for us. Throughout this process, **trial and error** became our guiding principle: **analyze**, **adapt**, and **iterate**.
 
 As the cycles passed and the methodology within our teams strengthened, we continued introducing new ideas within the framework, hoping it would help us reach our goals more effectively. Here's a helpful tip: **only introduce a few changes at a time**, as it can be difficult to pinpoint which change worked and which didn't. Instead, **opt for small changes** while aiming for at least one improvement per cycle.
 
@@ -56,7 +56,7 @@ There are two types of key results: activity-based and value-based.
 * **Activity-based key results** focus on completing activities or delivering “projects”. This type of KRs typically start with verbs such as *launch*, *create*, *develop*, *deliver*, *build*, *implement*, *define*, *test*, *prepare*, and *plan*.
 * **Value-based** **key results** measure the outcomes of successful activities or projects aiming to deliver value to the organization or clients. They often follow the format: *Increase*, *maintain*, or *reduce* *X metric from value A to value B*.
 
-Why emphasize these distinctions? We aim to foster a culture **focused on results and not focused on tasks**. If we had completed all the activities and nothing improved, we wouldn't have been really successful, so relying only on activity-based key results falls short. Here's where KPIs come into play. As measurable metrics, **KPIs can serve as excellent key results within OKRs**, facilitating a smooth integration of both frameworks.
+Why emphasize these distinctions? We aim to foster a culture **focused on results and not focused on tasks or activities**. If we had completed all the activities and nothing improved, we wouldn't have been really successful, so relying only on activity-based key results falls short. Here's where KPIs come into play. As measurable metrics, **KPIs can serve as excellent key results within OKRs**, facilitating a smooth integration of both frameworks.
 
 But what if KPIs still need to be established within your organization? While the ideal course of action would involve developing organizational and team KPIs, there's no need to panic. You can still effectively implement OKRs by gradually incorporating value-based key results into your OKRs, **ensuring each objective includes at least one value-based key result alongside activity-based ones**. This approach establishes a way to measure added value and sets clear success criteria, ensuring a smoother integration of OKRs and KPIs over time.
 
