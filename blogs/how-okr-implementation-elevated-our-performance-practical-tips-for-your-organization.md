@@ -4,7 +4,7 @@ title: How OKR implementation elevated our performance (+ Practical tips for
 subtitle: " "
 permalink: OKR-business-goals-methodology
 featured: true
-date: 2024-04-08
+date: 2024-04-18
 category: strategy
 thumbnail: /images/portada-okrs.png
 tags:
