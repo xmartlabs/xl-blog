@@ -93,6 +93,8 @@ You can witness the results of BingeWiz by heading to [bingewiz.xmartlabs.com](h
 
 
 
-> 🔍 Exploring ML's Possibilities? Don't Miss Our Exclusive LLMs Roundtable – Your Gateway to the Future of AI! [Sign Up Now](https://lu.ma/bwu0nrt0)!
+> 💡 Learn the intricacies of AI and how to manage sensitive data responsibly to ensure safe AI innovation from leading experts!
+>
+> Register now to [secure your spot](https://lu.ma/wuajojk8)! ✅
 
-![](/images/blog-footer.png)
+![](/images/linkedin-google-forms-1.2.png)
