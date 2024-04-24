@@ -183,9 +183,3 @@ However, we also found some obstacles and concerns. Selecting appropriate thresh
 In conclusion, model monitoring requires continuous improvement and adaptation. As we developed our recommendation system, we recognized that **monitoring isn't just about tracking metrics – it's about refining user experiences, optimizing performance, and staying resilient in the face of change.**
 
 If you're interested in optimizing your own rec system, our team can help you elevate your performance and overall user experience. Don't hesitate to [reach out](https://form.typeform.com/to/D1PhDJIR)!
-
-> 🔍 Exploring ML Models? Don't Miss Our Exclusive LLMs Roundtable – Your Gateway to the Future of AI! [Sign Up Now](https://lu.ma/bwu0nrt0)!
->
-> ![](/images/blog-footer.png)
-
-![](/images/blog-footer.png)
