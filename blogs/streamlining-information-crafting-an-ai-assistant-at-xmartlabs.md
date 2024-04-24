@@ -105,4 +105,12 @@ The AI assistant excels in providing clear, comprehensible answers. Its adaptabi
 
 In essence, the creation and utilization of this AI assistant show how AI can redefine our interaction with copious amounts of information. It streamlines processes and accelerates information retrieval and enhances our comprehension and usage of crucial data across various industries.
 
-If you're intrigued by the prospect of implementing a similar solution to reclaim valuable time lost in sifting through information, feel free to [reach out to our team](https://form.typeform.com/to/D1PhDJIR)!
+If you're intrigued by the prospect of implementing a similar solution to reclaim valuable time lost in sifting through information, feel free to [reach out to our team](https://form.typeform.com/to/D1PhDJIR)
+
+
+
+> 💡 Learn the intricacies of AI and how to manage sensitive data responsibly to ensure safe AI innovation from leading experts!
+>
+> Register now to [secure your spot](https://lu.ma/wuajojk8)! ✅
+
+![](/images/linkedin-google-forms-1.2.png)
