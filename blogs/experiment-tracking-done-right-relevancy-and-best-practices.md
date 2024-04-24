@@ -170,3 +170,9 @@ Model development is a hard task, but thanks to the experiment tracking tools re
 * Write down what experiments you are doing, and also those that you decided not to do and the reasons behind them.
 
 Hopefully these tips will help your future self or some other team member be able to continue your work without a lot of friction, avoid repeating experiments, and have an idea of how the project is developing at any point in time.
+
+> 💡 Learn the intricacies of AI and how to manage sensitive data responsibly to ensure safe AI innovation from leading experts!
+>
+> Register now to [secure your spot](https://lu.ma/wuajojk8)! ✅
+
+![](/images/linkedin-google-forms-1.2.png)
