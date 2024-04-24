@@ -90,9 +90,3 @@ As mentioned earlier, we chose to go with a CPU deployment as that saves a lot i
 It is good to think ahead when planning an ML project. In this blog, you can see that over and over again. This will save a lot of lost time and produce better solutions. From our experience, it is also greatly beneficial when people in different roles (like people who build and train a model and those who are responsible for deploying it) work together on designing of a solution.
 
 You can witness the results of BingeWiz by heading to [bingewiz.xmartlabs.com](http://bingewiz.xmartlabs.com), where our ML experts did a fantastic job. If you want them on your team, don't hesitate to [reach out](https://form.typeform.com/to/D1PhDJIR), and we'll become part of your team from day one!
-
-
-
-> 🔍 Exploring ML's Possibilities? Don't Miss Our Exclusive LLMs Roundtable – Your Gateway to the Future of AI! [Sign Up Now](https://lu.ma/bwu0nrt0)!
-
-![](/images/blog-footer.png)
