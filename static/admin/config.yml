@@ -115,6 +115,7 @@ collections:
           - {value: "nati-quintana", label: "Natalia Quintana"}
           - {value: "ceci-herrera", label: "Cecilia Herrera"}
           - {value: "nat-nobre", label: "Natalia Nobre"}
+          - {value: "team-qa", label: "Team QA"}
       - { name: body, label: Body, widget: markdown }
     identifier_field: title
 
