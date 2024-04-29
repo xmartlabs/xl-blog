@@ -250,6 +250,6 @@
   image: members/nat-nobre.png
   github: NataliaNobre
   profile_url: https://github.com/NataliaNobre
-  - author: team-qa
+- author: team-qa
   display_name: Team QA
   image: members/team-qa.png
