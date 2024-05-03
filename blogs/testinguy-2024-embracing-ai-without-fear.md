@@ -1,7 +1,7 @@
 ---
 title: "TestingUy 2024: Embracing AI Without Fear"
 subtitle: " "
-permalink: testing-ai-2024
+permalink: testing-uy-2024-ai
 featured: true
 date: 2024-05-03
 category: development
