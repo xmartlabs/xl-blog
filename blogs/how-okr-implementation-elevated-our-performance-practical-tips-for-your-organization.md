@@ -13,7 +13,7 @@ tags:
   - Strategy
   - Goals
   - Methodology
-author: qa-team
+author: nati-quintana
 ---
 Embarking on our OKR journey three years ago marked a key moment in our path to achieving organizational efficiency. At that point, we needed a **robust but flexible** **framework.** A system that would foster collaboration, translate long-term aspirations into actionable short-term objectives, and have the flexibility to adapt to the diverse needs of all our teams. Transparency, organization, and an agile approach were non-negotiable elements on our checklist, and the OKR framework introduced by Andrew Grove in the 1970s for Intel checked all the boxes.
 
