@@ -118,8 +118,8 @@ With the pace at which AI changes things, it's easy to feel constantly overwhelm
 
 - - -
 
-1. <https://www.deloitte.com/content/dam/assets-shared/legacy/docs/services/consulting/2022/DI_State-of-AI.pdf>
-2. <https://mitsloan.mit.edu/ideas-made-to-matter/how-big-firms-leverage-artificial-intelligence-competitive-advantage>
+1. [https://www.deloitte.com/content/dam/assets-shared/legacy/docs/services/consulting/2022/DI_State-of-AI.pdf](https://www.deloitte.com/content/dam/assets-shared/legacy/docs/services/consulting/2022/DI_State-of-AI.pdf)
+2. [https://mitsloan.mit.edu/ideas-made-to-matter/how-big-firms-leverage-artificial-intelligence-competitive-advantage](https://mitsloan.mit.edu/ideas-made-to-matter/how-big-firms-leverage-artificial-intelligence-competitive-advantage)
 
 
 
