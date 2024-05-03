@@ -13,7 +13,7 @@ tags:
   - TestingUy
 author: xl
 ---
-This year, our QA team had the chance to attend TestingUy's 10th edition, a prominent testing event in Latin America that gathers professionals and enthusiasts from all over the region. This event brings the testing community together with the purpose of sharing knowledge and connecting.
+This year, our QA team had the chance to attend [TestingUy's](https://testinguy.org/) 10th edition, a prominent testing event in Latin America that gathers professionals and enthusiasts from all over the region. This event brings the testing community together with the purpose of sharing knowledge and connecting.
 
 Unsurprisingly the main focus this year was Artificial Intelligence (AI), a topic we explored thoroughly during the event. We learned a lot about its effective use in our field, and we're excited to share some key ideas in this article. Join us as we explore how AI impacts testing practices and how it can help improve our (and your) work. 🚀
 
@@ -40,6 +40,10 @@ What really makes GPT models stand out is their initial pre-training phase. When
 ## To sum up: Seize the AI Advantage
 
 Attending the event gave us some precious insights into how AI can seriously boost our work, and we realized that now is the prime time to dive into AI training while it's still in its early stages. Plus, it gave us peace of mind—robots aren't taking our jobs (at least for now 😅). We'd also like to highlight the event itself and the effort the TestingUy organization put into making this a top-notch event, where everything works smoothly, and you are just focused on absorbing the quality knowledge they're putting in front of you.
+
+👀﻿ PS. You can find this year's talks on [TestingUy's YouTube Channel](https://www.youtube.com/c/TestingUy)!
+
+At Xmartlabs, we're fully dedicated to AI innovation, building projects such as lanthorn.ai and our latest endeavor: a sign language practice assist system.
 
 At Xmartlabs, we're fully dedicated to AI innovation, building projects such as [lanthorn.ai](http://lanthorn.ai/) and our latest endeavor: [a sign language practice assist system](https://blog.xmartlabs.com/blog/machine-learning-sign-language-recognition/).
 
