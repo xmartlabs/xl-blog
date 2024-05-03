@@ -11,7 +11,7 @@ tags:
   - Testing
   - AI
   - TestingUy
-author: xl
+author: qa-team
 ---
 This year, our QA team had the chance to attend [TestingUy's](https://testinguy.org/) 10th edition, a prominent testing event in Latin America that gathers professionals and enthusiasts from all over the region. This event brings the testing community together with the purpose of sharing knowledge and connecting.
 
