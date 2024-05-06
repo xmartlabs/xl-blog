@@ -43,8 +43,6 @@ Attending the event gave us some precious insights into how AI can seriously boo
 
 👀﻿ PS. You can find this year's talks on [TestingUy's YouTube Channel](https://www.youtube.com/c/TestingUy)!
 
-At Xmartlabs, we're fully dedicated to AI innovation, building projects such as lanthorn.ai and our latest endeavor: a sign language practice assist system.
-
 At Xmartlabs, we're fully dedicated to AI innovation, building projects such as [lanthorn.ai](http://lanthorn.ai/) and our latest endeavor: [a sign language practice assist system](https://blog.xmartlabs.com/blog/machine-learning-sign-language-recognition/).
 
 Engaging in internal projects alongside our daily project-related activities gives us a unique opportunity to unleash our creativity and explore the forefront of technological innovation. Through this, we gain several advantages, like exploring AI’s full potential, learning best practices, and being prepared to implement the insights in our client projects. Moreover, involvement in internal initiatives cultivates a culture of collaboration and continuous improvement within our team as we exchange ideas, tackle challenges together, and collectively work toward advancing our AI expertise.
