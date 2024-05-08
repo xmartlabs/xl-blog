@@ -11,6 +11,7 @@ import { TwitterIcon, Facebook, Linkedin, ClockIcon, InstagramIcon} from '../com
 import { MoreBlogsSection } from '../components/more-blogs-section';
 import { Tags } from '../components/tags/tags';
 import { TitleBlogIndex } from '../components/title-blog-index/title-blog-index';
+import { Seo } from '../components/seo/seo';
 
 import * as styles from '../css/blog-post.module.scss';
 
@@ -25,17 +26,17 @@ const getPathname = () => {
 
 const shareBlogPostLinks = [
   {
-    path: `https://twitter.com/intent/tweet?url=URL&text=${getPathname()}`, 
+    path: `https://twitter.com/intent/tweet?url=https%3A%2F%2Fblog.xmartlabs.com${getPathname()}`, 
     icon: <TwitterIcon />,
     id: 'socialSharePostTwitter'
   },
   {
-    path: `https://www.facebook.com/sharer/sharer.php?u=https://blog.xmartlabs.com/blog${getPathname()}`, 
+    path: `https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fblog.xmartlabs.com${getPathname()}`, 
     icon: <Facebook />,
     id: 'socialSharePostFacebook'
   },
   {
-    path: `https://www.linkedin.com/sharing/share-offsite/?url=https%3A%2F%2Fblog.xmartlabs.com%2Fblog%2F${getPathname()}%2F`,
+    path: `https://www.linkedin.com/sharing/share-offsite/?url=https%3A%2F%2Fblog.xmartlabs.com${getPathname()}%2F`,
     icon: <Linkedin />,
     id: 'socialSharePostLinkedIn'
   }
@@ -168,12 +169,12 @@ const BlogPost = ({ data, children }) => {
   );
 };
 
-export const Head = () => {
+export const Head = ({ data }) => {
 //   // Mailchimp newsletter popup
 	return (
-    <>
+    <Seo seoImageUrl={data.mdx.frontmatter.thumbnail}>
       <script  id="mcjs" src={'!function(c,h,i,m,p){m=c.createElement(h),p=c.getElementsByTagName(h)[0],m.async=1,m.src=i,p.parentNode.insertBefore(m,p)}(document,"script","https://chimpstatic.com/mcjs-connected/js/users/1015680a3007c259370b6f4e9/d1d99830b33d13826f947dbb1.js");'} />
-    </>
+    </Seo>
   );
 };
 
