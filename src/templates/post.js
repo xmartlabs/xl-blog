@@ -18,7 +18,6 @@ import * as styles from '../css/blog-post.module.scss';
 const _ = require('lodash');
 
 const getPathname = () => {
-  console.log('pathname', window.location.pathname);
   if (typeof window !== 'undefined') {
     return window.location.pathname;
   }
