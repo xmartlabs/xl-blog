@@ -15,7 +15,7 @@
     "clean": "gatsby clean"
   },
   "engines": {
-    "node": "18.x"
+    "node": "20.x"
   },
   "dependencies": {
     "@deckdeckgo/highlight-code": "^4.4.0",
