@@ -36,7 +36,7 @@ const shareBlogPostLinks = [
     id: 'socialSharePostFacebook'
   },
   {
-    path: `https://www.linkedin.com/sharing/share-offsite/?url=https%3A%2F%2Fblog.xmartlabs.com${getPathname()}%2F`,
+    path: `https://www.linkedin.com/sharing/share-offsite/?url=https%3A%2F%2Fblog.xmartlabs.com${getPathname()}`,
     icon: <Linkedin />,
     id: 'socialSharePostLinkedIn'
   }
@@ -172,7 +172,7 @@ const BlogPost = ({ data, children }) => {
 export const Head = ({ data }) => {
 //   // Mailchimp newsletter popup
 	return (
-    <Seo seoImageUrl={data.mdx.frontmatter.thumbnail}>
+    <Seo seoImageUrl={data.mdx.frontmatter.thumbnail} title={data.mdx.frontmatter.title}>
       <script  id="mcjs" src={'!function(c,h,i,m,p){m=c.createElement(h),p=c.getElementsByTagName(h)[0],m.async=1,m.src=i,p.parentNode.insertBefore(m,p)}(document,"script","https://chimpstatic.com/mcjs-connected/js/users/1015680a3007c259370b6f4e9/d1d99830b33d13826f947dbb1.js");'} />
     </Seo>
   );
