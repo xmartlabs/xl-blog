@@ -24,47 +24,6 @@ const getPathname = () => {
   return '';
 }
 
-const shareBlogPostLinks = [
-  {
-    path: `https://twitter.com/intent/tweet?url=https%3A%2F%2Fblog.xmartlabs.com${getPathname()}`, 
-    icon: <TwitterIcon />,
-    id: 'socialSharePostTwitter'
-  },
-  {
-    path: `https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fblog.xmartlabs.com${getPathname()}`, 
-    icon: <Facebook />,
-    id: 'socialSharePostFacebook'
-  },
-  {
-    path: `https://www.linkedin.com/sharing/share-offsite/?url=https%3A%2F%2Fblog.xmartlabs.com${getPathname()}`,
-    icon: <Linkedin />,
-    id: 'socialSharePostLinkedIn'
-  }
-];
-
-const shareXlProfileLinks = [
-  {
-    path: 'https://www.instagram.com/xmartlabs', 
-    icon: <InstagramIcon />,
-    id: 'socialMenuInstagram'
-  },
-  {
-    path: 'https://www.linkedin.com/company/xmartlabs/mycompany/', 
-    icon: <Linkedin />,
-    id: 'socialProfileLinkedIn'
-  },
-  {
-    path: 'https://twitter.com/xmartlabs', 
-    icon: <TwitterIcon />,
-    id: 'socialProfileTwitter'
-  },
-  {
-    path: 'https://es-la.facebook.com/xmartlabs/', 
-    icon: <Facebook />,
-    id: 'socialProfileFacebook'
-  },
-];
-
 const BlogPost = ({ data, children }) => {
   const author = AuthorsYAMLData.find(({ author }) => (author === data.mdx.frontmatter.author));
   const authorBlog = AuthorSerializer.deSerialize(author);
@@ -73,6 +32,47 @@ const BlogPost = ({ data, children }) => {
   const refIndexTitles = useRef(null);
   const categoryBlog = useCategory(data.mdx.frontmatter.category);
   const [ disappearIndex, setDisappearIndex ] = useState(false);
+
+  const shareBlogPostLinks = [
+    {
+      path: `https://twitter.com/intent/tweet?url=https%3A%2F%2Fblog.xmartlabs.com${getPathname()}`, 
+      icon: <TwitterIcon />,
+      id: 'socialSharePostTwitter'
+    },
+    {
+      path: `https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fblog.xmartlabs.com${getPathname()}`, 
+      icon: <Facebook />,
+      id: 'socialSharePostFacebook'
+    },
+    {
+      path: `https://www.linkedin.com/sharing/share-offsite/?url=https%3A%2F%2Fblog.xmartlabs.com${getPathname()}`,
+      icon: <Linkedin />,
+      id: 'socialSharePostLinkedIn'
+    }
+  ];
+  
+  const shareXlProfileLinks = [
+    {
+      path: 'https://www.instagram.com/xmartlabs', 
+      icon: <InstagramIcon />,
+      id: 'socialMenuInstagram'
+    },
+    {
+      path: 'https://www.linkedin.com/company/xmartlabs/mycompany/', 
+      icon: <Linkedin />,
+      id: 'socialProfileLinkedIn'
+    },
+    {
+      path: 'https://twitter.com/xmartlabs', 
+      icon: <TwitterIcon />,
+      id: 'socialProfileTwitter'
+    },
+    {
+      path: 'https://es-la.facebook.com/xmartlabs/', 
+      icon: <Facebook />,
+      id: 'socialProfileFacebook'
+    },
+  ];
 
   useEffect(() => {
     setDisappearIndex(true);
