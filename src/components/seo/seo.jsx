@@ -13,10 +13,10 @@ export const Seo = ({ title, description, pathname, children, seoImageUrl }) => 
 
   return (
     <>
-      <meta property="og:title" content={seo.title} />
-      <meta property="og:url" content={seo.url} />
-      <meta property="og:description" content={seo.description} />
-      <meta property="og:image" content={seoImageUrl || `${siteUrl}/images/og-thumbnail.png`} />
+      <meta name="title" property="og:title" content={seo.title} />
+      <meta name="url" property="og:url" content={seo.url} />
+      <meta name="description" property="og:description" content={seo.description} />
+      <meta name="image" property="og:image" content={seoImageUrl || `${siteUrl}/images/og-thumbnail.png`} />
       <title>{seo.title}</title>
       <meta name="description" content={seo.description} />
       <script src={withPrefix('identity.js')} type="text/javascript"></script>
