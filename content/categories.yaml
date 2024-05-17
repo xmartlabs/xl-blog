@@ -25,3 +25,6 @@
 - category: data-engineering
   display_name: Data Engineering
   url: /category/data-engineering
+- category: qa
+  display_name: QA
+  url: /category/qa
