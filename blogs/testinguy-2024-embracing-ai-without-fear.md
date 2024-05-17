@@ -4,7 +4,7 @@ subtitle: " "
 permalink: testing-uy-2024-ai
 featured: true
 date: 2024-05-03
-category: development
+category: qa
 thumbnail: /images/testinguy-2024-blog.png
 tags:
   - QA
