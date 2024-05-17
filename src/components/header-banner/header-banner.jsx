@@ -13,9 +13,11 @@ const HeaderBanner = () => {
       <span>•</span>
       <span>Machine Learning</span>
       <span>•</span>
-      <span>Blockchain</span>
+      <span>Strategy</span>
       <span>•</span>
       <span>People</span>
+      <span>•</span>
+      <span>QA</span>
       <span>•</span>
     </>
   );

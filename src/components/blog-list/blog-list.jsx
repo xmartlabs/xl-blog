@@ -13,8 +13,9 @@ const Categories = {
   development: "Development",
   "product-design": "Design",
   "machine-learning": "Machine\u00a0Learning",
-  blockchain: "Blockchain",
   "people-events": "People",
+  strategy: "Strategy",
+  qa: "QA",
 };
 
 export const BlogList = ({ pageContext, data, location: { pathname } }) => {
