@@ -143,4 +143,6 @@ Words like speed, improved collaboration, rapid deployment, quality, reliability
 
 Commercially, these translated into a reduced time to market and a stronger ability to adapt to market needs. It also meant having a more stable and reliable product for its users, and if any failings should arise, they are compensated by a smaller time to recovery.
 
-If you have a scalling product or complex infrastructure you want our team to assess, don't hesitate to contact our team to schedul a [quick exploratory meeting](https://form.typeform.com/to/c7G2RUWm?typeform-source=xmartlabs.com)!
+If you have a scalling product or complex infrastructure you want our team to assess, don't hesitate to contact our team to schedule a [quick exploratory meeting](https://form.typeform.com/to/c7G2RUWm?typeform-source=xmartlabs.com)!
+
+![](/images/devops-7.png)
