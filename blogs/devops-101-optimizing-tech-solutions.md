@@ -5,7 +5,7 @@ permalink: devops-explained
 featured: true
 date: 2024-05-24
 category: strategy
-thumbnail: /images/ai-integration.png
+thumbnail: /images/linkedin-devops.png
 tags:
   - DevOps
   - Development
@@ -18,11 +18,15 @@ Imagine a way to save digital projects thousands of dollars by reducing develope
 
 Luckily, you don't need to dream about it—all of this is possible through DevOps. You've likely heard of it and seen the famous "infinite symbol" image representing its stages. In this blog, we're diving deeper into what DevOps is, what drives it, how we implement it here at Xmartlabs, and the significant impact it has had on our clients (ie. how we've reduced their storage costs by 20% and saved up to 75% of resources dedicated to cloud usage).
 
+![](/images/devops-2.3.png)
+
 ### What exactly is DevOps
 
 Before DevOps was conceived (2007 approx.), the software lifecycle process looked very different from current extended practices. The developers writing the code worked separately from the operations team that deployed and supported that same code.
 
-Enter: DevOps. Based on the Agile methodologies, this new way of working integrated people, processes, and technology through a mindset that enabled team integration.
+![](/images/devops-5.png)
+
+Enter: DevOps. Based on Agile methodologies, this new way of working integrates people, processes, and technology through a mindset that enables team integration.
 
 ### The foundations of DevOps
 
@@ -79,6 +83,8 @@ Our team has established three steps to implement DevOps on existing digital pro
    → **Infrastructure (daily mantainance + support)**: They design and implement the server side in the cloud. They provide the automated tool to the developer and the server.
 
    → **Observability:** Once the code is running they provide visibility of what goes on in said code. Knowledge on what is happening with the application, what each user is doing, etc.
+
+![](/images/devops-6.png)
 
 ### Use Case #1: Large healthtech corporation with sensitive patient data
 
@@ -138,5 +144,3 @@ Words like speed, improved collaboration, rapid deployment, quality, reliability
 Commercially, these translated into a reduced time to market and a stronger ability to adapt to market needs. It also meant having a more stable and reliable product for its users, and if any failings should arise, they are compensated by a smaller time to recovery.
 
 If you have a scalling product or complex infrastructure you want our team to assess, don't hesitate to contact our team to schedul a [quick exploratory meeting](https://form.typeform.com/to/c7G2RUWm?typeform-source=xmartlabs.com)!
-
-<!-- notionvc: 0bc45675-991a-44f4-a01a-ae63db365630 -->
