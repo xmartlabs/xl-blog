@@ -3,7 +3,7 @@ title: "DevOps 101: Optimizing Tech Solutions"
 subtitle: " "
 permalink: devops-explained
 featured: true
-date: 2024-05-24
+date: 2024-05-25
 category: strategy
 thumbnail: /images/linkedin-devops.png
 tags:
