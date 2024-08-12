@@ -5,7 +5,7 @@ permalink: rails-activestorage-cloudfront-media-optimization
 featured: true
 date: 2024-08-12
 category: development
-thumbnail: /images/ai-integration.png
+thumbnail: /images/active-storage-portada.jpg
 tags:
   - Rails
   - AWS
@@ -39,7 +39,7 @@ Content distribution is a complex problem to solve by yourself. It’s hard to t
 
 Content Delivery Networks act as caches of data. They store copies of content on multiple nodes around the Internet and intelligently choose where they serve it from, hopefully bridging the gap between your files and your users. Here’s a simple diagram to help you understand how they work.
 
-
+![](/images/active-storage-1.png)
 
 1. Your user intends to access a file. Note that, in this case, the URL points to the CDN and not to your server. First, it needs to resolve the IP of the CDN’s node.
 
@@ -63,9 +63,9 @@ Here’s what’s on our plate today:
 
 To get us going, here’s how a user will access our content:
 
+![](/images/active-storage-2.png)
 
-
-1. The user requests information from our backend. Think, for instance, an Instagram post or a list of posts. Some of that information will be links to media or content, which will **not** point to Cloudfront, but rather our API.
+1. The user requests information from our backend. Think, for instance, an Instagram post or a list of posts. Some of that information will be links to media or content, which will . **not** point to Cloudfront, but rather our API.
 2. The browser tries to render our files, so a request is made to our API. Authentication and authorization checks can be performed by our backend, and if the user is allowed, they will be redirected to a specially crafted Cloudfront URL. We’ll talk about these later.
 3. Cloudfront receives the request, checks the signature on the URL. If valid, then it will return the content (if cached) or forward the request to S3.
 4. S3 checks whether the file exists and returns it to the Cloudfront node.
@@ -81,7 +81,11 @@ Our S3 bucket will be in charge of storing all our content. Contrary to instinct
 
 Let’s start by creating our bucket. First, name it. A bucket’s name needs to be URL-safe as well as unique worldwide. That’s because the name of the bucket is part of the domain name that AWS assigns to it.
 
+![](/images/active-storage-3.png)
+
 Notice how, by default, the bucket is completely private. We want this. Here’s how it should look:
+
+![](/images/active-storage-4.png)
 
 I won’t post all other settings and options here for the sake of length, but make sure to review them. You’ll also need to configure CORS headers for your domain if you have not done so yet. Once you create the bucket you’re halfway there. Now we need to create a specific user with specific permissions.
 
@@ -120,13 +124,19 @@ Now that our bucket is up and running, let’s set up our Cloudfront distributio
 
 Here comes the fun part. Let’s create a Cloudfront distribution linked to our S3 bucket. Step 1: set the origin to the one that points to the bucket you created previously.
 
+![](/images/active-storage-5.png)
+
 By selecting “Origin access control settings” you’ll need to create an Origin Access Control. Make it so requests are signed.
 
 As with the S3 bucket we’ll be skipping options that are not that relevant.
 
 Step 2: I recommend setting the distribution to only accept HTTPS connections. What you will need one hundred percent is restricting viewer access. This tells Cloudfront to only accept connections from a signed URL or signed cookies. We’ll use signed URLs. You will need to create a trusted key group, which can include a few trusted public keys. For now you can just create a group with one key. Note that you’ll have to create the key pairs locally and upload only the public key to AWS. You can find more information [here](https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/private-content-trusted-signers.html#private-content-creating-cloudfront-key-pairs). Keep the private key handy, you’ll use to sign requests.
 
+![](/images/active-storage-6.png)
+
 Next, configure the distribution to forward query parameters to S3 so that you don’t lose access to features like setting the content disposition. Here I’ve done it so Cloudfront forwards everything to S3, which might not be desirable.
+
+![](/images/active-storage-7.png)
 
 Now that our bucket and Cloudfront distribution are online, let’s configure ActiveStorage! But first, notice that once you create a distribution AWS automatically assigns a domain to it, keep it handy.
 
@@ -442,8 +452,6 @@ end
 Before finishing, some closing thoughts. This solution is clearly not meant to be used by everybody in every use case. It’s more of an optimized solution for a few use cases. The posts I could find on the subject were not really what I was looking for, so I was looking to come up with something that might work for a specific use case, which means it might not necessarily work for yours. However, I do hope you find this helpful.
 
 Thanks for reading, and if you have any comments, feel free to reach out. If you felt inspired by this blog check our previous work or contact [us](https://xmartlabs.com/)!
-
-
 
 ## References
 
