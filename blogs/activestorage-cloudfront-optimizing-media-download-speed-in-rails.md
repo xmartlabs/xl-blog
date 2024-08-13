@@ -185,10 +185,15 @@ This URL was generated using ActiveStorage **without** configuring Cloudfront. L
 
 Now let’s look at a signed URL generated for Cloudfront for the same ActiveStorage blob.
 
-https://d221pc53be89z4.cloudfront.net/uivi1ye50kmapzmn5rr3h8wy2wye?&Expires=1720729446&response-content-disposition=inline%3B%20filename%3D%22Group%20168.png%22%3B%20filename%2A%3DUTF-8%27%27Group%2520168.png&response-content-type=image%2Fpng&Signature=byNci40HdAjYeicFVpR7XXK4d6aO6d5KveKEgJYWOfcORrG8\~9ugES6v9Zi9jh6b2q1OmLRG5xpA1ac3cSP\~gDic5aTd
-SecFUjJt0XkEg8E65rA1nuOPca6\~JlvFiSPxyYBPiT1N7tuaRzjhuNeeSYwzJcYRLJ\~9S5tbMXGLnaaZSOYUABbaDa7kcNKcmrn8GpsAJfbEvfAZmw8fhptln
-\~DPKlVVSdOqLuwQDqdQp6ZbOToGwvx66gpSQHMSfkqnhmFrmNgMLXO2Io3RCplfJ9A\~rnX\~\~PQnGidtpU6mAgRtW9C8OWPqEU6q2HD~5DU3anqw4qzO8-
-pTI0VtDVdoDw__&Key-Pair-Id=K22BGJMS612N2Z
+https://d221pc53be89z4.cloudfront.net/uivi1ye50kmapzmn5rr3h8wy2wye?
+&Expires=1720729446&response-content-disposition=inline%3B%20filename
+%3D%22Group%20168.png%22%3B%20filename%2A%3DUTF-8%27%27Group%2520168
+.png&response-content-type=image%2Fpng&Signature=byNci40HdAjYeicFVpR
+7XXK4d6aO6d5KveKEgJYWOfcORrG8\~9ugES6v9Zi9jh6b2q1OmLRG5xpA1ac3cSP\~gDic5aTd
+ SecFUjJt0XkEg8E65rA1nuOPca6\~JlvFiSPxyYBPiT1N7tuaRzjhuNeeSYwzJcYRLJ\~9S5tb
+MXGLnaaZSOYUABbaDa7kcNKcmrn8GpsAJfbEvfAZmw8fhptln \~DPKlVVSdOqLuwQDqdQp6ZbO
+ToGwvx66gpSQHMSfkqnhmFrmNgMLXO2Io3RCplfJ9A\~rnX\~\~PQnGidtpU6mAgRtW9C8OWPqEU6q
+2HD~5DU3anqw4qzO8- pTI0VtDVdoDw__&Key-Pair-Id=K22BGJMS612N2Z
 
 The domain `d2s1pcb3be89z4.cloudfront.net` points to our Cloudfront distribution.
 
@@ -329,9 +334,11 @@ Rails.application.routes.url_helpers.rails_blob_url(blob)
 This should output a URL similar to:
 
 https://YOUR_DOMAIN.com/rails/active_storage/representations/redirect/
-eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaHBBcDVUIiwiZXhwIjpudWxsLCJwdXIiOiJibG9iX2lkIn19--90ee7e940c77b194a9d55012d595f560d2085eb5/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaDdCem
-9MWm05eWJXRjBTU0lJY0c1bkJqb0dSVlE2RkhKbGMybDZaVjkwYjE5c2FXMXBkRnNIYVFLUUFXa0NrQUU9
-IiwiZXhwIjpudWxsLCJwdXIiOiJ2YXJpYXRpb24ifX0=--2640bc2d2290293bac7db1c3c43366e58f53ae97/image.png
+eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaHBBcDVUIiwiZXhwIjpudWxsLCJwdXIiOiJib
+G9iX2lkIn19--90ee7e940c77b194a9d55012d595f560d2085eb5/eyJfcmFpbHMiOnsib
+WVzc2FnZSI6IkJBaDdCem 9MWm05eWJXRjBTU0lJY0c1bkJqb0dSVlE2RkhKbGMybDZaVjkw
+YjE5c2FXMXBkRnNIYVFLUUFXa0NrQUU9 IiwiZXhwIjpudWxsLCJwdXIiOiJ2YXJpYXRpb24i
+fX0=--2640bc2d2290293bac7db1c3c43366e58f53ae97/image.png
 
 If the signed ID of the blob is valid, then our redirect controller will return a Cloudfront URL! And that’s it. You can also add more logic to the controllers we overloaded to make sure the user is authenticated.
 
