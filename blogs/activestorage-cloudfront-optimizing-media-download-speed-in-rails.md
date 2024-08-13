@@ -27,7 +27,7 @@ Here are the tools and libraries we’ll use:
 * An S3 bucket
 * A Cloudfront distribution
 
-> **ℹ️ This blogpost is both beginner-friendly and senior-friendly. Want me to stop yapping and just get to the point? Jump to the [TL;DR](##TL;DR) section. Or keep reading, I’m not your dad.** 
+> **ℹ️ This blogpost is both beginner-friendly and senior-friendly. Want me to stop yapping and just get to the point? Jump to the [TL;DR](#TL;DR) section. Or keep reading, I’m not your dad.** 
 
 ## The Problem
 
