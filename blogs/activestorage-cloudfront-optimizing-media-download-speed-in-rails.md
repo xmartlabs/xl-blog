@@ -328,7 +328,10 @@ Rails.application.routes.url_helpers.rails_blob_url(blob)
 
 This should output a URL similar to:
 
-https://YOUR_DOMAIN.com/rails/active_storage/representations/redirect/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaHBBcDVUIiwiZXhwIjpudWxsLCJwdXIiOiJibG9iX2lkIn19--90ee7e940c77b194a9d55012d595f560d2085eb5/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaDdCem9MWm05eWJXRjBTU0lJY0c1bkJqb0dSVlE2RkhKbGMybDZaVjkwYjE5c2FXMXBkRnNIYVFLUUFXa0NrQUU9IiwiZXhwIjpudWxsLCJwdXIiOiJ2YXJpYXRpb24ifX0=--2640bc2d2290293bac7db1c3c43366e58f53ae97/image.png
+https://YOUR_DOMAIN.com/rails/active_storage/representations/redirect/
+eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaHBBcDVUIiwiZXhwIjpudWxsLCJwdXIiOiJibG9iX2lkIn19--90ee7e940c77b194a9d55012d595f560d2085eb5/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaDdCem
+9MWm05eWJXRjBTU0lJY0c1bkJqb0dSVlE2RkhKbGMybDZaVjkwYjE5c2FXMXBkRnNIYVFLUUFXa0NrQUU9
+IiwiZXhwIjpudWxsLCJwdXIiOiJ2YXJpYXRpb24ifX0=--2640bc2d2290293bac7db1c3c43366e58f53ae97/image.png
 
 If the signed ID of the blob is valid, then our redirect controller will return a Cloudfront URL! And that’s it. You can also add more logic to the controllers we overloaded to make sure the user is authenticated.
 
