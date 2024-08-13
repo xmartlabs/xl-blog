@@ -158,7 +158,15 @@ One thing to disambiguate right now is that S3 supports signed URLs, but so does
 
 Let’s look at examples of signed URLs. Note that these are just here for illustrative purposes and don’t actually point to anything. Here’s a signed URL for our S3 bucket created previously:
 
-https://xl-activestorage-cloudfront.s3.amazonaws.com/uivi1ye50kmapzmn5rr3h8wy2wye?response-content-disposition=inline%3B%20filename%3D%22Group%20168.png%22%3B%20filename%2A%3DUTF-8%27%27Group%2520168.png&response-content-type=image%2Fpng&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAWJA6LBQMVE3WMN75%2F20240709%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Date=20240709T201035Z&X-Amz-Expires=172800&X-Amz-SignedHeaders=host&X-Amz-Signature=8e8ef2e42ae70ae46a030b0a8072407f4eec9abcc307945bb93354aece07dbdc
+https://xl-activestorage-cloudfront.s3.amazonaws.com/
+uivi1ye50kmapzmn5rr3h8wy2wye?response-content-
+disposition=inline%3B%20filename%3D%22Group%20168.png%22%
+3B%20filename%2A%3DUTF-8%27%27Group%2520168.png&response-
+content-type=image%2Fpng&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-
+Amz-Credential=AKIAWJA6LBQMVE3WMN75%2F20240709%2Fus-east-
+1%2Fs3%2Faws4_request&X-Amz-Date=20240709T201035Z&X-Amz-
+Expires=172800&X-Amz-SignedHeaders=host&X-Amz-Signature=
+8e8ef2e42ae70ae46a030b0a8072407f4eec9abcc307945bb93354aece07dbdc
 
 This URL was generated using ActiveStorage **without** configuring Cloudfront. Let’s analyze it.
 
@@ -177,9 +185,13 @@ This URL was generated using ActiveStorage **without** configuring Cloudfront. L
 
 Now let’s look at a signed URL generated for Cloudfront for the same ActiveStorage blob.
 
-https://d221pc53be89z4.cloudfront.net/uivi1ye50kmapzmn5rr3h8wy2wye?&Expires=1720729446&response-content-disposition=inline%3B%20filename%3D%22Group%20168.png%22%3B%20filename%2A%3DUTF-8%27%27Group%2520168.png&response-content-type=image%2Fpng&Signature=byNci40HdAjYeicFVpR7XXK4d6aO6d5KveKEgJYWOfcORrG8\~9ugES6v9Zi9jh6b2q1OmLRG5xpA1ac3cSP\~gDic5aTdSecFUjJt0XkEg8E65rA1nuOPca6\~JlvFiSPxyYBPiT1N7tuaRzjhuNeeSYwzJcYRLJ\~9S5tbMXGLnaaZSOYUABbaDa7kcNKcmrn8GpsAJfbEvfAZmw8fhptln\~DPKlVVSdOqLuwQDqdQp6ZbOToGwvx66gpSQHMSfkqnhmFrmNgMLXO2Io3RCplfJ9A\~rnX\~\~PQnGidtpU6mAgRtW9C8OWPqEU6q2HD~5DU3anqw4qzO8-pTI0VtDVdoDw__&Key-Pair-Id=K22BGJMS612N2Z
+https://d221pc53be89z4.cloudfront.net/uivi1ye50kmapzmn5rr3h8wy2wye?&Expires=1720729446&response-content-disposition=inline%3B%20filename%3D%22Group%20168.png%22%3B%20filename%2A%3DUTF-8%27%27Group%2520168.png&response-content-type=image%2Fpng&Signature=byNci40HdAjYeicFVpR7XXK4d6aO6d5KveKEgJYWOfcORrG8\~9ugES6v9Zi9jh6b2q1OmLRG5xpA1ac3cSP\~gDic5aTd
+SecFUjJt0XkEg8E65rA1nuOPca6\~JlvFiSPxyYBPiT1N7tuaRzjhuNeeSYwzJcYRLJ\~9S5tbMXGLnaaZSOYUABbaDa7kcNKcmrn8GpsAJfbEvfAZmw8fhptln
+\~DPKlVVSdOqLuwQDqdQp6ZbOToGwvx66gpSQHMSfkqnhmFrmNgMLXO2Io3RCplfJ9A\~rnX\~\~PQnGidtpU6mAgRtW9C8OWPqEU6q2HD~5DU3anqw4qzO8-
+pTI0VtDVdoDw__&Key-Pair-Id=K22BGJMS612N2Z
 
-* The domain `d2s1pcb3be89z4.cloudfront.net` points to our Cloudfront distribution.
+The domain `d2s1pcb3be89z4.cloudfront.net` points to our Cloudfront distribution.
+
 * The path `uivi1ye50kmapzmn5rr3h8wy2wye` remains the same. Cloudfront just forwards the path and query parameters to S3, so this makes perfect sense.
 * Let’s look at the query parameters:
 
