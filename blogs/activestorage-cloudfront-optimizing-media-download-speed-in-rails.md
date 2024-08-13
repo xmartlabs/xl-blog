@@ -27,7 +27,7 @@ Here are the tools and libraries we’ll use:
 * An S3 bucket
 * A Cloudfront distribution
 
-> **ℹ️ This blogpost is both beginner-friendly and senior-friendly. Want me to stop yapping and just get to the point? Jump to the TL;DR section. Or keep reading, I’m not your dad.** 
+> **ℹ️ This blogpost is both beginner-friendly and senior-friendly. Want me to stop yapping and just get to the point? Jump to the [TL;DR](##TL;DR) section. Or keep reading, I’m not your dad.** 
 
 ## The Problem
 
@@ -65,7 +65,7 @@ To get us going, here’s how a user will access our content:
 
 ![](/images/active-storage-2.png)
 
-1. The user requests information from our backend. Think, for instance, an Instagram post or a list of posts. Some of that information will be links to media or content, which will . **not** point to Cloudfront, but rather our API.
+1. The user requests information from our backend. Think, for instance, an Instagram post or a list of posts. Some of that information will be links to media or content, which will **not** point to Cloudfront, but rather our API.
 2. The browser tries to render our files, so a request is made to our API. Authentication and authorization checks can be performed by our backend, and if the user is allowed, they will be redirected to a specially crafted Cloudfront URL. We’ll talk about these later.
 3. Cloudfront receives the request, checks the signature on the URL. If valid, then it will return the content (if cached) or forward the request to S3.
 4. S3 checks whether the file exists and returns it to the Cloudfront node.
@@ -77,7 +77,7 @@ Let’s start setting this up.
 
 ### Creating the S3 Bucket
 
-Our S3 bucket will be in charge of storing all our content. Contrary to instinct, we want our bucket to be completely private and only accessible via authenticated requests. Why? Well, it’s our API’s job to let users in or not. If your bucket is public then all links to its content are public permalinks and, barring renaming the file or deleting it, you cannot stop a user from accessing the content forever. By making the bucket public, we force users to go through our API first.
+Our S3 bucket will be in charge of storing all our content. Contrary to instinct, we want our bucket to be completely private and only accessible via authenticated requests. Why? Well, it’s our API’s job to let users in or not. If your bucket is public then all links to its content are public permalinks and, barring renaming the file or deleting it, you cannot stop a user from accessing the content forever. By making the bucket private, we force users to go through our API first.
 
 Let’s start by creating our bucket. First, name it. A bucket’s name needs to be URL-safe as well as unique worldwide. That’s because the name of the bucket is part of the domain name that AWS assigns to it.
 
