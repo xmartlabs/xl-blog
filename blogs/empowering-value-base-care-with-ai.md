@@ -35,18 +35,11 @@ But how is this shift happening? Is there only one road to adopt VBC practices? 
 
 ## VBC Models: Shifting Risks From Patients To Providers
 
+![](/images/vbc-2.png)
+
 The model chosen will depend not only on the provider's risk tolerance but also on their patient population size, historical performance data, and access to technology and support services. Here are some of the models.
 
-| VBC Model                             | Description                                                                                                                                                                                      | What's Good                                                                        |
-| ------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ---------------------------------------------------------------------------------- |
-| Pay-for-performance                   | Providers receive bonuses for meeting quality metrics like patient satisfaction and cost savings.                                                                                                | It's a good entry point for VBC as it uses the existing fee-for-service structure. |
-| Downside Risk                         | Providers receive a set amount per patient and keep a portion of the surplus if costs are controlled. They are responsible for a portion of the deficit if the expenses exceed the set amount.   | Providers take on more risk but can also reap higher rewards.                      |
-| Bundled Payments                      | Providers receive a fixed amount for an entire episode of care, like surgery. They are responsible for managing all costs within that episode.                                                   | Providers keep the savings if they are efficient.                                  |
-| Accountable Care Organizations (ACOs) | Groups of doctors, hospitals, and other healthcare providers who come together voluntarily to provide coordinated, high-quality care to their Medicare patients, incredibly the chronically ill. | Providers are rewarded for patient health outcomes.                                |
-
-It's important to note that transitioning to VBC operations will be challenging, regardless of the model. Providers must change how they operate and invest in new tools and tech that track patients’ health journeys. How? Through Care Coordination.
-
-![](/images/vbc-2.png)
+![](/images/table-1-vbc-models.png)
 
 ## Care Coordination: AI's Perfect Match
 
@@ -54,20 +47,7 @@ Care coordination involves deliberately organizing patient care activities and s
 
 Integrating AI into Care Coordination can significantly enhance these efforts. Here’s how:
 
-| **AI's Solution / Capabilities**             | **Implementation in Care Coordination**                                                                                                                                                                                                                                                                                                                                                    | **Result**                                                                                                                                 |
-| -------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------ |
-| **Data Analytics**                           | AI can quickly analyze vast amounts of patient data collected. Predictive analytics can identify risks or complications and prompt preemptive actions. For example, an AI model helped predict potential patients with breast cancer to prioritize them, resulting in a 60% increase in [accurate predictions](https://medcitynews.com/2024/01/artificial-intelligence-value-based-care/). | • Increased and more accurate patient risk identification. • Optimized resource allocation • Personalized care plans                       |
-| **Conversational AI**                        | AI-powered virtual assistants can answer patient questions, schedule appointments, and provide basic medical advice based on FDA and AMA guidance, enhancing patient engagement and satisfaction. [IBM provides an AI-powered chatbot](https://www.ibm.com/products/watsonx-assistant/healthcare) that healthcare organizations can adapt to their own needs.                              | • Increased patient ownership over their health journey. • Increased patient satisfaction. • More efficient use of health center resources |
-| **Real-Time Data Collection.**               | Wearable devices can collect real-time health data, which algorithms can instantly analyze. This enables faster and more accurate Remote Patient Monitoring (RPM).                                                                                                                                                                                                                         | • Timely interventions • Decreased / prevention of hospital readmissions                                                                   |
-| **Aggregate and Standardize Diverse Data**   | Institutions like Accountable Care Organizations (ACOs) can benefit from integrating all providers' Electronic Health Records (EHR) data. Algorithms can read and process different types of data, which vary greatly in healthcare format and structure.                                                                                                                                  | • Gain data insights • Data standardization                                                                                                |
-| **Real-time Adjustments**                    | Algorithms can provide real-time schedule adjustments based on unexpected changes, such as emergencies or surgery delays. An example is the one highlighted in [this study](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC7747850/) regarding operating room booking times.                                                                                                                 | • Scheduling optimizations • Cost savings                                                                                                  |
-| **Imaging through Deep Learning Algorithms** | AI algorithms based on deep learning can process and analyze medical images to detect abnormalities, such as tumors, fractures, or lesions, often with high accuracy and minimal patient intervention. [Viz.ai](http://Viz.ai), for example, analyses medical imaging data, including CT scans and echocardiograms, and provides real-time insights.                                       | • Faster diagnosis and intervention • Improved precision medicine • Reduced medical practitioner's workload                                |
-
-![](/images/vbc-2.png)
-
-## AI-enabled Care Coordination benefits patients and physician
-
-With the ability to seamlessly share and integrate data points from every patient encounter, healthcare data becomes more cohesive and manageable. It is only when healthcare data can be translated into actionable insights that it is of value to the overall coordination of care for the patient.
+![](/images/table-2-ai-in-care-coordination.png)
 
 Technology-enabled care coordination transforms the patient experience by reducing hospital readmissions, improving medication adherence, enhancing communications with their providers, and empowering them throughout their care journey. Additionally, data-driven insights enable providers to create personalized care plans, resulting in more effective interventions and improved quality of life.
 
