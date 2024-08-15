@@ -1,0 +1,95 @@
+---
+title: Empowering Value-Base Care with AI
+subtitle: " "
+permalink: ai-value-based-care
+featured: true
+date: 2024-08-15
+category: development
+thumbnail: /images/vbc-portada.jpg
+tags:
+  - ValueBasedCare
+  - ArtificialIntelligence
+  - HealthTech
+  - CareCoordination
+  - AI
+author: vale
+---
+In the race to revolutionize healthcare, Value-Based Care (VBC) and Artificial Intelligence (AI) are emerging as powerful allies. This alliance is an unprecedented opportunity for health tech startups and forward-thinking healthcare organizations to lead the charge in transforming patient care.
+
+For decades, the healthcare system incentivized **quantity** over **quality**, rewarding providers based on the volume of services rather than patient outcomes. Value-based care emerged as a paradigm shift to flip this model on its head. However, adapting entrenched practices to new methodologies often requires significant time and resources. This is where AI enters the picture as a game-changing ally.
+
+While the shift towards VBC predates the current AI revolution, the quick advancements in AI tools and technologies are poised to accelerate and enhance this transition. The question now is: How can innovative startups leverage AI to power Value-Based Care solutions? And more importantly, can this synergy fundamentally reshape the healthcare landscape in the United States?
+
+In this blog post, we'll explore the intersection of VBC and AI. We'll start by laying a foundation of VBC basics before diving into how cutting-edge technology can be harnessed to meet its objectives.
+
+## **But what is [Value-Based Care](https://www.cms.gov/priorities/innovation/key-concepts/value-based-care) (VBC)?**
+
+Value-based care is a framework that focuses on patient outcomes rather than service volume. 
+It has become a growing trend in healthcare, with many stakeholders, including policymakers, payers, and providers, recognizing its potential to improve patient care and control costs.
+
+![](/images/vbc-4.png)
+
+Now, providers are incentivized to offer patients the highest quality of care, focusing on preventive measures and the patient's overall health. This has led to a significant change in how healthcare services are delivered **and paid for**. And here is where the shift happens: th**e burden of keeping costs down isn't solely on patients or insurers anymore**. Providers have a stake in the game too. They are being held accountable for the health outcomes of their patients, discouraging unnecessary procedures and treatments, encouraging prevention, and **fostering increased collaboration among healthcare providers**.
+
+But how is this shift happening? Is there only one road to adopt VBC practices? Is it an all-or-nothing type of approach? Well, no. The level of adoption and risk providers are prepared to take on will depend on the VBC model they choose.
+
+## VBC Models: Shifting Risks From Patients To Providers
+
+The model chosen will depend not only on the provider's risk tolerance but also on their patient population size, historical performance data, and access to technology and support services. Here are some of the models.
+
+
+
+| VBC Model | Description | What's Good |
+| --------------------- | --------------------- | --------------------- |
+| Pay-for-performance | Providers receive bonuses for meeting quality metrics like patient satisfaction and cost savings.| It's a good entry point for VBC as it uses the existing fee-for-service structure.|
+| Downside Risk | Providers receive a set amount per patient and keep a portion of the surplus if costs are controlled. They are responsible for a portion of the deficit if the expenses exceed the set amount.| Providers take on more risk but can also reap higher rewards.|
+| Bundled Payments | Providers receive a fixed amount for an entire episode of care, like surgery. They are responsible for managing all costs within that episode.| Providers keep the savings if they are efficient. 
+| Accountable Care Organizations (ACOs) | Groups of doctors, hospitals, and other healthcare providers who come together voluntarily to provide coordinated, high-quality care to their Medicare patients, incredibly the chronically ill. | Providers are rewarded for patient health outcomes. |
+
+
+It's important to note that transitioning to VBC operations will be challenging, regardless of the model. Providers must change how they operate and invest in new tools and tech that track patients’ health journeys. How? Through Care Coordination.
+
+![](/images/vbc-2.png)
+
+## Care Coordination: AI's Perfect Match
+
+Care coordination involves deliberately organizing patient care activities and sharing information among all participants required in a patient's care journey to achieve safer and more effective outcomes. This helps prevent readmissions, avoid complications, and reduce unnecessary interventions.
+
+Integrating AI into Care Coordination can significantly enhance these efforts. Here’s how:
+
+| **AI's Solution / Capabilities**             | **Implementation in Care Coordination**                                                                                                                                                                                                                                                                                                                                                    | **Result**                                                                                                                                 |
+| -------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------ |
+| **Data Analytics**                           | AI can quickly analyze vast amounts of patient data collected. Predictive analytics can identify risks or complications and prompt preemptive actions. For example, an AI model helped predict potential patients with breast cancer to prioritize them, resulting in a 60% increase in [accurate predictions](https://medcitynews.com/2024/01/artificial-intelligence-value-based-care/). | • Increased and more accurate patient risk identification. • Optimized resource allocation • Personalized care plans                       |
+| **Conversational AI**                        | AI-powered virtual assistants can answer patient questions, schedule appointments, and provide basic medical advice based on FDA and AMA guidance, enhancing patient engagement and satisfaction. [IBM provides an AI-powered chatbot](https://www.ibm.com/products/watsonx-assistant/healthcare) that healthcare organizations can adapt to their own needs.                              | • Increased patient ownership over their health journey. • Increased patient satisfaction. • More efficient use of health center resources |
+| **Real-Time Data Collection.**               | Wearable devices can collect real-time health data, which algorithms can instantly analyze. This enables faster and more accurate Remote Patient Monitoring (RPM).                                                                                                                                                                                                                         | • Timely interventions • Decreased / prevention of hospital readmissions                                                                   |
+| **Aggregate and Standardize Diverse Data**   | Institutions like Accountable Care Organizations (ACOs) can benefit from integrating all providers' Electronic Health Records (EHR) data. Algorithms can read and process different types of data, which vary greatly in healthcare format and structure.                                                                                                                                  | • Gain data insights • Data standardization                                                                                                |
+| **Real-time Adjustments**                    | Algorithms can provide real-time schedule adjustments based on unexpected changes, such as emergencies or surgery delays. An example is the one highlighted in [this study](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC7747850/) regarding operating room booking times.                                                                                                                 | • Scheduling optimizations • Cost savings                                                                                                  |
+| **Imaging through Deep Learning Algorithms** | AI algorithms based on deep learning can process and analyze medical images to detect abnormalities, such as tumors, fractures, or lesions, often with high accuracy and minimal patient intervention. [Viz.ai](http://Viz.ai), for example, analyses medical imaging data, including CT scans and echocardiograms, and provides real-time insights.                                       | • Faster diagnosis and intervention • Improved precision medicine • Reduced medical practitioner's workload                                |
+
+![](/images/vbc-2.png)
+
+## AI-enabled Care Coordination benefits patients and physician
+
+With the ability to seamlessly share and integrate data points from every patient encounter, healthcare data becomes more cohesive and manageable. It is only when healthcare data can be translated into actionable insights that it is of value to the overall coordination of care for the patient.
+
+Technology-enabled care coordination transforms the patient experience by reducing hospital readmissions, improving medication adherence, enhancing communications with their providers, and empowering them throughout their care journey. Additionally, data-driven insights enable providers to create personalized care plans, resulting in more effective interventions and improved quality of life.
+
+The results of implementing the technologies in the table above also have a direct impact on healthcare professionals. Care coordination ensures that suitable patients see the appropriate doctors at the correct time, making better use of their time and energy. This is especially significant if we take into account a [Mayo Clinic report](https://www.mayoclinicproceedings.org/article/S0025-6196(18)30938-8/fulltext), which stated that 40% of medical professionals reported feelings of burnout throughout the last couple of years, a feeling that increased during the COVID-19 pandemic.
+
+![](/images/vbc-3.png)
+
+## Risks of Mixing AI and Healthcare
+
+Like all new ventures, integrating AI into healthcare is challenging, and healthcare organizations should be mindful of this. First and foremost, compliance is critical. In the US, the [FDA is in charge of approving](https://www.fda.gov/medical-devices/software-medical-device-samd/artificial-intelligence-and-machine-learning-aiml-enabled-medical-devices?utm_medium=email&utm_source=govdeliveryal) algorithms AI algorithms for medical devices. As of today (July 2024), 882 have been authorized. If operating in the US, having that clearance is a must. The fuel of AI is data, so [data governance and preparation](https://blog.xmartlabs.com/blog/ai-data-governance-panel/) to comply with regulatory standards is as important as the AI model itself. Data quality, completeness, and interoperability should be a priority for any technical team.
+
+According to a [McKinsey report](https://www.mckinsey.com/industries/healthcare/our-insights/investing-in-the-new-era-of-value-based-care), for VBC providers to raise investors’ interest, they need to excel in terms of ‘operational sophistication.’ This means integrating new technologies with existing systems and an efficient change management process where staff, patients, and other providers are prepared to incorporate AI tools.
+
+The ethical aspect of AI should also be addressed. While its potential in healthcare is tremendous, the importance of maintaining the irreplaceable human element in patient care can't be overstated. Healthcare organizations must strike a delicate balance, leveraging AI to enhance efficiency and outcomes while preserving the empathy, intuition, and personal touch that only human healthcare providers can offer. This means using AI as a tool to augment human decision-making rather than replace it entirely. Moreover, transparency in AI use is crucial. Patients should be informed about how AI is being used in their care, and providers must be prepared to explain AI-driven recommendations.
+
+## A Successful Transition to Value-Based Care
+
+Transitioning into a VBC or Care Coordination can be daunting for most healthcare organizations. It might seem too complex, layered, or out of their reach. At Xmartlabs, we've been helping startups and enterprises develop and adopt new technologies for over a decade. Throughout our years in the software company market, we have amassed significant [experience in the healthtech](https://xmartlabs.com/healthtech) sector. We have previously worked in [precision medicine solutions](https://xmartlabs.com/gated/precision-oncology) and developed [wearable tech](https://xmartlabs.com/work/day-j) and [patient support platforms](https://xmartlabs.com/work/cipherhealth), with our ML developing AI-powered solutions for various use cases.
+
+Xmartlabs becomes the technical partner to transition to this new way of thinking about healthcare. We integrate your team at the stage that makes the most sense (from the beginning or in later phases) and they not only develop new tech solutions but also assist you in achieving a holistic organizational change that ensures an efficient adoption of new technology tools.
+
+Remember to check out our [latest report on AI for Care Coordination](https://mailchi.mp/a38a005bc179/care-coordination-report). In this extensive research, we analyzed dozens of papers, reports, and articles and interviewed tens of doctors, nurses, care coordinators, and patients. **[Contact us](https://xmartlabs.com/)** for a quick call with our team to discuss how we can help!
