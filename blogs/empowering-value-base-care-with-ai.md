@@ -37,15 +37,12 @@ But how is this shift happening? Is there only one road to adopt VBC practices? 
 
 The model chosen will depend not only on the provider's risk tolerance but also on their patient population size, historical performance data, and access to technology and support services. Here are some of the models.
 
-
-
-| VBC Model | Description | What's Good |
-| --------------------- | --------------------- | --------------------- |
-| Pay-for-performance | Providers receive bonuses for meeting quality metrics like patient satisfaction and cost savings.| It's a good entry point for VBC as it uses the existing fee-for-service structure.|
-| Downside Risk | Providers receive a set amount per patient and keep a portion of the surplus if costs are controlled. They are responsible for a portion of the deficit if the expenses exceed the set amount.| Providers take on more risk but can also reap higher rewards.|
-| Bundled Payments | Providers receive a fixed amount for an entire episode of care, like surgery. They are responsible for managing all costs within that episode.| Providers keep the savings if they are efficient. 
-| Accountable Care Organizations (ACOs) | Groups of doctors, hospitals, and other healthcare providers who come together voluntarily to provide coordinated, high-quality care to their Medicare patients, incredibly the chronically ill. | Providers are rewarded for patient health outcomes. |
-
+| VBC Model                             | Description                                                                                                                                                                                      | What's Good                                                                        |
+| ------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ---------------------------------------------------------------------------------- |
+| Pay-for-performance                   | Providers receive bonuses for meeting quality metrics like patient satisfaction and cost savings.                                                                                                | It's a good entry point for VBC as it uses the existing fee-for-service structure. |
+| Downside Risk                         | Providers receive a set amount per patient and keep a portion of the surplus if costs are controlled. They are responsible for a portion of the deficit if the expenses exceed the set amount.   | Providers take on more risk but can also reap higher rewards.                      |
+| Bundled Payments                      | Providers receive a fixed amount for an entire episode of care, like surgery. They are responsible for managing all costs within that episode.                                                   | Providers keep the savings if they are efficient.                                  |
+| Accountable Care Organizations (ACOs) | Groups of doctors, hospitals, and other healthcare providers who come together voluntarily to provide coordinated, high-quality care to their Medicare patients, incredibly the chronically ill. | Providers are rewarded for patient health outcomes.                                |
 
 It's important to note that transitioning to VBC operations will be challenging, regardless of the model. Providers must change how they operate and invest in new tools and tech that track patients’ health journeys. How? Through Care Coordination.
 
