@@ -23,6 +23,8 @@ Although this is not written in stone  (it's based on my own personal experienc
 
 Imagine a list of tiles where every row has an icon to the left. If those icons are all different in sizes and proportions, it will be difficult for you as a designer to fit them as you wish in the tile, doing the manual work of aligning and resizing them to try to visually look all the same size. In contrast, if they have the same proportion, the work is easier as you won’t have to modify them one by one and the distances to the labels are going to be always the same.
 
+![](/images/img1.png)
+
 Consider the same scenario but for engineers. They will have to look at every single size for each of the icons and each distance to the label to recreate the design perfectly. Of course that won’t happen because they simply can’t go through every detail, and you will likely end up frustrated when you see an icon much smaller/larger than the others.
 
 It is the designer's responsibility to deliver all the icons in the same proportion (a square). This will make our own work easier and, in consequence, easier for the engineers that will use them in a more simpler way. 
@@ -37,6 +39,8 @@ As a tip, what I always do is to try to remember their terminology and switch to
 
 One option that is also really useful is to have a glossary document shared throughout the company where everyone speaks the same language. Xmartlabs is currently working on it, so it will come soon!
 
+![](/images/img2.png)
+
 ### Decide on names, before they do it for you
 
 Naming layers is tedious and manual work, I know it and I see you. Developers will need names to organize the code's content so they will come up with all of those descriptive titles even if you don’t. 
@@ -49,15 +53,21 @@ The platforms dedicated to creating digital design projects are basically based 
 
 It's true that there are landing pages with an incredible design that include lots of elements floating around and fabulous interactions and details that contrarrest my previous paragraph. But for that I’m certain you will need a lot of more time from you and the front end team, as those pages are much more complex to implement. Going through these approaches is a matter of costs and team capacity/availability; that’s why it's more common to see pages more structured and simpler in composition. 
 
+![](/images/img3.png)
+
 There are some specific tools in the design platforms such as the autolayout in Figma, that help structure the components and limit the composition a bit to be more aligned with the implementation side. So although the freedom provided by design tools and your wish to challenge your skills will make you wanna give free reign to your creativity, it is important to try to adapt your designs by being mindful of implementation constraints.
 
 ### ﻿Your designs are valid just the way they are: don't give into the pressure to fit them in
 
 Imagine you are designing a screen where you want a button to fit in a specific space but that can't happen because said space has fewer pixels in width than the button. So you edit that button and change its horizontal padding from 16 to 8 px to fit.
 
+![](/images/img4.png)
+
 The engineer won’t be revising every small detail in every reused component. We need to be realistic, that scenario will not be implemented as seen in the image so the button will collapse  and this will end up looking very different than what you had planned. 
 
 Sure there can be exceptions and you can talk to the engineer and arrange the change in that specific button. But, was it an exception for the good of the user? Or was it just to fit the design? What will you do in smaller screens where the problem will be the same? From my point of view, it's better to work with the original button of the design system and accept that, although the design may not look perfect, it will be realistic on what will happen then on the implementation.
+
+![](/images/img5.png)
 
 ### The happy path is just the beginning
 
@@ -72,6 +82,8 @@ To achieve this, always mind these scenarios:
 * User extremes: think about what happens when the user has lots of information or activity or cases with articles with really long titles.
 * Error states: missing documentation, form errors, trying to close a flow without saving, databases crash or time out cases.
 * Flow secondary interactions: as a final check, go through every screen or page and look at each component that is clickable (buttons, bottom nav, links, checkbox) to try to find if there is any interaction left to design.
+
+![](/images/img6.png)
 
 ### Be mindful of the environment (your time): Reduce, reuse and recycle (your designs) 
 
@@ -91,6 +103,8 @@ If at any moment, in any design, you’ve got a really small -no matter how smal
 
 And that in the best of cases: on the other side, the developer will end up deciding something that is not correct and finally complicate the flow for the user.
 
+![](/images/img7.png)
+
 ### Always synchronize the designs with the implementation
 
 If the implementation doesn’t follow the design, you open a ticket and they must adjust the code. The inverse of this holds as well, but sometimes we don't give it the importance it deserves.
@@ -103,10 +117,20 @@ If you are doubting if a design can be complex to implement, there are two possi
 
 It takes time and experience to try to think if something may be difficult to implement and, even if you are used to identifying it, you won’t be able to point out all the scenarios every time. To start thinking about it, it can be useful to read the “Think inside the box” section above and also you can count on the advice of the next section.
 
+![](/images/img8.png)
+
+### **Take advantage of templates**
+
+The developers count on predefined libraries created using the coding language they use for each project. From there, they can get simple components such as buttons or text fields to use as a basis, not create that element from scratch, and save a lot of time.
+
+Sometimes, they can take advantage of more complex components. Let’s imagine, for example, a crop image tool for an app. That may take a lot of hours of implementation, so I usually ask the frontend team if there is a component already created that we can use as a basis to cover that case. If the answer is yes and that predefined UX is beneficial from a design perspective, I start designing from there. In the future, this will help the dev team code a lot.
+
 ### Final thoughts
 
 It is really common to hear designers say their designs weren’t implemented correctly and that their original files were more accurate and well-organized for users. This is why the relationship between designers and frontenders matters. If you can work more closely with them, anticipating problems before they happen, clarifying doubts and enhancing the communication, then you will spend less time revising the releases and have more time to focus on product iterations and new features for the users.
 
 In addition, we need to think of this process as a relationship in continuous learning. As technology and tools evolve, we should also iterate the methods and strategies for collaboration to create a more cohesive, efficient team.
 
-All of these recommendations may seem overwhelming at first, but it is a matter of time to get accustomed to it. I can assure you that in the future you’ll automatically do most of them without even thinking.
+All of these recommendations may seem overwhelming at first, but it is a matter of time to get used to it. I can assure you that in the future you’ll automatically do most of them without even thinking.
+
+**If we've missed something in the post, or you'd like to discuss design further, don't hesitate to [reach out](https://form.typeform.com/to/c7G2RUWm) or [learn more about Xmartlabs' work](https://xmartlabs.com/work)! 😀**
