@@ -3,7 +3,7 @@ title: Webinar recap "AI:Beyond the Hype"
 subtitle: "  "
 permalink: ai-product-strategy-webinar
 featured: true
-date: 2024-09-09
+date: 2024-09-10
 category: strategy
 thumbnail: /images/webinar-recap.jpg
 tags:
@@ -130,6 +130,6 @@ The factors you prioritize will change as the company evolves, but it's essentia
   * Assemble the right team that understands both technical and business aspects
 * Successful AI integration aligns technology with business strategy and adds real value to users and products
 
-If you'd like to delve deeper you can check out the complete [webinar recording here](https://vimeo.com/1003845562/b603561122?share=copy), including the audience Q&A session. You can also connect with [Bruce](https://www.linkedin.com/in/brunoferrariuy/), our speaker, for more in-depth discussions or specific questions about AI implementation in your product.
+If you'd like to delve deeper, check out the complete [webinar recording here](https://vimeo.com/1003845562/b603561122?share=copy), including the audience Q&A session. You can also connect with [Bruce](https://www.linkedin.com/in/brunoferrariuy/), our speaker, for more in-depth discussions or specific questions about AI implementation in your product.
 
 We're committed to providing more responsible AI integration and product development content, so stay tuned for future insights. Thanks for reading!
