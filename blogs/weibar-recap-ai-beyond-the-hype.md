@@ -52,7 +52,7 @@ It's important to acknowledge the trade-off we mentioned, because:
 
 ### AI's Mishaps
 
-To illustrate that not everything is perfect in the GenAI world, we gathered some AI “horror stories” from <https://incidentdatabase.ai/> in which AI proves it's not a panacea.  These, of course, are mistakes where the stakes are high, but it goes to show how errors have the potential to be expensive as well as unethical.  
+To illustrate that not everything is perfect in the GenAI world, we gathered some AI “horror stories” from [incidentdatabase.ai](https://incidentdatabase.ai/) in which AI proves it's not a panacea.  These, of course, are mistakes where the stakes are high, but it goes to show how errors have the potential to be expensive as well as unethical.  
 
 ![](/images/webinar-recap3.png)
 
