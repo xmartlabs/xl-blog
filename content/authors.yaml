@@ -254,3 +254,31 @@
   display_name: Team QA
   image: members/qa-team.png
   profile_url: https://xmartlabs.com
+- author: galpe
+  display_name: Mauricio Galperin
+  image: members/galpe.jpg
+  profile_url: https://linkedin.com/in/mauricio-galperin-cassarino
+- author: joa
+  display_name: Joana Miller
+  image: members/joa.jpg
+  profile_url: https://uy.linkedin.com/in/joana-miller
+- author: nando
+  display_name: Fernando Gonzalez
+  image: members/nando.jpg
+  profile_url: https://www.linkedin.com/in/fgonzalezh/
+- author: augusto
+  display_name: Augusto Lezchik
+  image: members/augusto.jpg
+  profile_url: https://www.linkedin.com/in/augusto-lezchik/
+- author: sante
+  display_name: Agustin Santellan
+  image: members/sante.jpg
+  profile_url: https://www.linkedin.com/in/agust%C3%ADn-santell%C3%A1n-carrero-978041202/
+- author: felifa
+  display_name: Felipe Facio
+  image: members/felifa.jpg
+  profile_url: https://uy.linkedin.com/in/felipe-facio-cabrera-6350841b4
+- author: nico-fripp
+  display_name: Nicolas Fripp
+  image: members/nico-fripp.jpg
+  profile_url: http://linkedin.com/in/nicol%C3%A1s-fripp-rodr%C3%ADguez-82526420a
