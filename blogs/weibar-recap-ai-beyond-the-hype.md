@@ -1,5 +1,5 @@
 ---
-title: 'Weibar Recap "AI: Beyond the Hype"'
+title: 'Webinar Recap "AI: Beyond the Hype"'
 subtitle: " "
 permalink: ai-product-strategy-webinar
 featured: true
