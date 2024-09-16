@@ -43,8 +43,6 @@ This example illustrates how **Personal Context Understanding** uses data like m
 
 While these new features are undoubtedly exciting, privacy is central to their design. As **Craig Federighi** emphasized, "You should not have to hand over all the details of your life to be warehoused and analyzed in someone’s AI cloud." Apple Intelligence processes personal data on-device, meaning your information stays on your device, not in the cloud.
 
-![]()
-
 Even when more computational power is required for certain tasks—like when larger models are needed—Private Cloud Compute steps in. This allows Apple to use server-based models while ensuring your data is never stored or accessible to anyone. Apple uses cryptographic techniques to ensure that only servers running authorized software can process your data, adding an extra layer of protection.
 
 ### What Is Private Cloud Compute?
