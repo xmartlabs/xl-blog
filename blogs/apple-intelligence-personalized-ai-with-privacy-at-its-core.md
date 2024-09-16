@@ -28,7 +28,7 @@ Apple Intelligence employs a sophisticated on-device **semantic index** that org
 
 The power of this semantic indexing was demonstrated during the WWDC 2024 presentation by Craig Federighi. He showcased how Apple Intelligence could process multiple pieces of personal data to provide context-aware insights:
 
-
+![](/images/apple-intelligence-1.png)
 
 When Craig's meeting was rescheduled for later in the day, he wondered if he would still make it to his daughter's play performance on time. Apple Intelligence seamlessly processed various pieces of information:
 
@@ -43,11 +43,15 @@ This example illustrates how **Personal Context Understanding** uses data like m
 
 While these new features are undoubtedly exciting, privacy is central to their design. As **Craig Federighi** emphasized, "You should not have to hand over all the details of your life to be warehoused and analyzed in someone’s AI cloud." Apple Intelligence processes personal data on-device, meaning your information stays on your device, not in the cloud.
 
+![](/images/apple-intelligence-2.png)
+
 Even when more computational power is required for certain tasks—like when larger models are needed—Private Cloud Compute steps in. This allows Apple to use server-based models while ensuring your data is never stored or accessible to anyone. Apple uses cryptographic techniques to ensure that only servers running authorized software can process your data, adding an extra layer of protection.
 
 ### What Is Private Cloud Compute?
 
 Apple’s **Private Cloud Compute (PCC)** addresses the challenge of processing tasks that require more computational power than a user's device can handle. For tasks that exceed the capabilities of an iPhone, iPad, or Mac, the device securely sends the request to **PCC nodes**, which are specially designed-cloud servers.
+
+![](/images/apple-intelligence-3.png)
 
 ### Secure Hardware: Apple Silicon and the Secure Enclave
 
@@ -76,6 +80,8 @@ By combining **code signing**, **attestation**, and public software transparency
 ### Handling Privacy in Third-Party Integrations: ChatGPT Example
 
 With the integration of **ChatGPT** into **Apple Intelligence**, Apple enables users to tap into the power of this language model for creative tasks, content generation, and more. However, since ChatGPT is operated by a third party, privacy concerns have surfaced, and even **Elon Musk** sparked controversy, claiming, “Apple has no clue what’s actually going on once they hand your data over to OpenAI. They’re selling you down the river.” Musk went on to criticize Apple, stating that using terms like “protect your privacy” while partnering with OpenAI was misleading.
+
+![](/images/elon-x.png)
 
 In response to these concerns, Apple has implemented privacy measures aimed at protecting user data during such third-party integrations:
 
