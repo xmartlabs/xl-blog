@@ -18,7 +18,7 @@ Apple’s **WWDC 2024** introduced various **innovative features** through **App
 
 However, the standout feature is **Personal Context Understanding**. This feature delivers a highly personalized experience tailored to each user’s unique needs by tapping into user data like messages, calendar events, and location.
 
-As **Uncle Ben** wisely said, "With great power comes great responsibility" and with AI comes data usage and privacy issues. In this blog, we will on **Personal Context Understanding** and discuss how Apple promises to ensure user data privacy within these new features.
+As **Uncle Ben** wisely said, "With great power comes great responsibility" and with AI comes data usage and privacy issues. In this blog, we will expand on **Personal Context Understanding** and discuss how Apple promises to ensure user data privacy within these new features.
 
 ## Personal Context Understanding
 
@@ -26,7 +26,7 @@ At the heart of Apple Intelligence lies its ability to understand and utilize pe
 
 Apple Intelligence employs a sophisticated on-device **semantic index** that organizes and surfaces information from across your apps. This index allows the system to quickly retrieve relevant personal data when needed, without storing or analyzing this data in the cloud.
 
-The power of this semantic indexing was demonstrated during the WWDC 2024 presentation by Craig Federighi. He showcased how Apple Intelligence could process multiple pieces of personal data to provide context-aware insights:
+The power of this semantic indexing was demonstrated during the WWDC 2024 presentation by [Craig Federighi](https://www.apple.com/la/leadership/craig-federighi/). He showcased how Apple Intelligence could process multiple pieces of personal data to provide context-aware insights:
 
 ![](/images/apple-intelligence-1.png)
 
@@ -50,6 +50,8 @@ Even when more computational power is required for certain tasks—like when lar
 Apple’s **Private Cloud Compute (PCC)** addresses the challenge of processing tasks that require more computational power than a user's device can handle. For tasks that exceed the capabilities of an iPhone, iPad, or Mac, the device securely sends the request to **PCC nodes**, which are specially designed-cloud servers.
 
 ![](/images/apple-intelligence-3.png)
+
+*S﻿ource: Apple*
 
 ### Secure Hardware: Apple Silicon and the Secure Enclave
 
