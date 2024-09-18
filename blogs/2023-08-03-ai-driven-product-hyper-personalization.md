@@ -20,7 +20,7 @@ In the ever-evolving landscape of Product Lifecycle Management (PLM), the future
 
 While existing discussions on AI and PLM have shown their transformative power in optimizing processes and driving efficiency, there is an untapped potential that has yet to be fully harnessed—the ability of AI to unlock the true essence of individuality through hyper-personalization.
 
-![[Source: McKinsey *Next in Personalization 2021 Report*](https://www.mckinsey.com/capabilities/growth-marketing-and-sales/our-insights/the-value-of-getting-personalization-right-or-wrong-is-multiplying)](/images/ai-driven-product-hyper-personalization/MacBook_Air_-_1.png)
+![[Source: McKinsey *Next in Personalization 2021 Report*](https://www.mckinsey.com/capabilities/growth-marketing-and-sales/our-insights/the-value-of-getting-personalization-right-or-wrong-is-multiplying)](/images/macbook-air-1.png)
 
 [Source: McKinsey *Next in Personalization 2021 Report*](https://www.mckinsey.com/capabilities/growth-marketing-and-sales/our-insights/the-value-of-getting-personalization-right-or-wrong-is-multiplying)
 <br />
@@ -107,8 +107,6 @@ Beyond streamlining operations, AI has the ability to decipher complex customer 
 But it's worth noting that now AI interactions seem to be everywhere, there needs to be a focus on its quality so it doesn't come up as too automated or fake (which might have the contrary effect on the client). Having a skilled technical talent that's capable of building, managing, and optimizing intricate AI-driven personalization systems becomes a priority. Furthermore, the ability to manage data analysis and privacy is also a key element for a successful venture into AI.
 
 At Xmartlabs, our team of experts has honed their craft in creating custom software solutions for over a decade, including building [hyper-personalized platforms](https://xmartlabs.com/work/day-j). Join us on this exciting journey of elevating customer experiences through AI-driven personalization and driving your business forward.
-
-
 
 > 💡 Learn the intricacies of AI and how to manage sensitive data responsibly to ensure safe AI innovation from leading experts!
 >
