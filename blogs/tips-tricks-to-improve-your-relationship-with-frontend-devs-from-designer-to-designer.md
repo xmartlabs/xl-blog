@@ -4,7 +4,7 @@ title: "Tips & tricks to improve your relationship with frontend devs: From
 subtitle: "  "
 permalink: tips-improve-relationship-with-frontend-developers
 featured: true
-date: 2024-08-29
+date: 2024-09-23
 category: product-design
 thumbnail: /images/design-frontend-portada.jpg
 tags:
