@@ -3,7 +3,7 @@ title: " Improving team collaboration with Monthly ‘Meet & Learn’ Sessions"
 subtitle: " "
 permalink: team-collaboration-monthly-sessions
 featured: true
-date: 2024-10-04
+date: 2024-10-08
 category: strategy
 thumbnail: /images/meet-learn-portada.jpg
 tags:
