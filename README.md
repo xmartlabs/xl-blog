@@ -1,56 +1,29 @@
-[![Netlify Status](https://api.netlify.com/api/v1/badges/10c49854-8f0e-4726-9411-7d3f6c91a936/deploy-status)](https://app.netlify.com/sites/xl-blog/deploys)
 
-<p align="center">
-  <a href="https://www.gatsbyjs.com/?utm_source=starter&utm_medium=readme&utm_campaign=minimal-starter">
-    <img alt="Gatsby" src="https://www.gatsbyjs.com/Gatsby-Monogram.svg" width="60" />
-  </a>
-</p>
-<h1 align="center">
-  Gatsby minimal starter
-</h1>
+## XL Blog
+This project is a static blog built with Gatsby, leveraging Netlify as a CMS and continuous deployment service, integrated with GitHub for version control. The process is automated from the moment content is edited in the CMS or code is pushed to GitHub, triggering builds and deployments to production.
 
-## 🚀 Quick start
+### Key elements
 
-1.  **Create a Gatsby site.**
+* [Gatsby](https://www.gatsbyjs.com/): Static site generator that powers the UI of the blog, offering fast, optimized web experiences. We use Gatsby to create the blog’s frontend, while the build process is handled by Netlify, which integrates seamlessly with Gatsby to automatically generate and deploy the static site.
 
-    Use the Gatsby CLI to create a new site, specifying the minimal starter.
+* [Netlify](https://www.netlify.com/) CMS: A git-based content management system integrated directly with GitHub repository, allowing easy content creation and updates.
 
-    ```shell
-    # create a new Gatsby site using the minimal starter
-    npm init gatsby
-    ```
+* Netlify instance: Handles the deployment pipeline. Every change pushed to GitHub triggers a build on Netlify, deploying the updated site to production seamlessly.
 
-2.  **Start developing.**
+* GitHub: Manages the version control of the blog's code and content.
 
-    Navigate into your new site’s directory and start it up.
+### Key considerations
 
-    ```shell
-    cd my-gatsby-site/
-    npm run develop
-    ```
+Every time a new blog entry is created, it generates a pull request towards the main branch, which is maintained throughout the workflow from draft to publish, when it is merged into the branch and published.
 
-3.  **Open the code and start customizing!**
+The entire deployment process is managed automatically by Netlify using the Netlify+GitHub integration, which requires configuring access permissions in advance. See [Netlify & GitHub](https://docs.netlify.com/git/repo-permissions-linking/) for details. <br>
+The owner of this instance is associated with the account engineering@xmartlabs.com, which is responsible for creating the PR on behalf of the user who creates a new entry.
 
-    Your site is now running at http://localhost:8000!
+It is important to ensure that the Cloudflare domain for blog.xmartlabs.com is associated with the Netlify instance.
 
-    Edit `src/pages/index.js` to see your site update in real-time!
-
-4.  **Learn more**
-
-    - [Documentation](https://www.gatsbyjs.com/docs/?utm_source=starter&utm_medium=readme&utm_campaign=minimal-starter)
-
-    - [Tutorials](https://www.gatsbyjs.com/tutorial/?utm_source=starter&utm_medium=readme&utm_campaign=minimal-starter)
-
-    - [Guides](https://www.gatsbyjs.com/tutorial/?utm_source=starter&utm_medium=readme&utm_campaign=minimal-starter)
-
-    - [API Reference](https://www.gatsbyjs.com/docs/api-reference/?utm_source=starter&utm_medium=readme&utm_campaign=minimal-starter)
-
-    - [Plugin Library](https://www.gatsbyjs.com/plugins?utm_source=starter&utm_medium=readme&utm_campaign=minimal-starter)
-
-    - [Cheat Sheet](https://www.gatsbyjs.com/docs/cheat-sheet/?utm_source=starter&utm_medium=readme&utm_campaign=minimal-starter)
-
-## 🚀 Quick start (Gatsby Cloud)
-
-Deploy this starter with one click on [Gatsby Cloud](https://www.gatsbyjs.com/cloud/):
-
-[<img src="https://www.gatsbyjs.com/deploynow.svg" alt="Deploy to Gatsby Cloud">](https://www.gatsbyjs.com/dashboard/deploynow?url=https://github.com/gatsbyjs/gatsby-starter-minimal)
+| **Url**                                                            | **Description**                                                                                                                     |
+|--------------------------------------------------------------------|-------------------------------------------------------------------------------------------------------------------------------------|
+| https://app.netlify.com/sites/blog-xl/overview                     | It is the back-office of the XL blog instance in Netlify. Necessary for configuring integrations, domains, permissions, users, etc. |
+| https://blog.xmartlabs.com/admin                                   | It is the CMS provided by Netlify to manage the blog posts.                                                                         |
+| https://app.netlify.com/sites/blog-xl/configuration/identity#users | CMS access user list.                                                                                                               |
+| https://app.netlify.com/sites/blog-xl/deploys                      | Deploys            
