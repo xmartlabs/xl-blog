@@ -1,0 +1,103 @@
+---
+title: How to Integrate ANY Wearable with Your React Native App
+subtitle: " "
+permalink: wereables-react-native-integration
+featured: true
+date: 2024-10-16
+category: development
+thumbnail: /images/wereables-cover.jpg
+tags:
+  - reactnative
+  - wereables
+  - mobile
+  - development
+  - healthcare
+author: belu
+---
+Have you ever considered integrating data from a wearable device into your app, only to be overwhelmed by the maze of wearables, each with its unique implementations? I've been there. In fact, it made me briefly contemplate quitting software engineering for good. But instead of trading my keyboard for a paintbrush I found a solution, a way to integrate wearables without the agony of being tied to a specific one. Sounds too good to be true, right? Let me show you how it works.
+
+## Our problem
+
+I've been working on developing a platform that enables doctors to monitor patients' conditions and create personalized treatment plans. This approach based on model-informed precision dosing, requires vast amounts of patient data to accurately simulate the concentration in the bloodstream of medication doses over time. To achieve that, we needed to integrate a wide variety of real-time patient health data into our app.
+
+Developing software for just a select group of wearables wasn’t an option. Our models rely on everything from basic metrics like heart rate (easily measured by a smartwatch) to more complex metrics, like blood glucose levels.
+
+## Letting other apps do the heavy lifting
+
+What if there were a way to avoid communicating directly with each wearable and navigating through the nightmare of endless different protocol support? Imagine letting each manufacturer handle the hard work, while your app simply consumes data from a perfectly consistent API? Good news: there's a way. Presenting: HealthKit and Health Connect!
+
+### HealthKit & Health Connect
+
+[HealthKit](https://developer.apple.com/documentation/healthkit/) and [Health Connect](https://developer.android.com/health-and-fitness/guides/health-connect) are services that create a central repository for fitness and health data. While both tools serve the same purpose, HealthKit was developed by Apple for iOS while Health Connect is Android's alternative.
+
+The purpose of these tools? Offering a secure, centralized, and consistent way to store and access user health data, allowing users to control which apps have access to their information. Let’s say your user has a specific wearable that measures something that you need (eg. a continuous glucose monitoring device that controls the patient’s blood glucose) but the wearable’s software is proprietary and the communication with the wearable can only be achieved by using the manufacturer’s app.
+
+If the app is integrated with HealthKit or Health Connect, this shouldn't be a problem since the glucose monitoring device app would write the data to the shared repository, and other apps could access the measurements (with the user’s permission, of course). The data is stored locally on the user's device, which is excellent for security.
+
+### Security Considerations
+
+When handling health data, you must keep security and privacy in mind. Both HealthKit and Health Connect take several measures to protect data, but it's essential for developers to handle the data responsibly as well. Here's what you need to remember:
+
+#### **Data Privacy and User Consent**
+
+Health data is highly sensitive, meaning user consent to handle it is crucial. Both HealthKit and Health Connect require apps to ask for user permissions to read or write any health data. However, beyond technical implementation, you should consider clearly communicating *why* the data is requested, *how* it will be used and *who* will access it. Apart from building user trust, this can also help prevent your app from being rejected by the app stores.
+
+Keep in mind that you can be as granular as you like with these tools. Try to ask only for permissions over the data types you absolutely need, in order to minimize the risk in case of data breaches.
+
+#### **Compliance with Regulations**
+
+When working with health data, your app may need to comply with local or international regulations, like the **Health Insurance Portability and Accountability Act (HIPAA)** in the U.S.
+
+This often depends on how your app uses the data, but there are some recommended practices. It's important to provide users with the ability to view, delete, or export their data, and to let them revoke permissions and ask to delete all their data from the server. Establishing clear data retention policies is also good: avoid storing health data indefinitely. Last but not least, keeping an audit trail of data access and modifications can ensure compliance with regulations and provide accountability in case of breaches or disputes.
+
+#### **Backend Security**
+
+Not all mobile developers have access to the implementation of the server, but securing the mobile app is pointless if the data is sent to an insecure backend. It's essential that both the app and server maintain high security standards to protect user data effectively. Encryption and proper user role management can go a long way. Another good practice would be to anonymize the data, so that in the event of a breach, the health information cannot be traced back to an individual.
+
+## Implementation
+
+As an example implementation of how these tools can be used in a React Native app, we will read the blood glucose information using both tools, and then let the user choose whether they want to share it with their doctor to improve their treatment. You can check my [health-poc repository](https://github.com/carozo/health-poc), which contains all the code examples for HealthKit and Health Connect mentioned in this article.
+
+There are many other data types that can be integrated apart from blood glucose. A full list of those can be found [here](https://developer.apple.com/documentation/healthkit/data_types) for HealthKit and [here](https://developer.android.com/health-and-fitness/guides/health-connect/plan/data-types) for Health Connect.
+
+### Installation
+
+To use HealthKit and Health Connect in your React Native app, you need to install the following libraries:
+
+```javascript
+react-native-health
+react-native-health-connect
+```
+
+And follow the installation instructions for [react-native-health](https://github.com/agencyenterprise/react-native-health) and [react-native-health-connect](https://github.com/matinzd/react-native-health-connect).
+
+### Getting the blood glucose data
+
+#### Always ask for permission
+
+The first thing we need to do is to get the user’s permission to read the data type that we want to use. This must be done on both iOS and Android, and it's a crucial aspect of protecting user privacy.
+
+On iOS, we need to initialize the service with the specific permissions we plan to request:
+
+```
+ import AppleHealthKit, { HealthKitPermissions } from 'react-native-health';
+ 
+ //iOS
+ const permissionsToAsk: HealthKitPermissions = {
+          permissions: {
+            read: [AppleHealthKit.Constants.Permissions.BloodGlucose],
+            write: [],
+          },
+        };
+        AppleHealthKit.initHealthKit(permissionsToAsk, (error: string) => {
+          console.log(error);
+        });
+```
+
+While on Android, we first need to initialize Health Connect and then ask for permissions:
+
+
+
+```
+        });
+```
