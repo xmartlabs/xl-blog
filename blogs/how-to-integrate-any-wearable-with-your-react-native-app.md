@@ -26,7 +26,7 @@ Developing software for just a select group of wearables wasn’t an option. Our
 
 What if there were a way to avoid communicating directly with each wearable and navigating through the nightmare of endless different protocol support? Imagine letting each manufacturer handle the hard work, while your app simply consumes data from a perfectly consistent API? Good news: there's a way. Presenting: HealthKit and Health Connect!
 
-![]()
+![](/images/wereableshealth-1.png)
 
 ### HealthKit & Health Connect
 
@@ -81,7 +81,7 @@ The first thing we need to do is to get the user’s permission to read the data
 
 On iOS, we need to initialize the service with the specific permissions we plan to request:
 
-```
+```typescript
  import AppleHealthKit, { HealthKitPermissions } from 'react-native-health';
  
  //iOS
@@ -144,6 +144,8 @@ import AppleHealthKit, { HealthKitPermissions } from 'react-native-health';
 ```
 
 This will take the user to this screen, where they can select which permissions they want to grant the app. In this case, we are asking for the BloodGlucose information.
+
+![](/images/wereableshealth-2.png)
 
 ### Obtaining the blood glucose value
 
@@ -273,17 +275,27 @@ You may not have a wearable device that measures blood glucose, but you can stil
 
 To add a blood glucose sample, you can use the Health app. Simply go to the Browse section and search for the data type you want to add, in our case, blood glucose:
 
+![](/images/wereableshealth-3.png)
+
 Then, you can add a sample value for testing:
+
+![](/images/wereableshealth-4.png)
 
 #### Android
 
 You can use the Google Fit app to add a blood glucose sample. Similarly to iOS, go to the Browse section and search for the data type you want to add:
 
+![](/images/wereableshealth-5.png)
+
 Then, you can add a sample value for testing:
+
+![](/images/wereableshealth-6.png)
 
 ### Displaying Results
 
 Once we tested the integration and decided that it was working as expected, we could then use the results of the `readBloodGlucose` function to show the blood glucose in the app UI.
+
+![](/images/wereableshealth-7.png)
 
 ### Sending the data to a health provider
 
@@ -303,6 +315,8 @@ const sendBloodGlucoseData = async (bloodGlucoseValue) => {
   }
 };
 ```
+
+![](/images/wereables.gif)
 
 ## Conclusion
 
