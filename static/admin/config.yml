@@ -144,5 +144,6 @@ collections:
           - { value: "sante", label: "Agustin Santellan" }
           - { value: "felifa", label: "Felipe Facio" }
           - { value: "nico-fripp", label: "Nicolas Fripp" }
+          - { value: "daniel-baena", label: "Daniel Baena" }
       - { name: body, label: Body, widget: markdown }
     identifier_field: title
