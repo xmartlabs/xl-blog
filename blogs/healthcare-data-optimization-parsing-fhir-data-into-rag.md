@@ -12,7 +12,7 @@ tags:
   - RAG
   - Data
   - AI
-author: xl
+author: daniel-baena
 ---
 With the growing power of large language models (LLMs), structured healthcare data like FHIR (Fast Healthcare Interoperability Resources) is becoming increasingly vital. FHIR is the standard for health data exchange in the U.S. and is widely accepted in clinical systems due to its interoperability and detailed data structure. In the context of AI, especially in **Retrieval-Augmented Generation (RAG)** systems, FHIR data allows healthcare solutions to provide personalized insights about patient lab results, diagnoses, and medical history.
 
