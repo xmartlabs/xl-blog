@@ -26,6 +26,8 @@ The goal of splitting the work between a **Product Board** and a **Development B
 
 ### 1. The Product Board: Where User Stories Live
 
+![](/images/jirablog1.png)
+
 This board is owned by the product team and serves as the **source of truth for features**. Here’s how it works:
 
 * **User Stories**: These are high-level descriptions of features or functionality that the product team wants to build. They capture the *what* and the *why* of the product and are focused on delivering value to the customer. Eventually, we could have technical stories enveloping a set of related tasks, that's owned by the engineering team.
@@ -35,6 +37,8 @@ This board is owned by the product team and serves as the **source of truth for 
 This board allows the product team to manage features in a way that’s flexible and adaptive. It also provides transparency to the development team regarding what’s coming next and why.
 
 ### 2. The Development Board: Breaking Down the Work
+
+![](/images/jirablog2.png)
 
 Once a user story is ready for development, it gets broken down into tasks, and that’s where the **Development Board** comes into play:
 
@@ -51,6 +55,8 @@ The flow between these two boards is essential for smooth collaboration between 
 3. **Breaking Down Stories**: The development team takes user stories and breaks them down into manageable tasks on the Development Board. Each task is linked to the original user story to maintain traceability.
 4. **Sprint Planning**: A sprint preplanning is done in collaboration between project management and the leaders of the engineering team. During the sprint’s kickoff, the planning goes through a final verification step with the product team, ensuring its scope correlates with the product vision and priorities.
 5. **Feature Testing:** After the tasks in a story are done, it enters the testing stage where QA and the product team review the developed product from a user’s perspective and can provide feedback as separate tasks related to the story. This ensures development issues are well documented and responsibilities are clear, as well as preventing user stories with pending feedback from being released to a production environment.
+
+![](/images/jirablog3.png)
 
 ### Maintaining Simplicity for Developers
 
