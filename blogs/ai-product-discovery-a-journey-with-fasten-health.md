@@ -18,7 +18,7 @@ Product Discovery is a vital process of developing technology, helping companies
 
 Product Discovery involves a series of workshops and research phases aimed at aligning stakeholders, understanding the market, generating ideas, and assessing their viability.
 
-For Fasten Health, a novel personal health record (PHR) solution, this process was essential to ensure their AI-driven product would meet user needs and stand out in a competitive market.
+For [Fasten Health](https://www.fastenhealth.com/), a novel personal health record (PHR) solution, this process was essential to ensure their AI-driven product would meet user needs and stand out in a competitive market.
 
 ## Introducing Fasten Health
 
@@ -59,8 +59,6 @@ In Fasten Health's case, the Product Discovery workshops we conducted were as fo
 
 This workshop helped us understand Fasten Health’s objectives and constraints, setting a solid foundation for the subsequent workshops.
 
-
-
 **The second workshop** involved **market analysis and research**. We:
 
 * Reviewed existing product iterations and prototypes
@@ -68,8 +66,6 @@ This workshop helped us understand Fasten Health’s objectives and constraints,
 * Conducted competitive research and analysis. 
 
 This phase was crucial for gathering essential insights into the market landscape and identifying opportunities and challenges for Fasten Health.
-
-
 
 In the **third workshop**, we:
 
