@@ -145,5 +145,6 @@ collections:
           - { value: "felifa", label: "Felipe Facio" }
           - { value: "nico-fripp", label: "Nicolas Fripp" }
           - { value: "daniel-baena", label: "Daniel Baena" }
+          - { value: "rafael-morante", label: "Rafael Morante" }
       - { name: body, label: Body, widget: markdown }
     identifier_field: title
