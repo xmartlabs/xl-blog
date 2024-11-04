@@ -12,7 +12,7 @@ tags:
   - Healthtech
   - PHR
   - AIproduct
-author: mtnBarreto
+author: rafael-morante
 ---
 Product Discovery is a vital process of developing technology, helping companies identify the right features, functionalities, and overall direction for their products. This process is especially critical in AI initiatives, where genuinely understanding user needs and technical feasibility before hopping into the AI wave is paramount. 
 
