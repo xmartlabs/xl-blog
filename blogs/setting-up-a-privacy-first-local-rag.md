@@ -3,7 +3,7 @@ title: Setting up a Privacy-First Local RAG
 subtitle: " "
 permalink: secure-local-rag-system-for-healthcare-data
 featured: true
-date: 2024-11-04
+date: 2024-11-12
 category: machine-learning
 thumbnail: /images/privacy-firts-local-rag-portada.jpg
 tags:
