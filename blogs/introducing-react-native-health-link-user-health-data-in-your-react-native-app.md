@@ -71,3 +71,44 @@ Getting started with react-native-health-link is a breeze. You can initialize he
 > `});`
 >
 > ``
+
+### read Function
+
+To read data, use the read function along with the `HealthLinkDataType` enum to specify the desired data type. You can also pass additional options, such as `startDate`, `endDate,` `limit`, or `ascending`, to customize your query.
+
+
+
+> `  read(HealthLinkDataType.BloodGlucose, {`
+>
+> `    startDate: new Date('2025-01-01').toISOString(),`
+>
+> `  })`
+
+
+
+### write Function
+
+Similarly, to use the write function and select a data type from the `WriteDataType` enum. Then, pass any necessary options as the second argument to configure the data input.
+
+> `write(HealthLinkDataType.BloodGlucose, {`
+>
+> `    value: 4,`
+>
+> `    unit: BloodGlucoseUnit.MmolPerL,`
+>
+> `  });`
+
+## Looking ahead
+
+The library is currently at the beginning of its development, and we have big plans for its future. Here’s what you can expect: 
+
+* We aim to support all data types compatible with HealthKit and Health Connect, giving you unparalleled flexibility.
+* Enhanced querying options to provide developers with more control over data access.
+* We'll work on improving documentation with more detailed examples for each data type.
+* Community input will mean a lot for the roadmap of this library. We’re committed to solving real problems faced by developers.
+
+## Who Should Use react-native-health-link?
+
+Whether you're building a fitness tracker, a wellness app, or a personalized health assistant, this library is perfect for saving time and providing a unified interface. To get started today, follow the installation guide available in [react-native-health-link’s documentation](https://github.com/xmartlabs/react-native-health-link?tab=readme-ov-file).
+
+If you're looking for a partner to help you streamline your healthcare app, we could be just what you’re looking for. Feel free to reach out and thanks for reading!
