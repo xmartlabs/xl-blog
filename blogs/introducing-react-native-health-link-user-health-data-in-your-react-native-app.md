@@ -46,22 +46,21 @@ This open-source library is actively developed, and the list of supported data t
 
 The library lets your app read and write supported data types, making it easy to access and update them. It also includes a utility to check whether the native SDKs (HealthKit/Health Connect) are available on the user’s device.
 
+![](/images/react-native-health-link1.png)
+
 ### How It Works
 
 Getting started with react-native-health-link is a breeze. You can initialize health data access in just a few lines of code. To initialize, simply use the `initializeHealth` function and provide an object specifying the permissions you want to request from the user.
 
-
-
 > `import {`
 >
-> `  initializeHealth,`
+> `initializeHealth,`
 >
-> `  HealthLinkPermissions,`
+> `HealthLinkPermissions,`
 >
 > `} from 'react-native-health-link';`
 >
-> ````
->
+> ```
 > `initializeHealth({`
 >
 > `  read: [HealthLinkPermissions.BloodGlucose],`
@@ -71,20 +70,17 @@ Getting started with react-native-health-link is a breeze. You can initialize he
 > `});`
 >
 > ``
+> ```
 
 ### read Function
 
 To read data, use the read function along with the `HealthLinkDataType` enum to specify the desired data type. You can also pass additional options, such as `startDate`, `endDate,` `limit`, or `ascending`, to customize your query.
 
-
-
-> `  read(HealthLinkDataType.BloodGlucose, {`
+> `read(HealthLinkDataType.BloodGlucose, {`
 >
-> `    startDate: new Date('2025-01-01').toISOString(),`
+> `startDate: new Date('2025-01-01').toISOString(),`
 >
-> `  })`
-
-
+> `})`
 
 ### write Function
 
@@ -92,11 +88,11 @@ Similarly, to use the write function and select a data type from the `WriteDataT
 
 > `write(HealthLinkDataType.BloodGlucose, {`
 >
-> `    value: 4,`
+> `value: 4,`
 >
-> `    unit: BloodGlucoseUnit.MmolPerL,`
+> `unit: BloodGlucoseUnit.MmolPerL,`
 >
-> `  });`
+> `});`
 
 ## Looking ahead
 
