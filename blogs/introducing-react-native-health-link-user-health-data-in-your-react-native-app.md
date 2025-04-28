@@ -52,35 +52,29 @@ The library lets your app read and write supported data types, making it easy to
 
 Getting started with react-native-health-link is a breeze. You can initialize health data access in just a few lines of code. To initialize, simply use the `initializeHealth` function and provide an object specifying the permissions you want to request from the user.
 
-> `import {`
+> ```javascript
+> import {
+>  initializeHealth,
+>  HealthLinkPermissions,
+> } from 'react-native-health-link';
 >
-> `initializeHealth,`
->
-> `HealthLinkPermissions,`
->
-> `} from 'react-native-health-link';`
->
-> ```
-> `initializeHealth({`
->
-> `  read: [HealthLinkPermissions.BloodGlucose],`
->
-> `  write: [HealthLinkPermissions.BloodGlucose],`
->
-> `});`
->
-> ``
+> initializeHealth({
+>   read: [HealthLinkPermissions.BloodGlucose],
+>   write: [HealthLinkPermissions.BloodGlucose],
+> });
 > ```
 
 ### read Function
 
 To read data, use the read function along with the `HealthLinkDataType` enum to specify the desired data type. You can also pass additional options, such as `startDate`, `endDate,` `limit`, or `ascending`, to customize your query.
 
-> `read(HealthLinkDataType.BloodGlucose, {`
->
-> `startDate: new Date('2025-01-01').toISOString(),`
->
-> `})`
+```javascript
+read(HealthLinkDataType.BloodGlucose, {
+  startDate: new Date('2025-01-01').toISOString(),
+})
+```
+
+
 
 ### write Function
 
