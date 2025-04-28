@@ -68,11 +68,13 @@ Getting started with react-native-health-link is a breeze. You can initialize he
 
 To read data, use the read function along with the `HealthLinkDataType` enum to specify the desired data type. You can also pass additional options, such as `startDate`, `endDate,` `limit`, or `ascending`, to customize your query.
 
-> `read(HealthLinkDataType.BloodGlucose, {`
->
-> `startDate: new Date('2025-01-01').toISOString(),`
->
-> `})`
+```javascript
+read(HealthLinkDataType.BloodGlucose, {
+  startDate: new Date('2025-01-01').toISOString(),
+})
+```
+
+
 
 ### write Function
 
