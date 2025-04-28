@@ -1,12 +1,14 @@
 ---
-title: "The XL Way — Closing the Gender Gap"
+title: The XL Way — Closing the Gender Gap
+subtitle: " "
 permalink: /2022-05-11-the-xl-way-closing-the-gender-gap/
+featured: true
 date: 2022-05-12
 category: people-events
+thumbnail: /images/the-xl-way-closing-the-gender-gap/8m_cover.jpg
 tags:
   - 8M
 author: vale
-thumbnail: /images/the-xl-way-closing-the-gender-gap/8m_cover.jpg
 ---
 
 ## Building a Company Culture To Be Proud Of
@@ -28,7 +30,7 @@ As I mentioned, there have been some constant, although slow, improvements in th
 
 ![Source: Analysis and 2021 and 2022 predictions based on published diversity reports from 20 large technology companies (with an average of more than 100,000 employees). [Deloitte](https://www2.deloitte.com/us/en/insights/industry/technology/technology-media-and-telecom-predictions/2022/statistics-show-women-in-technology-are-facing-new-headwinds.html)](/images/the-xl-way-closing-the-gender-gap/Untitled.png)
 
-*Source: Analysis and 2021 and 2022 predictions based on published diversity reports from 20 large technology companies (with an average of more than 100,000 employees). [Deloitte](https://www2.deloitte.com/us/en/insights/industry/technology/technology-media-and-telecom-predictions/2022/statistics-show-women-in-technology-are-facing-new-headwinds.html)*
+*Source: Analysis and 2021 and 2022 predictions based on published diversity reports from 20 large technology companies (with an average of more than 100,000 employees). [Deloitte](https://www2.deloitte.com/content/dam/insights/articles/GLOB164590_Women-tech/DI_Women-tech.pdf)*
 
 However, there's still a lot of work to do. As shown below, women have continued to be disadvantaged in comparison to their male counterparts:
 
