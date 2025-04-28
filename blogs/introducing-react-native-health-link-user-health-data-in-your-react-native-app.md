@@ -74,19 +74,16 @@ read(HealthLinkDataType.BloodGlucose, {
 })
 ```
 
-
-
 ### write Function
 
 Similarly, to use the write function and select a data type from the `WriteDataType` enum. Then, pass any necessary options as the second argument to configure the data input.
 
-> `write(HealthLinkDataType.BloodGlucose, {`
->
-> `value: 4,`
->
-> `unit: BloodGlucoseUnit.MmolPerL,`
->
-> `});`
+```javascript
+write(HealthLinkDataType.BloodGlucose, {[
+  value: 4,
+  unit: BloodGlucoseUnit.MmolPerL,
+});
+```
 
 ## Looking ahead
 
