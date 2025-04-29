@@ -41,7 +41,7 @@ While the most common result is gaining knowledge about the investigation topic,
 
 Regardless of the outcome, remember that no amount of work can eliminate uncertainty, but reduce it. Work around this, make your best effort, and avoid wasting time!
 
-
+![Illustration of the five steps to tackle software development spikes: Define Scope, Learn, Test, Document, Share visualized as climbing a mountain.](/images/surviving-to-spikes-img.png "The Spike Mountain: 5 Key Steps to Navigate Software Development Spikes")
 
 ## Spike-ing Step by Step
 
