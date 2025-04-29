@@ -1,7 +1,7 @@
 ---
 title: How to tackle a Spike and live to tell it
 subtitle: " "
-permalink: /blog/surviving-a-spike
+permalink: surviving-a-spike
 featured: true
 date: 2025-04-29
 category: development
