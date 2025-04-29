@@ -8,6 +8,9 @@ category: development
 thumbnail: /images/portada-surviving-to-spikes.jpg
 tags:
   - SoftwareDevelopment
+  - Agile
+  - DevTips
+  - TechTeam
 author: xl
 ---
 Imagine yourself as a new Software Developer, eager to tackle exciting challenges. Then comes your first Spike. It seems harmless at first—until you're buried in documentation, shady forums, and endless YouTube tutorials. And after all that suffering, in most of the cases, you have to make a decision that will impact your team. *Panic.*
