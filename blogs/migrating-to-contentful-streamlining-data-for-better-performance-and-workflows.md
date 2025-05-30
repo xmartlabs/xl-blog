@@ -11,13 +11,13 @@ tags:
   - Migration  Contentful  WordPress  SEO  Workflows
 author: facu
 ---
-## **Migrating to Contentful: Streamlining Data for Better Performance and Workflows**
+# **Migrating to Contentful: Streamlining Data for Better Performance and Workflows**
 
 Migrating from WordPress to a modern CMS like Contentful can supercharge your website’s performance, streamline content creation, and make life easier for everyone involved. In this guide, we'll walk you through our process, highlight key considerations, and share tips to ensure a smooth transition.
 
 Using our client Robinson & Henry as an example, we’ll explore key steps and decisions that led to a seamless migration, without losing a single byte of data.
 
-### Why Migrate to Contentful?
+## Why Migrate to Contentful?
 
 WordPress is a reliable CMS, but it does come with its challenges, like performance issues, dependence on heavy plugins, and some SEO constraints. Switching to Contentful offers you the chance to unlock:
 
@@ -25,17 +25,17 @@ WordPress is a reliable CMS, but it does come with its challenges, like performa
 * Cleaner workflows for content creators
 * A modern, flexible data model
 
-### Understanding Relationships Between Content Types
+## Understanding Relationships Between Content Types
 
 Before diving into migration tools, it’s essential to understand how your data is structured as this is key to ensuring smooth migration and accurate data mapping.  The first step is building a conceptual model using the Entity-Relationship (ER) diagram. This step will help map out your existing WordPress content types and their relationships. With this visual reference, it becomes easier for everyone—from developers to stakeholders—to understand how the data will flow in the new system.
 
 Pro tip: Focus on the big picture. We kept the diagram simple by leaving out details like the SEO content type, which had a straightforward 1:1 relationship with every other type.
 
-I﻿MAGEN
+![pre-migration conceptual model](/images/migrating-to-contentful-mapa-1.png "Conceptual model before migration")
 
 Conceptual model before migration
 
-### Streamlining Your Data Model
+## Streamlining Your Data Model
 
 Once you’ve mapped your content, it’s time to optimize for better performance. Here’s what worked for us:
 
@@ -46,11 +46,11 @@ Once you’ve mapped your content, it’s time to optimize for better performanc
 
 These adjustments simplify the model, and make it easier for content creators to work efficiently without worrying about data inconsistencies or overly complicated workflows.
 
-I﻿MAGEN
+![Conceptual model after migration](/images/migrating-to-contentful-mapa-2.png "Conceptual model after migration")
 
 Conceptual model after migration
 
-### Pre-Migration Considerations
+## Pre-Migration Considerations
 
 A key step to avoid future headaches is ensuring your pre-migration data is in order. In this case, some data had already been manually migrated. Sounds good, right? Less content to move should mean less work… Well, sort of. While it reduced the amount of content needing migration, it introduced a challenge: mismatched database IDs.
 
@@ -100,3 +100,19 @@ Testing these mappings was important, as missed matches could lead to unlinked e
 ## Results of Proper Planning
 
 By following a structured migration process, you can significantly reduce the time spent on manual data entry. While some simpler entities might take a minute each, more complex items like detailed articles, can require up to 30 minutes or more to migrate due to the volume of information involved. A well-planned migration can save you weeks, even months of work, time that’s far better spent enhancing your site’s functionality and user experience. After running the migration script, we achieved the following:
+
+![Amount of entities per content-type migrated](/images/migrating-to-contentful-results-of-proper-planning-table.png "Amount of entities per content-type migrated")
+
+Amount of entities per content-type migrated
+
+## Key Takeaways:
+
+Migrating to Contentful hasn’t just been a platform switch,  it has been a chance to level up our content strategy and workflows. By following a solid migration process, we’ve gained several key benefits:
+
+* Faster Performance & Cleaner Workflows: Contentful offers improved speed and streamlined content management compared to WordPress, making it easier to get things done.
+* Simplified Data Models: Consolidating redundant content types and relationships helped create a cleaner usable structure.
+* Structured Migration Process: By tackling migration step-by-step, starting with simple content types, fix mismatched IDs, and test mappings we ensured a smooth and accurate transition.
+* Post-Migration Optimization: After migration, it's all about optimizing SEO fields, missing redirects and ensuring everything works together for a seamless user experience.
+
+\
+Transitioning to Contentful brings measurable improvements to your website and content workflows, that said, migrating from WordPress to Contentful wasn’t just about changing platforms, it was about learning what really made the transition work. A streamlined, step-by-step process made all the difference, from tackling mismatched IDs to improving how content types connected. Testing along the way helped catch issues early, and post-migration tweaks like validating SEO fields and setting up redirects ensured everything ran smoothly. The biggest takeaway? Staying organized and intentional is the key to making a migration seamless and setting your content up for success.
