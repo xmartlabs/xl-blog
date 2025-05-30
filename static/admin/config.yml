@@ -147,5 +147,6 @@ collections:
           - { value: "daniel-baena", label: "Daniel Baena" }
           - { value: "rafael-morante", label: "Rafael Morante" }
           - { value: "mei", label: "Maité Martinez" }
+          - { value: "facu", label: "Facundo Ruiz" }
       - { name: body, label: Body, widget: markdown }
     identifier_field: title
