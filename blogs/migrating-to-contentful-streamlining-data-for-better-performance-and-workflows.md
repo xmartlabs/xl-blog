@@ -15,11 +15,11 @@ tags:
   - Workflows
 author: facu
 ---
-# **Migrating to Contentful: Streamlining Data for Better Performance and Workflows**
+## **Migrating to Contentful: Streamlining Data for Better Performance and Workflows**
 
 Migrating from WordPress to a modern CMS like Contentful can supercharge your website’s performance, streamline content creation, and make life easier for everyone involved. In this guide, we'll walk you through our process, highlight key considerations, and share tips to ensure a smooth transition.
 
-Using our client Robinson & Henry as an example, we’ll explore key steps and decisions that led to a seamless migration, without losing a single byte of data.
+Using our client [Robinson & Henry](http://www.robinsonandhenry.com) as an example, we’ll explore key steps and decisions that led to a seamless migration, without losing a single byte of data.
 
 ## Why Migrate to Contentful?
 
