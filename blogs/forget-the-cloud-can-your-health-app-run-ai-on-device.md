@@ -43,7 +43,6 @@ In this section, we will be discussing the process of creating the application a
 
 ![](/images/simulator-screenshot-xlcare-4.png)
 
-### \
 \
 Technical Aspects
 
@@ -64,8 +63,6 @@ In our first iteration, we tried feeding the LLM all of the individual entries o
 * Steps count of 5987 steps on 05/19/2025.
 
 That approach didn’t work very well. The model sometimes tended to average out the metrics and explained its reasoning for doing calculating the mean, getting confused in the process. Other times, it became overly fixated on a single measurement and analyzed it in excessive detail. Plus, passing in that much context made it noticeably slow.
-
-
 
 ![](/images/simulator-screenshot-xlcare-3.png)
 
@@ -100,11 +97,7 @@ It is important to note that this is the only situation in which any user data m
 
 By putting AI directly in the hands of users, not the cloud, XLCare is a step toward making personalized health insights more accessible, responsible, and private. Privacy wasn’t just a feature, it was the foundation. Designing from this principle led to trade-offs, but also opened up entirely new design patterns and opportunities.
 
-The prototype is fully functional and can be downloaded on the [App Store](https://apps.apple.com/us/app/xlcare/id6744706064) or the [Play Store](https://play.google.com/store/apps/details?id=com.xmartlabs.xlcare).\
-\
-_﻿\_\_\_\_VIDEO\_\_\_\_\_\_\_\_
-
-
+The prototype is fully functional and can be downloaded on the [App Store](https://apps.apple.com/us/app/xlcare/id6744706064) or the [Play Store](https://play.google.com/store/apps/details?id=com.xmartlabs.xlcare).
 
 ## Conclusions & Next Steps
 
