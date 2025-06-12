@@ -37,11 +37,15 @@ These models scored 491 and 465 out of 1000, respectively. This puts them among 
 
 We realized that, with the unmatched privacy benefits of local LLM execution, there was a unique opportunity to create a more personal experience by feeding the model the user's own health data. With HealthKit (iOS) and Health Connect (Android) integration, users could ask questions and learn things directly relevant to their health. This could be done privately and securely, with no data ever leaving the device.
 
-In this section, we will be discussing the process of creating the application and the challenges that we faced.\
-\
--﻿-------
+In this section, we will be discussing the process of creating the application and the challenges that we faced.
 
-### Technical Aspects
+![](/images/simulator-screenshot-xlcare-5.png)
+
+![](/images/simulator-screenshot-xlcare-4.png)
+
+### \
+\
+Technical Aspects
 
 XLCare was built using React Native, the library `llama.rn` to run LLMs locally, and the library `react-native-health-link` to read the user’s health data stored on the device.
 
@@ -61,7 +65,9 @@ In our first iteration, we tried feeding the LLM all of the individual entries o
 
 That approach didn’t work very well. The model sometimes tended to average out the metrics and explained its reasoning for doing calculating the mean, getting confused in the process. Other times, it became overly fixated on a single measurement and analyzed it in excessive detail. Plus, passing in that much context made it noticeably slow.
 
-_﻿\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\__
+
+
+![](/images/simulator-screenshot-xlcare-3.png)
 
 So, for now, we decided to provide just two summary metrics: the **mean** and the **standard deviation**. These give the model a bit more context about average values (mean) and variation (standard deviation) without overwhelming it with too much information.
 
