@@ -70,9 +70,9 @@ Of course, this approach has its own limitations:
 * It can’t evaluate trends over time.
 * It applies calculations across the entire dataset, which may miss recent changes.
 
-We’re currently working on a new version that takes these factors into account, so if that interests you, stay tuned!\
-\
-_﻿\_\_\_\_\_\_\_\__
+We’re currently working on a new version that takes these factors into account, so if that interests you, stay tuned!
+
+![Simulator Screenshot XL care](/images/simulator-screenshot-xlcare-1.png)
 
 ### Prompting
 
@@ -94,7 +94,9 @@ By putting AI directly in the hands of users, not the cloud, XLCare is a step to
 
 The prototype is fully functional and can be downloaded on the [App Store](https://apps.apple.com/us/app/xlcare/id6744706064) or the [Play Store](https://play.google.com/store/apps/details?id=com.xmartlabs.xlcare).\
 \
-_﻿\_\_\_\_\_\_
+_﻿\_\_\_\_VIDEO\_\_\_\_\_\_\_\_
+
+
 
 ## Conclusions & Next Steps
 
