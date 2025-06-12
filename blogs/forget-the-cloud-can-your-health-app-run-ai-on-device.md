@@ -74,6 +74,8 @@ We’re currently working on a new version that takes these factors into account
 
 ![Simulator Screenshot XL care](/images/simulator-screenshot-xlcare-1.png)
 
+![](/images/simulator-screenshot-xlcare-2.png)
+
 ### Prompting
 
 One of the trickiest parts of building any AI assistant is crafting the right prompt for your specific use case. We went through many iterations and rounds of testing before landing on one that gave us the results we were looking for.
