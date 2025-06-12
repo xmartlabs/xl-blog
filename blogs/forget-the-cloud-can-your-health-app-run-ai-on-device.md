@@ -90,4 +90,36 @@ It is important to note that this is the only situation in which any user data m
 
 ### Final Prototype
 
+By putting AI directly in the hands of users, not the cloud, XLCare is a step toward making personalized health insights more accessible, responsible, and private. Privacy wasn’t just a feature, it was the foundation. Designing from this principle led to trade-offs, but also opened up entirely new design patterns and opportunities.
+
+The prototype is fully functional and can be downloaded on the [App Store](https://apps.apple.com/us/app/xlcare/id6744706064) or the [Play Store](https://play.google.com/store/apps/details?id=com.xmartlabs.xlcare).\
+\
 _﻿\_\_\_\_\_\_
+
+## Conclusions & Next Steps
+
+Building a locally powered AI health assistant has proven not only possible, but promising. But do the benefits outweigh the current limitations? Let’s break down what we’ve learned so far.
+
+**Advantages:**
+
+* All data stays on-device, meaning users retain full control over their information and companies avoid the burden of handling Protected Health Information (PHI).
+* Unlike cloud-based solutions, where ongoing usage often translates into user-facing costs, local models can easily be free to use without limit.
+* Smaller models consume significantly less computing power, appealing to those mindful of environmental impact.
+
+**Limitations:**
+
+* At 2–4GB, these models take up a significant amount of space on mobile devices.
+* Not all smartphones can handle the memory demands. For example, the app doesn’t currently run on an iPhone 12 due to RAM limitations.
+* Smaller models are more prone to hallucinations and may struggle with complex medical queries.
+
+### **A Promising Future**
+
+AI advancements are progressing rapidly, and what feels like a technical limitation today may be solved tomorrow. Just because running a fully featured, on-device AI health assistant isn’t universally practical yet doesn’t mean it never will be. As models become smaller, smarter, and more efficient, they’ll help shift healthcare toward a more preventive, accessible, and user-driven future.
+
+### **Agentic Capabilities: What’s Next for XLCare**
+
+One of the current limitations that we discussed is the use of basic statistical summaries like mean and standard deviation due to context constraints. These measurements don’t reflect trends or patterns in the data. But what if we could empower the assistant with more advanced reasoning, capable of identifying trends, filtering relevant data, and adapting to each user's unique health profile?
+
+That’s the goal of our next major update.
+
+We're actively working on bringing **agentic capabilities** to XLCare. We will make it smarter, more contextual, and even more useful, without sacrificing privacy. Stay tuned for a much more powerful version soon.
