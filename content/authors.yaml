@@ -293,7 +293,7 @@
   profile_url: https://www.linkedin.com/in/rafaelmoranter
 - author: mei
   display_name: Maité Martinez
-  image: members/mei.png
+  image: members/mei.jpg
   github: mfmaite
   profile_url: https://github.com/mfmaite
 - author: facu
@@ -301,3 +301,7 @@
   image: members/facu_ruiz.jpeg
   github: facu274
   profile_url: https://github.com/facu274
+- author: conor
+  display_name: Conor Morrissey
+  image: members/conor.jpg
+  profile_url: https://www.linkedin.com/in/conormorrisseyucl/
