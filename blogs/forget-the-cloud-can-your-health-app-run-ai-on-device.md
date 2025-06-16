@@ -77,8 +77,6 @@ We’re currently working on a new version that takes these factors into account
 
 ![Simulator Screenshot XL care](/images/simulator-screenshot-xlcare-1.png)
 
-
-
 ![Simulator Screenshot XL care 2](/images/simulator-screenshot-xlcare-2.png)
 
 ### Prompting
@@ -112,6 +110,8 @@ The prototype is fully functional and can be downloaded on the [App Store](https
     allowfullscreen>
   </iframe>
 </div>
+
+
 
 ## Conclusions & Next Steps
 
