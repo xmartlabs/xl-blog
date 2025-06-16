@@ -39,11 +39,9 @@ We realized that, with the unmatched privacy benefits of local LLM execution, th
 
 In this section, we will be discussing the process of creating the application and the challenges that we faced.
 
-<p style="display: flex; gap: 12px; flex-wrap: wrap;">
-  <img src="/images/simulator-screenshot-xlcare-5.png" alt="XLCare" style="max-width: 300px; height: auto; border-radius: 8px;">
-  <img src="/images/simulator-screenshot-xlcare-4.png" alt="XLCare conversation" style="max-width: 300px; height: auto; border-radius: 8px;">
-</p>
+![Simulator Screenshot XL care 5](/images/simulator-screenshot-xlcare-5.png)
 
+![](/images/simulator-screenshot-xlcare-4.png)
 
 ### Technical Aspects
 
