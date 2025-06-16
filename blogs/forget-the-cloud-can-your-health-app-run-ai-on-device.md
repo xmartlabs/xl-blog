@@ -26,7 +26,7 @@ In this article, we’ll explore the current state of small medical models in 20
 
 ## What Works In 2025
 
-First, let’s take a look at the models currently available that are feasible to run locally on a mobile device. We based our evaluation on the research paper [\*\*Medicine on the Edge: Comparative Performance Analysis of On-Device LLMs for Clinical Reasoning](https://doi.org/10.48550/arXiv.2502.08954)\*\* which scored various models using the [AMEGA](https://github.com/DATEXIS/AMEGA-benchmark) benchmark, a benchmark designed to assess how well large language models adhere to medical guidelines. The study highlighted two standout models:
+First, let’s take a look at the models currently available that are feasible to run locally on a mobile device. We based our evaluation on the research paper **[Medicine on the Edge: Comparative Performance Analysis of On-Device LLMs for Clinical Reasoning](https://doi.org/10.48550/arXiv.2502.08954)** which scored various models using the [AMEGA](https://github.com/DATEXIS/AMEGA-benchmark) benchmark, a benchmark designed to assess how well large language models adhere to medical guidelines. The study highlighted two standout models:
 
 * **Aloe 8B**, a medical-specific model that achieved the highest score in the benchmark.
 * **Phi-3.5**, a smaller and faster model that delivered a surprisingly strong performance given its size.
@@ -43,7 +43,7 @@ In this section, we will be discussing the process of creating the application a
 
 ![XLCare conversation](/images/simulator-screenshot-xlcare-4.png)
 
-\
+### \
 Technical Aspects
 
 XLCare was built using React Native, the library `llama.rn` to run LLMs locally, and the library `react-native-health-link` to read the user’s health data stored on the device.
@@ -63,6 +63,10 @@ In our first iteration, we tried feeding the LLM all of the individual entries o
 * Steps count of 5987 steps on 05/19/2025.
 
 That approach didn’t work very well. The model sometimes tended to average out the metrics and explained its reasoning for doing calculating the mean, getting confused in the process. Other times, it became overly fixated on a single measurement and analyzed it in excessive detail. Plus, passing in that much context made it noticeably slow.
+
+
+
+
 
 ![](/images/simulator-screenshot-xlcare-3.png)
 
@@ -99,8 +103,6 @@ By putting AI directly in the hands of users, not the cloud, XLCare is a step to
 
 The prototype is fully functional and can be downloaded on the [App Store](https://apps.apple.com/us/app/xlcare/id6744706064) or the [Play Store](https://play.google.com/store/apps/details?id=com.xmartlabs.xlcare).
 
-
-
 <div style="position: relative; padding-bottom: 177.77%; height: 0; overflow: hidden;">
   <iframe 
     src="https://www.youtube.com/embed/FKWks8G9DzM?autoplay=1&mute=1" 
@@ -110,8 +112,6 @@ The prototype is fully functional and can be downloaded on the [App Store](https
     allowfullscreen>
   </iframe>
 </div>
-
-
 
 ## Conclusions & Next Steps
 
