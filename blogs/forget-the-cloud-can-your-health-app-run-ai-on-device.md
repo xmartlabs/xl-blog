@@ -39,9 +39,9 @@ We realized that, with the unmatched privacy benefits of local LLM execution, th
 
 In this section, we will be discussing the process of creating the application and the challenges that we faced.
 
-![](/images/simulator-screenshot-xlcare-5.png)
+![XLCare](/images/simulator-screenshot-xlcare-5.png)
 
-![](/images/simulator-screenshot-xlcare-4.png)
+![XLCare conversation](/images/simulator-screenshot-xlcare-4.png)
 
 \
 Technical Aspects
