@@ -39,11 +39,19 @@ We realized that, with the unmatched privacy benefits of local LLM execution, th
 
 In this section, we will be discussing the process of creating the application and the challenges that we faced.
 
+<div style="display:flex; gap:10px; flex-wrap:wrap;">
+  <img src="/images/simulator-screenshot-xlcare-5..png" style="max-width:300px; height:auto;">
+  <img src="/images/simulator-screenshot-xlcare-5..png" style="max-width:300px; height:auto;">
+</div>
+
+
+
 ![XLCare](/images/simulator-screenshot-xlcare-5.png)
 
 ![XLCare conversation](/images/simulator-screenshot-xlcare-4.png)
 
 ### \
+
 Technical Aspects
 
 XLCare was built using React Native, the library `llama.rn` to run LLMs locally, and the library `react-native-health-link` to read the user’s health data stored on the device.
@@ -63,10 +71,6 @@ In our first iteration, we tried feeding the LLM all of the individual entries o
 * Steps count of 5987 steps on 05/19/2025.
 
 That approach didn’t work very well. The model sometimes tended to average out the metrics and explained its reasoning for doing calculating the mean, getting confused in the process. Other times, it became overly fixated on a single measurement and analyzed it in excessive detail. Plus, passing in that much context made it noticeably slow.
-
-
-
-
 
 ![](/images/simulator-screenshot-xlcare-3.png)
 
