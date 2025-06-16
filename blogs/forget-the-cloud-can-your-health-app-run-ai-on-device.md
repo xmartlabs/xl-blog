@@ -5,7 +5,7 @@ permalink: /blog/on-device-ai-health-assistant-xlcare
 featured: true
 date: 2025-06-12
 category: development
-thumbnail: /images/mientras-tanto.jpg
+thumbnail: /images/forget-the-cloud-portada.jpg
 tags:
   - On-device AI
   - Edge computing
@@ -77,7 +77,9 @@ We’re currently working on a new version that takes these factors into account
 
 ![Simulator Screenshot XL care](/images/simulator-screenshot-xlcare-1.png)
 
-![](/images/simulator-screenshot-xlcare-2.png)
+
+
+![Simulator Screenshot XL care 2](/images/simulator-screenshot-xlcare-2.png)
 
 ### Prompting
 
@@ -98,6 +100,8 @@ It is important to note that this is the only situation in which any user data m
 By putting AI directly in the hands of users, not the cloud, XLCare is a step toward making personalized health insights more accessible, responsible, and private. Privacy wasn’t just a feature, it was the foundation. Designing from this principle led to trade-offs, but also opened up entirely new design patterns and opportunities.
 
 The prototype is fully functional and can be downloaded on the [App Store](https://apps.apple.com/us/app/xlcare/id6744706064) or the [Play Store](https://play.google.com/store/apps/details?id=com.xmartlabs.xlcare).
+
+
 
 ## Conclusions & Next Steps
 
