@@ -13,7 +13,7 @@ tags:
   - Ambient Intelligence
   - Remote Patient Monitoring
   - AI Health Companions
-author: xl
+author: conor
 ---
 At Xmartlabs, we're witnessing a profound transformation as AI technologies move from theoretical potential to practical reality; four trends have emerged as key in reshaping healthcare in 2025.
 
@@ -76,7 +76,7 @@ These evolving platforms are addressing critical healthcare gaps:
 
 For healthtech innovators, the most significant opportunity lies in addressing the privacy and integration challenges that have historically limited adoption. By processing data on-device and creating seamless handoffs between digital and human providers, the industry is building bridges necessary for AI companions to fulfill their transformative potential.
 
-![](/images/ai-revolution-in-healthtech-4-forces.png)
+![Four Technologies Reshaping Care ](/images/ai-revolution-in-healthtech-4-forces.png)
 
 ## The Self-Reinforcing Healthcare Ecosystem
 
