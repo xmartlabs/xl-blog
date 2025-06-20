@@ -43,6 +43,8 @@ In this section, we will be discussing the process of creating the application a
 
 ![](/images/simulator-screenshot-xlcare-4.png)
 
+![](/images/simulator-screenshot-xlcare-6.png)
+
 ### Technical Aspects
 
 XLCare was built using React Native, the library `llama.rn` to run LLMs locally, and the library `react-native-health-link` to read the user’s health data stored on the device.
