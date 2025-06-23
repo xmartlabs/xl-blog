@@ -96,13 +96,13 @@ By putting AI directly in the hands of users, not the cloud, XLCare is a step to
 
 The prototype is fully functional and can be downloaded on the [App Store](https://apps.apple.com/us/app/xlcare/id6744706064) or the [Play Store](https://play.google.com/store/apps/details?id=com.xmartlabs.xlcare).
 
-<div style="position: relative; padding-bottom: 177.77%; height: 0; overflow: hidden;">
+<div style={{position: 'relative', paddingBottom: '177.77%', height: 0, overflow: 'hidden'}}>
   <iframe 
     src="https://www.youtube.com/embed/FKWks8G9DzM?autoplay=1&mute=1" 
-    style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;" 
+    style={{position: 'absolute', top: 0, left: 0, width: '100%', height: '100%'}} 
     frameborder="0" 
     allow="autoplay; encrypted-media" 
-    allowfullscreen>
+    allowFullScreen>
   </iframe>
 </div>
 
