@@ -39,9 +39,9 @@ We realized that, with the unmatched privacy benefits of local LLM execution, th
 
 In this section, we will be discussing the process of creating the application and the challenges that we faced.
 
-![Simulator Screenshot XL care 5](/images/simulator-screenshot-xlcare-5.png)
 
-![](/images/simulator-screenshot-xlcare-4.png)
+
+![](/images/simulator-xlcare-5-y-4.png)
 
 ### Technical Aspects
 
@@ -63,7 +63,7 @@ In our first iteration, we tried feeding the LLM all of the individual entries o
 
 That approach didn’t work very well. The model sometimes tended to average out the metrics and explained its reasoning for doing calculating the mean, getting confused in the process. Other times, it became overly fixated on a single measurement and analyzed it in excessive detail. Plus, passing in that much context made it noticeably slow.
 
-![](/images/simulator-screenshot-xlcare-3.png)
+![](/images/simulator-xlcare-3.png)
 
 So, for now, we decided to provide just two summary metrics: the **mean** and the **standard deviation**. These give the model a bit more context about average values (mean) and variation (standard deviation) without overwhelming it with too much information.
 
@@ -74,9 +74,7 @@ Of course, this approach has its own limitations:
 
 We’re currently working on a new version that takes these factors into account, so if that interests you, stay tuned!
 
-![Simulator Screenshot XL care](/images/simulator-screenshot-xlcare-1.png)
-
-![Simulator Screenshot XL care 2](/images/simulator-screenshot-xlcare-2.png)
+![](/images/simulator-xlcare-1-y-2.png)
 
 ### Prompting
 
