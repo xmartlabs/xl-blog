@@ -32,6 +32,8 @@ Privacy regulations like HIPAA and GDPR are essential for protecting patient dat
 
 An interoperable, modern health system can be very costly to implement. Considerable financial resources and technical ability are necessary, which can raise issues for healthcare organizations and hospitals. Despite high revenue for services, hospitals often struggle to remain profitable. Implementing a considerable and technically-challenging change can be very difficult. However, in the long term, interoperability improves security, enables data-driven decisions, and reduces time-cost for clinicians. 
 
+![Interoperability illustration](/images/interoperability-1.png)
+
 ## Overcoming These Hurdles and Making Systems Talk
 
 With these hurdles in mind, healthcare providers can adopt a few strategies to help bridge the gaps and create a more connected ecosystem.
