@@ -62,13 +62,14 @@ At first, we thought that a simple approach would work best. Simple prompt, lett
 
 This is an example of the type of prompts that we used at this stage:
 
+```
 `'You are a helpful assistant that interprets user health-related questions and returns structured queries for health data retrieval. Your job is to translate user requests into well-formed JSON objects that can be used to call external health services such as Apple HealthKit.'`
+```
 
 However, we could not get a conversational response using this technique. The model either chose to respond in natural language or call a tool; never both. Some disastrous outputs below:
 
 ![](/images/how-far-can-on-device-ai-go-1-2.png)
 
-## \
 No. 2: Triple prompt
 
 Since it wasn't responding in the conversational way that we intended, we tried a different strategy: breaking down the message in three parts. That way, we could customize each part of the prompt specifically. This is the structure we thought of:
