@@ -66,11 +66,10 @@ This is an example of the type of prompts that we used at this stage:
 
 However, we could not get a conversational response using this technique. The model either chose to respond in natural language or call a tool; never both. Some disastrous outputs below:
 
-![Screenshot 2025-05-09 at 1.48.20 PM.png](attachment:d36b5dec-9efd-4a12-a701-20e83abb2829:Screenshot_2025-05-09_at_1.48.20_PM.png)
+![](/images/how-far-can-on-device-ai-go-1-2.png)
 
-![Screenshot 2025-05-09 at 3.02.32 PM.png](attachment:829acfd6-4c87-4c96-9e81-f982d2cb19ae:Screenshot_2025-05-09_at_3.02.32_PM.png)
-
-## No. 2: Triple prompt
+## \
+No. 2: Triple prompt
 
 Since it wasn't responding in the conversational way that we intended, we tried a different strategy: breaking down the message in three parts. That way, we could customize each part of the prompt specifically. This is the structure we thought of:
 
