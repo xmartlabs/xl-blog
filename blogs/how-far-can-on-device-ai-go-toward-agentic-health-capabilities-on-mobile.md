@@ -150,6 +150,21 @@ As a result of combining the three prompts, we finally had the first working age
 
 We really wanted to test the limits, so we decided to give the model another tool to play with. We added another tool to let the model create a chart of the user’s health data if requested. We had to modify the tool prompt to induce the model to use the chart tool whenever the user asks for a visual representation.
 
+`Convert the user's health question into a structured call using the correct tool: queryHealthData or createHealthChart. Today is ${new Date().toISOString()}.\n\n` +
+      'Follow these rules:\n\n' +
+      '**For queryHealthData:**\n' +
+      '- Always request data from the **past 2–3 weeks**.\n' +
+      '- Choose a single `statistic` based on the question:\n' +
+      '  - "how is my \[metric]" → `mean`\n' +
+      '  - "does it vary" / "is it consistent" → `stdDev`\n' +
+      '  - "has it improved"/"changed"/"trended" → `linearTrend`\n\n' +
+      '**For createHealthChart:**\n' +
+      '- Choose aggregation:\n' +
+      '  - Past 1–2 weeks → `daily`\n' +
+      '  - Past 3+ weeks → `weekly`\n' +
+      '- Always include `start_date` and `end_date`.\n\n' +
+      'Only generate one tool call per request.'
+
 ```jsx
 `Convert the user's health question into a structured call using the correct tool: queryHealthData or createHealthChart. Today is ${new Date().toISOString()}.\n\n` +
       'Follow these rules:\n\n' +
@@ -166,6 +181,8 @@ We really wanted to test the limits, so we decided to give the model another too
       '- Always include `start_date` and `end_date`.\n\n' +
       'Only generate one tool call per request.'
 ```
+
+
 
 Then, using `react-native-gifted-chart`, we were able to create the chart that the LLM requested.
 
