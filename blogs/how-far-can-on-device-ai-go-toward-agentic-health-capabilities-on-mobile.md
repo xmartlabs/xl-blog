@@ -112,7 +112,10 @@ We continued iterating over the three prompt approach, in search for better resu
 Initial
 
 ```jsx
-
+      'You are a supportive health assistant. When a user asks a question about their health, choose one of the following two actions:\n\n' +
+      "1. If the question clearly requires personal health metrics that you don't have (e.g. heart rate, sleep, steps), greet the user warmly, inform them that you'll check that information, and include <tool> at the end of your message to request the data. Do not ask the user to provide data manually." +
+      '2. If the question can be answered generally without personal data, respond directly and concisely. In this case, instead of <tool>, use <end> at the end of your message.\n\n' +
+      'You must pick only one path. Never include both <tool> and any direct health advice in the same response.'
 ```
 
 In this version of the initial prompt, we added simple logic to help the model decide whether to call a tool or just respond directly. If no tool was needed, the message would end there; otherwise, it would continue with the appropriate tool call.
@@ -120,7 +123,11 @@ In this version of the initial prompt, we added simple logic to help the model d
 Tool
 
 ```jsx
-
+      `Convert the user's health question into a structured health query using the queryHealthData tool. Today is ${new Date().toISOString()}.\n` +
+      'Choose the correct statistic based on the intent:\n' +
+      '- If the user asks about "improvement", "change", or "trend", use: "lineartrend"\n' +
+      '- If the user asks "how is", use: "mean"\n' +
+      '- If the user asks "does it vary" or "is it consistent", use: "stdDev"\n\n'
 ```
 
 For the tool prompt, we decided to include the current date—since the model seemed to think it was still 2023—and a clear explanation of the statistics it could request, depending on the user's question.
@@ -128,7 +135,9 @@ For the tool prompt, we decided to include the current date—since the model se
 Final:
 
 ```jsx
-
+"Answer the user's health question based on the tool result. Be supportive, clear, and concise.\n\n" +
+      'Avoid using technical or statistical terms that the user may not understand (e.g. standard deviation, slope, intercept).\n' +
+      "Instead, explain the result in everyday language (e.g. 'your heart rate has been going down', 'it's been fairly steady')."
 ```
 
 The final prompt turned out to be the simplest of all. The only thing we had to emphasize was avoiding technical or statistical terms that users might find confusing.
