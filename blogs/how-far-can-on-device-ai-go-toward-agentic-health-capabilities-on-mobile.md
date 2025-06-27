@@ -70,7 +70,7 @@ However, we could not get a conversational response using this technique. The mo
 
 ![](/images/how-far-can-on-device-ai-go-1-2.png)
 
-No. 2: Triple prompt
+## No. 2: Triple prompt
 
 Since it wasn't responding in the conversational way that we intended, we tried a different strategy: breaking down the message in three parts. That way, we could customize each part of the prompt specifically. This is the structure we thought of:
 
@@ -83,7 +83,20 @@ For that purpose, we designed three separate prompts that would be used in each 
 This were the first three prompts that we tested:
 
 ```jsx
-
+  const initialPrompt = {
+    role: 'system',
+    content:
+      'You are a health agent. Greet the user warmly and supportively when they ask about their health. Inform the user that you are going to check some metrics to provide a better response for their query.',
+  };
+  const toolPrompt = {
+    role: 'system',
+    content:
+      'Convert the user health question into a structured health query using queryHealthData.',
+  };
+  const answerPrompt = {
+    role: 'system',
+    content:
+      'Answer the users health question based on the tool result. Be helpful and concise.',
 ```
 
 ![Screenshot 2025-05-14 at 1.25.28 PM.png](attachment:86723fba-f7ce-4435-83c5-15b63a200927:Screenshot_2025-05-14_at_1.25.28_PM.png)
