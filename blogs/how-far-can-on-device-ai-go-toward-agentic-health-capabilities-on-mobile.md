@@ -99,7 +99,9 @@ This were the first three prompts that we tested:
       'Answer the users health question based on the tool result. Be helpful and concise.',
 ```
 
-![Screenshot 2025-05-14 at 1.25.28 PM.png](attachment:86723fba-f7ce-4435-83c5-15b63a200927:Screenshot_2025-05-14_at_1.25.28_PM.png)
+
+
+![](/images/how-far-can-on-device-ai-go-3.png)
 
 At this point we were still dealing with some formatting issues such as all the output being in JSON format due to the grammar provided. And of course, we forgot we needed to call the tool and actually pass the results as context for the model to be able to arrive at a conclusion. But this was definitely a step in the right direction!
 
