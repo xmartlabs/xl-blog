@@ -185,7 +185,7 @@ Here are a few examples of the types of questions we used:
 * *“Show me a visual representation of my steps from last month.”* — the agent should call a tool to generate a chart.
 * *“Is walking better than running for heart health?”* — no tool needed; the agent should just respond in natural language.
 
-![Screenshot 2025-06-09 at 4.43.51 PM.png](attachment:51a67090-b364-4eb2-817f-a6d092526bda:Screenshot_2025-06-09_at_4.43.51_PM.png)
+![](/images/how-far-can-ai-on-device-go-last.png)
 
 The test results showed that the agent made the correct tool call in 50 out of the 60 scenarios, giving it a success rate of about 83%. While there's still room for improvement, especially in edge cases or more ambiguous prompts, this is a strong starting point for an on-device health agent.
 
