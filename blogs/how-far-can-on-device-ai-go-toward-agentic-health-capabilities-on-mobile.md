@@ -5,7 +5,7 @@ permalink: /blog/building-a-local-health-ai-agent
 featured: true
 date: 2025-06-27
 category: machine-learning
-thumbnail: /images/mientras-tanto.jpg
+thumbnail: /images/portada-how-far-can-on-device-ai-go.jpg
 tags:
   - AI Agents
   - On-Device AI
