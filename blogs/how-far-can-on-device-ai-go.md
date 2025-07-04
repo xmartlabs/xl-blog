@@ -9,7 +9,7 @@ thumbnail: /images/group-2-1-1-.png
 tags:
   - health
   - ai agent
-  - local agent
+  - mobile agent
   - local llm
   - health ai
 author: belu
