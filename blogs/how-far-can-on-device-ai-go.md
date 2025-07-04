@@ -186,6 +186,8 @@ To fix this, we added an **intermediate planning step**. After the initial user 
 
 ![Group 6 (1).png](/images/final-flow.png)
 
+
+
 The planning prompt looks like this:
 
 ```jsx
