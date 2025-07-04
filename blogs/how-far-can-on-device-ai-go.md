@@ -1,6 +1,6 @@
 ---
-title: How Far Can On-Device AI Go?
-subtitle: Toward Agentic Health Capabilities on Mobile
+title: How Far Can On-Device AI Go? Toward Agentic Health Capabilities on Mobile
+subtitle: How Far Can On-Device AI Go? Toward Agentic Health Capabilities on Mobile
 permalink: /on-device-agent/
 featured: true
 date: 2025-07-04
@@ -14,8 +14,6 @@ tags:
   - health ai
 author: belu
 ---
-![Group 2 (1).png]()
-
 # Introduction
 
 In our [last blog post](https://blog.xmartlabs.com/blog/blog-on-device-ai-health-assistant-xlcare/), we talked about running Large Language Models (LLMs) locally on your phone to power a privacy-first health assistant. The idea was simple: let your wearable data stay on your device and still get smart, personalized answers about your health, no cloud required. It mostly worked… but it was not perfect. The biggest issues were that the assistant couldn’t really understand trends or tell when your data was collected, which made certain questions hard to answer.
@@ -76,8 +74,6 @@ This is an example of the type of prompts that we used at this stage:
 However, we could not get a conversational response using this technique.
 
 ![examples of early iterations of the agent](/images/1.png)
-
-![Screenshot 2025-05-09 at 3.02.32 PM 1.png]()
 
 ## No. 2: Triple prompt
 
@@ -145,7 +141,6 @@ export const toolPrompt = {
     'Only answer the user once all tool calls are done.\n' +
     'Explain results clearly, without jargon. Be concise, relate findings to norms, and ask a follow-up (e.g. "Want to see a chart?").',
 };
-
 ```
 
 For the tool prompt, we decided to include the current date—since the model seemed to think it was still 2023—and a clear explanation of the statistics it could request, depending on the user's question.
