@@ -5,7 +5,7 @@ permalink: /on-device-agent/
 featured: true
 date: 2025-07-04
 category: development
-thumbnail: /images/group-2-1-1-.png
+thumbnail: /images/group-2-1-1-1-.png
 tags:
   - health
   - ai agent
