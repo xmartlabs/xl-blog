@@ -73,7 +73,7 @@ This is an example of the type of prompts that we used at this stage:
 
 However, we could not get a conversational response using this technique.
 
-![examples of early iterations of the agent](/images/1.png)
+![examples of early iterations of the agent ](/images/1.png)
 
 ## No. 2: Triple prompt
 
