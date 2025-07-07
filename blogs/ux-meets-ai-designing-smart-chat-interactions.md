@@ -23,6 +23,8 @@ To improve the experience, it’s ideal to emulate the natural back-and-forth th
 
 After the user sends a message, it is crucial to give visibility of what is happening on the other side of the screen. An idea is to emulate that the AI is ‘typing’ a response, even if the actual processing time is minimal. A common approach is to display a three-dot animation before the bot reply appears.
 
+![Typing Gif](/images/typing-gif.gif "Typing Gif")
+
 Another advice is to, before the ‘Typing…’ information appears, add one second of delay. It will make the difference because it is perceived as the AI has ‘thought’ the response.
 
 ### **Be explicit**
@@ -37,6 +39,8 @@ For achieving that, give users the clarity of knowing that they are talking with
 
 Something that it is not user friendly at all (and unavoidable at least for now) is the limitation of the AI bots of generating a response right after the user sends each message. In a real conversation, you can think and send how many messages you want until covering what you want to say to then receive an answer. Nowadays, ChatGPT for example gives you the possibility to stop the AI response and send another message right after your first one. It helps a little bit but you have to be really fast to do it before the AI answer first.
 
+![Chat with AI](/images/ux-meets-ai-chat.png "Chat with AI")
+
 In some cases, users may have already interacted with an AI before and will know what to expect. In this scenarios, with a ‘You’re interacting with an AI’ disclaimer is enough for the users to be aware of it and they will avoid sending several messages instead of a unique one.
 
 On the other hand, if it’s the first time for the user interacting with an AI, that can be little more tricky. You can try disabling the ‘Send’ button right after the user clicks on it. The first time can be frustrating for them but then they will understand the idea of how the AI works.
@@ -48,6 +52,8 @@ The more straightforward the user's request is from the first prompt, the easier
 Imagine you're designing a travel assistant chat where it would be helpful for the user to input a detailed description of their ideal trip (where they want to go, what kind of experiences they’re looking for, approximate budget, etc.). Since you need the users to provide detailed information, encourage them to do so directly in the first prompt, using an expandable text area with plenty of space.
 
 On the other hand, if you need users to be concise in their requests, a simple one-line text field is likely enough. For example, in a restaurant chatbot where users just want to quickly book a table, you could encourage a simple input like: “Table for two at 7 PM.”
+
+![Text field and text area](/images/ux-meets-ai-chat-2.png)
 
 Useful tip: consider showing in the UI an example of what you expect the users to type, to help them provide the information you need more easily.
 
