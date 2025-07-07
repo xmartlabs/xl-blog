@@ -3,7 +3,7 @@ title: "Interoperability: Make Your Systems Speak to Each Other"
 subtitle: " "
 permalink: /blog/healthcare-interoperability
 featured: true
-date: 2025-06-25
+date: 2025-07-07
 category: strategy
 thumbnail: /images/interoperability-portada.jpg
 tags:
