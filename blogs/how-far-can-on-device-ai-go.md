@@ -3,7 +3,7 @@ title: How Far Can On-Device AI Go? Toward Agentic Health Capabilities on Mobile
 subtitle: How Far Can On-Device AI Go? Toward Agentic Health Capabilities on Mobile
 permalink: /on-device-agent/
 featured: true
-date: 2025-07-04
+date: 2025-07-08
 category: development
 thumbnail: /images/group-2-1-1-1-.png
 tags:
