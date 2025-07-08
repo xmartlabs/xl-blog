@@ -104,8 +104,6 @@ This were the first three prompts that we tested:
 
 ![Screenshot 2025-05-14 at 1.25.28 PM 3.png](/images/2.png)
 
-
-
 At this point we were still dealing with some formatting issues such as all the output being in JSON format due to the grammar provided. And of course, we forgot we needed to call the tool and actually pass the results as context for the model to be able to arrive at a conclusion. But this was definitely a step in the right direction!
 
 ## No. 3: Prompt Evolution
@@ -186,8 +184,6 @@ To fix this, we added an **intermediate planning step**. After the initial user 
 
 ![Group 6 (1).png](/images/final-flow.png)
 
-
-
 The planning prompt looks like this:
 
 ```jsx
@@ -213,6 +209,8 @@ export const planPrompt = {
 Having a plan allows the model to separate the steps and treat each subtask explicitly, reducing ambiguity and preventing issues like redundant tool calls or incomplete comparisons.
 
 ![planned response](/images/4.png)
+
+The prototype can be downloaded on the [App Store](https://apps.apple.com/us/app/xlcare/id6744706064) or the [Play Store](https://play.google.com/store/apps/details?id=com.xmartlabs.xlcare).
 
 # Testing
 
