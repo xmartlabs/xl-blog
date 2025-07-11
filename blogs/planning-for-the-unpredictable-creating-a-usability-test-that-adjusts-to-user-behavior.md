@@ -33,7 +33,7 @@ We came up with 3 hypothesis of why the landing page was failing to convert:
 
 ## How we approached the research
 
-![1.png](attachment:b5010172-a751-47e7-9362-fba1f0793d3e:1.png)
+![1.png](/images/how-we-approached-the-research.png)
 
 To achieve our research goals we decided to divide our study in three exercises:
 
@@ -49,7 +49,7 @@ This created a problem: Traditional usability testing requires a script with pre
 
 We could identify at least a couple navigation paths that made sense for every prompt we wanted to give testers. For example, if we asked them how they would figure out what the product does, there were multiple reasonable paths they could take.
 
-![The home page, how it works, use cases and free trial were all reasonable approaches to learning what a product does.](attachment:22634c82-03a9-4f27-a924-f318581f6ad9:2.png)
+![The home page, how it works, use cases and free trial were all reasonable approaches to learning what a product does.](/images/the-home-page-how-it-works-use-cases-and-free-trial.png)
 
 The home page, how it works, use cases and free trial were all reasonable approaches to learning what a product does.
 
@@ -59,13 +59,13 @@ If we tried to anticipate every possible move, and plan follow up questions for 
 
 We decided to create a flowscript: a flexible decision tree that adjusts based on user actions, rather than a fixed sequence of prompts and follow up questions.
 
-![3.png](attachment:55a9bea0-96ed-4ad1-a9c5-752e57a2dac2:3.png)
+![3.png](/images/flowscript.png)
 
 * We used broad task prompts to see how users naturally explored the site.
 * Follow-up questions were triggered based on navigation paths, and whether the user struggle or succeed to complete the task.
 * Optional prompts were asked depending on how testers interacted with key aspect of the website, or as a way to get them back on track without forcing them into a specific journey if they navigated too far away from our predicted paths.
 
-![Videos were sprinkled throughout multiple pages, so we created a set of specific follow up questions.](attachment:1662eeea-bcae-4484-be24-69d7f1bf55ea:4.png)
+![](/images/optional-prompts-path.png)
 
 Videos were sprinkled throughout multiple pages, so we created a set of specific follow up questions.
 
@@ -98,31 +98,13 @@ Having optional prompts and screen-specific follow up questions planned (”Do y
 
 Once concluded the study the results were analyzed and compared, and we came up with the following list of key findings to address in the redesign:
 
-| **Key Findings**                                                  | **Actions Taken** |
-| ----------------------------------------------------------------- | ----------------- |
-| 3 out of 4 testers thought the website required too much reading. |                   |
-
-Navigation for all users turned erratic when users faced large amounts of text.
-
-There was no single way to solve the proposed prompts, indicating a need to make crucial information easier to find. | Restructure the information architecture to **make key information easier to find**.
-
-**Minimize text** on the website to communicate a clear message.
-
-Create a stronger **visual hierarchy**. | | Users preferred the language used in the marketing material shown, describing it as "moving," "comforting," and "nostalgic”, while they found the website “informational and static”. | Take a **more emotional approach** to communicate the benefits of the product. | | 2 out of 4 testers went directly to the ‘try it for free’ button. All testers were disappointed to find out it required sign up. | Make the **free trial** **accessible** **without sign up**. | | All 4 users found the pricing page confusing, and were unsure about the difference between subscription tiers.
-
-Users were expecting to find an outline of features under the “How It Works” page and instead found an onboarding guide. | **Simplify the pricing page** to highlight the difference between tiers.
-
-Move **feature list** to the ‘How it works’ page. | | The term ‘Use cases’ seemed unclear and too technical for users.
-
-Users believed that the website doesn’t clearly communicate whether its main target are consumers or businesses. | **Remove ‘Use Cases’ page.**
-
-**Create a ‘For Organizations’ page** to provide information for businesses and nonprofits, without confusing personal users. |
+![](/images/gráfico-tabla-comparativa-juvenil-colorido-pastel.png)
 
 ## Results
 
 Based on those decisions the information architecture was simplified and restructured:
 
-![5.gif](attachment:acf53618-6209-4081-a2cc-54f50803fa34:5.gif)
+![5.gif](/images/info-arch-simplified-and-restructured.gif)
 
 And the UI was redesigned, minimizing the amount of text and creating a more dynamic and stronger visual hierarchy:
 
