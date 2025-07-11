@@ -88,7 +88,17 @@ Our assumption that navigation patterns were going to vary wildly was quickly pr
 
 Some hesitated between the ‘How It Works’ and ‘Use Cases’ pages, others were overwhelmed by pricing options and scrolling erratically, and surprisingly, two users went straight to the free trial to figure out what the product was, something we hadn’t fully anticipated.
 
-[Recording of user’s screen while scanning the pricing page.](https://www.youtube.com/watch?v=lpLNDyZiggo)
+<div style={{ position: 'relative', paddingBottom: '56.25%', height: 0, overflow: 'hidden' }}>
+  <iframe
+    src="https://www.youtube.com/embed/lpLNDyZiggo?autoplay=1&mute=1&start=1"
+    style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%' }}
+    frameBorder="0"
+    allow="autoplay; encrypted-media"
+    allowFullScreen
+  />
+</div>
+
+[Recording of user’s screen while scanning the pricing page](https://www.youtube.com/watch?v=lpLNDyZiggo)
 
 Recording of user’s screen while scanning the pricing page.
 
@@ -108,7 +118,15 @@ Based on those decisions the information architecture was simplified and restruc
 
 And the UI was redesigned, minimizing the amount of text and creating a more dynamic and stronger visual hierarchy:
 
-<https://www.youtube.com/watch?v=3vQH1C4N96c>
+<div style={{ position: 'relative', paddingBottom: '177.77%', height: 0, overflow: 'hidden' }}>
+  <iframe
+    src="https://www.youtube.com/embed/3vQH1C4N96c?autoplay=1&mute=1"
+    style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%' }}
+    frameBorder="0"
+    allow="autoplay; encrypted-media"
+    allowFullScreen
+  />
+</div>
 
 ## Conclusion: The power of flexibility
 
