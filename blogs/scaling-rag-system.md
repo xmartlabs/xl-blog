@@ -9,7 +9,7 @@ tags:
   - OpenAI
   - RAG
 thumbnail: images/scaling-rag-system/thumbnail.png
-author: nicoh, nico-fripp, gastonv
+author: nico-fripp
 ---
 
 # Scaling RAG Systems: Challenges, Bottlenecks, and Real Solutions.
@@ -191,3 +191,7 @@ Throughout the development of this system, we faced several technical challenges
 Network parallelization was the first major improvement. It allowed us not only to reduce processing times, but also to split the inputs into smaller parts, thus avoiding exceeding the maximum number of tokens allowed. However, pushing this strategy to the extreme - with more than 400 concurrent tasks - brought up new bugs related to  `httpx` .
 
 This put us in a dilemma: if we didn't parallelize, the system would fail due to too many tokens or timeout; if we parallelized too much, it would fail due to connection errors. The solution was to find a break-even point. We clustered the data and reduced parallelization to approximately 50 simultaneous tasks, which allowed us to maintain good performance without system failure.
+
+## **Aknowledgements**
+
+Special thanks to Nicolás Hernandez for his outstanding leadership throughout this project, and to Gaston Valvassori for being an exceptional teammate and collaborator.
