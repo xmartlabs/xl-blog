@@ -200,13 +200,13 @@ The rest of the code inside the image processing method is simply to have token 
 
 ```json
 {
-   "file_name": "nombre del archivo PDF",
-   "file_type": "extensión del archivo, en este caso pdf",
-   "page_count": "cantidad de páginas en el documento",
-   "total_tokens_used": "cantidad total de tokens consumidos",
-   "estimated_cost_usd": "costo de la ejecución",
-   "processing_time_seconds": "tiempo total de procesamiento en segundos",
-   "pages": "un objeto con las interpretaciones de cada página y metadatos"
+   "file_name": "name of the PDF file",
+   "file_type": "file extension",
+   "page_count": "amount of pages in the PDF file",
+   "total_tokens_used": "total tokens used",
+   "estimated_cost_usd": "total cost",
+   "processing_time_seconds": "time in seconds",
+   "pages": "an object with intrepreted data"
 }
 ```
 
