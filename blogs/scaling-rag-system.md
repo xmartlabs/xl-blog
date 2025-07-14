@@ -3,7 +3,7 @@ title: "Scaling RAG Systems: Challenges, Bottlenecks, and Real Solutions.
 subtitle: " "
 date: 2025-07-14
 category: development
-permalink: scaling-rag-system
+permalink: /scaling-rag-system
 tags:
   - LLM
   - OpenAI
