@@ -1,5 +1,5 @@
 ---
-title: "Scaling RAG Systems: Challenges, Bottlenecks, and Real Solutions.
+title: "Scaling RAG Systems: Challenges, Bottlenecks, and Real Solutions."
 subtitle: " "
 date: 2025-07-14
 category: development
