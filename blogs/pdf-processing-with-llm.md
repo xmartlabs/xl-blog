@@ -10,7 +10,7 @@ tags:
   - LLM
   - OpenAI
   - PDF Processing
-author: nicoh, nico-fripp, gastonv
+author: gastonv
 ---
 ## **PDF and image processing with LLMs: Text extraction, charts and image interpretation.**
 
@@ -357,3 +357,7 @@ In recent years, data within companies have gained much relevance. Information t
 Nowadays, with the great boom of LLMs and their potential, it opened the playing field to incorporate data that need intensive processing from the interpretative point of view, allowing to exploit even more the documentation of all kinds that a company or industry may have. It is well known that working with PDFs is not an easy task, there are many challenges that developers face, but with the advent of powerful models such as `gpt-4.1` and `o3`, which are multimodal, we can achieve products such as those discussed in this post and in [Scaling RAG Systems: Challenges, Bottlenecks, and Real Solutions.](https://blog.xmartlabs.com/blog/scaling-rag-system/).
 
 Given the difficulty of dealing with PDFs and images, having a processor for these files is a great help and allows us to expand the capabilities of new applications that focus on GenAI.
+
+## **Aknowledgements**
+
+Special thanks to Nicolás Hernandez for his outstanding leadership throughout this project, and to Nicolás Fripp for being an exceptional teammate and collaborator.
