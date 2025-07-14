@@ -4,6 +4,11 @@ subtitle: " "
 date: 2025-07-14
 category: development
 permalink: scaling-rag-system
+tags:
+  - LLM
+  - OpenAI
+  - RAG
+thumbnail: images/scaling-rag-system/thumbnail.png
 author: nicoh, nico-fripp, gastonv
 ---
 
