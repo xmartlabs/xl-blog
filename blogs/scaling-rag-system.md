@@ -4,7 +4,7 @@ subtitle: " "
 date: 2025-07-14
 category: development
 permalink: scaling-rag-system
-author: Nicolas Hernandez, Nicolas Fripp, Gaston Valvassori
+author: nicoh, nico-fripp, gastonv
 ---
 
 # Scaling RAG Systems: Challenges, Bottlenecks, and Real Solutions.
