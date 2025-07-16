@@ -31,7 +31,19 @@ module.exports = {
     {
       resolve: "gatsby-plugin-mdx",
       options: {
-        extensions: [`.mdx`,`.md`],
+        extensions: [`.mdx`, `.md`],
+        gatsbyRemarkPlugins: [
+          {
+            resolve: "gatsby-remark-prismjs",
+            options: {
+              classPrefix: "language-",
+              inlineCodeMarker: null,
+              aliases: {},
+              showLanguage: false,
+              noInlineHighlight: false,
+            },
+          },
+        ],
       },
     },
     "gatsby-plugin-sharp",

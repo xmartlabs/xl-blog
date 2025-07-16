@@ -4,6 +4,7 @@ import { ThemeProvider, createGlobalStyle } from "styled-components";
 import Theme from "./src/themes/theme";
 import { AppContextProviderComponent } from "./src/context/context";
 import MainLayout from "/src/layouts/main-layout";
+import "prismjs/themes/prism-okaidia.css";
 
 const GlobalStyles = createGlobalStyle`    
     * {
@@ -16,6 +17,16 @@ const GlobalStyles = createGlobalStyle`
         height: 100%;
         background-color: ${prop => prop.theme.colors.main1};
     }
+    
+    .gatsby-highlight code {
+        white-space: pre-wrap !important;
+        word-wrap: break-word !important;
+    }
+
+    .language-text {
+      background-color: transparent !important;
+      color: ${prop => prop.theme.colors.dark1} !important;
+  };
 
     form > h2 {
       text-align: center;
