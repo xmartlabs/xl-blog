@@ -278,3 +278,4 @@ collections:
           - { value: "conor", label: "Conor Morrissey" }
       - { name: body, label: Body, widget: markdown }
     identifier_field: title
+    
