@@ -63,6 +63,8 @@ We decided to create a flowscript: a flexible decision tree that adjusts based o
 
 ![3.png](/images/flowscript.png)
 
+
+
 * We used broad task prompts to see how users naturally explored the site.
 * Follow-up questions were triggered based on navigation paths, and whether the user struggle or succeed to complete the task.
 * Optional prompts were asked depending on how testers interacted with key aspect of the website, or as a way to get them back on track without forcing them into a specific journey if they navigated too far away from our predicted paths.
@@ -118,15 +120,7 @@ Based on those decisions the information architecture was simplified and restruc
 
 And the UI was redesigned, minimizing the amount of text and creating a more dynamic and stronger visual hierarchy:
 
-<div style={{ position: 'relative', paddingBottom: '56.25%', height: 0, overflow: 'hidden' }}>
-  <iframe
-    src="https://www.youtube.com/embed/3vQH1C4N96c?autoplay=1&mute=1"
-    style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%' }}
-    frameBorder="0"
-    allow="autoplay; encrypted-media"
-    allowFullScreen
-  />
-</div>
+<iframe width="560" height="315" src="https://www.youtube.com/embed/3vQH1C4N96c?si=GTBAz5Nr4XSa3xNo" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
 
 ## Conclusion: The power of flexibility
 
