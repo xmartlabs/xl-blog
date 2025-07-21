@@ -35,6 +35,8 @@ We came up with 3 hypothesis of why the landing page was failing to convert:
 
 ![1.png](/images/how-we-approached-the-research.png)
 
+
+
 To achieve our research goals we decided to divide our study in three exercises:
 
 * **5 seconds test:** To gather first impressions, find out if the main visual anchors of the page align with the business goals, and get an idea of what users think of the look and feel.
@@ -116,7 +118,7 @@ Based on those decisions the information architecture was simplified and restruc
 
 And the UI was redesigned, minimizing the amount of text and creating a more dynamic and stronger visual hierarchy:
 
-<div style={{ position: 'relative', paddingBottom: '177.77%', height: 0, overflow: 'hidden' }}>
+<div style={{ position: 'relative', paddingBottom: '56.25%', height: 0, overflow: 'hidden' }}>
   <iframe
     src="https://www.youtube.com/embed/3vQH1C4N96c?autoplay=1&mute=1"
     style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%' }}
