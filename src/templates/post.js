@@ -15,7 +15,7 @@ import { Seo } from '../components/seo/seo';
 
 import * as styles from '../css/blog-post.module.scss';
 import { MDXProvider } from '@mdx-js/react';
-import { YouTube } from '../components/youtube';
+import { Youtube } from '../components/youtube';
 
 const _ = require('lodash');
 
@@ -132,7 +132,7 @@ const BlogPost = ({ data, children }) => {
   ) : '../../images/image.png';
 
   return (
-    <MDXProvider components={{ YouTube }}>
+    <MDXProvider components={{ Youtube }}>
       <div onScroll={handleScroll} id="containerDiv">
         <div className={styles.indexContainer}>
           <TitleBlogIndex data={getTitles()} disappearIndex={disappearIndex}

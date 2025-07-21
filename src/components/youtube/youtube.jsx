@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-const YouTube = ({ id, width, height, title }) => {
+const Youtube = ({ id, width, height, title }) => {
   return (
     <iframe width={width} height={height} src={`https://www.youtube.com/embed/${id}`} title={title}
             frameBorder="0"
@@ -9,17 +9,17 @@ const YouTube = ({ id, width, height, title }) => {
             allowFullScreen></iframe>);
 };
 
-YouTube.propTypes = {
+Youtube.propTypes = {
   id: PropTypes.string.isRequired,
   width: PropTypes.string,
   height: PropTypes.string,
   title: PropTypes.string,
 };
 
-YouTube.defaultProps = {
+Youtube.defaultProps = {
   width: '100%',
   height: '560px',
   title: 'Xmartlabs',
 };
 
-export { YouTube };
+export { Youtube };
