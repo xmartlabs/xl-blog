@@ -14,8 +14,6 @@ import { TitleBlogIndex } from '../components/title-blog-index/title-blog-index'
 import { Seo } from '../components/seo/seo';
 
 import * as styles from '../css/blog-post.module.scss';
-import { MDXProvider } from '@mdx-js/react';
-import { Youtube } from '../components/youtube';
 
 const _ = require('lodash');
 
@@ -132,57 +130,55 @@ const BlogPost = ({ data, children }) => {
   ) : '../../images/image.png';
 
   return (
-    <MDXProvider components={{ Youtube }}>
-      <div onScroll={handleScroll} id="containerDiv">
-        <div className={styles.indexContainer}>
-          <TitleBlogIndex data={getTitles()} disappearIndex={disappearIndex}
-                          refIndexTitles={refIndexTitles}/>
+    <div onScroll={handleScroll} id="containerDiv">
+      <div className={styles.indexContainer}>
+        <TitleBlogIndex data={getTitles()} disappearIndex={disappearIndex}
+                        refIndexTitles={refIndexTitles}/>
+      </div>
+      <SocialElement
+        className={classnames(disappearSocial ? styles.socialDisappear : styles.socialAppear,
+          styles.blogIcons, { [styles.socialDisappear]: disappearIndex })}
+        links={shareBlogPostLinks}/>
+      <div className={styles.bannerContainer}>
+        <div className={styles.categoryTagsContainer}>
+          <Category data={categoryBlog.displayName} className={styles.category}/>
         </div>
-        <SocialElement
-          className={classnames(disappearSocial ? styles.socialDisappear : styles.socialAppear,
-            styles.blogIcons, { [styles.socialDisappear]: disappearIndex })}
-          links={shareBlogPostLinks}/>
-        <div className={styles.bannerContainer}>
-          <div className={styles.categoryTagsContainer}>
-            <Category data={categoryBlog.displayName} className={styles.category}/>
-          </div>
-          <h1 className={classnames(styles.titleContainer, 'text__heading__one__blueOne')}>
-            {data.mdx.frontmatter.title}
-          </h1>
-          <div className={styles.authorContainer}>
-            <div className={styles.authorInformation}>
-              <img src={`/images/${authorBlog.image}`} alt={authorBlog.displayName}
-                   className={styles.authorImage}/>
-              <div className={styles.nameDateTimeContainer}>
-                <Link className={classnames(styles.authorName, 'text__paragraph__bold__blueOne')}
-                      to={author.profile_url}>{authorBlog.displayName}</Link>
-                <label className={classnames(styles.postDate,
-                  'text__label__bold__grayTwo')}>{data.mdx.frontmatter.date}</label>
-                <label className={classnames('text__label__bold__grayTwo', styles.timeToRead)}>
-                  <ClockIcon className={styles.clockIcon}/>
-                  {data.mdx.fields.timeToRead.text}
-                </label>
-              </div>
+        <h1 className={classnames(styles.titleContainer, 'text__heading__one__blueOne')}>
+          {data.mdx.frontmatter.title}
+        </h1>
+        <div className={styles.authorContainer}>
+          <div className={styles.authorInformation}>
+            <img src={`/images/${authorBlog.image}`} alt={authorBlog.displayName}
+                 className={styles.authorImage}/>
+            <div className={styles.nameDateTimeContainer}>
+              <Link className={classnames(styles.authorName, 'text__paragraph__bold__blueOne')}
+                    to={author.profile_url}>{authorBlog.displayName}</Link>
+              <label className={classnames(styles.postDate,
+                'text__label__bold__grayTwo')}>{data.mdx.frontmatter.date}</label>
+              <label className={classnames('text__label__bold__grayTwo', styles.timeToRead)}>
+                <ClockIcon className={styles.clockIcon}/>
+                {data.mdx.fields.timeToRead.text}
+              </label>
             </div>
           </div>
         </div>
-        <img src={imgUrl} alt="Blog Main Image"
-             onError={(event) => event.target.src = '../../images/image.png'}
-             className={styles.blogMainImage}/>
-        <div className={styles.bodyPostContainer} ref={refIndexTitles}>
-          {children}
-        </div>
-        <div className={styles.blogBottomElements}>
-          <div className={styles.socialBottomContainer}>
-            <SocialElement className={classnames(styles.socialBottom, styles.blogIcons)}
-                           links={shareXlProfileLinks}/>
-          </div>
-          <Tags blogTags={data.mdx.frontmatter.tags} className={styles.tags}/>
-        </div>
-        <MoreBlogsSection relatedPosts={data.mdx.relatedPosts} refMoreFrom={refMoreFrom}
-                          title={categoryBlog.displayName}/>
       </div>
-    </MDXProvider>
+      <img src={imgUrl} alt="Blog Main Image"
+           onError={(event) => event.target.src = '../../images/image.png'}
+           className={styles.blogMainImage}/>
+      <div className={styles.bodyPostContainer} ref={refIndexTitles}>
+        {children}
+      </div>
+      <div className={styles.blogBottomElements}>
+        <div className={styles.socialBottomContainer}>
+          <SocialElement className={classnames(styles.socialBottom, styles.blogIcons)}
+                         links={shareXlProfileLinks}/>
+        </div>
+        <Tags blogTags={data.mdx.frontmatter.tags} className={styles.tags}/>
+      </div>
+      <MoreBlogsSection relatedPosts={data.mdx.relatedPosts} refMoreFrom={refMoreFrom}
+                        title={categoryBlog.displayName}/>
+    </div>
   );
 };
 
