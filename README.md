@@ -26,4 +26,35 @@ It is important to ensure that the Cloudflare domain for blog.xmartlabs.com is a
 | https://app.netlify.com/sites/blog-xl/overview                     | It is the back-office of the XL blog instance in Netlify. Necessary for configuring integrations, domains, permissions, users, etc. |
 | https://blog.xmartlabs.com/admin                                   | It is the CMS provided by Netlify to manage the blog posts.                                                                         |
 | https://app.netlify.com/sites/blog-xl/configuration/identity#users | CMS access user list.                                                                                                               |
-| https://app.netlify.com/sites/blog-xl/deploys                      | Deploys            
+| https://app.netlify.com/sites/blog-xl/deploys                      | Deploys
+
+### React components in MDX
+First, to use a React Component while creating a new blog, we need to use the extension `mdx` while creating a blog.
+
+Second, we need to make it globally available in the app and for that we need to inject it the `MDXProvider` and you can find it in the `main-layout.jsx` file.
+
+Here you'll modify the following line
+```
+const shortCodes = { [ComponentName]: [ActualReactComponent] };
+```
+Here `ComponentName` is the name that the user will have to use when creating the blog.
+Example:
+```
+const shortCodes = { YouTube: YoutubePlayer };
+```
+
+Then while creating the blog, this is how it's going to be used
+```
+# Title
+This is my new blog using React Components
+
+<YouTube id="dsCiJIhfM5E" width="100%"/>
+```
+If the React Component name matches the name that to use in the template, then you can just simplify it like this
+```
+const shortCodes = { Youtube };
+```
+### Documenting the new Component
+It's very important to document **how** we can use the components for non-developers that create blogs.
+This can be documented in the Blog's Notion page, the [Snippet Section](https://www.notion.so/xmartlabs/Blog-Snippets-238fbac623cd80fbb43ffabb3ff38ef2).
+
