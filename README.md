@@ -29,7 +29,7 @@ It is important to ensure that the Cloudflare domain for blog.xmartlabs.com is a
 | https://app.netlify.com/sites/blog-xl/deploys                      | Deploys
 
 ### React components in MDX
-First, to use a React Component while creating a new blog, we need to use the extension `mdx` while creating a blog.
+First, to use a React Component while creating a new blog we need to use the extension `mdx` while creating a blog.
 
 Second, we need to make it globally available in the app and for that we need to inject it the `MDXProvider` and you can find it in the `main-layout.jsx` file.
 
@@ -50,11 +50,10 @@ This is my new blog using React Components
 
 <YouTube id="dsCiJIhfM5E" width="100%"/>
 ```
-If the React Component name matches the name that to use in the template, then you can just simplify it like this
+If the React Component name matches the name to use in the template, then you can just simplify it like this
 ```
 const shortCodes = { Youtube };
 ```
 ### Documenting the new Component
-It's very important to document **how** we can use the components for non-developers that create blogs.
-This can be documented in the Blog's Notion page, the [Snippet Section](https://www.notion.so/xmartlabs/Blog-Snippets-238fbac623cd80fbb43ffabb3ff38ef2).
+It's very important to document **how** we can use the components for non-developers that create blogs, this can be documented in the Blog's Notion page, the [Snippet Section](https://www.notion.so/xmartlabs/Blog-Snippets-238fbac623cd80fbb43ffabb3ff38ef2).
 
