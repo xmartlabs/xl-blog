@@ -23,6 +23,7 @@ There are infinite benefits of open source but nothing is more gratifying than b
 
 This constant commitment to work together in order to make something that could make a developer day easier is what we really call open source.
 
+
 There are two particular events that made me reflect on open source philosophy and write this blog post:
 
 1. Exacly one year ago we released [XLForm](https://github.com/xmartlabs/XLForm), a powerful iOS library for easily creating dynamic table-view forms. XLForm was a top trending github repository many times, it was featured by [iOSBytes podcast](https://iosbytes.codeschool.com/episodes/16-episode-16-april-17-2014/stories/118-xlform), and it got the attention of many cocoa active contributors.

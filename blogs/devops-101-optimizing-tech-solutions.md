@@ -1,6 +1,6 @@
 ---
-title: 'DevOps 101: Optimizing Tech Solutions'
-subtitle: ' '
+title: "DevOps 101: Optimizing Tech Solutions"
+subtitle: " "
 permalink: devops-explained
 featured: true
 date: 2024-05-25
@@ -14,7 +14,6 @@ tags:
   - Agile
 author: vale
 ---
-
 Imagine a way to save digital projects thousands of dollars by reducing developers' time and optimizing resources. What if you could keep different teams in sync and organized, all working towards the same goal? This would reduce rework, increase efficiency, and result in faster time to market with quicker iterations based on real user feedback. Wouldn't you want that?
 
 Luckily, you don't need to dream about it—all of this is possible through DevOps. You've likely heard of it and seen the famous "infinite symbol" image representing its stages. In this blog, we're diving deeper into what DevOps is, what drives it, how we implement it here at Xmartlabs, and the significant impact it has had on our clients (ie. how we've reduced their storage costs by 20% and saved up to 75% of resources dedicated to cloud usage).
@@ -33,11 +32,11 @@ Enter: DevOps. Based on Agile methodologies, this new way of working integrates 
 
 Key principles that drive DevOps practices and methodologies:
 
-- **Collaboration and Communication**: Open, ongoing communication between development, operations, business, and other stakeholders to enhance teamwork and minimize silos.
-- **Automation**: Automating routine tasks—such as integration, testing, deployment, and provisioning—boosts efficiency and speeds up delivery by reducing manual effort.
-- **Continuous Integration and Continuous Deployment (CI/CD)**: Frequent code updates are automatically tested and deployed, ensuring a steady flow of improvements to production.
-- **Feedback and Iteration**: Using feedback from various stages of the DevOps pipeline to continuously improve processes, tools, and outcomes.
-- **Monitoring and Logging**: Continuously monitoring system performance and health, coupled with robust logging practices, allow to quickly identify and address issues.
+* **Collaboration and Communication**: Open, ongoing communication between development, operations, business, and other stakeholders to enhance teamwork and minimize silos.
+* **Automation**: Automating routine tasks—such as integration, testing, deployment, and provisioning—boosts efficiency and speeds up delivery by reducing manual effort.
+* **Continuous Integration and Continuous Deployment (CI/CD)**: Frequent code updates are automatically tested and deployed, ensuring a steady flow of improvements to production.
+* **Feedback and Iteration**: Using feedback from various stages of the DevOps pipeline to continuously improve processes, tools, and outcomes.
+* **Monitoring and Logging**: Continuously monitoring system performance and health, coupled with robust logging practices, allow to quickly identify and address issues.
 
 ### DevOps phases
 
@@ -62,21 +61,21 @@ Key principles that drive DevOps practices and methodologies:
 Our team has established three steps to implement DevOps on existing digital products and that constitute our approach to the service.
 
 1. **Infrastructure Assessment:** Through an in-depth and comprehensive analysis process, our DevOps team assesses the following aspects of current infrastructures:
-   - dimension
-   - resources
-   - scalability
-   - networking
-   - resource usage
-   - cost optimation
-   - security compliance
-   - best-practices implementation
 
+   * dimension
+   * resources
+   * scalability
+   * networking
+   * resource usage
+   * cost optimation
+   * security compliance
+   * best-practices implementation
 2. **Strategic Suggestions:** Once there's an “official” diagnosis, they make actionable recommendations to improve infrastructure and processes. Such suggestions might include:
-   - Creating **pipelines**: help automate all the workflow devs do manually, improve what they already had in place
-   - Introduce certain industry-level **best-practices**
-   - Ensure **traceability**, **standardization**, and **regulation** of everything running in the cloud
-   - Enhance existing **infrastructure**
 
+   * Creating **pipelines**: help automate all the workflow devs do manually, improve what they already had in place
+   * Introduce certain industry-level **best-practices**
+   * Ensure **traceability**, **standardization**, and **regulation** of everything running in the cloud
+   * Enhance existing **infrastructure**
 3. **Implementation and Ongoing Support:** Once suggestions are made, the team is in charge of implementing and maintaining them. They work in three tracks: automation, infrastructure and observability.
 
    → **Automation**: They aims to make the dev's life easier by automating processes to make the development flow as automatic as possible and make deploying code a smooth task.
@@ -113,7 +112,7 @@ We partnered with a health-tech company working to help stroke survivors recover
 
 **Challenge and Opportunity**
 
-The primary challenge was managing their exponential growth without compromising the seamless functionality and security that users—patients and managers—rely on. The infrastructure had to support increasing users _and_ ensure robust security and compliance with healthcare regulations. This was critical to maintaining uninterrupted service and safeguarding patient data across all interactions within the platform.
+The primary challenge was managing their exponential growth without compromising the seamless functionality and security that users—patients and managers—rely on. The infrastructure had to support increasing users *and* ensure robust security and compliance with healthcare regulations. This was critical to maintaining uninterrupted service and safeguarding patient data across all interactions within the platform.
 
 **Strategic DevOps Intervention**
 
@@ -137,10 +136,10 @@ Through these targeted DevOps interventions, the client not only scaled its oper
 
 Words like speed, improved collaboration, rapid deployment, quality, reliability, and security are often used to describe the advantages or benefits of implementing DevOps. And even though those remain true, here are some benefits that stemmed from incorporating DevOps into the protections we mentioned.
 
-- **Integrated Automation:** We eliminate as many manual tasks as possible, reducing error margins and freeing developers to focus on innovating.
-- **Resource Optimization:** In Gurdant, we achieved a 20% reduction in storage costs by migrating to more efficient solutions and leveraged AWS savings plans to maximize budget efficiency.
-- **Security and Compliance**: We assess and enhance cloud security, ensuring that applications and data are protected and compliant with regulations. We did this for Kandu to ensure privacy and data integrity in the healthcare sector.
-- **Scalability and Resiliency**: We ensure solutions can grow sustainably. For example, when evaluating the Kandu platform, we ensured the platform could scale to handle exponential user growth while maintaining business continuity.
+* **Integrated Automation:** We eliminate as many manual tasks as possible, reducing error margins and freeing developers to focus on innovating.
+* **Resource Optimization:** In Gurdant, we achieved a 20% reduction in storage costs by migrating to more efficient solutions and leveraged AWS savings plans to maximize budget efficiency.
+* **Security and Compliance**: We assess and enhance cloud security, ensuring that applications and data are protected and compliant with regulations. We did this for Kandu to ensure privacy and data integrity in the healthcare sector.
+* **Scalability and Resiliency**: We ensure solutions can grow sustainably. For example, when evaluating the Kandu platform, we ensured the platform could scale to handle exponential user growth while maintaining business continuity.
 
 Commercially, these translated into a reduced time to market and a stronger ability to adapt to market needs. It also meant having a more stable and reliable product for its users, and if any failings should arise, they are compensated by a smaller time to recovery.
 

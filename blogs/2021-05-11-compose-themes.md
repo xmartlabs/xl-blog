@@ -1,16 +1,7 @@
 ---
 title: Extending Material theme in Jetpack Compose
 date: 2021-05-11
-tags:
-  [
-    Material,
-    Themes,
-    Material theme,
-    Custom material theme,
-    theming compose,
-    customizing themes,
-    Jetpack Compose,
-  ]
+tags: [Material, Themes, Material theme, Custom material theme, theming compose, customizing themes, Jetpack Compose]
 category: development
 author: mirland
 thumbnail: images/extending-material-theme-in-jetpack-compose/banner.jpeg
@@ -27,7 +18,6 @@ As you may already know, Material allows us to have a uniform UI that follows An
 In this post, we'll learn how to adapt, customize and extend Compose Material Theme in order to fulfill your app UI requirements and get rid of material limitations.
 
 # What's an application theme?
-
 [Android Theme] is just a collection of resources that are useful throughout a given application.
 Each resource has a semantic name such as `colorPrimary` that can be used as a reference from different places on the app.
 
@@ -35,14 +25,12 @@ Most Android apps already follow [Material Design Guidelines], that's the reason
 Material Theme comprises [color], [typography], and [shape] attributes that can be tweaked to get custom style variations of the components.
 
 ### Sounds good, but is it perfect?
-
 Material does a great job making sure every app follows Android UI guidelines, but it clearly lacks flexibility.
 So, here lies the first problem: you have to adapt your look and feel to the Material guidelines, and if you don't, then it becomes hard to use it.
 
 Secondly, Material comprises only [color], [typography], and [shape] attributes, but what if your app needs more resources, such as dimensions or icons?
 
 # Extending Material Colors
-
 Compose provides the [`Colors`] class to model the [Material color system] which includes nine colors and two functions to define light and dark color sets.
 
 According to our experience, most apps need way more than 9 colors.
@@ -172,6 +160,7 @@ Examples are list items' padding, a "small size", and a container margin.
 
 We can use a similar approach here and define a dimension class:
 
+
 ```kotlin
 @Immutable
 data class AppDims(
@@ -225,7 +214,6 @@ Then, you have to add the `AppDims` to your `AppTheme` just like we did with the
 Check out [the complete code in Gong repo](https://github.com/xmartlabs/gong/blob/b0b617e/app/src/main/java/com/xmartlabs/gong/ui/theme/AppDims.kt).
 
 # Conclusion
-
 I don't have to convince you about the importance of having a good UX/UI in an app, most of the time we use top-tier apps that provide a world-class experience and we end up expecting this UI/UX quality everywhere.
 
 Compose is coming to transform the way we build Android apps, it's a whole new approach that drastically simplifies and accelerates UI development.
@@ -237,11 +225,12 @@ This blog post presents concepts and ideas to leverage compose, app theming, and
 If your app still needs more customization, you'll be able to extend Material capabilities to derive full benefit from them.
 The benefits are clear, we end up having a clean code base, drastically reducing redundant style configuration code, and having full control over the whole app style from a single source of truth, the application-wide theming.
 
+
 [`AppShapes`]: https://github.com/xmartlabs/gong/blob/b0b617e56403c1f499704111acad89093aa3c9d6/app/src/main/java/com/xmartlabs/gong/ui/theme/AppShapes.kt
 [`AppTypographies`]: https://github.com/xmartlabs/gong/blob/b0b617e56403c1f499704111acad89093aa3c9d6/app/src/main/java/com/xmartlabs/gong/ui/theme/AppTypographies.kt
 [`Colors`]: https://developer.android.com/reference/kotlin/androidx/compose/material/Colors
 [Android Theme]: https://developer.android.com/guide/topics/ui/look-and-feel/themes
-[color]: https://material.io/design/color/
+[color]:https://material.io/design/color/
 [Jetpack Compose]: https://developer.android.com/jetpack/compose
 [Material color system]: https://material.io/design/color/
 [Material Design Guidelines]: https://material.io/design/introduction

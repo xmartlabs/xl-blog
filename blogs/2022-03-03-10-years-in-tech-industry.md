@@ -1,12 +1,7 @@
 ---
 title: 10 Things We've Learned After 10 Years Running A Tech Agency
 date: 2022-03-07
-tags:
-  [
-    10 years Xmartlabs,
-    10 lessons learned in tech industry,
-    10 years in tech industry,
-  ]
+tags: [10 years Xmartlabs, 10 lessons learned in tech industry, 10 years in tech industry]
 author: xl
 category: people-events
 thumbnail: images/10-lessons-in-tech-industry/10_things_cover.jpg
@@ -34,7 +29,7 @@ This approach made Xmartlabs what we believe is a great place to work. Our turno
 
 ## 2. First team members set the company culture
 
-We always aimed to create the best innovative team in South America, but we never compromised our team's human qualities.
+We always aimed to create the best innovative team in South America, but we never compromised our team's human qualities. 
 Milestones are accomplished by teams and not by individuals on their own. With that in mind, we began recruiting (1 to 1) talented acquaintances and friends in the industry who shared our values and principles. This way we hoped they'd support Xmartlabs' vision and help lay the foundations of the culture we wanted in Xmartlabs.
 
 Different key roles were essential to put the company on its feet during those early stages:
@@ -45,13 +40,15 @@ Different key roles were essential to put the company on its feet during those e
 
 However, we did have to cover a considerable amount of roles simultaneously. We had no background whatsoever in legal, marketing, sales, or business management, which presented a huge opportunity for learning on the go.
 
+
 ## 3. Learn From Your Clients
 
-Anyone who started a company knows how much first clients teach you and how valuable those lessons are. They especially point you in the right direction by helping you understand what they value, pain points, and drivers they have.
+Anyone who started a company knows how much first clients teach you and how valuable those lessons are. They especially point you in the right direction by helping you understand what they value, pain points, and drivers they have. 
 
-Negative feedback it's also crucial as it will eventually help you improve. Those first reviews and bits of advice have an enormous impact on you (even if they're small tips like _"Buy noise-canceling headsets"_).
+Negative feedback it's also crucial as it will eventually help you improve. Those first reviews and bits of advice have an enormous impact on you (even if they're small tips like *"Buy noise-canceling headsets"*).
 
 Clients also helped us to adopt a *modus operandi* and a work ethic based on empathy and, just like with teammates, interpersonal bonds. They're also good to test yourself. In our case, we proved (to clients and ourselves) that we were up to any challenge and that being an offshore company was not a disadvantage or obstacle.
+
 
 <figure>
   <img style={{ width:'40%'}} src="/images/10-lessons-in-tech-industry/Learn-From-Your-Clients.png" alt="Learn From Your Clients" />
@@ -74,14 +71,17 @@ When we launched our OSS library (XL Form), there was already one doing the same
 
 There’s always time for improvements. Our first website was honestly a bit embarrassing, but we needed to put it out there because there's always time to improve. If, in this case, the website was nice or not was not going to break it or make it, we needed it out, and that was it. Since the beginning, we were exposed to problems we needed to solve by yesterday, and being expedited became necessary. For us, perfect is late, most of the time!
 
+
 <figure>
   <img style={{ width:'100%'}} src="/images/10-lessons-in-tech-industry/first-website.png" alt="Xmartlabs’ website during those first years." />
   <figcaption>Xmartlabs’ website during those first years.</figcaption>
 </figure>
 
+
+
 ## 7. We're never alone
 
-Since our very beginning, we were made aware of the importance of weaving bonds with our surrounding community, this was mainly thanks to the accelerator we began in. Our first commercial mission and first move to an independent office was made together with other entrepreneurs we met there.
+Since our very beginning, we were made aware of the importance of weaving bonds with our surrounding community, this was mainly thanks to the accelerator we began in. Our first commercial mission and first move to an independent office was made together with other entrepreneurs we met there. 
 
 We also got involved by giving several talks in main events, even when our team was small. OSS was also a big part of this because, although we didn’t have that many success stories, we had some type of value to give back to the community, and they were always open to receiving it.
 
@@ -102,9 +102,11 @@ When we were looking to expand Xmartlabs, we found some internal reticence, espe
 
 How do we try every day to stay ourselves? We are willing to listen to each other and maintain integrity throughout the years, not thinking purely in economic terms (even if companies' ultimate goals are always to make a profit), prioritizing relationships and happiness, and building quality products with ethics.
 
+
 <figure>
   <img style={{ width:'100%'}} src="/images/10-lessons-in-tech-industry/team.png" alt="XL team" />
   <figcaption>XL team at the 2019 year-end retreat</figcaption>
 </figure>
 
-We hope our top learned lessons help you in your tech business. We would love to know about yours, please share in the comments section below.
+
+We hope our top learned lessons help you in your tech business. We would love to know about yours, please share in the comments section below. 

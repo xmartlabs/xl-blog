@@ -1,6 +1,6 @@
 ---
 title: "Data Governance Framework: Elevating Data's Potential"
-subtitle: ' '
+subtitle: " "
 permalink: data-governance
 featured: true
 date: 2023-11-16
@@ -14,7 +14,6 @@ tags:
   - bigdata
 author: jsanchez
 ---
-
 Much like electricity without power, AI lacks substance without quality data. Your data quality becomes the cornerstone determining the success of your AI solution. Envision Data Governance as the silent architect behind the AI revolution.
 
 In this blog post, we highlight the critical role of data governance— the custodian ensuring every AI endeavor's reliability, ethics, and efficacy.
@@ -45,28 +44,28 @@ Consider the case of your organization dealing with sensitive information. You p
 
 Here are some common use cases:
 
-- **Data stewardship**: Data governance often means giving accountability and responsibility for both the data itself and the processes that ensure its proper use to “data stewards”.
-- **Data quality**: Data governance is also used to ensure data quality, which refers to any activities or techniques designed to make sure data is suitable to be used. Data quality is generally judged on six dimensions: accuracy, completeness, consistency, timeliness, validity, and uniqueness.
-- **Data management**: This is a broad concept encompassing all aspects of managing data as an enterprise asset, from collection and storage to usage and oversight, making sure it’s being leveraged securely, efficiently, and cost-effectively before it’s disposed of.
+* **Data stewardship**: Data governance often means giving accountability and responsibility for both the data itself and the processes that ensure its proper use to “data stewards”.
+* **Data quality**: Data governance is also used to ensure data quality, which refers to any activities or techniques designed to make sure data is suitable to be used. Data quality is generally judged on six dimensions: accuracy, completeness, consistency, timeliness, validity, and uniqueness.
+* **Data management**: This is a broad concept encompassing all aspects of managing data as an enterprise asset, from collection and storage to usage and oversight, making sure it’s being leveraged securely, efficiently, and cost-effectively before it’s disposed of.
 
 ## Risks of poor Data Governance
 
 Poor data governance can lead to a wide range of risks and negative consequences for organizations. Some of the key risks of poor data governance include:
 
-- **Data Inaccuracies and Inconsistencies**: Without proper governance, data may become inaccurate, incomplete, or inconsistent. This can lead to decision-making based on faulty information and erode trust in data.
-- **Compliance Violations**: Failure to manage data compliant with industry regulations (e.g., GDPR, HIPAA) and legal requirements can result in legal fines, penalties, and reputational damage.
-- **Data Silos**: Without governance, data may be stored and managed in isolated silos, making it difficult to share and access data across the organization. This can hinder collaboration and lead to inefficiencies.
-- **Data Redundancy**: Lack of governance may result in duplicate or redundant data, leading to increased storage costs and confusion about which data is the "single source of truth.”
+* **Data Inaccuracies and Inconsistencies**: Without proper governance, data may become inaccurate, incomplete, or inconsistent. This can lead to decision-making based on faulty information and erode trust in data.
+* **Compliance Violations**: Failure to manage data compliant with industry regulations (e.g., GDPR, HIPAA) and legal requirements can result in legal fines, penalties, and reputational damage.
+* **Data Silos**: Without governance, data may be stored and managed in isolated silos, making it difficult to share and access data across the organization. This can hinder collaboration and lead to inefficiencies.
+* **Data Redundancy**: Lack of governance may result in duplicate or redundant data, leading to increased storage costs and confusion about which data is the "single source of truth.”
 
 ## Roles and Responsibilities in Data Governance
 
 Implementing a data governance process typically involves establishing a clear organizational structure to define roles, responsibilities, and decision-making authority for managing data. The specific structure can vary depending on the organization's size, industry, and culture, but here is a common framework for a data governance organizational structure:
 
-- Data Governance Council: responsible for setting the strategic direction of data governance
-- Data Governance Team: provides support for data governance activities, including policy creation, monitoring, and communication
-- Data Stewards: They enforce data governance policies
-- Data Owners: department heads who are responsible for specific datasets
-- Data Users: people who access and use data as part of their job responsibilities
+* Data Governance Council: responsible for setting the strategic direction of data governance
+* Data Governance Team: provides support for data governance activities, including policy creation, monitoring, and communication
+* Data Stewards: They enforce data governance policies
+* Data Owners: department heads who are responsible for specific datasets
+* Data Users: people who access and use data as part of their job responsibilities
 
 ![](/images/data-governance.png)
 
@@ -101,6 +100,8 @@ Stay tuned if you liked this brand new data team post. We will be writing about 
 If you're interested in a custom-made solution or would like to learn the most efficient way to handle your company's data, don't hesitate to [reach out to our team](https://form.typeform.com/to/D1PhDJIR)!
 
 Thanks for reading 🙂
+
+
 
 > 💡 Learn the intricacies of AI and how to manage sensitive data responsibly to ensure safe AI innovation from leading experts!
 >

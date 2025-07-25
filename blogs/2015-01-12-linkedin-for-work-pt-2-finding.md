@@ -1,6 +1,6 @@
 ---
-title: 'LinkedIn for Work, pt. 2 : Finding candidates.'
-subtitle: ' '
+title: "LinkedIn for Work, pt. 2 : Finding candidates."
+subtitle: " "
 permalink: /linkedin-for-work-pt-2-finding/
 featured: true
 date: 2015-01-12

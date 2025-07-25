@@ -1,7 +1,7 @@
 ---
-title: 'Introducing react-native-health-link: User Health Data In Your React
-  Native App'
-subtitle: ' '
+title: "Introducing react-native-health-link: User Health Data In Your React
+  Native App"
+subtitle: " "
 permalink: react-native-health-link
 featured: true
 date: 2025-03-26
@@ -15,7 +15,6 @@ tags:
   - health link
 author: belu
 ---
-
 In a [previous blog post](https://blog.xmartlabs.com/blog/wereables-react-native-integration/), we looked into the benefits of using Health Kit and Health Connect to use wearable data on your React Native app. By combining two distinct libraries with separate interfaces, we managed to unlock real-time health insights. But did you know these tools can do much more than just handle wearable-recorded data? Enter react-native-health-link, a developer-friendly library that simplifies health data integration by providing a unified interface for both HealthKit and Health Connect.
 
 ## Why react-native-health-link?
@@ -24,9 +23,9 @@ While developing health-related applications in React Native, working with healt
 
 react-native-health-link eliminates these headaches by bridging the gap, offering:
 
-- A single API for both platforms.
-- Simplified permission handling.
-- Reduced maintenance of platform-specific codebases.
+* A single API for both platforms.
+* Simplified permission handling.
+* Reduced maintenance of platform-specific codebases.
 
 No more juggling separate implementations—this library keeps everything streamlined and developer-friendly.
 
@@ -34,14 +33,14 @@ No more juggling separate implementations—this library keeps everything stream
 
 With this library you can manage permissions for HealthKit and Health Connect for its supported data types, namely:
 
-- Blood glucose (read/write)
-- Weight (read/write)
-- Height (read/write)
-- Heart rate (read/write)
-- Resting heart rate (read)
-- Blood pressure (read)
-- Oxygen saturation (read)
-- Steps (read/write)
+* Blood glucose (read/write)
+* Weight (read/write)
+* Height (read/write)
+* Heart rate (read/write)
+* Resting heart rate (read)
+* Blood pressure (read)
+* Oxygen saturation (read)
+* Steps (read/write)
 
 This open-source library is actively developed, and the list of supported data types will grow based on community needs. This first integration covers the most commonly used health metrics supported by the `react-native-health` and `react-native-health-link` libraries. We eventually plan to extend support to any data types compatible with HealthKit and Health Connect.
 
@@ -55,13 +54,13 @@ Getting started with react-native-health-link is a breeze. You can initialize he
 
 > ```javascript
 > import {
->   initializeHealth,
->   HealthLinkPermissions,
+>  initializeHealth,
+>  HealthLinkPermissions,
 > } from 'react-native-health-link';
 >
 > initializeHealth({
->   read: [HealthLinkPermissions.BloodGlucose],
->   write: [HealthLinkPermissions.BloodGlucose],
+>   read: [HealthLinkPermissions.BloodGlucose],
+>   write: [HealthLinkPermissions.BloodGlucose],
 > });
 > ```
 
@@ -72,7 +71,7 @@ To read data, use the read function along with the `HealthLinkDataType` enum to 
 ```javascript
 read(HealthLinkDataType.BloodGlucose, {
   startDate: new Date('2025-01-01').toISOString(),
-});
+})
 ```
 
 ### write Function
@@ -90,10 +89,10 @@ write(HealthLinkDataType.BloodGlucose, {[
 
 The library is currently at the beginning of its development, and we have big plans for its future. Here’s what you can expect: 
 
-- We aim to support all data types compatible with HealthKit and Health Connect, giving you unparalleled flexibility.
-- Enhanced querying options to provide developers with more control over data access.
-- We'll work on improving documentation with more detailed examples for each data type.
-- Community input will mean a lot for the roadmap of this library. We’re committed to solving real problems faced by developers.
+* We aim to support all data types compatible with HealthKit and Health Connect, giving you unparalleled flexibility.
+* Enhanced querying options to provide developers with more control over data access.
+* We'll work on improving documentation with more detailed examples for each data type.
+* Community input will mean a lot for the roadmap of this library. We’re committed to solving real problems faced by developers.
 
 ## Who Should Use react-native-health-link?
 

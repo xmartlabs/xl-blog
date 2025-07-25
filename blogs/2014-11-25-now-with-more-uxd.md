@@ -70,6 +70,7 @@ There are no specific instructions to make something people love. At XmartLabs, 
     </ul>
   </li>
 
+
   <li>
     User Flows
     <ul>
@@ -95,6 +96,7 @@ There are no specific instructions to make something people love. At XmartLabs, 
     </ul>
   </li>
 </ul>
+
 
 <h4>Visual Design Phase</h4>
 <ul>
@@ -147,6 +149,7 @@ There are no specific instructions to make something people love. At XmartLabs, 
     </ul>
   </li>
 
+
   <li>
     Native Look and Feel
     <ul>
@@ -167,6 +170,7 @@ There are no specific instructions to make something people love. At XmartLabs, 
     </ul>
   </li>
 </ul>
+
 
 <h3>For Existing Products:</h3>
 <ul>

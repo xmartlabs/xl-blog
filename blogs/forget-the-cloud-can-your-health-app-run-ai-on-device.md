@@ -1,6 +1,6 @@
 ---
-title: 'Forget the Cloud: Can Your Health App Run AI On-Device?'
-subtitle: ' '
+title: "Forget the Cloud: Can Your Health App Run AI On-Device?"
+subtitle: " "
 permalink: /blog/on-device-ai-health-assistant-xlcare
 featured: true
 date: 2025-06-12
@@ -14,7 +14,6 @@ tags:
   - AI Assistants
 author: belu
 ---
-
 ## Introduction
 
 Traditionally, medicine has taken a reactive rather than a preventive approach, but that’s been gradually changing in recent years. With the rise of AI and LLMs (large language models), there are now many new opportunities to improve disease prevention and support healthy habits at home. Prevention not only enhances people’s quality of life but also helps reduce costs for hospitals.
@@ -29,8 +28,8 @@ In this article, we’ll explore the current state of small medical models in 20
 
 First, let’s take a look at the models currently available that are feasible to run locally on a mobile device. We based our evaluation on the research paper **[Medicine on the Edge: Comparative Performance Analysis of On-Device LLMs for Clinical Reasoning](https://doi.org/10.48550/arXiv.2502.08954)** which scored various models using the [AMEGA](https://github.com/DATEXIS/AMEGA-benchmark) benchmark, a benchmark designed to assess how well large language models adhere to medical guidelines. The study highlighted two standout models:
 
-- **Aloe 8B**, a medical-specific model that achieved the highest score in the benchmark.
-- **Phi-3.5**, a smaller and faster model that delivered a surprisingly strong performance given its size.
+* **Aloe 8B**, a medical-specific model that achieved the highest score in the benchmark.
+* **Phi-3.5**, a smaller and faster model that delivered a surprisingly strong performance given its size.
 
 These models scored 491 and 465 out of 1000, respectively. This puts them among the best performers in their size category, according to the study. While those numbers might initially seem low, [another paper](https://doi.org/10.1038/s41746-024-01356-6) compares it to a recently graduated medical student who scored 25.8 out of 50 on the same benchmark.
 
@@ -39,6 +38,8 @@ These models scored 491 and 465 out of 1000, respectively. This puts them among 
 We realized that, with the unmatched privacy benefits of local LLM execution, there was a unique opportunity to create a more personal experience by feeding the model the user's own health data. With HealthKit (iOS) and Health Connect (Android) integration, users could ask questions and learn things directly relevant to their health. This could be done privately and securely, with no data ever leaving the device.
 
 In this section, we will be discussing the process of creating the application and the challenges that we faced.
+
+
 
 ![](/images/simulator-xlcare-5-y-4.png)
 
@@ -56,9 +57,9 @@ For the first version, we decided to go with five metrics: steps, heart rate, ox
 
 In our first iteration, we tried feeding the LLM all of the individual entries of user’s health data. For example:
 
-- Heart rate of 79 bpm on 05/19/2025 at 11:03 AM.
-- Heart rate of 88 bpm on 05/19/2025 at 02:55 PM.
-- Steps count of 5987 steps on 05/19/2025.
+* Heart rate of 79 bpm on 05/19/2025 at 11:03 AM.
+* Heart rate of 88 bpm on 05/19/2025 at 02:55 PM.
+* Steps count of 5987 steps on 05/19/2025.
 
 That approach didn’t work very well. The model sometimes tended to average out the metrics and explained its reasoning for doing calculating the mean, getting confused in the process. Other times, it became overly fixated on a single measurement and analyzed it in excessive detail. Plus, passing in that much context made it noticeably slow.
 
@@ -68,8 +69,8 @@ So, for now, we decided to provide just two summary metrics: the **mean** and th
 
 Of course, this approach has its own limitations:
 
-- It can’t evaluate trends over time.
-- It applies calculations across the entire dataset, which may miss recent changes.
+* It can’t evaluate trends over time.
+* It applies calculations across the entire dataset, which may miss recent changes.
 
 We’re currently working on a new version that takes these factors into account, so if that interests you, stay tuned!
 
@@ -111,15 +112,15 @@ Building a locally powered AI health assistant has proven not only possible, but
 
 **Advantages:**
 
-- All data stays on-device, meaning users retain full control over their information and companies avoid the burden of handling Protected Health Information (PHI).
-- Unlike cloud-based solutions, where ongoing usage often translates into user-facing costs, local models can easily be free to use without limit.
-- Smaller models consume significantly less computing power, appealing to those mindful of environmental impact.
+* All data stays on-device, meaning users retain full control over their information and companies avoid the burden of handling Protected Health Information (PHI).
+* Unlike cloud-based solutions, where ongoing usage often translates into user-facing costs, local models can easily be free to use without limit.
+* Smaller models consume significantly less computing power, appealing to those mindful of environmental impact.
 
 **Limitations:**
 
-- At 2–4GB, these models take up a significant amount of space on mobile devices.
-- Not all smartphones can handle the memory demands. For example, the app doesn’t currently run on an iPhone 12 due to RAM limitations.
-- Smaller models are more prone to hallucinations and may struggle with complex medical queries.
+* At 2–4GB, these models take up a significant amount of space on mobile devices.
+* Not all smartphones can handle the memory demands. For example, the app doesn’t currently run on an iPhone 12 due to RAM limitations.
+* Smaller models are more prone to hallucinations and may struggle with complex medical queries.
 
 ### **A Promising Future**
 

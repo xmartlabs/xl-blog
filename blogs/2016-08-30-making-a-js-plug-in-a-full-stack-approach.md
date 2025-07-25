@@ -1,5 +1,5 @@
 ---
-title: 'Making a JS plug-in: a full-stack approach'
+title: "Making a JS plug-in: a full-stack approach"
 date: 2016-08-30
 tags: [JavaScript, Plugin, Widget, CORS, Ruby, Rails, CSS]
 author: remer
@@ -30,32 +30,32 @@ We want to make this plug-in easy to be integrated by client web sites' develope
 We will keep private all the auxiliary code used by the plug-in in order to correctly work, hiding it from developers.
 
 > Global variables and that kind of patterns will be avoided in our code.
-> Below we have a starting template for our plug-in:
+Below we have a starting template for our plug-in:
 
-```javascript
-(function () {
+``` javascript
+(function() {
+
   var defaults = {
-    clientId: undefined,
-  };
+    clientId: undefined
+  }
 
   /******* Public Methods *******/
 
-  this.Widget = function () {};
+  this.Widget = function() {
+  }
 
-  Widget.prototype.init = function (options, doc) {
-    this.doc = doc || window.document;
-    this.options = merge(defaults, options);
+  Widget.prototype.init = function(options, doc) {
+    this.doc = doc || window.document
+    this.options = merge(defaults, options)
 
     if (!this.options.clientId) {
       // Validate options as needed
-      console.error(
-        'Undefined `clientId`. You must set it before start using Widget'
-      );
-      return;
+      console.error("Undefined `clientId`. You must set it before start using Widget");
+      return
     }
 
     // Will create the widget
-  };
+  }
 
   /******* Private Methods *******/
 
@@ -65,7 +65,7 @@ We will keep private all the auxiliary code used by the plug-in in order to corr
       if (overrides.hasOwnProperty(property)) {
         if (overrides[property] instanceof Object) {
           source[property] = source[property] || new Object();
-          merge(source[property], overrides[property]);
+          merge(source[property], overrides[property])
         } else {
           source[property] = overrides[property];
         }
@@ -73,7 +73,8 @@ We will keep private all the auxiliary code used by the plug-in in order to corr
     }
     return source;
   }
-})();
+
+}());
 ```
 
 This way all the client code only needs to access to `Widget` function, in order to create an instance of our plug-in and to its `init` function.
@@ -83,32 +84,25 @@ Next code shows you how to add the widget to the client web site, add it within 
 
 ```html
 <script type="text/javascript">
-  var widgetInit = function () {
+  var widgetInit = function() {
     widget.init({
-      clientId: '7b4a03708a19ed6669ca00f4975a42b3',
+      clientId: '7b4a03708a19ed6669ca00f4975a42b3'
     });
   };
 
-  (function (window, document, tag, source, objectName, init) {
+  (function(window, document, tag, source, objectName, init) {
     var element = document.createElement(tag);
     element.async = 1;
     element.defer = 'defer';
     element.src = source;
-    element.onload = function () {
+    element.onload = function() {
       window['MyAppWidget'] = objectName;
       window[objectName] = new Widget();
       init();
     };
     var parent = document.getElementsByTagName(tag)[0];
     parent.parentNode.insertBefore(element, parent);
-  })(
-    window,
-    document,
-    'script',
-    '//widget-server-domain/widget/widget.js?client_id=7b4a03708a19ed6669ca00f4975a42b3',
-    'widget',
-    widgetInit
-  );
+  })(window, document, 'script', '//widget-server-domain/widget/widget.js?client_id=7b4a03708a19ed6669ca00f4975a42b3', 'widget', widgetInit);
 </script>
 ```
 
@@ -121,31 +115,31 @@ Now that we've created the code base for applying the plug-in and we introduced 
 > Note: we are going to need a CSS file where to place the widget's styles.
 
 ```javascript
-(function () {
+(function() {
+
   var defaults = {
     clientId: undefined,
-  };
+  }
 
   /******* Public Methods *******/
 
-  this.Widget = function () {};
+  this.Widget = function() {
+  }
 
-  Widget.prototype.init = function (options, doc) {
-    this.doc = doc || window.document;
-    this.options = merge(defaults, options);
+  Widget.prototype.init = function(options, doc) {
+    this.doc = doc || window.document
+    this.options = merge(defaults, options)
 
     if (!this.options.clientId) {
       // Validate options as needed
-      console.error(
-        'Undefined `clientId`. You must set it before start using Widget'
-      );
-      return;
+      console.error("Undefined `clientId`. You must set it before start using Widget");
+      return
     }
 
     loadCss(this.doc, this.options);
     createWidgetMarker(this.doc, this.options);
     createWidget(this.doc, this.options);
-  };
+  }
 
   /******* Private Methods *******/
 
@@ -155,7 +149,7 @@ Now that we've created the code base for applying the plug-in and we introduced 
       if (overrides.hasOwnProperty(property)) {
         if (overrides[property] instanceof Object) {
           source[property] = source[property] || new Object();
-          merge(source[property], overrides[property]);
+          merge(source[property], overrides[property])
         } else {
           source[property] = overrides[property];
         }
@@ -179,10 +173,8 @@ Now that we've created the code base for applying the plug-in and we introduced 
 
   function createWidgetMarker(doc, options) {
     var widgetMarker = doc.createElement('div');
-    widgetMarker.className =
-      'myapp-widget-marker myapp-widget-hoverable myapp-widget-unselectable';
-    widgetMarker.innerHTML =
-      '<div class="myapp-widget-title">Schedule your cute</div>';
+    widgetMarker.className = 'myapp-widget-marker myapp-widget-hoverable myapp-widget-unselectable';
+    widgetMarker.innerHTML = '<div class="myapp-widget-title">Schedule your cute</div>';
     widgetMarker.onclick = toggleWidgetCollapsed;
 
     customizeMarker(widgetMarker, options);
@@ -192,23 +184,18 @@ Now that we've created the code base for applying the plug-in and we introduced 
 
   function createWidget(doc, options) {
     var widget = doc.createElement('div');
-    widget.className =
-      'myapp-widget-widget myapp-widget-centered myapp-widget-hidden';
+    widget.className = 'myapp-widget-widget myapp-widget-centered myapp-widget-hidden';
     widget.isCollpased = true;
     widget.onclick = hideWidget;
-    widget.onscroll = function (ev) {
-      ev.stopPropagation();
-    };
-    widget.ontouchmove = function (ev) {
+    widget.onscroll = function(ev) {  ev.stopPropagation(); }
+    widget.ontouchmove = function(ev) {
       event.preventDefault();
       e.preventDefault();
-    };
+    }
 
     var body = doc.createElement('div');
     body.className = 'myapp-widget-body';
-    body.onclick = function (evt) {
-      evt.stopPropagation();
-    };
+    body.onclick = function(evt) { evt.stopPropagation(); }
     customizeWidgetBody(body, options);
 
     widget.appendChild(body);
@@ -229,17 +216,17 @@ Now that we've created the code base for applying the plug-in and we introduced 
     page.className = 'myapp-widget-container myapp-widget-centered';
     page.innerHTML =
       '<div class="myapp-widget-content">' +
-      '<div class="myapp-widget-title">Schedule your hair cute</div>' +
-      '<div class="myapp-widget-form">' +
-      '<div class="myapp-widget-row">' +
-      '<input id="myapp-widget-first-name" type="text" placeholder="First Name" />' +
-      '<input id="myapp-widget-last-name" type="text" placeholder="Last Name" />' +
-      '</div>' +
-      '<div class="myapp-widget-row">' +
-      '<input id="myapp-widget-date" type="date" />' +
-      '</div>' +
-      '<div id="myapp-widget-subscribe-action" class="myapp-widget-action myapp-widget-unselectable">Schedule</div>' +
-      '</div>' +
+        '<div class="myapp-widget-title">Schedule your hair cute</div>' +
+        '<div class="myapp-widget-form">' +
+          '<div class="myapp-widget-row">' +
+            '<input id="myapp-widget-first-name" type="text" placeholder="First Name" />' +
+            '<input id="myapp-widget-last-name" type="text" placeholder="Last Name" />' +
+          '</div>' +
+          '<div class="myapp-widget-row">' +
+            '<input id="myapp-widget-date" type="date" />' +
+          '</div>' +
+          '<div id="myapp-widget-subscribe-action" class="myapp-widget-action myapp-widget-unselectable">Schedule</div>' +
+        '</div>' +
       '</div>';
 
     var inputs = page.getElementsByTagName('input');
@@ -261,26 +248,24 @@ Now that we've created the code base for applying the plug-in and we introduced 
 
   function hideWidget() {
     var widget = me().widget;
-    widget.className =
-      'myapp-widget-widget myapp-widget-centered myapp-widget-hidden';
+    widget.className = 'myapp-widget-widget myapp-widget-centered myapp-widget-hidden';
     widget.isCollpased = true;
     clearWidgetForm();
   }
 
   function showWidget() {
     var widget = me().widget;
-    widget.className =
-      'myapp-widget-widget myapp-widget-centered myapp-widget-visible';
+    widget.className = 'myapp-widget-widget myapp-widget-centered myapp-widget-visible';
     widget.isCollpased = false;
   }
 
   function scheduleButtonClicked() {
     var xhttp = new XMLHttpRequest();
-    xhttp.open('POST', '<URL to the appropriate resource>', true);
-    xhttp.setRequestHeader('Content-type', 'application/json');
-    xhttp.onreadystatechange = function () {
+    xhttp.open("POST", "<URL to the appropriate resource>", true);
+    xhttp.setRequestHeader("Content-type", "application/json");
+    xhttp.onreadystatechange = function() {
       if (xhttp.readyState != 4) {
-        return;
+        return
       }
 
       var responseText = xhttp.responseText;
@@ -289,43 +274,43 @@ Now that we've created the code base for applying the plug-in and we introduced 
         if (xhttp.status >= 200 && xhttp.status < 300) {
           hideWidget();
         } else {
-          var msg = response.error.message;
-          alert('Oops! Something went wrong. ' + response.error.message);
+          var msg = response.error.message
+          alert("Oops! Something went wrong. " + response.error.message);
         }
       } catch (error) {
-        alert('Oops! Something went wrong, please try again later.');
-        console.error(error);
+        alert("Oops! Something went wrong, please try again later.");
+        console.error(error)
       }
     };
 
     var params = {
-      client_id: me().options.clientId,
-      schedule: {
-        date: me().doc.getElementById('myapp-widget-date').value,
-        first_name: me().doc.getElementById('myapp-widget-first-name').value,
-        last_name: me().doc.getElementById('myapp-widget-last-name').value,
-      },
+      'client_id': me().options.clientId,
+      'schedule': {
+        'date': me().doc.getElementById('myapp-widget-date').value,
+        'first_name': me().doc.getElementById('myapp-widget-first-name').value,
+        'last_name': me().doc.getElementById('myapp-widget-last-name').value
+      }
     };
-    xhttp.send(JSON.stringify(params));
+    xhttp.send(JSON.stringify(params));    
   }
 
   /******* DIY: straightforward functions *******/
 
   // change marker style properties according to the options passed
-  function customizeMarker(marker, options) {}
+  function customizeMarker(marker, options) { }
 
   // change widget body style properties according to the options passed
-  function customizeWidgetBody(body, options) {}
+  function customizeWidgetBody(body, options) { }
 
   // change input style properties according to the options passed
-  function customizeInput(input, options) {}
+  function customizeInput(input, options) { }
 
   // change action style properties according to the options passed
-  function customizeAction(action, options) {}
+  function customizeAction(action, options) { }
 
   // clear form input values
-  function clearWidgetForm() {}
-})();
+  function clearWidgetForm() { }
+}());
 ```
 
 > To keep this blogpost simple we omitted some implementations and the entire CSS file. Don't worry, these files are in the templates code base in a [repo at GitHub](https://github.com/xmartlabs/javascript-plugin).
@@ -428,12 +413,12 @@ Taking this into account is enough to discard the `iframe` solution, even withou
 
 As we are adding an external CSS file, there are a few things you should consider:
 
-- **Class name collisions:** you should prevent this by adding a prefix on each class name, something like `myapp-widget-` should be good enough.
-  You know this is a pain in the butt, so be smart and handle it from the beginning.
-- **External styles:** since we are including HTML and CSS in an external web site, it's going to be affected by all the rules that are already present on it.
-  Something like `* { background: red }` will change your widget's style and that is something you must avoid.
-  You can add a generic selector in your CSS filtering by the previous prefix, where you will override the appropriate values for CSS properties.
-  The following code will help you to do it.
+* **Class name collisions:** you should prevent this by adding a prefix on each class name, something like `myapp-widget-` should be good enough.
+You know this is a pain in the butt, so be smart and handle it from the beginning.
+* **External styles:** since we are including HTML and CSS in an external web site, it's going to be affected by all the rules that are already present on it.
+Something like `* { background: red }` will change your widget's style and that is something you must avoid.
+You can add a generic selector in your CSS filtering by the previous prefix, where you will override the appropriate values for CSS properties.
+The following code will help you to do it.
 
   ```css
   *[class^='myapp-widget-'],
@@ -442,8 +427,8 @@ As we are adding an external CSS file, there are a few things you should conside
   }
   ```
 
-- **Avoiding a resident evil:** the previous point was about preventing the widget style from being affected by the web site CSS rules, as you know, this is a two way issue, so if you want your clients to use your plug-in you must ensure you don't change anything else in the host.
-  So, avoid using generic selectors, try to use the most complete path to the components in your widget.
+* **Avoiding a resident evil:** the previous point was about preventing the widget style from being affected by the web site CSS rules, as you know, this is a two way issue, so if you want your clients to use your plug-in you must ensure you don't change anything else in the host.
+So, avoid using generic selectors, try to use the most complete path to the components in your widget.
 
 ## 3. Conclusions
 

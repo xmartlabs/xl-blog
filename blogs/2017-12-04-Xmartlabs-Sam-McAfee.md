@@ -1,6 +1,6 @@
 ---
 title: Sam McAfee - how to develop a game changer business idea in just 12 weeks?
-subtitle: ' '
+subtitle: " "
 permalink: /xmartlabs-sam-mc-afee/
 featured: true
 date: 2017-12-04
@@ -53,7 +53,7 @@ I've given talks on team performance and executing experiments at scale at QCon 
 
 There are many reasons why an external team would be useful. For starters, **all of your product teams may already be tied down with other work.** If you want to explore innovation, and you haven’t got the right mix of scrappy, smart, entrepreneurial engineers and designers on your staff, you may need to get outside help. With that same portfolio model mentioned above, **using an external team to build a new product experiment can solve a lot of bureaucratic problems in the typical company.**
 
-Just be sure **not do one of those dumb “fixed-bid, fixed-scope” projects.** You have to treat the **outsourced team like they are part of the family.** Make sure you’ve got a contractual relationship with them that prevents any kind of adversarial issues. Basically, \*_hire them as an extension of your organization for a period of time, not as some “vendor” that has no stake in the business._
+Just be sure **not do one of those dumb “fixed-bid, fixed-scope” projects.** You have to treat the **outsourced team like they are part of the family.** Make sure you’ve got a contractual relationship with them that prevents any kind of adversarial issues. Basically, **hire them as an extension of your organization for a period of time, not as some “vendor” that has no stake in the business.*
 
 <h2 class="color-title">Sounds like Xmartlabs is the perfect external team…</h2>
 

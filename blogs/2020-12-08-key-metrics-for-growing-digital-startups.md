@@ -1,15 +1,8 @@
 ---
 title: Key metrics for growing digital startups
 date: 2020-12-15
-excerpt: 'Still not using data and analytics to make informed decisions and make your startup grow? Check out this blog post to get some indication on how to get started, understand the most critical metrics, and take advantage of many free solutions out there!'
-tags:
-  [
-    digital product development,
-    product metrics,
-    Analytics,
-    A/B testing,
-    Xmartlabs,
-  ]
+excerpt: "Still not using data and analytics to make informed decisions and make your startup grow? Check out this blog post to get some indication on how to get started, understand the most critical metrics, and take advantage of many free solutions out there!"
+tags: [digital product development, product metrics, Analytics, A/B testing, Xmartlabs]
 category: development
 author: robert
 thumbnail: images/key-metrics-for-growing-digital-startups/featured.png
@@ -20,11 +13,13 @@ Ever since the bigger tech companies like Google, Amazon and Facebook realized t
 
 If you are in the process of growing your startup or digital product, you may be interested in getting to know how to use data the same way the biggest tech companies do to grow their own products. That is, tracking key performance indicators of two fundamental customer funnels and implementing experimental flows for different users, commonly known as A/B Testing.
 
+
 ## Understanding product evolution through funnel performance
 
 Funnels are not a new concept in the world of sales and marketing. Funnel is a term used to describe the process of obtaining customers through different interactions with the company and it's commonly divided into different stages. Although in this article we are not going to talk about how to build a funnel, there is plenty of information out there on how to design and implement one.
 
 Our focus will be explaining what are the key numerical indicators you should be tracking to determine the effectiveness of the two most important funnels, the **customer acquisition funnel** and the **customer engagement funnel** and also explain how can **A/B Testing** help you improve them even further.
+
 
 ### Gauging the customer acquisition funnel
 
@@ -32,15 +27,17 @@ As a startup, your customer acquisition funnel is defined by your growth model, 
 
 - **Cost Per Acquisition (CPA)**
 
-  This indicator tells you how much you are investing in order for your lead to make a conversion. It's important to understand this number as early as possible. If this indicator gets too high for your startup, then it means that you should change your growth model as soon as possible, as also possibly making some internal changes to reduce costs.
+    This indicator tells you how much you are investing in order for your lead to make a conversion.  It's important to understand this number as early as possible. If this indicator gets too high for your startup, then it means that you should change your growth model as soon as possible, as also possibly making some internal changes to reduce costs.
 
 - **Conversion Rate** **(CVR)**
 
-  One of the most important indicators in terms of sales, it allows you to understand the relation between the number of sales and the amount of leads you are generating for your product. If your CVR is very low, chances are that something is not working as it should in your funnel and needs to be improved. Other possibility is that your business model does not depend on a high conversion rate to be profitable, in which case is not bad, but of course a higher CVR would possibly mean a higher revenue for your business.
+    One of the most important indicators in terms of sales, it allows you to understand the relation between the number of sales and the amount of leads you are generating for your product. If your CVR is very low, chances are that something is not working as it should in your funnel and needs to be improved. Other possibility is that your business model does not depend on a high conversion rate to be profitable, in which case is not bad, but of course a higher CVR would possibly mean a higher revenue for your business.
 
 - **Number of visits / downloads / active visitors**
 
-  The straight forward number that tells you if both your product and funneling efforts are being effective at bringing people to buy your product/service. It's not a specific metric for all business models, but it is a good general indicator to keep an eye on to determine if you should invest more into your marketing/sales campaigns.
+    The straight forward number that tells you if both your product and funneling efforts are being effective at bringing people to buy your product/service. It's not a specific metric for all business models, but it is a good general indicator to keep an eye on to determine if you should invest more into your marketing/sales campaigns.
+
+
 
 ## Using A/B testing to improve funnels
 
@@ -62,7 +59,9 @@ The disclaimer here is that, if your startup scales maybe you should start consi
 
 For A/B Testing tools, Firebase once again has a really good product for performing such tests, the utility that Firebase for A/B Testing brings to the table is excellent as a starting tool. Another common tool you will see in this experimental phase is Optimizely, which comes with a great UI to setup your A/B experimentation and a lot of versatility outside of the technological sprectrum. Optimizely as a platform offers so many diverse solutions, from marketing ad tests to finance flows.
 
-_Do you need help implementing the correct business intelligence tool for your business? We are [here](https://xmartlabs.com) to help!_
+
+*Do you need help implementing the correct business intelligence tool for your business? We are [here](https://xmartlabs.com) to help!*
+
 
 ## The importance of monitoring all these components with analytics
 

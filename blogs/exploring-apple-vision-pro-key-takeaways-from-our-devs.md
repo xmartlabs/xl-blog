@@ -1,6 +1,6 @@
 ---
-title: 'Exploring Apple Vision Pro: Key Takeaways From Our Devs'
-subtitle: ' '
+title: "Exploring Apple Vision Pro: Key Takeaways From Our Devs"
+subtitle: " "
 permalink: apple-vision-pro
 featured: true
 date: 2023-11-28
@@ -14,7 +14,6 @@ tags:
   - ARKit
 author: nicolantean
 ---
-
 In this blog, we’ll take you on a journey through Apple Vision Pro, an exciting technology that brings digital experiences to life. We’ll share our experience and discoveries while working on a Proof of Concept (PoC) project and explore the process of moving existing apps to this new platform. We’ll also discuss which types of apps are best suited for this technology. During our exploration, we’ll tell you about what we’ve noticed, the challenges we’ve faced, and the exciting things we’ve learned, giving you a clear picture of how this amazing technology works.
 
 ## The Technology Behind Apple Vision Pro
@@ -38,11 +37,11 @@ Our Apple Vision journey showcases the dynamic nature of technology development.
 
 ![](/images/screenshot-xl.png)
 
-It's important to acknowledge that getting a physical device for testing can be a logistical challenge in certain regions, thus emphasizing the reliance on the simulator. In the context of ARKit apps on iOS, we've traditionally favored real device testing due to the simulator's limitations in replicating real-world AR experiences. So, until Vision Pro becomes more accessible, this is a limitation of developing this type of app.
+It's important to acknowledge that getting a physical device for testing can be a logistical challenge in certain regions, thus emphasizing the reliance on the simulator. In the context of ARKit apps on iOS, we've traditionally favored real device testing due to the simulator's limitations in replicating real-world AR experiences. So, until Vision Pro becomes more accessible, this is a limitation of developing this type of app. 
 
 ## Migrating Existing Apps to visionOS
 
-Apple Vision Pro offers a promising frontier for creating immersive applications, and the opportunity to transition existing apps to this innovative platform is exciting. While some apps may require substantial adjustments to meet Apple requirements, it’s important to note that in some cases, migrating to [visionOS](https://developer.apple.com/visionos/) can be a seamless process, with little to no changes required.
+Apple Vision Pro offers a promising frontier for creating immersive applications, and the opportunity to transition existing apps to this innovative platform is exciting. While some apps may require substantial adjustments to meet Apple requirements, it’s important to note that in some cases, migrating to [visionOS](https://developer.apple.com/visionos/) can be a seamless process, with little to no changes required. 
 
 Apple provides a checklist of prerequisites to evaluate whether your app is visionOS compatible. These requirements serve as a litmus test for readiness, ensuring a seamless migration process. Here are some key checkpoints to consider:
 
@@ -50,9 +49,9 @@ Apple provides a checklist of prerequisites to evaluate whether your app is visi
 2. **No Bugs Are Exhibited**: To ensure a smooth transition, it's vital that your app's features and functions work as intended without any issues. Any bugs or unexpected behaviors should be addressed and resolved to guarantee a smooth user experience.
 3. **App Doesn't Make Capability Assumptions**: It's important to verify that your app doesn't rely on specific device features or functions that may not be available on Apple Vision Pro. Compatibility should extend across the board to ensure that your app performs consistently across different platforms.
 
-By adhering to these checklist requirements, you can set a strong foundation for migrating your existing app into the realm of visionOS.
+By adhering to these checklist requirements, you can set a strong foundation for migrating your existing app into the realm of visionOS. 
 
-Apple's commitment to delivering immersive experiences involves a rigorous evaluation of app compatibility with VisionPro. Developers can begin this evaluation by running and testing their apps in the visionOS simulator within [Xcode](https://developer.apple.com/documentation/xcode).
+Apple's commitment to delivering immersive experiences involves a rigorous evaluation of app compatibility with VisionPro. Developers can begin this evaluation by running and testing their apps in the visionOS simulator within [Xcode](https://developer.apple.com/documentation/xcode). 
 
 Any issues that could impede Apple's evaluation can be identified and resolved using the compatibility checklist we provided. This collaborative effort ensures that the creation of robust, immersive applications aligns with Apple's vision for the future of technology. Participating in this evaluation process empowers developers to shape the landscape of immersive experiences on the VisionPro platform.
 
@@ -71,13 +70,13 @@ By following these guidelines, you can maximize the potential of visionOS, creat
 
 When transitioning ARKit-based apps to visionOS, it's important to consider more than just the compatibility checklist. Here are key considerations to ensure a seamless integration of ARKit technology in visionOS:
 
-- **Adopt Common Technologies**: To create an app that runs smoothly on iOS and visionOS, leverage the available technologies on both platforms. While ARKit in iOS offers a variety of interface creation options, visionOS prefers SwiftUI and RealityKit. If your app doesn't already use RealityKit for 3D content, it's advisable to make the switch before adding visionOS support. Retaining older technology code in your iOS app may necessitate recreating much of it using RealityKit when transitioning to visionOS.
-- **Convert to USDZ Format**: In both iOS and visionOS, the recommended format for 3D assets is USDZ. This format streamlines your assets into a single file, encompassing models, textures, behaviors, physics, anchoring, and more. To ensure compatibility, utilize the Reality Converter tool provided with Xcode to convert your assets for your visionOS project.
-- **Update Your Interface**: In visionOS, you control your app's content, and the system manages its integration with the user's surroundings. Unlike iOS, where a special ARKit view blends your content with live camera content, visionOS requires you to focus solely on your content, necessitating the removal of the special ARKit view.
-- **Replace ARKit Code**: ARKit offers distinct APIs for iOS and visionOS, with different approaches for utilizing ARKit services. In iOS, you use ARKit to display your content and manage interactions with the surroundings. In visionOS, the system takes care of displaying your content, so ARKit primarily manages interactions with the surroundings. In fact, some visionOS apps may not require ARKit at all, except when specific services are needed, such as plane detection, image tracking, scene reconstruction, hand tracking, world tracking, and device-pose prediction.
-- **Isolate Unavailable ARKit Features**: If your app relies on ARKit features that aren't supported in visionOS, isolate that code in the iOS version of your app. Features like face tracking, body tracking, and object detection are unavailable in visionOS, and must remain exclusive to the iOS version.
+* **Adopt Common Technologies**: To create an app that runs smoothly on iOS and visionOS, leverage the available technologies on both platforms. While ARKit in iOS offers a variety of interface creation options, visionOS prefers SwiftUI and RealityKit. If your app doesn't already use RealityKit for 3D content, it's advisable to make the switch before adding visionOS support. Retaining older technology code in your iOS app may necessitate recreating much of it using RealityKit when transitioning to visionOS.
+* **Convert to USDZ Format**: In both iOS and visionOS, the recommended format for 3D assets is USDZ. This format streamlines your assets into a single file, encompassing models, textures, behaviors, physics, anchoring, and more. To ensure compatibility, utilize the Reality Converter tool provided with Xcode to convert your assets for your visionOS project.
+* **Update Your Interface**: In visionOS, you control your app's content, and the system manages its integration with the user's surroundings. Unlike iOS, where a special ARKit view blends your content with live camera content, visionOS requires you to focus solely on your content, necessitating the removal of the special ARKit view.
+* **Replace ARKit Code**: ARKit offers distinct APIs for iOS and visionOS, with different approaches for utilizing ARKit services. In iOS, you use ARKit to display your content and manage interactions with the surroundings. In visionOS, the system takes care of displaying your content, so ARKit primarily manages interactions with the surroundings. In fact, some visionOS apps may not require ARKit at all, except when specific services are needed, such as plane detection, image tracking, scene reconstruction, hand tracking, world tracking, and device-pose prediction.
+* **Isolate Unavailable ARKit Features**: If your app relies on ARKit features that aren't supported in visionOS, isolate that code in the iOS version of your app. Features like face tracking, body tracking, and object detection are unavailable in visionOS, and must remain exclusive to the iOS version.
 
-Adapting ARKit-based apps to visionOS can be complex, particularly for apps heavily relying on ARKit features. It's important to recognize that these apps, which already leverage augmented reality on iOS, may require the most work to bring to visionOS. The distinct APIs and approaches of ARKit in iOS and visionOS can present unique challenges during the transition.
+Adapting ARKit-based apps to visionOS can be complex, particularly for apps heavily relying on ARKit features. It's important to recognize that these apps, which already leverage augmented reality on iOS, may require the most work to bring to visionOS. The distinct APIs and approaches of ARKit in iOS and visionOS can present unique challenges during the transition. 
 
 Features like face tracking, body tracking, and object detection that are unavailable in visionOS must be carefully managed and retained in the iOS version. However, the opportunities in the immersive world of visionOS are promising for apps that can successfully make the switch.
 

@@ -1,6 +1,6 @@
 ---
 title: Deploying a Recommendation system using FastAPI, TF Serving and Feast
-subtitle: ' '
+subtitle: " "
 permalink: /deploying-a-recommendation-system-using-fastapi-tf-serving-and-feast/
 featured: true
 date: 2023-08-24
@@ -14,7 +14,6 @@ tags:
   - Machine Learning
 author: mathias
 ---
-
 ### Introduction
 
 In today's fast-paced and highly competitive business landscape, staying ahead of the curve is not just a goal but a necessity for
@@ -85,16 +84,16 @@ We designed a system that holds all the
 recommender-related business logic in one place (FastAPI Controller), which is
 separate from the main application backend. This has several advantages:
 
-- It allows the ML Engineering team to integrate the different components of the
+* It allows the ML Engineering team to integrate the different components of the
   recommendation system themselves and in Python (or their preferred language).
   This is especially useful when some pre- or post-processing is done in the
   controller.
-- A separate release process will allow this component to be updated
+* A separate release process will allow this component to be updated
   without the database migrations and related rollbacks and downtime of the main
   backend. Possibly the ML Controller could be released more often as well.
-- Allows scaling the main backend and the ML Controller independently. You can
+* Allows scaling the main backend and the ML Controller independently. You can
   also choose cloud instance types that better suit each of their work.
-- The main backend does not need to know all the services (Redis, TF Serving, Feast)
+* The main backend does not need to know all the services (Redis, TF Serving, Feast)
   connected to the controller and must not integrate those dependencies.
 
 The ML Controller is not only the glue that sticks the other components together; it

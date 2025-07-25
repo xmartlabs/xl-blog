@@ -1,6 +1,6 @@
 ---
-title: 'Jira Setup for Streamlined Scrum: Balancing Product and Development Needs'
-subtitle: ' '
+title: "Jira Setup for Streamlined Scrum: Balancing Product and Development Needs"
+subtitle: " "
 permalink: jira-setup-streamlined-scrum-product-development
 featured: true
 date: 2024-10-30
@@ -14,7 +14,6 @@ tags:
   - Agile
 author: sante
 ---
-
 As a former software developer turned project manager, I’ve experienced firsthand the need for clarity and simplicity when managing both the product vision and the day-to-day work of the development team.
 
 One of the most effective setups I’ve implemented in Jira balances the strategic needs of the product team with the tactical requirements of developers. This setup revolves around maintaining two distinct boards: one for **user stories** and another for **tasks**, ensuring transparency and focus across teams.
@@ -31,9 +30,9 @@ The goal of splitting the work between a **Product Board** and a **Development B
 
 This board is owned by the product team and serves as the **source of truth for features**. Here’s how it works:
 
-- **User Stories**: These are high-level descriptions of features or functionality that the product team wants to build. They capture the _what_ and the _why_ of the product and are focused on delivering value to the customer. Eventually, we could have technical stories enveloping a set of related tasks, that's owned by the engineering team.
-- **Acceptance Criteria**: Every user story includes detailed acceptance criteria, clearly outlining the conditions that must be met for the feature to be considered complete.
-- **Prioritization**: The product team is responsible for prioritizing these user stories, ensuring that the most valuable features are addressed first.
+* **User Stories**: These are high-level descriptions of features or functionality that the product team wants to build. They capture the *what* and the *why* of the product and are focused on delivering value to the customer. Eventually, we could have technical stories enveloping a set of related tasks, that's owned by the engineering team.
+* **Acceptance Criteria**: Every user story includes detailed acceptance criteria, clearly outlining the conditions that must be met for the feature to be considered complete.
+* **Prioritization**: The product team is responsible for prioritizing these user stories, ensuring that the most valuable features are addressed first.
 
 This board allows the product team to manage features in a way that’s flexible and adaptive. It also provides transparency to the development team regarding what’s coming next and why.
 
@@ -43,9 +42,9 @@ This board allows the product team to manage features in a way that’s flexible
 
 Once a user story is ready for development, it gets broken down into tasks, and that’s where the **Development Board** comes into play:
 
-- **Tasks**: These are smaller, actionable items that the development team can estimate, assign, and work on. Each task is related to a specific user story, providing traceability from feature request to implementation.
-- **Task Estimation**: Our team uses poker planning sessions to assign story point values to each task, in which every team member gives their two cents about all the tasks in scope, assuring the criteria for estimation remains consistent even though we are working with multiple components and technologies.
-- **Sprint Planning**: After the tasks are estimated, they are pulled into sprints, allowing the team to commit to achievable goals. This board helps developers focus on the _how_ of implementing features, without being overwhelmed by the broader product vision.
+* **Tasks**: These are smaller, actionable items that the development team can estimate, assign, and work on. Each task is related to a specific user story, providing traceability from feature request to implementation.
+* **Task Estimation**: Our team uses poker planning sessions to assign story point values to each task, in which every team member gives their two cents about all the tasks in scope, assuring the criteria for estimation remains consistent even though we are working with multiple components and technologies.
+* **Sprint Planning**: After the tasks are estimated, they are pulled into sprints, allowing the team to commit to achievable goals. This board helps developers focus on the *how* of implementing features, without being overwhelmed by the broader product vision.
 
 ### Workflow Between the Boards
 
@@ -63,17 +62,17 @@ The flow between these two boards is essential for smooth collaboration between 
 
 One of the primary reasons this Jira setup works so well is its focus on keeping things simple for developers. By having a separate board for tasks:
 
-- The day-to-day development board contains only four columns, which lessens the burden on the team to keep every status up to date, they only need to go and modify it when they pick up a task and when they are either done or blocked.
-- Developers only need to interact with the Development Board on a day-to-day basis, where they see a clear breakdown of what’s expected of them in the sprint.
-- The team isn’t bogged down with high-level product discussions or features that are not ready for development.
-- It’s easy to see who is working on what, and dependencies between tasks are clearer, due to the granularity of the tasks.
+* The day-to-day development board contains only four columns, which lessens the burden on the team to keep every status up to date, they only need to go and modify it when they pick up a task and when they are either done or blocked.
+* Developers only need to interact with the Development Board on a day-to-day basis, where they see a clear breakdown of what’s expected of them in the sprint.
+* The team isn’t bogged down with high-level product discussions or features that are not ready for development.
+* It’s easy to see who is working on what, and dependencies between tasks are clearer, due to the granularity of the tasks.
 
 ### Managing Dependencies and Communication
 
 Jira’s **linking feature** plays a crucial role in this setup. Each task on the Development Board is linked back to its parent user story on the Product Board. This ensures:
 
-- **Traceability**: Every task completed is tied back to a specific feature, providing a clear view of progress.
-- **Alignment**: The development team can always look at the user story if they need to understand the broader context of a task.
+* **Traceability**: Every task completed is tied back to a specific feature, providing a clear view of progress.
+* **Alignment**: The development team can always look at the user story if they need to understand the broader context of a task.
 
 We also use **automation rules** in Jira to notify the product team when all tasks related to a user story are completed. This keeps the product team in the loop without interrupting the development flow.
 

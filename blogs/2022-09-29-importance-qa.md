@@ -80,7 +80,7 @@ They located the bug before launch, but for lack of time, they developed a patch
 ## A lethal dose of X-rays.
 
 Therac-25 was a machine designed for therapeutic radiation.
-Due to a bug in its software, a series of patients received an unexpected X-ray dose, causing several deaths among the many affected.
+Due to a bug in its software, a series of patients received an unexpected  X-ray dose, causing several deaths among the many affected.
 
 ## The day a bug wiped Sweden off the internet map.
 
@@ -98,9 +98,9 @@ In 2015, some hackers broke into the system and published a list of clients, tot
 The hackers, who called themselves the Impact Team, said they had managed to steal the real names and addresses of the site's users, including those who had previously paid to "delete" their accounts.
 It appears that the Ashley Madison team didn't understand the flaws in their security system until after the hack, though the methods the hackers used are still unknown.
 
-As a business, to minimize your own risk, you should take action now to double-check your security systems.
-Make security a priority, and get involved with your security team to understand how it works and how you can better secure your systems.
-Hiring an outside firm to test your security measure via Penetration Testing and Vulnerability assessments would be a good idea.
+ As a business, to minimize your own risk, you should take action now to double-check your security systems.
+ Make security a priority, and get involved with your security team to understand how it works and how you can better secure your systems.
+ Hiring an outside firm to test your security measure via Penetration Testing and Vulnerability assessments would be a good idea.
 
 # So, is implementing QA necessary?
 

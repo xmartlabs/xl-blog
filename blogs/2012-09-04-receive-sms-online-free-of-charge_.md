@@ -2,7 +2,7 @@
 title: Receive SMS online free of charge
 date: 2012-09-04
 tags:
-  - tips
+- tips
 blogger_orig_url: https://blog.xmartlabs.com/2012/09/receive-sms-online-free-of-charge_4.html
 author: enrique
 category: development

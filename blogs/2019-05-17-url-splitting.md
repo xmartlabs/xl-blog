@@ -126,7 +126,9 @@ import React from 'react';
 import { AppTemplate } from '../app-template';
 import './app.css';
 
-const App = () => <AppTemplate />;
+const App = () => (
+  <AppTemplate />
+);
 
 export default App;
 ```
@@ -158,11 +160,11 @@ const appData = Object.values(apps).map((appName) => {
       path: resolveApp(`src/apps/${appName}/index.js`),
     },
     html: {
-      chunks: [appName],
+      chunks: [ appName ],
       filename: `${appName}.html`,
       template: resolveApp(`public/base-template.html`),
-    },
-  };
+    }
+  }
 });
 ```
 
@@ -212,7 +214,8 @@ paths.appData.forEach((entry) => {
     // the line below with these two lines if you prefer the stock client:
     // require.resolve('webpack-dev-server/client') + '?/',
     // require.resolve('webpack/hot/dev-server'),
-    isEnvDevelopment && require.resolve('react-dev-utils/webpackHotDevClient'),
+    isEnvDevelopment &&
+      require.resolve('react-dev-utils/webpackHotDevClient'),
     // Finally, this is your app's code:
     entryJs.path,
     // We include the app code last so that if there is a runtime error during
@@ -224,59 +227,54 @@ paths.appData.forEach((entry) => {
 return {
   // ...
   entry: entries,
-};
+}
 ```
 
 #### Output Configuration
 
 Right now, Webpack expects you to only generate one final bundle. We're trying to split our app so this approach won't work. Head to the `output` key on the configuration object and look for the `filename` key inside. In development mode its value is `static/js/bundle.js`. We don't want it to have a static name, since we'll be creating three of them and they'll step on each other. The easy solution is to use Webpack's handy interpolation schemes: simply change the value to `static/js/[name].bundle.js`. This will make Webpack interpolate the name of the bundle in the file, so you'll end up creating three different main bundles.
 
-And _voilà_, Webpack now knows where to look for our JS files and thus define the apps correctly. But there's a final task: configure the HTML Webpack generates for each app. We'll do this on the `plugins` key, creating one instance of `HtmlWebpackPlugin` for each of our apps.
+And *voilà*, Webpack now knows where to look for our JS files and thus define the apps correctly. But there's a final task: configure the HTML Webpack generates for each app. We'll do this on the `plugins` key, creating one instance of `HtmlWebpackPlugin` for each of our apps.
 
 ```js
 return {
   // ...
   plugins: [
     //...
-    ...paths.appData.map(
-      (appData) =>
-        new HtmlWebpackPlugin(
-          Object.assign(
-            {},
-            appData,
-            {
-              inject: true,
+    ...paths.appData.map(appData => new HtmlWebpackPlugin(Object.assign(
+      {},
+      appData,
+      {
+        inject: true,
+      },
+      isEnvProduction
+        ? {
+            minify: {
+              removeComments: true,
+              collapseWhitespace: true,
+              removeRedundantAttributes: true,
+              useShortDoctype: true,
+              removeEmptyAttributes: true,
+              removeStyleLinkTypeAttributes: true,
+              keepClosingSlash: true,
+              minifyJS: true,
+              minifyCSS: true,
+              minifyURLs: true,
             },
-            isEnvProduction
-              ? {
-                  minify: {
-                    removeComments: true,
-                    collapseWhitespace: true,
-                    removeRedundantAttributes: true,
-                    useShortDoctype: true,
-                    removeEmptyAttributes: true,
-                    removeStyleLinkTypeAttributes: true,
-                    keepClosingSlash: true,
-                    minifyJS: true,
-                    minifyCSS: true,
-                    minifyURLs: true,
-                  },
-                }
-              : undefined
-          )
-        )
-    ),
+          }
+        : undefined
+    ))),
   ],
-};
+}
 ```
 
-Remember to maintain the relative order of the plugins. Also, keep in mind that you have to _replace_ the instance of HtmlWebpackPlugin that is already being created.
+Remember to maintain the relative order of the plugins. Also, keep in mind that you have to *replace* the instance of HtmlWebpackPlugin that is already being created.
 
 Now are apps are correctly split. Sadly it isn't the end yet, but we're getting closer! The last thing we'll need to do is configure Webpack's development server to serve us the three different apps.
 
 ### Rewriting Development Routes
 
-The development server that runs when you start the project in development is biased towards a single-entry-point implementation. We'll need to change a couple of things in order to make URL splitting work here. Essentially, the development server needs to know which app it needs to serve on which URL. We can do so with _rewrites_:
+The development server that runs when you start the project in development is biased towards a single-entry-point implementation. We'll need to change a couple of things in order to make URL splitting work here. Essentially, the development server needs to know which app it needs to serve on which URL. We can do so with *rewrites*:
 
 ```js
 /* config/paths.js */
@@ -290,7 +288,7 @@ const appRewrites = [
 
 Now simply export `appRewrites` so that we can access it from the configuration file.
 
-Rewrites work with regular expressions, so you won't necessarily need to specify _each_ of your app's paths manually. Here I've given a naive example to get you going. It's also reasonable to put a catch-all rule at the end so that the user always gets an app served to them (maybe to show them a not found page).
+Rewrites work with regular expressions, so you won't necessarily need to specify *each* of your app's paths manually. Here I've given a naive example to get you going. It's also reasonable to put a catch-all rule at the end so that the user always gets an app served to them (maybe to show them a not found page).
 
 Now, let's tell Webpack's development server to use these rewrites. The configuration resides in `config/webpackDevServer.config.js`.
 
@@ -331,13 +329,13 @@ The whole idea of URL splitting is to avoid serving the user code they probably 
 
 Try structuring your code in a way that reusable code is correctly labeled and easy to identify (i.e. global styling files, helpers and generic components). This will make it easier for people who work with your code to know what they're looking at, and give you an idea of how much code you're sharing.
 
-Much like a prepubescent teenager, your apps want to have a personality! If you find yourself sharing _everything_ between apps, it might be a sign that you didn't split them in a sensible way. Also, sharing little to no code between them can also be signalling an issue. It's all a matter of balance.
+Much like a prepubescent teenager, your apps want to have a personality! If you find yourself sharing *everything* between apps, it might be a sign that you didn't split them in a sensible way. Also, sharing little to no code between them can also be signalling an issue. It's all a matter of balance.
 
 ### Service Workers and PWAs
 
 The initial app we created is configured to be a [Progressive Web App](https://developers.google.com/web/progressive-web-apps/) out of the box. This is because it is assumed you'll always have a single bundle, and having your app be a PWA without configuration is sure useful!
 
-The problem is, our app is now _three_ different bundles. You can't have a PWA with multiple entry points that don't share all the code. What you can have is three different PWAs scoped by an internal path in your domain. I won't go into detail on how you could achieve this, since it isn't the scope of this article, and I personally don't find it very useful (but it could be for your use case).
+The problem is, our app is now *three* different bundles. You can't have a PWA with multiple entry points that don't share all the code. What you can have is three different PWAs scoped by an internal path in your domain. I won't go into detail on how you could achieve this, since it isn't the scope of this article, and I personally don't find it very useful (but it could be for your use case).
 
 If you've followed this blogpost's code to a tee, then probably all your apps' `index.js` file have these lines somewhere:
 
@@ -358,7 +356,7 @@ Sadly, with URL splitting you'll need to make your backend a little smarter. Muc
 
 ### Frontend Routing
 
-If you have experience with SPA's with React, you've probably used React Router to solve your routing needs. The issue is, React Router will solve routing _inside_ each of your apps, but not _between_ them. Perfect time to sell my next blog post!
+If you have experience with SPA's with React, you've probably used React Router to solve your routing needs. The issue is, React Router will solve routing *inside* each of your apps, but not *between* them. Perfect time to sell my next blog post!
 
 Jokes aside, this is a somewhat deep topic, so I've decided to split it. Check out part two when it releases!
 

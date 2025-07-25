@@ -2,9 +2,9 @@
 title: Speakers at JIAP 2013
 date: 2013-08-13
 tags:
-  - iOS Development
-  - Mobile Development
-  - Android
+- iOS Development
+- Mobile Development
+- Android
 author: agustin
 category: people-events
 permalink: /speakers-at-jiap-2013/

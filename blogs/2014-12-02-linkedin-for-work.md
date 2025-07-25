@@ -1,6 +1,6 @@
 ---
 title: LinkedIn for Work
-subtitle: ' '
+subtitle: " "
 permalink: /linkedin-for-work/
 featured: true
 date: 2014-12-02

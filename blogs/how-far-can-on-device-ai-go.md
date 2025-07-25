@@ -14,7 +14,6 @@ tags:
   - health ai
 author: belu
 ---
-
 # Introduction
 
 In our [last blog post](https://blog.xmartlabs.com/blog/blog-on-device-ai-health-assistant-xlcare/), we talked about running Large Language Models (LLMs) locally on your phone to power a privacy-first health assistant. The idea was simple: let your wearable data stay on your device and still get smart, personalized answers about your health, no cloud required. It mostly worked… but it was not perfect. The biggest issues were that the assistant couldn’t really understand trends or tell when your data was collected, which made certain questions hard to answer.
@@ -69,7 +68,7 @@ This is an example of the type of prompts that we used at this stage:
 
 ```javascript
 'You are a helpful assistant that interprets user health-related questions and returns structured queries for health data retrieval.' +
-  'Your job is to translate user requests into well-formed JSON objects that can be used to call external health services such as Apple HealthKit.';
+'Your job is to translate user requests into well-formed JSON objects that can be used to call external health services such as Apple HealthKit.'
 ```
 
 However, we could not get a conversational response using this technique.
@@ -114,10 +113,10 @@ We continued iterating over the three prompt approach, in search for better resu
 ### I﻿nitial
 
 ```jsx
-'You are a supportive health assistant. When a user asks a question about their health, choose one of the following two actions:\n\n' +
-  "1. If the question clearly requires personal health metrics that you don't have (e.g. heart rate, sleep, steps), greet the user warmly, inform them that you'll check that information, and include <tool> at the end of your message to request the data. Do not ask the user to provide data manually." +
-  '2. If the question can be answered generally without personal data, respond directly and concisely. In this case, instead of <tool>, use <end> at the end of your message.\n\n' +
-  'You must pick only one path. Never include both <tool> and any direct health advice in the same response.';
+      'You are a supportive health assistant. When a user asks a question about their health, choose one of the following two actions:\n\n' +
+      "1. If the question clearly requires personal health metrics that you don't have (e.g. heart rate, sleep, steps), greet the user warmly, inform them that you'll check that information, and include <tool> at the end of your message to request the data. Do not ask the user to provide data manually." +
+      '2. If the question can be answered generally without personal data, respond directly and concisely. In this case, instead of <tool>, use <end> at the end of your message.\n\n' +
+      'You must pick only one path. Never include both <tool> and any direct health advice in the same response.'
 ```
 
 In this version of the initial prompt, we added simple logic to help the model decide whether to call a tool or just respond directly. If no tool was needed, the message would end there; otherwise, it would continue with the appropriate tool call.
@@ -158,19 +157,19 @@ We really wanted to test the limits, so we decided to give the model another too
 
 ```javascript
 `Convert the user's health question into a structured call using the correct tool: queryHealthData or createHealthChart. Today is ${new Date().toISOString()}.\n\n` +
-  'Follow these rules:\n\n' +
-  '**For queryHealthData:**\n' +
-  '- Always request data from the **past 2–3 weeks**.\n' +
-  '- Choose a single `statistic` based on the question:\n' +
-  '  - "how is my [metric]" → `mean`\n' +
-  '  - "does it vary" / "is it consistent" → `stdDev`\n' +
-  '  - "has it improved"/"changed"/"trended" → `linearTrend`\n\n' +
-  '**For createHealthChart:**\n' +
-  '- Choose aggregation:\n' +
-  '  - Past 1–2 weeks → `daily`\n' +
-  '  - Past 3+ weeks → `weekly`\n' +
-  '- Always include `start_date` and `end_date`.\n\n' +
-  'Only generate one tool call per request.';
+      'Follow these rules:\n\n' +
+      '**For queryHealthData:**\n' +
+      '- Always request data from the **past 2–3 weeks**.\n' +
+      '- Choose a single `statistic` based on the question:\n' +
+      '  - "how is my [metric]" → `mean`\n' +
+      '  - "does it vary" / "is it consistent" → `stdDev`\n' +
+      '  - "has it improved"/"changed"/"trended" → `linearTrend`\n\n' +
+      '**For createHealthChart:**\n' +
+      '- Choose aggregation:\n' +
+      '  - Past 1–2 weeks → `daily`\n' +
+      '  - Past 3+ weeks → `weekly`\n' +
+      '- Always include `start_date` and `end_date`.\n\n' +
+      'Only generate one tool call per request.'
 ```
 
 Then, using `react-native-gifted-chart`, we were able to create the chart that the LLM requested.
@@ -221,9 +220,9 @@ We created our own set of 60 questions to evaluate the agent’s ability to use 
 
 Here are a few examples of the types of questions we used:
 
-- _“What is my average heart rate over the past week?”_ — the agent should call a tool to get a statistic.
-- _“Show me a visual representation of my steps from last month.”_ — the agent should call a tool to generate a chart.
-- _“Is walking better than running for heart health?”_ — no tool needed; the agent should just respond in natural language.
+* *“What is my average heart rate over the past week?”* — the agent should call a tool to get a statistic.
+* *“Show me a visual representation of my steps from last month.”* — the agent should call a tool to generate a chart.
+* *“Is walking better than running for heart health?”* — no tool needed; the agent should just respond in natural language.
 
 ![test results](/images/tests.png)
 

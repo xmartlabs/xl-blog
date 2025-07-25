@@ -1,6 +1,6 @@
 ---
-title: 'Experiment Tracking Done Right: Relevancy and Best Practices'
-subtitle: ' '
+title: "Experiment Tracking Done Right: Relevancy and Best Practices"
+subtitle: " "
 permalink: experiment-tracking-machine-learning
 featured: true
 date: 2024-04-04
@@ -14,7 +14,6 @@ tags:
   - ClearML
 author: gabriel-lema
 ---
-
 ## What is experiment tracking (and why is it important)
 
 Experiment tracking (ET) in machine learning is the process we rely on to avoid getting lost as we navigate through the intricate landscape of parameters, datasets, and performance metrics. It entails systematically recording and organizing experiment details, ensuring reproducibility and efficiency in the iterative process of building models. It is a core component of any ML project applying the best MLOps practices.
@@ -26,14 +25,15 @@ This blog explores the vital role experiment tracking plays in machine learning 
 We can identify two main goals for experiment tracking:
 
 1. **Reproducibility:** it refers to being able to reproduce what you ran at any point in the past. You might want to run a new experiment with the same set of dependencies, code, data, random seeds, and everything to get the same result, or you might want to tweak some parts of it, leaving the rest unchanged. These are some reasons why it is important to be able to reproduce experiments while developing a model:
-   - Faster development: being able to reproduce the entire workflow accelerates the testing and refinement of models.
-   - Collaboration: new team members should be able to effortlessly start working on someone else's experiments and contributing to model development.
-   - Recovery: it's crucial to be able to go back in time and understand what was done, what parameters were used to create a model, and correct in case of any errors
 
+   * Faster development: being able to reproduce the entire workflow accelerates the testing and refinement of models.
+   * Collaboration: new team members should be able to effortlessly start working on someone else's experiments and contributing to model development.
+   * Recovery: it's crucial to be able to go back in time and understand what was done, what parameters were used to create a model, and correct in case of any errors
 2. **Model improvement**: A good experiment tracking tool should allow you to visualize the most important aspects of any training run so that you can analyze what can be done to improve the model. To accomplish this, the tracking tool should display:
-   - Metrics
-   - Intermediate results (for example, model outputs)
-   - Model parameters and configuration
+
+   * Metrics
+   * Intermediate results (for example, model outputs)
+   * Model parameters and configuration
 
 Finally, the tool should allow you to compare two sessions in terms of changes in both inputs, such as code/parameters/data, as well as the output, such as metrics/results.
 
@@ -45,13 +45,13 @@ Having a nice UI that lets you look at past experiments and compare metrics /par
 
 To achieve the goals mentioned above, it is critical to track the following elements for each experiment:
 
-- **Code:** the exact code that was used to run the experiment.
-- **Parameters:** and configurations that can be tuned to improve a model.
-- **Dataset**: the exact data that was used for training. Versioning datasets is important here.
-- **Metadata**: the reason you are experimenting. You can even include the expected output.
-- **Environment:** Docker containers and libraries (with versions) that are installed.
-- **Hardware**: which GPU or CPU, amount of RAM, etc., was used to run the experiment.
-- **Model output:** and possibly some intermediate results.
+* **Code:** the exact code that was used to run the experiment.
+* **Parameters:** and configurations that can be tuned to improve a model.
+* **Dataset**: the exact data that was used for training. Versioning datasets is important here. 
+* **Metadata**: the reason you are experimenting. You can even include the expected output.
+* **Environment:** Docker containers and libraries (with versions) that are installed.
+* **Hardware**: which GPU or CPU, amount of RAM, etc., was used to run the experiment.
+* **Model output:** and possibly some intermediate results.
 
 All of these points are essential to **reproducing** any experiment you've done in the past.
 
@@ -76,8 +76,8 @@ If no existing tool matches your requirements, then you might be tempted to deve
 At Xmartlabs, we've been mainly working with [ClearML](http://clear.ml/). It allows you to start tracking your experiments by adding two lines of code.
 
 ```
-from clearml import Task
-task = Task.init(project_name='your project name',
+from clearml import Task 
+task = Task.init(project_name='your project name',							   
 task_name='your task name')
 ```
 
@@ -85,21 +85,22 @@ It works out of the box with most common ML frameworks (PyTorch / Tensorflow / S
 
 Additionally, it automatically stores all the information about:
 
-- the code:
-  - Git repository
-  - Git branch and commit
-  - Local workspace code changes on top of the latest commit
+* the code:
 
-- the environment:
-  - libraries (conda | pip )
-  - docker container
-  - environmental variables
+  * Git repository
+  * Git branch and commit
+  * Local workspace code changes on top of the latest commit
+* the environment:
 
-- model parameters and configurations
-- execution info:
-  - hardware info (i.e., GPUs)
-  - date
-  - user
+  * libraries (conda | pip )
+  * docker container
+  * environmental variables
+* model parameters and configurations
+* execution info:
+
+  * hardware info (i.e., GPUs)
+  * date
+  * user
 
 Even after having all this info available in your experiments' metadata, a couple of things could go wrong. Let's list a few of the most common here and the way we finally were able to avoid them.
 
@@ -107,9 +108,9 @@ Even after having all this info available in your experiments' metadata, a coupl
 
 **Missing files in your repo**
 
-- You designed and implemented an experiment. You wrote some functions and forgot to commit some new (untracked) files. If you run the experiment locally, this would go unnoticed.
-- You locally created a branch and ran all your experiments successfully but never pushed it.
-- You loaded a dataset that is only present on your computer, in some relative folder inside or outside your repo.
+* You designed and implemented an experiment. You wrote some functions and forgot to commit some new (untracked) files. If you run the experiment locally, this would go unnoticed.
+* You locally created a branch and ran all your experiments successfully but never pushed it.
+* You loaded a dataset that is only present on your computer, in some relative folder inside or outside your repo.
 
 **Missing libraries in your metadata**\
 You depend on a certain library installed in your machine, but since it is not a Python library, it wouldn't be tracked by ClearML. Or maybe a Python library that ClearML thinks can be installed via `pip install “ “` but it actually can't.
@@ -122,17 +123,17 @@ You might have run a training script locally pointing to data on your disk that 
 
 ### ClearML’s solution
 
-To tackle all of these problems, ClearML provides a utility called `agent` that allows you to:
+To tackle all of these problems, ClearML provides a utility called `agent` that allows you to: 
 
-- Reproduce experiments by recreating the environment specified in the task's metadata.
-- Scale your workflow by running several jobs in parallel. This, combined with the ease of changing the parameters in the UI, has a major impact on your development speed.
+* Reproduce experiments by recreating the environment specified in the task's metadata.
+* Scale your workflow by running several jobs in parallel. This, combined with the ease of changing the parameters in the UI, has a major impact on your development speed.
 
 When running a task through an agent, it will go through the following steps:
 
-- Clone the repo
-- Checkout commit
-- Apply git diff patch
-- Run your script with the parameters specified in the environment specified (docker container or local)
+* Clone the repo
+* Checkout commit
+* Apply git diff patch
+* Run your script with the parameters specified in the environment specified (docker container or local)
 
 Basically, an agent will get all the information of the task that was stored in ClearML and try to run the task. Therefore, we make sure that if an agent is able to reproduce your experiment, any team member would be able to do so, too.
 
@@ -165,8 +166,8 @@ After creating the dataset, you should register it as a ClearML Dataset, and loa
 
 Model development is a hard task, but thanks to the experiment tracking tools readily available, it becomes much easier. As with any other software development task, it’s important to start developing good habits from the start:
 
-- Make sure your experiments are reproducible by using a remote worker.
-- Write down what experiments you are doing, and also those that you decided not to do and the reasons behind them.
+* Make sure your experiments are reproducible by using a remote worker.
+* Write down what experiments you are doing, and also those that you decided not to do and the reasons behind them.
 
 Hopefully these tips will help your future self or some other team member be able to continue your work without a lot of friction, avoid repeating experiments, and have an idea of how the project is developing at any point in time.
 
