@@ -1,5 +1,5 @@
 ---
-title: 'Top EVM-compatible frameworks to build dApps - Truffle vs Hardhat'
+title: "Top EVM-compatible frameworks to build dApps - Truffle vs Hardhat"
 permalink: /best-blockchain-development-framework/
 date: 2022-06-28
 category: blockchain
@@ -52,16 +52,17 @@ If you want to save time and have fun, you should use a framework.
 
 Probably the most popular framework. Initially created for Ethereum, you can develop any EVM-compatible dApp using it. Almost every EVM-compatible blockchain (Avalanche, Ethereum, Polygon, etc.) tutorial uses [Truffle](https://trufflesuite.com/) to guide you through each step of building a dApp.
 
-Truffle provides a suite of tools and solves every major dApp development challenge. It’s internally written in javascript, and you can easily install it using npm (node package manager) by executing `npm install -g truffle`_._
+Truffle provides a suite of tools and solves every major dApp development challenge. It’s internally written in javascript, and you can easily install it using npm (node package manager) by executing `npm install -g truffle`*.*
 
 **Project structure**
 
 Once you install Truffle, you can create a new Ethereum project by running `truffle init`. It will make the project structure and base project files within the current folder, but it won't contain any smart contracts.
 
-> Alternatively, you can use `truffle unbox <box-name>` to initialize the base template that contains actual dApp functionality (more on that later). As you can see, Truffle offers many command-line commands to perform tasks. For instance, `truffle compile` compiles your smart contracts into their bytecode.
+> Alternatively, you can use `truffle unbox <box-name>`  to initialize the base template that contains actual dApp functionality (more on that later). As you can see, Truffle offers many command-line commands to perform tasks. For instance, `truffle compile` compiles your smart contracts into their bytecode.
+>
 
 ![Truffle project’s folder structure](/images/evm-compatible-frameworks/poject-structure.png)
-_Truffle project’s folder structure_
+*Truffle project’s folder structure*
 
 - **contracts:** directory for smart contract files.
 - **migrations:** directory for deployment scripts.
@@ -81,7 +82,7 @@ Truffle provides a local development blockchain for testing and debugging propos
 `truffle develop` lets you work with smart contracts interactively. It runs a [ganache](https://trufflesuite.com/ganache/) instance and attaches the console to the environment.
 
 ![`truffle develop` terminal output](/images/evm-compatible-frameworks/truffle-develop.png)
-_`truffle develop` terminal output_
+*`truffle develop` terminal output*
 
 As seen in the image above, it automatically provides ten blockchain accounts and their corresponding private keys so you can play interactively with the blockchain network.
 
@@ -108,7 +109,7 @@ This section aims to give you a sense of how simple it is to create and interact
 [Ganache:](https://trufflesuite.com/ganache/) An open-source personal blockchain to develop, test, and debug your dApp without spending actual gas fees. Ganache UI is super helpful to test dApp for confidence before deployment. 
 
 ![Gatache UI](/images/evm-compatible-frameworks/ganache-window.png)
-_Gatache UI_
+*Gatache UI*
 
 Using Ganache, you can track blockchain account status such as transactions, addresses, keys, balance, etc. Ganache provides many other helpers, simulating mining, blockchain activity log output, and a rich UI to explore blockchain blocks.
 
@@ -189,6 +190,7 @@ contract Token  {
 }
 ```
 
+
 The login information is shown when tests are executed. Nice right?
 
 ```jsx
@@ -236,6 +238,8 @@ To deploy a smart contract in Truffle, we must add a migration file to the migra
 
 Is this flexibility good or bad? It depends on the developer's preference. Personally, I leave the configuration as it comes out of the box, but at the same time, I like some level of flexibility to tweak things (when the requirements force me to do so).
 
+
+
 ## **Additional tools typically used along with dApp frameworks**
 
 ### **[OpenZepplin](https://openzeppelin.com/)**
@@ -245,6 +249,7 @@ OpenZeppelin provides a set of tools and smart contracts to security build, auto
 As I have already mentioned, it’s super hard to fix security and functional issues after deployment. Using audited, well-written base code minimizes those risks and speeds up development time. OpenZepplin provides modular, reusable, and secure smart contract implementations for ERC standards. It also includes helper libraries such as [Math](https://docs.openzeppelin.com/contracts/2.x/api/math) to wrap Solidity arithmetic operations which makes your code more secure (avoiding overflows and so on).
 
 > Just in case, there are some tricks to upgrade a dApp by using a smart contract proxy and delegating implementation to another smart contract. This way, we can change the contract code while preserving the state, balance, and address of the dApp.
+>
 
 OpenZeppelin Defender (another product) is an automated tool to ship and manage smart contracts after deployment. Read more on their [site](https://www.openzeppelin.com/defender).
 
@@ -254,10 +259,10 @@ Most popular NFT and Defi EVM-compatible platforms trust OpenZeppelin, and I str
 
 Figment’s development platform, DataHub, allows developers to use the most powerful and unique blockchain features without becoming protocol experts.
 
-With DataHub, developers now have access to Web 3 protocols through the **[enterprise-grade infrastructure](https://learn.datahub.figment.io/guides/datahub-infrastructure)**. They provide reliable access to the RPC and REST APIs of supported protocols for both the latest mainnets and testnets so developers can test and implement their products safely.
+With DataHub, developers now have access to Web 3 protocols through the **[enterprise-grade infrastructure](https://learn.datahub.figment.io/guides/datahub-infrastructure)**.  They provide reliable access to the RPC and REST APIs of supported protocols for both the latest mainnets and testnets so developers can test and implement their products safely.
 
 ![datahub.png](/images/evm-compatible-frameworks/datahub.png)
-_Datahubs hi-level architecture wrapping popular EVM-compatible protocols._
+ *Datahubs hi-level architecture wrapping popular EVM-compatible protocols.*
 
 ### [Alchemy](https://www.alchemy.com/)
 

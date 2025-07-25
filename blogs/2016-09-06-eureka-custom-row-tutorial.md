@@ -1,5 +1,5 @@
 ---
-title: Creating your own rows for Eureka
+title:  Creating your own rows for Eureka
 date: 2016-09-06
 tags: [Swift, iOS, Eureka]
 author: mathias
@@ -50,6 +50,7 @@ Now we have to create two classes: `UserInfoRow` and `UserInfoCell`. Let's see t
 
 > Note: All cells have to be final and conform to the `CellType` protocol.
 
+
 ```swift
 final class UserInfoCell: Cell<User>, CellType {
 
@@ -87,6 +88,7 @@ Then we defined the required init method, which we have to implement to conform 
 Our `UserInfoRow` is ready. But the `UserInfoCell` still needs some customization. Let's start by setting some styles to our labels in the `setup()` method.
 
 > Remember: `setup` will be called after the cell is instantiated while `update` will be called each time the cell is refreshed, specifically from the `cellForRowAtIndexPath` of the FormViewController's tableView. Therefore, in the `setup` method we should put code that shall be executed once to set up our cell. On the other hand, the `update` method should include the code that depends on external variables that (may) change over time like the value of the row for example.
+
 
 ```swift
 override func setup() {
@@ -178,12 +180,14 @@ And this is the result:
 
 ![Nib file example](/images/eureka-custom-row/user-info-cell.png)
 
+
 You can see the source files [in this gist](https://gist.github.com/mats-claassen/7add73434216ee9cd70309c7e8deba31). The code has recently been updated to Swift 3.
 
 ## Where to go from here
 
 This is just a very simple row without user interaction. I hope it helps and encourages some readers to create their own custom rows. But the potential is much greater. We can create really awesome rows with much more functionality, some of them have been published at [EurekaCommunity]. If you have created a custom row and think that it could be reused then you could share it by creating a repository at EurekaCommunity. If you plan to do this, drop a mail to me or anyone at Xmartlabs to get access to the EurekaCommunity organization.
 
-[SuggestionRow]: https://github.com/EurekaCommunity/SuggestionRow
-[GooglePlacesRow]: https://github.com/EurekaCommunity/GooglePlacesRow
-[EurekaCommunity]: https://github.com/EurekaCommunity
+
+[SuggestionRow]:        https://github.com/EurekaCommunity/SuggestionRow
+[GooglePlacesRow]:      https://github.com/EurekaCommunity/GooglePlacesRow
+[EurekaCommunity]:      https://github.com/EurekaCommunity

@@ -36,7 +36,6 @@ After all, why do we have to do this? This is boilerplate. You have to add it to
 [Crashlytics](https://get.fabric.io/crashlytics), part of [Fabric](https://get.fabric.io/), is there for you. Crashes and logged exceptions will be notified to you via email if you decide to use it. More information about the issues is available, like the whole stack trace, Android versions that caused the issue, device models and even more details you want to add.
 
 To setup Crashlytics in your app you have to add this to your `build.gradle`:
-
 ```
     buildscript {
         repositories {

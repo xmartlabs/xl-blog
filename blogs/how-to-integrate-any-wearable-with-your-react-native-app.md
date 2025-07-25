@@ -1,6 +1,6 @@
 ---
 title: How to Integrate ANY Wearable with Your React Native App
-subtitle: ' '
+subtitle: " "
 permalink: wereables-react-native-integration
 featured: true
 date: 2024-10-16
@@ -14,7 +14,6 @@ tags:
   - healthcare
 author: belu
 ---
-
 Have you ever considered integrating data from a wearable device into your app, only to be overwhelmed by the maze of wearables, each with its unique implementations? I've been there. In fact, it made me briefly contemplate quitting software engineering for good. But instead of trading my keyboard for a paintbrush I found a solution, a way to integrate wearables without the agony of being tied to a specific one. Sounds too good to be true, right? Let me show you how it works.
 
 ## Our problem
@@ -43,7 +42,7 @@ When handling health data, you must keep security and privacy in mind. Both Heal
 
 #### **Data Privacy and User Consent**
 
-Health data is highly sensitive, meaning user consent to handle it is crucial. Both HealthKit and Health Connect require apps to ask for user permissions to read or write any health data. However, beyond technical implementation, you should consider clearly communicating _why_ the data is requested, _how_ it will be used and _who_ will access it. Apart from building user trust, this can also help prevent your app from being rejected by the app stores.
+Health data is highly sensitive, meaning user consent to handle it is crucial. Both HealthKit and Health Connect require apps to ask for user permissions to read or write any health data. However, beyond technical implementation, you should consider clearly communicating *why* the data is requested, *how* it will be used and *who* will access it. Apart from building user trust, this can also help prevent your app from being rejected by the app stores.
 
 Keep in mind that you can be as granular as you like with these tools. Try to ask only for permissions over the data types you absolutely need, in order to minimize the risk in case of data breaches.
 
@@ -68,8 +67,8 @@ There are many other data types that can be integrated apart from blood glucose.
 To use HealthKit and Health Connect in your React Native app, you need to install the following libraries:
 
 ```javascript
-react - native - health;
-react - native - health - connect;
+react-native-health
+react-native-health-connect
 ```
 
 And follow the installation instructions for [react-native-health](https://github.com/agencyenterprise/react-native-health) and [react-native-health-connect](https://github.com/matinzd/react-native-health-connect).
@@ -83,32 +82,34 @@ The first thing we need to do is to get the user’s permission to read the data
 On iOS, we need to initialize the service with the specific permissions we plan to request:
 
 ```typescript
-import AppleHealthKit, { HealthKitPermissions } from 'react-native-health';
-
-//iOS
-const permissionsToAsk: HealthKitPermissions = {
-  permissions: {
-    read: [AppleHealthKit.Constants.Permissions.BloodGlucose],
-    write: [],
-  },
-};
-AppleHealthKit.initHealthKit(permissionsToAsk, (error: string) => {
-  console.log(error);
-});
+ import AppleHealthKit, { HealthKitPermissions } from 'react-native-health';
+ 
+ //iOS
+ const permissionsToAsk: HealthKitPermissions = {
+          permissions: {
+            read: [AppleHealthKit.Constants.Permissions.BloodGlucose],
+            write: [],
+          },
+        };
+        AppleHealthKit.initHealthKit(permissionsToAsk, (error: string) => {
+          console.log(error);
+        });
 ```
 
 While on Android, we first need to initialize Health Connect and then ask for permissions:
 
 ```typescript
-import {
+        import {
   initialize,
   readRecords,
   requestPermission,
 } from 'react-native-health-connect';
-
-//Android
-await initialize();
-await requestPermission([{ accessType: 'read', recordType: 'BloodGlucose' }]);
+ 
+ //Android
+  await initialize();
+  await requestPermission([
+    {accessType: 'read', recordType: 'BloodGlucose'},
+  ]);
 ```
 
 We can create a function to initialize both services at the same time. When you put it all together, it looks like this:
@@ -121,25 +122,25 @@ import {
 } from 'react-native-health-connect';
 
 import AppleHealthKit, { HealthKitPermissions } from 'react-native-health';
-
-const initializeHealth = async () => {
-  if (Platform.OS === 'ios') {
-    const permissionsToAsk: HealthKitPermissions = {
-      permissions: {
-        read: [AppleHealthKit.Constants.Permissions.BloodGlucose],
-        write: [],
-      },
-    };
-    AppleHealthKit.initHealthKit(permissionsToAsk, (error: string) => {
-      console.log(error);
-    });
-  } else if (Platform.OS === 'android') {
-    await initialize();
-    await requestPermission([
-      { accessType: 'read', recordType: 'BloodGlucose' },
-    ]);
-  }
-};
+  
+  const initializeHealth = async () => {
+     if (Platform.OS === 'ios') {
+      const permissionsToAsk: HealthKitPermissions = {
+        permissions: {
+          read: [AppleHealthKit.Constants.Permissions.BloodGlucose],
+          write: [],
+        },
+      };
+      AppleHealthKit.initHealthKit(permissionsToAsk, (error: string) => {
+        console.log(error);
+      });
+    } else if (Platform.OS === 'android') {
+      await initialize();
+      await requestPermission([
+        {accessType: 'read', recordType: 'BloodGlucose'},
+      ]);
+    }
+  };
 ```
 
 This will take the user to this screen, where they can select which permissions they want to grant the app. In this case, we are asking for the BloodGlucose information.
@@ -151,11 +152,11 @@ This will take the user to this screen, where they can select which permissions 
 The next step, after configuring permissions, is to read the data. To do this, we need to specify a time interval for the data we want to retrieve. In this example, we will get today’s data:
 
 ```typescript
-//set up the time range for the query
-const dayStart = new Date();
-const dayEnd = new Date();
-dayStart.setHours(0, 0, 0, 405);
-dayEnd.setHours(23, 59, 15, 405);
+    //set up the time range for the query
+    const dayStart = new Date();
+    const dayEnd = new Date();
+    dayStart.setHours(0, 0, 0, 405);
+    dayEnd.setHours(23, 59, 15, 405);
 ```
 
 The data provided by both services and how to get it is structured differently. Let’s break it down for blood glucose.
@@ -189,82 +190,82 @@ Meanwhile, on Android, the object retrieved by the library contains all the avai
 Then, to actually get the blood glucose information from iOS, we're going to use the function `getBloodGlucoseSamples` from `AppleHealthKit`:
 
 ```typescript
-//iOS
-AppleHealthKit.getBloodGlucoseSamples(
-  {
-    startDate: dayStart.toISOString(),
-    endDate: dayEnd.toISOString(),
-    ascending: false,
-  },
-  (err, results) => {
-    if (err) {
-      console.error(err);
-      return;
-    }
-    //this will return the last result
-    return results[0]?.value;
-  }
-);
+ //iOS
+ AppleHealthKit.getBloodGlucoseSamples(
+        {
+          startDate: dayStart.toISOString(),
+          endDate: dayEnd.toISOString(),
+          ascending: false,
+        },
+        (err, results) => {
+          if (err) {
+            console.error(err);
+            return;
+          }
+          //this will return the last result
+          return results[0]?.value;
+        },
+      );
 ```
 
 Similarly, we can get the data from Health Connect for Android using the function `readRecords`:
 
 ```typescript
-//Android
-const result = await readRecords('BloodGlucose', {
-  timeRangeFilter: {
-    operator: 'between',
-    startTime: dayStart.toISOString(),
-    endTime: dayEnd.toISOString(),
-  },
-  ascendingOrder: false,
-});
-//this will return the last result
-return result[0]?.level?.inMillimolesPerLiter;
+    //Android
+    const result = await readRecords('BloodGlucose', {
+        timeRangeFilter: {
+          operator: 'between',
+          startTime: dayStart.toISOString(),
+          endTime: dayEnd.toISOString(),
+        },
+        ascendingOrder: false,
+      });
+      //this will return the last result
+      return result[0]?.level?.inMillimolesPerLiter;
 ```
 
 And then put it all together in a function called `readBloodGlucose` :
 
 ```typescript
-const readBloodGlucose = async () => {
-  //set up the time range for the query
-  const dayStart = new Date();
-  const dayEnd = new Date();
-  dayStart.setHours(0, 0, 0, 405);
-  dayEnd.setHours(23, 59, 15, 405);
+ const readBloodGlucose = async () => {
+    //set up the time range for the query
+    const dayStart = new Date();
+    const dayEnd = new Date();
+    dayStart.setHours(0, 0, 0, 405);
+    dayEnd.setHours(23, 59, 15, 405);
 
-  if (Platform.OS === 'ios') {
-    AppleHealthKit.getBloodGlucoseSamples(
-      {
-        startDate: dayStart.toISOString(),
-        endDate: dayEnd.toISOString(),
-        ascending: false,
-      },
-      (err, results) => {
-        if (err) {
-          console.error(err);
-          return;
-        }
-        //this will return the last result
-        return results[0]?.value;
-      }
-    );
-  } else if (Platform.OS === 'android') {
-    const results = await readRecords('BloodGlucose', {
-      timeRangeFilter: {
-        operator: 'between',
-        startTime: dayStart.toISOString(),
-        endTime: dayEnd.toISOString(),
-      },
-      ascendingOrder: false,
-    });
-    //this will return the last result
-    return results[0]?.level?.inMillimolesPerLiter;
-  }
-};
+    if (Platform.OS === 'ios') {
+      AppleHealthKit.getBloodGlucoseSamples(
+        {
+          startDate: dayStart.toISOString(),
+          endDate: dayEnd.toISOString(),
+          ascending: false,
+        },
+        (err, results) => {
+          if (err) {
+            console.error(err);
+            return;
+          }
+          //this will return the last result
+          return results[0]?.value;
+        },
+      );
+    } else if (Platform.OS === 'android') {
+      const results = await readRecords('BloodGlucose', {
+        timeRangeFilter: {
+          operator: 'between',
+          startTime: dayStart.toISOString(),
+          endTime: dayEnd.toISOString(),
+        },
+        ascendingOrder: false,
+      });
+      //this will return the last result
+      return results[0]?.level?.inMillimolesPerLiter;
+    }
+  };
 ```
 
-There is more information in the object retrieved by each library, like the exact time the measure was taken. I encourage you to explore the response and find the specific information your app needs.
+ There is more information in the object retrieved by each library, like the exact time the measure was taken. I encourage you to explore the response and find the specific information your app needs.
 
 ### Testing the Integration
 
@@ -304,7 +305,7 @@ Once you have the data in the app, you can process it however you like. For mode
 import axios from 'axios';
 
 const sendBloodGlucoseData = async (bloodGlucoseValue) => {
-  const bloodGlucoseValue = await readBloodGlucose();
+	const bloodGlucoseValue = await readBloodGlucose()
   try {
     const response = await axios.post('https://example-api.com/api/glucose', {
       bloodGlucose: bloodGlucoseValue,
@@ -325,7 +326,7 @@ In our project, this flexibility made all the difference. Instead of implementin
 
 If you're interested in wearables integration or looking for a partner to help you streamline your healthcare app, we might be a good fit! Feel free to reach out and thanks for reading!
 
----
+- - -
 
 **References:**
 [A﻿pple Developer Documentation | HealthKit

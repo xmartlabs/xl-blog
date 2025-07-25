@@ -8,6 +8,8 @@ permalink: /a-comprehensive-guide-to-alpaca-trading-api/
 thumbnail: /images/alpaca-trading-API/Alpaca_trading.png
 ---
 
+
+
 # What is Alpaca Trading API?
 
 Alpaca API is a cutting-edge platform created by Alpaca Group, a US-based stock brokerage firm. It provides users with a robust infrastructure to develop algorithms for buying and selling stocks, cryptocurrencies, and other financial services. With Alpaca's API, users can send orders directly to Alpaca's servers to automate the trading process, bypassing traditional clients.
@@ -193,7 +195,7 @@ Alpaca Trading API has gained popularity among developers and financial services
 
 In this section, we'll provide a step-by-step guide on how to get started with Alpaca API using NodeJS. We'll cover how to set up a paper-only account and a Broker API account, the two alternatives to interact and consume the Alpaca resources. Whether you're a beginner or an experienced developer, our guide will help you get started with Alpaca API quickly and easily.
 
-## Setting up a Paper-Only Account in Alpaca
+## Setting up a Paper-Only Account in  Alpaca
 
 Paper trading is a type of account that provides a real-time simulation environment where it's possible to test your code. You can reset and test your algorithm as much as you want using free, real-time market data.
 
@@ -205,35 +207,39 @@ To create a Paper Only Account and integrate it with an app it’s necessary to 
 - After creating and verifying the account, you should log in and navigate to the [operations dashboard](https://app.alpaca.markets/paper/dashboard/overview).
 - Once in the dashboard, locate the API Keys tab and click on the 'Generate', 'New Key’ or 'Regenerate’ buttons. Save these credentials as you won't be able to visualize them again.
 - After generating and saving the credentials, you will be able to integrate Alpaca's API with an application. To this end, Alpaca provides an [SDK](https://alpaca.markets/docs/trading/getting_started/) for Python, Javascript C# and Go.
-  ```bash
-  npm install --save @alpacahq/alpaca-trade-api
-  ```
+    
+    ```bash
+    npm install --save @alpacahq/alpaca-trade-api
+    ```
+    
 - After installing the library, it must be imported into the service where it will be used in order to create a new instance, for which the previously saved credentials must be provided.
-
-  ```jsx
-  import Alpaca from '@alpacahq/alpaca-trade-api';
-
-  const alpaca = new Alpaca({
-    paper: true,
-    secretKey: process.env.SECRET_KEY,
-    API: process.env.API_KEY,
-  });
-  ```
+    
+    ```jsx
+    import Alpaca from '@alpacahq/alpaca-trade-api';
+    
+    const alpaca = new Alpaca({
+      paper: true,
+      secretKey: process.env.SECRET_KEY,
+      API: process.env.API_KEY,
+    });
+    ```
+    
 
 At this point, Alpaca API resources can be consumed, and the information can be used according to the application logic. In this case, the resources have been associated with services exposed through a NodeJS API.
 
-- These services can be consumed in different ways, for example using Postman or in some cases directly from a web browser. For this example, the _[REST Client](https://marketplace.visualstudio.com/items?itemName=humao.rest-client)_ extension of Visual Studio Code is used, for which only a file with the http extension needs to be created within the application. From this file, all calls to the API can be made using the following structure.
-
-  ```bash
-  @api = http://localhost:3000/api/trading
-
-  ### get account info
-  GET {{api}}/account
-  ```
+- These services can be consumed in different ways, for example using Postman or in some cases directly from a web browser. For this example, the *[REST Client](https://marketplace.visualstudio.com/items?itemName=humao.rest-client)* extension of Visual Studio Code is used, for which only a file with the http extension needs to be created within the application. From this file, all calls to the API can be made using the following structure.
+    
+    ```bash
+    @api = http://localhost:3000/api/trading
+    
+    ### get account info
+    GET {{api}}/account
+    ```
+    
 
 The Javascript SDK provides a large number of functions that allow you to consume a wide variety of resources from the Alpaca API, which can be used to automate trading based on this information and the business logic that is implemented.
 
-- One of the first resources that can be consumed is account information, which can be obtained by making an asynchronous call to the **_getAccount_** function. The response includes all account information.
+- One of the first resources that can be consumed is account information, which can be obtained by making an asynchronous call to the ***getAccount*** function. The response includes all account information.
 
 ```jsx
 export const getAccount = async () => {
@@ -277,14 +283,14 @@ export const getAccount = async () => {
 }
 ```
 
-- **_getCryptoBars_**: This function allows you to track the performance of a cryptocurrency within a specific period by providing the cryptocurrency name, start and end dates, and a timeframe, it returns a json object with the cryptocurrency price of a specific date.
+- ***getCryptoBars***: This function allows you to track the performance of a cryptocurrency within a specific period by providing the cryptocurrency name, start and end dates, and a timeframe, it returns a json object with the cryptocurrency price of a specific date.
 
 ```jsx
 export const getSymbolTrades = async (params: SymbolParams) => {
   const { symbol, days } = params;
   return await alpaca.getCryptoBars(
     symbol,
-    {
+    { 
       start: getDateFrom(days),
       end: new Date(),
       timeframe: "1Day",
@@ -295,20 +301,20 @@ export const getSymbolTrades = async (params: SymbolParams) => {
 
 ```json
 {
-  "symbol": "BTCUSD",
-  "timestamp": "2022-07-07T05:00:00Z",
-  "exchange": "CBSE",
-  "open": 20400.28,
-  "high": 20445.5,
-  "low": 20224.8,
-  "close": 20404.32,
-  "volume": 1029.86433895,
-  "tradecount": 43372,
-  "VWAP": 20350.5220346576
+	"symbol": "BTCUSD",
+	"timestamp": "2022-07-07T05:00:00Z",
+	"exchange": "CBSE",
+	"open": 20400.28,
+	"high": 20445.5,
+	"low": 20224.8,
+	"close": 20404.32,
+	"volume": 1029.86433895,
+	"tradecount": 43372,
+	"VWAP": 20350.5220346576
 }
 ```
 
-- **_getPositions_**: This function returns the open positions associated with the account. No parameters are required to consume this information.
+- ***getPositions***: This function returns the open positions associated with the account. No parameters are required to consume this information.
 
 ```jsx
 export const getPositionsStatus = async () => {
@@ -337,7 +343,7 @@ export const getPositionsStatus = async () => {
 }
 ```
 
-- **_getAssets_**: This function provides a master list of available cryptocurrencies and tokens. It can take up to 3 different parameters: status, asset_class, and exchange. It retrieves a json object list according to the provided parameters.
+- ***getAssets***: This function provides a master list of available cryptocurrencies and tokens. It can take up to 3 different parameters: status, asset_class, and exchange. It retrieves a json object list according to the provided parameters.
 
 ```jsx
 export const getAssets = async (params: AssetsParams) => {
@@ -364,7 +370,7 @@ export const getAssets = async (params: AssetsParams) => {
 }
 ```
 
-- **_createOrder_**: This function allows you to create a new order for a specific asset, which requires providing a minimum set of parameters, although there are various options available. It returns the created order object.
+- ***createOrder***: This function allows you to create a new order for a specific asset, which requires providing a minimum set of parameters, although there are various options available. It returns the created order object.
 
 ```jsx
 export const createOrder = async (orderParams: any) => {
@@ -419,7 +425,7 @@ export const createOrder = async (orderParams: any) => {
   }
 ```
 
-- **_getOrders_**: This function returns all orders associated with an account and allows you to send certain parameters to filter the information, such as status, until, after, limit, and others.
+- ***getOrders***: This function returns all orders associated with an account and allows you to send certain parameters to filter the information, such as status, until, after, limit, and others.
 
 ```jsx
 export const getOrders = async (params: any) => {
@@ -434,47 +440,47 @@ export const getOrders = async (params: any) => {
 ```jsx
 [
   {
-    id: '5cdabade-aded-47be-9ef1-489695bfa39d',
-    client_order_id: '8fb819c8-98c5-4609-861c-d9bd6bd05b7c',
-    created_at: '2023-01-09T22:30:04.085727Z',
-    updated_at: '2023-01-09T22:30:04.097252Z',
-    submitted_at: '2023-01-09T22:30:04.085201Z',
-    filled_at: '2023-01-09T22:30:04.08896Z',
-    expired_at: null,
-    canceled_at: null,
-    failed_at: null,
-    replaced_at: null,
-    replaced_by: null,
-    replaces: null,
-    asset_id: '276e2673-764b-4ab6-a611-caf665ca6340',
-    symbol: 'BTC/USD',
-    asset_class: 'crypto',
-    notional: null,
-    qty: '1',
-    filled_qty: '1',
-    filled_avg_price: '17238.291649',
-    order_class: '',
-    order_type: 'market',
-    type: 'market',
-    side: 'buy',
-    time_in_force: 'gtc',
-    limit_price: null,
-    stop_price: null,
-    status: 'filled',
-    extended_hours: false,
-    legs: null,
-    trail_percent: null,
-    trail_price: null,
-    hwm: null,
-    subtag: null,
-    source: 'access_key',
-  },
-];
+    "id": "5cdabade-aded-47be-9ef1-489695bfa39d",
+    "client_order_id": "8fb819c8-98c5-4609-861c-d9bd6bd05b7c",
+    "created_at": "2023-01-09T22:30:04.085727Z",
+    "updated_at": "2023-01-09T22:30:04.097252Z",
+    "submitted_at": "2023-01-09T22:30:04.085201Z",
+    "filled_at": "2023-01-09T22:30:04.08896Z",
+    "expired_at": null,
+    "canceled_at": null,
+    "failed_at": null,
+    "replaced_at": null,
+    "replaced_by": null,
+    "replaces": null,
+    "asset_id": "276e2673-764b-4ab6-a611-caf665ca6340",
+    "symbol": "BTC/USD",
+    "asset_class": "crypto",
+    "notional": null,
+    "qty": "1",
+    "filled_qty": "1",
+    "filled_avg_price": "17238.291649",
+    "order_class": "",
+    "order_type": "market",
+    "type": "market",
+    "side": "buy",
+    "time_in_force": "gtc",
+    "limit_price": null,
+    "stop_price": null,
+    "status": "filled",
+    "extended_hours": false,
+    "legs": null,
+    "trail_percent": null,
+    "trail_price": null,
+    "hwm": null,
+    "subtag": null,
+    "source": "access_key"
+  }
+]
 ```
 
 ### Real-Time services
 
-The Alpaca API provides other Real-Time options, which can be consumed in real-time through web sockets. These options allow you to subscribe to different types of resources and receive instant updates, enabling you to make timely decisions regarding market behavior. To use the Real-Time resources the Alpaca API has to offer you need to follow these steps:
+The Alpaca API provides other Real-Time options, which can be consumed in real-time through web sockets. These options allow you to subscribe to different types of resources and receive instant updates, enabling you to make timely decisions regarding market behavior. To use the Real-Time resources  the Alpaca API has to offer you need to follow these steps:
 
 - Create an Alpaca instance just like you did previously. After creating the instance, assign the required client, and once the specific client has been assigned, it is possible to subscribe to the required resources.
 
@@ -486,51 +492,51 @@ const alpaca = new Alpaca({
 const websocket = alpaca.crypto_stream_v2;
 ```
 
-- In this example a subscription is made to \***\*\*\*\*\*\*\***subscribeForTrades\***\*\*\*\*\*\*\***, corresponding to the events generated by updating a specific symbol, such as a cryptocurrency or a stock.
+- In this example a subscription is made to ************subscribeForTrades************, corresponding to the events generated by updating a specific symbol, such as a cryptocurrency or a stock.
 
 ```jsx
 websocket.onConnect(() => {
-  websocket.subscribeForTrades(['AAPL']);
+	websocket.subscribeForTrades(["AAPL"]);
 });
 ```
 
-- Just like subscriptions, the respective listeners for each event must be initialized, such as _connect_, _onError_, _onStateChange_, and the listeners for specific resources to which you have subscribed, such as _onStockTrade_, _onStockBar_, and others.
+- Just like subscriptions, the respective listeners for each event must be initialized, such as *connect*, *onError*, *onStateChange*, and the listeners for specific resources to which you have subscribed, such as *onStockTrade*, *onStockBar*, and others.
 
 ```jsx
-websocket.onStateChange((status) => {
-  console.log('Crypto stream status:', status);
+websocket.onStateChange((status) => { 
+  console.log("Crypto stream status:", status);
 });
 
 websocket.onError((err) => {
-  console.log('Error:', err);
+  console.log("Error:", err);
 });
 
 websocket.onCryptoBar((bar) => {
-  console.log('Crypto Bar:', bar);
+  console.log("Crypto Bar:", bar);
 });
 
 websocket.onCryptoDailyBar((bar) => {
-  console.log('Crypto Daily Bar:', bar);
+  console.log("Crypto Daily Bar:", bar);
 });
 
 websocket.onCryptoOrderbook((order) => {
-  console.log('Crypto Order Book:', order);
+  console.log("Crypto Order Book:", order);
 });
 
 websocket.onCryptoQuote((quote) => {
-  console.log('Crypto Quote:', quote);
+  console.log("Crypto Quote:", quote);
 });
 
 websocket.onCryptoTrade((trade) => {
-  console.log('Crypto Trade:', trade);
+  console.log("Crypto Trade:", trade);
 });
 
 websocket.onCryptoUpdatedBar((bar) => {
-  console.log('Crypto updated bar:', bar);
+  console.log("Crypto updated bar:", bar);
 });
 ```
 
-- In the API created with Typescript and NodeJS, the _websocket crypto_stream_v2_ client is used, which allows you to receive information on different events associated with the cryptocurrencies you want to analyze in an array. Additionally, the _data_stream_v2_ client provides information on different events.
+- In the API created with Typescript and NodeJS, the *websocket crypto_stream_v2* client is used, which allows you to receive information on different events associated with the cryptocurrencies you want to analyze in an array. Additionally, the *data_stream_v2* client provides information on different events.
 
 ```jsx
 // crypto_stream_v2
@@ -557,13 +563,13 @@ subscribe(symbols: {
 }): void;
 ```
 
-In addition to these two WebSocket clients, there are also the _news_stream_ and _data_ws_ clients, which provide other types of real-time information.
+In addition to these two WebSocket clients, there are also the *news_stream* and *data_ws* clients, which provide other types of real-time information.
 
 The above functions are some of the many options provided by the SDK. Depending on the needs and logic of the application, you can choose to use the one that meets the requirements. These resources can be consulted in the [API documentation](https://alpaca.markets/docs/).
 
 ## **Setting up a Broker API Account in the Alpaca API**
 
-The Broker API Account provided by Alpaca allows you to create trading applications with various tools for users. Alpaca provides an isolated environment with all the necessary tools and information to implement and test all the functionalities a broker app typically offers. This isolated testing environment has the same capabilities as the real environment, except for a few functionalities that require real money.
+The Broker API Account provided by Alpaca allows you to create trading applications with various tools for users. Alpaca provides an isolated environment with all the necessary tools and information to implement and test all the functionalities a broker app typically offers. This isolated testing environment has the same capabilities as the real environment, except for a few functionalities that require real money. 
 
 ### Use Cases for Creating Apps with a Broker API Account
 
@@ -571,10 +577,10 @@ Depending on the type of application you want to build, there are three use case
 
 - **[Trading/Investing](https://alpaca.markets/docs/broker/use-cases/#tradinginvesting-app)**: This type of trading and/or investment application can be developed by a technology company, an established fintech company that offers cash management services, a neobank, or even a payroll company without the required license. In this case, the account approval process is owned by Alpaca, and the application creator would own the user experience and most of the communications. Unless you have a solid CIP/KYC/AML program that has been reviewed by Alpaca, your clients will go through Alpaca's CIP/KYC/AML process.
 - **[Broker-Dealer](https://alpaca.markets/docs/broker/use-cases/#broker-dealer)**: This use case has two alternatives, Fully-Disclosed and Omnibus.
-  - **[Fully-Disclosed](https://alpaca.markets/docs/broker/use-cases/#fully-disclosed):** In this case, a user established as a broker-dealer within their jurisdiction, creates individual accounts for their clients in Alpaca using their information. Depending on the legal framework of the application creator's jurisdiction, they may own the complete user experience, from account opening, trading, generating reports, and maintaining a robust customer identification program (CIP) and procedures to fully identify customers (KYC), in accordance with anti-money laundering (AML) regulations.
-  - **[Omnibus](https://alpaca.markets/docs/broker/use-cases/#omnibus):** In this case, a user established as a stockbroker manages the information and trading flow of their clients with long and short-term trading accounts. In this configuration, clients' basic information such as name, address, etc. is not revealed to Alpaca.
+    - **[Fully-Disclosed](https://alpaca.markets/docs/broker/use-cases/#fully-disclosed):** In this case, a user established as a broker-dealer within their jurisdiction, creates individual accounts for their clients in Alpaca using their information. Depending on the legal framework of the application creator's jurisdiction, they may own the complete user experience, from account opening, trading, generating reports, and maintaining a robust customer identification program (CIP) and procedures to fully identify customers (KYC), in accordance with anti-money laundering (AML) regulations.
+    - **[Omnibus](https://alpaca.markets/docs/broker/use-cases/#omnibus):** In this case, a user established as a stockbroker manages the information and trading flow of their clients with long and short-term trading accounts. In this configuration, clients' basic information such as name, address, etc. is not revealed to Alpaca.
 - **[Registered Investment Advisor (RIA)](https://alpaca.markets/docs/broker/use-cases/#registered-investment-advisor-ria):** In this case, an RIA user registered in the SEC with clients within or outside the US, must create accounts for their clients in Alpaca. Said creation and approval will be the property of Alpaca, while the user of the application will own the user experience and most communications. Unless they have a solid CIP/KYC/AML program that has been reviewed by Alpaca, their clients will go through Alpaca's CIP/KYC/AML process.
-  As an RIA, the user can communicate directly with their clients, and Alpaca will work with the user to market the service using the Broker API in a compatible way.
+As an RIA, the user can communicate directly with their clients, and Alpaca will work with the user to market the service using the Broker API in a compatible way.
 
 ### Creating **a Broker API Account**
 
@@ -585,7 +591,7 @@ To create a Broker API Account and integrate it with an app it’s necessary to 
 - Register to the Alpaca Broker platform through this URL: [https://broker-app.alpaca.markets/sign-up](https://broker-app.alpaca.markets/sign-up)
 - After creating your account and logging in, you need to generate your API access credentials. To do this, go to the [API/Devs](https://broker-app.alpaca.markets/dev) page and click on the Generate option.
 - Once you have the corresponding credentials, you can proceed to integrate with the Broker API. In this case, this platform does not have an SDK for such integration. In the practical example, NodeJS and Typescript were used, and API calls were made with the Axios library. For this, the first step was to create a function that generates a token based on the generated credentials, and another function that receives the endpoint to be queried and the respective parameters.
-
+    
 ```jsx
 const generateAuthToken = () => {
   return Buffer.from(`${BROKER_API_KEY}:${BROKER_SECRET}`, 'utf8').toString('base64');
@@ -610,14 +616,15 @@ const callAPI = async (endpoint: string, method = 'get', params = {}, data = {})
   return response.data;
 };
 ```
-
+    
 - The AlpacaBroker API guide recommends initially exporting and exploring the Postman collection, which contains all the resources provided by the API, and serves as a guide to identifying the resources required for the implementation of the services to be executed.
 
 After having the base configuration to communicate with the API, and having chosen and explored the services to be used, the implementation begins. In this case, services were enforced for the creation and consultation of client users, and consultation of assets and commercial events.
 
-- **_createAccount_**: This service allows the creation of a new user account associated with the broker account. This service receives a series of parameters, some mandatory and some optional, and it returns the created account info.
-
+- ***createAccount***: This service allows the creation of a new user account associated with the broker account. This service receives a series of parameters, some mandatory and some optional, and it returns the created account info.
+    
 This resource is accessible at the endpoint: *https://broker-api.sandbox.alpaca.markets/v1/accounts*
+    
 
 ```jsx
 export const createNewAccount = async (params: UserInfo) => {
@@ -686,7 +693,7 @@ export const createNewAccount = async (params: UserInfo) => {
 }
 ```
 
-- **_getAccounts_**: This service allows consulting all the user accounts associated with the broker account. Among the parameters received by this service is the status or accountId, the response is an array with the accounts information. This resource is accessible at the endpoint [https://broker-api.sandbox.alpaca.markets/v1/accounts](https://broker-api.sandbox.alpaca.markets/v1/accounts).
+- ***getAccounts***: This service allows consulting all the user accounts associated with the broker account. Among the parameters received by this service is the status or accountId, the response is an array with the accounts information. This resource is accessible at the endpoint [https://broker-api.sandbox.alpaca.markets/v1/accounts](https://broker-api.sandbox.alpaca.markets/v1/accounts).
 
 ```jsx
 export const getAccounts = async (params: any) => {
@@ -703,26 +710,28 @@ export const getAccounts = async (params: any) => {
 ```jsx
 [
   {
-    id: 'fc1a5a44-6a9a-4919-9e4f-9e17edf9cc64',
-    account_number: '961722725',
-    status: 'ACTIVE',
-    crypto_status: 'INACTIVE',
-    kyc_results: {
-      reject: {},
-      accept: {},
-      indeterminate: {},
-      summary: 'pass',
+    "id": "fc1a5a44-6a9a-4919-9e4f-9e17edf9cc64",
+    "account_number": "961722725",
+    "status": "ACTIVE",
+    "crypto_status": "INACTIVE",
+    "kyc_results": {
+      "reject": {},
+      "accept": {},
+      "indeterminate": {},
+      "summary": "pass"
     },
-    currency: 'USD',
-    last_equity: '0',
-    created_at: '2023-01-16T22:05:31.346989Z',
-    account_type: 'trading',
-    enabled_assets: ['us_equity'],
-  },
-];
+    "currency": "USD",
+    "last_equity": "0",
+    "created_at": "2023-01-16T22:05:31.346989Z",
+    "account_type": "trading",
+    "enabled_assets": [
+      "us_equity"
+    ]
+  }
+]
 ```
 
-- **_getAssets_**: This service allows querying the current asset information, for this query the parameters _symbol_, _status_, _asset_class_, and _exchange_ must be passed. The response is composed of an array with the assets data. This is because if this filter is not done, the API returns too much data. This resource is accessible at the endpoint [https://broker-api.sandbox.alpaca.markets/v1/assets](https://broker-api.sandbox.alpaca.markets/v1/assets).
+- ***getAssets***: This service allows querying the current asset information, for this query the parameters *symbol*, *status*, *asset_class*, and *exchange* must be passed. The response is composed of an array with the assets data. This is because if this filter is not done, the API returns too much data. This resource is accessible at the endpoint [https://broker-api.sandbox.alpaca.markets/v1/assets](https://broker-api.sandbox.alpaca.markets/v1/assets).
 
 ```jsx
 export const getAssets = async (assetParams: AssetsParams) => {
@@ -746,23 +755,23 @@ export const getAssets = async (assetParams: AssetsParams) => {
 
 ```jsx
 [
-  {
-    id: '7595a8d2-68a6-46d7-910c-6b1958491f5c',
-    class: 'us_equity',
-    exchange: 'NYSE',
-    symbol: 'A',
-    name: 'Agilent Technologies Inc.',
-    status: 'active',
-    tradable: true,
-    marginable: true,
-    shortable: true,
-    easy_to_borrow: true,
-    fractionable: true,
-  },
-];
+	{
+		"id": "7595a8d2-68a6-46d7-910c-6b1958491f5c",
+		"class": "us_equity",
+		"exchange": "NYSE",
+		"symbol": "A",
+		"name": "Agilent Technologies Inc.",
+		"status": "active",
+		"tradable": true,
+		"marginable": true,
+		"shortable": true,
+		"easy_to_borrow": true,
+		"fractionable": true
+	}
+]
 ```
 
-- **_getTradeEvents_**: This service allows to consult all the trade events that have occurred in a range of time. TeThis resource is accessible at the endpoint. [https://broker-api.sandbox.alpaca.markets/v1/events/trades](https://broker-api.sandbox.alpaca.markets/v1/events/trades)
+- ***getTradeEvents***: This service allows to consult all the trade events that have occurred in a range of time. TeThis resource is accessible at the endpoint. [https://broker-api.sandbox.alpaca.markets/v1/events/trades](https://broker-api.sandbox.alpaca.markets/v1/events/trades)
 
 ```jsx
 export const getTradeEvents: Handler = async (req, res) => {
@@ -842,7 +851,7 @@ To deploy any application, different steps may be required, depending on the tec
 
 ## Conclusion
 
-Alpaca API provides a tremendous amount of options to implement cryptocurrency trading applications. To go deeper into this world, you can check out the official documentation and the Alpaca community [forums](https://forum.alpaca.markets/).
+Alpaca API provides a tremendous amount of options to implement cryptocurrency trading applications. To go deeper into this world, you can check out the official documentation and the Alpaca community [forums](https://forum.alpaca.markets/). 
 
 Alpaca has had impressive growth during the last couple of years thanks to various factors, including:
 
@@ -851,8 +860,8 @@ Alpaca has had impressive growth during the last couple of years thanks to vario
 - **Integration**: The Alpaca API allows integration with third-party applications, with different programming languages through libraries.
 - **Large developer community**: Alpaca has developed an active community of developers that creates and shares tools and applications for the platform, making it more attractive to those interested in automated trading.
 
-The possibilities of Alpaca API are almost endless, and whatever your fintech app is, it can surely help you with your objectives. But with great power comes great responsibility and it's important to know what the best options are for you so as not to get lost in that much information/possibilities. I encourage you to educate yourself in the Alpaca API or to hire a third party who knows the tech's ins and outs so you can have a more professional assessment.
+The possibilities of Alpaca API are almost endless, and whatever your fintech app is, it can surely help you with your objectives. But with great power comes great responsibility and it's important to know what the best options are for you so as not to get lost in that much information/possibilities. I encourage you to educate yourself in the Alpaca API or to hire a third party who knows the tech's ins and outs so you can have a more professional assessment. 
 
-You can get a comprehensive and honest picture of your project or product and its opportunities by jumping on a free discovery call with our team, which includes developers well-versed in this platform. Contact us here.
+You can get a comprehensive and honest picture of your project or product and its opportunities by jumping on a free discovery call with our team, which includes developers well-versed in this platform. Contact us here. 
 
 We hope this guide proved to be useful, any questions or comments are more than welcome. Thanks for reading!

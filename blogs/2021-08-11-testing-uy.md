@@ -29,6 +29,7 @@ The system under test was provided by Abstracta, a channel via Discord was avail
 <img style={{ width: '100%'}} src="/images/our-take-on-testinguy/testing-uy.jpeg" alt="Testing UY" />
 </p>
 
+
 ### Our insight
 
 **Load your app with JMeter (Bruno Mareque & Delvis Echeverria):**

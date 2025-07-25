@@ -1,6 +1,6 @@
 ---
 title: Bedtime (Cybersecurity) Stories
-subtitle: ' '
+subtitle: " "
 permalink: cyber-security-tips
 featured: true
 date: 2024-03-21
@@ -14,14 +14,17 @@ tags:
   - TaskScams
 author: belu
 ---
-
 Many of you probably grew up hearing adventure stories, letting your imagination run wild over the new worlds the protagonists discovered. Or maybe you preferred fantasy tales with fairies, flowers, and magic systems. Or even historical epics, where knights fight bravely in the name of honor and justice.
 
-While it may sound odd, I spent my childhood listening to cybercrime stories.
+
+
+While it may sound odd, I spent my childhood listening to cybercrime stories. 
+
+
 
 It’s not that weird if you think about it. Being the last child of a big, tech-savvy family, I was inevitably in contact with technology from a very early age. My father is a cybersecurity expert and a storyteller by heart, so he’d always tell us his day-to-day work adventures in a captivating way. I guess something about that stuck with me.
 
-The stories I’m going to tell you are not for children. But I always found that when real-life events are narrated to me, they have a greater impact. Nobody is ever safe from cybercrime, not even those who think that they are not a sufficiently important target. These tales are real situations that happened to me, someone I know, or many people at the same time.
+The stories I’m going to tell you are not for children. But I always found that when real-life events are narrated to me, they have a greater impact. Nobody is ever safe from cybercrime, not even those who think that they are not a sufficiently important target. These tales are real situations that happened to me, someone I know, or many people at the same time. 
 
 I will also describe the type of cybersecurity issue and give you some context. This article is meant to be entertaining for everyone, whether you are an expert or just use the Internet to watch YouTube videos. And who knows, maybe you’ll learn something. Let’s get started!
 
@@ -79,8 +82,8 @@ This was another phishing attack, a very sick one. The perpetrators pretended to
 
 ### Tips to avoid being scammed by a celebrity
 
-- Always check the URLs of sites you are redirected to, even if the page looks trustworthy.
-- Beware of people you don’t know communicating with you, especially if they ask for money.
+* Always check the URLs of sites you are redirected to, even if the page looks trustworthy.
+* Beware of people you don’t know communicating with you, especially if they ask for money.
 
 ## Your Download Is Here…
 
@@ -112,8 +115,8 @@ Adware is a type of malware that specifically displays ads in places where there
 
 ### Tips to avoid this
 
-- On the internet, if it seems too good to be true, it probably is.
-- Try to avoid installing programs on your computer that you don’t trust, and if you do, give it as little privileges over your system as possible.
+* On the internet, if it seems too good to be true, it probably is.
+* Try to avoid installing programs on your computer that you don’t trust, and if you do, give it as little privileges over your system as possible.
 
 ## Minecraft and smart fridges
 
@@ -123,11 +126,13 @@ This didn’t happen to me or to someone I know—that I know of, at least. The 
 
 ![](/images/frame-47453.png)
 
-Imagine you are playing Minecraft, the popular sandbox game. You’re on a server with your best friends, having a good time. Then, all of a sudden, the game starts lagging, and you get disconnected. You wouldn’t think much of it, right?
+ 
+
+Imagine you are playing Minecraft, the popular sandbox game. You’re on a server with your best friends, having a good time. Then, all of a sudden, the game starts lagging, and you get disconnected. You wouldn’t think much of it, right? 
 
 ![](/images/connectionlost.png)
 
-And the truth is that it could have happened for many reasons. But I’m here to tell you about one that I found particularly interesting: Mirai.
+And the truth is that it could have happened for many reasons. But I’m here to tell you about one that I found particularly interesting: Mirai. 
 
 Many IoT devices are connected to the network, such as surveillance cameras, smart fridges, and kettles, among others. Some of the owners of those devices leave the username and password that comes in by default.
 
@@ -147,10 +152,12 @@ A botnet is a group of devices that are infected by malware and can attack coord
 
 ![](/images/smartattack.png)
 
+
+
 ### Tips to avoid this
 
-- To avoid your IoT device being taken by a botnet, make sure to use a secure password if it is connected to the internet.
-- Try to buy devices that offer security updates and are not easily vulnerable. Some cheap surveillance cameras, for example, have vulnerabilities that allow malicious agents to see what the camera is capturing. Remember that attackers having access to your IoT device is NOT something you’d want since you probably have it in your home in the real world, and you don’t know the attacker’s intentions.
+* To avoid your IoT device being taken by a botnet, make sure to use a secure password if it is connected to the internet.
+* Try to buy devices that offer security updates and are not easily vulnerable. Some cheap surveillance cameras, for example, have vulnerabilities that allow malicious agents to see what the camera is capturing. Remember that attackers having access to your IoT device is NOT something you’d want since you probably have it in your home in the real world, and you don’t know the attacker’s intentions.
 
 ## Antiya, the odd employer
 
@@ -176,7 +183,7 @@ She made me create a user in a platform called Grandern. The platform was only m
 
 ![](/images/group-7633.png)
 
-Antiya told me to give her the mobile number associated with my account. I didn’t want to give her my number —although it wasn’t a very rational concern, as I was talking to her from my real number—, so I gave her a free US phone website that we sometimes use for testing purposes. I needed the phone to be able to receive messages because I wanted to see if she’d sent me something.
+Antiya told me to give her the mobile number associated with my account. I didn’t want to give her my number —although it wasn’t a very rational concern, as I was talking to her from my real number—, so I gave her a free US phone website that we sometimes use for testing purposes. I needed the phone to be able to receive messages because I wanted to see if she’d sent me something. 
 
 But it was pointless because after that, Antiya disappeared forever.
 
@@ -190,14 +197,14 @@ This one was ticker than the others to unravel because, at some point, the scamm
 
 It was a task scam: the scammers offer you a job. It is a really promising, easy job with good pay. They assign you tasks —like reviewing a product on Amazon, liking a YouTube video, etc—and pay you after you complete a bunch of them. Most of the time, they pay you in a virtual coin system that their platform provides, which you can allegedly withdraw after reaching a certain amount of funds. What I found really interesting is that they sometimes pay you in real money. But where does that money come from?
 
-Well, let’s not get ahead of ourselves. You go and complete the tasks, you receive the payment, and then you trust them because, well, they’ve paid you.
+Well, let’s not get ahead of ourselves. You go and complete the tasks, you receive the payment, and then you trust them because, well, they’ve paid you. 
 
 Then, they’ll ask you to invest in a cryptocurrency for some of the tasks. It always promises great returns on the investment, and most victims see this as a plus from the “job” they already have. This is the part of the scam where they get you because what you are asked to invest in is always higher than what they have already paid you. They use part of what you “invested” to pay the new “employees” and keep the rest while also getting revenue from selling engagement on different platforms, such as Instagram. Personally, I think it’s brilliant; I wish the person who came up with this model used their intelligence to do good.
 
 ### Tips to avoid this
 
-- I cannot stress this enough: if it looks too good to be true, it probably is.
-- Never use your money in an online job. Your employers are supposed to pay you, not the other way around.
+* I cannot stress this enough: if it looks too good to be true, it probably is.
+* Never use your money in an online job. Your employers are supposed to pay you, not the other way around.
 
 ## Conclusion: no one is safe!
 

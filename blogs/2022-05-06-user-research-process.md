@@ -1,5 +1,5 @@
 ---
-title: 'Spoiler alert: User research is like a movie'
+title: "Spoiler alert: User research is like a movie"
 permalink: /user-research-process/
 excerpt: I have two types of friends, the ones who don’t care for or even enjoy
   spoilers, and the ones (like me) who hate them. Read on to discover how this also adapts to the user research that goes into building a digital product.
@@ -14,17 +14,17 @@ thumbnail: /images/user-research-is-like-a-movie/image.jpg
 
 I have two types of friends, [the ones who don’t care for or even enjoy spoilers](https://www.psychologytoday.com/us/blog/thriving101/201108/the-spoiler-paradox), and the ones (like me) [who hate them](https://scholarscompass.vcu.edu/uresposters/38/).
 
-I usually have this conversation with them as I would often go in ‘blind’ to the movies, not even watching the trailers that come ahead of them, and going as far as covering my eyes before _The Batman_ plays. I can’t help but be as excited about _Doctor Strange in the Multiverse of Madness_, so I would hate it if a trailer ruined a big reveal. Thankfully, as the movie just premiered, those fears have now dissipated until _Thor: Love and Thunder_ approaches.
+I usually have this conversation with them as I would often go in ‘blind’ to the movies, not even watching the trailers that come ahead of them, and going as far as covering my eyes before *The Batman* plays. I can’t help but be as excited about *Doctor Strange in the Multiverse of Madness*, so I would hate it if a trailer ruined a big reveal. Thankfully, as the movie just premiered, those fears have now dissipated until *Thor: Love and Thunder* approaches.
 
 In many regards, anticipation could be one heck of a motivator. However, we must be mindful that it has its fair share of danger.
 
 ## The problem with spoilers.
 
-Just like when Scarlet Witch and Doctor Strange were about to— Eh, you didn’t think I was going to give away _Multiverse of Madness_, did you?
+Just like when Scarlet Witch and Doctor Strange were about to— Eh, you didn’t think I was going to give away *Multiverse of Madness*, did you?
 
-That single sentence may have had you sweating for a brief moment, should you have any level of investment into the Marvel Cinematic Universe. And, even if you didn’t, it surely made you think something’s not right. That “_aw, snap!_” kind of feeling.
+That single sentence may have had you sweating for a brief moment, should you have any level of investment into the Marvel Cinematic Universe. And, even if you didn’t, it surely made you think something’s not right. That “*aw, snap!*” kind of feeling.
 
-What if you end up regretting knowing _something_ about that movie? Or worse, what if it ends up not making sense in the way you thought it would? This also happens when trailers give away too much detail, which is increasingly becoming the norm to move up box office numbers and pre-orders (especially in the case of videogames).
+What if you end up regretting knowing *something* about that movie? Or worse, what if it ends up not making sense in the way you thought it would? This also happens when trailers give away too much detail, which is increasingly becoming the norm to move up box office numbers and pre-orders (especially in the case of videogames).
 
 Hype, spoilers, and spoiler-generated anticipation might be effective to attract people, but could also actually be a double-edged sword. This valuable lesson doesn’t just apply to entertainment, it applies to product research and development, too.
 
@@ -32,7 +32,7 @@ Grab a cup of coffee and join me for a brief look into why anticipation can be o
 
 ## Setting expectations (accurately) is key.
 
-![> Driven by hunger, a fox tried to reach some grapes hanging high on the vine but was unable to, although it leaped with all its strength. As it went away, the fox remarked “Oh, you aren’t even ripe yet! I don’t need any sour grapes.”](/images/user-research-is-like-a-movie/02.jpg 'The Fox and the Grapes')
+![> Driven by hunger, a fox tried to reach some grapes hanging high on the vine but was unable to, although it leaped with all its strength. As it went away, the fox remarked “Oh, you aren’t even ripe yet! I don’t need any sour grapes.”](/images/user-research-is-like-a-movie/02.jpg "The Fox and the Grapes")
 
 > Driven by hunger, a fox tried to reach some grapes hanging high on the vine but was unable to, although it leaped with all its strength. As it went away, the fox remarked “Oh, you aren’t even ripe yet! I don’t need any sour grapes.”
 
@@ -42,15 +42,19 @@ In essence, cognitive dissonance is the psychological phenomenon in which differ
 
 If we were to learn something from that, is that we must be cautious of how much we promise or which features we reveal before the product ships. In the end, we are in control of how ripe we make our grapes look, and that gives us a tremendous advantage.
 
-![ ”Not everyone needs to know everything, Newt.”](/images/user-research-is-like-a-movie/03.jpg ' Not everyone needs to know everything, Newt.')
+![ ”Not everyone needs to know everything, Newt.”](/images/user-research-is-like-a-movie/03.jpg " Not everyone needs to know everything, Newt.")
 
+>
+>
 > ”Not everyone needs to know everything, Newt.”
+>
+>
 
 ## Building... a bridge?
 
 As designers, we may feel the urge to ask users what they think of adding certain features to the experience and, if we are not timely, we may taint their entire thought process of how a product works and, with that, their expectations. Undeniably, even stakeholders may feel this eagerness and ‘spoil’ a long-term roadmap if they were to participate in co-creation sessions, focus groups, or interviews. Remember, people in business do not have the same sensibilities as people in design, and that’s the whole point.
 
-![Laguna Garzón Bridge](/images/user-research-is-like-a-movie/04.jpg 'Laguna Garzón Bridge')
+![Laguna Garzón Bridge](/images/user-research-is-like-a-movie/04.jpg "Laguna Garzón Bridge")
 
 > Laguna Garzón Bridge
 
@@ -68,7 +72,7 @@ Like users, we also have our own expectations of how a product might turn out to
 
 So, how do we ensure we don’t taint the process with our own excitement?
 
-![Image of Dr. Strange with multiple hands](/images/user-research-is-like-a-movie/05.jpg 'Image of Dr. Strange with multiple hands')
+![Image of Dr. Strange with multiple hands](/images/user-research-is-like-a-movie/05.jpg "Image of Dr. Strange with multiple hands")
 
 ## Our key plot devices.
 
@@ -92,7 +96,7 @@ If we were to learn one thing about a skilled interviewer, like Kara Swisher, is
 
 ### Honesty, only with a bit of secrecy
 
-![”If I tell you what happens, it won’t happen”](/images/user-research-is-like-a-movie/06.png '”If I tell you what happens, it won’t happen”')
+![”If I tell you what happens, it won’t happen”](/images/user-research-is-like-a-movie/06.png "”If I tell you what happens, it won’t happen”")
 
 Like with spoilers, giving away too much detail on your discovery activities might harm the actual thought process of your users, as we mentioned.
 
@@ -100,4 +104,4 @@ In my experience, you can mitigate this in pre-work meetings as we have the chan
 
 Never force the user into thinking what you or your stakeholders want them to think. Pick the most relevant information and let it be disclosed at suitable times in such a way that brings value to our discovery process. And remember...
 
-> _“The secret of being a bore is to tell everything.”_ - Voltaire
+> *“The secret of being a bore is to tell everything.”* - Voltaire

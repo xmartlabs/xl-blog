@@ -10,6 +10,7 @@ permalink: /how-ar-can-create-an-roi-for-the-enterprise/
 
 Due to recent breakthroughs in AR technology, mobile AR has suddenly become valuable for several specific use cases. These use cases include employee training, product visualization, visual search, and communication. Enterprises that adopt AR today stand to gain significantly in cost and time savings, customer engagement and retention, as well as reduced time to close deals.
 
+
 The skepticism around mobile AR in 2017 and 2018 is justified: can you think of a single AR app you use on a daily basis? Probably not. However, the reasons for this are twofold:
 
 #### 1 - Mobile AR lacked multi-user capabilities until very recently

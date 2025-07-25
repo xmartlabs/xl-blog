@@ -1,6 +1,6 @@
 ---
-title: ' Improving team collaboration with Monthly ‘Meet & Learn’ Sessions'
-subtitle: ' '
+title: " Improving team collaboration with Monthly ‘Meet & Learn’ Sessions"
+subtitle: " "
 permalink: team-collaboration-monthly-sessions
 featured: true
 date: 2024-10-08
@@ -13,7 +13,6 @@ tags:
   - TeamStrategy
 author: galpe
 ---
-
 Have you ever been so caught up in your projects that you barely get to share experiences or learn from your colleagues? We've all been there, buried in tasks with little room for collaboration. In the fast-paced world of tech, this can be particularly challenging. We often miss out on valuable insights and innovative ideas because we’re too focused on our day-to-day work.
 
 This situation was no strange to the Xmartlabs Delivery Team, and we wanted to change that. The result? Our new monthly 'Meet & Learn' sessions. These meetings became a game-changer for us and have transformed how we work, turning our isolated efforts into a collaborative powerhouse. In this post, I'll share the process of defining and carrying out these meetings and their impact on our team culture.   

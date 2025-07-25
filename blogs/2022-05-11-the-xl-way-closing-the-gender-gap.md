@@ -1,6 +1,6 @@
 ---
 title: The XL Way — Closing the Gender Gap
-subtitle: ' '
+subtitle: " "
 permalink: /2022-05-11-the-xl-way-closing-the-gender-gap/
 featured: true
 date: 2022-05-12
@@ -22,7 +22,7 @@ A process that strives towards a consolidated and formal network, with specific 
 We feel it's essential to show the changes and objectives and why they must occur. Although the IT industry has made certain advances towards gender equality, we believe it wouldn't be wise to risk stagnation because we've reached a relative "comfort.”
 
 ![Xmartlabs’ women in an end-of-the-year retreat — December 2021](/images/the-xl-way-closing-the-gender-gap/PHOTO-2021-12-10-15-24-03.jpg)
-_Xmartlabs’ women in an end-of-the-year retreat — December 2021_
+*Xmartlabs’ women in an end-of-the-year retreat — December 2021*
 
 ## Background — IT industry in numbers
 
@@ -30,7 +30,7 @@ As I mentioned, there have been some constant, although slow, improvements in th
 
 ![Source: Analysis and 2021 and 2022 predictions based on published diversity reports from 20 large technology companies (with an average of more than 100,000 employees). [Deloitte](https://www2.deloitte.com/us/en/insights/industry/technology/technology-media-and-telecom-predictions/2022/statistics-show-women-in-technology-are-facing-new-headwinds.html)](/images/the-xl-way-closing-the-gender-gap/Untitled.png)
 
-_Source: Analysis and 2021 and 2022 predictions based on published diversity reports from 20 large technology companies (with an average of more than 100,000 employees). [Deloitte](https://www2.deloitte.com/content/dam/insights/articles/GLOB164590_Women-tech/DI_Women-tech.pdf)_
+*Source: Analysis and 2021 and 2022 predictions based on published diversity reports from 20 large technology companies (with an average of more than 100,000 employees). [Deloitte](https://www2.deloitte.com/content/dam/insights/articles/GLOB164590_Women-tech/DI_Women-tech.pdf)*
 
 However, there's still a lot of work to do. As shown below, women have continued to be disadvantaged in comparison to their male counterparts:
 
@@ -44,7 +44,7 @@ However, there's still a lot of work to do. As shown below, women have continued
 Although the talent search is an inherent problem in the IT industry, it should be noted that, compared to other sectors, it continues to lag behind in terms of female participation.
 
 ![Source: Future of Jobs Survey, World Economic Forum.](/images/the-xl-way-closing-the-gender-gap/Untitled%201.png)
-_Source: Future of Jobs Survey, World Economic Forum._
+*Source: Future of Jobs Survey, World Economic Forum.*
 
 ## Beginnings — 8M 2021
 
@@ -59,10 +59,10 @@ After that first experience, we undertook specific actions. Some of them were:
 - Our participation in the 2021 edition of "[Techy Por El Día](https://cuti.org.uy/destacados/suma-tu-empresa-al-techy-por-el-dia-edicion-2022/)"
 - Gender workshops for all the team to participate in, which an external consultant carried out in September 2021.
 - Begin our involvement in [CUTI's Gender Comission](https://cuti.org.uy/en/nosotros/) (CUTI being the Uruguayan Chamber of Information and Communication Technologies).
-- Starting a process to solidify the women's group and start organizing next year's March 8 and think of it as a day in which we would carry out special activities.\*\*\*\*
+- Starting a process to solidify the women's group and start organizing next year's March 8 and think of it as a day in which we would carry out special activities.****
 
 ![An after office for Xmartlabs’ women  — September 2021.](/images/the-xl-way-closing-the-gender-gap/PHOTO-2021-09-10-21-25-34.jpg)
-_An after office for Xmartlabs’ women — September 2021._
+*An after office for Xmartlabs’ women  — September 2021.*
 
 ## 2022 — a more solid team
 
@@ -75,7 +75,7 @@ We also needed to let the clients know about our plans for the day and have them
 Every step of the way, Xmartlabs management also supported us and encouraged the activity.
 
 ![Xmartlabs' 10th-anniversary party.](/images/the-xl-way-closing-the-gender-gap/Xmartlabs_157.jpg)
-_Xmartlabs' 10th-anniversary party._
+*Xmartlabs' 10th-anniversary party.*
 
 ### 8M 2022
 
@@ -83,14 +83,15 @@ Just like last year, we had the opportunity to get to know each other. Some 21 w
 
 Besides personal introductions, some of the questions and topics we worked around were:
 
-- The role we have at Xmartlabs and the industry as a whole
-- What we want to give visibility to
-- Is there something that doesn’t sit well with us or bothers us?
+* The role we have at Xmartlabs and the industry as a whole
+* What we want to give visibility to
+* Is there something that doesn’t sit well with us or bothers us?
+
 
 After sharing our stories and opinions with everyone, we started to think about how we could carry out specific actions to bring improvement opportunities. These would bring us closer to a more fair and healthy working environment. Some of them are detailed below:
 
 ![A purple flag waved over Xmartlabs’ offices during March, commemorating International Women’s Day on the 8th of that month.](/images/the-xl-way-closing-the-gender-gap/PHOTO-2022-03-07-14-56-11.jpg)
-_A purple flag waved over Xmartlabs’ offices during March, commemorating International Women’s Day on the 8th of that month._
+*A purple flag waved over Xmartlabs’ offices during March, commemorating International Women’s Day on the 8th of that month.*
 
 ### Proposals that came up
 
@@ -130,7 +131,7 @@ After grounding the proposals and documenting them, the first step was to presen
 
 Once we did this, they were presented to the entire company during a lightning talk (quick half-hour talks that we do every Friday based on topics proposed by the team).
 
-It seemed key to present these changes as something that should be a joint effort that we have to carry out as a team. The idea wasn't to impose a series of demands but of changes, of challenges that we are facing together as a team.\*\*\*\*
+It seemed key to present these changes as something that should be a joint effort that we have to carry out as a team. The idea wasn't to impose a series of demands but of changes, of challenges that we are facing together as a team.****
 
 ## Next steps...
 

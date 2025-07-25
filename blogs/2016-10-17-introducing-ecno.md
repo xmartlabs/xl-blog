@@ -7,9 +7,9 @@ category: development
 permalink: /introducing-ecno/
 ---
 
-[Ecno]: https://github.com/xmartlabs/Ecno
+[Ecno]:        https://github.com/xmartlabs/Ecno
 
-Have you ever been using `UserDefaults` to store something that the user did in the past and then check whether or not he did it? Maybe you wanted to display certain tutorial or prompt the user to subscribe just oncE? (the capital E ;)
+Have you ever been using `UserDefaults` to store something that the user did in the past and then check whether or not he did it? Maybe you wanted to display certain tutorial or prompt the user to subscribe just oncE? (the capital E ;)  
 
 If you feel familiar with those situations, you will discover a new friend, [Ecno].
 
@@ -17,10 +17,10 @@ If you feel familiar with those situations, you will discover a new friend, [Ecn
 
 [Ecno] is an open source library inspired by [Once](https://github.com/jonfinerty/Once), built on top of `UserDefaults` and written in pure `Swift 3`. Its main purpose is to keep track of user-defined tasks allowing you to mark them as **done**, **to-do** and check for those states. Within this context, a task can be any conceptual action or activity that you want to track. The following list shows a few examples:
 
-- Show the app tutorial.
-- Update a token.
-- Prompt the user to subscribe.
-- Perform a sync operation.
+* Show the app tutorial.
+* Update a token.
+* Prompt the user to subscribe.
+* Perform a sync operation.
 
 You will end up doing things like this:
 
@@ -61,7 +61,8 @@ if !Ecno.beenDone("sync operation", scope: .since(3.hours)) {
 }
 ```
 
-> meaning "If there's been at least 3 hours since the last sync operation, then perform another sync".
+> meaning "If there's been at least 3 hours since the last sync operation, then perform another sync".  
+
 
 If you want to show a tutorial every time your app gets updated:
 
@@ -73,6 +74,7 @@ if !Ecno.beenDone("show tutorial", scope: .appVersion) {
   Ecno.markDone("show tutorial")
 }
 ```
+
 
 On the other hand, setting a task as **to-do** within a specific scope will only have effect if that task was not already done in that scope. A **to-do** task is useful in those cases when a certain action triggers another one.
 

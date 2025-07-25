@@ -1,6 +1,6 @@
 ---
 title: Should we automate all testing efforts?
-excerpt: 'Have you ever found yourself wanting full automation testing? Have you ever thought that everything should be automated? Then this post is for you.'
+excerpt: "Have you ever found yourself wanting full automation testing? Have you ever thought that everything should be automated? Then this post is for you."
 date: 2020-05-11
 tags: [QA, Testing]
 category: development
@@ -43,7 +43,7 @@ Eventually as new technologies were introduced to the world, some parts of this 
 
 Same thing applies to software development.
 
-By definition, automation testing means using a set of tools (frameworks) that help execute in a programatically manner, validations and verifications to a given software, with very little to almost none human effort. This helps to perform repetitive tasks in a more efficient and faster way, avoiding human errors as well. It is important to highlight that **_little to almost none human effort_** doesn’t mean a replacement for manual QA analysts, as these tools have to be analyzed, planned, developed and maintained by these analysts.
+By definition, automation testing means using a set of tools (frameworks) that help execute in a programatically manner, validations and verifications to a given software, with very little to almost none human effort. This helps to perform repetitive tasks in a more efficient and faster way, avoiding human errors as well. It is important to highlight that ***little to almost none human effort*** doesn’t mean a replacement for manual QA analysts, as these tools have to be analyzed, planned, developed and maintained by these analysts.
 
 In short, the goal of automation testing is to reduce the number of verifications to be done manually, and help the team members to focus on other important tasks.
 

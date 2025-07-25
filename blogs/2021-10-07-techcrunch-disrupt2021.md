@@ -31,7 +31,7 @@ If the speakers emphasized one thing through the panels, it's the importance of 
 
 Entrepreneurs can turn to guidance and mentorships from founders who went through similar journeys. Talk to them about their experiences and relationships with those investors, and ask specifically about how they acted in times of crisis.
 
-Another good strategy mentioned in [_Preparing for Your Series A_](https://techcrunch.com/video/youve-raised-your-seed-round-now-what-preparing-for-your-series-a/) is having a clear picture of your ideal investor. List those non-negotiable qualities they need to fulfill and make sure those you consider doing business with fit into that mold. Once you have made up your mind, you're ready to start pitching.
+Another good strategy mentioned in [*Preparing for Your Series A*](https://techcrunch.com/video/youve-raised-your-seed-round-now-what-preparing-for-your-series-a/) is having a clear picture of your ideal investor. List those non-negotiable qualities they need to fulfill and make sure those you consider doing business with fit into that mold. Once you have made up your mind, you're ready to start pitching.
 
 ### The Importance of a Killer Pitch Deck
 
@@ -112,6 +112,8 @@ As mentioned previously, remote reality significantly impacted founding, especia
     <a href="https://www.google.com/url?sa=i&url=https%3A%2F%2Finsight.factset.com%2Fventure-capital-activity-skyrockets-in-the-first-half-of-2021&psig=AOvVaw2jh6caWGIGh-N3BodLRSH1&ust=1633801259917000&source=images&cd=vfe&ved=0CAsQjRxqFwoTCMCIpZCuu_MCFQAAAAAdAAAAABBM">Source</a>
 </p>
 
+
+
 **Final notes**
 
 The good news is, there are plenty of opportunities for founders to get capital, and if one doesn't work, you can keep going through other alternatives. Founding a company has never been easier. People are very willing to buy good products from companies with vision, so, once again, don't give up and focus on traction before fundraising while remembering your north star.
@@ -142,7 +144,7 @@ It's crucial to squirrel away some money for a rainy day (a.k.a emergencies, lik
 
 **Build your brand before advertising**
 
-On _[How to Accelerate Everything](https://techcrunch.com/video/how-to-accelerate-everything/)_, panelists prompted companies to build a brand foundation before turning on their growth efforts. This is key if you want to be a brand instead of simply a product company. [Nik Sharma](https://www.linkedin.com/in/mrniksharma/), CEO of Sharma Brands, said the best way was to think about marketing vs. advertising in the following terms: marketing is a digital image of your company, and advertising is when you enlarge the image, and you stretch it, and the more you stretch it, the more important is that the image is good quality; otherwise it will look blurry.
+On *[How to Accelerate Everything](https://techcrunch.com/video/how-to-accelerate-everything/)*, panelists prompted companies to build a brand foundation before turning on their growth efforts. This is key if you want to be a brand instead of simply a product company. [Nik Sharma](https://www.linkedin.com/in/mrniksharma/), CEO of Sharma Brands, said the best way was to think about marketing vs. advertising in the following terms: marketing is a digital image of your company, and advertising is when you enlarge the image, and you stretch it, and the more you stretch it, the more important is that the image is good quality; otherwise it will look blurry.
 
 <blockquote class="twitter-tweet"><p lang="en" dir="ltr">Building brand equity in the early days is SO crucial for success.<br /><br />You can’t just rely on ads. <a href="https://t.co/S6qi08Drvc">pic.twitter.com/S6qi08Drvc</a></p>&mdash; Nik Sharma (@mrsharma) <a href="https://twitter.com/mrsharma/status/1413294546868346882?ref_src=twsrc%5Etfw">July 9, 2021</a></blockquote> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
 
@@ -167,7 +169,8 @@ Most companies are unsure about when it's time to go out and look for further fu
 Fundraising should be a catalyst to something happening that's already there, the business growing so fast you can't meet expectations without that money.
 
 > "Look at what you have to solve, understand the problem, and ask yourself if capital can accelerate what you have already validated and understood."
-> \*Tope Awotona, CEO of Calendly (Calendly, From Bootstrap to Billions)
+*Tope Awotona, CEO of Calendly (Calendly, From Bootstrap to Billions)
+>
 
 However, be careful with the timing. As mentioned, most companies run on a year and a half to a two-year runway, but speakers stressed the importance of not waiting for the money to run out to go out and start raising. Negotiating with no liquidity will leave you with no leverage whatsoever, and you should avoid that at all costs.
 
@@ -190,7 +193,8 @@ The more early-stage the company is, the more difficult it is to see the PMF cle
 It's essential in those early days to have a clear understanding of what's going on in the industry and the market, and you need to trust the entrepreneur's resumè. It has been noted that those companies whose founders identify with the pain point they're trying to solve have higher chances of growing and developing. Ask yourself, is the pain point I'm tackling good for me, or for the market?
 
 > "We provide a product/service that solves a real problem and provides true value. This is Calendly. Time-saving, improved retention and the chance of outcome of that meeting are just some value propositions.
-> _Tope Awotona_, Calendly 's CEO — Calendly, From Bootstrap to Billions
+*Tope Awotona*, Calendly 's CEO — Calendly, From Bootstrap to Billions
+>
 
 And what happens with those founders looking for capital while they're defining the PMF? Before looking for funding, you need to have information from the users and the market that supports the business's development. It should be first-hand information; it's not a good move to outsource the initial market and user research. The founder should be in the research process and understand his product's use cases. There has to be an understanding by the founder so they can constantly look for accurate indicators of PMF. An excellent way to achieve this is to look for product validation constantly.
 
@@ -207,11 +211,13 @@ As for the value a company delivers, in developing products, the focus needs to 
 
 ## What happens with underrepresented entrepreneurs?
 
-[Hana Mohan](https://www.linkedin.com/in/unamashana/?originalSubdomain=es), [Stephen Bailey](https://www.linkedin.com/in/stephen-bailey-7bb5144/), and [Leslie Feinzaig](https://www.linkedin.com/in/lesliefeinzaig/) talked about a topic sometimes overlooked within the startup industry, although gaining visibility in the last few years. Being an entrepreneur is never easy, but what about those with other disadvantages like their race or gender? How does this affect them in their path to business growth?
+[Hana Mohan](https://www.linkedin.com/in/unamashana/?originalSubdomain=es),  [Stephen Bailey](https://www.linkedin.com/in/stephen-bailey-7bb5144/), and [Leslie Feinzaig](https://www.linkedin.com/in/lesliefeinzaig/) talked about a topic sometimes overlooked within the startup industry, although gaining visibility in the last few years. Being an entrepreneur is never easy, but what about those with other disadvantages like their race or gender? How does this affect them in their path to business growth?
 
 Feinzaig shared her experience trying to raise capital in Silicon Valley and how the view that the place is a meritocracy is a myth entirely. Although it's an idea we all wanna believe in, it takes a certain amount of courage (or what she described as a "gaslit experience") to question that. In the early stages of a startup, you are not raising out on your idea, what matters is how you execute, and Leslie found that depends partly on your resources, and not everyone has the same amount. She mentioned connections were also crucial to get meetings in Sand Hill Road. Investors weren't always interested in founding women and risked them getting pregnant and quitting their business.
 
+
 <blockquote class="twitter-tweet"><p lang="en" dir="ltr">Popular career advice doesn&#39;t work for women. I want to re-write all the books.<br /><br />&quot;Rich mom, poor mom.&quot;<br />&quot;How to win friends &amp; influence people without playing dumb or being labeled a bitch&quot;<br />&quot;The 7 habits of highly effective people who don&#39;t have a housewife &amp; full time help&quot;</p>&mdash; Leslie Feinzaig 🎃 (@LeslieFeinzaig) <a href="https://twitter.com/LeslieFeinzaig/status/1440439978182332417?ref_src=twsrc%5Etfw">September 21, 2021</a></blockquote> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+
 
 Bailey said that being an entrepreneur in a minority group sometimes means being asked for more proof from investors or business partners. It also implicates not always finding mentorship because people want to help those who look like them.
 
@@ -221,9 +227,9 @@ With all these obstacles being thrown at you, it's easier for your confidence to
 
 - Don't allow others to define you ("you are so and so, you must know about XYZ"), or it will mess up your sense of purpose, your ambition, and what makes you unique as a leader.
 - Do things that take you to a place of confidence, such as
-  - Know what you can do and remind yourself of those things
-  - Remind yourself why you're doing it; if you lose your purpose, you lose your confidence.
-  - Know that you're going to be successful; that's out of the question. What you need to ask is, "Are you joining me or not? I'd love to do it with you, but I am also capable of doing it without you."
+    - Know what you can do and remind yourself of those things
+    - Remind yourself why you're doing it; if you lose your purpose, you lose your confidence.
+    - Know that you're going to be successful; that's out of the question. What you need to ask is, "Are you joining me or not? I'd love to do it with you, but I am also capable of doing it without you."
 - Know that those who succeeded are not necessarily better or more clever, nor worse than you. Don't make room for resentment.
 - Don't overwork or feel the need to do something all the time, that may come from a place of doubt. Center yourself and prioritize what matters.
 

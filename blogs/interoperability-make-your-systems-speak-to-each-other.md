@@ -1,6 +1,6 @@
 ---
-title: 'Interoperability: Make Your Systems Speak to Each Other'
-subtitle: ' '
+title: "Interoperability: Make Your Systems Speak to Each Other"
+subtitle: " "
 permalink: /blog/healthcare-interoperability
 featured: true
 date: 2025-07-07
@@ -14,7 +14,6 @@ tags:
   - Healthtech
 author: conor
 ---
-
  A patient arrives at the emergency room with a severe allergic reaction. The clinicians rush to access her medical records, only to discover her allergy information is trapped in another hospital’s electronic health record (EHR) system, formatted differently and inaccessible in real time. The result? Delayed care, unnecessary tests, and increased risk to the patient’s safety. Unfortunately, in spite of huge technological advances, this scenario is still far too common in healthcare today. Existing barriers to interoperability results in the loss of critical information and delayed workflows, causing both patients and providers to lose trust in digital solutions.
 
 Despite the promise of digital health, making different systems “speak the same language” is still a daily challenge for many healthcare organizations. Here are the key barriers that stand in the way:

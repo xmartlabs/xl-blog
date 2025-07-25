@@ -14,7 +14,6 @@ We faced this problem and have gone through several options to reduce model infe
 In this post, we'll go through the journey of choosing a framework, showing performance comparisons, and, hopefully helping you decide which one to use.
 
 ## Running style transfer on realtime video in iOS
-
 A few years ago, before the release of CoreML and TFlite on iOS, we built [DreamSnap], an app that runs style transfer on camera input in real-time and lets users take stylized photos or videos.
 We decided we wanted to update the app with newer models and found a Magenta model hosted on [TFHub] and available for download as TFlite or TensorFlow model.
 Magenta is a machine learning research project from Google focused on art and music. They have published several trained models with open-source training code.
@@ -29,7 +28,6 @@ We tried to use the Metal or CoreML delegates to run this model on the GPU, but 
 > Note: in this post, we did not consider MLKit, but its performance should be similar to using TFlite directly.
 
 ### Converting to CoreML
-
 Converting a TFlite model to CoreML [is not easy].
 Also, the base TF model available on TFHub, was not exactly the same as the TFlite model, so we had to retrain it.
 Luckily the source code to train it's available, and we proceeded to train a model with the same architecture as the TFlite model.
@@ -39,10 +37,9 @@ Increasing the image size will roughly increase the processing time by the same 
 
 CoreML chooses on which device (CPU, GPU, or Neural Engine) your model will run.
 However, it allows you to limit which devices it can choose:
-
-- CPU only
-- CPU and GPU
-- all (Neural Engine, CPU and GPU)
+* CPU only
+* CPU and GPU
+* all (Neural Engine, CPU and GPU)
 
 As you might have noticed, the CPU option will always be enabled, meaning CoreML can always choose to run your model on CPU (which normally has the worst performance compared to GPU and NE).
 
@@ -57,7 +54,6 @@ Using MPS directly can be a bit tedious because of how the API is set up, which 
 The introduction of the MPSNNGraph made using MPS a bit easier but didn't solve all of its problems.
 
 ### About Bender
-
 Bender was the result of abstracting and generalizing the code we developed for DreamSnap.
 It's an abstraction built above MPS with some additions.
 One of its main advantages is that it allows converting TensorFlow frozen graphs to its own graph representation, wrapping MPS or custom layers.
@@ -68,7 +64,6 @@ Bender's `TFConverter` solves all of this.
 The drawback is that Bender supports a limited subset of layers, so if you want to use it for other models, chances are you will need to add support for extra layers.
 
 ### Bender vs CoreML vs TFlite
-
 We haven't been maintaining Bender a lot since CoreML was released. However, we figured it was still worth a shot.
 We had to add support for a few new layers, but then running the model was straightforward.
 And to our surprise, we were able to almost double the FPS we got from CoreML, achieving over 30 FPS.
@@ -90,7 +85,6 @@ Note, however, that when using CoreML's `.cpuAndGPU` option, the energy impact i
 We could also state from the results of this experiment, that the main advantage of the Neural Engine is for the device's battery, not for the performance of the models.
 
 ## So which framework should I choose?
-
 The short answer to this question is: It depends.
 
 First of all, it depends on your needs.
@@ -104,23 +98,21 @@ Moreover, Apple and Google maintain these frameworks, so you should get decent s
 If you need real-time performance and both TFlite or CoreML aren't cutting it, then the moment to consider using MPS (either directly or with the MPSNNGraph) or Bender has come.
 
 So you should use CoreML or TFlite when:
-
-- You want to quickly try a model
-- You don't need real-time performance
-- You expect your model to be running during a prolonged period of time, and you want to avoid draining the user's battery
-- The performance is good enough for your use case
+* You want to quickly try a model
+* You don't need real-time performance
+* You expect your model to be running during a prolonged period of time, and you want to avoid draining the user's battery
+* The performance is good enough for your use case
 
 However, consider using MPS or Bender when:
+* The performance of CoreML is not good enough
+* You want to make sure that your model runs on the GPU
 
-- The performance of CoreML is not good enough
-- You want to make sure that your model runs on the GPU
 
 It must be said as well that:
-
-- The difference shown for this model won't always be the same for other models
-- CoreML could choose to run bigger parts of the network on GPU or NE and thus run faster
-- The network architecture will likely be an important factor here
-- For certain architectures, using MPS means the speedup will increase, whereas, for others, you might not get any benefit
+* The difference shown for this model won't always be the same for other models
+* CoreML could choose to run bigger parts of the network on GPU or NE and thus run faster
+* The network architecture will likely be an important factor here
+* For certain architectures, using MPS means the speedup will increase, whereas, for others, you might not get any benefit
 
 ## To sum up
 
@@ -129,6 +121,7 @@ That's when MPS or Bender come in to help with increased performance, albeit wit
 
 Bender allows converting frozen TF models and running them in iOS, although, this process might not be straightforward.
 If you need help doing such a conversion, feel free to reach out at [hi@xmartlabs.com](mailto:hi@xmartlabs.com).
+
 
 [Dreamsnap]: https://getdreamsnap.com
 [TFHub]: https://tfhub.dev/google/lite-model/magenta/arbitrary-image-stylization-v1-256/fp16/transfer/1

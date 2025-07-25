@@ -31,14 +31,13 @@ At first glance, JUST WOW, this is such a departure from the current workflow wh
 
 > Lists rule mobile UI
 
-Lists are by far the most common UI layout used today (just think about how everything scrolls down in modern apps). And given how tedious it was to create a list using UIKit it makes a lot of sense that Apple shows this as their first demo. It’s like shouting to their audience a big _“Look! This doesn’t suck anymore!”_. These announcements go perfectly in line with the other WWDC keynote announcements, all which respond to long-awaited needs.
+Lists are by far the most common UI layout used today (just think about how everything scrolls down in modern apps). And given how tedious it was to create a list using UIKit it makes a lot of sense that Apple shows this as their first demo. It’s like shouting to their audience a big *“Look! This doesn’t suck anymore!”*. These announcements go perfectly in line with the other WWDC keynote announcements, all which respond to long-awaited needs.
 
 ### New UI, familiar syntax
 
 This is all great, but when we saw the conference we couldn't help but think of how similar this declarative syntax looks to Google’s. Flutter is looking at [huge growth in the developer community ](http://gittrends.io/#/repos/flutter/flutter), and a big part of that can probably be attributed to the UI framework being really simple to use.
 
 #### How similar is SwiftUI to Flutter?
-
 Let’s take that first example from [Apple’s site](https://developer.apple.com/tutorials/swiftui/) again:
 
 <p align="center">
@@ -46,7 +45,6 @@ Let’s take that first example from [Apple’s site](https://developer.apple.co
 </p>
 
 **Swift**
-
 ```swift
 List(landmarks) { landmark in
    HStack {
@@ -63,7 +61,6 @@ List(landmarks) { landmark in
 ```
 
 **Now in Flutter**
-
 ```swift
 ListView( children: landmarks.map((landmark) {
     return Row( children: <Widget>[
@@ -79,13 +76,13 @@ ListView( children: landmarks.map((landmark) {
 
 ## **That’s really similar! Isn’t it?**
 
-There are a few Swift vs Dart syntax differences (Swift is definitely cleaner, with the help of some nice syntax sugar), but **the overall structure is _almost identical_.**
+There are a few Swift vs Dart syntax differences (Swift is definitely cleaner, with the help of some nice syntax sugar), but **the overall structure is *almost identical*.**
 
 Although a really basic example, we can pick up some differences:
 
-- SwiftUI Lists receive a model and automatically maps it to the cell builder function. (nice!), in Flutter we need to use a map function and then turn it into a List. (Although this would probably be done using [List.builder](https://api.flutter.dev/flutter/widgets/ListView/ListView.builder.html)).
+* SwiftUI Lists receive a model and automatically maps it to the cell builder function. (nice!), in Flutter we need to use a map function and then turn it into a List. (Although this would probably be done using [List.builder](https://api.flutter.dev/flutter/widgets/ListView/ListView.builder.html)).
 
-- Adding optional elements is a bit trickier in Flutter, given a Widget lists cannot contain nulls ([currently in discussion](https://github.com/flutter/flutter/issues/3783)).
+* Adding optional elements is a bit trickier in Flutter, given a Widget lists cannot contain nulls ([currently in discussion](https://github.com/flutter/flutter/issues/3783)).
 
 I’m wondering how much of this is on purpose, Apple has had a few years to look at what Google and others have been doing to use as inspiration. In the end, developers don’t want to learn 5 different ways of doing things, just one that works well is enough.
 
@@ -93,7 +90,7 @@ I’m wondering how much of this is on purpose, Apple has had a few years to loo
 
 Apple’s demo images don’t really match with the example code (which makes sense for explanatory purposes). There are layout details (paddings, separators, chevrons) being left out, and one should probably wrap the cell in its own file. You can go over the [SwiftUI tutorial to see the details](https://developer.apple.com/tutorials/swiftui/building-lists-and-navigation).
 
-_Wondering how the complete screen would be done in Flutter?_
+*Wondering how the complete screen would be done in Flutter?*
 
 Without encapsulating widgets (which is heavily encouraged) it looks something like this:
 

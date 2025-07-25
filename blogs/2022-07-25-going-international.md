@@ -1,5 +1,5 @@
 ---
-title: 'Going International - The Ups and Downs of Being a Distributed Team'
+title: "Going International - The Ups and Downs of Being a Distributed Team"
 date: 2022-07-25
 tags: [Xmartlabs]
 category: people-events
@@ -72,7 +72,7 @@ Our traditional barbecues (or “Asados”) have always taken place in the offic
 
 ## How we addressed the challenges of a distributed team.
 
-At an event, last year _mmhmm_’s co-founder [Phil Libin](https://www.linkedin.com/in/plibin/) talked about the pros and cons of a distributed team. He was clear that calling it remote work was not good because it conjured up images of sad, distant, and apathetic people ("No one is remote, we're intentionally distributed"). He encouraged us to be creative and intentional in how we think about the advantages of WFH.
+At an event, last year *mmhmm*’s co-founder [Phil Libin](https://www.linkedin.com/in/plibin/) talked about the pros and cons of a distributed team. He was clear that calling it remote work was not good because it conjured up images of sad, distant, and apathetic people ("No one is remote, we're intentionally distributed"). He encouraged us to be creative and intentional in how we think about the advantages of WFH.
 
 **Increasing communication and collaboration in the team.**
 

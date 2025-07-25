@@ -35,7 +35,7 @@ In this architecture, each user has the possibility of running the video process
 
 # Why Object Detection in Lanthorn?
 
-You’re probably wondering “Why are we talking about an occupancy analytics product in an Object Detection blog?” Well, because we’re interested in the way the product calculates metrics. Instead of building a specific end-to-end ML model for each metric, Lanthorn only has basic ML models (such as object detection) and computing analytics in post-processing.
+You’re probably wondering “Why are we talking about an occupancy analytics product in an Object Detection blog?” Well, because we’re interested in the way the product calculates metrics. Instead of building a specific end-to-end ML model for each metric, Lanthorn only has basic ML models (such as object detection) and computing analytics in post-processing. 
 
 Let's overview this architecture with a specific metric like **social distancing**. Rather than building an end-to-end neural network that, given a video frame, returns distances between people or which people are violating it; Lanthorn executes an object detection model (such as [yolo](#yolo)) in a LAN’s processor and sends the detected people (bounding boxes) to the cloud’s backend. Here, the post-processing computes the social distancing violation using heuristics to measure distances from a flattened 2d coordinate system.
 
@@ -58,7 +58,7 @@ Considering the diversity of devices and uses cases that Lanthorn supports, ther
 - X86 node accelerated with [OpenVino toolkit](https://docs.openvinotoolkit.org/)
 - X86 node with Nvidia GPU
 
-_Devices Lanthorn supports. So many devices usually mean diverse use cases._
+*Devices Lanthorn supports. So many devices usually mean diverse use cases.*
 
 Imagine, for example, a user interested in using Lanthorn to monitor the time people spend lining in a food track. In this case, the accuracy may not be important because you are not worried about detecting 100% of the people in the scene; but real-time metrics are key for taking action immediately after a delay is detected.
 
@@ -72,7 +72,7 @@ MobilenetSSD is an object detection model that belongs to the Single-Shot Detect
 
 ### **Single-Shot Detector (SSD)**
 
-The SSD model was published in the 2016 paper *[SSD: Single Shot MultiBox Detector](https://arxiv.org/pdf/1512.02325.pdf).* Before SDD, the most famous state-of-the-art object detection models follow a **_Two-stage object detectors_** architecture. This architecture (as his name indicates and we explained in our [previous blog](https://blog.xmartlabs.com/blog/computer-vision-techniques-for-body-detection/)) needs two phases to detect a category in an image. In the first phase, the model detects the candidate regions where the objects can be located using some heuristic or specific [CNN](https://en.wikipedia.org/wiki/Convolutional_neural_network) neural networks. Later, using the previously calculated regions as input, another model (the classifier) classifies each of these regions into the supported categories. These characteristics make these models very accurate and precise. However, they have the disadvantage of performing very slow on embedded systems. As mentioned in the SSD paper, the fastest implementation of these algorithms (Faster R-CNN) only archives seven frames per second (FPS).
+The SSD model was published in the 2016 paper *[SSD: Single Shot MultiBox Detector](https://arxiv.org/pdf/1512.02325.pdf).* Before SDD, the most famous state-of-the-art object detection models follow a ***Two-stage object detectors*** architecture. This architecture (as his name indicates and we explained in our [previous blog](https://blog.xmartlabs.com/blog/computer-vision-techniques-for-body-detection/)) needs two phases to detect a category in an image. In the first phase, the model detects the candidate regions where the objects can be located using some heuristic or specific [CNN](https://en.wikipedia.org/wiki/Convolutional_neural_network) neural networks. Later, using the previously calculated regions as input, another model (the classifier) classifies each of these regions into the supported categories. These characteristics make these models very accurate and precise. However, they have the disadvantage of performing very slow on embedded systems. As mentioned in the SSD paper, the fastest implementation of these algorithms (Faster R-CNN) only archives seven frames per second (FPS).
 
 Examples of two-stage object detectors algorithms are:
 
@@ -139,7 +139,7 @@ Although this is an object detection blog, you can use any pose estimation model
 
 We won't go too deep into the topic in this post, but to sum it up, most pose estimation models tend to be slower than object detection. That's because the pose estimation problem is more complex and requires higher resolution work.
 
-In Lanthorn, the pose estimation models supported are openpipaf (https://github.com/openpifpaf/openpifpaf) and posenet ([https://github.com/tensorflow/tfjs-models/tree/master/posenet](https://github.com/tensorflow/tfjs-models/tree/master/posenet)).
+In Lanthorn, the pose estimation models supported are openpipaf (https://github.com/openpifpaf/openpifpaf) and posenet ([https://github.com/tensorflow/tfjs-models/tree/master/posenet](https://github.com/tensorflow/tfjs-models/tree/master/posenet)). 
 
 ## Model comparison in Lanthorn
 
@@ -200,10 +200,10 @@ On this blog, we concluded (with an actual use case example) that it's possible 
 
 We can also conclude that choosing the model that better fits your circumstances is not a trivial decision. You can make multiple comparisons between two models, but it's essential to choose the one that will find the best possible solution. It's critical to have an in-depth understanding of the particularities of your use case before selecting a model. As was shown in the models' comparison sections, the best model can vary depending on your needs.
 
-Finally, the machine learning models have improved a lot over the recent years, making it possible to execute video models in edge devices without sacrificing accuracy efficiently. This improvement facilitates the build of ML solutions without the need for expensive hardware, making possible the application of ML solutions in practical problems like [Lanthorn.ai](http://lanthorn.ai/), as well as many others.
+Finally, the machine learning models have improved a lot over the recent years, making it possible to execute video models in edge devices without sacrificing accuracy efficiently. This improvement facilitates the build of ML solutions without the need for expensive hardware, making possible the application of ML solutions in practical problems like [Lanthorn.ai](http://lanthorn.ai/), as well as many others. 
 
-ML solutions have been proven to solve different issues and optimize processes in an array of different industries, especially traditional ones.
+ML solutions have been proven to solve different issues and optimize processes in an array of different industries, especially traditional ones. 
 
-If you’d like to learn how our Machine Learning [expertise](https://xmartlabs.com/services#ML) might help you improve and optimize your business, whatever it is, contact us for a free discovery call with our experts.
+If you’d like to learn how our Machine Learning [expertise](https://xmartlabs.com/services#ML) might help you improve and optimize your business, whatever it is, contact us for a free discovery call with our experts. 
 
 Thanks for reading 🙂

@@ -1,5 +1,5 @@
 ---
-title: '#OnlyOneEarth - The Impact of Tech On The Environment'
+title: "#OnlyOneEarth - The Impact of Tech On The Environment"
 permalink: /2022-06-06-the-impact-of-tech-on-the-environment/
 date: 2022-06-06
 category: people-events
@@ -10,13 +10,12 @@ tags:
 author: coti
 thumbnail: /images/only-one-earth/OnlyOneEarth.png
 ---
-
 # raw - #OnlyOneEarth
 
-**_In the universe are billions of galaxies,
+***In the universe are billions of galaxies,
 In our galaxy are billions of planets,
 But there is #OnlyOneEarth.
-[Let’s take care of it.](https://www.worldenvironmentday.global/get-involved/practical-guide?utm_source=google&utm_medium=cpc&utm_campaign=search_practical_guide&utm_term=worldwide&utm_content=wed2022_phase2&utm_term=only%20one%20earth&utm_campaign=WED+-+Phase2+-+Global+-+Search+Practical+guide&utm_source=adwords&utm_medium=ppc&hsa_acc=1970971754&hsa_cam=17325777484&hsa_grp=137834214955&hsa_ad=599967094798&hsa_src=g&hsa_tgt=kwd-1658379539656&hsa_kw=only%20one%20earth&hsa_mt=b&hsa_net=adwords&hsa_ver=3&gclid=Cj0KCQjwheyUBhD-ARIsAHJNM-Nc4cH4ZGxXjZqH3BVJFst9CXXgVTzg7djyXDZn1PsMysoYxP3S8OsaAsIwEALw_wcB)_**
+[Let’s take care of it.](https://www.worldenvironmentday.global/get-involved/practical-guide?utm_source=google&utm_medium=cpc&utm_campaign=search_practical_guide&utm_term=worldwide&utm_content=wed2022_phase2&utm_term=only%20one%20earth&utm_campaign=WED+-+Phase2+-+Global+-+Search+Practical+guide&utm_source=adwords&utm_medium=ppc&hsa_acc=1970971754&hsa_cam=17325777484&hsa_grp=137834214955&hsa_ad=599967094798&hsa_src=g&hsa_tgt=kwd-1658379539656&hsa_kw=only%20one%20earth&hsa_mt=b&hsa_net=adwords&hsa_ver=3&gclid=Cj0KCQjwheyUBhD-ARIsAHJNM-Nc4cH4ZGxXjZqH3BVJFst9CXXgVTzg7djyXDZn1PsMysoYxP3S8OsaAsIwEALw_wcB)***
 
 The IT industry plays a major role in generating a greener and more sustainable future. In 2021 Data Centers alone accounted for between 1.1% and 1.5% of worldwide electricity consumption; now in 2022, and with all the advancements and development in Green Energy generation, you’d think that we’d be in a lower percentage. But, you guessed right! We are not. In the next post, I’ll let you in on why and what’s being done to reverse that situation.
 
@@ -66,7 +65,7 @@ But, even though those numbers can be a little bit scary, different strategies a
 
 ![****CopenHill: waste-to-energy plant by Bjarke Ingels Group****](/images/only-one-earth/4.jpg)
 
-\***\*CopenHill: waste-to-energy plant by Bjarke Ingels Group\*\***
+****CopenHill: waste-to-energy plant by Bjarke Ingels Group****
 
 These facilities ensure the process of generating energy in the form of electricity and/or heat from the primary treatment of waste. But in order to get that done, it takes a few steps to get from this:
 
@@ -76,7 +75,7 @@ To this:
 
 ![Untitled](/images/only-one-earth/Untitled%206.png)
 
-One of the most important steps in this whole process is the sorting of the waste, that way, what’s actually recyclable (like plastics, glass, metals) can be sorted out, and what is not, continues in the process.
+One of the most important steps in this whole process is the sorting of the waste, that way,  what’s actually recyclable (like plastics, glass, metals) can be sorted out, and what is not, continues in the process.
 
 And that’s when IT comes in: AI and machine vision-based technology can sort the recyclables from what’s going to continue the process of waste-to-energy; Artificial Intelligence is transforming waste management, while human workers can sort between 30 and 40 recyclables per minute, AI-powered machines can handle up to 160.
 
@@ -85,6 +84,8 @@ And that’s when IT comes in: AI and machine vision-based technology can sort t
 ## Closing thoughts & fun facts
 
 Bottom line, even though we are bringing up some uncomfortable topics and harsh truths, we are also super excited about sustainability tech. A growing and flourishing niche that we cant’ wait to see what it might bring up next.
+
+
 
 If you got to this point, first: good for you! Second, here are 5 fun (and happy) facts about sustainability:
 

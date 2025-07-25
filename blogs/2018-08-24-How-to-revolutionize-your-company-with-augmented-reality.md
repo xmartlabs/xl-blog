@@ -18,6 +18,7 @@ Augmented reality is already being used in retail and e-commerce, mainly in the 
 
 Similar use cases have been adopted by Ikea, Wayfair, and Amazon, in which customers can place products into their houses to see how products would look in their environment. Product visualization demos can range from furniture and appliances - or even seeing what a new car would look like parked in your driveway.
 
+
 <img width="100%" src="/images/how-to-revolutionize-your-company-with-augmented-reality/screen-shot-2017-11-01-at-1-53-15-pm.png" />
 (source: [ZDnet](https://www.zdnet.com/article/amazon-brings-augmented-reality-feature-ar-view-to-amazon-app/))
 
@@ -65,12 +66,14 @@ Wayfinding is one of the core benefits of the AR Cloud. GPS has provided us with
 
 AR to the rescue! Advancements in computer vision and the AR cloud mean that tourists can navigate by following highlighted arrows and directions in their camera, instead of deciphering a confusing blue dot in Google Maps.
 
+
 <img width="100%" src="/images/how-to-revolutionize-your-company-with-augmented-reality/Gatwick-augmented-reality-e1495793865704-916x515.jpg" />
 (Source: [Business Traveller](https://www.businesstraveller.com/business-travel/2017/05/26/gatwick-enables-augmented-reality-wayfinding/))
 
 Ministries of tourism in cities around the world can use the AR cloud’s wayfinding capabilities to help tourists (especially foreigners) more easily navigate cities and large indoor destinations such as shopping malls, convention centers, and airports.
 
 That said, finding a landmark is just the first step. AR cloud capabilities can provide tourists with a much richer, intimate, and contextual experience. For example, tourists may want to gain more information about a specific cathedral, historical site, or restaurant. In this case, it’s possible to create 3D animations of what a landmark looked like several decades in the past - as well as drop annotations and notes about specific spots at that landmark within an accuracy of millimeters.
+
 
 <img width="100%" src="/images/how-to-revolutionize-your-company-with-augmented-reality/Augmented-Reality-Apps-for-Travel-Enthusiasts.png" />
 (Source: [Business Computing World](http://www.businesscomputingworld.co.uk/how-blockchain-and-ar-technology-are-boosting-the-travel-and-tourism-industry/))

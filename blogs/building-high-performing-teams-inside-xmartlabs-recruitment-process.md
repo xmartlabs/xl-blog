@@ -1,6 +1,6 @@
 ---
 title: "Building High-Performing Teams: Inside Xmartlabs' Recruitment Process"
-subtitle: ' '
+subtitle: " "
 permalink: tech-recruiting-process-enterprise
 featured: true
 date: 2024-02-16
@@ -13,7 +13,6 @@ tags:
   - Team
 author: vale
 ---
-
 Recently, we published a blog post discussing the [importance of having flexible and adaptable teams](https://blog.xmartlabs.com/blog/2023-10-04-adapting-teams-to-enterprise-needs/), especially when dealing with enterprise clients. We touched on Xmartlabs' search and recruiting process and its importance in keeping an active search for potential profiles that might be useful for a client's needs.
 
 This process serves as a cornerstone, shaping our team's composition and essence and embodying our work ethic in every stage of our client's projects. It ensures that we assemble the most fitting teams to deliver excellence.
@@ -32,7 +31,7 @@ Therefore, when the recruiting team searches for potential profiles, these requi
 
 In the aforementioned blog post, we emphasized the importance of an active search involving the proactive pursuit of individuals with specialized skill sets and/or technologies that might be challenging to find in the market. However, one might wonder how this aligns with our earlier point about clearly understanding the needs we aim to fulfill. How can a constant search be carried out when it's not necessarily known what you need beyond a technology or role?
 
-The recruiting team addresses this by continuously conducting a broad search based on technologies, particularly those that are harder to find. During their weekly meetings with the operations team, when specific needs for a profile are identified, the recruiting team already possesses a pre-set pool of candidates to review, saving valuable time. When specific profiles lack a previous search, a new search is initiated from scratch.
+The recruiting team addresses this by continuously conducting a broad search based on technologies, particularly those that are harder to find. During their weekly meetings with the operations team, when specific needs for a profile are identified, the recruiting team already possesses a pre-set pool of candidates to review, saving valuable time. When specific profiles lack a previous search, a new search is initiated from scratch. 
 
 Once the candidates are evaluated by the team and deemed ready to be presented to the client, having successfully passed the entire process, we send their resumes. While maintaining clarity on client needs, this approach also ensures that our recruitment team is continuously ready to meet the dynamic demands of our enterprise clients.
 
@@ -62,9 +61,9 @@ These measures are implemented to guarantee that both parties are comfortable wi
 
 Keeping the pulse on a cornerstone process like recruiting and hiring is fundamental to ensure continued success and improvements. To do this, we have certain practices in place:
 
-- **Three-month Satisfaction Survey**: completed by the manager of the person who joined the company, it aims to identify any areas for improvement for the individual. It also serves as a means to evaluate the process and provides input for the People team.
-- **First-month Meeting:** This meeting between the new team member and the People Team serves the purpose of assessing how the person is doing and determining if expectations and reality are aligned.
-- We also constantly look for feedback, and potential issues in the process are always communicated to the recruiting team.
+* **Three-month Satisfaction Survey**: completed by the manager of the person who joined the company, it aims to identify any areas for improvement for the individual. It also serves as a means to evaluate the process and provides input for the People team.
+* **First-month Meeting:** This meeting between the new team member and the People Team serves the purpose of assessing how the person is doing and determining if expectations and reality are aligned.
+* We also constantly look for feedback, and potential issues in the process are always communicated to the recruiting team.
 
 ![](/images/team.png)
 

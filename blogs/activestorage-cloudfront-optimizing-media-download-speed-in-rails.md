@@ -1,6 +1,6 @@
 ---
-title: 'ActiveStorage + CloudFront: Optimizing Media Download Speed in Rails'
-subtitle: ' '
+title: "ActiveStorage + CloudFront: Optimizing Media Download Speed in Rails"
+subtitle: " "
 permalink: rails-activestorage-cloudfront-media-optimization
 featured: true
 date: 2024-08-12
@@ -14,7 +14,6 @@ tags:
   - WebPerformance
 author: mlorenzo
 ---
-
 ## Introduction
 
 I’ll start strong and say that ActiveStorage has got to be one the most useful tools that comes bundled with Rails. Once you pay the initial cost of learning how it works, it's baffling how easy it is to upload and download files, both on local and production environments.
@@ -23,12 +22,12 @@ Why are we here, then? If it really is so easy, then why am I writing this? Well
 
 Here are the tools and libraries we’ll use:
 
-- `rails` 7.0.2.3
-- `aws-sdk-s3` 1.153
-- An S3 bucket
-- A Cloudfront distribution
+* `rails` 7.0.2.3
+* `aws-sdk-s3` 1.153
+* An S3 bucket
+* A Cloudfront distribution
 
-> **ℹ️ This blogpost is both beginner-friendly and senior-friendly. Want me to stop yapping and just get to the point? Jump to the [TL;DR](#TL;DR) section. Or keep reading, I’m not your dad.**
+> **ℹ️ This blogpost is both beginner-friendly and senior-friendly. Want me to stop yapping and just get to the point? Jump to the [TL;DR](#TL;DR) section. Or keep reading, I’m not your dad.** 
 
 ## The Problem
 
@@ -43,10 +42,10 @@ Content Delivery Networks act as caches of data. They store copies of content on
 ![](/images/active-storage-1.png)
 
 1. Your user intends to access a file. Note that, in this case, the URL points to the CDN and not to your server. First, it needs to resolve the IP of the CDN’s node.
-   1. a. CDNs intelligently “trick” your user into sending the request to the closest node in the network. This can be done by using smart DNS servers that look at your users' IP and estimate a good node, or even by manipulating how networks of nodes collectively build routing information (out of scope, go [read something made by people smarter than me](https://www.cloudflare.com/en-gb/learning/cdn/what-is-a-cdn/)).
 
+   1. a. CDNs intelligently “trick” your user into sending the request to the closest node in the network. This can be done by using smart DNS servers that look at your users' IP and estimate a good node, or even by manipulating how networks of nodes collectively build routing information (out of scope, go [read something made by people smarter than me](https://www.cloudflare.com/en-gb/learning/cdn/what-is-a-cdn/)).
 2. After getting the IP of the host of the file, the user attempts to fetch the file. Their request gets handled by a node from the CDN.
-3. If this is the first time this node has been asked for this file, then it’s a _cache miss_. The node needs to fetch it from source. In this case, the node queries your server (or whatever location acts as an authority). The CDN node stores the file locally for future access. In this diagram the authority is inside the CDN for convenience, but it could be outside.
+3. If this is the first time this node has been asked for this file, then it’s a *cache miss*. The node needs to fetch it from source. In this case, the node queries your server (or whatever location acts as an authority). The CDN node stores the file locally for future access. In this diagram the authority is inside the CDN for convenience, but it could be outside.
 4. The CDN node returns the file to the user.
 5. Another user asks for the file? No problem! As long as the CDN node considers the file not to be stale it will avoid going back to the source and just return the cached file.
 
@@ -58,9 +57,9 @@ We want our users to have the best experience possible from anywhere, but we als
 
 Here’s what’s on our plate today:
 
-- Create and configure an S3 bucket to use with ActiveStorage.
-- Create and configure a Cloudfront distribution.
-- Final touches over our API to close the loop.
+* Create and configure an S3 bucket to use with ActiveStorage.
+* Create and configure a Cloudfront distribution.
+* Final touches over our API to close the loop.
 
 To get us going, here’s how a user will access our content:
 
@@ -96,24 +95,24 @@ It’s always best practice to create a specific user that manages S3 buckets. I
 
 ```json
 {
-  "Version": "2012-10-17",
-  "Statement": [
-    {
-      "Action": [
-        "s3:PutObject",
-        "s3:PutObjectAcl",
-        "s3:GetObject",
-        "s3:GetObjectAcl",
-        "s3:DeleteObject",
-        "s3:ListBucket"
-      ],
-      "Effect": "Allow",
-      "Resource": [
-        "arn:aws:s3:::xl-activestorage-cloudfront",
-        "arn:aws:s3:::xl-activestorage-cloudfront/*"
-      ]
-    }
-  ]
+    "Version": "2012-10-17",
+    "Statement": [
+        {
+            "Action": [
+                "s3:PutObject",
+                "s3:PutObjectAcl",
+                "s3:GetObject",
+                "s3:GetObjectAcl",
+                "s3:DeleteObject",
+                "s3:ListBucket"
+            ],
+            "Effect": "Allow",
+            "Resource": [
+                "arn:aws:s3:::xl-activestorage-cloudfront",
+                "arn:aws:s3:::xl-activestorage-cloudfront/*"
+            ]
+        }
+    ]
 }
 ```
 
@@ -171,17 +170,18 @@ Expires=172800&X-Amz-SignedHeaders=host&X-Amz-Signature=
 
 This URL was generated using ActiveStorage **without** configuring Cloudfront. Let’s analyze it.
 
-- The domain: `xl-activestorage-cloudfront.s3.amazonaws.com`. It points to the bucket we created before.
-- The path `uivi1ye50kmapzmn5rr3h8wy2wye` is the ActiveStorage blob key, which coincidentally matches the path to the file on the bucket. This is how ActiveStorage saves files by design.
-- The query parameters:
-  - `response-content-disposition` tells S3 what to send on the `Content-Disposition` header if the request is successful. This is useful for instructing the browsers to display content inline or trigger a download.
-  - `response-content-type` is similar to the previous one, but it tells S3 what to send back on the `Content-Type` header.
-  - `X-Amz-Algorithm` informs S3 on what algorithm was used to generate the signature.
-  - `X-Amz-Credential` identifies the access key that generated the signature, with some other information like the region and the date the URL was generated.
-  - `X-Amz-Date` contains the exact timestamp of the generation of the URL.
-  - `X-Amz-Expires` informs S3 on the validity range of the URL, i.e. it can be used up to this many seconds after `X-Amz-Date` .
-  - `X-Amz-SignedHeaders` informs what headers have been included in the signature.
-  - `X-Amz-Signature` the actual signature. Notice how it is encoded in base 64.
+* The domain: `xl-activestorage-cloudfront.s3.amazonaws.com`. It points to the bucket we created before.
+* The path `uivi1ye50kmapzmn5rr3h8wy2wye` is the ActiveStorage blob key, which coincidentally matches the path to the file on the bucket. This is how ActiveStorage saves files by design.
+* The query parameters:
+
+  * `response-content-disposition` tells S3 what to send on the `Content-Disposition` header if the request is successful. This is useful for instructing the browsers to display content inline or trigger a download.
+  * `response-content-type` is similar to the previous one, but it tells S3 what to send back on the `Content-Type` header.
+  * `X-Amz-Algorithm` informs S3 on what algorithm was used to generate the signature.
+  * `X-Amz-Credential` identifies the access key that generated the signature, with some other information like the region and the date the URL was generated.
+  * `X-Amz-Date` contains the exact timestamp of the generation of the URL.
+  * `X-Amz-Expires` informs S3 on the validity range of the URL, i.e. it can be used up to this many seconds after `X-Amz-Date` .
+  * `X-Amz-SignedHeaders` informs what headers have been included in the signature.
+  * `X-Amz-Signature` the actual signature. Notice how it is encoded in base 64.
 
 Now let’s look at a signed URL generated for Cloudfront for the same ActiveStorage blob.
 
@@ -190,19 +190,20 @@ https://d221pc53be89z4.cloudfront.net/uivi1ye50kmapzmn5rr3h8wy2wye?
 %3D%22Group%20168.png%22%3B%20filename%2A%3DUTF-8%27%27Group%2520168
 .png&response-content-type=image%2Fpng&Signature=byNci40HdAjYeicFVpR
 7XXK4d6aO6d5KveKEgJYWOfcORrG8\~9ugES6v9Zi9jh6b2q1OmLRG5xpA1ac3cSP\~gDic5aTd
-SecFUjJt0XkEg8E65rA1nuOPca6\~JlvFiSPxyYBPiT1N7tuaRzjhuNeeSYwzJcYRLJ\~9S5tb
+ SecFUjJt0XkEg8E65rA1nuOPca6\~JlvFiSPxyYBPiT1N7tuaRzjhuNeeSYwzJcYRLJ\~9S5tb
 MXGLnaaZSOYUABbaDa7kcNKcmrn8GpsAJfbEvfAZmw8fhptln \~DPKlVVSdOqLuwQDqdQp6ZbO
 ToGwvx66gpSQHMSfkqnhmFrmNgMLXO2Io3RCplfJ9A\~rnX\~\~PQnGidtpU6mAgRtW9C8OWPqEU6q
-2HD~5DU3anqw4qzO8- pTI0VtDVdoDw\_\_&Key-Pair-Id=K22BGJMS612N2Z
+2HD~5DU3anqw4qzO8- pTI0VtDVdoDw__&Key-Pair-Id=K22BGJMS612N2Z
 
 The domain `d2s1pcb3be89z4.cloudfront.net` points to our Cloudfront distribution.
 
-- The path `uivi1ye50kmapzmn5rr3h8wy2wye` remains the same. Cloudfront just forwards the path and query parameters to S3, so this makes perfect sense.
-- Let’s look at the query parameters:
-  - `Expires` is the UTC timestamp that marks the moment when this URL expires.
-  - `Signature` contains the signature, which you might notice is far longer than the previous one.
-  - `Key-Pair-Id` informs Cloudfront on what is the ID of the public key used to sign. Since you can use multiple different private keys to generate valid signed URLs you need to let Cloudfront know which key pair you used.
-  - Notice how both response headers are also present, since we want Cloudfront to forward them to S3.
+* The path `uivi1ye50kmapzmn5rr3h8wy2wye` remains the same. Cloudfront just forwards the path and query parameters to S3, so this makes perfect sense.
+* Let’s look at the query parameters:
+
+  * `Expires` is the UTC timestamp that marks the moment when this URL expires.
+  * `Signature` contains the signature, which you might notice is far longer than the previous one.
+  * `Key-Pair-Id` informs Cloudfront on what is the ID of the public key used to sign. Since you can use multiple different private keys to generate valid signed URLs you need to let Cloudfront know which key pair you used.
+  * Notice how both response headers are also present, since we want Cloudfront to forward them to S3.
 
 ## Mixing All Together
 
@@ -261,9 +262,9 @@ end
 
 There’s a few things going on here:
 
-- First we generate a URL using the Cloudfront domain and the blob key. This matches how ActiveStorage generates its URLs.
-- Then we set the `response-content-type` and `response-content-disposition` query parameters just like ActiveStorage generates them.
-- The URL is signed using the key pair ID and the private key from that key pair. Make sure you define the path to the private key correctly.
+* First we generate a URL using the Cloudfront domain and the blob key. This matches how ActiveStorage generates its URLs.
+* Then we set the `response-content-type` and `response-content-disposition` query parameters just like ActiveStorage generates them.
+* The URL is signed using the key pair ID and the private key from that key pair. Make sure you define the path to the private key correctly.
 
 Now let’s use this concern. We need to overload two controllers: `ActiveStorage::Blobs::RedirectController` and `ActiveStorage::Representations::RedirectController`. You can find the original implementation of these controllers [here](https://github.com/rails/rails/blob/v7.0.2.3/activestorage/app/controllers/active_storage/blobs/redirect_controller.rb) and [here](https://github.com/rails/rails/blob/v7.0.2.3/activestorage/app/controllers/active_storage/representations/redirect_controller.rb). In order to overload the controllers, you need to create two controller files in a specific location. Let’s look at the blob redirect controller:
 
@@ -345,9 +346,9 @@ If the signed ID of the blob is valid, then our redirect controller will return 
 
 As I said at the beginning of this post, there’s no such thing as a free lunch. Here are some caveats to be mindful of.
 
-- **Mirroring not possible/difficult**: if your project is big and/or the information you store is vital you might want to store it in multiple providers (AWS, Google Cloud, Azure, etc). This Cloudfront setup does not play well with that approach, since you would be excluding all other providers from the benefits of the CDN.
-- **Provider Lock-in:** similar to the previous point, but you can only enjoy the benefits of this approach when using Cloudfront and S3.
-- **Rails assets not included:** this post covers only ActiveStorage blobs. If you want also to serve your rails assets via Cloudfront, then I recommend the first part of [this post](https://headey.net/rails-assets-active-storage-and-a-cloudfront-cdn), which creates a separate distribution.
+* **Mirroring not possible/difficult**: if your project is big and/or the information you store is vital you might want to store it in multiple providers (AWS, Google Cloud, Azure, etc). This Cloudfront setup does not play well with that approach, since you would be excluding all other providers from the benefits of the CDN.
+* **Provider Lock-in:** similar to the previous point, but you can only enjoy the benefits of this approach when using Cloudfront and S3.
+* **Rails assets not included:** this post covers only ActiveStorage blobs. If you want also to serve your rails assets via Cloudfront, then I recommend the first part of [this post](https://headey.net/rails-assets-active-storage-and-a-cloudfront-cdn), which creates a separate distribution.
 
 ## TL;DR
 
@@ -356,17 +357,18 @@ As I said at the beginning of this post, there’s no such thing as a free lunch
 Want to speedrun this configuration? Here we go.
 
 1. **Create an S3 bucket.**
+
    1. Make sure public access is blocked.
    2. Create credentials for a user. Recommended: limit its permissions only to use the bucket.
-
 2. **Create a Cloudfront distribution:**
+
    1. The origin domain of the distribution must be the domain of the S3 bucket. You should be able to select it from the list AWS provides.
    2. Origin access must be set to "Origin access control settings". You'll need to create a new Origin Access Control (OAC), which should be very simple. Force it to sign the requests. You will need to update bucket policy later, AWS will help you out on this.
    3. Force the distribution to only accept HTTPS connections.
    4. Restrict the viewer access. By default AWS should prompt you to add key groups. You'll need to create a key group containing a key-pair. Create a key pair on you local machine and upload the public key to AWS and that’s it.
    5. Origin request policy must be set to `AllViewerExceptHostHeader`. This forwards all query parameters to S3 allowing us more flexibility.
-
 3. **Configure ActiveStorage**
+
    1. Create the `Cloudfrontable` module.
    2. Overload the `ActiveStorage::Blobs::RedirectController` and `ActiveStorage::Representations::RedirectController` controllers.
    3. Make sure ActiveStorage is configured in redirect mode.
@@ -440,7 +442,7 @@ class ActiveStorage::Blobs::RedirectController < ActiveStorage::BaseController
     return cloudfront_url(@blob, disposition: params[:disposition]) if amazon?
 
     @blob.url(disposition: params[:disposition])
-  end
+  end 
 end
 ```
 
@@ -475,10 +477,10 @@ Thanks for reading, and if you have any comments, feel free to reach out. If you
 
 ## References
 
-- [Geography-based structural analysis of the Internet](https://www.osti.gov/biblio/1016114)
-- [What is a CDN](https://www.cloudflare.com/en-gb/learning/cdn/what-is-a-cdn/)
-- [ActiveStorage Proxy Mode](https://edgeguides.rubyonrails.org/active_storage_overview.html#proxy-mode)
-- [ActiveStorage::Blobs::RedirectController implementation](https://github.com/rails/rails/blob/v7.0.2.3/activestorage/app/controllers/active_storage/blobs/redirect_controller.rb)
-- [ActiveStorage::Representations::RedirectController implementation](https://github.com/rails/rails/blob/v7.0.2.3/activestorage/app/controllers/active_storage/representations/redirect_controller.rb)
-- [Specify Allowed Signers in Cloudfront](https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/private-content-trusted-signers.html#private-content-creating-cloudfront-key-pairs)
-- [Rails Assets, ActiveStorage and a Cloudfront CDN](https://headey.net/rails-assets-active-storage-and-a-cloudfront-cdn)
+* [Geography-based structural analysis of the Internet](https://www.osti.gov/biblio/1016114)
+* [What is a CDN](https://www.cloudflare.com/en-gb/learning/cdn/what-is-a-cdn/)
+* [ActiveStorage Proxy Mode](https://edgeguides.rubyonrails.org/active_storage_overview.html#proxy-mode)
+* [ActiveStorage::Blobs::RedirectController implementation](https://github.com/rails/rails/blob/v7.0.2.3/activestorage/app/controllers/active_storage/blobs/redirect_controller.rb)
+* [ActiveStorage::Representations::RedirectController implementation](https://github.com/rails/rails/blob/v7.0.2.3/activestorage/app/controllers/active_storage/representations/redirect_controller.rb)
+* [Specify Allowed Signers in Cloudfront](https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/private-content-trusted-signers.html#private-content-creating-cloudfront-key-pairs)
+* [Rails Assets, ActiveStorage and a Cloudfront CDN](https://headey.net/rails-assets-active-storage-and-a-cloudfront-cdn)

@@ -1,9 +1,9 @@
 ---
-title: 'Summary: RubyConf UY 2013'
+title: "Summary: RubyConf UY 2013"
 date: 2013-05-03
 tags:
-  - rubyconf
-  - talk
+- rubyconf
+- talk
 thumbnail: https://img.youtube.com/vi/FCZs6Ijnyx8/default.jpg
 author: agustin
 category: people-events

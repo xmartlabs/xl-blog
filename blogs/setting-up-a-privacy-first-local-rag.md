@@ -1,6 +1,6 @@
 ---
 title: Setting up a Privacy-First Local RAG
-subtitle: ' '
+subtitle: " "
 permalink: secure-local-rag-system-for-healthcare-data
 featured: true
 date: 2024-11-12
@@ -14,7 +14,6 @@ tags:
   - Healthcare
 author: daniel-baena
 ---
-
 Building a secure, local RAG system for healthcare data can dramatically improve how organizations leverage their FHIR records. This article builds upon our previous work on [Parsing FHIR Data into RAG](https://blog.xmartlabs.com/blog/fhir-data-optimization-rag-systems/), where we explored strategies for manipulating FHIR data for LLM systems. While our earlier piece focused on transforming structured healthcare data into LLM-friendly formats, we now explore practical implementation using llama.cpp - emphasizing privacy, data control, and performance optimization.
 
 ## Why deploy a RAG locally?
@@ -23,9 +22,9 @@ Deploying a local RAG system offers distinct advantages, particularly in industr
 
 Some industries notable for their stringent data privacy regulations are:
 
-- **Healthcare**: Patient data, such as medical records, lab results, and diagnostic reports, is subject to regulations like HIPAA in the U.S. A local RAG system ensures that this sensitive information remains within the organization’s control, minimizing risks of breaches or non-compliance.
-- **Finance**: Deploying locally helps organizations prevent the exposure of sensitive financial data to external cloud environments, ensuring compliance with regulations like SOX and avoiding complexities in cross-border data transfers.
-- **Legal Services**: Law firms handling confidential case files, client communications, or intellectual property documents can benefit from local deployments, ensuring that these materials remain secure and are not inadvertently exposed to third-party services.
+* **Healthcare**: Patient data, such as medical records, lab results, and diagnostic reports, is subject to regulations like HIPAA in the U.S. A local RAG system ensures that this sensitive information remains within the organization’s control, minimizing risks of breaches or non-compliance.
+* **Finance**: Deploying locally helps organizations prevent the exposure of sensitive financial data to external cloud environments, ensuring compliance with regulations like SOX and avoiding complexities in cross-border data transfers.
+* **Legal Services**: Law firms handling confidential case files, client communications, or intellectual property documents can benefit from local deployments, ensuring that these materials remain secure and are not inadvertently exposed to third-party services.
 
 However, configuring and maintaining a local deployment does require significant technical expertise. Ensuring that the system runs as efficiently as possible—by making the best use of both CPU and GPU resources, for example, or selecting the right quantization level for models.
 
@@ -39,11 +38,11 @@ llama.cpp provides an efficient way to run LLMs locally, offering ease of config
 
 Key optimizations include:
 
-- **Apple Silicon**: Leverages ARM NEON, Accelerate, and Metal frameworks for improved performance.
-- **x86 Architectures**: Optimized with AVX, AVX2, and AVX512 for better performance on modern CPUs.
-- **Quantization**: Supports from 1.5-bit to 8-bit quantization, reducing memory consumption and speeding up inference.
-- **Hybrid Inference**: Allows combined use of CPU+GPU, optimizing resource use when VRAM is limited.
-- **Docker Integration**: Facilitates deployment, enabling easy access to performance metrics like prediction time and token generation rate.
+* **Apple Silicon**: Leverages ARM NEON, Accelerate, and Metal frameworks for improved performance.
+* **x86 Architectures**: Optimized with AVX, AVX2, and AVX512 for better performance on modern CPUs.
+* **Quantization**: Supports from 1.5-bit to 8-bit quantization, reducing memory consumption and speeding up inference.
+* **Hybrid Inference**: Allows combined use of CPU+GPU, optimizing resource use when VRAM is limited.
+* **Docker Integration**: Facilitates deployment, enabling easy access to performance metrics like prediction time and token generation rate.
 
 ## Architecture
 
@@ -63,29 +62,29 @@ To evaluate the performance of different models and context sizes, we developed 
 
 We evaluated our RAG implementation using three models and different quantization settings:
 
-- Phi-3.5-mini-instruct-F16 (no quantization)
-- Meta-Llama-3.1-8B-Instruct-F16-Q2_K (Q2 quantization)
-- Meta-Llama-3.1-8B-Instruct-F16-Q5_K_M (Q5 quantization)
+* Phi-3.5-mini-instruct-F16 (no quantization)
+* Meta-Llama-3.1-8B-Instruct-F16-Q2_K (Q2 quantization)
+* Meta-Llama-3.1-8B-Instruct-F16-Q5_K_M (Q5 quantization)
 
 Key metrics analyzed included:
 
-- **Prompt processing time**: Time taken to process input before token generation.
-- **Prediction time**: Duration for generating output tokens.
-- **Tokens per second**: Tokens generated per second.
+* **Prompt processing time**: Time taken to process input before token generation.
+* **Prediction time**: Duration for generating output tokens.
+* **Tokens per second**: Tokens generated per second.
 
 For inputs of 400 tokens, the results on a Dell Inspiron 15 with integrated graphics, 12 cores, and 32GB of RAM and a MacBook Pro M1 with 10 CPU cores and 16GB of RAM were as follows:
 
 **Dell Inspiron 15:**
 
-- **Prompt processing time**: 37.4 seconds
-- **Prediction time**: 53.8 seconds
-- **Tokens per second**: 3.7
+* **Prompt processing time**: 37.4 seconds
+* **Prediction time**: 53.8 seconds
+* **Tokens per second**: 3.7
 
 **MacBook Pro M1:**
 
-- **Prompt processing time**: 10.05 seconds
-- **Prediction time**: 10.2 seconds
-- **Tokens per second**: 19.52
+* **Prompt processing time**: 10.05 seconds
+* **Prediction time**: 10.2 seconds
+* **Tokens per second**: 19.52
 
 ![](/images/privacy-rag-4.png)
 

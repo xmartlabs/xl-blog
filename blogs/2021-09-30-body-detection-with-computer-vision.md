@@ -1,14 +1,7 @@
 ---
 title: Body Detection using Computer Vision
 date: 2021-10-19
-tags:
-  [
-    Pose Estimation,
-    Body Segmentation,
-    Human Detection,
-    Machine Learning,
-    Computer Vision,
-  ]
+tags: [Pose Estimation, Body Segmentation, Human Detection, Machine Learning, Computer Vision]
 author: vale
 category: machine-learning
 thumbnail: images/body-detection-with-computer-vision/body-detection-with-computer-vision.jpg
@@ -55,6 +48,7 @@ Computer vision relies basically on two Machine Learning concepts to interpret a
   <img style={{ width: '100%'}} src="/images/body-detection-with-computer-vision/ML-DeepLearning-Neural Networks-AI.png" alt="ML, DeepLearning, Neural Networks, AI" />
   <figcaption>ML, Deep Learning, and Neural Networks are all subfields of AI (<a href="https://lh4.googleusercontent.com/9gORhD6V2G7XBya2mSKVgZitf09o0n97JqQ20yuew4Fo8YfpUT1RO6voAqTOPMQDoorjJtKmI80vLVvltF6JIOK0IOB2F7tA7VgLJxZIUJf-mF2cW80jjPHNtWIZ-FZu2eEC2ePu" target="_blank">image source</a>).</figcaption>
 </figure>
+
 
 Most standard computer vision applications already have a trained deep learning model that engineers can use out of the box. For more complex solutions, engineers need to optimize models or even design a model from scratch, which requires training the algorithm to make the predictions, detect events, etc., properly.
 
@@ -119,6 +113,7 @@ Tracking works with objects that change in size, shape, and position depending o
 Image or video streaming can be used as the model input. Its output provides information about each body keypoint's position, generally in the form of a 2D space coordinate and a confidence score between 0 and 1.
 
 There've been several performance improvements around pose estimation. For instance, the Google team is actively working on the [MoveNet](https://blog.tensorflow.org/2021/05/next-generation-pose-detection-with-movenet-and-tensorflowjs.html) project, which provides real-time pose estimation data apart from having an outstanding accuracy rate/score.
+
 
 ## Body Detection using Computer Vision
 
@@ -231,6 +226,7 @@ Body segmentation can be used for many things by itself, but its use to improve 
   <figcaption>BodyPix by TensorFlow can segment the person into 24 body parts (<a href="https://blog.tensorflow.org/2019/11/updated-bodypix-2.html" target="_blank">image source</a>).</figcaption>
 </figure>
 
+
 **Practical applications**
 
 The **health industry** has greatly benefited from image segmentation to process biomedical images such as x rays, tomographies, MRIs, PET scans, or ultrasounds. Although doctors do a manual visual analysis, variation in interpretation, fatigue errors, image quality, inexperience, etc., can lead to wrong diagnostics. By automating this task, an extra layer of accuracy is added to the overall analysis.
@@ -240,6 +236,8 @@ Extracting **face features** is becoming increasingly popular for verifying iden
 Once again, **retail** applies state-of-the-art technology, this time for clothes classification, retexturing and virtual try-on. Person segmentation enables the potential customer to try new clothes and even change their style (color, texture, etc.), and it's also good for classifying apparel (pants, tops, dresses).
 
 Photography editing is also much easier with segmentation. Not only its easier to separate the body from the background ([hello Zoom](https://twitter.com/PettyClegg/status/1244649528285855746?ref_src=twsrc%5Etfw%7Ctwcamp%5Etweetembed%7Ctwterm%5E1244649528285855746%7Ctwgr%5E%7Ctwcon%5Es1_&ref_url=https%3A%2F%2Fwww.buzzfeednews.com%2Farticle%2Flaurenstrapagiel%2Fpotato-boss-video-call) once again), but it's also simpler to make edits to the human body. For example, if you want to edit just one aspect of the human face (eyes, lips, hair, skin color) using another image as style input (see image below).
+
+
 
 <figure>
   <img style={{ width: '100%'}} src="/images/body-detection-with-computer-vision/face-image-editing.png" />
@@ -261,6 +259,7 @@ There's still a lot of fertile ground in computer vision, and any business, proj
 There's also much to learn, and, luckily, many people are willing to share new models and discoveries they do on the field. Having so many models to choose from can also be a challenge, but, as we saw in the post, it will come down to the one that fits the best with your use case.
 
 If you're interested in learning more about how it might fit in your plans, don't hesitate to reach out!
+
 
 **Sources**
 

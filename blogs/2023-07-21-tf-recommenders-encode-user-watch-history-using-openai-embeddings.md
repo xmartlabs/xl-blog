@@ -1,6 +1,6 @@
 ---
-title: 'TF Recommenders: Encode user watch history using OpenAI embeddings'
-subtitle: '  '
+title: "TF Recommenders: Encode user watch history using OpenAI embeddings"
+subtitle: "  "
 permalink: /tf-recommenders-encode-user-watch-history-using-openai-embeddings/
 featured: true
 date: 2023-07-21
@@ -14,7 +14,6 @@ tags:
   - Large Language Model
 author: mathias
 ---
-
 ### Introduction
 
 In this digital age of endless possibilities and vast information, **recommendation systems** have emerged as the guiding compass that helps us navigate through the overwhelming sea of choices. Whether it's suggesting the perfect movie to watch, a personalized playlist for a road trip, or a tailored product recommendation, these intelligent algorithms have become integral to our online experiences.
@@ -41,8 +40,8 @@ One of the most commonly used movie datasets is the [MovieLens](https://movielen
 
 Using the movie metadata, we can create very rich item feature vectors. On the other hand, we don't have similar information about our users (such as age, gender, likes, and dislikes). We only have the user’s ID and the movies a user has watched as our user features. The watch history is what contains the most information about the user and is what lets us relate a specific user to other similar ones. But how do we use this information? One option would be to learn an embedding for each movie ID and then combine all the embeddings in a watch history and use that as input for the user tower. This has several drawbacks:
 
-- Restricted to movies that are in the training dataset (in this case, movies older than 2019)
-- The model has to learn these embeddings only by learning from interactions of similar users (collaborative filtering) and not from metadata of the movies. This metadata could be added as separate inputs, but the model still needs to learn these embeddings from scratch.
+* Restricted to movies that are in the training dataset (in this case, movies older than 2019)
+* The model has to learn these embeddings only by learning from interactions of similar users (collaborative filtering) and not from metadata of the movies. This metadata could be added as separate inputs, but the model still needs to learn these embeddings from scratch.
 
 However, we can show you a better way of encoding this user watch history by leveraging the power of **OpenAI’s embedding** API, which will allow us to use embeddings of movies that are not in the dataset while also removing the need to learn these embeddings from scratch.
 

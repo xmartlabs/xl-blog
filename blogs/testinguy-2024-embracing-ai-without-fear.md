@@ -1,6 +1,6 @@
 ---
-title: 'TestingUy 2024: Embracing AI Without Fear'
-subtitle: ' '
+title: "TestingUy 2024: Embracing AI Without Fear"
+subtitle: " "
 permalink: testing-uy-2024-ai
 featured: true
 date: 2024-05-03
@@ -13,7 +13,6 @@ tags:
   - TestingUy
 author: qa-team
 ---
-
 This year, our QA team had the chance to attend [TestingUy's](https://testinguy.org/) 10th edition, a prominent testing event in Latin America that gathers professionals and enthusiasts from all over the region. This event brings the testing community together with the purpose of sharing knowledge and connecting.
 
 Unsurprisingly the main focus this year was Artificial Intelligence (AI), a topic we explored thoroughly during the event. We learned a lot about its effective use in our field, and we're excited to share some key ideas in this article. Join us as we explore how AI impacts testing practices and how it can help improve our (and your) work. 🚀
@@ -36,7 +35,7 @@ But not everything that shines is gold, at least not from day one… AI still ne
 
 However, we have an advantage here! As Dona emphasized, **we are in the innovation phase of AI**, with only the second year since the introduction of ChatGPT. As early adopters, we should prepare accordingly. How? One critical aspect of testing involves guarding against biases, which can sneak into AI systems due to the biases in the data they're trained on. These biases can perpetuate harmful stereotypes and exacerbate societal inequalities without careful examination. For instance, if a language model consistently generates biased or exclusionary content, it could contribute to the marginalization of certain groups, including minorities. They showed a perfect example of this issue during an open panel discussion. They asked an AI to create an image of "a tech conference in San Francisco," guess what? The image only had white males in it. 😱
 
-What really makes GPT models stand out is their initial pre-training phase. When we focus on thorough testing and ensuring everyone's included, we can create AI systems like GPT that work well and adhere to important principles like fairness, equity, and respect for diversity. This approach is crucial for shaping a future where AI benefits everyone. In Uruguay, the _Microsoft AI Co-Innovation Lab_ enables companies to access cutting-edge technology at no cost to develop their products. Companies can engage with Microsoft engineers who provide support and guidance through this initiative. Uruguay aims to position itself as a global reference in technology innovation.
+What really makes GPT models stand out is their initial pre-training phase. When we focus on thorough testing and ensuring everyone's included, we can create AI systems like GPT that work well and adhere to important principles like fairness, equity, and respect for diversity. This approach is crucial for shaping a future where AI benefits everyone. In Uruguay, the *Microsoft AI Co-Innovation Lab* enables companies to access cutting-edge technology at no cost to develop their products. Companies can engage with Microsoft engineers who provide support and guidance through this initiative. Uruguay aims to position itself as a global reference in technology innovation.
 
 ## To sum up: Seize the AI Advantage
 

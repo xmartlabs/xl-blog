@@ -1,7 +1,7 @@
 ---
 title: Latest updates on Apple machine learning!
 date: 2020-08-04
-excerpt: 'Discover the new updates on Apple Machine Learning frameworks at WWDC 2020'
+excerpt: "Discover the new updates on Apple Machine Learning frameworks at WWDC 2020"
 tags: [Machine learning, CoreML, CreateML, Vision, WWDC20]
 author: nicolantean
 thumbnail: images/whats-new-on-apple-machine-learning-at-wwdc-2020/0-preview.png
@@ -16,6 +16,7 @@ This year was no exception since Apple announced some interesting new features o
 At Xmartlabs we have been closely involved in the field of on-device Machine Learning.
 Our main focus has been Machine Learning on iOS and we have been exploring different use cases including style-transfer, human body pose detection and medical image classification.
 Not only have we built some cool almost magical apps, but we have also rolled up our sleeves to create first of its kind development tools like **[Bender](https://xmartlabs.github.io/Bender/)** a few days before WWDC 17.
+
 
 So now let's get into what new capabilities were released by Apple at the WWDC 2020.
 
@@ -171,7 +172,7 @@ FlowerStylizer.load { [self] result in
             applySlyledEffect(using: model)
         }
     case failure(let error):
-        hanldeFailure(for: error)
+        hanldeFailure(for: error)   
     }
 }
 ```

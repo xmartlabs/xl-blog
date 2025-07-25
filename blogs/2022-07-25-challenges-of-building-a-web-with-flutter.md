@@ -1,5 +1,5 @@
 ---
-title: 'Challenges of building a web with Flutter'
+title: "Challenges of building a web with Flutter"
 permalink: /challenges-of-building-a-web-with-flutter/
 date: 2022-08-10
 category: development
@@ -10,7 +10,6 @@ tags:
 author: felipe
 thumbnail: /images/building-a-web-with-flutter/featured.png
 ---
-
 ## Lessons learned from a nonconventional approach to flutter web development
 
 Recently a client approached Xmartlabs with the idea of making a platform that achieved excellent results by combining camera usage with [MoveNet](https://www.tensorflow.org/hub/tutorials/movenet), an ML pose detection model. The challenge was to do it fast to ship an MVP that most users could try but make it so that we could reuse the code if we wanted to continue development on other platforms. Flutter appeared as an excellent option to accomplish these needs, so we took on the challenge and started working on a web page with a V1 in mind. However, we found some challenges along the way; this blog is about how we worked around them in case you also bump into similar issues someday.
@@ -45,15 +44,15 @@ The result of inspecting a web made in Flutter, as you can see there is only a c
 
 Dart has two compilers for the web, one that supports debugging and hot reloading called `dev_compiler`, and other `dart2js` that focuses on code optimization. Their uses are obvious, one for development and one for release code. But in our experience, some things that work in one don’t necessarily work in the other, so **running the app in release mode** has become a must in the development cycle to test the app.
 
-```dart
- @override
- Widget build(BuildContext context) => Column(
-       children: [
-         Positioned(
-           child: Text('This text is positioned'),
-         )
-       ],
-     );
+ ```dart
+  @override
+  Widget build(BuildContext context) => Column(
+        children: [
+          Positioned(
+            child: Text('This text is positioned'),
+          )
+        ],
+      );
 ```
 
 <p style={{ color:"gray", fontSize:"80%", fontStyle:"italic", textAlign:"center" }}>This should never work but it does in debug not in release.</p>
@@ -85,9 +84,9 @@ Widgets allow us to do plenty of UI work, but what happens if we want to do more
 Having said that, we must ensure to **correctly use those elements** without getting a weird user experience.
 
 - **HTML elements are not like Flutter. When changing states, they can behave weirdly**: From size changes to nonworking HTML code, elements don't interact well when updated constantly. For example, a camera element that's being updated all the time without need can result in the image blinking continuously.
-  ![camera-example.gif](/images/building-a-web-with-flutter/camera-example.gif)
+![camera-example.gif](/images/building-a-web-with-flutter/camera-example.gif)
 - **HTML and Flutter lifecycle are separated:**
-  We must be especially careful with this point since not correctly managing web elements can be linked to dead dart code, making the app crash by accessing variables or components that are no longer available.
+We must be especially careful with this point since not correctly managing web elements can be linked to dead dart code, making the app crash by accessing variables or components that are no longer available.
 
 To avoid this kind of behavior, HTML elements should be declared at the top of your widget trees or register its **`viewFactory` with a unique random key each time you want to recreate the widget.**
 
