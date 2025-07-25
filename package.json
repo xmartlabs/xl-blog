@@ -12,7 +12,8 @@
     "start": "gatsby develop",
     "build": "gatsby build",
     "serve": "gatsby serve",
-    "clean": "gatsby clean"
+    "clean": "gatsby clean",
+    "prepare": "husky"
   },
   "engines": {
     "node": "20.x"
@@ -39,7 +40,7 @@
     "gatsby-plugin-reading-time-2": "^0.1.1",
     "gatsby-plugin-readingtime-contentful": "^1.0.0",
     "gatsby-plugin-redirects": "^1.0.0",
-    "gatsby-plugin-sass": "^6.9.0",
+    "gatsby-plugin-sass": "^3.2.0",
     "gatsby-plugin-sharp": "^5.12.0",
     "gatsby-plugin-sitemap": "^6.9.0",
     "gatsby-plugin-slug": "^2.0.0",
@@ -64,5 +65,18 @@
     "sass": "^1.62.1",
     "smooth-scroll": "^16.1.3",
     "styled-components": "^5.3.11"
+  },
+  "devDependencies": {
+    "eslint": "^8.57.1",
+    "eslint-config-prettier": "^10.1.8",
+    "eslint-plugin-prettier": "^5.5.3",
+    "husky": "^9.1.7",
+    "lint-staged": "^16.1.2",
+    "prettier": "^3.6.2"
+  },
+  "lint-staged": {
+    "*.{js,jsx,ts,tsx,json,css,scss,md}": [
+      "prettier --write"
+    ]
   }
 }
