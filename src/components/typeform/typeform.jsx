@@ -1,9 +1,9 @@
-import React from "react";
-import PropTypes from "prop-types";
+import React from 'react';
+import PropTypes from 'prop-types';
 
-import { CloseIcon } from "../icons";
+import { CloseIcon } from '../icons';
 
-import * as styles from "./typeform.module.scss";
+import * as styles from './typeform.module.scss';
 
 const TypeForm = ({ onClick }) => {
   return (
@@ -16,21 +16,17 @@ const TypeForm = ({ onClick }) => {
         title="typeform"
         frameborder="0"
         className={styles.typeForm}
-      >
-      </iframe>
+      ></iframe>
     </div>
   );
-}
-
+};
 
 TypeForm.propTypes = {
-  onCkick: PropTypes.func
+  onCkick: PropTypes.func,
 };
 
 TypeForm.defaultProps = {
-  onClick: () => {}
-
+  onClick: () => {},
 };
-
 
 export { TypeForm };

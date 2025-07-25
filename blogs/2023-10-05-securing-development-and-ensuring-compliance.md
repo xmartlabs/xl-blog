@@ -1,7 +1,7 @@
 ---
-title: "Securing Development and Ensuring Compliance: Tips, Guidance, and Best
-  Practices"
-subtitle: " "
+title: 'Securing Development and Ensuring Compliance: Tips, Guidance, and Best
+  Practices'
+subtitle: ' '
 permalink: /2023-10-05-securing-development-and-ensuring-compliance/
 featured: true
 date: 2023-10-06

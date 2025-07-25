@@ -1,18 +1,18 @@
-import React from "react"
-import PropTypes from "prop-types"
+import React from 'react';
+import PropTypes from 'prop-types';
 
 // Utilities
-import kebabCase from "lodash/kebabCase"
+import kebabCase from 'lodash/kebabCase';
 
 // Components
-import { Link, graphql } from "gatsby"
+import { Link, graphql } from 'gatsby';
 
 const TagsPage = ({ data }) => (
   <>
     <div>
       <h1>Tags</h1>
       <ul>
-        {data.allMdx.group.map(tag => (
+        {data.allMdx.group.map((tag) => (
           <li key={tag.fieldValue}>
             <Link to={`/tags/${kebabCase(tag.fieldValue)}/`}>
               {tag.fieldValue} ({tag.totalCount})
@@ -22,7 +22,7 @@ const TagsPage = ({ data }) => (
       </ul>
     </div>
   </>
-)
+);
 
 TagsPage.propTypes = {
   data: PropTypes.shape({
@@ -35,15 +35,17 @@ TagsPage.propTypes = {
       ),
     }),
   }),
-}
+};
 
-export default TagsPage
+export default TagsPage;
 
-export const pageQuery = graphql`{
-  allMdx(limit: 2000) {
-    group(field: {frontmatter: {tags: SELECT}}) {
-      fieldValue
-      totalCount
+export const pageQuery = graphql`
+  {
+    allMdx(limit: 2000) {
+      group(field: { frontmatter: { tags: SELECT } }) {
+        fieldValue
+        totalCount
+      }
     }
   }
-}`
+`;

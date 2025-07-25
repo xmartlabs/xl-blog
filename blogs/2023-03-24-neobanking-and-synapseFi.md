@@ -8,7 +8,6 @@ permalink: /the-power-of-neobanking-with-synapse-fi/
 thumbnail: /images/neobanking-and-synapseFi/Neobanking-1.png
 ---
 
-
 During the last couple of years and as a result of the digital transformation, Neobanks have grown and expanded rapidly. Their low-cost, seamless, and user-friendly digital experiences have secured its adoption throughout the world, and increasingly more business and traditional banks are riding the neobaniking wave. Providing a digital layer on top of traditional banking, they promise a streamlined and hassle-free experience.
 
 [SynapseFi](https://synapsefi.com/) is one such neobanking solution that has taken the industry by storm. The company provides Bank as a service (BaaS) platforms to fintech companies, enabling them to launch innovative financial products, such as bank accounts, payments, and loans. SynapseFi's platform is scalable, secure, and customizable, making it an ideal solution for companies looking to reduce market entry costs and foster competition and innovation in the digital financial services space.
@@ -23,7 +22,7 @@ Neobanking is a new banking model that provides a fully digital platform for cus
 
 One of the main advantages of neobanks is that customers can access banking services easily and quickly without the need to visit a physical branch. Neobanks offer a seamless online experience through an experiential digital layer on top of traditional banking. Customers can create accounts and use their offerings seamlessly due to their technology-driven nature.
 
-Moreover, neobanks often offer competitive rates, low fees, and personalized services. These services are accessible to a broad range of customers, especially millennials who are tech-savvy and prefer a digital experience. The involvement of neobanks in the development of artificial intelligence (AI) is also a contributing factor to their popularity. The use of AI in financial services enhances the customer experience and provides personalized services that traditional banks may not offer. 
+Moreover, neobanks often offer competitive rates, low fees, and personalized services. These services are accessible to a broad range of customers, especially millennials who are tech-savvy and prefer a digital experience. The involvement of neobanks in the development of artificial intelligence (AI) is also a contributing factor to their popularity. The use of AI in financial services enhances the customer experience and provides personalized services that traditional banks may not offer.
 
 With the increasing popularity of neobanking, it's likely that we'll see further development in this area as more fintech companies enter the market, and traditional banks look to compete by investing in their own digital platforms.
 
@@ -121,7 +120,7 @@ Overall, SynapseFi's BaaS platform is a powerful tool for companies seeking to l
 
 ### **SynapseFI — Success Stories**
 
-Synapse has enabled numerous clients to offer services through the implementation of neobanks, which provide a range of financial products to users. Some notable customers include: 
+Synapse has enabled numerous clients to offer services through the implementation of neobanks, which provide a range of financial products to users. Some notable customers include:
 
 <table>
 	<tbody>
@@ -175,7 +174,7 @@ After exploring the available endpoints, you can start with the implementation. 
 
 In this practical example with Typescript and Express, direct API calls will be made, since the library does not have typing available yet.
 
-The services were implemented according to the API documentation, which specifies all the resources and the respective options provided by each of the endpoints. 
+The services were implemented according to the API documentation, which specifies all the resources and the respective options provided by each of the endpoints.
 
 - The API entry point available to date is [https://api.synapsefi.com/v3.1/](https://api.synapsefi.com/v3.1/), to consume the resources, by default, the headers 'X-SP-USER', 'X-SP-USER-IP', 'X-SP-USER', among others must be sent depending on the resource being consumed.
 
@@ -185,7 +184,7 @@ X-SP-USER-IP: 255.127.79.76
 X-SP-USER: |<user_id>
 ```
 
-- The first service that was addressed is the query of the users associated with the account, the response includes an array of json objects. The parameters that can be used are *per_page*, *page*, and *show_refresh_tokens*.
+- The first service that was addressed is the query of the users associated with the account, the response includes an array of json objects. The parameters that can be used are _per_page_, _page_, and _show_refresh_tokens_.
 
 ```yaml
 GET https://api.synapsefi.com/v3.1/users?show_refresh_tokens=yes&per_page=10&page=1 HTTP/1.1
@@ -215,9 +214,7 @@ GET https://api.synapsefi.com/v3.1/users?show_refresh_tokens=yes&per_page=10&pag
       "flag": "NOT-FLAGGED",
       "flag_code": null,
       "is_hidden": false,
-      "legal_names": [
-        "Larry Lamda"
-      ],
+      "legal_names": ["Larry Lamda"],
       "logins": [
         {
           "email": "test-user@synapsepay.com",
@@ -226,9 +223,7 @@ GET https://api.synapsefi.com/v3.1/users?show_refresh_tokens=yes&per_page=10&pag
       ],
       "permission": "SEND-AND-RECEIVE",
       "permission_code": null,
-      "phone_numbers": [
-        "901.111.1111"
-      ],
+      "phone_numbers": ["901.111.1111"],
       "refresh_token": "refresh_zyJKde0INOU02mqQ37pF5krwYZ8ACDHjt6WPTvuR",
       "watchlists": "NO_MATCH"
     }
@@ -237,7 +232,7 @@ GET https://api.synapsefi.com/v3.1/users?show_refresh_tokens=yes&per_page=10&pag
 }
 ```
 
-- The following service corresponds to the query of a specific user. For this call, the user ID is required, and as a parameter, the option *full_dehydrate* is used to indicate if you want to receive all the user information. It returns a json object with the user information.
+- The following service corresponds to the query of a specific user. For this call, the user ID is required, and as a parameter, the option _full_dehydrate_ is used to indicate if you want to receive all the user information. It returns a json object with the user information.
 
 ```bash
 GET https://api.synapsefi.com/v3.1/users/:user_id
@@ -245,40 +240,36 @@ GET https://api.synapsefi.com/v3.1/users/:user_id
 
 ```json
 {
-      "_id": "63caf4ee337e1a32ea049e2e",
-      "_links": {
-        "self": {
-          "href": "https://uat-api.synapsefi.com/v3.1/users/63caf4ee337e1a32ea049e2e"
-        }
-      },
-      "account_closure_date": null,
-      "client": {
-        "id": "63c88320aa0d692a3dcfd7cb",
-        "name": "Christian Casaran"
-      },
-      "flag": "NOT-FLAGGED",
-      "flag_code": null,
-      "is_hidden": false,
-      "legal_names": [
-        "Larry Lamda"
-      ],
-      "logins": [
-        {
-          "email": "test-user@synapsepay.com",
-          "scope": "READ_AND_WRITE"
-        }
-      ],
-      "permission": "SEND-AND-RECEIVE",
-      "permission_code": null,
-      "phone_numbers": [
-        "901.111.1111"
-      ],
-      "refresh_token": "refresh_zyJKde0INOU02mqQ37pF5krwYZ8ACDHjt6WPTvuR",
-      "watchlists": "NO_MATCH"
+  "_id": "63caf4ee337e1a32ea049e2e",
+  "_links": {
+    "self": {
+      "href": "https://uat-api.synapsefi.com/v3.1/users/63caf4ee337e1a32ea049e2e"
     }
+  },
+  "account_closure_date": null,
+  "client": {
+    "id": "63c88320aa0d692a3dcfd7cb",
+    "name": "Christian Casaran"
+  },
+  "flag": "NOT-FLAGGED",
+  "flag_code": null,
+  "is_hidden": false,
+  "legal_names": ["Larry Lamda"],
+  "logins": [
+    {
+      "email": "test-user@synapsepay.com",
+      "scope": "READ_AND_WRITE"
+    }
+  ],
+  "permission": "SEND-AND-RECEIVE",
+  "permission_code": null,
+  "phone_numbers": ["901.111.1111"],
+  "refresh_token": "refresh_zyJKde0INOU02mqQ37pF5krwYZ8ACDHjt6WPTvuR",
+  "watchlists": "NO_MATCH"
+}
 ```
 
-- The following service implemented corresponds to the creation of users. The minimum required parameters are the following: *logins*, *phone_numbers*, *legal_names*, *extra*, and an optional parameter called *documents*. This call returns a json object with the created account information.
+- The following service implemented corresponds to the creation of users. The minimum required parameters are the following: _logins_, _phone_numbers_, _legal_names_, _extra_, and an optional parameter called _documents_. This call returns a json object with the created account information.
 
 ```bash
 POST https://api.synapsefi.com/v3.1/users
@@ -291,21 +282,17 @@ POST https://api.synapsefi.com/v3.1/users
       "email": "jamye506@yopmail.com"
     }
   ],
-  "phone_numbers": [
-    "901.111.1111"
-  ],
-  "legal_names": [
-    "Test User"
-  ],
+  "phone_numbers": ["901.111.1111"],
+  "legal_names": ["Test User"],
   "extra": {
     "supp_id": "my_user_id",
-    "cip_tag":1,
+    "cip_tag": 1,
     "is_business": false
   }
 }
 ```
 
-- The following service is the update of the users' information, similar to the creation of the users. The *logins*, *phone_numbers*, *legal_names*, *extra*, and *documents* fields can be updated.  This call returns a json object with the updated account information.
+- The following service is the update of the users' information, similar to the creation of the users. The _logins_, _phone_numbers_, _legal_names_, _extra_, and _documents_ fields can be updated. This call returns a json object with the updated account information.
 
 ```bash
 PATCH https://api.synapsefi.com/v3.1/users/:user_id
@@ -313,24 +300,24 @@ PATCH https://api.synapsefi.com/v3.1/users/:user_id
 
 ```json
 {
-    "documents": [
-        {
-            "email": "test@test.com",
-            "phone_number": "901.111.1111",
-            "ip": "::1",
-            "name": "Test User",
-            "alias": "Test",
-            "entity_type": "M",
-            "entity_scope": "Arts & Entertainment",
-            "day": 2,
-            "month": 5,
-            "year": 1989           
-        }
-    ]
+  "documents": [
+    {
+      "email": "test@test.com",
+      "phone_number": "901.111.1111",
+      "ip": "::1",
+      "name": "Test User",
+      "alias": "Test",
+      "entity_type": "M",
+      "entity_scope": "Arts & Entertainment",
+      "day": 2,
+      "month": 5,
+      "year": 1989
+    }
+  ]
 }
 ```
 
-- The following service is the creation of accounts or nodes as indicated in the documentation. This resource supports a large number of parameters since there are several types of accounts that can be created and each one has some particular fields, but in common the *type* and *info* fields are sent.
+- The following service is the creation of accounts or nodes as indicated in the documentation. This resource supports a large number of parameters since there are several types of accounts that can be created and each one has some particular fields, but in common the _type_ and _info_ fields are sent.
 
 ```bash
 POST https://api.synapsefi.com/v3.1/users/:user_id/nodes
@@ -340,8 +327,8 @@ POST https://api.synapsefi.com/v3.1/users/:user_id/nodes
 {
   "type": "DEPOSIT-US",
   "info": {
-    "nickname":"My Deposit Account",
-    "document_id":"2a4a5957a3a62aaac1a0dd0edcae96ea2cdee688ec6337b20745eed8869e3ac8"
+    "nickname": "My Deposit Account",
+    "document_id": "2a4a5957a3a62aaac1a0dd0edcae96ea2cdee688ec6337b20745eed8869e3ac8"
   }
 }
 ```
@@ -356,28 +343,27 @@ POST https://api.synapsefi.com/v3.1/users/:user_id/nodes/:node_id
 ```
 
 - The following service allows you to perform a transaction, the parameters vary according to the type of transaction to be performed. This call returns a json object with the transaction information.
-    
-    ```json
-    POST https://api.synapsefi.com/v3.1/users/:user_id/nodes/:node_id/trans
-    
-    {
-      "to": {
-        "type": "DEPOSIT-US",
-        "id": "deposit_node_id"
-      },
-      "amount": {
-        "amount": 100.1,
-        "currency": "USD"
-      },
-      "extra": {
-        "ip": "ip",
-        "note": "Test transaction"
-      }
-    }
-    ```
-    
 
-- The following service allows to query of all the transactions associated to a user, the parameters that can be sent in this query are *per_page* and *page*. The response contains a json object array with each transaction information.
+  ```json
+  POST https://api.synapsefi.com/v3.1/users/:user_id/nodes/:node_id/trans
+
+  {
+    "to": {
+      "type": "DEPOSIT-US",
+      "id": "deposit_node_id"
+    },
+    "amount": {
+      "amount": 100.1,
+      "currency": "USD"
+    },
+    "extra": {
+      "ip": "ip",
+      "note": "Test transaction"
+    }
+  }
+  ```
+
+- The following service allows to query of all the transactions associated to a user, the parameters that can be sent in this query are _per_page_ and _page_. The response contains a json object array with each transaction information.
 
 ```json
 GET https://api.synapsefi.com/v3.1/users/:user_id/trans
@@ -448,7 +434,7 @@ GET https://api.synapsefi.com/v3.1/users/:user_id/trans
 }
 ```
 
-- The following service allows to query of all the transactions associated with a specific node of a user, the parameters that can be sent in this query are *per_page* and *page*. The response contains a json object array with each transaction information.
+- The following service allows to query of all the transactions associated with a specific node of a user, the parameters that can be sent in this query are _per_page_ and _page_. The response contains a json object array with each transaction information.
 
 ```json
 GET https://api.synapsefi.com/v3.1/users/:user_id/nodes/:node_id/trans
@@ -519,7 +505,7 @@ GET https://api.synapsefi.com/v3.1/users/:user_id/nodes/:node_id/trans
 }
 ```
 
-- The following service allows to query of a transaction associated with a specific node and user, the parameters that can be sent in this query are *per_page* and *page*. The response contains a json object with the transaction information.
+- The following service allows to query of a transaction associated with a specific node and user, the parameters that can be sent in this query are _per_page_ and _page_. The response contains a json object with the transaction information.
 
 ```json
 GET https://api.synapsefi.com/v3.1/users/:user_id/nodes/:node_id/trans/:trans_id
@@ -527,16 +513,16 @@ GET https://api.synapsefi.com/v3.1/users/:user_id/nodes/:node_id/trans/:trans_id
 
 ```json
 {
-      "_id": "63d2f3fc97c26f844d9e2104",
-      "_v": 2,
-      "amount": {
-        "amount": 600.8,
-        "currency": "USD"
-      },
-      "client": {
-        "id": "63c88320aa0d692a3dcfd7cb",
-        "name": "test user"
-      }
+  "_id": "63d2f3fc97c26f844d9e2104",
+  "_v": 2,
+  "amount": {
+    "amount": 600.8,
+    "currency": "USD"
+  },
+  "client": {
+    "id": "63c88320aa0d692a3dcfd7cb",
+    "name": "test user"
+  }
 }
 ```
 
@@ -550,7 +536,7 @@ PATCH https://api.synapsefi.com/v3.1/users/:user_id/nodes/:node_id/trans/:trans_
 }
 ```
 
-- The following service corresponds to the subscription to events. To be able to make this subscription, two parameters are required, the *scope*, which represents so to speak the categories of events that you want to track, and the URL, which corresponds to the client that will be listening to the messages that will be issued. In this case, you can create an account in [pipedream](https://pipedream.com/) which provides you with a URL to receive the messages issued. This call returns a json object with the subscription information.
+- The following service corresponds to the subscription to events. To be able to make this subscription, two parameters are required, the _scope_, which represents so to speak the categories of events that you want to track, and the URL, which corresponds to the client that will be listening to the messages that will be issued. In this case, you can create an account in [pipedream](https://pipedream.com/) which provides you with a URL to receive the messages issued. This call returns a json object with the subscription information.
 
 ```json
 POST https://api.synapsefi.com/v3.1/subscriptions
@@ -627,27 +613,27 @@ GET https://api.synapsefi.com/v3.1/subscriptions
 
 ```json
 {
-	"subscriptions": [
-		{
-		  "_id": "63fe7760418a9b4c1d313e1e",
-		  "_links": {
-		    "self": {
-		      "href": "https://uat-api.synapsefi.com/v3.1/subscriptions/63fe7760418a9b4c1d313e1e"
-		    }
-		  },
-		  "_v": 2,
-		  "client_id": "63c88320aa0d692a3dcfd7cb",
-		  "is_active": false,
-		  "scope": [
-		    "USERS|POST",
-		    "USER|PATCH",
-		    "NODES|POST",
-		    "NODE|PATCH",
-		    "TRANS|POST"
-		  ],
-		  "url": "https://eoey9ujcjduzcdo.m.pipedream.net"
-		}
-	]
+  "subscriptions": [
+    {
+      "_id": "63fe7760418a9b4c1d313e1e",
+      "_links": {
+        "self": {
+          "href": "https://uat-api.synapsefi.com/v3.1/subscriptions/63fe7760418a9b4c1d313e1e"
+        }
+      },
+      "_v": 2,
+      "client_id": "63c88320aa0d692a3dcfd7cb",
+      "is_active": false,
+      "scope": [
+        "USERS|POST",
+        "USER|PATCH",
+        "NODES|POST",
+        "NODE|PATCH",
+        "TRANS|POST"
+      ],
+      "url": "https://eoey9ujcjduzcdo.m.pipedream.net"
+    }
+  ]
 }
 ```
 
@@ -673,46 +659,27 @@ As an example, a REST API was built in which the services described above were i
 In order to go into production using Synapse services, a series of phases must be completed to verify that the technical and legal requirements for providing a neobanking platform are met.
 
 - **Phase 1: Configuration**
-    
-    This process starts with the creation and configuration of an account in the platform, in this configuration all the legal information of the company must be provided.
-    
-    Once the account is created and configured, a call will be scheduled with a Synapse commercial agent, where the following points must be explained.
-    
-    1) Implementation schedule.
-    
-    2) Specification sheet of the product to be implemented with all the relevant controls it will have.
-    
-    3) The API guide to be implemented.
-    
-    4) Guide of good practices to be included.
-    
+  This process starts with the creation and configuration of an account in the platform, in this configuration all the legal information of the company must be provided.
+  Once the account is created and configured, a call will be scheduled with a Synapse commercial agent, where the following points must be explained.
+  1. Implementation schedule.
+  2. Specification sheet of the product to be implemented with all the relevant controls it will have.
+  3. The API guide to be implemented.
+  4. Guide of good practices to be included.
 - **Phase 2: Initial Testing.**
-    
-    The platform will provide a test environment with all the necessary resources so that all the functionalities supported by Synapse resources can be tested, such tests should include the following:
-    
-    1. Card creation and configuration with card printers.
-    2. Card generation with networks.
-    3. Generation of mobile and third party wallets.
-    4. Account integration with banks.
-    
-    As part of the process, Synapse will request a series of documents to verify compliance with legal and marketing requirements. For this stage, a reserve account must also be in place, as a backup for possible losses that may be generated.
-    
-    At this point of the implementation, end customers should be clearly informed that the application is in Beta, this is important if there are regulatory inquiries while the implementation is being finalized.
-    
-    It should be noted that even with bank approval, the Synapse API will limit the number of users for Beta testing.
-    
+  The platform will provide a test environment with all the necessary resources so that all the functionalities supported by Synapse resources can be tested, such tests should include the following:
+  1. Card creation and configuration with card printers.
+  2. Card generation with networks.
+  3. Generation of mobile and third party wallets.
+  4. Account integration with banks.
+     As part of the process, Synapse will request a series of documents to verify compliance with legal and marketing requirements. For this stage, a reserve account must also be in place, as a backup for possible losses that may be generated.
+     At this point of the implementation, end customers should be clearly informed that the application is in Beta, this is important if there are regulatory inquiries while the implementation is being finalized.
+     It should be noted that even with bank approval, the Synapse API will limit the number of users for Beta testing.
 - **Phase 3: Beta Testing.**
-    
-    In this phase, the respective approvals from the associated banks will also be received, based on the documentation previously submitted. If everything is approved correctly, the limit on the number of users will be eliminated.
-    
+  In this phase, the respective approvals from the associated banks will also be received, based on the documentation previously submitted. If everything is approved correctly, the limit on the number of users will be eliminated.
 - **Phase 4: Deploy an application to production.**
-    
-    Once all the implementation points have been verified, the Synapse team will make a complete guide of all the possibilities that the platform offers as a service.
-    
-    In the first weeks, after generating information, Synapse will provide support to verify that everything is running correctly.
-    
-    Depending on the type of services offered, Synapse will provide differentiated support and verification.
-    
+  Once all the implementation points have been verified, the Synapse team will make a complete guide of all the possibilities that the platform offers as a service.
+  In the first weeks, after generating information, Synapse will provide support to verify that everything is running correctly.
+  Depending on the type of services offered, Synapse will provide differentiated support and verification.
 
 ## Conclusion
 

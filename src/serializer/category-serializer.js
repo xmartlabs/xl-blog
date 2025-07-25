@@ -7,4 +7,4 @@ class CategorySerializer {
   }
 }
 
-export { CategorySerializer }
+export { CategorySerializer };

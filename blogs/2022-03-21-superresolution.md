@@ -1,14 +1,19 @@
 ---
 title: From Low to High-Quality Image — Practical Application of Super-Resolution Algorithms
 date: 2022-03-22
-tags: [10 years Xmartlabs, 10 lessons learned in tech industry, 10 years in tech industry]
+tags:
+  [
+    10 years Xmartlabs,
+    10 lessons learned in tech industry,
+    10 years in tech industry,
+  ]
 author: lazaro
 category: machine-learning
 thumbnail: images/ml-superresolution/Superresolution-blog.jpg
 permalink: /machine-learning-super-resolution-algorithms/
 ---
 
-Nowadays, everyone is exposed to artificial intelligence (AI) in one way or another. [Computer vision](https://blog.xmartlabs.com/blog/computer-vision-techniques-for-body-detection/) is a popular application of AI through cellphones, video conference platforms, and video vigilance cameras, among other [use cases](https://blog.xmartlabs.com/blog/computer-vision-and-object-detection-use-case/). One fascinating problem to solve within the computer vision field is super-resolution (SR). 
+Nowadays, everyone is exposed to artificial intelligence (AI) in one way or another. [Computer vision](https://blog.xmartlabs.com/blog/computer-vision-techniques-for-body-detection/) is a popular application of AI through cellphones, video conference platforms, and video vigilance cameras, among other [use cases](https://blog.xmartlabs.com/blog/computer-vision-and-object-detection-use-case/). One fascinating problem to solve within the computer vision field is super-resolution (SR).
 
 There are two different approaches: the academic and the "practical" approach. The difference between them is time frames. Because academic work involves a lot of validation and later publishing of the algorithms, it can take several years. However, the industry can't wait that much time due to the constant change in its landscape. Practical applications of SR problems, need to make sense of academic data, pipelines and features transformation.
 
@@ -16,7 +21,7 @@ This blog aims to compare different state-of-the-art algorithms for SR and their
 
 ## What is Super-Resolution and how does it work?
 
-Super-resolution aims to extract a High-Resolution (HR) image from its respective Low-Resolution (LR) one. Another idea behind SR is to find patterns and tendencies from the HR images and reconstruct the image in LR, something like an inverse solution. 
+Super-resolution aims to extract a High-Resolution (HR) image from its respective Low-Resolution (LR) one. Another idea behind SR is to find patterns and tendencies from the HR images and reconstruct the image in LR, something like an inverse solution.
 
 There are two approaches to solve the super-resolution problem:
 
@@ -30,7 +35,6 @@ The metrics used for measuring image quality are vital. Although there are sever
 ## Image Quality Metrics
 
 **Peak signal-to-noise ratio (PSNR):** It's a qualitative measure of image quality compression, defined by the maximum pixel value and the mean square error between the reference image and the SR image, also known as the power of image distortion noise. A disadvantage of this method is that it doesn't consider the structural informa6tion within the image.
-
 
 ![Untitled2](/images/ml-superresolution/Untitled.png)
 
@@ -73,7 +77,6 @@ The general idea behind all algorithms is an extensive neural network with the o
 ## **Quantitative Analysis (PNSR/SSIM):**
 
 After a recap of the algorithms’ main components, we started with quantitative results. We use datasets Set5, Set14, BSD100, Urban100, and Manga109. The results of algorithms based on GAN were generally worse than the rest, and SwinIR was the best of them all. This analysis is only concerning selected metrics. We didn't consider aspects such as training time or hardware used because there isn't any information about that in the papers we mentioned.
-
 
 ![Table of results](/images/ml-superresolution/table-of-results.png)
 
@@ -217,7 +220,6 @@ In the marketing industry, it's common to see images that focus on one object wh
  <img src="/images/ml-superresolution/test_497x712_SwinIR_large.png" />
 </div>
 
-
 In this image, **Muhammad Ali's** fist is in focus while the rest of his body is blurred. When we apply SwinIR, it tries to repair this effect, ignoring the intention behind the picture. We can mitigate this error by using SwinIR in the fist and then RCAN in the rest of the image.
 
 The next question is: Can we find some image that improves its quality and keeps the sense and topology through SwinIR? Trying to answer this led to some excellent examples. Let's see them:
@@ -247,4 +249,3 @@ Having run both SwinIR and RCAN on diverse images with different qualities and c
 Furthermore, it's not always easy to reproduce the academic results we saw in the papers, but the numbers when we applied them to specific images from our computers, weren't bad either.
 
 You should also consider the result's predicted time because, if you're looking for real-time results, these algorithms are not the answer.
-

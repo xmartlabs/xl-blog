@@ -1,6 +1,6 @@
 ---
-title: "Power Dynamics: The Founder-Investor Relationship in the Startup Industry"
-subtitle: " "
+title: 'Power Dynamics: The Founder-Investor Relationship in the Startup Industry'
+subtitle: ' '
 permalink: founder-investors-startup-funding
 featured: true
 date: 2024-04-09
@@ -14,6 +14,7 @@ tags:
   - MVP
 author: vale
 ---
+
 At the heart of the startup ecosystem lies the relationship between founders and investors, an intricate partnership founded on mutual trust, shared goals, and the understanding that both parties are integral to the startup's success. This relationship evolves through various stages, each marked by its own set of challenges and power shifts.
 
 This blog draws on insights from various resources to shed light on the complexities of this relationship, offering guidance for both parties to navigate their partnership effectively.
@@ -69,8 +70,6 @@ Investors can play a pivotal role in calming these fears by demonstrating the ta
 Founders and investors alike argue that the best formula is to keep investors informed and allow them access so founders get the freedom to act and solid advice on their part.
 
 ![](/images/clear-communication.png)
-
-
 
 ## Building a Lasting Partnership
 

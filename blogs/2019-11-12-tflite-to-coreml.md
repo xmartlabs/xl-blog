@@ -26,7 +26,6 @@ So for example, for the following image, we want our model to predict "0":
 
 <img width="343px" src="/images/tflite_coreml/zero.png" />
 
-
 ## Inspecting the model
 
 The first thing we should do is to inspect the model to see its layers.
@@ -38,10 +37,11 @@ With the MNIST model we get the following:
 <br />
 
 There we can see that this simple model has the following layers:
-* A Flatten layer which serves as input
-* A FullyConnected, or Dense, layer with ReLU activation function
-* Another FullyConnected layer without activation function
-* A Softmax layer
+
+- A Flatten layer which serves as input
+- A FullyConnected, or Dense, layer with ReLU activation function
+- Another FullyConnected layer without activation function
+- A Softmax layer
 
 We can also print each node in the graph of the model using the following snippet:
 
@@ -218,10 +218,10 @@ And that is it. We have a CoreML model!
 ## Conclusion
 
 Some takeaways from this post:
-* TensorFlow Lite models have to be converted manually to CoreML but that can be done, specially when you already have some code that produces the same architecture.
-* Converting a model to CoreML can be tricky in some cases.
-* Sometimes you must use a different layer or function for the conversion to be successful.
 
+- TensorFlow Lite models have to be converted manually to CoreML but that can be done, specially when you already have some code that produces the same architecture.
+- Converting a model to CoreML can be tricky in some cases.
+- Sometimes you must use a different layer or function for the conversion to be successful.
 
 The source code used in this tutorial can be found in [this GitHub gist](https://gist.github.com/mats-claassen/f76520dd32108b65d57113fd7ac99bf9).
 

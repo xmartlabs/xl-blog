@@ -8,7 +8,7 @@ thumbnail: /images/basic-infrastructure-in-AWS-using-terraform/Basic-Infrastruct
 permalink: /blog-basic-infrastructure-in-aws-using-terraform/
 ---
 
-Managing cloud infrastructure doesn’t always go smoothly for developers. Choosing which cloud provider to use, configuring the private and public networks, and the required security of the infrastructure aren’t easy tasks,  and they consume research, documentation, and implementation time. In addition to that, in that process, many questions arise:
+Managing cloud infrastructure doesn’t always go smoothly for developers. Choosing which cloud provider to use, configuring the private and public networks, and the required security of the infrastructure aren’t easy tasks, and they consume research, documentation, and implementation time. In addition to that, in that process, many questions arise:
 
 - What happens when you successfully configure everything for a specific environment (for example, development or staging) and it’s required to replicate it for a new one (let’s say RC or even production)?
 - How can you guarantee and validate that your infrastructure is secure?
@@ -27,7 +27,7 @@ Why choosing Terraform instead of other solutions (CloudFormation, AWS, SDK, etc
 - **Terraform isn’t a complex tool to use:** Learning terraform in depth can be a complex task that requires training. Understanding all the concepts managed by Terraform, its good practices, and creating modules from scratch aren’t trivial tasks. However, if you have a module already built in Terraform (like the one we’re presenting today), the interaction with the tool isn’t complex, and you can understand it in no time.
 - **Terraform can be used to build complex solutions:** The example explained here is a simple infrastructure that probably can be handled without any problems and with no infrastructure as code solution. We suggest managing it with Terraform from the start so you can scale it easily in the future if required.
 - **Terraform community**: Like many of the open-source tools we use in Xmartlabs, the community behind Terraform is huge, and there are several blogs, tutorials, and forums that give support and explain in detail the solutions to possible problems.
-- **Terraform registry**:  One of the most useful resources that Terraform provides is the [registry](https://registry.terraform.io/), where you can find well-documented and maintained built modules that can be used by your own modules.
+- **Terraform registry**: One of the most useful resources that Terraform provides is the [registry](https://registry.terraform.io/), where you can find well-documented and maintained built modules that can be used by your own modules.
 
 # What can we deploy with the Terraform Basic Infra module?
 
@@ -47,7 +47,6 @@ AWS provides several ways of creating infrastructure for this kind of applicatio
 
 ![basic-infra-diagram.jpg](/images/basic-infrastructure-in-AWS-using-terraform/basic-infra-diagram.jpg)
 
-
 One of the reasons why we chose these resources against others is that they give you multiple alternatives to deploy your code. You can dockerize your application if you want, but it isn’t mandatory. Moreover, most of the resources managed in this module are included in the AWS free tier, allowing you to deploy your solution without spending much money.
 
 # Project Structure
@@ -55,20 +54,20 @@ One of the reasons why we chose these resources against others is that they give
 When you clone the open-source Terraform module repository from [GitHub](https://github.com/xmartlabs/terraform-basic-infra), you’ll see the structure of the project is the following:
 
 - `environments`: A folder that contains the `tfvars` files with the values of the variables for each environment managed by Terraform. Later we’ll explain how to create and modify each file in this folder in more detail.
-- `modules`: A folder that contains the terraform modules created by our team to better organize the resources managed in the basic infra module. As the [official documentation](https://www.terraform.io/language/modules/develop) defines, a module is *a container for multiple resources that are used together. Modules can be used to create lightweight abstractions so that you can describe your infrastructure in terms of its architecture rather than directly in terms of physical objects.* Following that philosophy, the created modules are
-    - `module-cloudwatch`: Module that creates a clodwatch log_group and an IAM instance profile with access to it. You can use this module to store your application logs.
-    - `module-ec2-linux-web`: Module that creates an EC2 instance where your application will run
-    - `module-network-linux-web`: Module that creates all the networking resources required to deploy infrastructure with a single EC2 machine with exposition to the internet. The created resources include:
-        - A vpc
-        - A public subnet
-        - A security group with the rules to open ports 443, 80 and 22 to the whole world
-        - The API gateway and the route tables required to expose the previous subnet to the internet
-    - `module-network-linux-web-db`: Module that creates the same resources that the previous module (`module-network-linux-web`), adding a connection between the database and the EC2 instance. That means:
-        - 2 private subnets required to create the RDS instance
-        - A db security group exposing the db port to the VPC cidr
-    - `module-ecr`: Module that creates a set of Elastic container Registers (ECRs) useful for docker image storage. This module is useful when your application is dockerized and you want to store multiple versions of the images.
-    - `module-rd-db`: Module that creates a database in RDS. Optionally, you can also configure a read replica for this database if needed.
-    - `module-s3`: Module that creates an S3 bucket. Optionally, you can also configure an IAM user with access to this bucket and access and secret key pair.
+- `modules`: A folder that contains the terraform modules created by our team to better organize the resources managed in the basic infra module. As the [official documentation](https://www.terraform.io/language/modules/develop) defines, a module is _a container for multiple resources that are used together. Modules can be used to create lightweight abstractions so that you can describe your infrastructure in terms of its architecture rather than directly in terms of physical objects._ Following that philosophy, the created modules are
+  - `module-cloudwatch`: Module that creates a clodwatch log_group and an IAM instance profile with access to it. You can use this module to store your application logs.
+  - `module-ec2-linux-web`: Module that creates an EC2 instance where your application will run
+  - `module-network-linux-web`: Module that creates all the networking resources required to deploy infrastructure with a single EC2 machine with exposition to the internet. The created resources include:
+    - A vpc
+    - A public subnet
+    - A security group with the rules to open ports 443, 80 and 22 to the whole world
+    - The API gateway and the route tables required to expose the previous subnet to the internet
+  - `module-network-linux-web-db`: Module that creates the same resources that the previous module (`module-network-linux-web`), adding a connection between the database and the EC2 instance. That means:
+    - 2 private subnets required to create the RDS instance
+    - A db security group exposing the db port to the VPC cidr
+  - `module-ecr`: Module that creates a set of Elastic container Registers (ECRs) useful for docker image storage. This module is useful when your application is dockerized and you want to store multiple versions of the images.
+  - `module-rd-db`: Module that creates a database in RDS. Optionally, you can also configure a read replica for this database if needed.
+  - `module-s3`: Module that creates an S3 bucket. Optionally, you can also configure an IAM user with access to this bucket and access and secret key pair.
 - `create_machine_script.tmpl`: File with an init script example used in the EC2 machine initialization. In this file, you can configure the installation of all the tools required for your application.
 - `main.tf`: Main Terraform module with the declaration of all the resources required for basic infrastructure. In that file, you will see exactly how the created modules are used by the main one. You probably won’t modify this module, but if required, here you can include new modules, modify current ones, etc.
 - `outputs.tf`: Definition of the main modules outputs values. All the declared values that will be shown in the terminal after the Terraform commands are executed are on this file.
@@ -101,8 +100,6 @@ Before starting to type terraform commands in a terminal, some resources inside 
   <iframe src="/images/basic-infrastructure-in-AWS-using-terraform/I-Am-User.mp4" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen type="video/mp4"></iframe>
 </div>
 
-
-
 - **EC2 Key Pair:** to have ssh access to the EC2 instance created (to deploy your code, for example), you’ll need an RSA key pair. If you want, you can import an already created pair (for example, your personal ones) into AWS and configure the access to the EC2. We recommend **creating a new pair instead of using an existing one.** You can easily do it from the AWS console in this [link](https://console.aws.amazon.com/ec2/v2/home#KeyPairs). Make sure to **create this key in the same region as the rest of your infrastructure** (otherwise, you won’t be able to use it) and **store the .pem file in a secure place**.
 
 <div class="videoWrapper">
@@ -117,7 +114,7 @@ Our suggestion is to version the infrastructure code in a repository (a new one 
 
 ## 4 - Configuring the provider
 
-Once you have a template copy, you can configure it for your specific solution. Before changing anything, you must configure your machine's AWS client. A detailed guide about this tool and how to configure it is [here](https://docs.aws.amazon.com/cli/latest/userguide/cli-chap-configure.html);  a short explanation about configuring the AWS client is: executing the following commands in a terminal:
+Once you have a template copy, you can configure it for your specific solution. Before changing anything, you must configure your machine's AWS client. A detailed guide about this tool and how to configure it is [here](https://docs.aws.amazon.com/cli/latest/userguide/cli-chap-configure.html); a short explanation about configuring the AWS client is: executing the following commands in a terminal:
 
 ```bash
 aws configure set aws_access_key_id <AWS_ACCESS_KEY_ID>
@@ -158,6 +155,7 @@ If everything is configured correctly, you should be able to run the init comman
 ```bash
 terraform init
 ```
+
 <div class="videoWrapper">
   <iframe src="/images/basic-infrastructure-in-AWS-using-terraform/terraform-init.mp4" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen type="video/mp4"></iframe>
 </div>
@@ -172,10 +170,10 @@ One of the purposes of this template is to provide similar infrastructure to mul
 terraform workspace new <environment>
 terraform workspace select <environment>
 ```
+
 <div class="videoWrapper">
   <iframe src="/images/basic-infrastructure-in-AWS-using-terraform/ws-create.mp4" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen type="video/mp4"></iframe>
 </div>
-
 
 The workspaces are also stored in the S3 bucket, meaning that everyone in the project with access to it will have access, allowing your team to collaborate. The command to list all the environments is:
 
@@ -190,27 +188,26 @@ For you to create and manage the infrastructure for a specific environment, you 
 Some considerations that you need to keep in mind when you are configuring these values:
 
 - Take care of duplicated names for the resources. If you put the same name in multiple environments, you’ll have issues at creation time. To avoid this situation, the module comes with a variable called `create_prefix_for_resources` that appends the prefix `'{var.project}_{var.env}'` before each resource name. It’s also useful to identify the environment (or even project) that each resource belongs. Our suggestion is to keep this variable set in True.
-- The EC2 module has a variable called  `key_name` that needs to have the RSA key name created before. You can share the same key between multiple environments, but we suggest creating a specific one per environment to reduce vulnerabilities.
+- The EC2 module has a variable called `key_name` that needs to have the RSA key name created before. You can share the same key between multiple environments, but we suggest creating a specific one per environment to reduce vulnerabilities.
 - In the EC2 module, there’s a variable called `amiid` that can be a little bit difficult to understand if you don’t have experience working with AWS. An Amazon Machine Image (AMI) is a supported and maintained image provided by AWS that provides the information required to launch an instance (definition extracted from the [official documentation](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/AMIs.html)). The available AMI ids vary based on the region that you’re using. If you have doubts about which AMI to use, you can take a look at this [link](https://console.aws.amazon.com/ec2/v2/home#LaunchInstanceWizard).
 - The database password is a secret that can’t be stored in this file because it will become a vulnerability. The implemented rds module is integrated with the [AWS secret manager](https://aws.amazon.com/secrets-manager/) to avoid that situation. The procedure to create that secret is:
-    - Go to the secret management page on your AWS console:  [https://console.aws.amazon.com/secretsmanager/home](https://ca-central-1.console.aws.amazon.com/secretsmanager/home?region=ca-central-1#!/home)
-    - To create your secret click the `Store a new secret` button.
-    - Select “Other type of secret”
-    - Define the keys and values. Make sure you use the exact keys, or Terraform won’t be able to find the values. For the RDS Database, you’ll need:
-        - `username`: the username to connect to the RDS DB.
-        - `password`: the password to connect to the RDS DB.  Be sure to use a secure password.
-    - Click “Next” and then define the secret name.
-        - You can choose whatever secret name you want. Our suggestion is to name it following this pattern `<project>/<environment>/db-credentials`
-        - It’s recommended that you have one secret for each environment.
-    - Remember the secret name and update your variables file with the correct secret.
-    - Click “Next”
-    - Do not choose to rotate the secrets.
-    - Once the process ends, click “Store,” and your secret will have been created.
+  - Go to the secret management page on your AWS console: [https://console.aws.amazon.com/secretsmanager/home](https://ca-central-1.console.aws.amazon.com/secretsmanager/home?region=ca-central-1#!/home)
+  - To create your secret click the `Store a new secret` button.
+  - Select “Other type of secret”
+  - Define the keys and values. Make sure you use the exact keys, or Terraform won’t be able to find the values. For the RDS Database, you’ll need:
+    - `username`: the username to connect to the RDS DB.
+    - `password`: the password to connect to the RDS DB. Be sure to use a secure password.
+  - Click “Next” and then define the secret name.
+    - You can choose whatever secret name you want. Our suggestion is to name it following this pattern `<project>/<environment>/db-credentials`
+    - It’s recommended that you have one secret for each environment.
+  - Remember the secret name and update your variables file with the correct secret.
+  - Click “Next”
+  - Do not choose to rotate the secrets.
+  - Once the process ends, click “Store,” and your secret will have been created.
 
 <div class="videoWrapper">
   <iframe src="/images/basic-infrastructure-in-AWS-using-terraform/Store-scret.mp4" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen type="video/mp4"></iframe>
 </div>
-
 
 ## 7 - Review what you did
 
@@ -237,7 +234,6 @@ terraform apply --var-file=environments/<environment>.tfvars
 <div class="videoWrapper">
   <iframe src="/images/basic-infrastructure-in-AWS-using-terraform/terraform-apply.mp4" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen type="video/mp4"></iframe>
 </div>
-
 
 After executing this command, you can go to the AWS console dashboard and see how all the resources were created.
 

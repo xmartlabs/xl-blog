@@ -1,8 +1,8 @@
-import React from "react";
-import { graphql } from "gatsby";
+import React from 'react';
+import { graphql } from 'gatsby';
 
-import { BlogList } from "/src/components/blog-list/blog-list"
-import { HeaderBanner } from "/src/components/header-banner"
+import { BlogList } from '/src/components/blog-list/blog-list';
+import { HeaderBanner } from '/src/components/header-banner';
 
 const CategoriesPage = (props) => {
   return (
@@ -16,11 +16,11 @@ const CategoriesPage = (props) => {
 export default CategoriesPage;
 
 export const blogListQuery = graphql`
-  query($category: String, $limit: Int, $skip: Int) {
+  query ($category: String, $limit: Int, $skip: Int) {
     allMdx(
       limit: $limit
-      sort: {frontmatter: {date: DESC}}
-      filter: {frontmatter: {category: {eq: $category}}}
+      sort: { frontmatter: { date: DESC } }
+      filter: { frontmatter: { category: { eq: $category } } }
       skip: $skip
     ) {
       edges {
@@ -39,4 +39,4 @@ export const blogListQuery = graphql`
       }
     }
   }
-`
+`;

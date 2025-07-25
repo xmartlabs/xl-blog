@@ -1,6 +1,6 @@
 ---
-title: "Closing the Pop-Up Dilemma: A Deep Dive into UX Discontent"
-subtitle: " "
+title: 'Closing the Pop-Up Dilemma: A Deep Dive into UX Discontent'
+subtitle: ' '
 permalink: pop-up-ux-design
 featured: true
 date: 2024-03-16
@@ -14,6 +14,7 @@ tags:
   - UX/UI
 author: carolina-berastegui
 ---
+
 Have you ever found yourself closing pop-ups faster than you can say "annoying"? Turns out, you're not alone. With the idea of analyzing this phenomenon, we decided to dig into this whole pop-up situation: we've read various studies, looked at user tests and statistics, and guess what we discovered? **Pop-ups are widely disliked in the field of user experience (UX).**
 
 An initial research from 2004 by John Boyd from Yahoo! and Christian Rohrer from eBay was considered for this analysis. It was a large body of tests on how users perceive online advertising supported by a survey based on 605 respondents.
@@ -52,10 +53,10 @@ Validated on the user tests of the researches, displaying multiple popups on top
 
 Some of the main negative topics found on open questions asked to the users on the researches were:
 
-* Animation on ads/popups
-* Autoplay videos without the consent of the user
-* Deceptive links (advertisements buttons or links that appear near the main CTA, confusing the user where to click)
-* Retargeting (when you shop for an item online and later you see advertisements for that same item or company on other websites)
+- Animation on ads/popups
+- Autoplay videos without the consent of the user
+- Deceptive links (advertisements buttons or links that appear near the main CTA, confusing the user where to click)
+- Retargeting (when you shop for an item online and later you see advertisements for that same item or company on other websites)
 
 ## The overlapping is even worse when users are on small devices
 
@@ -83,6 +84,6 @@ Our deep dive into the use of pop-ups within the user experience landscape has r
 
 Over the years, the narrative remains the same: users dislike the disruption caused by pop-ups, especially during critical tasks. The interference with content access, the potential for overlapping chaos, and the prevalence of banner blindness are just some of the challenges posed by this UX mess.
 
-In light of this validated information, the takeaway is clear —we need to be really careful about when to implement popups on websites. It is essential to prioritize the user and evaluate whether popups will improve their experience in each particular case or if they are hindering their ability to accomplish specific tasks without unnecessary distractions. 
+In light of this validated information, the takeaway is clear —we need to be really careful about when to implement popups on websites. It is essential to prioritize the user and evaluate whether popups will improve their experience in each particular case or if they are hindering their ability to accomplish specific tasks without unnecessary distractions.
 
 If you need advice on navigating the dynamic terrain of digital design, or want to create a thoughtful and user-centric approach to pop-up usage and overall UX, don't hesitate to contact our team of design experts and have a talk about how that can help!

@@ -1,6 +1,6 @@
 ---
 title: Powerful animations in React Native
-excerpt: "Powerful animations with Reanimated. We will learn how to make powerful animations in React Native using this awesome library!"
+excerpt: 'Powerful animations with Reanimated. We will learn how to make powerful animations in React Native using this awesome library!'
 date: 2020-04-27
 tags: [ReactNative, Animations, Javascript]
 category: development
@@ -8,11 +8,12 @@ author: nicoh
 thumbnail: images/powerful-animations-rn/featured.jpg
 permalink: /powerful-animations-in-rn/
 ---
+
 In this blog post we're going to present the main issues we ran into implementing complex animations in React Native at Xmartlabs. We'll show how Reanimated helps achieving smooth animations and at which cost. After reading this blog post you will be able to determine if react native is a proper choice to create your app considering its animations requirements.
 
 So let's start with a little introduction to the matter.
 
-***“When speaking of animations, the key to success is to avoid frame drops”***
+**_“When speaking of animations, the key to success is to avoid frame drops”_**
 
 What makes React Native so special regarding this topic of avoiding frame drops?
 
@@ -58,7 +59,7 @@ As we mentioned before in order to do it declarative we are going to use these t
 
 First of all, our code needs to be written with the `Reanimated.API`, what does this mean?
 
-We cannot use if-else, Views neither the + * == operators because they live in the JavaScript thread, we need to use the auxiliary functions that are provided by the `Reanimated.API`, let's see some examples of these auxiliary functions:
+We cannot use if-else, Views neither the + \* == operators because they live in the JavaScript thread, we need to use the auxiliary functions that are provided by the `Reanimated.API`, let's see some examples of these auxiliary functions:
 
 > Explaining each parameter and details of each `Reanimated API` is out of the scope of this blogpost.
 
@@ -108,63 +109,78 @@ We cannot use if-else, Views neither the + * == operators because they live in t
 So if we apply this in a simple example this is how it looks.
 
 ```javascript
-    import React, { useState } from "react";
-    import { View, SafeAreaView, Text, StyleSheet } from "react-native";
-    import Animated from "react-native-reanimated";
-    import { useMemoOne } from "use-memo-one";
-    import { RectButton } from "react-native-gesture-handler";
+import React, { useState } from 'react';
+import { View, SafeAreaView, Text, StyleSheet } from 'react-native';
+import Animated from 'react-native-reanimated';
+import { useMemoOne } from 'use-memo-one';
+import { RectButton } from 'react-native-gesture-handler';
 
-    export const Example = () => {
-      const { Value, useCode, block, cond, Clock, not, clockRunning, startClock, set, interpolate, Extrapolate, add, eq, stopClock } = Animated;
-      const animationDuration = 500;
-      const [show, updateShow] = useState<boolean>(true);
-      const { time, clock, progress } = useMemoOne(
-        () => ({
-          time: new Value(0),
-          clock: new Clock(),
-          progress: new Value(0)
-        }),
-        []
-      );
-      const opacity = interpolate(progress, {
-        inputRange: [0, 1],
-        outputRange: show ? [0, 1] : [1, 0],
-        extrapolate: Extrapolate.CLAMP
-      });
+export const Example = () => {
+  const {
+    Value,
+    useCode,
+    block,
+    cond,
+    Clock,
+    not,
+    clockRunning,
+    startClock,
+    set,
+    interpolate,
+    Extrapolate,
+    add,
+    eq,
+    stopClock,
+  } = Animated;
+  const animationDuration = 500;
+  const [show, updateShow] = useState < boolean > true;
+  const { time, clock, progress } = useMemoOne(
+    () => ({
+      time: new Value(0),
+      clock: new Clock(),
+      progress: new Value(0),
+    }),
+    []
+  );
+  const opacity = interpolate(progress, {
+    inputRange: [0, 1],
+    outputRange: show ? [0, 1] : [1, 0],
+    extrapolate: Extrapolate.CLAMP,
+  });
 
-      useCode(
-        block([
-          cond(not(clockRunning(clock)), [startClock(clock), set(time, clock)]),
-          set(
-            progress,
-            interpolate(clock, {
-              inputRange: [time, add(time, animationDuration)],
-              outputRange: [0, 1],
-              extrapolate: Extrapolate.CLAMP
-            })
-          ),
-          cond(eq(progress, 1), stopClock(clock))
-        ]),
-        [show]
-      );
+  useCode(
+    block([
+      cond(not(clockRunning(clock)), [startClock(clock), set(time, clock)]),
+      set(
+        progress,
+        interpolate(clock, {
+          inputRange: [time, add(time, animationDuration)],
+          outputRange: [0, 1],
+          extrapolate: Extrapolate.CLAMP,
+        })
+      ),
+      cond(eq(progress, 1), stopClock(clock)),
+    ]),
+    [show]
+  );
 
-      return (
-        <View style={styles.container}>
-          <View style={styles.mainContent}>
-            <Animated.View style={{ opacity }}>
-              <View style={styles.card} />
-            </Animated.View>
+  return (
+    <View style={styles.container}>
+      <View style={styles.mainContent}>
+        <Animated.View style={{ opacity }}>
+          <View style={styles.card} />
+        </Animated.View>
+      </View>
+      <RectButton onPress={() => updateShow(!show)}>
+        <SafeAreaView style={styles.button} accessible>
+          <View style={styles.button}>
+            <Text style={styles.label}>{show ? 'Hide' : 'Show'}</Text>
           </View>
-          <RectButton onPress={() => updateShow(!show)}>
-            <SafeAreaView style={styles.button} accessible>
-              <View style={styles.button}>
-                <Text style={styles.label}>{show ? "Hide" : "Show"}</Text>
-              </View>
-            </SafeAreaView>
-          </RectButton>
-        </View>
-      );
-    };
+        </SafeAreaView>
+      </RectButton>
+    </View>
+  );
+};
 ```
 
 <img style={{ display:"block", marginLeft:"auto", marginRight:"auto", width:"50%", height:"80%" }} src="/images/
@@ -181,10 +197,8 @@ At first, it might feel a bit awful and kind of antinatural, but when you get ac
 In conclusion, we can achieve powerful animations in React Native but it comes with a little trade-off in complexity.
 So if you are looking to make an App that has simple animations and just few complex ones, maybe with React Native + Reanimated you could get a nice looking app but if you want to make an app in which the animations are a core aspect of the product, React Native may not be the best choice for you.
 
-
 Well, I hope you now have a better idea of how to implement powerful animations in React Native!
 
+**_Are you doing something regarding animations in your RN projects and have learned something not covered in this post? Let me know in the comments. I'd be interested to get your perspective._**
 
-***Are you doing something regarding animations in your RN projects and have learned something not covered in this post? Let me know in the comments. I'd be interested to get your perspective.***
-
-***Have questions about Reanimated? I'd be happy to answer those in the comments if I can.***
+**_Have questions about Reanimated? I'd be happy to answer those in the comments if I can._**

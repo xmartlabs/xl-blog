@@ -1,5 +1,5 @@
 ---
-title: "Put your data to work: Amazon Redshift vs Snowflake"
+title: 'Put your data to work: Amazon Redshift vs Snowflake'
 date: 2019-07-04
 tags: [Data analysis, Data warehouse]
 author: pbt
@@ -15,6 +15,7 @@ There, a consolidated view of all the convenient business information is stored 
 
 <img style={{ width: '100%' }} src="/images/redshift-snowflake/cloud-data-warehouse.jpg" />
 <br />
+
 <p style={{ textAlign: 'center' }}> (source: <a href="https://www.cazena.com/resource-topic/data-mart">Cazena</a>)</p>
 
 **Cloud Data warehouses** are a popular choice among today's options.
@@ -31,21 +32,23 @@ Following, we describe some aspects that are different between these two solutio
 One of the questions that may arise when selecting a warehouse is, what will I pay for?
 
 The Snowflake approach for pricing is essentially paying for what you use, [splitting the billing on](https://www.snowflake.com/pricing/):
-1. *Computing:*
-    * Offers a compute resource called **Warehouse**, [which comes in seven different sizes](https://docs.snowflake.net/manuals/user-guide/warehouses-overview.html#warehouse-size).
-    * The price is charged **per-second** of warehouse usage, which can be configured to automatically stop and resume.
-    * Each **second cost a fraction of a credit**. The price of the **credit varies on the [plan you selected](https://www.snowflake.com/pricing/)**.
 
-2. *Storage:*
-    * *On-demand*: Pay storage as you use it on a monthly basis.
-    * *Up-front*: If you know how much storage you need, you can pre-pay for it each month, which is cheaper than the on-demand option.
+1. _Computing:_
+   - Offers a compute resource called **Warehouse**, [which comes in seven different sizes](https://docs.snowflake.net/manuals/user-guide/warehouses-overview.html#warehouse-size).
+   - The price is charged **per-second** of warehouse usage, which can be configured to automatically stop and resume.
+   - Each **second cost a fraction of a credit**. The price of the **credit varies on the [plan you selected](https://www.snowflake.com/pricing/)**.
+
+2. _Storage:_
+   - _On-demand_: Pay storage as you use it on a monthly basis.
+   - _Up-front_: If you know how much storage you need, you can pre-pay for it each month, which is cheaper than the on-demand option.
 
 The pricing on Redshift [is more coupled](https://aws.amazon.com/redshift/pricing/) but it offer some interesting options too:
-* You can choose between **two different cluster types**, **dense compute** or **dense storage**, both options with powerful characteristics.
-* The usage is billed on a **per-hour** granularity.
-* You can choose between an **on-demand plan or an up-front payment**, obtaining interesting savings if you choose the latter option.
-* Provides a **Concurrency Scaling** option, where you can add to your cluster more computing power on-demand, priced on a per-second rate.
-* Amazon now provides [Redshift Spectrum](https://aws.amazon.com/blogs/big-data/amazon-redshift-spectrum-extends-data-warehousing-out-to-exabytes-no-loading-required/), which allows the user to **run queries over S3 storage data**. This way, you can pay for your storage and compute capabilities more independently.
+
+- You can choose between **two different cluster types**, **dense compute** or **dense storage**, both options with powerful characteristics.
+- The usage is billed on a **per-hour** granularity.
+- You can choose between an **on-demand plan or an up-front payment**, obtaining interesting savings if you choose the latter option.
+- Provides a **Concurrency Scaling** option, where you can add to your cluster more computing power on-demand, priced on a per-second rate.
+- Amazon now provides [Redshift Spectrum](https://aws.amazon.com/blogs/big-data/amazon-redshift-spectrum-extends-data-warehousing-out-to-exabytes-no-loading-required/), which allows the user to **run queries over S3 storage data**. This way, you can pay for your storage and compute capabilities more independently.
 
 ## Security
 
@@ -64,13 +67,14 @@ A desirable feature for your data warehouse is the ability to scale up or down t
 On Snowflake, this process is as easy as [altering your warehouse](https://docs.snowflake.net/manuals/user-guide/warehouses-tasks.html#resizing-a-warehouse) and select a new size, taking virtually no time.
 
 On redshift, you have [two different options to re-scale a cluster](https://docs.aws.amazon.com/redshift/latest/mgmt/rs-resize-tutorial.html):
-1. *Elastic resize:*
-    * Change only the **number of nodes** on your cluster
-    * **Takes a few minutes** to add the new resources and redistribute the data among them.
-2. *Classic resize:*
-    * Change the **types of the nodes** (and the amount if you want).
-    * **Takes some hours**, as a new cluster is created the data from the old one is transfer to it.
-    * Redshift team recommends to follow the approach [*Snapshot, Restore, and Resize*](https://docs.aws.amazon.com/redshift/latest/mgmt/rs-resize-tutorial.html#rs-tutorial-snapshot-restore-resize-overview) to avoid downtimes during this process.
+
+1. _Elastic resize:_
+   - Change only the **number of nodes** on your cluster
+   - **Takes a few minutes** to add the new resources and redistribute the data among them.
+2. _Classic resize:_
+   - Change the **types of the nodes** (and the amount if you want).
+   - **Takes some hours**, as a new cluster is created the data from the old one is transfer to it.
+   - Redshift team recommends to follow the approach [_Snapshot, Restore, and Resize_](https://docs.aws.amazon.com/redshift/latest/mgmt/rs-resize-tutorial.html#rs-tutorial-snapshot-restore-resize-overview) to avoid downtimes during this process.
 
 Another topic to consider is how to manage the query load on your data warehouse, in order to deliver the needed information for every report in a reasonable time.
 
@@ -95,6 +99,5 @@ Nowadays, it is more and more common to have information on a semi-structured fo
 
 If this is the case and you want to extract and correlate this data with other sources, Snowflake provides [**out-of-the-box datatypes and a query syntax**](https://docs.snowflake.net/manuals/sql-reference/data-types-semistructured.html) that allow you to traverse your JSON data.
 Redshift also provides this feature through [**Spectrum**](https://aws.amazon.com/blogs/big-data/amazon-redshift-spectrum-extends-data-warehousing-out-to-exabytes-no-loading-required/), but it needs [some previous configuration](https://docs.aws.amazon.com/redshift/latest/dg/c-getting-started-using-spectrum.html) to work properly, like creating external schemas and tables.
-
 
 Summarizing, both of these cloud data warehouse options are powerful and flexible solutions that are constantly improving to help companies to focus on what's important, get data-supported insights that will make their business successful.

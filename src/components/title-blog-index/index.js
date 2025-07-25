@@ -1,1 +1,1 @@
-export { TitleBlogIndex } from "./title-blog-index";
+export { TitleBlogIndex } from './title-blog-index';

@@ -2,7 +2,7 @@
 title: WWDC 2013 - Apple Worldwide Developers Conference - June 10-14, San Francisco
 date: 2013-06-09
 tags:
-- iOS Development
+  - iOS Development
 thumbnail: https://2.bp.blogspot.com/-oBzMmMrIAL8/UbOS9KL0qxI/AAAAAAAAAK4/v8CNWDFOL8k/s72-c/wwdc13-about-main.jpg
 author: mtnBarreto
 category: people-events

@@ -1,1 +1,1 @@
-export { PolygonIcon } from "./polygon-icon";
+export { PolygonIcon } from './polygon-icon';

@@ -8,7 +8,6 @@ thumbnail: /images/introducing-stock/banner.png
 permalink: /introducing-stock/
 ---
 
-
 October is a special month for Open Source contributors thanks to [Hacktoberfest] taking place.
 In this wonderful month, we are thrilled to announce [**Stock**][stock], Xmartlabs' latest Flutter Open Source Project.
 
@@ -25,7 +24,6 @@ We created [Stock] to make this process smoother. It allows you to combine these
 Furthermore, if you only use a remote source, Stock can be used as a local cache, improving your app experience in just a few lines of code.
 
 <img width="100%" src="/images/introducing-stock/repository-pattern.jpg" />
-
 
 ## Should I consider caching the network data?
 
@@ -45,10 +43,10 @@ However, creating this stream might not be that straightforward if we use a remo
 We can do it, but it could become a headache.
 With [Stock], getting a data stream is trivial, that's why you should consider adding it to your project.
 
-
 ## How does it work?
 
 Stock uses two important components:
+
 - The `Fetcher` defines how data will be fetched over the network.
 - The `SourceOfTruth` defines how local data will be read and written in your local cache. Although Stock can be used without it, we recommend its usage.
 
@@ -81,6 +79,7 @@ Stock provides some methods to get the data, but the most important one is `stre
 It returns a `Stream` of data containing the data state.
 
 This state has 3 possible values:
+
 - Data: New data arrived
 - Error: Something went wrong
 - Loading: The data is loading
@@ -107,7 +106,6 @@ One of the greatest things about this plugin is its flexibility to be used in mu
 An interesting example is [using it to add offline support in Supabase][suppabase_blog].
 
 So go check it out, we welcome any feedback you have. If you like it, don't forget to [give us a star][stock_gh]!
-
 
 [Hacktoberfest]: https://hacktoberfest.com/
 [stock]: https://pub.dev/packages/stock

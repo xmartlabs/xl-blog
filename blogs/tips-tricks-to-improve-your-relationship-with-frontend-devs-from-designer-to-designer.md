@@ -1,7 +1,7 @@
 ---
-title: "Tips & tricks to improve your relationship with frontend devs: From
-  designer to designer"
-subtitle: "  "
+title: 'Tips & tricks to improve your relationship with frontend devs: From
+  designer to designer'
+subtitle: '  '
 permalink: tips-improve-relationship-with-frontend-developers
 featured: true
 date: 2024-09-23
@@ -15,6 +15,7 @@ tags:
   - UserExperience
 author: carolina-berastegui
 ---
+
 I’ve been a UX designer for over 7 years now, and during that time, I was lucky enough to work daily with frontend professionals on most projects. This has provided me with tons of experience and insights into the sometimes complex dynamic of these two professions working together. So, in the spirit of sharing, I will expand on tips and tricks for designers I've gained throughout the years when it comes to the relationship between the design and frontend team.
 
 Although this is not written in stone  (it's based on my own personal experience, after all), I do hope it can lead to conclusions that may be useful for other designers in similar situations.
@@ -77,11 +78,11 @@ This work involves lots of lateral thinking so don’t be disappointed if some c
 
 To achieve this, always mind these scenarios:
 
-* Empty states: situations where there is no content to show. A good way to imagine these cases is from the point of view of a user the first time they reach a screen or page, or thinking of the app as it is launched for the first time and doesn’t have any content yet. 
-* [Interruption Testing](https://blog.xmartlabs.com/blog/interruption-testing-qa/): what happens in unexpected situations that can interfere with the user flow like no internet connection, closing the app in the middle of a task, running out of battery or phone blocked.
-* User extremes: think about what happens when the user has lots of information or activity or cases with articles with really long titles.
-* Error states: missing documentation, form errors, trying to close a flow without saving, databases crash or time out cases.
-* Flow secondary interactions: as a final check, go through every screen or page and look at each component that is clickable (buttons, bottom nav, links, checkbox) to try to find if there is any interaction left to design.
+- Empty states: situations where there is no content to show. A good way to imagine these cases is from the point of view of a user the first time they reach a screen or page, or thinking of the app as it is launched for the first time and doesn’t have any content yet. 
+- [Interruption Testing](https://blog.xmartlabs.com/blog/interruption-testing-qa/): what happens in unexpected situations that can interfere with the user flow like no internet connection, closing the app in the middle of a task, running out of battery or phone blocked.
+- User extremes: think about what happens when the user has lots of information or activity or cases with articles with really long titles.
+- Error states: missing documentation, form errors, trying to close a flow without saving, databases crash or time out cases.
+- Flow secondary interactions: as a final check, go through every screen or page and look at each component that is clickable (buttons, bottom nav, links, checkbox) to try to find if there is any interaction left to design.
 
 ![](/images/img6.png)
 
@@ -91,9 +92,9 @@ Let’s imagine you need to design a new screen for a mobile project you have be
 
 If you’ve already designed how to show that content in another page, why don’t you consider reusing it exactly the same as on the previous design? I mean literally copy-paste. By doing this, you reduce the hours the developer will spend on implementing it, but also:
 
-* the hours you will spend designing (so you can focus on another important and new task)
-* the hours for you to review the new release as you’ve already validated the implementation before in that other page
-* also, while users may not realize it, you'll minimize the time they take to understand that new information since they'll only need to learn how to use or read that section only once.
+- the hours you will spend designing (so you can focus on another important and new task)
+- the hours for you to review the new release as you’ve already validated the implementation before in that other page
+- also, while users may not realize it, you'll minimize the time they take to understand that new information since they'll only need to learn how to use or read that section only once.
 
 Anyway, it is important to analyze each specific case because we want to simplify things and save time but we don’t want to cause any problems. Sometimes it will be better to create a new entire section or copy only the elements that are exactly the same. This might be necessary if for example the purpose of the content is different (informational vs marketing), or if the content is not exactly the same (one needs filters or different type of cards), or if duplicating the design creates a monotonous/boring composition (because the user sees it too much).
 

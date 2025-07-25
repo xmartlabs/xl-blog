@@ -1,7 +1,20 @@
 ---
 title: Kickstart your Android Project with Gong Base Project
 date: 2021-08-04
-tags: [Android App Template, Android Base project, Android Compose Base Project, Xmartlabs Android App, Jetpack Compose App Template, Jetpack Compose Base Project, Android Development, Kotlin Development, Jetpack Compose, Android, Kotlin]
+tags:
+  [
+    Android App Template,
+    Android Base project,
+    Android Compose Base Project,
+    Xmartlabs Android App,
+    Jetpack Compose App Template,
+    Jetpack Compose Base Project,
+    Android Development,
+    Kotlin Development,
+    Jetpack Compose,
+    Android,
+    Kotlin,
+  ]
 category: development
 author: sante
 
@@ -18,7 +31,6 @@ That's why we created [Gong][gong], to consolidate all our discussions and resea
 This blog post introduces Gong, the Android App Template we use to kickstart every Android app we build.
 Gong results from years of experience in creating well-written and maintainable Android code using Kotlin and, recently, Jetpack Compose, and our Android team actively maintains it.
 
-
 # What exactly is Gong?
 
 [Gong][gong] is our Android App Template to effortlessly kickstart Android projects and get us quickly ready to implement product features.
@@ -28,7 +40,6 @@ Gong is entirely written in [Kotlin][kotlin], and it leverages the language's ca
 It also uses [Jetpack Compose][compose], the new declarative toolkit for creating UI in Android.
 
 In short, Gong is a base project which gives you a good structure, well-constructed architecture, good practices, and modern features and toolkits with virtually no effort and in no time, so you can start implementing features right away.
-
 
 # Kickstarting your project using Gong
 
@@ -62,8 +73,7 @@ Checking out the generated project, you can find a well-constructed package stru
 - **Domain:** In this package you get the aforementioned repositories as well as a template use case definition accompanied by a few implementation examples.
 
 - **UI:** This package is meant to have all your user interface-related elements such as composables, classic views, fragments, and activities.
-Besides, we provide an extension to Compose's proposed theme management, which gives you more flexibility to manage all your color palettes, fonts, and shapes. It also gives you an easy way to add more elements to fit your definition of theme. For more information about this, our team released another [blog post][mirland] about this some time ago.
-
+  Besides, we provide an extension to Compose's proposed theme management, which gives you more flexibility to manage all your color palettes, fonts, and shapes. It also gives you an easy way to add more elements to fit your definition of theme. For more information about this, our team released another [blog post][mirland] about this some time ago.
 
 # Final thoughts
 

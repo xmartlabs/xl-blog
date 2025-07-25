@@ -1,6 +1,6 @@
 ---
-title: "Interruption Testing: What Is it and why it matters"
-subtitle: " "
+title: 'Interruption Testing: What Is it and why it matters'
+subtitle: ' '
 permalink: interruption-testing-QA
 featured: true
 date: 2024-07-15
@@ -13,6 +13,7 @@ tags:
   - Mobile
 author: nat-nobre
 ---
+
 Have you ever considered what happens when your app faces unexpected disruptions? Picture this: you're deeply immersed in a mobile game, just about to beat that difficult level you've been struggling with for days. Suddenly, your phone rings. Frustrating, right? Or imagine you're in the middle of a critical payment transaction, and your battery dies. Though seemingly minor, these disruptions can significantly affect how users perceive and interact with your app. Luckily, there's a way to ensure these mishaps don't hurt user experience: interruption testing.
 
 ## What is interruption testing?
@@ -21,7 +22,7 @@ Interruption testing is the process of checking how well a mobile application ha
 
 ![](/images/interruption-testing-1.png)
 
-Think of popular apps that handle interruptions exceptionally well. For example, YouTube pauses your video when you receive a call and resumes it once the call ends. Or consider WhatsApp, which seamlessly manages network changes, ensuring your messages are sent when the connection is restored. These, of course, are big apps that work thoroughly on their interruption testing, but however big or small the app might be, these steps shouldn't be overlooked. 
+Think of popular apps that handle interruptions exceptionally well. For example, YouTube pauses your video when you receive a call and resumes it once the call ends. Or consider WhatsApp, which seamlessly manages network changes, ensuring your messages are sent when the connection is restored. These, of course, are big apps that work thoroughly on their interruption testing, but however big or small the app might be, these steps shouldn't be overlooked.
 
 ## The importance of interrupting our application
 
@@ -47,16 +48,16 @@ Understanding our users and their devices is crucial for effectively focusing ou
 
 Once we have the scope clear, creating a checklist of scenarios we want to consider in our interruption tests is a good idea. A few ideas to begin with are the following, but you can get creative depending on the app's needs.
 
-* Incoming phone calls and messages
-* Using the app while you are on a phone call
-* Alarms
-* Low battery
-* No internet connection or slow connection
-* Blocking the phone while an action is processing
-* Sending app to background
-* Closing the app
-* Redirection to an external link
-* Silencing the phone
+- Incoming phone calls and messages
+- Using the app while you are on a phone call
+- Alarms
+- Low battery
+- No internet connection or slow connection
+- Blocking the phone while an action is processing
+- Sending app to background
+- Closing the app
+- Redirection to an external link
+- Silencing the phone
 
 ## I﻿n conclusion
 

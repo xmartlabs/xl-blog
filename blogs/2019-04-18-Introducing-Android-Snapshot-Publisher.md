@@ -12,7 +12,7 @@ We're happy to announce the release of [**Android Snapshot Publisher**, our firs
 Here at [Xmartlabs](https://xmartlabs.com/) we love engineering new products, adding new features to existing ones and also improving and fixing up our client's apps.
 Our awesome clients are oftentimes so excited about the work we do that they want to try it ASAP.
 Furthermore, our QA team or even other team members could also be anxiously waiting for our changes to be deployed to test them themselves.
-That's why we prepare and deliver new *Snapshot Builds* as soon as possible.
+That's why we prepare and deliver new _Snapshot Builds_ as soon as possible.
 
 Do you find this familiar? If you do, you probably know that preparing and distributing new builds is not too hard but can take up valuable time.
 Nowadays, the CI/CD servers are of great help as they can compile and deliver our applications with ease.
@@ -20,10 +20,11 @@ Additionally, they let you schedule tasks so you don't have to care about tests 
 
 However, there's always some work that must be done before releasing a new build.
 In my opinion, two of the most important tasks we have to perform before deploying any build are:
+
 1. Adding information to track possible issues.
-For example, if a crash happens, you'll want to know which was the specific build that caused that crash.
+   For example, if a crash happens, you'll want to know which was the specific build that caused that crash.
 1. Generating reasonable release notes (including a changelog) to be aware of what changed with respect to previous versions.
-This is essential as you must communicate what should be tested.
+   This is essential as you must communicate what should be tested.
 
 We've already discussed [how we can do some of these tasks in a Jenkins-specific way](/2017/10/02/Release-Snapshot-Versions-In-Jenkins/).
 In this blogpost we introduce a different approach that's platform agnostic.
@@ -34,22 +35,23 @@ In this blogpost we introduce a different approach that's platform agnostic.
 It was designed to **prepare and distribute Android Snapshot builds**.
 
 The main features of the preparation process are:
+
 - Update the Android Version Name to keep track of the distributed versions.
-The default behavior appends the commit identifier to the Android Version name. For instance, a version name may look similar to `1.0.2-b799fbc`.
+  The default behavior appends the commit identifier to the Android Version name. For instance, a version name may look similar to `1.0.2-b799fbc`.
 - Create and customize rich release notes based on Git's history.
 
 After this preparation work, the plugin will proceed to compile and publish the snapshot build.
 Currently, the available distribution sources are:
+
 - [Google Play](https://play.google.com/apps/publish)
 - [Fabric Beta](https://docs.fabric.io/android/beta/overview.html)
 
-
 Here's an illustration of the process:
+
 <div class="separator" style={{ textAlign: 'center', clear:'both' }}>
     <img  border="0" src="/images/android-snapshot-plugin/snapshot-sample.png" />
 </div>
 <br/>
-
 
 ## What is the preparation work based on?
 

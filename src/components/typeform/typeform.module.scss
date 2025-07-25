@@ -1,5 +1,5 @@
-@import "/src/css/colors.scss";
-@import "/src/css/variables.scss";
+@import '/src/css/colors.scss';
+@import '/src/css/variables.scss';
 
 .formContainer {
   position: fixed;
@@ -36,20 +36,20 @@
   .formContainer {
     padding: 0;
   }
-  
+
   .typeForm {
     height: 100%;
     width: 100%;
   }
-  
+
   .closeForm {
     cursor: pointer;
     position: absolute;
     top: 1rem;
     right: 1.5rem;
   }
-  
+
   .closeFormIcon {
     fill: $blueOne;
-  }  
+  }
 }

@@ -11,10 +11,9 @@ In this post I'm going to write about my experience and the problems I faced whe
 
 There are a lot of blogs that explain how to set up Xcode Server, create an integration bot, and explore the results on Xcode (issue tracking, tests code coverage, etc). However, when you try to make something more sophisticated, you may encounter some errors and it will be difficult to find resources for a solution.
 
-
 #### Why did we have our own CI server?
 
-Well, almost everybody knows the benefits of having a CI server; it can automatically analyze code, run unit and UI tests, build your project among some other valuable task. If something goes wrong, it will notify the results to people that may have introduced the issue. Xcode bot tracks all new issues of each integration as well as solved ones. For new issues, the bot will display a range of commits where the issue may have introduced. Moreover, we no longer need to deal with deployment provisioning profiles and certificates allowing anyone on the team to easily release a new version of the app.    
+Well, almost everybody knows the benefits of having a CI server; it can automatically analyze code, run unit and UI tests, build your project among some other valuable task. If something goes wrong, it will notify the results to people that may have introduced the issue. Xcode bot tracks all new issues of each integration as well as solved ones. For new issues, the bot will display a range of commits where the issue may have introduced. Moreover, we no longer need to deal with deployment provisioning profiles and certificates allowing anyone on the team to easily release a new version of the app.
 
 In short, this allows the programmer to spend more time on app development and less on app integration and deployment. Meanwhile it ensures the code has certain minimum quality level.
 
@@ -51,13 +50,12 @@ $ ln -s `which fastlane` /Applications/Xcode.app/Contents/Developer/usr/bin/fast
 
 ```
 
-
 #### Emails & Notifications
 
 A nice Xcode Server feature has the ability to send an email to selected people depending on the integration result. For example, if the integration fails because the project is not compiling, or some tests are not passing, the bot will send an email to the last committers notifying that the build has been broken.
 
 Since we use a Gmail account to send emails, we had to change the settings on the Mail service on Server app.
-First enable the Mail service on Server. Then check the option *Relay outgoing mail through ISP*. On the Relay option dialog you have to put `smtp.gmail.com:587` in *Outgoing Mail Relay*, enable authentication and enter valid credentials. That's all you have to set up for your Server to send the email using your Gmail account.
+First enable the Mail service on Server. Then check the option _Relay outgoing mail through ISP_. On the Relay option dialog you have to put `smtp.gmail.com:587` in _Outgoing Mail Relay_, enable authentication and enter valid credentials. That's all you have to set up for your Server to send the email using your Gmail account.
 
 ![Mail setup](/images/remer-xcode-server/mail-setup.png)
 
@@ -97,17 +95,15 @@ To build the IPA, we have to put required provisioning profiles in the folder be
 
     /Library/Developer/XcodeServer/ProvisioningProfiles
 
-
 ### Before integration script
 
 Xcode integration allows us to provide a before and a after integration script.
 
 Before our Deployer Bot starts integrating, we have to perform some tasks which will be run from a triggered command:
 
-* Increase build number
-* Download required provisioning profiles
-* Install the correct versions of the libraries used by the project
-
+- Increase build number
+- Download required provisioning profiles
+- Install the correct versions of the libraries used by the project
 
 Fastlane tools will look for useful information at `Appfile` file to deploy the lanes such as **Apple ID** and **application Bundle Identifier**. Code snippet below illustrates how `Appfile` could looks like:
 
@@ -169,7 +165,7 @@ $ fastlane before_integration
 
 > Initially we attempted to use Keychain to pass the passwords to Fastlane `sigh` but it doesn't work, for further info about this see [here](#attempting-to-developer-password-to-fastlane-tools).
 
-We will modify the deployer bot by adding a before trigger command on the *Triggers* tab, that will execute `before_integration` lane.
+We will modify the deployer bot by adding a before trigger command on the _Triggers_ tab, that will execute `before_integration` lane.
 
 ![Before trigger](/images/remer-xcode-server/before-trigger.png)
 
@@ -252,7 +248,7 @@ end
 
 #### Supporting multiples targets
 
-Typically our projects have production and staging application targets. `Fastfile` file will require different lanes for each target that we want to upload to iTunes Connect. We need to  modify the `Appfile` file to set up the correct app identifier depending on each lane:
+Typically our projects have production and staging application targets. `Fastfile` file will require different lanes for each target that we want to upload to iTunes Connect. We need to modify the `Appfile` file to set up the correct app identifier depending on each lane:
 
 ```ruby
 
@@ -294,7 +290,7 @@ fastlane_version '1.63.1'
 
 default_platform :ios
 
-platform :ios do  
+platform :ios do
   before_all do
     ENV["SLACK_URL"] ||= "https://hooks.slack.com/services/#####/#####/#########"
   end
@@ -430,10 +426,10 @@ end
 
 Notes about previous `Fastfile` file:
 
-* Defines two `before_integration` lanes for both production and staging environments in order to setup the correct app identifiers using the `Appfile`.
-* Build, git, and deploy actions are encapsulated in the `after_integration` lane. This allow us to have production and staging lanes that, basically, will setup some parameters and invoke the internal `after_integration` lane.
-* `ensure_git_status_clean` will check if the bot's working folder has changes and will fail in such case. This will ensure that the bot’s working copy is exactly the same to the remote repository files. As we are changing local files on our `after_integration` lane, if something went wrong we'll want to reset all of them. So we added the action `reset_git_repo` in the `error` block.
-* The command `xcrun xcodebuild -exportArchive` requires a configuration file specified with the option `-exportOptionsPlist`. We created the file `ExportOptions.plist` within `fastlane` folder and its content is similar to:
+- Defines two `before_integration` lanes for both production and staging environments in order to setup the correct app identifiers using the `Appfile`.
+- Build, git, and deploy actions are encapsulated in the `after_integration` lane. This allow us to have production and staging lanes that, basically, will setup some parameters and invoke the internal `after_integration` lane.
+- `ensure_git_status_clean` will check if the bot's working folder has changes and will fail in such case. This will ensure that the bot’s working copy is exactly the same to the remote repository files. As we are changing local files on our `after_integration` lane, if something went wrong we'll want to reset all of them. So we added the action `reset_git_repo` in the `error` block.
+- The command `xcrun xcodebuild -exportArchive` requires a configuration file specified with the option `-exportOptionsPlist`. We created the file `ExportOptions.plist` within `fastlane` folder and its content is similar to:
 
 ```xml
 
@@ -481,8 +477,8 @@ $ fastlane before_integration_staging
 ```
 
 On the output log appears next messages:
-    security: SecKeychainAddInternetPassword `<NULL>`: User interaction is not allowed.
-    Could not store password in keychain
+security: SecKeychainAddInternetPassword `<NULL>`: User interaction is not allowed.
+Could not store password in keychain
 We simply couldn't access the keychain when running Fastlane. We opted to just save the password as a system environment variable.
 
 #### CocoaPods is not able to update dependencies
@@ -510,21 +506,21 @@ $ ln -s `which pod` /Applications/Xcode.app/Contents/Developer/usr/bin/pod
 #### Fastlane - Sigh & Gym cannot access to keychain
 
 That's all, they cannot access to keychain. Seeing this message (or similar) when running `gym`or `sigh` is the symptom:
-    security: SecKeychainAddInternetPassword `<NULL>`: User interaction is not allowed.
-    
-* They cannot access stored login password, you must pass the password through env variables to `sigh` using `FASTLANE_PASSWORD`.
-* `gym` cannot access to distribution certificates installed in keychain, so make the IPA using `xcrun xcodebuild` instead of `gym`.
+security: SecKeychainAddInternetPassword `<NULL>`: User interaction is not allowed.
+
+- They cannot access stored login password, you must pass the password through env variables to `sigh` using `FASTLANE_PASSWORD`.
+- `gym` cannot access to distribution certificates installed in keychain, so make the IPA using `xcrun xcodebuild` instead of `gym`.
 
 #### Certificates & private keys
 
 Ensure that:
 
-* They must be installed in System keychain so Xcode Bot can access them.
-* On the keychain app, change certificates and private keys *Access Control* allowing `codesign` and `security` binaries to access them.
+- They must be installed in System keychain so Xcode Bot can access them.
+- On the keychain app, change certificates and private keys _Access Control_ allowing `codesign` and `security` binaries to access them.
 
 #### Cannot select Xcode in Server app
 
-After updating Xcode to version 7.2.1 we were able to select it on Server app, then Xcode service was disabled. When we tried to select the correct Xcode app there was a dialog saying *"You must agree to the terms of the xcode software license agreement"* was shown. We found the solution on an Apple Forum thread [Can not choose Xcode in Server App - "You must agree to the terms..."](https://forums.developer.apple.com/thread/34683), running next command will allow you to select Xcode on Server app:
+After updating Xcode to version 7.2.1 we were able to select it on Server app, then Xcode service was disabled. When we tried to select the correct Xcode app there was a dialog saying _"You must agree to the terms of the xcode software license agreement"_ was shown. We found the solution on an Apple Forum thread [Can not choose Xcode in Server App - "You must agree to the terms..."](https://forums.developer.apple.com/thread/34683), running next command will allow you to select Xcode on Server app:
 
 ```shell
 
@@ -548,20 +544,20 @@ The env variable XCS_ARCHIVE is defined only when the bot is set to perform the 
 
 To commit changelog changes and a build number bump we need to have access to the repo from `_xcsbuildd`'s shell. If you prefer use SSH to access the git server you will need to add a valid key in the builder user `.ssh` folder. Note that this key should not have a passphrase set. Otherwise, the trigger will ask you to enter the shh key password stopping its process until you enter it.
 
-* Log in as `_xcsbuildd`:
-   `$ sudo su - _xcsbuildd`
-* Copy a valid ssh key to `~/.ssh`.
-* Modify `~/.bash_login` in order to automatically add your custom key to ssh agent:
-   ```shell
-   $ echo 'eval "$(ssh-agent -s)"' >> ~/.bash_login
-   $ echo 'ssh-add ~/.ssh/id_rsa_github' >> ~/.bash_login
-   ```
-* Determine which key should be used to access git repo by changing `~/.ssh/config` file, for example add next lines:
-   ```
-    Host github.com
-       HostName github.com
-     IdentityFile ~/.ssh/id_rsa_github
-   ```
+- Log in as `_xcsbuildd`:
+  `$ sudo su - _xcsbuildd`
+- Copy a valid ssh key to `~/.ssh`.
+- Modify `~/.bash_login` in order to automatically add your custom key to ssh agent:
+  ```shell
+  $ echo 'eval "$(ssh-agent -s)"' >> ~/.bash_login
+  $ echo 'ssh-add ~/.ssh/id_rsa_github' >> ~/.bash_login
+  ```
+- Determine which key should be used to access git repo by changing `~/.ssh/config` file, for example add next lines:
+  ```
+   Host github.com
+      HostName github.com
+    IdentityFile ~/.ssh/id_rsa_github
+  ```
 
 This will also be helpful to fetch git submodules.
 

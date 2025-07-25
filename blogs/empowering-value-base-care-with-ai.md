@@ -1,6 +1,6 @@
 ---
 title: Empowering Value-Base Care with AI
-subtitle: " "
+subtitle: ' '
 permalink: ai-value-based-care
 featured: true
 date: 2024-08-15
@@ -14,6 +14,7 @@ tags:
   - AI
 author: vale
 ---
+
 In the race to revolutionize healthcare, Value-Based Care (VBC) and Artificial Intelligence (AI) are emerging as powerful allies. This alliance is an unprecedented opportunity for health tech startups and forward-thinking healthcare organizations to lead the charge in transforming patient care.
 
 For decades, the healthcare system incentivized **quantity** over **quality**, rewarding providers based on the volume of services rather than patient outcomes. Value-based care emerged as a paradigm shift to flip this model on its head. However, adapting entrenched practices to new methodologies often requires significant time and resources. This is where AI enters the picture as a game-changing ally.
@@ -24,7 +25,7 @@ In this blog post, we'll explore the intersection of VBC and AI. We'll start by 
 
 ## **But what is [Value-Based Care](https://www.cms.gov/priorities/innovation/key-concepts/value-based-care) (VBC)?**
 
-Value-based care is a framework that focuses on patient outcomes rather than service volume. 
+Value-based care is a framework that focuses on patient outcomes rather than service volume.
 It has become a growing trend in healthcare, with many stakeholders, including policymakers, payers, and providers, recognizing its potential to improve patient care and control costs.
 
 ![](/images/vbc-4.png)
@@ -51,7 +52,7 @@ Integrating AI into Care Coordination can significantly enhance these efforts. H
 
 Technology-enabled care coordination transforms the patient experience by reducing hospital readmissions, improving medication adherence, enhancing communications with their providers, and empowering them throughout their care journey. Additionally, data-driven insights enable providers to create personalized care plans, resulting in more effective interventions and improved quality of life.
 
-The results of implementing the technologies in the table above also have a direct impact on healthcare professionals. Care coordination ensures that suitable patients see the appropriate doctors at the correct time, making better use of their time and energy. This is especially significant if we take into account a [Mayo Clinic report](https://www.mayoclinicproceedings.org/article/S0025-6196(18)30938-8/fulltext), which stated that 40% of medical professionals reported feelings of burnout throughout the last couple of years, a feeling that increased during the COVID-19 pandemic.
+The results of implementing the technologies in the table above also have a direct impact on healthcare professionals. Care coordination ensures that suitable patients see the appropriate doctors at the correct time, making better use of their time and energy. This is especially significant if we take into account a [Mayo Clinic report](<https://www.mayoclinicproceedings.org/article/S0025-6196(18)30938-8/fulltext>), which stated that 40% of medical professionals reported feelings of burnout throughout the last couple of years, a feeling that increased during the COVID-19 pandemic.
 
 ![](/images/vbc-3.png)
 

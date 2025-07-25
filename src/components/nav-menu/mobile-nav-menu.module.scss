@@ -1,5 +1,5 @@
-@import "src/css/colors.scss";
-@import "src/css/variables.scss";
+@import 'src/css/colors.scss';
+@import 'src/css/variables.scss';
 
 // General Container
 
@@ -68,7 +68,6 @@
   font-family: $primary-font;
   font-weight: 900;
   border: none;
-
 }
 
 .socialContainer {
@@ -77,9 +76,9 @@
   flex-direction: row;
   position: static;
 
-  a:nth-child(2n+0) {
+  a:nth-child(2n + 0) {
     margin: 0 2rem;
-  }  
+  }
 }
 
 .closeIconMobile {

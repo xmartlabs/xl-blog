@@ -11,10 +11,12 @@ permalink: /Android-Nav-Component-Part-1/
 This year the [Google I/O](https://events.google.com/io/) conference was canceled, so I think it's a good time to talk about one of [Jetpack's](https://developer.android.com/jetpack) biggest Architecture component introduced last year, the [Android Navigation Component](https://developer.android.com/guide/navigation).
 
 The aim of this series of posts is to talk about two important items that will help you decide on whether to use this library or not:
+
 1. The expectations and conclusions of using it for more than 9 months.
 1. Some tips and helper classes that are very helpful if you do want to start using it (next post).
 
 ## What were we expecting from a new navigation library?
+
 That was the first question that came to my mind when we first thought about using it.
 There are a bunch of navigation libraries in existence for Android, and at that moment we already had a solid navigation architecture based on the Router pattern, so, what were we expecting from it?
 
@@ -31,20 +33,20 @@ After the integration, you'll have to define the app's main **navigation graph**
 
 <img width="100%" src="/images/android_navigation_blog_part_one/nav_graph.png" />
 
-
 The graph is stored in a simple XML file, where the nodes are the app's screens (fragments, dialogs, etc) and the actions are the edges that allow for navigating between nodes.
 Each node is able to declare arguments, which ends up being data shared within the navigation flow.
 
 I found the nav graph extremely useful, with two key advantages:
+
 - You can see the whole app flow represented as a navigation graph.
-It's useful not only for you but especially for new colleagues joining your project.
+  It's useful not only for you but especially for new colleagues joining your project.
 - The ability to define **nested graphs**, which are graphs that will be included by other graphs.
-So that you can define a specific app flow part in a nested graph to work with small diagrams and be able to handle complex app flow.
+  So that you can define a specific app flow part in a nested graph to work with small diagrams and be able to handle complex app flow.
 
 > The login is a common example for both items: suppose that the login epic is a complex flow that contains a login screen, a register screen, and a terms and conditions screen.
-If you add all of these screens to your main graph, it'll make it grow too fast -risking its future maintainability- so I recommend including a login subgraph instead.
-Using this approach I found some advantages: the main graph is easier to understand and you can also re-utilize a given flow in multiple places in the app.
-We know that re-utilization is an excellent pattern: if you have to change something, you will do it just once.
+> If you add all of these screens to your main graph, it'll make it grow too fast -risking its future maintainability- so I recommend including a login subgraph instead.
+> Using this approach I found some advantages: the main graph is easier to understand and you can also re-utilize a given flow in multiple places in the app.
+> We know that re-utilization is an excellent pattern: if you have to change something, you will do it just once.
 
 One disadvantage we found is related to how Android Studio stores the graph nodes position.
 These are saved in a huge and complex `.idea/navEditor.xml` file.
@@ -84,7 +86,6 @@ Android Architecture Components are libraries that help you design robust, testa
  </div>
 </div>
 
-
 All graphs have an associated [lifecycle scope](https://developer.android.com/topic/libraries/architecture/lifecycle), so that you can create ViewModels associated to the graph's scope.
 That means that you can share data through the screens using a ViewModel that's associated with a graph.
 
@@ -113,6 +114,7 @@ Additionally, a couple of months ago Material released the [motion system](https
 You can easily integrate these smooth transitions in your app by using the navigation library.
 
 ## Conclusion
+
 In this post we covered the most important advantages when using Android Navigation Component.
 App UI and flow are essential parts in all applications and a graphical representation helps everyone clearly understand how it works.
 If you want to quickly implement and maintain your app UI and navigation, Android Navigation Component is the way to go.

@@ -1,8 +1,16 @@
 ---
 title: Frontend architecture and best practices for consuming APIs
 date: 2020-07-09
-excerpt: "Having headache when integrating with apis? The architecture and good practices that we share in this blog post can help you!"
-tags: [Frontend architecture, Frontend best practices, How to consume APIs, Frontend architecture patterns, Frontend, Js]
+excerpt: 'Having headache when integrating with apis? The architecture and good practices that we share in this blog post can help you!'
+tags:
+  [
+    Frontend architecture,
+    Frontend best practices,
+    How to consume APIs,
+    Frontend architecture patterns,
+    Frontend,
+    Js,
+  ]
 author: mlorenzo
 thumbnail: images/2020-07-08/frontend-architecture-and-best-practices.jpg
 category: development
@@ -24,7 +32,7 @@ Moreover, by implementing this architecture, your project will be less tightly c
 ## Motivation
 
 Frontends, by nature, have an enormous flaw: they strictly depend on some kind of backend service (an API, microservices, or any other data provider).
-This is not the case *always*, I know, but I feel like it's the case most of the time with medium to large apps.
+This is not the case _always_, I know, but I feel like it's the case most of the time with medium to large apps.
 That dependency is a blessing, but also a curse.
 If the backend changes its API or re-structures data in some other way, the frontend **has** to be refactored, there's no way around it.
 
@@ -36,7 +44,6 @@ Let's look at what kind of issues this pattern could solve.
 Let's assume we're developing a web frontend in Javascript (framework-agnostic) that communicates with a typical JSON REST API that is developed by another team over which we don't have any control.
 Our app is an online shopping platform (creative, right?).
 FYI: all these next examples have happened to me first-hand (naturally I've adapted them for this post, but the concept is the same).
-
 
 ## Main Issues We Run Into When Integrating APIs
 
@@ -64,7 +71,7 @@ To fix the issues I'll probably have to mass-replace all usages of that key, whi
 
 ### How Data is Presented
 
-Say our products are categorized and there's a category tree of three levels (*Home* -> *Electronics* -> *Fans*, for example). We want to show a visual representation of the category tree, so we query the backend for it. This is a subset of the response for brevity:
+Say our products are categorized and there's a category tree of three levels (_Home_ -> _Electronics_ -> _Fans_, for example). We want to show a visual representation of the category tree, so we query the backend for it. This is a subset of the response for brevity:
 
 ```json
 [
@@ -105,9 +112,9 @@ It would be ideal if frontends could have some more freedom on how they model th
 
 ## Goals of the Proposed Architecture
 
-* Adaptation of field names should be trivial.
-* Adaptation of data structure should be as trivial as possible.
-* Decouple frontend business logic from the backend as much as we can.
+- Adaptation of field names should be trivial.
+- Adaptation of data structure should be as trivial as possible.
+- Decouple frontend business logic from the backend as much as we can.
 
 For the sake of simplicity, the code and examples we're going to see next are implemented in Javascript, but they can perfectly be implemented in any language.
 Also, we'll cover the happy paths (no errors or error handling), but include an afterword with some considerations about this.
@@ -116,7 +123,7 @@ Let's introduce the pattern then!
 ## The Architecture: Model-Controller-Serializer
 
 Yes, that's the name we gave it.
-At least we didn't use a recursive acronym (*cough, Linux, cough, GNU*).
+At least we didn't use a recursive acronym (_cough, Linux, cough, GNU_).
 Besides, it perfectly describes what the pattern introduces into the code!
 
 Let's start with a representation of how this pattern comes into play in an imaginary scenario.
@@ -143,7 +150,7 @@ Encapsulation is sometimes key for success.
 Think about this, should a certain UI component know what the path is to fetch products?
 Should it know what headers to send on the request?
 That seems like a responsibility of some other entity.
-Controllers are the main point of contact with our API, and are the entities that know *how* to make a certain request.
+Controllers are the main point of contact with our API, and are the entities that know _how_ to make a certain request.
 
 In this particular scenario, our `ProductsController` is the one that knows how to do all product-related requests to our API.
 A certain component that wants to get products from the API must only call its `fetchProduct` method and await results.
@@ -163,7 +170,7 @@ class ProductsController {
     const response = await makeRequest('/products');
     // response.data is expected to be an array of product information.
     const deSerializedData = response.data.map(ProductSerializer.deSerialize);
-    return deSerializedData.map(params => new Product(params));
+    return deSerializedData.map((params) => new Product(params));
   }
 }
 ```
@@ -189,15 +196,15 @@ Let's assume our API returns the product information in a non-ideal manner in th
     "Product_Has_Stock": "true",
     "Created_at": "2020-06-12T10:47:45.604Z",
     "Updated_at": "2020-06-12T10:47:45.604Z"
-  },
+  }
 ]
 ```
 
 There are a few things I don't like here:
 
-* `Product_Has_Stock` seems to be a boolean, but has been serialized as a string.
-* We don't really need to show the user the database timestamps (`Created_at`, `Updated_at`), but they have been sent anyway.
-* The nomenclature used for the keys is really unusable.
+- `Product_Has_Stock` seems to be a boolean, but has been serialized as a string.
+- We don't really need to show the user the database timestamps (`Created_at`, `Updated_at`), but they have been sent anyway.
+- The nomenclature used for the keys is really unusable.
 
 This is where the serializer comes in!
 These structures are like a "firewall of data".
@@ -225,7 +232,7 @@ No more "do we even use this field?" questions anymore, just go to the appropria
 What if, in a few months, the API decides that `Product_Name` should be changed to `Product_name` (lower case "n").
 If we've been using this field everywhere in our app, then we might be at risk of introducing bugs by mass-replacing (this is quite a simple example, I know, but bear with me).
 With serializers, this is a trivial issue.
-Just go to the serializer and change how the name is obtained: `name: data.Product_name` and *voilà*.
+Just go to the serializer and change how the name is obtained: `name: data.Product_name` and _voilà_.
 Commit, open a PR and you're done for the day.
 
 What's more, note how serializers are also resilient against changes in structure.
@@ -248,7 +255,7 @@ You might think that we should be done with this.
 Our frontend is protected and decoupled from our API as much as we can.
 And that assumption is... true.
 Models are not meant to decouple our frontend from the backend, nor protect our data.
-They are used to inject *meaning* and *value* into our data.
+They are used to inject _meaning_ and _value_ into our data.
 Simply speaking, they are classes that represent concepts on our frontend.
 The advantage of models is that they are, in a certain way, **owned** by the frontend.
 
@@ -288,13 +295,13 @@ One of the greatest things about models is that you no longer work with plain Ja
 
 Let's summarize what each part of the pattern provides:
 
-* **Controllers**: provide an abstraction of our API (or a portion of it) which allows other components to not care about where the data comes from and how it is fetched.
-* **Serializers**: protect data by acting as an adapter and a firewall. They transform and remove data according to our needs, while at the same time documenting what we're using.
-* **Models**: add meaning to our data. They aid us by allowing the frontend to inject its own logic and value to data, without needing support from the API.
+- **Controllers**: provide an abstraction of our API (or a portion of it) which allows other components to not care about where the data comes from and how it is fetched.
+- **Serializers**: protect data by acting as an adapter and a firewall. They transform and remove data according to our needs, while at the same time documenting what we're using.
+- **Models**: add meaning to our data. They aid us by allowing the frontend to inject its own logic and value to data, without needing support from the API.
 
 Remember that the idea of the pattern is to be versatile and applicable in many different cases.
 I've shown a possible minimal implementation with Javascript, but you can certainly use it in other languages with any framework.
-As long as you have *something* in your code that acts as a part of the pattern, then you're implementing it!
+As long as you have _something_ in your code that acts as a part of the pattern, then you're implementing it!
 I recommend (if you want to apply it) to experiment and see what suits you best.
 In my experience, I've seen that people tend to make this pattern their own by implementing it slightly differently, which is awesome and helps us learn from others.
 
@@ -323,7 +330,7 @@ It won't change how we develop code in a meaningful manner.
 But it gives a name and structure to something we typically try to implement (or at least we should!).
 You don't need to rediscover the wheel in each project, you merely need to remember the rules of the pattern and apply it.
 
-There are some caveats of course (*"There's no such thing as a free lunch"*).
+There are some caveats of course (_"There's no such thing as a free lunch"_).
 Any "generic" pattern or algorithm is bound to fail or be ineffective in border cases.
 I certainly haven't implemented this pattern in every single possible use case.
 You might find it forces you to write too much boilerplate, or feel like some things you need are really hard to implement with it.

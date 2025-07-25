@@ -1,6 +1,6 @@
 ---
-title: "ML Model Monitoring: Boosting Performance & Reliability"
-subtitle: " "
+title: 'ML Model Monitoring: Boosting Performance & Reliability'
+subtitle: ' '
 permalink: /ml-model-monitoring-boosting-performance-and-reliability/
 featured: true
 date: 2023-08-24
@@ -14,6 +14,7 @@ tags:
   - Recommendation Systems
 author: maximol
 ---
+
 # ML Model Monitoring: Boosting Performance & Reliability
 
 In the dynamic realm of recommendation systems, the spotlight often shines on the development and deployment of models. Yet, the vital importance of ongoing model monitoring can sometimes fade into the background. This blog aims to uncover the crucial role that effective monitoring plays in guaranteeing the efficacy of ML models driving recommendation systems. As user preferences continually evolve, the relevance and impact of these models are sustained by the meticulous attention devoted to ensuring they run flawlessly.
@@ -58,15 +59,15 @@ Prometheus and Grafana worked seamlessly for us, allowing efficient data collect
 
 **Why we chose Prometheus and Grafana**
 
-* **Efficient data collection with Prometheus:** By integrating Prometheus, we were able to capture and analyze the vital data, enabling us to calculate custom metrics and understand how well our model was truly performing.
-* **Alerting and anomaly detection**: Monitoring an ML model in production demands proactive detection of issues such as data drift, model degradation, or infrastructure problems. Both Prometheus and Grafana offered built-in support for alerting based on predefined thresholds. With this feature, we could promptly detect any anomalies or performance deviations, triggering alerts to notify our team.
-* **Grafana visualization**: Grafana, a powerful visualization tool, proved to be the perfect complement to Prometheus. Its user-friendly and customizable dashboarding experience allowed us to create comprehensive visualizations of the monitoring data. Grafana's extensive support for Prometheus integration ensured seamless data flow and simplified the overall monitoring process.
+- **Efficient data collection with Prometheus:** By integrating Prometheus, we were able to capture and analyze the vital data, enabling us to calculate custom metrics and understand how well our model was truly performing.
+- **Alerting and anomaly detection**: Monitoring an ML model in production demands proactive detection of issues such as data drift, model degradation, or infrastructure problems. Both Prometheus and Grafana offered built-in support for alerting based on predefined thresholds. With this feature, we could promptly detect any anomalies or performance deviations, triggering alerts to notify our team.
+- **Grafana visualization**: Grafana, a powerful visualization tool, proved to be the perfect complement to Prometheus. Its user-friendly and customizable dashboarding experience allowed us to create comprehensive visualizations of the monitoring data. Grafana's extensive support for Prometheus integration ensured seamless data flow and simplified the overall monitoring process.
 
 **When/why not to use Prometheus or Grafana**
 
-* **You already have the data**: If you've collected and stored the required data in a suitable format and need to visualize and analyze it, Grafana can be directly linked to your existing dataset, enabling you to build dashboards and alerts without extra data collection from Prometheus.
-* **Alternative monitoring solutions**: In some cases, you might be using a cloud-based suite or a monitoring platform that comes with integrated monitoring and dashboarding capabilities. If your current solution adequately meets your monitoring needs and provides essential metrics, it may not be necessary to introduce Prometheus and Grafana into your setup.
-* **PromQL learning curve**: While Prometheus offers powerful querying capabilities through PromQL, mastering this query language might require time and effort.
+- **You already have the data**: If you've collected and stored the required data in a suitable format and need to visualize and analyze it, Grafana can be directly linked to your existing dataset, enabling you to build dashboards and alerts without extra data collection from Prometheus.
+- **Alternative monitoring solutions**: In some cases, you might be using a cloud-based suite or a monitoring platform that comes with integrated monitoring and dashboarding capabilities. If your current solution adequately meets your monitoring needs and provides essential metrics, it may not be necessary to introduce Prometheus and Grafana into your setup.
+- **PromQL learning curve**: While Prometheus offers powerful querying capabilities through PromQL, mastering this query language might require time and effort.
 
 ### Exploring metrics for model monitoring: Metrics selection and implementation
 
@@ -74,9 +75,9 @@ Prometheus and Grafana worked seamlessly for us, allowing efficient data collect
 
 In our movie recommender model, we aimed to gain a deep understanding of how well our recommendations were serving users. To achieve this, we selected a set of metrics that covered various aspects of the recommendation process, including user interactions, recommendation quality, and system performance. These metrics allowed us to evaluate the effectiveness of different recommendation sources in our system, which consisted of three main types: "similar," "popular," and "base.”:
 
-* **Similar Recommender**: The "similar" recommender utilized OpenAI embeddings to discover movies similar to those that users had previously rated or interacted with.
-* **Popular Recommender**: The "popular" recommender focused on recommending movies that were currently trending or widely popular among users. The average count of popular movies in the top 5 recommendations allowed us to gauge the balance between popular and niche movie recommendations.
-* **Base Recommender**: The "base" recommender is our two-tower retrieval model.
+- **Similar Recommender**: The "similar" recommender utilized OpenAI embeddings to discover movies similar to those that users had previously rated or interacted with.
+- **Popular Recommender**: The "popular" recommender focused on recommending movies that were currently trending or widely popular among users. The average count of popular movies in the top 5 recommendations allowed us to gauge the balance between popular and niche movie recommendations.
+- **Base Recommender**: The "base" recommender is our two-tower retrieval model.
 
 ![Frame 2608201.png](/images/ml-model-monitoring-boosting-performance-and-reliability/Frame_2608201.png)
 
@@ -87,27 +88,25 @@ In our movie recommender model, we aimed to gain a deep understanding of how wel
 Prometheus supports four main types of metrics, each serving a specific purpose for collecting and representing data. These metric types are used to measure different aspects of your system's performance and behavior. Let's explore each of the Prometheus metric types and how we made use of them:
 
 1. **Counter**:
+   - A counter is a monotonically increasing value that represents a cumulative total. It is typically used to track the number of occurrences of an event or the total number of items processed.
+   - Counters can only increase or be reset to zero, making them suitable for metrics that continuously accumulate, such as the total number of movie recommendations made to users.
+   - Example: `count_in_top5 = Counter('count_in_top5', 'Count of items in top 5', labelnames=['recommender'])` counter increments whenever a movie from a specific recommender is included in the top 5 recommendations. This way, we can monitor how frequently movies from each recommender are recommended in the top 5 and assess how the ranking model prefers the different recommendation sources.
 
-   * A counter is a monotonically increasing value that represents a cumulative total. It is typically used to track the number of occurrences of an event or the total number of items processed.
-   * Counters can only increase or be reset to zero, making them suitable for metrics that continuously accumulate, such as the total number of movie recommendations made to users.
-   * Example: `count_in_top5 = Counter('count_in_top5', 'Count of items in top 5', labelnames=['recommender'])` counter increments whenever a movie from a specific recommender is included in the top 5 recommendations. This way, we can monitor how frequently movies from each recommender are recommended in the top 5 and assess how the ranking model prefers the different recommendation sources.
 2. **Gauge**:
+   - A gauge is a value that can go up and down over time. It represents a snapshot of a particular value at a given moment.
+   - Gauges are useful for monitoring metrics that can vary independently, such as the current number of active users, CPU utilization.
 
-   * A gauge is a value that can go up and down over time. It represents a snapshot of a particular value at a given moment.
-   * Gauges are useful for monitoring metrics that can vary independently, such as the current number of active users, CPU utilization.
 3. **Histogram**:
+   - A histogram samples observations and counts them into configurable buckets. It also provides a sum of observed values and the count of observations.
+   - Histograms can be used to analyze the distribution of user feedback ratings for recommended movies.
+   - Example: `Histogram('user_rating', 'Histogram of user ratings by value', labelnames=['recommender'], buckets=[1, 2, 3, 4, 5])` This histogram metric categorizes user feedback ratings (e.g., 1 to 5 stars) for movies recommended by all three sources
 
-   * A histogram samples observations and counts them into configurable buckets. It also provides a sum of observed values and the count of observations.
-   * Histograms can be used to analyze the distribution of user feedback ratings for recommended movies.
-   * Example: `Histogram('user_rating', 'Histogram of user ratings by value', labelnames=['recommender'], buckets=[1, 2, 3, 4, 5])` This histogram metric categorizes user feedback ratings (e.g., 1 to 5 stars) for movies recommended by all three sources
 4. **Summary**:
-
-   * A summary is similar to a histogram but provides quantiles instead of buckets. It calculates the 0%, 25%, 50%, 75%, 90%, 95%, 99%, and 100% quantiles of observed values.
-   * Summaries are useful for monitoring metrics with varying distribution percentiles, such as response times, allowing you to analyze performance across different percentiles.
-   * Example: `rank_smr = Summary('item_rank', 'Summary of item ranks', labelnames=['recommender'])` This summary is designed to track the ranks(position) of the rated movies by users. By using this summary, we can observe how the ranks are distributed across the various recommenders in the system.
+   - A summary is similar to a histogram but provides quantiles instead of buckets. It calculates the 0%, 25%, 50%, 75%, 90%, 95%, 99%, and 100% quantiles of observed values.
+   - Summaries are useful for monitoring metrics with varying distribution percentiles, such as response times, allowing you to analyze performance across different percentiles.
+   - Example: `rank_smr = Summary('item_rank', 'Summary of item ranks', labelnames=['recommender'])` This summary is designed to track the ranks(position) of the rated movies by users. By using this summary, we can observe how the ranks are distributed across the various recommenders in the system.
 
    **Logging metrics with Prometheus**
-
    1. **Histogram of user ratings by value**: By building a histogram, we categorize user ratings into different buckets, such as 1, 2, 3, 4, and 5 stars. The histogram reveals the distribution of ratings across these buckets.
    2. **Summary of item ranks**: The summary metric provides both a count of rated items and the sum of their ranks. This way, we can get the average of a timeframe.
    3. **Counter of items in the top 5**: The counter increments whenever a movie from a specific recommender is included in the top 5 list.
@@ -127,8 +126,7 @@ Prometheus supports four main types of metrics, each serving a specific purpose 
    Color-coded thresholds of red for critical, yellow for warnings, and green for optimal values intuitively guide our attention. This quick visual assessment informs us of potential symptoms or deviations from normalcy. Should any anomaly be detected, this dashboard acts as a launchpad, providing seamless navigation to more detailed metrics for deeper analysis.
 
    Let’s dive into the different panels and metrics we developed to achieve this:
-
-   * Conversion rate: To represent the conversion rate, we use a Gauge panel as it’s a metric that can go up and down and can quickly show us how well users are interacting with the recommendations. To calculate it, we use the following PromQL query:
+   - Conversion rate: To represent the conversion rate, we use a Gauge panel as it’s a metric that can go up and down and can quickly show us how well users are interacting with the recommendations. To calculate it, we use the following PromQL query:
 
    ```sql
    (sum(rate(user_rating_bucket{le=~"5.0|4.0|3.0"}[$__interval])))
@@ -137,16 +135,15 @@ Prometheus supports four main types of metrics, each serving a specific purpose 
    ```
 
    This quantifies the sum of user ratings of 3 stars and above, divided by the total successful recommendation requests within the specified interval. Though not an exact conversion rate, it effectively gauges user satisfaction and interaction trends.
-
-   * Mean rating by recommender: In this case, we use a “Bar gauge” to represent the mean rating that each recommender gets for their recommendations. As we are logging the user ratings with Prometheus Summary, we can achieve this easily with the PromQL query
+   - Mean rating by recommender: In this case, we use a “Bar gauge” to represent the mean rating that each recommender gets for their recommendations. As we are logging the user ratings with Prometheus Summary, we can achieve this easily with the PromQL query
 
    ```json
     rate(user_rating_sum[$__interval])/rate(user_rating_count[$__interval])
    ```
 
-   * Recommendations requests per second: Number of requests to recommendations endpoint in a timeframe.
-   * Mean recommendations request time: The mean latency to get recommendations.
-   * Error percentage: Number of requests to recommendations endpoint that errored by the total number of requests.
+   - Recommendations requests per second: Number of requests to recommendations endpoint in a timeframe.
+   - Mean recommendations request time: The mean latency to get recommendations.
+   - Error percentage: Number of requests to recommendations endpoint that errored by the total number of requests.
 
    **System Metrics Dashboard:** it serves as a direct resource for addressing potential system-level concerns. Linked from the Main Dashboard, it presents a comprehensive view of resource utilization and response times.
 
