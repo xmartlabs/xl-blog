@@ -14,9 +14,9 @@ const GlobalStyles = createGlobalStyle`
   }
 
   body, html {
-    font-family: ${prop => prop.theme.fonts.main};
+    font-family: ${(prop) => prop.theme.fonts.main};
     height: 100%;
-    background-color: ${prop => prop.theme.colors.main1};
+    background-color: ${(prop) => prop.theme.colors.main1};
   }
 
   .gatsby-highlight code {
@@ -26,7 +26,7 @@ const GlobalStyles = createGlobalStyle`
 
   .language-text {
     background-color: transparent !important;
-    color: ${prop => prop.theme.colors.dark1} !important;
+    color: ${(prop) => prop.theme.colors.dark1} !important;
   }
 
   ;
@@ -39,7 +39,7 @@ const GlobalStyles = createGlobalStyle`
     padding: 0px 0px 0px 0px;
     line-height: 26px;
     letter-spacing: 0px;
-    font-family: ${prop => prop.theme.fonts.title};
+    font-family: ${(prop) => prop.theme.fonts.title};
   }
 
   form label {
@@ -56,22 +56,20 @@ const GlobalStyles = createGlobalStyle`
   }
 
   .category, a {
-    font-family: ${prop => prop.theme.fonts.links};
+    font-family: ${(prop) => prop.theme.fonts.links};
   }
 
   .category {
-    font-family: ${prop => prop.theme.fonts.links};
+    font-family: ${(prop) => prop.theme.fonts.links};
   }
-`
+`;
 
 export const wrapRootElement = ({ element }) => {
   return (
     <ThemeProvider theme={Theme}>
-      <GlobalStyles/>
+      <GlobalStyles />
       <AppContextProviderComponent>
-        <MainLayout>
-          {element}
-        </MainLayout>
+        <MainLayout>{element}</MainLayout>
       </AppContextProviderComponent>
     </ThemeProvider>
   );

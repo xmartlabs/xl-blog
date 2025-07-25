@@ -1,21 +1,35 @@
-import React from "react";
+import React from 'react';
 
-import { Link } from "gatsby";
-import PropTypes from "prop-types";
+import { Link } from 'gatsby';
+import PropTypes from 'prop-types';
 
-import { classnames } from "../../helpers";
+import { classnames } from '../../helpers';
 
-import { Card } from "../card";
+import { Card } from '../card';
 
 import * as styles from './more-blogs-section.module.scss';
 
 const MoreBlogsSection = ({ relatedPosts, refMoreFrom, title }) => (
-  <div className={styles.moreFromXlContainer} ref={refMoreFrom} >
+  <div className={styles.moreFromXlContainer} ref={refMoreFrom}>
     <div className={styles.titleContainer}>
-      <Link to={`/categories/${title}`} className={classnames("text__heading__two__separated__blueOne", styles.titleStyle)}>More from <span className={styles.title}>{title}</span> →</Link>
+      <Link
+        to={`/categories/${title}`}
+        className={classnames(
+          'text__heading__two__separated__blueOne',
+          styles.titleStyle
+        )}
+      >
+        More from <span className={styles.title}>{title}</span> →
+      </Link>
     </div>
     <div className={styles.blogsContainer}>
-      {relatedPosts.slice(0, 3).map((post) => <Card data={post} key={post.frontmatter.title} className={styles.cardStyles} />)}
+      {relatedPosts.slice(0, 3).map((post) => (
+        <Card
+          data={post}
+          key={post.frontmatter.title}
+          className={styles.cardStyles}
+        />
+      ))}
     </div>
   </div>
 );
@@ -40,9 +54,9 @@ MoreBlogsSection.propTypes = {
             tags: PropTypes.array,
             thumbnail: PropTypes.string,
             title: PropTypes.string.isRequired,
-          })
-        })
-      })
+          }),
+        }),
+      }),
     }),
     mdx: PropTypes.shape({
       frontmatter: PropTypes.shape({
@@ -50,12 +64,12 @@ MoreBlogsSection.propTypes = {
         date: PropTypes.string,
         tags: PropTypes.array,
         title: PropTypes.string,
-      })
-    })
-  })
+      }),
+    }),
+  }),
 };
 
 MoreBlogsSection.defaultProps = {
-  refMoreFrom: {current: null},
+  refMoreFrom: { current: null },
   title: '',
 };

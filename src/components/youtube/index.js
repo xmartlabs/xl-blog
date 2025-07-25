@@ -1,1 +1,1 @@
-export { Youtube } from './youtube'
+export { Youtube } from './youtube';

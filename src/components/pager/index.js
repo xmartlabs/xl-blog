@@ -1,1 +1,1 @@
-export { Pager } from './pager'
+export { Pager } from './pager';

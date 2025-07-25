@@ -3,10 +3,16 @@ import PropTypes from 'prop-types';
 
 const Youtube = ({ id, width, height, title }) => {
   return (
-    <iframe width={width} height={height} src={`https://www.youtube.com/embed/${id}`} title={title}
-            frameBorder="0"
-            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-            allowFullScreen></iframe>);
+    <iframe
+      width={width}
+      height={height}
+      src={`https://www.youtube.com/embed/${id}`}
+      title={title}
+      frameBorder="0"
+      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+      allowFullScreen
+    ></iframe>
+  );
 };
 
 Youtube.propTypes = {

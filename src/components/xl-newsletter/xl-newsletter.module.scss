@@ -1,6 +1,6 @@
-@import "/src/css/colors.scss";
-@import "/src/css/text-styles.scss";
-@import "/src/css/variables.scss";
+@import '/src/css/colors.scss';
+@import '/src/css/text-styles.scss';
+@import '/src/css/variables.scss';
 
 .container {
   width: 55rem;
@@ -12,12 +12,14 @@
   flex-direction: row;
   border-radius: 0.5rem;
   padding: 0 2rem 0 4rem;
-  box-shadow: 0px 7.07671px 24.7685px -5.30753px $darkTwo, 0px 15.9226px 77.8438px -3.53836px $darkTwo;
+  box-shadow:
+    0px 7.07671px 24.7685px -5.30753px $darkTwo,
+    0px 15.9226px 77.8438px -3.53836px $darkTwo;
 }
 
 .close {
-  margin-top: 2rem; 
-  width: 5.5rem; 
+  margin-top: 2rem;
+  width: 5.5rem;
   fill: $whiteTwo;
   width: 20px;
   height: 21px;
@@ -117,7 +119,8 @@
     }
   }
 
-  .buttonNewsletter, .inputNewsletter {
+  .buttonNewsletter,
+  .inputNewsletter {
     width: 100%;
   }
 

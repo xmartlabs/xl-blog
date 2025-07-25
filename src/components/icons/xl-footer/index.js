@@ -1,1 +1,1 @@
-export { XlFooter } from "./xlFooter";
+export { XlFooter } from './xlFooter';

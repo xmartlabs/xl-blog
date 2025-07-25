@@ -1,8 +1,8 @@
-@import "/src/css/colors.scss";
-@import "/src/css/variables.scss";
-@import "/src/css/text-styles.scss";
+@import '/src/css/colors.scss';
+@import '/src/css/variables.scss';
+@import '/src/css/text-styles.scss';
 
-.container {  
+.container {
   width: 100%;
   display: flex;
   flex-direction: column;
@@ -46,7 +46,7 @@
 
 .styledLink {
   text-decoration: none;
-  transition: all .2s cubic-bezier(.25,.46,.45,.94);
+  transition: all 0.2s cubic-bezier(0.25, 0.46, 0.45, 0.94);
 
   h1 {
     @extend .text__heading__two__separated__blueOne;

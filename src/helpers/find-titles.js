@@ -3,25 +3,28 @@ const findTitles = (htmlElements) => {
   const h2List = [];
   const h3List = [];
 
-  htmlElements.forEach(element => {
-    if(element.nodeName === "H1" || element.nodeName === "H2" || element.nodeName === "H3") {
-      
-      element.setAttribute("id", element.innerText);
-  
-      if (element.nodeName === "H1") {
+  htmlElements.forEach((element) => {
+    if (
+      element.nodeName === 'H1' ||
+      element.nodeName === 'H2' ||
+      element.nodeName === 'H3'
+    ) {
+      element.setAttribute('id', element.innerText);
+
+      if (element.nodeName === 'H1') {
         h1List.push(element);
       }
-      
-      if (element.nodeName === "H2") {
+
+      if (element.nodeName === 'H2') {
         h2List.push(element);
       }
-  
-      if (element.nodeName === "H3") {
+
+      if (element.nodeName === 'H3') {
         h3List.push(element);
       }
     }
   });
-  
+
   if (h1List.length !== 0) {
     return h1List;
   }
@@ -31,4 +34,4 @@ const findTitles = (htmlElements) => {
   return h3List;
 };
 
-export { findTitles };    
+export { findTitles };

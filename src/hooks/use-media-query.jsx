@@ -1,4 +1,4 @@
-import { useState, useEffect} from "react";
+import { useState, useEffect } from 'react';
 
 const useMediaQuery = (query) => {
   const [matches, setMatches] = useState(false);
@@ -12,7 +12,7 @@ const useMediaQuery = (query) => {
     window.addEventListener('resize', handleWindowSizeChange);
     return () => {
       window.removeEventListener('resize', handleWindowSizeChange);
-    }
+    };
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 

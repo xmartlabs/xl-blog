@@ -1,5 +1,5 @@
-@import "../../css/colors.scss";
-@import "../../css/variables.scss";
+@import '../../css/colors.scss';
+@import '../../css/variables.scss';
 
 .container {
   display: flex;
@@ -13,13 +13,12 @@
   @media only screen and (max-width: map-get($map: $screen-breakpoint, $key: xxl)) {
     padding-left: 4%;
   }
-  
+
   @media screen and (max-width: map-get($map: $screen-breakpoint, $key: sm)) {
     height: 100%;
     padding: 4rem 0 3rem 1.3rem;
   }
 }
-
 
 .linkContainer {
   margin-top: 2rem;
@@ -32,7 +31,6 @@
   margin-left: 0.9rem;
 }
 
-
 @media screen and (max-height: map-get($map: $screen-breakpoint, $key: md)) {
   .filterContainer {
     flex-wrap: wrap;
@@ -44,7 +42,7 @@
 }
 
 @media screen and (max-width: map-get($map: $screen-breakpoint, $key: xs)) {
-  .desktopLogo{
+  .desktopLogo {
     display: none;
   }
 
@@ -66,10 +64,11 @@
   }
 
   .selectedLink {
-    min-width:auto
+    min-width: auto;
   }
 
-  .logo, .optionContainer{
+  .logo,
+  .optionContainer {
     margin-left: 0.5rem;
   }
 }

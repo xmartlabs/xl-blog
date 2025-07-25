@@ -1,6 +1,6 @@
-@import "/src/css/variables.scss";
-@import "/src/css/text-styles.scss";
-@import "/src/css/colors.scss";
+@import '/src/css/variables.scss';
+@import '/src/css/text-styles.scss';
+@import '/src/css/colors.scss';
 
 .filterContainer {
   width: 100%;
@@ -19,7 +19,7 @@
   @media (max-width: 992px) {
     gap: 3rem;
     margin: 3rem 0 1.5rem 0;
-    padding: 0 2rem .5rem 2rem;
+    padding: 0 2rem 0.5rem 2rem;
     overflow-x: auto;
   }
 }

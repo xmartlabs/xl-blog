@@ -1,13 +1,13 @@
-import React, { useEffect } from "react";
-import { navigate } from "gatsby";
+import React, { useEffect } from 'react';
+import { navigate } from 'gatsby';
 
-import { Router } from "@reach/router";
+import { Router } from '@reach/router';
 
-import PrivateRoute from "../components/privateRoute";
+import PrivateRoute from '../components/privateRoute';
 
 const BounceToHome = () => {
   useEffect(() => {
-    navigate("/", { replace: true });
+    navigate('/', { replace: true });
   }, []);
   return null;
 };

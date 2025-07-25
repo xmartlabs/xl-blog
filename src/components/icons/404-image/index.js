@@ -1,1 +1,1 @@
-export { ErrorImage } from "./404-image";
+export { ErrorImage } from './404-image';

@@ -1,1 +1,1 @@
-export { HeaderBanner } from "./header-banner";
+export { HeaderBanner } from './header-banner';

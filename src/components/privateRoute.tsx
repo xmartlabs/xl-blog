@@ -1,4 +1,4 @@
-import * as React from "react"
+import * as React from 'react';
 // import { navigate } from "gatsby"
 //import { isLoggedIn } from "../services/auth"
 
@@ -7,6 +7,6 @@ const PrivateRoute = ({ component: Component, location, ...rest }) => {
   //   navigate("/accounts/sign-in")
   //   return null
   // }
-  return <Component {...rest} />
-}
-export default PrivateRoute
+  return <Component {...rest} />;
+};
+export default PrivateRoute;

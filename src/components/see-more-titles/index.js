@@ -1,1 +1,1 @@
-export { SeeMoreTitles } from "./see-more-titles";
+export { SeeMoreTitles } from './see-more-titles';

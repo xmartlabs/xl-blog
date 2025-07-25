@@ -1,27 +1,29 @@
-import React from "react"
-import PropTypes from "prop-types"
+import React from 'react';
+import PropTypes from 'prop-types';
 
 // Components
-import { Link, graphql } from "gatsby"
+import { Link, graphql } from 'gatsby';
 
 const Authors = ({ pageContext, data }) => {
-  const { author } = pageContext
-  const { edges, totalCount } = data.allMdx
+  const { author } = pageContext;
+  const { edges, totalCount } = data.allMdx;
   const authorHeader = `${totalCount} post${
-    totalCount === 1 ? "" : "s"
-  } written by "${author}"`
-  const _ = require("lodash")    
+    totalCount === 1 ? '' : 's'
+  } written by "${author}"`;
+  const _ = require('lodash');
   return (
     <div>
       <h1>{authorHeader}</h1>
       <ul>
         {edges.map(({ node }) => {
-          const { title } = node.frontmatter
+          const { title } = node.frontmatter;
           return (
             <li key={node.slug}>
-              <Link to={`/${_.kebabCase(node.frontmatter.permalink)}`}>{title}</Link>
+              <Link to={`/${_.kebabCase(node.frontmatter.permalink)}`}>
+                {title}
+              </Link>
             </li>
-          )
+          );
         })}
       </ul>
       {/*
@@ -30,8 +32,8 @@ const Authors = ({ pageContext, data }) => {
       */}
       <Link to="/">back to home</Link>
     </div>
-  )
-}
+  );
+};
 
 Authors.propTypes = {
   pageContext: PropTypes.shape({
@@ -45,30 +47,32 @@ Authors.propTypes = {
           node: PropTypes.shape({
             frontmatter: PropTypes.shape({
               title: PropTypes.string.isRequired,
-            })
+            }),
           }),
         }).isRequired
       ),
     }),
   }),
-}
+};
 
-export default Authors
+export default Authors;
 
-export const pageQuery = graphql`query ($author: String) {
-  allMdx(
-    limit: 2000
-    sort: {frontmatter: {date: DESC}}
-    filter: {frontmatter: {author: {eq: $author}}}
-  ) {
-    totalCount
-    edges {
-      node {
-        frontmatter {
-          title
-          permalink
+export const pageQuery = graphql`
+  query ($author: String) {
+    allMdx(
+      limit: 2000
+      sort: { frontmatter: { date: DESC } }
+      filter: { frontmatter: { author: { eq: $author } } }
+    ) {
+      totalCount
+      edges {
+        node {
+          frontmatter {
+            title
+            permalink
+          }
         }
       }
     }
   }
-}`
+`;

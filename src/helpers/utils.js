@@ -3,12 +3,16 @@ function classnames(...args) {
     const [firstEntry] = args;
     if (firstEntry && typeof firstEntry === 'object') {
       const activeClasses = Object.entries(firstEntry)
-        .filter(([, value]) => value).map(([key]) => key);
+        .filter(([, value]) => value)
+        .map(([key]) => key);
       return activeClasses.join(' ');
     }
     return firstEntry;
   }
-  return args.filter((entry) => !!entry).map((value) => classnames(value)).join(' ');
+  return args
+    .filter((entry) => !!entry)
+    .map((value) => classnames(value))
+    .join(' ');
 }
 
 export { classnames };

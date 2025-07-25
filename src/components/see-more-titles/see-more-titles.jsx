@@ -1,11 +1,11 @@
-import React from "react";
-import PropTypes from "prop-types";
+import React from 'react';
+import PropTypes from 'prop-types';
 
-import { classnames } from "../../helpers";
+import { classnames } from '../../helpers';
 
-import * as styles from "./see-more-titles.module.scss";
+import * as styles from './see-more-titles.module.scss';
 
-const SeeMoreTitles = ({ onClick, className, children}) => (
+const SeeMoreTitles = ({ onClick, className, children }) => (
   <a onClick={onClick} className={classnames(className, styles.container)}>
     {children}
   </a>
@@ -13,7 +13,7 @@ const SeeMoreTitles = ({ onClick, className, children}) => (
 
 SeeMoreTitles.propTypes = {
   className: PropTypes.string,
-  onClick: PropTypes.func
+  onClick: PropTypes.func,
 };
 
 SeeMoreTitles.defaultProps = {

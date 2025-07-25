@@ -1,1 +1,1 @@
-export { ClockIcon } from "./clock-icon";
+export { ClockIcon } from './clock-icon';

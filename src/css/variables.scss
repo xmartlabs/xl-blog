@@ -1,26 +1,26 @@
-@import "/src/css/typography.css";
+@import '/src/css/typography.css';
 
 // Fonts
 
-$primary-font-family: "gilroy";
+$primary-font-family: 'gilroy';
 $primary-font: $primary-font-family, sans-serif;
 
-$title-font-family: "gilroy";
+$title-font-family: 'gilroy';
 $title-font: $title-font-family, serif;
 
-$link-font-family: "gilroy";
+$link-font-family: 'gilroy';
 $link-font: $link-font-family, serif;
 
-$link-light-font-family: "gilroy";
+$link-light-font-family: 'gilroy';
 $link-light-font: $link-light-font-family;
 
-$blog-font-family: "work-sans";
+$blog-font-family: 'work-sans';
 $blog-font: $blog-font-family, serif;
 
-$link-blog-font-family: "work-sans";
+$link-blog-font-family: 'work-sans';
 $link-blog-font: $link-blog-font-family, serif;
 
-$code-font-family: "fira-code";
+$code-font-family: 'fira-code';
 $code-font: $code-font-family, serif;
 
 // Bold Weight

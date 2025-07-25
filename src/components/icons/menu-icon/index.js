@@ -1,1 +1,1 @@
-export { MenuMobileIcon } from "./menu-mobile-icon";
+export { MenuMobileIcon } from './menu-mobile-icon';

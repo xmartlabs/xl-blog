@@ -1,1 +1,1 @@
-export { Linkedin } from "./linkedin";
+export { Linkedin } from './linkedin';

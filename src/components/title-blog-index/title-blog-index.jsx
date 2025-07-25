@@ -1,11 +1,11 @@
-import React, { useState, useRef, useEffect } from "react";
+import React, { useState, useRef, useEffect } from 'react';
 
 import { ArrowIcon } from '../icons';
-import { SeeMoreTitles } from "../see-more-titles/see-more-titles";
+import { SeeMoreTitles } from '../see-more-titles/see-more-titles';
 
-import { classnames, findTitles } from "../../helpers";
+import { classnames, findTitles } from '../../helpers';
 
-import * as styles from "./title-blog-index.module.scss";
+import * as styles from './title-blog-index.module.scss';
 
 const TitleBlogIndex = ({ data, refIndexTitles, disappearIndex }) => {
   const [titleOnView, setTitleOnView] = useState('');
@@ -14,7 +14,7 @@ const TitleBlogIndex = ({ data, refIndexTitles, disappearIndex }) => {
   const [isBottomArrow, setIsBottomArrow] = useState(false);
   const linksContainerRef = useRef(null);
   const indexContainerRef = useRef(null);
-  const [ heightVariation, setHeightVariation ] = useState();
+  const [heightVariation, setHeightVariation] = useState();
 
   useEffect(() => {
     window.addEventListener('scroll', getActiveTitle, { passive: true });
@@ -29,7 +29,7 @@ const TitleBlogIndex = ({ data, refIndexTitles, disappearIndex }) => {
     if (linksContainerRef.current && indexContainerRef.current) {
       const indexHeight = indexContainerRef.current.clientHeight;
       const linksHeight = linksContainerRef.current.clientHeight;
-  
+
       const heightDifference = indexHeight - linksHeight;
 
       if (heightDifference < 650) {
@@ -44,17 +44,22 @@ const TitleBlogIndex = ({ data, refIndexTitles, disappearIndex }) => {
     if (refIndexTitles.current) {
       const elementList = Array.from(refIndexTitles.current.childNodes);
       const titles = findTitles(elementList);
-      const activeTitle = titles.findLast((title) => title.getBoundingClientRect().top <= 500) || titles[0];
+      const activeTitle =
+        titles.findLast((title) => title.getBoundingClientRect().top <= 500) ||
+        titles[0];
       setTitleOnView(activeTitle.textContent);
-      setSelectLink('');      
+      setSelectLink('');
 
       if (titles.length > 8) {
-        if (titles[titles.length -2].textContent === activeTitle.textContent || titles[titles.length -1].textContent === activeTitle.textContent) {
+        if (
+          titles[titles.length - 2].textContent === activeTitle.textContent ||
+          titles[titles.length - 1].textContent === activeTitle.textContent
+        ) {
           linksContainerRef.current.scrollTo({
             top: 600,
             behavior: 'smooth',
           });
-  
+
           setIsTopArrow(false);
           setIsBottomArrow(true);
         } else {
@@ -65,58 +70,72 @@ const TitleBlogIndex = ({ data, refIndexTitles, disappearIndex }) => {
           setIsTopArrow(true);
           setIsBottomArrow(false);
         }
-      } 
+      }
     }
   };
-  
-  const scrollToBottom = () => {    
+
+  const scrollToBottom = () => {
     linksContainerRef.current.scrollTo({
       top: heightVariation,
       behavior: 'smooth',
     });
-  
+
     setIsTopArrow(false);
     setIsBottomArrow(true);
   };
-  
+
   const scrollToTop = () => {
-    linksContainerRef.current.scrollTo({ 
-      top: 0, 
-      behavior: 'smooth' 
+    linksContainerRef.current.scrollTo({
+      top: 0,
+      behavior: 'smooth',
     });
-  
+
     setIsTopArrow(true);
     setIsBottomArrow(false);
   };
 
   return (
     <>
-      {isTopArrow && 
-        <SeeMoreTitles 
-          onClick={scrollToBottom} 
-          className={classnames({[styles.disappearIndex]: disappearIndex})} 
-          children={<ArrowIcon className={styles.topArrow}/>}  
-        /> 
-      }
-      {isBottomArrow && 
-        <SeeMoreTitles 
-          onClick={scrollToTop} 
-          className={classnames({[styles.disappearIndex]: disappearIndex})} 
-          children={<ArrowIcon className={styles.bottomArrow}/>}  
-        /> 
-      }
+      {isTopArrow && (
+        <SeeMoreTitles
+          onClick={scrollToBottom}
+          className={classnames({ [styles.disappearIndex]: disappearIndex })}
+          children={<ArrowIcon className={styles.topArrow} />}
+        />
+      )}
+      {isBottomArrow && (
+        <SeeMoreTitles
+          onClick={scrollToTop}
+          className={classnames({ [styles.disappearIndex]: disappearIndex })}
+          children={<ArrowIcon className={styles.bottomArrow} />}
+        />
+      )}
       <div className={styles.heightContainer} ref={indexContainerRef}>
-        <div className={classnames({[styles.disappearIndex]: disappearIndex}, styles.indexSubContainer)} ref={linksContainerRef}>
-          {data?.map((title) => 
-            <a href={"#" + title.id} key={title.id} onClick={() => setSelectLink(title.id)}
+        <div
+          className={classnames(
+            { [styles.disappearIndex]: disappearIndex },
+            styles.indexSubContainer
+          )}
+          ref={linksContainerRef}
+        >
+          {data?.map((title) => (
+            <a
+              href={'#' + title.id}
+              key={title.id}
+              onClick={() => setSelectLink(title.id)}
               className={classnames(
-                {[styles.selectedLink]: title.id === selectLink || titleOnView === title.id},
+                {
+                  [styles.selectedLink]:
+                    title.id === selectLink || titleOnView === title.id,
+                },
                 styles.links
               )}
             >
-              {title.innerText.length > 55 ? title.innerText.slice(0, 55) + "..." : title.innerText}
+              {title.innerText.length > 55
+                ? title.innerText.slice(0, 55) + '...'
+                : title.innerText}
             </a>
-          )}
+          ))}
         </div>
       </div>
     </>
