@@ -1,1 +1,1 @@
-export { LinkedInIcon } from "./linked-in";
+export { LinkedInIcon } from './linked-in';

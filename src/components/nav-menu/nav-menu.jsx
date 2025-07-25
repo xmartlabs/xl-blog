@@ -10,7 +10,6 @@ import { useMediaQuery } from '../../hooks';
 import { XmartlabsLogo } from '../icons';
 import { TypeForm } from '../typeform/typeform';
 
-
 const StyledGetStartedButton = styled.button`
   width: 147px;
   height: 44px;
@@ -20,15 +19,15 @@ const StyledGetStartedButton = styled.button`
   background-color: #ee1a64;
   color: #fff;
   text-decoration: none;
-`
+`;
 
 const StyledGetStartedTextButton = styled.div`
   line-height: 22px;
   font-size: 14px;
   font-weight: 900;
-  letter-spacing: .5px;
+  letter-spacing: 0.5px;
   max-height: 17px;
-`
+`;
 
 const StyledContainerNavBarXL = styled.div`
   display: flex;
@@ -38,8 +37,8 @@ const StyledContainerNavBarXL = styled.div`
   background-color: white;
   position: fixed;
   z-index: 1;
-  box-shadow: 0px 2px 8px 0px rgba(0, 0, 0, 0.14); 
-`
+  box-shadow: 0px 2px 8px 0px rgba(0, 0, 0, 0.14);
+`;
 
 const StyledContainerHeader = styled.div`
   align-items: center;
@@ -49,31 +48,36 @@ const StyledContainerHeader = styled.div`
   position: static;
   width: 90%;
   max-width: 1300px;
-`
+`;
 
-
-export const NavMenu = () => {  
-  const isMobile = useMediaQuery("(max-width: 992px)");
-  const [ showTypeForm, setShowTypeForm ] = useState(false);
+export const NavMenu = () => {
+  const isMobile = useMediaQuery('(max-width: 992px)');
+  const [showTypeForm, setShowTypeForm] = useState(false);
   return (
-      <>
-        {showTypeForm && <TypeForm onClick={() => setShowTypeForm(false)}/>}
-        <StyledContainerNavBarXL>
-          {isMobile && <MobileMenu />}
-          <StyledContainerHeader>
-            <div className={styles.navMenuContainer}>
-              <a href="/" id="logo-xl" aria-label='Blog Home'>
-                <XmartlabsLogo />
-              </a>
-              {!isMobile && <NavMenuElements />}
-            </div>
-            {!isMobile && 
-              <StyledGetStartedButton className={styles.getStarted} id="header-getintouch" onClick={() => setShowTypeForm(true)}>
-                <StyledGetStartedTextButton>Let's Talk</StyledGetStartedTextButton>
-              </StyledGetStartedButton>
-            }
-          </StyledContainerHeader>
-        </StyledContainerNavBarXL>
-      </>
+    <>
+      {showTypeForm && <TypeForm onClick={() => setShowTypeForm(false)} />}
+      <StyledContainerNavBarXL>
+        {isMobile && <MobileMenu />}
+        <StyledContainerHeader>
+          <div className={styles.navMenuContainer}>
+            <a href="/" id="logo-xl" aria-label="Blog Home">
+              <XmartlabsLogo />
+            </a>
+            {!isMobile && <NavMenuElements />}
+          </div>
+          {!isMobile && (
+            <StyledGetStartedButton
+              className={styles.getStarted}
+              id="header-getintouch"
+              onClick={() => setShowTypeForm(true)}
+            >
+              <StyledGetStartedTextButton>
+                Let's Talk
+              </StyledGetStartedTextButton>
+            </StyledGetStartedButton>
+          )}
+        </StyledContainerHeader>
+      </StyledContainerNavBarXL>
+    </>
   );
-}
+};

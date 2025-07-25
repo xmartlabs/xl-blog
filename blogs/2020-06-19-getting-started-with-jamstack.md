@@ -1,7 +1,15 @@
 ---
-title: "New to Jamstack? Everything you need to know to get started"
+title: 'New to Jamstack? Everything you need to know to get started'
 date: 2020-06-22
-tags: [Jamstack, Markup, Static Site Generator, Static Website, web stack, Xmartlabs]
+tags:
+  [
+    Jamstack,
+    Markup,
+    Static Site Generator,
+    Static Website,
+    web stack,
+    Xmartlabs,
+  ]
 excerpt: "In this blogpost, we cover all you need to get started with Jamstack. From its meaning and best practices to what caused Jamstack's rapid adoption as a web stack alternative."
 category: development
 author: mtnBarreto
@@ -67,7 +75,6 @@ Additionally, using a Git repository allows the entire website to be centrally h
 
 Web stack architecture and ecosystem has been evolving since the very beginning, let's compare the traditional web (monolithic) stack against the Jamstack.
 
-
 <img src="/images/jamstack-intro/jamstack.jpeg" />
 
 **Monolithic web stack**
@@ -76,7 +83,6 @@ The monolithic web architecture is the way we have been creating web apps over t
 
 Here the browser communicates with a central server which communicates to a DB layer. This approach has caused a lot of security issues since we create almost every document from scratch. It also suffers performance and scalability issues. Normally we end up adding many caching layers, DB caching, memory caching and HTTP caching and so on. We could say that the website needs to build each time it's served (even though caching makes this viable).
 _LAMP and MEAN stacks are examples of this architecture._
-
 
 **Modern web stack**
 
@@ -103,11 +109,9 @@ Browsers have become really powerful. Nowadays a browser is way more than a docu
 
 And finally, API microservices have become really popular. There are specialized 3rd party services to manage the most common functionality we find in a web app. Web developers started to rely on, combine, and integrate these (instead of building and managing complex software systems). For small and medium-sized systems, they can deliver cost reduction, quality improvement, agility, and decreased time to market. Typically microservices are implemented by a third party company but it can be developed in-house too.
 
-
 ## Jamstack Best Practices
 
 As we have seen, this new web architecture stack is possible thanks to the evolution of web developer tools, static site generators, and an emerging microservices economy among others.
-
 
 When building Jamstack websites, we can really get the most out of the stack if we stick to the following best practices:
 
@@ -124,19 +128,18 @@ Ideally, we can also take advantage of modern build tools. By using tools like B
 Git is fundamental to the Jamstack because it holds all the site’s components, the entire site should be pushed to a git repository. There are publishing platforms that offer CI & CD, and app distribution to CDN services so the site is automatically pre-build and deploy whenever a git remote branch changes. This workflow embodies the modern software development life cycle practice of Continuous Integration and Deployment (CI/CD).
 Having the entire site code centralized in git reduces the contribution friction since anyone is able to clone it and execute a command (e.g. npm install) to set up dependencies and run the website locally. There are no databases to clone, no complex installations. This extremely simplifies staging and testing workflows.
 
-**Automated builds**  
+**Automated builds**
 
 Because Jamstack markup is prebuilt, content changes won’t go live until you run another build. Automating this process will save you lots of frustration. You can do this yourself with webhooks, or use a publishing platform that automatically includes this service.
 
 **Atomic deploys**
 
 Any CDN content update must be performed at the same time, despite the app size and the number of files involved. No changes should go live until all changed files have been updated otherwise the state can become inconsistent
- while the update process completes.
+while the update process completes.
 
 **Instant cache invalidation**
 
 Cache-Control values in each file must be properly set up to avoid inconsistent outdated files after deploying a new version to the CDN.
-
 
 ## Jamstack ecosystem resources
 
@@ -157,11 +160,11 @@ In many cases a Jamstack site needs to run code, there are microservices that al
 
 There are also many microservices providing content management system solutions (CMS), each one with its pros and cons. [sanity.io](https://www.sanity.io/), [storyblok](https://www.storyblok.com/), [prismic.io](https://prismic.io/), [contentful](https://www.contentful.com/), [ghost](https://ghost.org/), [netlifycms](https://www.netlifycms.org/) are some of them.
 
-In terms of DB solutions, there are also a big list of them. [faunaDB](https://fauna.com/), [firebase](https://firebase.com/), [Amazon DynamoDB](https://aws.amazon.com/dynamodb/), [Azure Cosmos DB](https://azure.microsoft.com/en-us/services/cosmos-db/), [Amazon Aurora Serverless](https://aws.amazon.com/rds/aurora/serverless/), [Amazon Relational Database Service](https://aws.amazon.com/rds/), [Cloud SQL](https://cloud.google.com/sql/docs/) are some alternatives. By the way, we have collaborated with fauna team to create a swift language client for its DB.  
+In terms of DB solutions, there are also a big list of them. [faunaDB](https://fauna.com/), [firebase](https://firebase.com/), [Amazon DynamoDB](https://aws.amazon.com/dynamodb/), [Azure Cosmos DB](https://azure.microsoft.com/en-us/services/cosmos-db/), [Amazon Aurora Serverless](https://aws.amazon.com/rds/aurora/serverless/), [Amazon Relational Database Service](https://aws.amazon.com/rds/), [Cloud SQL](https://cloud.google.com/sql/docs/) are some alternatives. By the way, we have collaborated with fauna team to create a swift language client for its DB.
 
 Services like [Auth0](https://auth0.com/), [Okta](https://www.okta.com/), and [Netlify Identity](https://docs.netlify.com/visitor-access/identity/) offer a cloud-based identity management service.
 
-The microservices list above is not intended to be exhaustive by any means, it's just to give a picture of how mature the microservices industry is.  
+The microservices list above is not intended to be exhaustive by any means, it's just to give a picture of how mature the microservices industry is.
 
 ## Final thoughts
 

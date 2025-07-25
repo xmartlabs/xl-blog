@@ -1,6 +1,6 @@
 ---
 title: How to tackle a Spike and live to tell it
-subtitle: " "
+subtitle: ' '
 permalink: surviving-a-spike
 featured: true
 date: 2025-04-29
@@ -13,7 +13,8 @@ tags:
   - TechTeam
 author: mei
 ---
-Imagine yourself as a new Software Developer, eager to tackle exciting challenges. Then comes your first Spike. It seems harmless at first—until you're buried in documentation, shady forums, and endless YouTube tutorials. And after all that suffering, in most of the cases, you have to make a decision that will impact your team. *Panic.*
+
+Imagine yourself as a new Software Developer, eager to tackle exciting challenges. Then comes your first Spike. It seems harmless at first—until you're buried in documentation, shady forums, and endless YouTube tutorials. And after all that suffering, in most of the cases, you have to make a decision that will impact your team. _Panic._
 
 This was exactly the situation I found myself in recently, facing my first Spike. Now, I’m here to share what I wish I had known before starting.
 
@@ -23,13 +24,13 @@ Let’s go for it!
 
 If you’re a recent developer or unfamiliar with Agile methodologies, you may be wondering: what is a Spike?
 
-According to what Mike Cohn explains in his video “What is a Spike on Agile?”, *“A Spike is an activity a team performs to get smarter about something. With a Spike, a team isn’t trying to immediately deliver a new capability, instead, they are building the knowledge that will allow them to deliver the new capability later”*.
+According to what Mike Cohn explains in his video “What is a Spike on Agile?”, _“A Spike is an activity a team performs to get smarter about something. With a Spike, a team isn’t trying to immediately deliver a new capability, instead, they are building the knowledge that will allow them to deliver the new capability later”_.
 
 A Spike is focused on investigation. It could involve exploring a new tool, technology, architecture, or any topic relevant to the team and the project.
 
 The goal of a Spike is to generate knowledge and reduce risks. For example, assuming you can use an API without proper investigation might result in useless code and wasted time (speaking from experience here 😅).
 
-Even though you may be tempted to create a Spike for every single task, it’s important to practice moderation. A Spike requires a significant investment of time, and you certainly *don’t need one to align a div*.
+Even though you may be tempted to create a Spike for every single task, it’s important to practice moderation. A Spike requires a significant investment of time, and you certainly _don’t need one to align a div_.
 
 A team may opt, for example, to use a Spike to explore whether an external service offers what is needed for a task to be completed, or to learn about the most recent updates on the framework they are working with.
 
@@ -41,13 +42,13 @@ While the most common result is gaining knowledge about the investigation topic,
 
 Regardless of the outcome, remember that no amount of work can eliminate uncertainty, but reduce it. Work around this, make your best effort, and avoid wasting time!
 
-![Illustration of the five steps to tackle software development spikes: Define Scope, Learn, Test, Document, Share visualized as climbing a mountain.](/images/surviving-to-spikes-img.png "The Spike Mountain: 5 Key Steps to Navigate Software Development Spikes")
+![Illustration of the five steps to tackle software development spikes: Define Scope, Learn, Test, Document, Share visualized as climbing a mountain.](/images/surviving-to-spikes-img.png 'The Spike Mountain: 5 Key Steps to Navigate Software Development Spikes')
 
 ## Spike-ing Step by Step
 
 ### First of all; define the scope
 
-If you’re going to skip any step, this shouldn’t be the one. To stay organized and save time, it’s *crucial* to define exactly what needs to be done and how much time you’ll dedicate to it.
+If you’re going to skip any step, this shouldn’t be the one. To stay organized and save time, it’s _crucial_ to define exactly what needs to be done and how much time you’ll dedicate to it.
 
 The most important aspect of this step is to fully understand **what** needs to be achieved and **why**. If you’re unclear on the goal, your investigation might end up being a waste of time.
 
@@ -57,11 +58,12 @@ It is also necessary to set a specific timeframe for completing the task. While 
 
 Based on what we’ve learned, here’s an example of how to apply this step:
 
-* **Objective:** learn about *Product X* and determine if it’s a good fit for solving *Problem* *Y*.
+- **Objective:** learn about _Product X_ and determine if it’s a good fit for solving _Problem_ _Y_.
 
   💡 In this step, you could list the Acceptance Criteria and the functionalities you’ll need the product to provide, among other details.
-* **Scope:** investigate the capabilities of *Product X*, test it in a development environment, and document the findings to make an informed decision on whether the team should use this tool or a different one.
-* **Timeframe:** the investigation and testing should take less than one week.
+
+- **Scope:** investigate the capabilities of _Product X_, test it in a development environment, and document the findings to make an informed decision on whether the team should use this tool or a different one.
+- **Timeframe:** the investigation and testing should take less than one week.
 
   💡The task could be estimated as your preferred unit: story point, hours, etc.
 
@@ -101,9 +103,9 @@ Including a section that outlines the initial questions and the findings from yo
 
 Other useful sections to include are:
 
-* **API endpoints:** if applicable, document the endpoints that can be used and their responses.
-* **Reliable sources:** a list of trustworthy sources consulted during the research.
-* **Challenges & Roadblocks:** any issues encountered that may be relevant for future work.
+- **API endpoints:** if applicable, document the endpoints that can be used and their responses.
+- **Reliable sources:** a list of trustworthy sources consulted during the research.
+- **Challenges & Roadblocks:** any issues encountered that may be relevant for future work.
 
 Lastly, don’t hesitate to format your document for readability. A Table of Contents, clear headings, and highlighted key concepts can go a long way in making your research easier to navigate and understand.
 
@@ -113,10 +115,10 @@ Your research is only valuable if it reaches the people who need it. Sharing you
 
 There are several ways to do this:
 
-* simply sharing the document,
-* proposing a team meeting,
-* designing a short presentation,
-* creating and showcasing a demo
+- simply sharing the document,
+- proposing a team meeting,
+- designing a short presentation,
+- creating and showcasing a demo
 
 Lastly, be open to feedback!  A Spike is about learning, and your findings might evolve as your team builds on them.
 

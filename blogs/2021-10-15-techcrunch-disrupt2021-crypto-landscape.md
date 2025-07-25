@@ -18,7 +18,7 @@ This blog post covers the main insights shared around the crypto space, which we
 
 ## NFTs
 
-NFTs were the main topic around the *Collecting Crypto Opportunities* talk where [Roham Gharegozlou](https://twitter.com/roham), CEO at [Dapper Labs](https://www.dapperlabs.com/) told how they created and launched many digital collectible marketplaces into the mainstream of society.
+NFTs were the main topic around the _Collecting Crypto Opportunities_ talk where [Roham Gharegozlou](https://twitter.com/roham), CEO at [Dapper Labs](https://www.dapperlabs.com/) told how they created and launched many digital collectible marketplaces into the mainstream of society.
 
 ### What's an NFT?
 
@@ -36,10 +36,9 @@ Using Flow, Dapper Labs launched [NBA Top Shot](https://nbatopshot.com/) earlier
 
 ### What's coming for NFT
 
-The digital collectible craze is real; in a world where crypto is regulated and under so much speculation, we still have to wait and see if NFTs are here for good. Flow is doing great work in accelerating NFT adoption by lowering the barriers through reduced [gas prices](https://ethereum.org/en/developers/docs/gas/) and user-friendliness.  
+The digital collectible craze is real; in a world where crypto is regulated and under so much speculation, we still have to wait and see if NFTs are here for good. Flow is doing great work in accelerating NFT adoption by lowering the barriers through reduced [gas prices](https://ethereum.org/en/developers/docs/gas/) and user-friendliness.
 
 We have to wait until mass adoption occurs or it draws down. What's genuine is the current interest in the industry and the considerable capital liquidity that allows the space to push forward, test new ideas, learn from failure until delivering valuable apps around NFT to the mass.
-
 
 ## Crypto Regulation
 
@@ -77,11 +76,10 @@ We can understand a DAO as an **internet native organization** that is controlle
 [Manasi Vora](https://twitter.com/manasilvora), who joined the "How DAOs Could Shake Up VC" panel defined a DAO with the following statement:
 
 > Organizations are just communities with aligned missions that are coming together. And usually, there is a treasury or financial incentives in place. **Autonomous** means there are rules that are encoded in code. And it's governed by the rules that are already created at the beginning or at the launch of the DAO, thus making a lot of the decision makings really transparent. And then the last component is **decentralized**, which refers to just the decision-making process, where it's not hierarchical, there isn't a CEO or board that makes all the decisions, it's really the **community coming together**, making decisions to proposals and voting, and leveraging the collective power.
->
 
 ### Types of DAOs
 
-Manasi Vora and [David Pakman](https://twitter.com/pakman) shared different types of DAOs that are successfully operating so far.  
+Manasi Vora and [David Pakman](https://twitter.com/pakman) shared different types of DAOs that are successfully operating so far.
 
 **Governance Style**
 
@@ -114,7 +112,6 @@ It's indisputable that DAOs enable individuals to pool their capital for group i
 In David words:
 
 > Consensus decision-making is poison to VC. If everyone agrees that it's a great idea, then it's either too obvious that it has already happened, or it's just not, and therefore, it's just not going to produce a great return. And VC is about, you know, trying to find the few that produce the greatest returns.
->
 
 Normally these few investments are not that obvious and most people don't have the context to make the right investment decisions or create a VC portfolio.
 
@@ -157,7 +154,6 @@ An excellent example of recent Web3.0 innovation is DeFi (Decentralized Finance)
 [Ben Rubin](https://twitter.com/benrbn), [slashtalk](https://slashtalk.com/)'s founder & CEO, defined Web 3.0 as:
 
 > Web 2.0 has a network owned by central entities and in Web3.0, it could happen (it's a possibility, this is pretty much new and it's in its early stages) that the network (everyone including you and me) owns the network.
->
 
 Our identities are pretty much reliant on what we own, and Web 3.0 reframes how we think of ownership. Suddenly, People broadly accepted web 3.0's financial layer, ownership shifts from person to person, and NFTs are on the rise.
 
@@ -173,13 +169,11 @@ He concludes NFTs are an insider moment in the first step, so there are two rema
 
 He said we are so early that there's a lot of excitement regarding social media, which means a lot of capital in the market. An abundance of capital is translated to the implementation of ecosystem ideas. However, it's tough to make sure they'll deliver on their promise. There will probably be plenty of projects that'll raise a lot of money and fail, but they will still help the industry move forward, and it will learn from those missteps. Eventually, after multiple failures, people will create something meaningful.
 
-
 ## Rounding Up
 
 <div class="videoWrapper">
 <iframe width="560" height="315" src="https://www.youtube-nocookie.com/embed/rL9hreAyPy0" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 </div>
-
 
 Crypto positively impacts several industries, most directly fintech, and others such as games, investments, creators economy, games, etc. Blockchain is the foundation for all these innovations; it allows us to run Dapps by implementing smart contracts owned by shared networks, bringing transparency, trust, autonomy, ownership, and ultimately, gives the power back to people. Regulations around crypto play a central role in how fast these innovations can occur. NFTs, DeFi, and DAOs are just the tip of the iceberg for what's coming next.
 

@@ -1,6 +1,6 @@
 ---
 title: Insights from Experts on AI and Data Governance
-subtitle: " "
+subtitle: ' '
 permalink: ai-data-governance-panel
 featured: true
 date: 2024-05-25
@@ -14,6 +14,7 @@ tags:
   - Data
 author: xl
 ---
+
 Last week, Xmartlabs hosted an expert panel on [AI and data governance](https://youtu.be/y6FNOWmPbeM) as part of our Xmartlabs Roundtable Talks. This insightful discussion brought together industry experts to share their perspectives on the latest trends, challenges, and best practices in AI and data governance. In this blog, we summarize the key insights from the talk, aiming to share the valuable knowledge imparted by our panelists. [Stay tuned](https://forms.gle/Sfnkj5Aw5uXpUhwQ8) for more expert panels in the future and get real-time insights!
 
 ![](/images/pannelists-bio-3.png)

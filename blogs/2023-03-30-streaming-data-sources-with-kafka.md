@@ -8,7 +8,6 @@ permalink: /streaming-data-sources-with-kafka/
 thumbnail: /images/streaming-data-sources-with-kafka/kafka-blogpost.png
 ---
 
-
 ### Introduction
 
 In this blog post, we will introduce Apache Kafka, how it works, some of its use cases, and a comparison against RabbitMQ and Amazon SQS.
@@ -17,11 +16,11 @@ Kafka is highly useful when trying to connect services without coupling them, cr
 
 ### What is Kafka?
 
-Apache Kafka is not just a messaging system; it’s an open-source distributed event streaming platform for high-performance data pipelines, streaming analytics, and data integration. 
+Apache Kafka is not just a messaging system; it’s an open-source distributed event streaming platform for high-performance data pipelines, streaming analytics, and data integration.
 
 While creating a messaging system using other methods and tools is possible, these solutions can quickly become problematic as system loads and stress increase. That's where Kafka shines and becomes the ideal solution.
 
-Some key features: 
+Some key features:
 
 - **High throughput**: the ability to process huge amounts of messages per second
 - **Scalability**: the ability to grow in capacity when the load increases
@@ -113,4 +112,3 @@ Proper use of Kafka is crucial to efficient performance and smooth data processi
 Apache Kafka is an invaluable tool for high-performance data streaming and management. As a solution architect, it's important to understand its internal design and compare it with other available tools to determine the best solution for your needs. However, simply selecting Kafka is not enough. Implementing it requires careful consideration of best practices, especially those mentioned above. By following these best practices, you can ensure your Kafka implementation's optimal performance and security.
 
 If you're interested in learning more about how Apache Kafka can benefit your business, or if you have any questions, feel free to contact us at [Xmartlabs](https://xmartlabs.com). Our team of experts is always ready to help you.
-

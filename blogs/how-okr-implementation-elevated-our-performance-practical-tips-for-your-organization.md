@@ -1,7 +1,7 @@
 ---
 title: How OKR implementation elevated our performance (+ Practical tips for
   your organization)
-subtitle: " "
+subtitle: ' '
 permalink: OKR-business-goals-methodology
 featured: true
 date: 2024-04-18
@@ -15,6 +15,7 @@ tags:
   - Methodology
 author: nati-quintana
 ---
+
 Embarking on our OKR journey three years ago marked a key moment in our path to achieving organizational efficiency. At that point, we needed a **robust but flexible** **framework.** A system that would foster collaboration, translate long-term aspirations into actionable short-term objectives, and have the flexibility to adapt to the diverse needs of all our teams. Transparency, organization, and an agile approach were non-negotiable elements on our checklist, and the OKR framework introduced by Andrew Grove in the 1970s for Intel checked all the boxes.
 
 Even before introducing the framework, we were conscious of the inherent challenges, particularly in introducing a company-wide framework designed to set priorities and manage goals. The initial resistance to change is a common hurdle, but for frameworks like OKRs, where a smooth adoption translates into achieving company and team goals, overcoming this resistance is a must.
@@ -29,9 +30,9 @@ As the cycles passed and the methodology within our teams strengthened, we conti
 
 Here are some key lessons from our first OKRs cycles:
 
-* Embrace a mindset of continuous improvement and learning. You will for sure make mistakes, the important thing is to learn from them and adapt.
-* Remember, things take time; adapting might require a few cycles, and not all teams will adjust simultaneously. Have patience and work with each team manager to help them adjust.
-* Assign someone as an “OKR Master” (just like the Scrum masters in Scrum) to ensure the seamless implementation of the framework, at least in the initial stages.
+- Embrace a mindset of continuous improvement and learning. You will for sure make mistakes, the important thing is to learn from them and adapt.
+- Remember, things take time; adapting might require a few cycles, and not all teams will adjust simultaneously. Have patience and work with each team manager to help them adjust.
+- Assign someone as an “OKR Master” (just like the Scrum masters in Scrum) to ensure the seamless implementation of the framework, at least in the initial stages.
 
 ## **OKRs become a pillar of our organization**
 
@@ -53,8 +54,8 @@ But how do we integrate OKRs and KPIs? It begins with a deeper exploration of KR
 
 There are two types of key results: activity-based and value-based.
 
-* **Activity-based key results** focus on completing activities or delivering “projects”. This type of KRs typically start with verbs such as *launch*, *create*, *develop*, *deliver*, *build*, *implement*, *define*, *test*, *prepare*, and *plan*.
-* **Value-based** **key results** measure the outcomes of successful activities or projects aiming to deliver value to the organization or clients. They often follow the format: *Increase*, *maintain*, or *reduce* *X metric from value A to value B*.
+- **Activity-based key results** focus on completing activities or delivering “projects”. This type of KRs typically start with verbs such as _launch_, _create_, _develop_, _deliver_, _build_, _implement_, _define_, _test_, _prepare_, and _plan_.
+- **Value-based** **key results** measure the outcomes of successful activities or projects aiming to deliver value to the organization or clients. They often follow the format: _Increase_, _maintain_, or _reduce_ _X metric from value A to value B_.
 
 Why emphasize these distinctions? We aim to foster a culture **focused on results and not focused on tasks or activities**. If we had completed all the activities and nothing improved, we wouldn't have been really successful, so relying only on activity-based key results falls short. Here's where KPIs come into play. As measurable metrics, **KPIs can serve as excellent key results within OKRs**, facilitating a smooth integration of both frameworks.
 
@@ -69,7 +70,7 @@ Throughout our journey with OKRs, we've encountered numerous challenges. Each of
 1. **No magic recipe: customization is key.** As previously emphasized, there's no one-size-fits-all approach to implementing OKRs. While there's a lot of information online, including success stories and implementation guides, it's essential to remember that each organization is unique. What worked for others may not necessarily work for you, and vice versa. Adapting the framework to suit the specific needs and dynamics of your teams and organization is crucial.
 2. **If it doesn’t have a number, it’s not a key result.** A fundamental aspect of key results is their specificity and measurability. If a key result lacks a numerical component, it's not truly measurable. We've previously highlighted the importance of prioritizing value-based key results over activity-based ones and avoiding turning key results into mere task lists. Concrete numerical key results ensure clarity and accountability in measuring outcomes.
 3. **Balancing ambition with realism**: OKRs should be ambitious, driving teams toward significant achievements. However, excessive ambition, also known as "moonshots," can result in challenges or problems such as demotivation, loss of commitment, and alignment issues. Achieving the right balance between ambition and realism is crucial. While one OKR can be set as a moonshot, it's prudent to balance it with more attainable objectives, also known as "roofshots," ensuring sustained progress without overwhelming teams.
-4. **Weekly check-ins: vital for cadence.** Integrating OKRs into our daily work structure through weekly check-ins is indispensable to prevent them from becoming mere goals forgotten in drawers. We know you are probably thinking, “*More meetings? No, thank you.*” However, we've found that weekly check-ins are crucial in maintaining focus towards our goals. By combining these check-ins with the weekly planning sessions of each team, we optimize efficiency and use our time more effectively. These brief but essential meetings serve as crucial checkpoints in our journey toward achieving our OKRs, ensuring alignment and accountability across the organization.
+4. **Weekly check-ins: vital for cadence.** Integrating OKRs into our daily work structure through weekly check-ins is indispensable to prevent them from becoming mere goals forgotten in drawers. We know you are probably thinking, “_More meetings? No, thank you._” However, we've found that weekly check-ins are crucial in maintaining focus towards our goals. By combining these check-ins with the weekly planning sessions of each team, we optimize efficiency and use our time more effectively. These brief but essential meetings serve as crucial checkpoints in our journey toward achieving our OKRs, ensuring alignment and accountability across the organization.
 
 By internalizing these lessons and all the others we’ve collected through this blog post, we've refined our approach to OKRs, driving our way for greater alignment and success.
 

@@ -1,6 +1,6 @@
 ---
-title: "AI Product Discovery: A Journey with Fasten Health"
-subtitle: " "
+title: 'AI Product Discovery: A Journey with Fasten Health'
+subtitle: ' '
 permalink: ai-product-discovery-fasten-health
 featured: true
 date: 2024-11-04
@@ -14,6 +14,7 @@ tags:
   - AIproduct
 author: rafael-morante
 ---
+
 Product Discovery is a vital process of developing technology, helping companies identify the right features, functionalities, and overall direction for their products. This process is especially critical in AI initiatives, where genuinely understanding user needs and technical feasibility before hopping into the AI wave is paramount. 
 
 Product Discovery involves a series of workshops and research phases aimed at aligning stakeholders, understanding the market, generating ideas, and assessing their viability.
@@ -52,37 +53,37 @@ In Fasten Health's case, the Product Discovery workshops we conducted were as fo
 
 **In the first workshop**, we aimed to:
 
-* Align the **project’s** vision and goals, 
-* Define the **product's** vision and goals
-* Identify **constraints**
-* Perform a **RAID** (Risks, Assumptions, Issues, Dependencies) analysis. 
+- Align the **project’s** vision and goals, 
+- Define the **product's** vision and goals
+- Identify **constraints**
+- Perform a **RAID** (Risks, Assumptions, Issues, Dependencies) analysis. 
 
 This workshop helped us understand Fasten Health’s objectives and constraints, setting a solid foundation for the subsequent workshops.
 
 **The second workshop** involved **market analysis and research**. We:
 
-* Reviewed existing product iterations and prototypes
-* Explored product and technical specifics through SME (Subject Matter Expert) interviews
-* Conducted competitive research and analysis. 
+- Reviewed existing product iterations and prototypes
+- Explored product and technical specifics through SME (Subject Matter Expert) interviews
+- Conducted competitive research and analysis. 
 
 This phase was crucial for gathering essential insights into the market landscape and identifying opportunities and challenges for Fasten Health.
 
 In the **third workshop**, we:
 
-* Brainstormed and formulated hypotheses
-* Conducted personas analysis to understand end-users better
-* Mapped user’s current journeys
-* Defined success metrics and measurement strategies
+- Brainstormed and formulated hypotheses
+- Conducted personas analysis to understand end-users better
+- Mapped user’s current journeys
+- Defined success metrics and measurement strategies
 
 This session generated innovative ideas and hypotheses to address user needs and mapped out the current user journeys to identify areas for improvement.
 
 \
 During the **fourth** and last workshop, we:
 
-* Focused on assessing ideas' **viability**
-* Brainstormed **features** that better represent the product's potential
-* **Scoped** the project in detail
-* Drafted future **user journeys** aligned with our hypotheses 
+- Focused on assessing ideas' **viability**
+- Brainstormed **features** that better represent the product's potential
+- **Scoped** the project in detail
+- Drafted future **user journeys** aligned with our hypotheses 
 
 This phase helped us evaluate the feasibility of proposed ideas and define a clear project scope, aligned with user needs and market demands.
 
@@ -105,9 +106,9 @@ For Fasten Health, our ML engineers conducted technical research and proof of co
 
 The technical feasibility takeaways included:
 
-* Identifying viable options for LLMs that can run locally on devices
-* Developing strategies to mitigate security concerns with cloud-based models
-* Confirming the solution's overall viability (with further experimentation)
+- Identifying viable options for LLMs that can run locally on devices
+- Developing strategies to mitigate security concerns with cloud-based models
+- Confirming the solution's overall viability (with further experimentation)
 
 ![](/images/ai-prod.-discovery-2.png)
 

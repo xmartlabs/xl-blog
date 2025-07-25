@@ -13,7 +13,6 @@ Did you obtain good accuracy with your deep learning model only to find out that
 
 <div style={{ textAlign: 'center'}}><img width="100%" src="/images/how-to-speed-up-inference-in-your-deep-learning-model/speed-up.jpg" /></div>
 
-
 Data Science projects have the peculiarity that your focus must constantly shift across completely different requirements.
 
 - How will you obtain the data? Are you creating the dataset? (if so what exactly should you label? how many samples should you invest in?)
@@ -179,7 +178,7 @@ A great advantage of this is that we aren't restricted to only using labelled da
 Beware though that our accuracy might suffer a bit, but we should be able to get a decent speed improvement out of it.
 
 We, unfortunately, didn't have the pleasure of implementing this approach ourselves.
-But  Knowledge distillation has got quite popular recently and has been used in object classification, object detection, acoustic models, and NLP, among others.
+But Knowledge distillation has got quite popular recently and has been used in object classification, object detection, acoustic models, and NLP, among others.
 
 If you want to know more about knowledge distillation check out this paper by [Geoffrey Hinton et al](https://arxiv.org/pdf/1503.02531.pdf).
 
@@ -191,7 +190,6 @@ In this blog, we've described five approaches to improve the inference time of y
 In particular, we'd advise you to implement them in the order we also listed them in, because any coding we do to implement model quantization and automatic mixed-precision is of great value to any further changes we make on our model.
 
 We hope that this article was of value to you, either by giving you guidance on an issue you're currently facing or by arming you with our knowledge should the need arise for it!
-
 
 **Let us know if you have an approach to speed up your model's inference that wasn't covered in this blogpost... Have any question about model's inference speed optimization? We'd be happy to answer those in the comments if we can.**
 

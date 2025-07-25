@@ -1,6 +1,6 @@
 ---
-title: "Adapting Teams to Enterprise Needs: The Key to Successful Collaborations"
-subtitle: " "
+title: 'Adapting Teams to Enterprise Needs: The Key to Successful Collaborations'
+subtitle: ' '
 permalink: /2023-10-04-adapting-teams-to-enterprise-needs/
 featured: true
 date: 2023-10-04

@@ -23,7 +23,6 @@ During the Understand phase, your team comes together to explore the business pr
 
 The team needs to become expert in the fashion industry in less than a day, so after making some phone calls they manage to bring to the room some real experts for day 1. The first one is what the team figured would be a normal customer of their product, and the second the manager of a local clothing firm, who illustrates them about how the fashion industry works.
 
-
 **User Journey Mapping:** mapping out a user’s journey as they encounter and interact with your product.
 
 <img src="/images/sprint2/b.jpg"/>
@@ -38,29 +37,27 @@ During the design phase, individual team members are given the time and space to
 
 **Comparable problem research:** benchmark of related industries and review of similar problems and solutions already existing in the market.
 
-* After searching for direct competitors, analyzing them and picturing a better solution for the spotted problem, it’s time to search for inspiration and existing creative solutions to similar problems. Once the team is full of ideas on how the product could work, they’re ready for the next step.
+- After searching for direct competitors, analyzing them and picturing a better solution for the spotted problem, it’s time to search for inspiration and existing creative solutions to similar problems. Once the team is full of ideas on how the product could work, they’re ready for the next step.
 
 **Exploration and solution sketching:** using fast sketching methods and agile voting to explore wild ideas which will be expanded and refined later.
 
-* Everyone gets pen to paper and design different solutions using a set of fast ideation techniques. The rest of the day is spent refining the solutions and making sure the rest of the team would understand them. After each member presents their solution sketch, a vote is held.
+- Everyone gets pen to paper and design different solutions using a set of fast ideation techniques. The rest of the day is spent refining the solutions and making sure the rest of the team would understand them. After each member presents their solution sketch, a vote is held.
 
 ## Wednesday: Decide
 
-
 During this phase the team converges into a solution and chooses what to prototype. Two steps are involved in the decision making phase:
 
-*Solution voting:* using a method called zen voting, to keep discussions short and be able to decide which ideas are worth the shot.
+_Solution voting:_ using a method called zen voting, to keep discussions short and be able to decide which ideas are worth the shot.
 
 <img src="/images/sprint2/d.jpg"/>
 
 At this point the walls are filled with hand-drawn sketches and post-it notes that explain what’s going on. After a few minutes of discussion, the sketches are filled with dots highlighting interesting ideas. It is time for the decider to place the super votes, (large stickers which are used to determine which ideas will be prototyped and tested). Two solutions regarding how to decide which clothes should be delivered stand out. The first one includes a “style discovery” phase, in which the user would be asked to choose from a variety of different outfits, in order to create a “personal style profile” which could range from trendy to conservative, formal, edgy, etc. The second one is a simple approach: a set of 6 looks to choose from would be presented to each customer, for him to choose one of them. This means simpler logistics. The team decides to prototype and test both.
 
-*Storyboarding:* mapping out each step of the experience you’re going to test.
+_Storyboarding:_ mapping out each step of the experience you’re going to test.
 
-* It it design time, so both solutions are discussed and sketched a few times, each time in more detail. The team is confident that they had come up with two strong products.
+- It it design time, so both solutions are discussed and sketched a few times, each time in more detail. The team is confident that they had come up with two strong products.
 
 ## Thursday: Prototype
-
 
 During this phase the team builds a facade of the experience you they have envisioned in the design phase. The facade needs to be real enough so as to get an authentic response from a potential user.
 
@@ -68,9 +65,7 @@ During this phase the team builds a facade of the experience you they have envis
 
 Every member of the Clothing Rental Box team has a job to get done: researching outfits, gathering images, creating content, designing the screens and putting together the fake prototype that mimic the website.
 
-
 ## Friday: Test
-
 
 The Test phase is the Design Sprint moment of truth. When you finally get to see live users interact with your ideas and hear direct feedback from your target audience.
 

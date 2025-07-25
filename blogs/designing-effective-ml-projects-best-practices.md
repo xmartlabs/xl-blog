@@ -1,6 +1,6 @@
 ---
-title: "Designing Effective ML Projects: Best Practices"
-subtitle: " "
+title: 'Designing Effective ML Projects: Best Practices'
+subtitle: ' '
 permalink: effective-ml-project-design
 featured: true
 date: 2023-11-20
@@ -13,6 +13,7 @@ tags:
   - ProjectDesign
 author: mathias
 ---
+
 In the dynamic world of machine learning (ML), success relies on more than just advanced algorithms and vast datasets. Reaching time-constrained objectives requires a thoughtful process. At Xmartlabs, we've learned the importance of involving Machine Learning Engineers early in an ML project. This proactive approach ensures that the project's foundation is solid right from the start.
 
 Imagine investing weeks or months in a complex ML model, only to discover later that it doesn't fit the real-world application. This can lead to frustration and wasted resources. ML model suitability depends heavily on the specific use case, making early ML Engineer involvement invaluable.
@@ -90,8 +91,6 @@ As mentioned earlier, we chose to go with a CPU deployment as that saves a lot i
 It is good to think ahead when planning an ML project. In this blog, you can see that over and over again. This will save a lot of lost time and produce better solutions. From our experience, it is also greatly beneficial when people in different roles (like people who build and train a model and those who are responsible for deploying it) work together on designing of a solution.
 
 You can witness the results of BingeWiz by heading to [bingewiz.xmartlabs.com](http://bingewiz.xmartlabs.com), where our ML experts did a fantastic job. If you want them on your team, don't hesitate to [reach out](https://form.typeform.com/to/D1PhDJIR), and we'll become part of your team from day one!
-
-
 
 > 💡 Learn the intricacies of AI and how to manage sensitive data responsibly to ensure safe AI innovation from leading experts!
 >

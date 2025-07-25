@@ -1,6 +1,6 @@
 ---
 title: How to stay mentally and physically healthy during covid-19 quarantine
-excerpt: "In this blogpost I share some useful behaviour tips to overcame physically and mentally healthy the COVID-19 quarantine"
+excerpt: 'In this blogpost I share some useful behaviour tips to overcame physically and mentally healthy the COVID-19 quarantine'
 date: 2020-06-08
 tags: [COVID-19, Mental Health, Physical Health]
 category: people-events
@@ -45,7 +45,6 @@ Find meaning in what’s happening. Ask yourself: Why am I staying at home? Whic
 There is another thing that we should take into consideration. Some countries are leaving the lockdown behind and they are starting to go out again. If this is your case, stay as calm as you can. There is no need to rush, it’s not the time to make up for lost time, it’s time to recover and to adapt to the new normal.
 
 You may want to go out and see all the people you couldn’t see for a while, but it’s important for you to be progressive. Go out and see people as long as you feel comfortable. Don’t make risky decisions, take care of yourself, and of the people around you. Wash your hands, keep social distancing, and if you have COVID-19 symptoms you should stay at home.
-
 
 ## Be responsible & don't feel guilty
 

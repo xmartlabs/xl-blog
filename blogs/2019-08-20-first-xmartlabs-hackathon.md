@@ -1,5 +1,5 @@
 ---
-title: "Our very first Hackathon!"
+title: 'Our very first Hackathon!'
 date: 2019-09-10
 tags: [hackathon, team, xmartlabs]
 category: people-events

@@ -1,7 +1,7 @@
 ---
-title: "Migrating to Contentful: Streamlining Data for Better Performance and
-  Workflows"
-subtitle: " "
+title: 'Migrating to Contentful: Streamlining Data for Better Performance and
+  Workflows'
+subtitle: ' '
 permalink: /contentful-migration-data-performance
 featured: true
 date: 2025-05-29
@@ -15,6 +15,7 @@ tags:
   - Workflows
 author: facu
 ---
+
 ## **Migrating to Contentful: Streamlining Data for Better Performance and Workflows**
 
 Migrating from WordPress to a modern CMS like Contentful can supercharge your website’s performance, streamline content creation, and make life easier for everyone involved. In this guide, we'll walk you through our process, highlight key considerations, and share tips to ensure a smooth transition.
@@ -25,9 +26,9 @@ Using our client [Robinson & Henry](http://www.robinsonandhenry.com) as an examp
 
 WordPress is a reliable CMS, but it does come with its challenges, like performance issues, dependence on heavy plugins, and some SEO constraints. Switching to Contentful offers you the chance to unlock:
 
-* Faster site performance
-* Cleaner workflows for content creators
-* A modern, flexible data model
+- Faster site performance
+- Cleaner workflows for content creators
+- A modern, flexible data model
 
 ## Understanding Relationships Between Content Types
 
@@ -35,7 +36,7 @@ Before diving into migration tools, it’s essential to understand how your data
 
 Pro tip: Focus on the big picture. We kept the diagram simple by leaving out details like the SEO content type, which had a straightforward 1:1 relationship with every other type.
 
-![pre-migration conceptual model](/images/migrating-to-contentful-mapa-1.png "Conceptual model before migration")
+![pre-migration conceptual model](/images/migrating-to-contentful-mapa-1.png 'Conceptual model before migration')
 
 Conceptual model before migration
 
@@ -43,14 +44,14 @@ Conceptual model before migration
 
 Once you’ve mapped your content, it’s time to optimize for better performance. Here’s what worked for us:
 
-* **Simplifying Tags:** In WordPress, Tags were a separate content type but lacked reusability. We streamlined this by implementing them as a multivalued field within Articles and Case Results.
-* **Simplifying “Ask Our Attorney”:** To declutter the model, we opted for a single-question, single-answer structure, ensuring simplicity for both users and developers.
-* **Unifying Articles:** Instead of maintaining two distinct content types for articles, we merged them into one.
-* **Merging Categories and Services:** We identified that these two content types were actually referring to the same concept. However, a few of their entries were written different like "Sex Crimes" and "Sex Crimes Defense.". In this process, we also unified them, eliminating redundancy and creating a more consistent and streamlined structure.
+- **Simplifying Tags:** In WordPress, Tags were a separate content type but lacked reusability. We streamlined this by implementing them as a multivalued field within Articles and Case Results.
+- **Simplifying “Ask Our Attorney”:** To declutter the model, we opted for a single-question, single-answer structure, ensuring simplicity for both users and developers.
+- **Unifying Articles:** Instead of maintaining two distinct content types for articles, we merged them into one.
+- **Merging Categories and Services:** We identified that these two content types were actually referring to the same concept. However, a few of their entries were written different like "Sex Crimes" and "Sex Crimes Defense.". In this process, we also unified them, eliminating redundancy and creating a more consistent and streamlined structure.
 
 These adjustments simplify the model, and make it easier for content creators to work efficiently without worrying about data inconsistencies or overly complicated workflows.
 
-![Conceptual model after migration](/images/migrating-to-contentful-mapa-2.png "Conceptual model after migration")
+![Conceptual model after migration](/images/migrating-to-contentful-mapa-2.png 'Conceptual model after migration')
 
 Conceptual model after migration
 
@@ -72,14 +73,14 @@ This WordPress plugin allowed us to fetch data via structured queries, providing
 
 ### Contentful Management
 
-* getEntry: This function fetches an existing entry to ensure related items exist before linking. For example, when creating an article, it checks if the connected service exists. If not, the article could link to an undefined entity, causing issues later. This function prevents such problems.
-* createEntryWithId: This function lets you create an entry with a custom ID which is crucial to create relationships later from other content types. Once the entry is created, it’s saved as a draft in Contentful. Depending on what you need, you can also run: entry.publish to publish it right away.\
+- getEntry: This function fetches an existing entry to ensure related items exist before linking. For example, when creating an article, it checks if the connected service exists. If not, the article could link to an undefined entity, causing issues later. This function prevents such problems.
+- createEntryWithId: This function lets you create an entry with a custom ID which is crucial to create relationships later from other content types. Once the entry is created, it’s saved as a draft in Contentful. Depending on what you need, you can also run: entry.publish to publish it right away.\
   entry.archive, in cases it was archived in WordPress.
-* createAsset: This function is used to create an asset. After it’s created, you’ll need to run either asset.processForLocale or asset.processForAllLocales to start asset processing.
+- createAsset: This function is used to create an asset. After it’s created, you’ll need to run either asset.processForLocale or asset.processForAllLocales to start asset processing.
 
 ### Contentful Migration
 
-* transformEntries: This function was useful for updating existing entries and linking them to new content-types created after migration. For example, we used it to update attorneys with their IDs, as they would be referenced by other content types. Additionally, it allowed us to update the attorneys’ SEO since the SEO entities had been migrated, and the attorneys initially had none.
+- transformEntries: This function was useful for updating existing entries and linking them to new content-types created after migration. For example, we used it to update attorneys with their IDs, as they would be referenced by other content types. Additionally, it allowed us to update the attorneys’ SEO since the SEO entities had been migrated, and the attorneys initially had none.
 
 ## Migration Strategies
 
@@ -95,9 +96,9 @@ This method allows you to test the migration in smaller chunks before moving on 
 
 Before starting the migration process, data related to Attorney, Office and Service & Subareas had already been migrated manually. To address mismatched IDs, we developed custom mapping functions for:
 
-* Matching service names between WordPress and Contentful.
-* Aligning category and service names (often representing the same concept with different labels).
-* Linking attorney and office names across platforms.
+- Matching service names between WordPress and Contentful.
+- Aligning category and service names (often representing the same concept with different labels).
+- Linking attorney and office names across platforms.
 
 Testing these mappings was important, as missed matches could lead to unlinked entities, causing significant issues later. Our QA team meticulously reviewed these connections to ensure accuracy.
 
@@ -105,7 +106,7 @@ Testing these mappings was important, as missed matches could lead to unlinked e
 
 By following a structured migration process, you can significantly reduce the time spent on manual data entry. While some simpler entities might take a minute each, more complex items like detailed articles, can require up to 30 minutes or more to migrate due to the volume of information involved. A well-planned migration can save you weeks, even months of work, time that’s far better spent enhancing your site’s functionality and user experience. After running the migration script, we achieved the following:
 
-![Amount of entities per content-type migrated](/images/migrating-to-contentful-results-of-proper-planning-table.png "Amount of entities per content-type migrated")
+![Amount of entities per content-type migrated](/images/migrating-to-contentful-results-of-proper-planning-table.png 'Amount of entities per content-type migrated')
 
 Amount of entities per content-type migrated
 
@@ -113,10 +114,10 @@ Amount of entities per content-type migrated
 
 Migrating to Contentful hasn’t just been a platform switch,  it has been a chance to level up our content strategy and workflows. By following a solid migration process, we’ve gained several key benefits:
 
-* Faster Performance & Cleaner Workflows: Contentful offers improved speed and streamlined content management compared to WordPress, making it easier to get things done.
-* Simplified Data Models: Consolidating redundant content types and relationships helped create a cleaner usable structure.
-* Structured Migration Process: By tackling migration step-by-step, starting with simple content types, fix mismatched IDs, and test mappings we ensured a smooth and accurate transition.
-* Post-Migration Optimization: After migration, it's all about optimizing SEO fields, missing redirects and ensuring everything works together for a seamless user experience.
+- Faster Performance & Cleaner Workflows: Contentful offers improved speed and streamlined content management compared to WordPress, making it easier to get things done.
+- Simplified Data Models: Consolidating redundant content types and relationships helped create a cleaner usable structure.
+- Structured Migration Process: By tackling migration step-by-step, starting with simple content types, fix mismatched IDs, and test mappings we ensured a smooth and accurate transition.
+- Post-Migration Optimization: After migration, it's all about optimizing SEO fields, missing redirects and ensuring everything works together for a seamless user experience.
 
 \
 Transitioning to Contentful brings measurable improvements to your website and content workflows, that said, migrating from WordPress to Contentful wasn’t just about changing platforms, it was about learning what really made the transition work. A streamlined, step-by-step process made all the difference, from tackling mismatched IDs to improving how content types connected. Testing along the way helped catch issues early, and post-migration tweaks like validating SEO fields and setting up redirects ensured everything ran smoothly. The biggest takeaway? Staying organized and intentional is the key to making a migration seamless and setting your content up for success.

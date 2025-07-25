@@ -1,6 +1,6 @@
-@import "../../css/variables.scss";
-@import "../../css/colors.scss";
-@import "../../css/text-styles.scss";
+@import '../../css/variables.scss';
+@import '../../css/colors.scss';
+@import '../../css/text-styles.scss';
 
 // Container
 
@@ -19,7 +19,11 @@
   width: 100%;
   height: 100%;
   background-size: 15%;
-  background: radial-gradient(circle at right, rgb(219, 255, 0) -3%, rgb(244, 247, 252) 17%);
+  background: radial-gradient(
+    circle at right,
+    rgb(219, 255, 0) -3%,
+    rgb(244, 247, 252) 17%
+  );
   background-repeat: no-repeat;
 }
 
@@ -52,7 +56,7 @@
 // Bottom Text Header
 
 .bottomTextContainer {
-  background-color: #DBFF00;
+  background-color: #dbff00;
   height: 3.125rem;
   overflow: hidden;
   max-width: 100%;
@@ -64,7 +68,8 @@
   margin-top: 0.1rem;
 }
 
-.bottomText, .dupContent {
+.bottomText,
+.dupContent {
   letter-spacing: 0.11rem;
   text-transform: uppercase;
   font-family: $title-font;
@@ -89,7 +94,8 @@
 
 // Circle
 
-.pinkCircle,.pinkCircle:after{ 
+.pinkCircle,
+.pinkCircle:after {
   display: block;
 }
 
@@ -105,11 +111,12 @@
   left: 58%;
 }
 
-@keyframes pink-cirlce-move{
+@keyframes pink-cirlce-move {
   0% {
-      transform: rotate(0deg)
-  } to {
-      transform: rotate(1turn)
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(1turn);
   }
 }
 
@@ -121,9 +128,12 @@
   }
 
   .contentContainer {
-    background: radial-gradient(circle at right, rgb(219, 255, 0) -15%, rgb(244, 247, 252) 25%);
+    background: radial-gradient(
+      circle at right,
+      rgb(219, 255, 0) -15%,
+      rgb(244, 247, 252) 25%
+    );
   }
-
 }
 
 @media screen and (max-width: map-get($map: $screen-breakpoint, $key: xs)) {
@@ -153,13 +163,17 @@
   }
 
   .contentContainer {
-    background: radial-gradient(circle at right, rgb(219, 255, 0) -60%, rgb(244, 247, 252) 50%);
+    background: radial-gradient(
+      circle at right,
+      rgb(219, 255, 0) -60%,
+      rgb(244, 247, 252) 50%
+    );
   }
 
   .bottomTextContainer {
     height: 2.75rem;
   }
-  
+
   .bottomTextSubContainer {
     margin-top: 2.5%;
     span {

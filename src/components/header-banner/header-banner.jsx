@@ -1,8 +1,8 @@
-import React from "react";
+import React from 'react';
 
-import { HeaderCircleIcon } from "../icons";
+import { HeaderCircleIcon } from '../icons';
 
-import * as styles from "./header-banner.module.scss";
+import * as styles from './header-banner.module.scss';
 
 const HeaderBanner = () => {
   const reuseCat = (
@@ -30,14 +30,12 @@ const HeaderBanner = () => {
           <p>Access our Insights on Technology, Product, Design, & more</p>
         </div>
         <div className={styles.pinkCircle}>
-          <HeaderCircleIcon/>
+          <HeaderCircleIcon />
         </div>
       </div>
       <div className={styles.bottomTextContainer}>
         <div className={styles.bottomTextSubContainer}>
-          <div className={styles.bottomText}>
-            {reuseCat}
-          </div>
+          <div className={styles.bottomText}>{reuseCat}</div>
           <div className={styles.dupContent}>
             {reuseCat}
             {reuseCat}
@@ -46,6 +44,6 @@ const HeaderBanner = () => {
       </div>
     </div>
   );
-}
+};
 
 export { HeaderBanner };

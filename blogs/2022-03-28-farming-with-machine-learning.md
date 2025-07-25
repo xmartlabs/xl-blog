@@ -1,7 +1,13 @@
 ---
 title: Precision Agriculture And The Future of Farming with Machine Learning
 date: 2022-03-29
-tags: [applied Machine Learning, Machine Learning in Agriculture, deep learning for agriculture, production costs]
+tags:
+  [
+    applied Machine Learning,
+    Machine Learning in Agriculture,
+    deep learning for agriculture,
+    production costs,
+  ]
 author: vale
 category: machine-learning
 thumbnail: images/farming-ml/MLAgriculture.jpg
@@ -10,11 +16,9 @@ permalink: /precision-agriculture-and-the-future-of-farming-with-machine-learnin
 
 Maintaining a plantation, whether it’s for forestry or crops, has never been more expensive ([costs per acre in the US have risen 170% since the 70s](https://www.extension.iastate.edu/agdm/crops/pdf/a1-21.pdf)). And this is partly due to the increasing costs of maintaining weed-free fields.
 
-Weed detection and control in small and large farms has become a challenge. Herbicide usage has increased ([527 million pounds in the last 20 years](https://enveurope.springeropen.com/articles/10.1186/2190-4715-24-24#:~:text=Herbicide%2Dresistant%20crop%20technology%20has,kilograms%20(123%20million%20pounds).)), and although its price has not necessarily decreased, never have people spent more on it (a whopping $6.6 billion yearly in the US alone).
+Weed detection and control in small and large farms has become a challenge. Herbicide usage has increased ([527 million pounds in the last 20 years](<https://enveurope.springeropen.com/articles/10.1186/2190-4715-24-24#:~:text=Herbicide%2Dresistant%20crop%20technology%20has,kilograms%20(123%20million%20pounds).>)), and although its price has not necessarily decreased, never have people spent more on it (a whopping $6.6 billion yearly in the US alone).
 
 Machine Learning and [Computer Vision](https://blog.xmartlabs.com/blog/computer-vision-techniques-for-body-detection/) have provided solutions to tackle the challenges producers face regarding weed control. In the following post, we’ll discuss the critical problems around herbicides and irrigation and how ML tech has helped reduce its economic and environmental costs.
-
- 
 
 <aside>
 If you’re struggling with high production costs, contact our team, and let’s see how we can leverage our ML knowledge to find a solution for you.
@@ -37,7 +41,7 @@ Worst of all, the costly herbicide doesn’t always reach its target because bro
 
 ### Impact of herbicides on soil
 
-Application of herbicides can disrupt earthworm ecology, inhibit soil [N-cycling](https://en.wikipedia.org/wiki/Nitrogen_cycle), and increase disease, altering soil function. And although impacts might be minor or temporary, herbicide application is still risky. It may be a “necessary evil”, but it’s worth mentioning some of the damage it’s been proven to cause, especially if these side effects can be reduced or remedied. 
+Application of herbicides can disrupt earthworm ecology, inhibit soil [N-cycling](https://en.wikipedia.org/wiki/Nitrogen_cycle), and increase disease, altering soil function. And although impacts might be minor or temporary, herbicide application is still risky. It may be a “necessary evil”, but it’s worth mentioning some of the damage it’s been proven to cause, especially if these side effects can be reduced or remedied.
 
 The truth is, there’s also a [lack of evidence of damage](http://sciencedirect.com/science/article/abs/pii/S0065211315001492) to the soil because there’s not a consistent framework for assessing it, there are other elements affecting soil such as management practices (crop rotation, tillage), and there's a limited amount of long term studies on the topic.
 
@@ -84,7 +88,7 @@ The idea behind the solution is for the individual nozzles to spray the desired 
 
 ### Datasets for sourcing weed and plant images
 
-AlexNet and other models were based on ImageNet, which is one of the visual datasets available (i.e., a dataset that contains millions of images that have been classified by hand to indicate the object in the picture). But because we will be dealing with very specific images (plants/crops/trees) the ideal would be to transfer the classification knowledge acquired in ImageNet or other large datasets, to a more specific dataset. That can be achieved by Transfer Learning, which enables one to take a model trained on a large dataset and fine-tune it on a smaller dataset without having to re-train it from scratch (which would take a considerable amount of time).  
+AlexNet and other models were based on ImageNet, which is one of the visual datasets available (i.e., a dataset that contains millions of images that have been classified by hand to indicate the object in the picture). But because we will be dealing with very specific images (plants/crops/trees) the ideal would be to transfer the classification knowledge acquired in ImageNet or other large datasets, to a more specific dataset. That can be achieved by Transfer Learning, which enables one to take a model trained on a large dataset and fine-tune it on a smaller dataset without having to re-train it from scratch (which would take a considerable amount of time).
 
 ![data set](/images/farming-ml/dataset.png)
 
@@ -102,7 +106,7 @@ An accurate dataset is achieved by creating it with all possible scenarios in mi
 
 Because the ML model should perform on pre-existing software on the tractor, edge computer comes as the organic alternative. It not only improves response time and saves bandwidth, but it’s also easier to install, cheaper, and can work without an internet connection (essential if you want it to work in remote farmlands).
 
-The advantages this solution presents are obvious, if you know exactly what weed it is you can select the best herbicide to spray depending on the weed’s resistance and save a considerable amount of herbicide by spraying it directly on the weed and not on the crop/tree. Not wasting herbicides on resistant weeds or spraying them on plants that don’t need it will invariably help save a considerable amount of costs in the long run. 
+The advantages this solution presents are obvious, if you know exactly what weed it is you can select the best herbicide to spray depending on the weed’s resistance and save a considerable amount of herbicide by spraying it directly on the weed and not on the crop/tree. Not wasting herbicides on resistant weeds or spraying them on plants that don’t need it will invariably help save a considerable amount of costs in the long run.
 
 ## Current solutions
 

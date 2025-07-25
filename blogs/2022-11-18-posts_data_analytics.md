@@ -27,9 +27,7 @@ To take advantage of it, Big Data Analytics comes to play.
 It is the process to examine large amounts of data to uncover hidden patterns, trends, correlations, customer preferences, and more insights.
 After obtaining and cleaning the data, business analysts can work together with data analysts to use visualization tools and find these insights, leading to a more informed decision-making process.
 
-
 <img width="100%" src="/images/data-analytics/Data-analytics1.png" />
-
 
 ## The Benefits of Using Big Data and Analytics
 

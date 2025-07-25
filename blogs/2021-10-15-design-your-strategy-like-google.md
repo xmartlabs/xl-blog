@@ -45,7 +45,7 @@ At XmartLabs, we set up **yearly objectives** that reflect our goals for the f
 
 Once the quarterly OKRs are defined at a company level, each team develops its own OKRs linked to the general ones. After an initial meeting to define them and break down OKRs into tasks, teams have weekly syncs to comment on their progress with their responsibilities.
 
-Although our experience with OKRs is relatively new, we can see the advantage of setting specific tasks to help teams focus on the long-term strategy. Being a B2B company sometimes means running behind clients' deadlines and adopting their objectives and needs as our own. And, although this is necessary and ensures great outcomes, it's easy to forget our own company's goals. OKRs are an excellent way of dealing with that tension.  There's also the obvious advantage of being aligned as a company and having a sense that all teams are working towards the same general objectives.
+Although our experience with OKRs is relatively new, we can see the advantage of setting specific tasks to help teams focus on the long-term strategy. Being a B2B company sometimes means running behind clients' deadlines and adopting their objectives and needs as our own. And, although this is necessary and ensures great outcomes, it's easy to forget our own company's goals. OKRs are an excellent way of dealing with that tension. There's also the obvious advantage of being aligned as a company and having a sense that all teams are working towards the same general objectives.
 
 Some best practices we found helpful when it comes to implementing OKRs are:
 

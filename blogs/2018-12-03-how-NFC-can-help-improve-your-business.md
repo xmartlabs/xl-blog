@@ -27,7 +27,6 @@ Furthermore, NFC-based payment methods have been accepted in a wide variety of s
 
 NFC chips are already being used to identify most of the people in the world! Since a significant majority of the world passports have an NFC chip that contains personal information. Biometric information is usually stored in this type of chips allowing to identify its owner and provide critical information like its digital signature. Since the creation of the standard a lot of countries have transitioned into electronic passports in order to make their identifications processes faster and more efficient.
 
-
 <img width="100%" src="/images/how-nfc-can-help-improve-your-business/linked-in.jpg" />
 <br />
 <p style={{ textAlign: 'center' }}> (source: <a href="https://www.instructables.com/">Instructables</a>)</p>

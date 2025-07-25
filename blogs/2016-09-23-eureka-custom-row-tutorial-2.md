@@ -13,14 +13,13 @@ Some days ago, we released the introduction to create custom rows for [Eureka](h
 
 The row we are going to build will allow the user to create strong passwords. The developer will be in charge of defining (and implementing) the concept of **password strength** and also the reactive view to provide feedback of it.
 
-
 ## Motivation
 
 We will support the following features:
 
-* Show password strength while typing.
-* Provide hints in order to help the user create a valid password.
-* Provide a button to hide/show the password.
+- Show password strength while typing.
+- Provide hints in order to help the user create a valid password.
+- Provide a button to hide/show the password.
 
 **Final product**
 
@@ -35,7 +34,6 @@ Before start coding, since we want our row to be as reusable as we can, we shoul
 <img src="/images/eureka-custom-row-2/GenericPasswordRow-Diagram.svg" style={{ margin: '0 auto', display: 'block' }}/>
 
 As you may have learned from our [previous post](https://blog.xmartlabs.com/2016/09/06/Eureka-custom-row-tutorial/), any custom row in Eureka will have a `Row` and `Cell` as primary components, in this case, `GenericPasswordRow` and `GenericPasswordCell` will map with those respectively. For the customizable UI side, we will be adding a custom nib file (which you can replace or use our default one). On the other hand, we will have a `PasswordValidator` component that will be responsible for the password validation process, here is where you (as a programmer) could be as creative as you want.
-
 
 As any custom row of Eureka we will have our `Row` and `Cell` as primary components, in this example, `GenericPasswordRow` and `GenericPasswordCell` respectively. Then, we are adding a custom nib file as the `Design` component and the `PasswordValidator` component as the "brain" of the password validation process.
 
@@ -61,10 +59,10 @@ This protocol should specify all what's needed to determine the UI state for any
 
 Let's create our custom password validator called `MyPasswordValidator` with the following rules:
 
-* At least a lowercase letter
-* At least a number
-* At least an uppercase letter
-* At least 6 characters.
+- At least a lowercase letter
+- At least a number
+- At least an uppercase letter
+- At least 6 characters.
 
 Pretty basic, don't you think? We could check if you are using part of your email in your password but maybe some other time... ¯\\_(ツ)_/¯
 
@@ -162,13 +160,12 @@ public final class GenericPasswordRow: _GenericPasswordRow, RowType { }
 
 As we mentioned earlier, we will also provide our custom design in `GenericPasswordCell.xib`. Using IB we will create a UITableViewCell with the following views:
 
-* textField: UITextField
-* visibility button: UIButton
-* password strength view: **subclass** of PasswordStrengthView
-* hint label: UILabel
+- textField: UITextField
+- visibility button: UIButton
+- password strength view: **subclass** of PasswordStrengthView
+- hint label: UILabel
 
 <img src="/images/eureka-custom-row-2/Nib-outlets.svg" style={{ margin: '0 auto', display: 'block' }}/>
-
 
 Thinking ahead a little bit, we need to design this cell having in mind that the `hintLabel` will be toggling its hidden state depending on the return values of `func hintForPassword(password: String) -> String?` (whether being `nil` or not) on the `passwordValidator` instance of our `GenericPasswordRow`.
 Again, trying to be as generic as possible, we introduce the `PasswordStrengthView` here. The idea is that you can easily replace this strength view by subclassing this class:
@@ -189,7 +186,6 @@ and implementing your desired behavior in those methods. In this implementation 
 and then, every time `updateStrength(...)` function gets called (while the user is typing) we use the `validator` to calculate the actual strength and then update the strength view.
 
 <img src="/images/eureka-custom-row-2/strength-loading.gif" style={{ margin: '0 auto', display: 'block' }}/>
-
 
 ### GenericPasswordCell
 
@@ -363,49 +359,50 @@ Again, you can see all the source files in [GenericPasswordRow](https://github.c
 
 There are several ways to change this custom row. You should be able to reuse all of the implemented logic and just replace the design (with another nib file). Also, providing a custom implementation of the `PasswordValidator` protocol should be pretty much straightforward (not being annoying to the user is the hard part). What follows should be used as a guideline to customize as much as you want or even extend the current functionality.
 
-  * Providing a custom password validator.
+- Providing a custom password validator.
 
-    ```swift
-    form +++ Section()
-        <<< GenericPasswordRow() {
-          $0.passwordValidator = // your custom validator
-        }
-    ```
-  * Creating another nib file to provide a different design component and connecting outlets to the `GenericPasswordCell` class. This is a very important feature, you can literally change the **entire design** of this row having the same functionality (for free!). Check [this instructions](https://github.com/EurekaCommunity/GenericPasswordRow/blob/master/README.md#creating-custom-nib-file) to get it done.
+  ```swift
+  form +++ Section()
+      <<< GenericPasswordRow() {
+        $0.passwordValidator = // your custom validator
+      }
+  ```
 
+- Creating another nib file to provide a different design component and connecting outlets to the `GenericPasswordCell` class. This is a very important feature, you can literally change the **entire design** of this row having the same functionality (for free!). Check [this instructions](https://github.com/EurekaCommunity/GenericPasswordRow/blob/master/README.md#creating-custom-nib-file) to get it done.
 
-    ```swift
-    GenericPasswordRow.defaultRowInitializer = {
-        $0.cellProvider = CellProvider<GenericPasswordCell>(nibName: "MyPasswordCell")
-    }
-    ```
-    or
+  ```swift
+  GenericPasswordRow.defaultRowInitializer = {
+      $0.cellProvider = CellProvider<GenericPasswordCell>(nibName: "MyPasswordCell")
+  }
+  ```
 
-    ```swift
-    final class MyPasswordRow: _GenericPasswordRow, RowType {
-        required init(tag: String?) {
-            super.init(tag: tag)
-            cellProvider = CellProvider<GenericPasswordCell>(nibName: "MyPasswordCell")
-        }
-    }
-    ```
-  * Subclassing `DefaultPasswordStrengthView` or `PasswordStrengthView` to provide a different strength view bar.
-  * Subclassing `_GenericPasswordRow` or `GenericPasswordCell`.
+  or
 
-    ```swift
-    public final class MyGenericPasswordRow: _GenericPasswordRow, RowType {
-        // add properties, methods, override, etc
-    }
-    ```
-    or
+  ```swift
+  final class MyPasswordRow: _GenericPasswordRow, RowType {
+      required init(tag: String?) {
+          super.init(tag: tag)
+          cellProvider = CellProvider<GenericPasswordCell>(nibName: "MyPasswordCell")
+      }
+  }
+  ```
 
-    ```swift
-    public class MyGenericPasswordCell: GenericPasswordCell {
-        // add properties, methods, override, etc
-    }
-    ```
+- Subclassing `DefaultPasswordStrengthView` or `PasswordStrengthView` to provide a different strength view bar.
+- Subclassing `_GenericPasswordRow` or `GenericPasswordCell`.
 
+  ```swift
+  public final class MyGenericPasswordRow: _GenericPasswordRow, RowType {
+      // add properties, methods, override, etc
+  }
+  ```
 
+  or
+
+  ```swift
+  public class MyGenericPasswordCell: GenericPasswordCell {
+      // add properties, methods, override, etc
+  }
+  ```
 
 ## Where to go from here
 

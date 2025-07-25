@@ -46,7 +46,6 @@ Since 2011, this top-5 error rate has decreased from 26% to less than 4% thanks 
 Some of the most successful convolutional neural networks are quite computationally expensive but there are also others like [MobileNet](https://arxiv.org/abs/1801.04381) which achieves an error rate of about 8% but is still small enough to be run on a mobile device in real time.
 We will run MobileNet on an iPhone in this post.
 
-
 # Running ML Kit on iOS
 
 To get started with ML Kit on iOS you need to have [Cocoapods](https://cocoapods.org/) installed and add the following lines to your Podfile:
@@ -139,7 +138,6 @@ override func viewDidLoad() {
 
 You can also specify how many predictions you want to get and if the Cloud API should use the latest model or the last stable model.
 
-
 ## Running a custom model
 
 To run a custom model you first need a TensorFlow Lite model which you have to upload to the Firebase console of your project. For this, go to `ML Kit` -> `Custom` in the console.
@@ -147,6 +145,7 @@ This is where you can easily update your models afterwards as well.
 In our case, we will use [MobileNet v2](https://arxiv.org/abs/1801.04381) as our custom model.
 
 The second step is to add the following pod to your Podfile:
+
 ```
 pod 'Firebase/MLModelInterpreter'
 ```
@@ -282,7 +281,6 @@ Core ML takes an average of 30 ms to process each frame while ML Kit takes 32 ms
 This small difference comes because Core ML uses the GPU, which ML Kit doesn't.
 We would expect the difference to be bigger but we have noted that Core ML sometimes does not run as fast as other solutions which use Metal directly.
 With other models this difference could also be bigger.
-
 
 ## Double buffering
 

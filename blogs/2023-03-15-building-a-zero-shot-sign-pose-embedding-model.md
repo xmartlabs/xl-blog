@@ -1,13 +1,18 @@
 ---
 title: Building a zero-shot Sign Pose Embedding model
 date: 2023-03-16
-tags: [machine-learning, pose estimation, pose embedding model, sign language recognition]
+tags:
+  [
+    machine-learning,
+    pose estimation,
+    pose embedding model,
+    sign language recognition,
+  ]
 author: mathias
 category: machine-learning
 thumbnail: /images/building-a-zero-shot-sign-pose-embedding-model/LSU.png
 permalink: /machine-learning-sign-language-recognition/
 ---
- 
 
 At Xmartlabs, our machine learning team set out to develop an innovative ML product last year. After careful consideration and collaboration with our Design team, we decided to focus on building **a sign language practice assist system** instead of a full-fledged sign language translator. Read more about our thought process (including the product definition and market research) in this [blog post](/blog/from-idea-to-MVP-the-lean-inception-process/) by our design team.
 
@@ -55,19 +60,19 @@ To allow for the training of embedding vectors for each input sequence of pose k
 
 **SPOTER embeddings:**
 
-![Blog_LSU10 (1) (1).gif](/images/building-a-zero-shot-sign-pose-embedding-model/Blog_LSU10_(1)_(1).gif)
+![Blog_LSU10 (1) (1).gif](</images/building-a-zero-shot-sign-pose-embedding-model/Blog_LSU10_(1)_(1).gif>)
 
 We also used Mediapipe’s Holistic Body Pose model, based on BlazePose (as mentioned in “[Spoter using MediaPipe](https://arxiv.org/abs/2210.00893)”) to create the keypoints dataset. This improved our results considerably compared to using the keypoints dataset provided in the SPOTER repository, which was created with Apple’s Vision framework.
 
-To evaluate the effectiveness of our model in clustering different sign classes, we used the [Silhouette](https://en.wikipedia.org/wiki/Silhouette_(clustering)) score as a metric. A [high Silhouette score](https://en.wikipedia.org/wiki/Silhouette_(clustering)) indicates that vectors of the same class are closer to each other than to vectors of other classes.
+To evaluate the effectiveness of our model in clustering different sign classes, we used the [Silhouette](<https://en.wikipedia.org/wiki/Silhouette_(clustering)>) score as a metric. A [high Silhouette score](<https://en.wikipedia.org/wiki/Silhouette_(clustering)>) indicates that vectors of the same class are closer to each other than to vectors of other classes.
 
 We also implemented a custom triplet selection mechanism and hard triplet mining in the following way:
 
 - We select a pre-batch of $B*M$ input sequences, where $B$ is the batch size and $M$ is the number of batches to compute simultaneously.
 - We compute current embeddings for these input sequences.
 - We create $M$ batches by grouping together:
-    - Input sequences of the same class and far away from each other
-    - Input sequences of different classes and close to each other
+  - Input sequences of the same class and far away from each other
+  - Input sequences of different classes and close to each other
 - We compute the forward pass for a whole batch and then compute the triplet loss for all hard triplets in that batch.
 - We loop 5 times over the batches in a pre-batch to reduce the time impact of grouping these batches.
 
@@ -77,9 +82,9 @@ In this section, we will present the results we obtained with our model.
 
 ### Silhouette score
 
-We used the [silhouette score](https://scikit-learn.org/stable/modules/generated/sklearn.metrics.silhouette_score.html) to measure how well the clusters are defined during the training step. Silhouette's score will be high (close to 1) when all clusters of different classes are well separated from each other, and it will be low (close to -1) for the opposite. Our best model reached 0.7 on the train set and 0.1 on validation. 
+We used the [silhouette score](https://scikit-learn.org/stable/modules/generated/sklearn.metrics.silhouette_score.html) to measure how well the clusters are defined during the training step. Silhouette's score will be high (close to 1) when all clusters of different classes are well separated from each other, and it will be low (close to -1) for the opposite. Our best model reached 0.7 on the train set and 0.1 on validation.
 
-Here is a scatter plot that shows how the classes are well separated into clusters. 
+Here is a scatter plot that shows how the classes are well separated into clusters.
 
 ![newplot.png](/images/building-a-zero-shot-sign-pose-embedding-model/newplot.png)
 
@@ -107,7 +112,7 @@ It is important to note that while the code is licensed under the permissive Apa
 
 ### Sign Language Practice
 
-Users can practice sign language skills in front of a camera and have their performance compared to other known instances of the same sign class. Different vector distance metrics can be used to determine how similar the user's repetition embedding is to a vector in the database. This feature can be useful for sign language courses. 
+Users can practice sign language skills in front of a camera and have their performance compared to other known instances of the same sign class. Different vector distance metrics can be used to determine how similar the user's repetition embedding is to a vector in the database. This feature can be useful for sign language courses.
 
 ### Search Sign Language Databases
 

@@ -7,11 +7,10 @@ category: product-design
 thumbnail: /images/from-idea-to-mvp/LSU_Design.png
 permalink: /from-idea-to-mvp-the-lean-inception-process/
 ---
- 
 
 Initiatives are a big part of our work life here at Xmartlabs. From time to time, we’re encouraged to take a break from our normal work duties and dedicate some time to research, develop or study something that interests us, especially if it might have an impact on our community.
 
-In this blog, we want to share with you the process of one of our latest initiatives: developing a tool to practice and train the Uruguayan Sign Language (or LSU, which stands for *Lengua de Señas Uruguaya*). Specifically, we’ll dive into the Research and Product Definition processes that the Design team carried out, and some of the challenges we faced along the way.
+In this blog, we want to share with you the process of one of our latest initiatives: developing a tool to practice and train the Uruguayan Sign Language (or LSU, which stands for _Lengua de Señas Uruguaya_). Specifically, we’ll dive into the Research and Product Definition processes that the Design team carried out, and some of the challenges we faced along the way.
 
 <aside>
  If you are also interested in the tech aspect of this project, you should check out <a href="/blog/machine-learning-sign-language-recognition/">this blog</a> by our machine learning team. In it, they delve deeper into the technical requirements and applications of developing a Machine Learning model for sign language practice.
@@ -21,13 +20,13 @@ In this blog, we want to share with you the process of one of our latest initiat
 
 While we may have come up with a more romantic way of telling how things started out, truth be told, the origin of this project is rather straightforward: our Machine Learning team developed the idea of an innovative ML product that involved the Uruguayan Sign Language. Soon after, knowing that what often seems simple might actually have deeper implications, they decided to involve our Design team.
 
-The initial idea was simple: a person would signage to a camera, and by *machine learning* magic, the product would come up with a translation in Spanish. Right from the start, we knew this idea was not completely original, as we had already encountered many competitors at some stage when developing similar products. However, no one was doing it here in Uruguay (at least to the extent of our knowledge). Knowing that each country’s sign language is different, the idea was innovative and exciting enough for us, so we got to work.
+The initial idea was simple: a person would signage to a camera, and by _machine learning_ magic, the product would come up with a translation in Spanish. Right from the start, we knew this idea was not completely original, as we had already encountered many competitors at some stage when developing similar products. However, no one was doing it here in Uruguay (at least to the extent of our knowledge). Knowing that each country’s sign language is different, the idea was innovative and exciting enough for us, so we got to work.
 
 Apart from some personal, brief experiences with sign language and the deaf community, we didn’t have much knowledge about this topic. **This scenario was any designer’s dream: a big, empty canvas and the opportunity to conduct a research process that would introduce us to the problem and the people it affected.** But where to begin?
 
 I’m a firm believer that despite there being countless design methodologies out there, our first step - consciously or not - is usually a Brainstorming session. This allows us to sit down and identify what we think we already know, detect what we don’t, and finally, envision what we need to learn.
 
-In our case, we came up with several previous cases, a few competitors and, most importantly, lots of questions. These questions quickly translated into action items, which became our very first roadmap. Yay! The first step was done: we identified all the puzzle pieces we were missing and came up with a rough idea of how to gather them. 
+In our case, we came up with several previous cases, a few competitors and, most importantly, lots of questions. These questions quickly translated into action items, which became our very first roadmap. Yay! The first step was done: we identified all the puzzle pieces we were missing and came up with a rough idea of how to gather them.
 
 ![Assets_01 Roadmap.png](/images/from-idea-to-mvp/Assets_01_Roadmap.png)
 
@@ -37,7 +36,7 @@ Did we follow this roadmap in this exact order or even fully accomplish it? Spoi
 
 ### Step 1. Desk Research
 
-The first stop in our journey was conducting Desk Research. 
+The first stop in our journey was conducting Desk Research.
 
 While many different definitions can be found, essentially, Desk Research involves reviewing what other people have already done or investigated about the subject. Basically, it's anything you can do from your desk without being actively involved in the field (hence the name). We could think of this as the “Googling stage” for the millennials' sake.
 
@@ -57,30 +56,29 @@ In UX design user interviews are a qualitative research method where designers o
 
 Knowing that to interview deaf users ourselves we'd need to overcome the communicational barrier and have someone interpret for us, we decided first to interview people who were somehow related to the LSU, but who weren't deaf.
 
-We scheduled two interviews: one with Sara, a recently-graduated LSU interpreter, and daughter of deaf parents, and another with Mauricio, who has a psychology degree and works as an academic investigator about the LSU. 
+We scheduled two interviews: one with Sara, a recently-graduated LSU interpreter, and daughter of deaf parents, and another with Mauricio, who has a psychology degree and works as an academic investigator about the LSU.
 
 ![Assets_02 User Interviews.png](/images/from-idea-to-mvp/Assets_02_User_Interviews.png)
 
-Despite only conducting a pair of interviews, and not having directly interviewed our target user, these proved to be a great source of information and valuable insights. We confirmed many of our assumptions about the needs and pain points of deaf people, how it impacts their daily life, and how their community works in a rather closed way. 
+Despite only conducting a pair of interviews, and not having directly interviewed our target user, these proved to be a great source of information and valuable insights. We confirmed many of our assumptions about the needs and pain points of deaf people, how it impacts their daily life, and how their community works in a rather closed way.
 
 Also, the interviewees mentioned a few tools and resources already used by the community, which led us to our next step.
 
 ### Step 3. Competitors Analysis
 
-As we’ve mentioned before, we knew our idea wasn’t a trailblazer from the start. But **what could we do differently from these competitors to add more value or better solve the problem?** 
+As we’ve mentioned before, we knew our idea wasn’t a trailblazer from the start. But **what could we do differently from these competitors to add more value or better solve the problem?**
 
 To find out, we conducted a Competitors Analysis exercise. We selected some products with similar features and analyzed what they do, how they do it, and how well they satisfy their users’ needs.
 
 The analysis showed that current competitors did not meet our users’ needs correctly, at least not how we intended to. Overall, their usability was not great and presented some core issues. Besides one case with a more recreational approach, none worked with the Uruguayan Sign Language.
 
-Based on these findings, we could **confirm there was an opportunity to create a product that addressed these unsatisfied needs and filled the gap in the market.** 
+Based on these findings, we could **confirm there was an opportunity to create a product that addressed these unsatisfied needs and filled the gap in the market.**
 
 ### Conclusion of this stage
 
 During the first stage of our project, we verified the Deaf community faces many challenges on a daily basis in terms of communicating and interacting with the rest of society. We also gained a better understanding of the Uruguayan Sign Language, its characteristics, and differences from a spoken language, like Spanish.
 
 Some of our main outcomes were:
-
 
 ![Assets_03a DR Results - LSU.png](/images/from-idea-to-mvp/Assets_03a_DR_Results_-_LSU.png)
 
@@ -101,17 +99,17 @@ Some of our main outcomes were:
 - Adaptability is a crucial aspect for sign language interpreters. They must be able to adjust to various factors, including the sign language knowledge of the deaf person and their unique signs and expressions.
 - Despite the importance of their role, sign language interpreters face various challenges, including the need for recognition for their role, paternalistic attitudes, and a lack of knowledge about the specific contexts they work in. They are often seen as being in charge of the deaf person, leading to their infantilization. To overcome these challenges, it's essential for sign language interpreters to study and be prepared for different technical terms and specific contexts, such as medical, legal, and academic.
 
-Despite all these challenges, it was clearly demonstrated that the Deaf community and the use of LSU continue to evolve and grow, as they find ways to connect, share information, and improve their quality of life. This realization sparked our interest to do this a [free, open-source project](https://github.com/xmartlabs/spoter-embeddings), accessible by the whole community. In doing so, we could contribute to spreading the LSU visibility and contribute to the knowledge of hundreds of interpreters. 
+Despite all these challenges, it was clearly demonstrated that the Deaf community and the use of LSU continue to evolve and grow, as they find ways to connect, share information, and improve their quality of life. This realization sparked our interest to do this a [free, open-source project](https://github.com/xmartlabs/spoter-embeddings), accessible by the whole community. In doing so, we could contribute to spreading the LSU visibility and contribute to the knowledge of hundreds of interpreters.
 
 We also recognized that for the MVP version of our product, it made sense to target mainly LSU interpreters. By narrowing our audience, we could smooth out the heterogeneity of LSU knowledge levels, as this group tends to share a common base of knowledge that we could build on.
 
-But while this first stage was crucial in laying the theoretical foundation for the rest of our project, it also became clear that we needed better product definition. Of course, we designers could have started devising and defining the product ourselves, and to be honest, the result could have been good enough. 
+But while this first stage was crucial in laying the theoretical foundation for the rest of our project, it also became clear that we needed better product definition. Of course, we designers could have started devising and defining the product ourselves, and to be honest, the result could have been good enough.
 
-However, true to the *‘teamwork is the dream work’* motto, we couldn’t envision doing so without the technical input and expertise the ML developers had to give. In fact, it felt like a natural step to avoid redundancy and rework in the future.
+However, true to the _‘teamwork is the dream work’_ motto, we couldn’t envision doing so without the technical input and expertise the ML developers had to give. In fact, it felt like a natural step to avoid redundancy and rework in the future.
 
 To further strengthen our approach, we decided to bring in a fresh perspective by including team members who had not been involved in the initiative and had not been influenced by previous research. This would provide an unaltered, neutral view of the matter. And what framework lets us involve many different parts and result in one defined concept? You guessed it: a Lean Inception.
 
-# Lean Inception *à la* XL
+# Lean Inception _à la_ XL
 
 Lean Inception is a widely covered topic, about which many people have already said many interesting things. So what can we add that’s new? Well, for starters, we did our very own version of a Lean Inception, adapting it to fit our resources and needs.
 
@@ -125,7 +123,7 @@ Overall, we gathered for one kick-off session and then three different work sess
 
 In the following weeks, we started with an in-person session (which was great for getting to know each other a little more and gaining confidence as a team) but then moved to virtual meetings. These lasted between 2-3 hours each and were held once every 3-4 days, to try and keep a certain work rhythm.
 
-Out of all the exercises originally proposed by the Lean Inception framework (approximately 10), we chose the ones we thought would be more fruitful, considering our team and project. The six exercises chosen were: Product Vision, Product Is / Is not / Does / Does not, Personas, Journey Mapping, Feature Brainstorming, and Feature Prioritization. 
+Out of all the exercises originally proposed by the Lean Inception framework (approximately 10), we chose the ones we thought would be more fruitful, considering our team and project. The six exercises chosen were: Product Vision, Product Is / Is not / Does / Does not, Personas, Journey Mapping, Feature Brainstorming, and Feature Prioritization.
 
 Throughout the sessions, we maintained a "Parking Lot" board to temporarily record ideas or discussions that arose but were not appropriate to address at the time. This method effectively kept the team focused and prevented any big distractions. Additionally, at the conclusion of the Lean Inception, we had a list of potential topics for future conversations.
 
@@ -133,7 +131,7 @@ Throughout the sessions, we maintained a "Parking Lot" board to temporarily reco
 
 For each exercise, we repeated the same structure: we first divided into two smaller groups to work separately, and finally came together to share our work and end up with one unified result. This structure let us have several significant discussions each time, challenging our ideas constantly.
 
-So what were the main outcomes of our Lean Inception? 
+So what were the main outcomes of our Lean Inception?
 
 In terms of the product, we ended up with a consistent definition of what our MVP would be. Along with this, we clearly defined our target users and the key features the product should have to successfully address their needs.
 
@@ -163,13 +161,13 @@ However, was there really anyone to blame? Of course, at first, we racked our br
 
 We are confident we took our steps correctly: we searched for competitors, analyzed their products, and kept an eye open for any new updates. Still, the truth is, these things happen more often than not. It’s a big world, so there’s always the possibility that a never-before-seen competitor is out there, hidden in plain sight (or Instagram ads).
 
-Our next big challenge was determining what we wanted to do with this new information. 
+Our next big challenge was determining what we wanted to do with this new information.
 
 It felt like the moment in a horror movie when the group decides to split up, each venturing off into the dark and unknown. We knew it was time to part ways with this project, but the thought of having done all that for 'nothing’ made our hearts race with fear.
 
 We took comfort in knowing that ultimately, our users’ needs were somehow going to be addressed by this newly found competitor. We didn’t see much sense in competing with an already established company, as our goal was to make this an open-source, non-profitable initiative.
 
-While it was a bit disappointing, in the overall picture, we could all agree that the timing was great. 
+While it was a bit disappointing, in the overall picture, we could all agree that the timing was great.
 
 # Final thoughts
 
@@ -181,7 +179,7 @@ We tend to think engaging in UX Research is an expensive, resource-consuming pro
 
 In addition, we proved once again the advantages of working with diverse, multidisciplinary teams. It was an excellent opportunity to share knowledge and experiences with the team, while introducing some of our design practices to other areas of the company that may not have been familiar with them previously.
 
-Finally, we can confirm that Design is a powerful tool for change: it's not just about creating a beautiful product, but about deeply understanding our users' needs and creating experiences that truly resonate with them. 
+Finally, we can confirm that Design is a powerful tool for change: it's not just about creating a beautiful product, but about deeply understanding our users' needs and creating experiences that truly resonate with them.
 
 At the end of the day, Design is about putting users first in everything we do. It's about making them feel heard, understood, and valued. By prioritizing user-centered design in any business strategy, we're not just creating better products - we're making a real difference in people's lives.
 

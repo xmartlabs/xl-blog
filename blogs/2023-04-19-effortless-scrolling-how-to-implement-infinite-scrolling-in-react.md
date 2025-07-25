@@ -62,7 +62,7 @@ I honestly don't remember if the authors mention it but I have the feeling that 
 
 It is very important to make this clarification since both will manipulate the cache of the data processed from the responses to the API in very different ways.
 
-The [useQuery](https://react-query-v3.tanstack.com/reference/useQuery#_top) hook is commonly used to wrap those calls to the server in which data is consulted, but for our specific case, we will be interested in using [useInfiniteQuery](https://react-query-v3.tanstack.com/reference/useInfiniteQuery#_top). I won't go into detail explaining how the [useQuery](https://react-query-v3.tanstack.com/reference/useQuery#_top) hook works, but I encourage you  to consult the documentation if it's something you're interested in.
+The [useQuery](https://react-query-v3.tanstack.com/reference/useQuery#_top) hook is commonly used to wrap those calls to the server in which data is consulted, but for our specific case, we will be interested in using [useInfiniteQuery](https://react-query-v3.tanstack.com/reference/useInfiniteQuery#_top). I won't go into detail explaining how the [useQuery](https://react-query-v3.tanstack.com/reference/useQuery#_top) hook works, but I encourage you to consult the documentation if it's something you're interested in.
 
 With this hook, our problem will be as simple as declaring an asynchronous function that will be mainly in charge of making the call to our server and return in response the parsed data in proper conditions to be persisted in the entity's cache. Minimally the function should receive as a parameter the page index.
 

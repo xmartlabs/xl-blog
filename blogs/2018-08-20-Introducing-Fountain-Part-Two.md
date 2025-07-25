@@ -1,7 +1,17 @@
 ---
 title: Introducing Fountain Part Two
 date: 2018-08-20 09:00:00
-tags: [Android, Android Jetpack, Android Paging Library, Live Data, Android Architecture Components, RxJava, Retrofit, Fountain]
+tags:
+  [
+    Android,
+    Android Jetpack,
+    Android Paging Library,
+    Live Data,
+    Android Architecture Components,
+    RxJava,
+    Retrofit,
+    Fountain,
+  ]
 author: mirland
 category: development
 permalink: /introducing-fountain-part-two/
@@ -16,8 +26,8 @@ So if we want to display the same entities multiple times, we have to wait for t
 
 In this post we'll see how we can use the second feature of the library: a `Listing` object combining network and cache support.
 
-
 # Fountain Cache + Network support
+
 We've seen how we could implement a `Listing` structure using the [**Fountain network support** library](https://github.com/xmartlabs/fountain).
 However, in that example we had only one source, so how could we manage multiple sources?
 How can we combine a database cache source with a paged service source?
@@ -33,13 +43,14 @@ Suppose that we have an incremental paged service, like the GitHub example prese
 It's hard to implement, we could save the item position and page number, but when an item is added all pages are updated, so it's not a good idea.
 In this post I show you how we can use the **[Fountain]** library to get it to work.
 
-
 ## Paging strategy
+
 To make the pagination strategy work, **Fountain** needs two components:
+
 1. A `NetworkDataSourceAdapter<out ListResponse<Value>>` to fetch all pages.
-This component was presented in the [previous post]. It's a structure which contains all required operations to manage the pagination of a paged service, where the strategy is based on an incremental page number.
+   This component was presented in the [previous post]. It's a structure which contains all required operations to manage the pagination of a paged service, where the strategy is based on an incremental page number.
 1. A [`CachedDataSourceAdapter`] to update the [`DataSource`].
-It's the interface that the library will use to take control of the [`DataSource`].
+   It's the interface that the library will use to take control of the [`DataSource`].
 
 The paging strategy that **Fountain** is using can be seen in the following diagram:
 <br /> <br /> <img src="/images/fountain/paginationStrategy.png" align="center" />
@@ -74,13 +85,12 @@ interface CachedDataSourceAdapter<NetworkValue, DataSourceValue> {
 The adapter has four methods that the user has to implement:
 
 - `getDataSourceFactory`: will be used to list the cached elements.
-The returned value is used to create the [`LivePagedListBuilder`].
+  The returned value is used to create the [`LivePagedListBuilder`].
 - `runInTransaction` will be used to apply multiple [`DataSource`] operations in a single transaction. That means that if something fails, all operations will fail.
 - `saveEntities` will be invoked to save all entities into the [`DataSource`].
-This will be executed in a transaction.
+  This will be executed in a transaction.
 - `dropEntities` will be used to delete all cached entities from the [`DataSource`].
-This will be executed in a transaction.
-
+  This will be executed in a transaction.
 
 ### DataSource
 
@@ -138,15 +148,17 @@ To implement these methods, we have to define a [Room Dao interface], let's name
 The `getDataSourceFactory` method will require a method to retrieve all `User` entities associated to a `search` query, sorted by the index.
 
 If we follow the paging strategy we defined, `saveEntities` will require three methods in the `UserDao`:
+
 - A method to insert the `User` entities.
 - A method to insert the `UserSearch` entities.
 - A method to get the next `searchPosition` index.
 
 The `dropEntities` method will require one or two methods depending on what we want to do.
+
 - The first option can be to have a method to delete all `User` entities and all `UserSearch` entities associated to a `search` query.
 - The second one can be to have only one method to delete the `UserSearch` entities associated to a `search` query and keep the `User` entities in the database.
-This is very helpful when you have multiple services that return the same entities and we have to keep the database consistent.
-In our example, the same user could be included in multiple `search` queries' responses, so to remove some complexity, we will use this solution.  
+  This is very helpful when you have multiple services that return the same entities and we have to keep the database consistent.
+  In our example, the same user could be included in multiple `search` queries' responses, so to remove some complexity, we will use this solution.
 
 Note that the `runInTransaction` operation will not require any method in the `UserDao`, we will just use the `runInTransaction` method that Room provides.
 
@@ -204,8 +216,8 @@ val cachedDSAdapter = object : CachedDataSourceAdapter<User, User> {
   }
 }
 ```
-The implementation looks well, the most difficult thing is creating the `UserSearch` entities and assigning the right `searchPosition` but it's not so hard!
 
+The implementation looks well, the most difficult thing is creating the `UserSearch` entities and assigning the right `searchPosition` but it's not so hard!
 
 ### Get the listing component
 
@@ -225,7 +237,6 @@ As well as in the network support listing, there are some optional parameters th
 - `ioServiceExecutor : Executor`: The executor where the service call will be made. By default the library will use a pool of 5 threads.
 - `ioDatabaseExecutor : Executor`: The executor where the database transaction will be done. By default the library will use a single thread executor.
 - `pagedListConfig: PagedList.Config` : The paged list configuration, in this object you can specify for example the `pageSize` and the `initialPageSize`.
-
 
 ### Conclusion
 

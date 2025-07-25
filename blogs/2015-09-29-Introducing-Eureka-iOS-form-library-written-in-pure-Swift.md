@@ -23,14 +23,14 @@ Eureka is a library that can be used to create dynamic table-view forms and whic
 
 Eureka was originally designed to be:
 
-* [*Elegant, concise syntax and super readable*](#elegant-concise-readable)
-* [*Support dynamic table-view forms*](#dynamic-forms)
-* [*Fully customizable*](#fully-customizable)
-* [*Safe*](#safe)
-* [*Powerful and Flexible*](#powerful-and-flexible)
-* [*Extensible*](#extensible)
+- [_Elegant, concise syntax and super readable_](#elegant-concise-readable)
+- [_Support dynamic table-view forms_](#dynamic-forms)
+- [_Fully customizable_](#fully-customizable)
+- [_Safe_](#safe)
+- [_Powerful and Flexible_](#powerful-and-flexible)
+- [_Extensible_](#extensible)
 
-Eureka takes advantage of Swift language capabilities such as [generics], functional and protocol oriented programming, operators, protocol extensions and much more to accomplish these design goals.  
+Eureka takes advantage of Swift language capabilities such as [generics], functional and protocol oriented programming, operators, protocol extensions and much more to accomplish these design goals.
 
 Let's deep into what we mean by each of the listed points.
 
@@ -57,7 +57,7 @@ self.form +++=  DateRow("Date") {
 
 ### Support dynamic table-view forms <a name="dynamic-forms"></a>
 
-Eureka provides a very powerful DSL used to create a form, basically a form is represented by a `Form` instance that contains   Sections which finally contain Rows. This data structure is identical to how table-views deal with the sections and cells.
+Eureka provides a very powerful DSL used to create a form, basically a form is represented by a `Form` instance that contains Sections which finally contain Rows. This data structure is identical to how table-views deal with the sections and cells.
 Typically any form we might build needs to make a row or section visible/invisible depending on a certain condition or action. To address this problem Eureka keeps track of any change made on the `Form` and updates the `FormViewController` table view accordingly and on the fly. This means that any change made through insertion, deletion or replacement of either a row or a section will be reflected on the tableView of the `FormViewController`.
 Based on that, you do not have to deal with table-view delegates and data sources anymore.
 
@@ -76,7 +76,7 @@ General customization allows us to make changes to all rows or cells of a specif
 DateRow.defaultRowInitializer = { row in row.minimumDate = NSDate() }
 // modify all NameRow cell textField font to UIFont.systemFontOfSize(fontSize: 12.0)
 NameRow.defaultCellUpdate = { cell, row in cell.textField?.font =  UIFont.systemFontOfSize(fontSize: 12.0)  }
-// Modify all CheckRow cells in order to show a orange check mark.  
+// Modify all CheckRow cells in order to show a orange check mark.
 CheckRow.defaultCellSetup = { cell, row in cell.tintColor = UIColor.orangeColor() }
 ```
 
@@ -164,7 +164,6 @@ section += [newRow1, newRow2, newRow3]
 //And there are much more possibilities ;)
 ```
 
-
 ### Extensible
 
 Adding a new `Row` definition is super simple by extending `Row<T, Cell>` and conforming to `RowType`. The basic behaviour of the row is inherited either from the superclass or added through protocol extension. Based on that you should only provide the row definition and the UITableViewCell that the `Row` handles. Eureka provides many rows by default that actually have no conceptual difference from a user defined row.
@@ -174,7 +173,7 @@ Adding a new `Row` definition is super simple by extending `Row<T, Cell>` and co
 We understand that Eureka's first version is very capable and powerful but we plan to enhance it even further. Among what we plan to improve is adding more row types, inline row support and multivalued sections.
 
 This post is just intended to briefly introduce Eureka and some of its architecture insights.
-If you are interested in how to use Eureka I would suggest you to take a look at its [github repository readme], You can also run the example project and  play with Eureka playground that are contained in Eureka workspace.
+If you are interested in how to use Eureka I would suggest you to take a look at its [github repository readme], You can also run the example project and play with Eureka playground that are contained in Eureka workspace.
 
 If you liked what you have read, want to suggest some feature, contribute to the project or you need some help on how to use it please drop us a line on [twitter].
 

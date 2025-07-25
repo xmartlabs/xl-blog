@@ -1,7 +1,14 @@
 ---
 title: Our Solution for the NFL Helmet Assignment Kaggle Competition
 date: 2021-11-30
-tags: [Kaggle Competition 2021, Computer Vision, NFL, Video Tracking, Machine Learning]
+tags:
+  [
+    Kaggle Competition 2021,
+    Computer Vision,
+    NFL,
+    Video Tracking,
+    Machine Learning,
+  ]
 author: andresh
 category: machine-learning
 thumbnail: images/nfl-kaggle-competition/nfl_cover.jpg
@@ -47,22 +54,18 @@ The central part of this problem is mapping the helmet's positions in a given fr
 
 In our case, we used the method proposed in the paper "Robust Point Set Registration Using Gaussian Mixture Models," which has its [code](https://github.com/bing-jian/gmmreg-python) available in Python. With some minor changes, we were able to include it in our solution.
 
-
 <p style={{ textAlign:'end', fontStyle: 'italic'}}
 >
 	<img src="/images/nfl-kaggle-competition/nfl_2dmatching.png" />
 	Left: Example shown in code presentation, Right: Example of implementation in our solution.
 </p>
 
-
 When passed two normalized clouds of points, the algorithm can return a correspondence between those cloud points. There are some issues; for example, when both sets have 22 points, the algorithm works really well, but when the video has a frame with fewer helmets, the results might have some errors. Because of this, we decided only to do 2D matching when there are 15 helmets or more in the image frame. Later we'll explain how we propagate the labels to the frames that don't have enough helmets. Besides this, we didn't run the matching on all frames, as variations in consecutive frames were almost none.
-
 
 <p style={{ textAlign:'end', fontStyle: 'italic'}}>
 	<img src="/images/nfl-kaggle-competition/nfl_helmetsinframe.png" />
 	Example of a low number of helmets in the frame.
 </p>
-
 
 ### 2. DeepSORT:
 
@@ -80,12 +83,10 @@ After fixing those simple errors, we matched each remaining frame with detectabl
 
 In some cases, this implementation gave impressive results. As seen in the following video, green bounding boxes are correctly labeled helmets and yellow when there is an impact (higher reward for the correct label while collision). The red bounding boxes are due to wrong labels during a collision.
 
-
 <p style={{ textAlign:'end', fontStyle: 'italic'}}>
 	<img src="/images/nfl-kaggle-competition/nfl_helmet.gif" />
 	Output of our solution applied to a Sideline video.
 </p>
-
 
 ### 4. Image Rotation:
 
@@ -97,12 +98,10 @@ As seen in the example of the two marked players, the bottom one appears to be m
 
 The rotation is done using the purple line, and the angle with the green one is the rotation angle.
 
-
 <p style={{ textAlign:'end', fontStyle: 'italic'}}>
 	<img src="/images/nfl-kaggle-competition/nfl_rotation.png" />
 	Image rotation example.
 </p>
-
 
 ### 5. Outfield players:
 
@@ -150,7 +149,6 @@ Calculating the size and number of the helmets in the frame, we can have a good 
 <p style={{ textAlign:'center'}}>
 	<img src="/images/nfl-kaggle-competition/nfl_endzone.png" />
 </p>
-
 
 However, merging this information with our pipeline wasn't easy, as more processing had to be done, and at the time, it didn't seem relevant.
 

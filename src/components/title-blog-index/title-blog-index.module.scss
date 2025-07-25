@@ -1,5 +1,5 @@
-@import "../../css/variables.scss";
-@import "../../css/text-styles.scss";
+@import '../../css/variables.scss';
+@import '../../css/text-styles.scss';
 
 // Containers
 
@@ -39,7 +39,8 @@
   padding: 0 1rem 0;
 }
 
-.topArrow, .bottomArrow {
+.topArrow,
+.bottomArrow {
   width: auto;
   height: auto;
 }
@@ -52,7 +53,7 @@
 
 .selectedLink {
   font-weight: $font-bold;
-  background-image: url("/images/index-blog-dot.png");
+  background-image: url('/images/index-blog-dot.png');
   background-position: 0 0.4rem;
   background-size: 0.5rem 0.5rem;
   background-repeat: no-repeat;
@@ -76,7 +77,8 @@
     display: none;
   }
 
-  .topArrow, .bottomArrow {
+  .topArrow,
+  .bottomArrow {
     display: none;
   }
 }
@@ -86,7 +88,8 @@
     margin-top: 3%;
   }
 
-  .topArrow, .bottomArrow {
+  .topArrow,
+  .bottomArrow {
     margin-top: 1%;
   }
 }
