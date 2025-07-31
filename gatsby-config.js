@@ -87,6 +87,17 @@ module.exports = {
         routeChangeEventName: 'route-change',
       },
     },
+    {
+      resolve: `gatsby-plugin-google-gtag`,
+      options: {
+        trackingIds: [process.env.GA_MEASUREMENT_ID],
+        pluginConfig: {
+          head: false,
+          respectDNT: true,
+          exclude: ['/preview/**', '/do-not-track/me/too/'],
+        },
+      },
+    },
     'gatsby-transformer-remark',
     'gatsby-plugin-sass',
   ],
