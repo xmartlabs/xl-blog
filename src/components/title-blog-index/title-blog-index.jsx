@@ -5,8 +5,6 @@ import { SeeMoreTitles } from "../see-more-titles/see-more-titles";
 
 import { classnames, findTitles } from "../../helpers";
 
-import * as styles from "./title-blog-index.module.scss";
-
 const TitleBlogIndex = ({ data, refIndexTitles, disappearIndex }) => {
   const [titleOnView, setTitleOnView] = useState('');
   const [selectLink, setSelectLink] = useState('');
@@ -94,24 +92,31 @@ const TitleBlogIndex = ({ data, refIndexTitles, disappearIndex }) => {
       {isTopArrow && 
         <SeeMoreTitles 
           onClick={scrollToBottom} 
-          className={classnames({[styles.disappearIndex]: disappearIndex})} 
-          children={<ArrowIcon className={styles.topArrow}/>}  
+          className={classnames({"hidden": disappearIndex})} 
+          children={
+            <ArrowIcon 
+              className="pt-8 px-4 pb-0 transform rotate-180 w-auto h-auto max-sm:hidden [@media(max-height:_992px)]:mt-[1%]"
+            />
+          }  
         /> 
       }
       {isBottomArrow && 
         <SeeMoreTitles 
           onClick={scrollToTop} 
-          className={classnames({[styles.disappearIndex]: disappearIndex})} 
-          children={<ArrowIcon className={styles.bottomArrow}/>}  
+          className={classnames({"hidden": disappearIndex})} 
+          children={<ArrowIcon className="py-0 px-4 w-auto h-auto max-sm:hidden [@media(max-height:_992px)]:mt-[1%]" />}  
         /> 
       }
-      <div className={styles.heightContainer} ref={indexContainerRef}>
-        <div className={classnames({[styles.disappearIndex]: disappearIndex}, styles.indexSubContainer)} ref={linksContainerRef}>
+      <div className="flex flex-row items-start w-[20%] mr-[5%] scroll-smooth fixed top-[22%] h-[70vh]" ref={indexContainerRef}>
+        <div className={classnames({"!hidden": disappearIndex}, "fixed top-22p w-[20%] mr-5p flex flex-row flex-wrap items-start max-h-[76vh] overflow-y-hidden scroll-smooth max-sm:hidden")} ref={linksContainerRef}>
           {data?.map((title) => 
-            <a href={"#" + title.id} key={title.id} onClick={() => setSelectLink(title.id)}
-              className={classnames(
-                {[styles.selectedLink]: title.id === selectLink || titleOnView === title.id},
-                styles.links
+            <a
+              href={"#" + title.id}
+              key={title.id}
+              onClick={() => setSelectLink(title.id)}
+              className={classnames({
+                "font-black bg-[url('/images/index-blog-dot.png')] bg-[position:0_0.4rem] bg-[background-size:0.5rem_0.5rem] bg-no-repeat": title.id === selectLink || titleOnView === title.id},
+                "text-xl text-blue-one no-underline font-primary pb-[2.5rem] h-auto overflow-hidden pl-[1.5rem] w-full"
               )}
             >
               {title.innerText.length > 55 ? title.innerText.slice(0, 55) + "..." : title.innerText}

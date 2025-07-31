@@ -1,56 +1,11 @@
 import React, { useState } from 'react';
 
-import styled from 'styled-components';
-
 import { NavMenuElements } from './nav-menu-elements';
 import { MobileMenu } from './mobile-nav-menu';
 
-import * as styles from './nav-menu.module.scss';
 import { useMediaQuery } from '../../hooks';
 import { XmartlabsLogo } from '../icons';
 import { TypeForm } from '../typeform/typeform';
-
-
-const StyledGetStartedButton = styled.button`
-  width: 147px;
-  height: 44px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  background-color: #ee1a64;
-  color: #fff;
-  text-decoration: none;
-`
-
-const StyledGetStartedTextButton = styled.div`
-  line-height: 22px;
-  font-size: 14px;
-  font-weight: 900;
-  letter-spacing: .5px;
-  max-height: 17px;
-`
-
-const StyledContainerNavBarXL = styled.div`
-  display: flex;
-  width: 100%;
-  height: 95px;
-  justify-content: center;
-  background-color: white;
-  position: fixed;
-  z-index: 1;
-  box-shadow: 0px 2px 8px 0px rgba(0, 0, 0, 0.14); 
-`
-
-const StyledContainerHeader = styled.div`
-  align-items: center;
-  flex-direction: row;
-  justify-content: space-between;
-  display: flex;
-  position: static;
-  width: 90%;
-  max-width: 1300px;
-`
-
 
 export const NavMenu = () => {  
   const isMobile = useMediaQuery("(max-width: 992px)");
@@ -58,22 +13,30 @@ export const NavMenu = () => {
   return (
       <>
         {showTypeForm && <TypeForm onClick={() => setShowTypeForm(false)}/>}
-        <StyledContainerNavBarXL>
+        <div className="flex w-[100%] h-[95px] justify-center bg-white fixed z-[1] shadow-[0px_2px_8px_0px_rgba(0,0,0,0.14)]">
           {isMobile && <MobileMenu />}
-          <StyledContainerHeader>
-            <div className={styles.navMenuContainer}>
+          <div className="flex items-center flex-row justify-between static w-[90%] max-w-[1300px]">
+            <div className="flex flex-row items-center">
               <a href="/" id="logo-xl" aria-label='Blog Home'>
                 <XmartlabsLogo />
               </a>
               {!isMobile && <NavMenuElements />}
             </div>
             {!isMobile && 
-              <StyledGetStartedButton className={styles.getStarted} id="header-getintouch" onClick={() => setShowTypeForm(true)}>
-                <StyledGetStartedTextButton>Let's Talk</StyledGetStartedTextButton>
-              </StyledGetStartedButton>
+              <button
+                className="
+                  w-[147px] h-[44px] flex justify-center items-center bg-[#ee1a64] text-white 
+                  no-underline relative top-0 transition-[top] ease duration-200 border-none 
+                  cursor-pointer font-primary hover:top-[-4px]
+                "
+                id="header-getintouch"
+                onClick={() => setShowTypeForm(true)}
+              >
+                <div className="leading-[22px] text-[14px] font-black tracking-[0.5px] max-h-[17px]">Let's Talk</div>
+              </button>
             }
-          </StyledContainerHeader>
-        </StyledContainerNavBarXL>
+          </div>
+        </div>
       </>
   );
 }

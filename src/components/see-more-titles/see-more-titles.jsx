@@ -3,10 +3,8 @@ import PropTypes from "prop-types";
 
 import { classnames } from "../../helpers";
 
-import * as styles from "./see-more-titles.module.scss";
-
 const SeeMoreTitles = ({ onClick, className, children}) => (
-  <a onClick={onClick} className={classnames(className, styles.container)}>
+  <a onClick={onClick} className={classnames(className, "fixed top-[14%] w-[20.3%] mr-[5%] cursor-pointer")}>
     {children}
   </a>
 );
