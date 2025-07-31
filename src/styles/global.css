@@ -275,43 +275,6 @@
     @apply w-full max-h-full h-auto;
   }
 
-  .bodyPostContainer table {
-    @apply font-primary mx-auto mb-8 border-collapse w-full hyphens-auto text-left;
-  }
-
-  .bodyPostContainer table thead {
-    @apply text-heading-four text-blue-one bg-yellow-one;
-  }
-
-  .bodyPostContainer table thead th {
-    @apply p-4 pt-4 pb-4 pl-4;
-  }
-
-  .bodyPostContainer table thead th:last-child {
-    @apply pr-4;
-  }
-
-  .bodyPostContainer table tbody tr:nth-child(even) {
-    @apply bg-blue-four h-20;
-  }
-
-  .bodyPostContainer table tbody tr:nth-child(odd) {
-    @apply bg-blue-five h-20;
-  }
-
-  .bodyPostContainer table tbody th,
-  .bodyPostContainer table tbody td {
-    @apply text-paragraph-two text-blue-one border-none p-4 leading-[1.7rem] hyphens-auto;
-  }
-
-  .bodyPostContainer table img {
-    @apply max-w-full h-auto max-h-full;
-  }
-
-  .bodyPostContainer div:has(table) {
-    @apply overflow-auto;
-  }
-
   .bodyPostContainer pre {
     @apply text-paragraph text-neutral-100 mb-8 bg-blue-one p-12 font-code overflow-x-scroll;
   }
@@ -372,18 +335,6 @@
 
     .bodyPostContainer > div iframe {
       @apply h-[15rem];
-    }
-
-    .bodyPostContainer table {
-      @apply block overflow-x-scroll;
-    }
-
-    .bodyPostContainer table td {
-      @apply pl-[1rem];
-    }
-
-    .bodyPostContainer table img {
-      @apply max-w-full;
     }
 
     .bodyPostContainer pre {
