@@ -14,9 +14,7 @@ function toClassName(value) {
 }
 
 function classnames(...args) {
-  console.log('classnames', args);
   const raw = args.map(toClassName).filter(Boolean).join(' ');
-  console.log('Merge', twMerge(raw));
   return twMerge(raw);
 }
 
