@@ -15,7 +15,8 @@
     "clean": "gatsby clean",
     "prepare": "husky",
     "format": "prettier --write \"**/*.{js,jsx,ts,tsx,json,css,scss}\"",
-    "format:check": "prettier --check \"**/*.{js,jsx,ts,tsx,json,css,scss}\""
+    "format:check": "prettier --check \"**/*.{js,jsx,ts,tsx,json,css,scss}\"",
+    "pre-deploy": ".husky/pre-deploy"
   },
   "engines": {
     "node": "20.x"
@@ -29,8 +30,9 @@
     "@mdx-js/react": "^3.1.0",
     "@parcel/namer-default": "^2.8.3",
     "babel-plugin-styled-components": "^2.1.4",
-    "gatsby": "^5.12.0",
+    "gatsby": "^5.9.0",
     "gatsby-link": "^5.12.0",
+    "gatsby-plugin-google-gtag": "^5.14.0",
     "gatsby-plugin-google-tagmanager": "^5.12.3",
     "gatsby-plugin-image": "^3.12.0",
     "gatsby-plugin-instagram-embed": "^4.0.0",
@@ -42,7 +44,7 @@
     "gatsby-plugin-reading-time-2": "^0.1.1",
     "gatsby-plugin-readingtime-contentful": "^1.0.0",
     "gatsby-plugin-redirects": "^1.0.0",
-    "gatsby-plugin-sass": "^6.12.0",
+    "gatsby-plugin-sass": "^6.9.0",
     "gatsby-plugin-sharp": "^5.12.0",
     "gatsby-plugin-sitemap": "^6.9.0",
     "gatsby-plugin-slug": "^2.0.0",
@@ -69,9 +71,6 @@
     "styled-components": "^5.3.11"
   },
   "devDependencies": {
-    "eslint": "^8.57.1",
-    "eslint-config-prettier": "^10.1.8",
-    "eslint-plugin-prettier": "^5.5.3",
     "husky": "^9.1.7",
     "lint-staged": "^16.1.2",
     "prettier": "^3.6.2"

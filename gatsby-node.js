@@ -7,6 +7,25 @@ const postsPerPage = 12;
 const path = require('path');
 const _ = require('lodash');
 
+exports.createSchemaCustomization = ({ actions }) => {
+  const { createTypes } = actions;
+
+  // Remove the custom Date type definition since Gatsby already provides it
+  const typeDefs = `
+    type MdxFrontmatter {
+      date: Date @dateformat
+      title: String
+      author: String
+      category: String
+      tags: [String]
+      permalink: String
+      thumbnail: String
+    }
+  `;
+
+  createTypes(typeDefs);
+};
+
 exports.createResolvers = ({ createResolvers }) => {
   const resolvers = {
     Mdx: {
