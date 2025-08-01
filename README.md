@@ -4,7 +4,7 @@ This project is a static blog built with Gatsby, leveraging Netlify as a CMS and
 
 ### Key elements
 
-- [Gatsby](https://www.gatsbyjs.com/): Static site generator that powers the UI of the blog, offering fast, optimized web experiences. We use Gatsby to create the blog’s frontend, while the build process is handled by Netlify, which integrates seamlessly with Gatsby to automatically generate and deploy the static site.
+- [Gatsby](https://www.gatsbyjs.com/): Static site generator that powers the UI of the blog, offering fast, optimized web experiences. We use Gatsby to create the blog's frontend, while the build process is handled by Netlify, which integrates seamlessly with Gatsby to automatically generate and deploy the static site.
 
 - [Netlify](https://www.netlify.com/) CMS: A git-based content management system integrated directly with GitHub repository, allowing easy content creation and updates.
 
@@ -62,6 +62,87 @@ If the React Component name matches the name to use in the template, then you ca
 const shortCodes = { Youtube };
 ```
 
+## Available Components
+
+### Image Component
+
+The Image component is a flexible React component that can display either a single image or multiple images in a row. It supports various styling options and maintains consistent aspect ratios.
+
+#### Props
+
+| Prop | Type | Default | Required | Description |
+|------|------|---------|----------|-------------|
+| `src` | `string \| string[]` | - | Yes | Image URL for single image or array of URLs for multiple images |
+| `alt` | `string` | `"Xmartlabs"` | No | Alt text for accessibility |
+| `width` | `string` | `"100%"` | No | Width of the image(s) |
+| `height` | `string` | `"315px"` | No | Height of the image(s) |
+| `aspectRatio` | `string` | `"16/9"` | No | CSS aspect ratio property |
+
+#### Usage Examples
+
+**Single Image:**
+```mdx
+<Image
+  src="https://example.com/image.jpg"
+  alt="Example image"
+  width="80%"
+  height="400px"
+/>
+```
+
+**Multiple Images:**
+```mdx
+<Image
+  src={[
+    "https://example.com/image1.jpg",
+    "https://example.com/image2.jpg",
+    "https://example.com/image3.jpg"
+  ]}
+  alt="Gallery images"
+  height="250px"
+/>
+```
+
+**Custom Aspect Ratio:**
+```mdx
+<Image
+  src="https://example.com/square-image.jpg"
+  alt="Square image"
+  aspectRatio="1/1"
+  width="300px"
+/>
+```
+
+#### Features
+
+- **Single or Multiple Images**: Pass a string for one image or an array for multiple images
+- **Even Distribution**: Multiple images are automatically distributed evenly across the container width
+- **Responsive Design**: Supports percentage-based widths for responsive layouts
+- **Aspect Ratio Control**: Maintains consistent aspect ratios using CSS
+- **Object Fit Cover**: Images maintain their aspect ratio and cover the container
+- **Flexible Layout**: Multiple images wrap to new rows on smaller screens
+- **Accessibility**: Proper alt text support with automatic numbering for multiple images
+
+### YouTube Component
+
+The YouTube component allows you to embed YouTube videos in your blog posts.
+
+#### Props
+
+| Prop | Type | Default | Required | Description |
+|------|------|---------|----------|-------------|
+| `id` | `string` | - | Yes | YouTube video ID |
+| `width` | `string` | `"100%"` | No | Width of the video player |
+| `height` | `string` | `"560px"` | No | Height of the video player |
+| `title` | `string` | `"Xmartlabs"` | No | Title for the iframe |
+
+#### Usage Example
+
+```mdx
+<YouTube id="dsCiJIhfM5E" width="100%" height="400px" />
+```
+
 ### Documenting the new Component
 
 It's very important to document **how** we can use the components for non-developers that create blogs, this can be documented in the Blog's Notion page, the [Snippet Section](https://www.notion.so/xmartlabs/Blog-Snippets-238fbac623cd80fbb43ffabb3ff38ef2).
+```
