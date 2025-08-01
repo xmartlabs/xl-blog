@@ -35,8 +35,6 @@ We came up with 3 hypothesis of why the landing page was failing to convert:
 
 ![1.png](/images/how-we-approached-the-research.png)
 
-
-
 To achieve our research goals we decided to divide our study in three exercises:
 
 * **5 seconds test:** To gather first impressions, find out if the main visual anchors of the page align with the business goals, and get an idea of what users think of the look and feel.
@@ -62,8 +60,6 @@ If we tried to anticipate every possible move, and plan follow up questions for 
 We decided to create a flowscript: a flexible decision tree that adjusts based on user actions, rather than a fixed sequence of prompts and follow up questions.
 
 ![3.png](/images/flowscript.png)
-
-
 
 * We used broad task prompts to see how users naturally explored the site.
 * Follow-up questions were triggered based on navigation paths, and whether the user struggle or succeed to complete the task.
@@ -100,7 +96,7 @@ Some hesitated between the ‘How It Works’ and ‘Use Cases’ pages, others 
     allow="autoplay; encrypted-media"
     allowFullScreen
   />
-</div>\
+</div>
 Recording of user’s screen while scanning the pricing page.
 
 Having optional prompts and screen-specific follow up questions planned (”Do you feel like you know everything you need to know about this product to start using it?” “What else would you like to know?”) helped us accommodate for those cases and discover insights without need to improvise.
