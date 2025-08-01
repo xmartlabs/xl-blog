@@ -15,8 +15,7 @@
     "clean": "gatsby clean",
     "prepare": "husky",
     "format": "prettier --write \"**/*.{js,jsx,ts,tsx,json,css,scss}\"",
-    "format:check": "prettier --check \"**/*.{js,jsx,ts,tsx,json,css,scss}\"",
-    "pre-deploy": ".husky/pre-deploy"
+    "format:check": "prettier --check \"**/*.{js,jsx,ts,tsx,json,css,scss}\""
   },
   "engines": {
     "node": "20.x"
