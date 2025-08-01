@@ -1,1 +1,1 @@
-export { ArrowIcon } from "./arrow-icon";
+export { ArrowIcon } from './arrow-icon';

@@ -1,7 +1,7 @@
-import React from "react";
-import PropTypes from "prop-types";
+import React from 'react';
+import PropTypes from 'prop-types';
 
-import { CloseIcon } from "../icons";
+import { CloseIcon } from '../icons';
 
 const TypeForm = ({ onClick }) => {
   return (
@@ -9,7 +9,7 @@ const TypeForm = ({ onClick }) => {
       className="
         fixed z-10 top-0 left-0 w-full h-full flex flex-col items-end p-[1%_2%] bg-dark-three
         [@media(max-height:_768px)]:p-0"
-      >
+    >
       <button
         onClick={onClick}
         className="
@@ -30,21 +30,17 @@ const TypeForm = ({ onClick }) => {
           [@media(max-height:_768px)]:absolute
           [@media(max-height:_768px)]:z-11
         "
-      >
-      </iframe>
+      ></iframe>
     </div>
   );
-}
-
+};
 
 TypeForm.propTypes = {
-  onCkick: PropTypes.func
+  onCkick: PropTypes.func,
 };
 
 TypeForm.defaultProps = {
-  onClick: () => {}
-
+  onClick: () => {},
 };
-
 
 export { TypeForm };

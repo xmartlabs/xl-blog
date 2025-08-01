@@ -1,14 +1,17 @@
-import React from "react";
+import React from 'react';
 
-import { Link } from "gatsby";
-import PropTypes from "prop-types";
+import { Link } from 'gatsby';
+import PropTypes from 'prop-types';
 
-import { Card } from "../card";
+import { Card } from '../card';
 
 const MoreBlogsSection = ({ relatedPosts, refMoreFrom, title }) => (
-  <div className="bg-blue-six mt-16 px-[16%] py-0 max-xxl:py-0 max-xxl:px-[5%]" ref={refMoreFrom}>
+  <div
+    className="bg-blue-six mt-16 px-[16%] py-0 max-xxl:py-0 max-xxl:px-[5%]"
+    ref={refMoreFrom}
+  >
     <div className="mb-16 pt-16 [&_a]:font-link max-sm:mt-0 max-sm:mx-0 max-sm:mb-16">
-      <Link 
+      <Link
         className="
           text-heading-two-separated text-blue-one no-underline 
           max-sm:leading-[2rem] max-sm:text-[1.4rem]
@@ -24,13 +27,13 @@ const MoreBlogsSection = ({ relatedPosts, refMoreFrom, title }) => (
         max-xs:flex max-xs:flex-col max-xs:items-center max-xs:w-auto max-xs:gap-0
       "
     >
-      {relatedPosts.slice(0, 3).map((post) => 
-        <Card 
+      {relatedPosts.slice(0, 3).map((post) => (
+        <Card
           data={post}
           key={post.frontmatter.title}
-          className="w-[30%] mb-20 [&_p]:absolute [&_p]:top-[13.5rem]" 
+          className="w-[30%] mb-20 [&_p]:absolute [&_p]:top-[13.5rem]"
         />
-      )}
+      ))}
     </div>
   </div>
 );
@@ -55,9 +58,9 @@ MoreBlogsSection.propTypes = {
             tags: PropTypes.array,
             thumbnail: PropTypes.string,
             title: PropTypes.string.isRequired,
-          })
-        })
-      })
+          }),
+        }),
+      }),
     }),
     mdx: PropTypes.shape({
       frontmatter: PropTypes.shape({
@@ -65,12 +68,12 @@ MoreBlogsSection.propTypes = {
         date: PropTypes.string,
         tags: PropTypes.array,
         title: PropTypes.string,
-      })
-    })
-  })
+      }),
+    }),
+  }),
 };
 
 MoreBlogsSection.defaultProps = {
-  refMoreFrom: {current: null},
+  refMoreFrom: { current: null },
   title: '',
 };

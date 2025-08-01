@@ -1,1 +1,1 @@
-export { MoreBlogsSection } from "./more-blogs-section";
+export { MoreBlogsSection } from './more-blogs-section';

@@ -1,48 +1,48 @@
-@import "tailwindcss";
+@import 'tailwindcss';
 
 @font-face {
   font-family: gilroy;
-  src: url("../fonts/Gilroy-Regular.ttf");
+  src: url('../fonts/Gilroy-Regular.ttf');
   font-weight: 400;
   font-style: normal;
 }
 
 @font-face {
   font-family: gilroy;
-  src: url("../fonts/Gilroy-Bold.ttf");
+  src: url('../fonts/Gilroy-Bold.ttf');
   font-weight: 700;
   font-style: normal;
 }
 
 @font-face {
   font-family: gilroy;
-  src: url("../fonts/Gilroy-SemiBold.ttf");
+  src: url('../fonts/Gilroy-SemiBold.ttf');
   font-weight: 600;
   font-style: normal;
 }
 
 @font-face {
   font-family: gilroy;
-  src: url("../fonts/Gilroy-Medium.ttf");
+  src: url('../fonts/Gilroy-Medium.ttf');
   font-weight: 500;
   font-style: normal;
 }
 
 @font-face {
   font-family: work-sans;
-  src: url("../fonts/WorkSans-Light.ttf");
+  src: url('../fonts/WorkSans-Light.ttf');
   font-weight: 400;
 }
 
 @font-face {
   font-family: work-sans;
-  src: url("../fonts/WorkSans-SemiBold.ttf");
+  src: url('../fonts/WorkSans-SemiBold.ttf');
   font-weight: 600;
 }
 
 @font-face {
   font-family: fira-code;
-  src: url("../fonts/FiraCode-Bold.ttf");
+  src: url('../fonts/FiraCode-Bold.ttf');
   font-weight: 700;
 }
 
@@ -354,7 +354,7 @@
       @apply max-h-[16rem];
     }
 
-    .bodyPostContainer img[src$=".gif"] {
+    .bodyPostContainer img[src$='.gif'] {
       @apply w-full max-h-[37rem];
     }
 

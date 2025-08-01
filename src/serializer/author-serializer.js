@@ -11,4 +11,4 @@ class AuthorSerializer {
   }
 }
 
-export { AuthorSerializer }
+export { AuthorSerializer };

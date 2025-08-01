@@ -1,1 +1,1 @@
-export { XlNewsletter } from "./xl-newsletter";
+export { XlNewsletter } from './xl-newsletter';
