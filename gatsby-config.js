@@ -4,22 +4,22 @@ require('dotenv').config({
 
 module.exports = {
   siteMetadata: {
-    title: "Xmartlabs | Blog",
-    description: "Explore Xmartlabs' blog for the latest in tech and business insights",
-    siteUrl: "https://blog.xmartlabs.com",
+    title: 'Xmartlabs | Blog',
+    description:
+      "Explore Xmartlabs' blog for the latest in tech and business insights",
+    siteUrl: 'https://blog.xmartlabs.com',
   },
   plugins: [
-    "gatsby-plugin-netlify-cms",
-    "gatsby-plugin-styled-components",
-    "gatsby-plugin-image",
-    "gatsby-plugin-instagram-embed",
-    "gatsby-plugin-slug",
-    "gatsby-plugin-sitemap",
-    "gatsby-plugin-netlify",
+    'gatsby-plugin-netlify-cms',
+    'gatsby-plugin-image',
+    'gatsby-plugin-instagram-embed',
+    'gatsby-plugin-slug',
+    'gatsby-plugin-sitemap',
+    'gatsby-plugin-netlify',
     {
-      resolve: "gatsby-plugin-manifest",
+      resolve: 'gatsby-plugin-manifest',
       options: {
-        icon: "static/favicon.png",
+        icon: 'static/favicon.png',
       },
     },
     {
@@ -29,14 +29,14 @@ module.exports = {
       },
     },
     {
-      resolve: "gatsby-plugin-mdx",
+      resolve: 'gatsby-plugin-mdx',
       options: {
         extensions: [`.mdx`, `.md`],
         gatsbyRemarkPlugins: [
           {
-            resolve: "gatsby-remark-prismjs",
+            resolve: 'gatsby-remark-prismjs',
             options: {
-              classPrefix: "language-",
+              classPrefix: 'language-',
               inlineCodeMarker: null,
               aliases: {},
               showLanguage: false,
@@ -46,47 +46,58 @@ module.exports = {
         ],
       },
     },
-    "gatsby-plugin-sharp",
-    "gatsby-transformer-sharp",
+    'gatsby-plugin-sharp',
+    'gatsby-transformer-sharp',
     {
-      resolve: "gatsby-source-filesystem",
+      resolve: 'gatsby-source-filesystem',
       options: {
-        name: "images",
-        path: "./static/images/",
+        name: 'images',
+        path: './static/images/',
       },
-      __key: "images",
+      __key: 'images',
     },
     {
-      resolve: "gatsby-source-filesystem",
+      resolve: 'gatsby-source-filesystem',
       options: {
-        name: "pages",
-        path: "./src/pages/",
+        name: 'pages',
+        path: './src/pages/',
       },
-      __key: "pages",
+      __key: 'pages',
     },
     {
-      resolve: "gatsby-source-filesystem",
+      resolve: 'gatsby-source-filesystem',
       options: {
-        name: "blogs",
+        name: 'blogs',
         path: `${__dirname}/blogs/`,
       },
     },
     {
-      resolve: "gatsby-source-filesystem",
+      resolve: 'gatsby-source-filesystem',
       options: {
-        name: "content",
+        name: 'content',
         path: `${__dirname}/content/`,
       },
     },
     {
-      resolve: "gatsby-plugin-google-tagmanager",
+      resolve: 'gatsby-plugin-google-tagmanager',
       options: {
-        id: "GTM-5J7PXXS",
+        id: 'GTM-5J7PXXS',
         includeInDevelopment: false,
-        routeChangeEventName: "route-change",
+        routeChangeEventName: 'route-change',
       },
     },
-    "gatsby-transformer-remark",
-    "gatsby-plugin-postcss",
+    {
+      resolve: `gatsby-plugin-google-gtag`,
+      options: {
+        trackingIds: [process.env.GA_MEASUREMENT_ID],
+        pluginConfig: {
+          head: false,
+          respectDNT: true,
+          exclude: ['/preview/**', '/do-not-track/me/too/'],
+        },
+      },
+    },
+    'gatsby-transformer-remark',
+    'gatsby-plugin-postcss',
   ],
 };

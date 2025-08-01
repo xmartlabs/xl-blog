@@ -1,11 +1,11 @@
-import React from "react";
-import { StaticImage } from "gatsby-plugin-image";
-import { Link } from "gatsby";
+import React from 'react';
+import { StaticImage } from 'gatsby-plugin-image';
+import { Link } from 'gatsby';
 
-import { CloseIcon } from "../icons"
+import { CloseIcon } from '../icons';
 
 const XlNewsletter = () => (
-  <div 
+  <div
     className="
       flex flex-row w-[55rem] h-[17rem] bg-blue-one opacity-90 mb-20rounded-lg py-0 pr-8 pl-16
       shadow-[0px_7.07671px_24.7685px_-5.30753px_#18274b1e,0px_15.9226px_77.8438px_-3.53836px_#18274b1e]
@@ -14,7 +14,7 @@ const XlNewsletter = () => (
   >
     <div className="flex flex-col items-center justify-center h-full w-[6.3rem] max-sm:h-[33%]">
       <Link to="/" className="bg-neutral100 max-h-[99px] max-w-[97px]">
-        <StaticImage    
+        <StaticImage
           src="../../../static/images/newsletter-xl/logo-xl.png"
           alt="Xmartlabs logo"
           layout="fixed"
@@ -24,8 +24,13 @@ const XlNewsletter = () => (
       </Link>
     </div>
     <div className="flex flex-col ml-16 max-sm:max-w-[19rem] max-sm:ml-0">
-      <h2 className="text-heading-two text-neutral-100">Xmartlabs´ Newsletter</h2>
-      <p className="text-paragraph-two text-default-gray w-[32rem] max-sm:w-full max-sm:text-center max-sm:text-base">Subscribe to our newsletter and get updates on AI, Computer Vision as well as mobile and web development.</p>
+      <h2 className="text-heading-two text-neutral-100">
+        Xmartlabs´ Newsletter
+      </h2>
+      <p className="text-paragraph-two text-default-gray w-[32rem] max-sm:w-full max-sm:text-center max-sm:text-base">
+        Subscribe to our newsletter and get updates on AI, Computer Vision as
+        well as mobile and web development.
+      </p>
       <div className="flex flex-row items-center justify-center mt-4 max-sm:flex max-sm:flex-col max-sm:w-full max-sm:self-center">
         <input
           placeholder="Type your email..."

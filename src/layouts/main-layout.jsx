@@ -15,17 +15,17 @@ const shortCodes = { Youtube, Table };
 function MainLayout({ children }) {
   return (
     <MDXProvider components={shortCodes}>
-      <Seo/>
-      <NavMenu/>
+      <Seo />
+      <NavMenu />
       {children}
-      <Footer/>
+      <Footer />
     </MDXProvider>
   );
 }
 
 MainLayout.propTypes = {
   children: PropTypes.object,
-}
+};
 
 MainLayout.defaultProps = {
   children: {},

@@ -1,31 +1,37 @@
-import * as React from "react";
+import * as React from 'react';
 
 import { SocialElement } from '/src/components/social-element';
-import { TwitterIcon, Facebook, Linkedin, InstagramIcon, XmartlabsTextLogoWhite } from '/src/components/icons';
+import {
+  TwitterIcon,
+  Facebook,
+  Linkedin,
+  InstagramIcon,
+  XmartlabsTextLogoWhite,
+} from '/src/components/icons';
 
-import { navMenuElements } from "../nav-menu";
+import { navMenuElements } from '../nav-menu';
 
 export const Footer = () => {
   const shareXlProfileLinks = [
     {
-      path: 'https://www.instagram.com/xmartlabs', 
+      path: 'https://www.instagram.com/xmartlabs',
       icon: <InstagramIcon />,
-      id: 'socialMenuInstagram'
+      id: 'socialMenuInstagram',
     },
     {
-      path: 'https://www.linkedin.com/company/xmartlabs/mycompany/', 
+      path: 'https://www.linkedin.com/company/xmartlabs/mycompany/',
       icon: <Linkedin />,
-      id: 'socialProfileLinkedIn'
+      id: 'socialProfileLinkedIn',
     },
     {
-      path: 'https://twitter.com/xmartlabs', 
+      path: 'https://twitter.com/xmartlabs',
       icon: <TwitterIcon />,
-      id: 'socialProfileTwitter'
+      id: 'socialProfileTwitter',
     },
     {
-      path: 'https://es-la.facebook.com/xmartlabs/', 
+      path: 'https://es-la.facebook.com/xmartlabs/',
       icon: <Facebook />,
-      id: 'socialProfileFacebook'
+      id: 'socialProfileFacebook',
     },
   ];
 
@@ -37,20 +43,24 @@ export const Footer = () => {
       "
     >
       <div className="ml-[0.9rem] max-xs:ml-[0.5rem]">
-        <a href="https://xmartlabs.com/" id="logo-xl-white" aria-label='Xmartlabs Homepage'>
+        <a
+          href="https://xmartlabs.com/"
+          id="logo-xl-white"
+          aria-label="Xmartlabs Homepage"
+        >
           <XmartlabsTextLogoWhite />
         </a>
       </div>
       <div className="mt-[2rem] flex flex-col text-default-gray">
-        {navMenuElements.map(({label, path}) =>
+        {navMenuElements.map(({ label, path }) => (
           <a
             key={label}
             href={path}
             className="text-[17px] my-[0.5rem] mx-[0.9rem] text-default-gray no-underline hover:text-neutral-100"
           >
             {label}
-          </a>)
-        }
+          </a>
+        ))}
         <SocialElement
           className="
             flex flex-row static items-center w-full z-0 justify-end mt-[1rem]
@@ -62,4 +72,4 @@ export const Footer = () => {
       </div>
     </div>
   );
-}
+};

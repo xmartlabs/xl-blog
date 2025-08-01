@@ -1,27 +1,27 @@
-import React from "react";
-import PropTypes from "prop-types";
+import React from 'react';
+import PropTypes from 'prop-types';
 
 // Components
-import { Link, graphql } from "gatsby";
+import { Link, graphql } from 'gatsby';
 
 const Tags = ({ pageContext, data }) => {
-  const { tag } = pageContext
-  const { edges, totalCount } = data.allMdx
+  const { tag } = pageContext;
+  const { edges, totalCount } = data.allMdx;
   const tagHeader = `${totalCount} post${
-    totalCount === 1 ? "" : "s"
-  } tagged with "${tag}"`
+    totalCount === 1 ? '' : 's'
+  } tagged with "${tag}"`;
 
   return (
     <div>
       <h1>{tagHeader}</h1>
       <ul>
         {edges.map(({ node }) => {
-          const { title } = node.frontmatter
+          const { title } = node.frontmatter;
           return (
             <li key={node.slug}>
               <Link to={node.slug}>{title}</Link>
             </li>
-          )
+          );
         })}
       </ul>
       {/*
@@ -30,8 +30,8 @@ const Tags = ({ pageContext, data }) => {
             */}
       <Link to="/tags">All tags</Link>
     </div>
-  )
-}
+  );
+};
 
 Tags.propTypes = {
   pageContext: PropTypes.shape({
@@ -45,29 +45,31 @@ Tags.propTypes = {
           node: PropTypes.shape({
             frontmatter: PropTypes.shape({
               title: PropTypes.string.isRequired,
-            })
+            }),
           }),
         }).isRequired
       ),
     }),
   }),
-}
+};
 
-export default Tags
+export default Tags;
 
-export const pageQuery = graphql`query ($tag: String) {
-  allMdx(
-    limit: 2000
-    sort: {frontmatter: {date: DESC}}
-    filter: {frontmatter: {tags: {in: [$tag]}}}
-  ) {
-    totalCount
-    edges {
-      node {
-        frontmatter {
-          title
+export const pageQuery = graphql`
+  query ($tag: String) {
+    allMdx(
+      limit: 2000
+      sort: { frontmatter: { date: DESC } }
+      filter: { frontmatter: { tags: { in: [$tag] } } }
+    ) {
+      totalCount
+      edges {
+        node {
+          frontmatter {
+            title
+          }
         }
       }
     }
   }
-}`
+`;

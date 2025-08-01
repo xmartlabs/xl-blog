@@ -1,1 +1,1 @@
-export { HeaderCircleIcon } from "./header-circle-icon";
+export { HeaderCircleIcon } from './header-circle-icon';
