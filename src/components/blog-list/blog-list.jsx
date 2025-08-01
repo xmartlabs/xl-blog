@@ -6,8 +6,6 @@ import { Pager } from '../pager';
 import { Card } from '../card';
 import { ErrorSafeLocalStorage, classnames } from '../../helpers';
 
-import * as styles from './blog-list.module.scss';
-
 const Categories = {
   all: 'All',
   development: 'Development',
@@ -48,7 +46,14 @@ export const BlogList = ({ pageContext, data, location: { pathname } }) => {
 
   return (
     <>
-      <div className={styles.filterContainer} ref={categoryFiltersRef}>
+      <div
+        className="
+          w-full max-w-full flex flex-row flex-nowrap 
+          md:m-[8rem_0_5rem_0] md:gap-[6%] md:items-center md:justify-center 
+          max-md:gap-[3rem] max-md:m-[3rem_0_1.5rem_0] max-md:p-[0_2rem_0.5rem_2rem] max-md:overflow-x-auto
+        "
+        ref={categoryFiltersRef}
+      >
         {Object.keys(Categories).map((category) => (
           <Link
             key={category}
@@ -56,8 +61,9 @@ export const BlogList = ({ pageContext, data, location: { pathname } }) => {
               ErrorSafeLocalStorage.setItem('scrollTo', window.scrollY)
             }
             className={classnames(
-              styles.filterElement,
-              category === selectedCategory && styles.selectedFilterElement
+              '!text-filter font-primary tracking-[1px] list-none no-underline w-fit text-gray-five',
+              category === selectedCategory &&
+                'text-xl-pink border-b-[2px] border-xl-pink'
             )}
             to={category === 'all' ? '/' : `/categories/${category}/`}
           >
@@ -65,7 +71,12 @@ export const BlogList = ({ pageContext, data, location: { pathname } }) => {
           </Link>
         ))}
       </div>
-      <div className={styles.container}>
+      <div
+        className="
+          m-[0_16%_0] grid grid-cols-[repeat(auto-fill,minmax(28%,1fr))] gap-16 
+          max-sm:m-0 max-sm:gap-[4rem_0] max-sm:grid-cols-[auto]
+        "
+      >
         {posts.map(({ node }) => (
           <Card data={node} key={node.id} withCategory={false} />
         ))}
