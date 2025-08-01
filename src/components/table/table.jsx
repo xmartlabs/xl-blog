@@ -12,8 +12,8 @@ const Table = ({
   const parsedHeaders = useMemo(() => {
     return headers
       .split(',')
-      .map((h) => h.trim())
-      .filter((h) => h)
+      .map((header) => header.trim())
+      .filter((header) => header)
       .map((label) => ({
         label,
         key: normalizeKey(label),
@@ -26,19 +26,19 @@ const Table = ({
       .map((rowStr) =>
         rowStr
           .split(',')
-          .map((c) => c.trim())
+          .map((cell) => cell.trim())
       )
       .map((cells) => {
         const obj = {};
-        parsedHeaders.forEach((h, idx) => {
-          obj[h.key] = cells[idx];
+        parsedHeaders.forEach((header, idx) => {
+          obj[header.key] = cells[idx];
         });
         return obj;
       });
   }, [rows, parsedHeaders]);
 
-  const renderCell = (row, h) => {
-    let cell = row[h.key];
+  const renderCell = (row, header) => {
+    let cell = row[header.key];
     return cell ?? "-";
   };
 
