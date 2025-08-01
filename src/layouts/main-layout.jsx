@@ -7,9 +7,10 @@ import { NavMenu } from '../components/nav-menu/index.js';
 import { Footer } from '../components/footer/index.js';
 import { MDXProvider } from '@mdx-js/react';
 import { Youtube } from '../components/youtube';
+import { Table } from '../components/table';
 
 /* These are the React Components that we use in the MDX template */
-const shortCodes = { Youtube };
+const shortCodes = { Youtube, Table };
 
 function MainLayout({ children }) {
   return (
