@@ -8,4 +8,4 @@ npm run format:check
 # Build the project to ensure it compiles successfully
 npm run build
 
-echo "✅ Pre-deploy checks passed!"
+echo "✅ Pre-push checks passed!"
