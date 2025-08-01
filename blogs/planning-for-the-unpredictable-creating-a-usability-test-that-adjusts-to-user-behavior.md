@@ -100,7 +100,7 @@ Some hesitated between the ‘How It Works’ and ‘Use Cases’ pages, others 
     allow="autoplay; encrypted-media"
     allowFullScreen
   />
-</div>\
+</div>
 Recording of user’s screen while scanning the pricing page.
 
 Having optional prompts and screen-specific follow up questions planned (”Do you feel like you know everything you need to know about this product to start using it?” “What else would you like to know?”) helped us accommodate for those cases and discover insights without need to improvise.
