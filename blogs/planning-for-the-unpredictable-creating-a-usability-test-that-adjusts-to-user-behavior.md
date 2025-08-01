@@ -4,7 +4,7 @@ title: "Planning for the unpredictable: creating a usability test that adjusts
 subtitle: " "
 permalink: /blog/flexible-usability-testing
 featured: true
-date: 2025-07-16
+date: 2025-08-01
 category: product-design
 thumbnail: /images/planning-for-the-unpredictable.jpg
 tags:
