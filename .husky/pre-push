@@ -1,0 +1,10 @@
+#!/usr/bin/env sh
+. "$(dirname -- "$0")/_/husky.sh"
+
+# Run format check
+npm run format:check
+
+# Clean and validate Gatsby configuration without full build
+npm run clean && npm run develop --dry-run
+
+echo "✅ Pre-push checks passed!"
