@@ -81,7 +81,7 @@ module.exports = {
     {
       resolve: 'gatsby-plugin-google-tagmanager',
       options: {
-        id: 'GTM-5J7PXXS',
+        id: process.env.GATSBY_GTM_ID,
         includeInDevelopment: false,
         routeChangeEventName: 'route-change',
       },
@@ -89,7 +89,7 @@ module.exports = {
     {
       resolve: `gatsby-plugin-google-gtag`,
       options: {
-        trackingIds: [process.env.GA_MEASUREMENT_ID],
+        trackingIds: [process.env.GATSBY_GA_MEASUREMENT_ID],
         pluginConfig: {
           head: false,
           respectDNT: true,
