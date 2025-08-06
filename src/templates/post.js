@@ -19,8 +19,6 @@ import { Tags } from '../components/tags/tags';
 import { TitleBlogIndex } from '../components/title-blog-index/title-blog-index';
 import { Seo } from '../components/seo/seo';
 
-import * as styles from '../css/blog-post.module.scss';
-
 const _ = require('lodash');
 
 const getPathname = () => {
@@ -102,7 +100,7 @@ const BlogPost = ({ data, children }) => {
     const isInbottom =
       Math.ceil(window.innerHeight + window.scrollY + moreFromXlSize + 1000) >=
       document.documentElement.scrollHeight;
-    const isInTop = document.documentElement.scrollTop < 650;
+    const isInTop = document.documentElement.scrollTop < 750;
 
     if (isInbottom) {
       setDisappearSocial(true);
@@ -143,7 +141,7 @@ const BlogPost = ({ data, children }) => {
 
   return (
     <div onScroll={handleScroll} id="containerDiv">
-      <div className={styles.indexContainer}>
+      <div className="flex justify-end">
         <TitleBlogIndex
           data={getTitles()}
           disappearIndex={disappearIndex}
@@ -152,59 +150,46 @@ const BlogPost = ({ data, children }) => {
       </div>
       <SocialElement
         className={classnames(
-          disappearSocial ? styles.socialDisappear : styles.socialAppear,
-          styles.blogIcons,
-          { [styles.socialDisappear]: disappearIndex }
+          disappearSocial
+            ? 'transition-[transform,opacity] duration-500 ease-in-out opacity-0'
+            : 'transition-[transform,opacity] duration-500 ease-in-out opacity-100',
+          '[&_a]:flex [&_a]:items-center [&_a]:m-[0.7rem]',
+          {
+            'transition-[transform,opacity] duration-500 ease-in-out opacity-0':
+              disappearIndex,
+          }
         )}
         links={shareBlogPostLinks}
       />
-      <div className={styles.bannerContainer}>
-        <div className={styles.categoryTagsContainer}>
+      <div className="p-[10rem_44%_20rem_16%] bg-blue-six max-lg:p-[10rem_27%_20rem_16%] max-sm:min-h-full max-sm:p-[8rem_1rem_6rem_5%]">
+        <div className="flex flex-row items-baseline">
           <Category
             data={categoryBlog.displayName}
-            className={styles.category}
+            className="flex justify-center text-[0.8rem] leading-[2rem] font-black text-blue-one bg-neutral-100 mb-4 w-auto px-4 h-[1.8rem] uppercase tracking-[0.1rem] max-sm:w-auto max-sm:px-4 max-sm:h-[1.5rem] max-sm:leading-[1.7rem]"
           />
         </div>
-        <h1
-          className={classnames(
-            styles.titleContainer,
-            'text__heading__one__blueOne'
-          )}
-        >
+        <h1 className="my-2 mx-0 text-heading-one text-blue-one font-link max-sm:m-0">
           {data.mdx.frontmatter.title}
         </h1>
-        <div className={styles.authorContainer}>
-          <div className={styles.authorInformation}>
+        <div className="w-full">
+          <div className="flex flex-row mt-8">
             <img
               src={`/images/${authorBlog.image}`}
               alt={authorBlog.displayName}
-              className={styles.authorImage}
+              className="rounded-[10px] mr-8 w-[5.5rem] h-full"
             />
-            <div className={styles.nameDateTimeContainer}>
+            <div className="flex flex-col items-start justify-between">
               <Link
-                className={classnames(
-                  styles.authorName,
-                  'text__paragraph__bold__blueOne'
-                )}
+                className={'no-underline font-link font-bold'}
                 to={author.profile_url}
               >
                 {authorBlog.displayName}
               </Link>
-              <label
-                className={classnames(
-                  styles.postDate,
-                  'text__label__bold__grayTwo'
-                )}
-              >
+              <label className="w-auto text-label-bold text-gray-two font-semibold">
                 {data.mdx.frontmatter.date}
               </label>
-              <label
-                className={classnames(
-                  'text__label__bold__grayTwo',
-                  styles.timeToRead
-                )}
-              >
-                <ClockIcon className={styles.clockIcon} />
+              <label className="w-auto text-label-bold text-gray-two font-semibold">
+                <ClockIcon className="mr-[0.5rem] inline" />
                 {data.mdx.fields.timeToRead.text}
               </label>
             </div>
@@ -215,19 +200,22 @@ const BlogPost = ({ data, children }) => {
         src={imgUrl}
         alt="Blog Main Image"
         onError={(event) => (event.target.src = '../../images/image.png')}
-        className={styles.blogMainImage}
+        className="transform translate-y-[-230px] ml-[16%] mb-20 w-[48.5rem] max-w-[78vh] h-auto max-sm:transform max-sm:-translate-y-12 max-sm:m-0 max-sm:w-full max-sm:h-auto"
       />
-      <div className={styles.bodyPostContainer} ref={refIndexTitles}>
+      <div className="bodyPostContainer" ref={refIndexTitles}>
         {children}
       </div>
-      <div className={styles.blogBottomElements}>
-        <div className={styles.socialBottomContainer}>
+      <div className="flex flex-row-reverse justify-start items-baseline p-[5rem_33%_2rem_16%] max-xxl:pr-[41%] max-lg:pr-[10%] max-sm:flex-col max-sm:p-0">
+        <div className="flex flex-row justify-end max-sm:justify-start">
           <SocialElement
-            className={classnames(styles.socialBottom, styles.blogIcons)}
+            className="flex flex-row static items-center w-full z-0 max-sm:w-auto [&_a]:flex [&_a]:items-center [&_a]:m-[0.7rem]"
             links={shareXlProfileLinks}
           />
         </div>
-        <Tags blogTags={data.mdx.frontmatter.tags} className={styles.tags} />
+        <Tags
+          blogTags={data.mdx.frontmatter.tags}
+          className="max-sm:w-[90%] max-sm:mt-4 max-sm:ml-4"
+        />
       </div>
       <MoreBlogsSection
         relatedPosts={data.mdx.relatedPosts}

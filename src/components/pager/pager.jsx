@@ -3,7 +3,6 @@ import PropTypes from 'prop-types';
 import { Link } from 'gatsby';
 
 import { ErrorSafeLocalStorage } from '../../helpers';
-import * as styles from './pager.module.scss';
 
 const buildPageUrl = ({ page, category }) => {
   let url = '/';
@@ -45,7 +44,10 @@ const getPagerItems = (currentPage, numPages) => {
 
 const PagerLink = ({ text, url, disabled }) => (
   <Link
-    className={styles.pagerLink}
+    className="
+      font-link-light no-underline min-w-[32px] text-center text-default-gray cursor-pointer 
+      disabled:cursor-not-allowed disabled:text-disabled-gray disabled:pointer-events-none
+    "
     disabled={disabled}
     onClick={() => ErrorSafeLocalStorage.setItem('scrollTo', 'categories')}
     to={url}
@@ -56,20 +58,26 @@ const PagerLink = ({ text, url, disabled }) => (
 
 const Pager = ({ numPages, currentPage, category }) => {
   return (
-    <div className={styles.pagerContainer}>
+    <div className="flex flex-row justify-center my-20 font-medium py-4 px-0 max-sm:my-20 max-sm:mx-auto">
       <PagerLink
         text="← Prev"
         url={buildPageUrl({ page: currentPage - 1, category })}
         disabled={currentPage === 1}
       />
-      <div className={styles.spacer} />
+      <div className="w-[10px]" />
       {getPagerItems(currentPage, numPages).map((item) =>
         item === currentPage ? (
-          <span key={item} className={styles.currentPage}>
+          <span
+            key={item}
+            className="font-link-light no-underline min-w-[32px] text-center text-xl-pink cursor-pointer"
+          >
             {item}
           </span>
         ) : item === '' ? (
-          <span key={item} className={styles.ellipsis}>
+          <span
+            key={item}
+            className="font-link-light no-underline min-w-[32px] text-center text-default-gray cursor-pointer"
+          >
             ...
           </span>
         ) : (
@@ -81,7 +89,7 @@ const Pager = ({ numPages, currentPage, category }) => {
           />
         )
       )}
-      <div className={styles.spacer} />
+      <div className="w-[10px]" />
       <PagerLink
         text="Next →"
         url={buildPageUrl({ page: currentPage + 1, category })}

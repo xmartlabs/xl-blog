@@ -3,31 +3,35 @@ import React from 'react';
 import { Link } from 'gatsby';
 import PropTypes from 'prop-types';
 
-import { classnames } from '../../helpers';
-
 import { Card } from '../card';
 
-import * as styles from './more-blogs-section.module.scss';
-
 const MoreBlogsSection = ({ relatedPosts, refMoreFrom, title }) => (
-  <div className={styles.moreFromXlContainer} ref={refMoreFrom}>
-    <div className={styles.titleContainer}>
+  <div
+    className="bg-blue-six mt-16 px-[16%] py-0 max-xxl:py-0 max-xxl:px-[5%]"
+    ref={refMoreFrom}
+  >
+    <div className="mb-16 pt-16 [&_a]:font-link max-sm:mt-0 max-sm:mx-0 max-sm:mb-16">
       <Link
+        className="
+          text-heading-two-separated text-blue-one no-underline 
+          max-sm:leading-[2rem] max-sm:text-[1.4rem]
+        "
         to={`/categories/${title}`}
-        className={classnames(
-          'text__heading__two__separated__blueOne',
-          styles.titleStyle
-        )}
       >
-        More from <span className={styles.title}>{title}</span> →
+        More from <span className="text-xl-pink">{title}</span> →
       </Link>
     </div>
-    <div className={styles.blogsContainer}>
+    <div
+      className="
+        flex flex-row items-baseline w-[92.5rem] m-auto gap-20 max-w-full
+        max-xs:flex max-xs:flex-col max-xs:items-center max-xs:w-auto max-xs:gap-0
+      "
+    >
       {relatedPosts.slice(0, 3).map((post) => (
         <Card
           data={post}
           key={post.frontmatter.title}
-          className={styles.cardStyles}
+          className="w-[30%] mb-20 [&_p]:absolute [&_p]:top-[13.5rem]"
         />
       ))}
     </div>

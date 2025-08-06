@@ -8,7 +8,7 @@ const CategoriesPage = (props) => {
   return (
     <>
       <HeaderBanner />
-      <BlogList {...props} />;
+      <BlogList {...props} />
     </>
   );
 };

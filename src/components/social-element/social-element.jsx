@@ -4,18 +4,21 @@ import PropTypes from 'prop-types';
 
 import { classnames } from '../../helpers/utils';
 
-import * as styles from './social-element.module.scss';
-
 const SocialElement = ({ className, links }) => {
   return (
-    <div className={classnames(styles.container, className)}>
+    <div
+      className={classnames(
+        'flex flex-col items-center w-[14.8%] fixed top-64',
+        className
+      )}
+    >
       {links.map((item) => (
         <a
           key={item.id}
           href={item.path}
           target="_blank"
           rel="noopener noreferrer"
-          className={styles.socialIcon}
+          className="w-6 h-6"
         >
           {item.icon}
         </a>

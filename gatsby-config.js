@@ -11,7 +11,6 @@ module.exports = {
   },
   plugins: [
     'gatsby-plugin-netlify-cms',
-    'gatsby-plugin-styled-components',
     'gatsby-plugin-image',
     'gatsby-plugin-instagram-embed',
     'gatsby-plugin-slug',
@@ -99,6 +98,6 @@ module.exports = {
       },
     },
     'gatsby-transformer-remark',
-    'gatsby-plugin-sass',
+    'gatsby-plugin-postcss',
   ],
 };
