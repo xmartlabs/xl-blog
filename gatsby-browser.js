@@ -17,7 +17,7 @@ export const wrapRootElement = ({ element }) => {
 export const onRouteUpdate = ({ location, prevLocation }) => {
   // Track page view with Google Analytics
   if (typeof window !== 'undefined' && window.gtag) {
-    window.gtag('config', process.env.GATSBY_GA_MEASUREMENT_ID, {
+    window.gtag('config', process.env.GA_MEASUREMENT_ID, {
       page_location: window.location.href,
       page_path: location.pathname + location.search + location.hash,
     });
