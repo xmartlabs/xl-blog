@@ -3,7 +3,7 @@ title: "UX meets AI: designing smart chat interactions"
 subtitle: " "
 permalink: /designing-human-friendly-ai-chat-interfaces
 featured: true
-date: 2025-07-21
+date: 2025-08-08
 category: product-design
 thumbnail: /images/ux-meets-ai.jpg
 tags:
