@@ -5,7 +5,8 @@ import PropTypes from 'prop-types';
 import kebabCase from 'lodash/kebabCase';
 
 // Components
-import { Link, graphql } from 'gatsby';
+import { graphql, Link } from 'gatsby';
+import { Seo } from '../components/seo/seo';
 
 const TagsPage = ({ data }) => (
   <>
@@ -38,6 +39,8 @@ TagsPage.propTypes = {
 };
 
 export default TagsPage;
+
+export const Head = () => <Seo />;
 
 export const pageQuery = graphql`
   {

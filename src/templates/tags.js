@@ -2,7 +2,8 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 // Components
-import { Link, graphql } from 'gatsby';
+import { graphql, Link } from 'gatsby';
+import { Seo } from '../components/seo/seo';
 
 const Tags = ({ pageContext, data }) => {
   const { tag } = pageContext;
@@ -54,6 +55,8 @@ Tags.propTypes = {
 };
 
 export default Tags;
+
+export const Head = () => <Seo />;
 
 export const pageQuery = graphql`
   query ($tag: String) {
