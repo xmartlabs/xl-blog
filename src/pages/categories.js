@@ -3,6 +3,7 @@ import { graphql } from 'gatsby';
 
 import { BlogList } from '/src/components/blog-list/blog-list';
 import { HeaderBanner } from '/src/components/header-banner';
+import { Seo } from '../components/seo/seo';
 
 const CategoriesPage = (props) => {
   return (
@@ -14,6 +15,8 @@ const CategoriesPage = (props) => {
 };
 
 export default CategoriesPage;
+
+export const Head = () => <Seo />;
 
 export const blogListQuery = graphql`
   query ($category: String, $limit: Int, $skip: Int) {

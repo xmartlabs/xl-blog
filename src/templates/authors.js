@@ -2,7 +2,8 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 // Components
-import { Link, graphql } from 'gatsby';
+import { graphql, Link } from 'gatsby';
+import { Seo } from '../components/seo/seo';
 
 const Authors = ({ pageContext, data }) => {
   const { author } = pageContext;
@@ -56,6 +57,8 @@ Authors.propTypes = {
 };
 
 export default Authors;
+
+export const Head = () => <Seo />;
 
 export const pageQuery = graphql`
   query ($author: String) {
