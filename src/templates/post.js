@@ -141,6 +141,8 @@ const BlogPost = ({ data, children }) => {
 
   return (
     <div onScroll={handleScroll} id="containerDiv">
+      <title>{data.mdx.frontmatter.title}</title>
+      Test
       <div className="flex justify-end">
         <TitleBlogIndex
           data={getTitles()}
