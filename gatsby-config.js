@@ -85,16 +85,6 @@ module.exports = {
         includeInDevelopment: false,
       },
     },
-    {
-      resolve: `gatsby-plugin-google-gtag`,
-      options: {
-        trackingIds: [`${process.env.GA_MEASUREMENT_ID}`],
-        pluginConfig: {
-          head: true,
-          respectDNT: true,
-        },
-      },
-    },
     'gatsby-transformer-remark',
     'gatsby-plugin-postcss',
   ],
