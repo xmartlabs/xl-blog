@@ -1,0 +1,128 @@
+---
+title: Build a Local Health Data Server on Your Phone with Flutter + MCP
+subtitle: Access your health data from your phone in a simple, natural way with
+  Flutter and MCP.
+permalink: /blog/building-health-apps-mcp-llms/
+featured: false
+date: 2025-08-29
+category: development
+thumbnail: /images/portada.jpg
+tags:
+  - Healthcare AI
+  - AI/ML
+  - Cloud LLM
+  - Mobile Development
+  - Wearables
+author: nicolantean
+---
+Tracking and understanding your health data shouldn’t require digging through multiple apps or dealing with complex integrations. Whether it’s steps, heart rate, sleep, or calories, the information is already on your phone, but it’s locked behind interfaces that aren’t exactly conversational or easy to connect with AI tools.
+
+We wanted a way to ask natural questions like *“How did my sleep affect my workouts this week?”* and get a structured, AI-ready answer instantly, without sacrificing control over our own data.
+
+That’s where we turned to the **[Model Context Protocol (MCP)](https://docs.anthropic.com/en/docs/mcp)** — a lightweight, schema-based protocol — to bridge the gap. We built an open-source MCP server in Flutter that runs directly on Android and iOS, exposing health metrics in a structured format any compatible client (like Claude or Cursor) can query and understand.
+
+In this post, we’ll walk you through the problem we set out to solve, the architecture we built, and where this could go next.
+
+## **The Problem We’re Solving**
+
+AI is incredibly powerful at understanding, analyzing, and summarizing information. However, most of the data it works with comes from the internet, not from *you*. Imagine if that same intelligence could analyze your own health records to give you quick and meaningful answers about your well-being.
+
+Right now, that’s harder than it should be. Accessing your health data often means digging through apps like Google Fitbit or Apple Health, scrolling through charts, and piecing things together manually. With [**XLCare**, our fully on-device health assistant, those insights already happen privately on your phone](https://blog.xmartlabs.com/blog/blog-on-device-ai-health-assistant-xlcare/). This new project takes a different path: letting your health metrics be accessed directly from your favorite AI client, so you can combine your own data with the full analytical power of today’s most advanced tools.
+
+We wanted something that:
+
+* Enables **natural language interaction** with your health data
+* Accesses health data from both Android and iOS
+* Can be extended or forked by the community. More than just adding new metrics or integrations, this project is meant to be a starting point for something bigger: future agents that can reason over your health data, provide proactive insights, and even collaborate with other tools.
+* Connects easily with AI clients like Cursor, Claude, or local LLMs
+
+Our idea was to make your phone’s health data accessible via MCP from a Cursor (or another MCP compatible client) client on your PC, so you can ask questions like:
+
+***“How many steps did I take yesterday?”***
+
+and get an answer from your own device, instantly and in a way AI can understand.
+
+## Architecture Overview
+
+Our system is composed of four key layers that work together to serve structured health data via MCP:
+
+### 1. Health Data Source (OS Libraries)
+
+* Uses Apple HealthKit (iOS) and Health Connect (Android).
+* These libraries give access to key metrics, such as heart rate, steps, sleep, calories, and more.
+
+### 2. Data Access Layer (Flutter app)
+
+* A Flutter app acts as the orchestrator.
+* It uses the [health](https://pub.dev/packages/health) package to read from HealthKit / Health Connect.
+* It manages platform compatibility, permissions, error handling, and data formatting.
+
+### 3. MCP Server Layer (on-device HTTP server)
+
+* We embed a local MCP server using [mcp_server](https://pub.dev/packages/mcp_server).
+* The server locally exposes your health data in a queryable schema over HTTP.
+
+### 4. MCP Client (e.g. Cursor)
+
+* AI clients connect and send natural language prompts.
+* Prompts get converted into structured MCP queries.
+* The device returns structured results with real-time health data.
+* Can be combined with cutting-edge AI models — like GPT-5 or other next-generation LLMs — to unlock deeper analysis, richer insights, and more natural conversations about your health data.
+
+<!-- notionvc: 0a1e18e4-39ea-4c29-ad0a-11292e5a831c -->
+
+![Diagram of a Cloud LLM, laptop, mobile app, and health wearable working together through MCP.](/images/frame-2.png)
+
+## **Our Take on the Project**
+
+For us, this isn’t just a neat tech demo — it’s a **sneak peek at a whole new way of interacting with data**.
+
+Once we ran it on real devices, the potential became obvious:
+
+1. **Instant answers from complex data**. MCP queries can pull and combine multiple data points at once, so you can cross-check heart rate, sleep quality, and activity in a single request and get instant insights.
+2. **Advanced analytics in plain language**, like averages, trends and correlations, all without writing a single line of SQL or opening a spreadsheet. Just ask, and get structured answers.
+3. **Data sharing without the middleman.** While this project is local-first, you could extend it with a remote MCP implementation. Imagine giving your personal trainer secure access to your live health metrics so they can track your progress throughout the week.
+4. **From snapshots to full health narratives.** Instead of isolated numbers, this architecture can stitch together a complete story of your well-being. An AI could connect your weekly activity, sleep quality, and recovery trends to give actionable recommendations, turning raw data into meaningful guidance.
+
+What we’ve built is a first step toward making health insights easier, faster, and a lot more natural. You’re in control, the community can take it further, and the future of local + AI feels closer than ever.
+
+<!-- notionvc: 26349cef-1b6b-4acc-9df2-de462f853764 -->
+
+<VideoPlayer name=Screen Recording blog Nico L.mp4 />
+
+<!-- notionvc: 30246cc0-4846-438f-818e-dab0563022a8 -->
+
+## **Where to Find the Code**
+
+If you want to see exactly how we wired everything together, from reading health data to serving it via MCP, the full implementation is open-source.
+
+In the [GitHub repo](https://github.com/xmartlabs/vytalLink-client/tree/1.0.0) you’ll find:
+
+* The Flutter app that connects to HealthKit and Health Connect
+* The local MCP server setup
+* The schema definitions for structured health data
+* Example configs for Claude, Cursor, and other MCP clients
+
+Check the `README` for quick setup instructions.
+
+## **Data Privacy Note**
+
+If you choose to connect this project to a **cloud-based AI model** (like GPT-5, Claude Sonnet 4, or others), be aware that your health data will be sent to that provider for processing. Always review their privacy policies before sharing sensitive information. For a fully private experience, pair the MCP server with an on-device LLM model instead.
+
+## **What’s Next**
+
+Connecting to a local MCP isn’t exactly plug-and-play. It takes a bit of technical wrangling. That’s the part we want to make vanish into the background.
+
+We also have a few ideas in motion that could take this far beyond what we’ve shown here.
+
+Can’t share all the details yet, but stay tuned.
+
+## **Conclusion**
+
+This project started as an experiment to see if health data could be accessed, understood, and acted on through MCP, all from the device in your pocket. Along the way, we found it’s not just possible, it’s powerful.
+
+By combining a local MCP server with AI clients, we open the door to instant insights, richer analytics, and entirely new ways to interact with personal health data. The potential goes well beyond tracking steps or logging workouts:t it’s about building AI-powered tools that are both personal and extensible.
+
+We’re just scratching the surface. The code is open, the ideas are evolving, and the possibilities are wide open.
+
+<!-- notionvc: 49e00757-7672-4d7b-8546-67173c90293a -->
