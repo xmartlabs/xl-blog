@@ -9,7 +9,7 @@ import { Image } from '../components/image';
 import { VideoPlayer } from '../components/video-player';
 
 /* These are the React Components that we use in the MDX template */
-const shortCodes = { Image, Table, VideoPlayer };
+const shortCodes = { Image, Table, Videoplayer: VideoPlayer };
 
 function MainLayout({ children }) {
   return (
