@@ -44,7 +44,7 @@ Here `ComponentName` is the name that the user will have to use when creating th
 Example:
 
 ```
-const shortCodes = { YouTube: YoutubePlayer };
+const shortCodes = { VideoPlayer: VideoPlayerComponent };
 ```
 
 Then while creating the blog, this is how it's going to be used
@@ -53,13 +53,13 @@ Then while creating the blog, this is how it's going to be used
 # Title
 This is my new blog using React Components
 
-<YouTube id="dsCiJIhfM5E" width="100%"/>
+<VideoPlayer id="dsCiJIhfM5E" width="100%"/>
 ```
 
-If the React Component name matches the name to use in the template, then you can just simplify it like this
+If the React Component name matches the name to use in the template, then you can simplify it like this
 
 ```
-const shortCodes = { Youtube };
+const shortCodes = { VideoPlayer };
 ```
 
 ## Available Components
@@ -123,23 +123,31 @@ The Image component is a flexible React component that can display either a sing
 - **Flexible Layout**: Multiple images wrap to new rows on smaller screens
 - **Accessibility**: Proper alt text support with automatic numbering for multiple images
 
-### YouTube Component
+### VideoPlayer Component
 
-The YouTube component allows you to embed YouTube videos in your blog posts.
+The VideoPlayer component allows you to embed YouTube videos in your blog posts or use videos stored in the CMS.
+
+The supported formats are: `MP4, WebM, and OGG`
 
 #### Props
 
-| Prop | Type | Default | Required | Description |
-|------|------|---------|----------|-------------|
-| `id` | `string` | - | Yes | YouTube video ID |
-| `width` | `string` | `"100%"` | No | Width of the video player |
-| `height` | `string` | `"560px"` | No | Height of the video player |
-| `title` | `string` | `"Xmartlabs"` | No | Title for the iframe |
+| Prop     | Type | Default | Required                     | Description                       |
+|----------|------|---------|------------------------------|-----------------------------------|
+| `id`     | `string` | - | Yes                          | YouTube video ID                  |
+| `name`   | `string` | - | Yes (Only if ID not present) | Name of the file (with extension) |
+| `width`  | `string` | `"100%"` | No                           | Width of the video player         |
+| `height` | `string` | `"560px"` | No                           | Height of the video player        |
+| `title`  | `string` | `"Xmartlabs"` | No                           | Title for the iframe              |
 
 #### Usage Example
 
+For Youtube:
 ```mdx
-<YouTube id="dsCiJIhfM5E" width="100%" height="400px" />
+<VideoPlayer id="dsCiJIhfM5E" width="100%" height="400px" />
+```
+For CMS Video:
+```mdx
+<VideoPlayer name="screen recording.mp4" width="100%" height="400px" />
 ```
 
 ### Documenting the new Component
