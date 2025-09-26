@@ -1,7 +1,7 @@
 ---
-title: Scaling RAG system
-subtitle: From prototype to productio
-permalink: /scaling-rag-system
+title: "Scaling AI Agents:"
+subtitle: Challenges, Bottlenecks, and solutions
+permalink: /scaling-AI-Agents
 featured: true
 date: 2025-09-19
 category: development
@@ -16,7 +16,7 @@ author: nico-fripp
 ---
 # 🧠 Introduction
 
-In our last GenAI project, we faced some problems that we feel may be of help to many of you. The project was to build a RAG(Retrieval-Augmented Generation) system that worked on existing official documents, technical reports and product descriptions. The objective was, from this information, to generate new product proposals optimized according to the country, the profile of the person within the country and other relevant variables.
+In our last GenAI project, we faced some problems that we feel may be of help to many of you. The project was to build an AI agent system capable of generating new product proposals optimized for different countries and user profiles. To achieve this, the agent needed to use, among other things, a RAG (Retrieval-Augmented Generation) component that accessed our official documents, technical reports, and product descriptions.
 
 # ⚙️ Initial system architecture
 
@@ -160,9 +160,9 @@ However, despite that improvement, in cases with heavy processing we still excee
 
 # ❌🧵 **Limitations when scaling parallelization.**
 
-At the time of performing a more exhaustive testing, we noticed that we had a new bug in the system. This time it was not related to `Azure`. The problem was that the logic defined in each node of the graph used `Langchain` to build chains, in turn, invoked OpenAI models through the `langchain-openai` and `openAI` packages, which internally use `httpx` to make requests.
+At the time of performing a more exhaustive testing, we noticed that we had a new bug in the system. This time it was not related to `Azure`. The problem was that the logic defined in each node of the graph used `Langchain` to build chains, and those chains, in turn, invoked OpenAI models through the `langchain-openai` and `openAI` packages, which internally use `httpx` to make requests.
 
-When we implemented parallelization, the number of asynchronous executions grew considerably -in some cases exceeding 400 concurrent tasks-. It was in this context that we started to experience ConnectionError errors.
+When we implemented parallelization, the number of asynchronous executions grew considerably -in some cases exceeding 400 concurrent tasks. It was in this context that we started to experience ConnectionError errors.
 
 While this error was initially related to an HTTPS issue that seemed to fail with many concurrent requests, we also suspected that our Azure machine was running out of resources. Although these operations are primarily limited to I/O, handling so many simultaneous requests and network calls can also significantly overload the CPU.
 
@@ -172,11 +172,9 @@ We were then faced with the following dilemma:
 * If we avoided parallelization, we exceeded the context window limit
 * Scaling the infra would increase our costs
 
-
-
 # ⚖️ Final solution: Find a balance when parallelizing.
 
-Instead of taking parallelization to the maximum level, we decided to parallelize by grouping a certain number of elements in such a way that there is parallelization but it does not exceed the limits of the context window.
+nstead of taking parallelization to the maximum level, we decided to parallelize by grouping a certain number of elements in such a way that there is parallelization but it does not exceed the limits of the context window.
 
 We went from 400 concurrent tasks to approximately 50. The tradeoff of this decision was that the complete execution of the graph increased by a few seconds. However, thanks to the fact that we had already implemented data streaming from LangGraph combined with WebSockets, this increase in time did not imply new errors and did not worsen the user experience.
 
