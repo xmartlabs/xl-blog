@@ -24,7 +24,7 @@ In our last GenAI project, we faced some problems that we feel may be of help to
 
 * Language: Python
 * Frameworks: LangGraph, LangChain, LangFuse
-* Infrastructure: Azure App Service
+* Infrastructure: Azure
 * Vector storage: PGVector
 * LLM: OpenAI
 
@@ -160,7 +160,7 @@ However, despite that improvement, in cases with heavy processing we still excee
 
 # ❌🧵 **Limitations when scaling parallelization.**
 
-At the time of performing a more exhaustive testing, we noticed that we had a new bug in the system. This time it was not related to `Azure`. The problem was that the logic defined in each node of the graph used `Langchain` to build chains, and those chains, in turn, invoked OpenAI models through the `langchain-openai` and `openAI` packages, which internally use `httpx` to make requests.
+At the time of performing a more exhaustive testing, we noticed that we had a new bug in the system. The problem was that the logic defined in each node of the graph used `Langchain` to build chains, and those chains, in turn, invoked OpenAI models through the `langchain-openai` and `openAI` packages, which internally use `httpx` to make requests.
 
 When we implemented parallelization, the number of asynchronous executions grew considerably -in some cases exceeding 400 concurrent tasks. It was in this context that we started to experience ConnectionError errors.
 
