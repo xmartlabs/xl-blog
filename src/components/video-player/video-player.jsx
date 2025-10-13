@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-const VideoPlayer = ({ name, id, width, height, title }) => {
+const VideoPlayer = ({ name, id, width, height, title, style }) => {
   if (id) {
     return (
       <iframe
@@ -12,6 +12,7 @@ const VideoPlayer = ({ name, id, width, height, title }) => {
         frameBorder="0"
         allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
         allowFullScreen
+        style={style}
       ></iframe>
     );
   }
@@ -23,6 +24,7 @@ const VideoPlayer = ({ name, id, width, height, title }) => {
       title={title}
       allowFullScreen
       controls={true}
+      style={style}
     />
   );
 };
@@ -33,6 +35,7 @@ VideoPlayer.propTypes = {
   width: PropTypes.string,
   height: PropTypes.string,
   title: PropTypes.string,
+  style: PropTypes.object,
 };
 
 VideoPlayer.defaultProps = {
