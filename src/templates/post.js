@@ -200,7 +200,7 @@ const BlogPost = ({ data, children }) => {
         src={imgUrl}
         alt="Blog Main Image"
         onError={(event) => (event.target.src = '../../images/image.png')}
-        className="transform translate-y-[-230px] ml-[16%] mb-20 w-[48.5rem] max-w-[78vh] h-auto max-sm:transform max-sm:-translate-y-12 max-sm:m-0 max-sm:w-full max-sm:h-auto"
+        className="transform translate-y-[-230px] ml-[16%] mb-20 w-[51.3rem] max-w-[78vh] h-auto max-sm:transform max-sm:-translate-y-12 max-sm:m-0 max-sm:w-full max-sm:h-auto"
       />
       <div className="bodyPostContainer" ref={refIndexTitles}>
         {children}
