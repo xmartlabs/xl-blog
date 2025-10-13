@@ -205,7 +205,7 @@ const BlogPost = ({ data, children }) => {
       <div className="bodyPostContainer" ref={refIndexTitles}>
         {children}
       </div>
-      <div className="flex flex-row-reverse justify-start items-baseline p-[5rem_33%_2rem_16%] max-xxl:pr-[41%] max-lg:pr-[10%] max-sm:flex-col max-sm:p-0">
+      <div className="flex flex-row-reverse justify-start items-baseline p-[5rem_30%_2rem_16%] max-xxl:pr-[41%] max-lg:pr-[10%] max-sm:flex-col max-sm:p-0">
         <div className="flex flex-row justify-end max-sm:justify-start">
           <SocialElement
             className="flex flex-row static items-center w-full z-0 max-sm:w-auto [&_a]:flex [&_a]:items-center [&_a]:m-[0.7rem]"

@@ -199,7 +199,7 @@
 
 @layer components {
   .bodyPostContainer {
-    @apply p-[5rem_33%_2rem_16%] text-left font-blog mt-[-22rem] scroll-pt-[3rem];
+    @apply p-[5rem_30%_2rem_16%] text-left font-blog mt-[-22rem] scroll-pt-[3rem];
   }
 
   .bodyPostContainer h1 {
