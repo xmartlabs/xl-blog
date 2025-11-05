@@ -150,7 +150,7 @@ response = chain.invoke({"query": query})
 print(f"Ticket classification: {response.content}")
 ```
 
-This sample code demonstrates the decoupling capabilities. The prompts team can now experiment with new versions of the customer-support-classifier in Langfuse. They can test a version in staging and, once validated, promote it simply by changing the production tag to the new version. The application, without any changes to its code, will automatically use the updated prompt on the next run. A critical bottleneck is eliminated, enabling unprecedented iteration and responsiveness.
+This sample code demonstrates the decoupling capabilities. The prompts team can now experiment with new versions of the customer-support-classifier in Langfuse. They can test a version in staging and, once validated, promote it simply by applying the production tag. The application, without any changes to its code, will automatically use the updated prompt on the next run. A critical bottleneck is eliminated, enabling unprecedented iteration and responsiveness.
 
 ## Anatomy of a Trace: Diagnosis with Langfuse
 
@@ -170,9 +170,6 @@ import os
 from langfuse.langchain import CallbackHandler
 
 # Configure Langfuse credentials (usually in environment variables)
-# os.environ["LANGFUSE_PUBLIC_KEY"] = "pk-lf-..."
-# os.environ["LANGFUSE_SECRET_KEY"] = "sk-lf-..."
-# os.environ["LANGFUSE_HOST"] = "https://cloud.langfuse.com"
 
 # Initialize the handler. Metadata can be passed to identify the session or user.
 
@@ -289,7 +286,6 @@ The open-source framework Ragas integrates easily into an evaluation workflow. I
 
 ```python
 # evaluate_rag_outputs.py
-import you
 from datasets import Dataset
 from ragas import evaluate
 from ragas.metrics import context_relevancy, faithfulness, answer_relevancy
