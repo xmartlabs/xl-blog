@@ -5,7 +5,7 @@ permalink: /pdf-charts-images-processing-with-llm
 featured: true
 date: 2025-07-14
 category: development
-thumbnail: /images/pdf-processing-with-llm.png
+thumbnail: /images/pdf-processing-with-llm/front-page.jpg
 tags:
   - LLM
   - OpenAI
