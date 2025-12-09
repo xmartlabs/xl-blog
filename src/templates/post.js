@@ -141,7 +141,7 @@ const BlogPost = ({ data, children }) => {
 
   return (
     <div onScroll={handleScroll} id="containerDiv">
-      <div className="flex justify-end">
+      <div className="flex justify-end max-lg:hidden">
         <TitleBlogIndex
           data={getTitles()}
           disappearIndex={disappearIndex}
@@ -161,7 +161,7 @@ const BlogPost = ({ data, children }) => {
         )}
         links={shareBlogPostLinks}
       />
-      <div className="p-[10rem_44%_20rem_16%] bg-blue-six max-lg:p-[10rem_27%_20rem_16%] max-sm:min-h-full max-sm:p-[8rem_1rem_6rem_5%]">
+      <div className="p-[10rem_44%_20rem_16%] bg-blue-six max-lg:p-[10rem_8%_20rem_8%] max-sm:min-h-full max-sm:p-[8rem_1rem_6rem_5%]">
         <div className="flex flex-row items-baseline">
           <Category
             data={categoryBlog.displayName}
@@ -200,12 +200,12 @@ const BlogPost = ({ data, children }) => {
         src={imgUrl}
         alt="Blog Main Image"
         onError={(event) => (event.target.src = '../../images/image.png')}
-        className="transform translate-y-[-230px] ml-[16%] mb-20 w-[51.3rem] max-w-[85vh] h-auto max-sm:transform max-sm:-translate-y-12 max-sm:m-0 max-sm:w-full max-sm:h-auto"
+        className="transform translate-y-[-230px] ml-[16%] mb-20 w-[51.3rem] max-w-[85vh] h-auto max-lg:ml-[8%] max-sm:transform max-sm:-translate-y-12 max-sm:m-0 max-sm:w-full max-sm:h-auto"
       />
       <div className="bodyPostContainer" ref={refIndexTitles}>
         {children}
       </div>
-      <div className="flex flex-row-reverse justify-start items-baseline p-[5rem_30%_2rem_16%] max-xxl:pr-[30%] max-lg:pr-[10%] max-sm:flex-col max-sm:p-0">
+      <div className="flex flex-row-reverse justify-start items-baseline p-[5rem_30%_2rem_16%] max-xxl:pr-[30%] max-lg:px-[8%] max-sm:flex-col max-sm:p-0">
         <div className="flex flex-row justify-end max-sm:justify-start">
           <SocialElement
             className="flex flex-row static items-center w-full z-0 max-sm:w-auto [&_a]:flex [&_a]:items-center [&_a]:m-[0.7rem]"

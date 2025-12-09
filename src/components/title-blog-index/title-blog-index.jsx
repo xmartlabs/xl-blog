@@ -113,13 +113,13 @@ const TitleBlogIndex = ({ data, refIndexTitles, disappearIndex }) => {
         />
       )}
       <div
-        className="flex flex-row items-start w-[20%] mr-[5%] scroll-smooth fixed top-[22%] h-[70vh]"
+        className="flex flex-row items-start w-[20%] mr-[5%] scroll-smooth fixed top-[22%] h-[70vh] max-lg:hidden"
         ref={indexContainerRef}
       >
         <div
           className={classnames(
             { '!hidden': disappearIndex },
-            'fixed top-22p w-[20%] mr-5p flex flex-row flex-wrap items-start max-h-[76vh] overflow-y-hidden scroll-smooth max-sm:hidden'
+            'fixed top-22p w-[20%] mr-5p flex flex-row flex-wrap items-start max-h-[76vh] overflow-y-hidden scroll-smooth max-lg:hidden'
           )}
           ref={linksContainerRef}
         >

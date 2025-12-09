@@ -8,7 +8,7 @@ const SocialElement = ({ className, links }) => {
   return (
     <div
       className={classnames(
-        'flex flex-col items-center w-[14.8%] fixed top-64',
+        'flex flex-col items-center w-[14.8%] fixed top-64 max-lg:hidden',
         className
       )}
     >
