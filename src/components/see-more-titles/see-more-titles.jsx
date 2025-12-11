@@ -8,7 +8,7 @@ const SeeMoreTitles = ({ onClick, className, children }) => (
     onClick={onClick}
     className={classnames(
       className,
-      'fixed top-[14%] w-[20.3%] mr-[5%] cursor-pointer'
+      'fixed top-[14%] w-[20.3%] mr-[5%] cursor-pointer max-lg:hidden'
     )}
   >
     {children}

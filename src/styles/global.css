@@ -299,7 +299,7 @@
 
   @media (max-width: 1200px) {
     .bodyPostContainer {
-      @apply pr-[10%];
+      @apply px-[8%];
     }
   }
 
