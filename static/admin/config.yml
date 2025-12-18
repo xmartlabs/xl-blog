@@ -277,6 +277,7 @@ collections:
           - { value: "mei", label: "Maité Martinez" }
           - { value: "facu", label: "Facundo Ruiz" }
           - { value: "conor", label: "Conor Morrissey" }
+          - { value: "eli-linardi", label: "Elisa Linardi" }
       - { name: body, label: Body, widget: markdown }
     identifier_field: title
     
