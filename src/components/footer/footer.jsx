@@ -7,6 +7,7 @@ import {
   Linkedin,
   InstagramIcon,
   XmartlabsTextLogoWhite,
+  GithubIcon,
 } from '/src/components/icons';
 
 import { navMenuElements } from '../nav-menu';
@@ -14,12 +15,12 @@ import { navMenuElements } from '../nav-menu';
 export const Footer = () => {
   const shareXlProfileLinks = [
     {
-      path: 'https://www.instagram.com/xmartlabs',
-      icon: <InstagramIcon />,
-      id: 'socialMenuInstagram',
+      path: 'https://github.com/xmartlabs',
+      icon: <GithubIcon />,
+      id: 'socialMenuGithub',
     },
     {
-      path: 'https://www.linkedin.com/company/xmartlabs/mycompany/',
+      path: 'https://www.linkedin.com/company/xmartlabs/',
       icon: <Linkedin />,
       id: 'socialProfileLinkedIn',
     },
@@ -29,9 +30,9 @@ export const Footer = () => {
       id: 'socialProfileTwitter',
     },
     {
-      path: 'https://es-la.facebook.com/xmartlabs/',
-      icon: <Facebook />,
-      id: 'socialProfileFacebook',
+      path: 'https://www.instagram.com/xmartlabs',
+      icon: <InstagramIcon />,
+      id: 'socialMenuInstagram',
     },
   ];
 
