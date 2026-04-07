@@ -6,8 +6,10 @@ import { classnames } from '../../helpers';
 export const navMenuElements = [
   { label: 'Work', path: 'https://xmartlabs.com/work' },
   { label: 'Services', path: 'https://xmartlabs.com/services' },
-  { label: 'Our Company', path: 'https://xmartlabs.com/company' },
-  { label: 'Community', path: 'https://xmartlabs.com/community' },
+  { label: 'Our Approach', path: 'https://xmartlabs.com/our-approach' },
+  { label: 'About', path: 'https://xmartlabs.com/company' },
+  { label: 'Blog', path: 'https://blog.xmartlabs.com/' },
+  { label: 'Careers', path: 'https://xmartlabs.com/careers' },
 ];
 
 export const NavMenuElements = ({ className, openMenu }) => {
