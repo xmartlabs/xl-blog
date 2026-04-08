@@ -26,52 +26,14 @@ This approach not only accelerated time-to-insight but also standardized how met
 
 The Before and After in Practice
 
-Capability
-	Before
-	After
-
-Query coverage
-	Fixed dashboard views only
-
-Limited to predefined dashboard views
-	All metrics and dimensions in the data model
-
-Full access to all metrics and dimensions in the data model
-
-How analysts get answers
-
-User Interaction
-	Dashboard navigation or a request to data engineering
-
-Manual navigation through dashboards and filters
-	Plain-language conversation
-
-Natural language queries via conversational interface
-
-Time to insight
-	Hours to days (if routed through engineering)
-	Seconds
-
-Real-time responses in seconds
-
-Data Accessibility
-	Requires knowledge of dashboard structure and data organization
-	Abstracted complexity; no need to understand underlying data models
-
-Operational Impact on data engineers
-	Pulled into ad-hoc query work
-
-Data engineers frequently involved in ad-hoc query requests
-	Free to focus on pipeline work
-
-Data engineers focused on scalable data pipelines and core infrastructure
-
-Flexibility
-Analytical Flexibility
-	Rigid, view-bound
-
-Rigid and constrained to existing views
-	Open-ended and exploratory analysis across dimensions
+| Capability                                | Before                                                                                     | After                                                                                                 |
+|--------------------------------------------|--------------------------------------------------------------------------------------------|-------------------------------------------------------------------------------------------------------|
+| **Query coverage**                         | Fixed dashboard views only <br/> Limited to predefined dashboard views                      | All metrics and dimensions in the data model <br/> Full access to all metrics and dimensions          |
+| **How analysts get answers**<br/>User Interaction | Dashboard navigation or a request to data engineering <br/> Manual navigation through dashboards and filters | Plain-language conversation <br/> Natural language queries via conversational interface                |
+| **Time to insight**                        | Hours to days (if routed through engineering)                                               | Seconds <br/> Real-time responses in seconds                                                          |
+| **Data Accessibility**                     | Requires knowledge of dashboard structure and data organization                             | Abstracted complexity; no need to understand underlying data models                                    |
+| **Operational Impact on data engineers**   | Pulled into ad-hoc query work <br/> Data engineers frequently involved in ad-hoc query requests | Free to focus on pipeline work <br/> Data engineers focused on scalable data pipelines and core infrastructure |
+| **Flexibility**<br/>Analytical Flexibility | Rigid, view-bound <br/> Rigid and constrained to existing views                            | Open-ended and exploratory analysis across dimensions                                                  |
 
 
 
