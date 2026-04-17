@@ -22,13 +22,13 @@ For years, our client's stakeholders navigated a familiar ritual: open the dashb
 
 Our client is a global operation, with business analysts spread across markets worldwide, each focused on their own specialty. Their Looker dashboard is well-built and serves its purpose, but it was designed around a fixed set of views, and that's the core constraint: the teams responsible for maintaining it can't keep up with every ad-hoc need a business analyst has. Adding a new view, filter, or metric for each request isn't sustainable. So when analysts needed data that the dashboard didn't expose, the natural fallback was to go to the source, which meant filing a request with the data engineering team. This often led to additional requests for new data breakdowns tailored to specific analytical needs, further increasing the system's complexity. Over time, the dashboard evolved into a much larger, more difficult-to-manage product, especially for new users, who had to navigate an increasing number of filters and configurations just to find the specific data they needed.
 
-![Diagram showing a “frustration loop” in traditional data workflows: a business analyst requests specific data from a dashboard that fails to answer, leading to a Jira ticket and a data engineer being interrupted for a manual query, before the cycle repeats.](/images/from-dashboard-to-dialogue-image-1.png "The frustration loop of traditional data analytics workflows")
+<img src="/images/from-dashboard-to-dialogue-image-1.png" alt="Diagram showing a 'frustration loop' in traditional data workflows: a business analyst requests specific data from a dashboard that fails to answer, leading to a Jira ticket and a data engineer being interrupted for a manual query, before the cycle repeats." width="80%" />
 
 This created a misalignment that everyone felt. Data Engineers whose core value is building robust and reliable data pipelines shouldn't spend time running ad hoc queries for business analysts. And business analysts whose core value is turning data into insights should spend time analyzing the data, not figuring out where the data lives and how to access it.
 
 ## What We Built: Conversational Analytics, Grounded in Real Data
 
-![Diagram showing the evolution from traditional data systems (databases, warehouses, dashboards, and reports) to a conversational AI interface, connected through a “semantic bridge” that enables natural language queries, generative AI insights, predictive modeling, and automated dialogue.](/images/from-dashboard-to-dialogue-image-2.png "From data infrastructure to conversational AI: bridging the gap with semantic understanding")
+<img src="/images/from-dashboard-to-dialogue-image-2.png" alt="Diagram showing the evolution from traditional data systems (databases, warehouses, dashboards, and reports) to a conversational AI interface, connected through a 'semantic bridge' that enables natural language queries, generative AI insights, predictive modeling, and automated dialogue." width="80%" />
 
 We created a Looker's Conversational Analytics Agent that was powered by the client's existing LookML models, which already powered the dashboard business analysts used. They can now ask questions in plain language and get precise, data-grounded answers without needing to understand the underlying data structure, table relationships, or filtering logic. This significantly reduced the dependency on both data engineering and BI teams for day-to-day analytical needs.
 
@@ -76,7 +76,7 @@ On the user side, we redesigned how context was handled. Instead of forcing anal
 
 At the same time, we removed one of the biggest usability pain points: exporting data. Instead of forcing users to download CSV files and import them manually, we enabled direct copy-paste from the interface into spreadsheets. A small change, but one that had a massive impact on daily workflows.
 
-![User interface of a conversational analytics platform showing an agent selection panel, including an agent named “Koda” for managing sales and inventory KPIs, with a prompt to start a session and interact through a chat-based interface.](/images/from-dashboard-to-dialogue-gif.gif "Conversational analytics interface with AI agent interaction")
+<img src="/images/from-dashboard-to-dialogue-gif.gif" alt="User interface of a conversational analytics platform showing an agent selection panel, including an agent named 'Koda' for managing sales and inventory KPIs, with a prompt to start a session and interact through a chat-based interface." width="80%" />
 
 On the system side, we went deep into observability. Every question, every answer, every intermediate step was tracked. Users could provide feedback directly, and each interaction was linked to a full trace of the events that happened behind the scenes. But we didn’t stop there; we automated the entire feedback loop.
 
@@ -84,7 +84,7 @@ A Pub/Sub pipeline picked up new feedback entries, sent them to our messaging ap
 
 Finally, we introduced automated evaluation using Prism. We defined a benchmark of 100 questions, each with expected dimensions and filters, and continuously measured the agent’s accuracy. This gave us a reliable, repeatable way to validate improvements and catch regressions early.
 
-![Diagram of a validation framework for conversational analytics showing automated validation of instructions and logic, using sets of control questions to evaluate expected dimensions and filters, and measuring precision with a high accuracy score.](/images/from-dashboard-to-dialogue-image-4.png "Conversational analytics interface with AI agent interaction")
+<img src="/images/from-dashboard-to-dialogue-image-4.png" alt="Diagram of a validation framework for conversational analytics showing automated validation of instructions and logic, using sets of control questions to evaluate expected dimensions and filters, and measuring precision with a high accuracy score." width="80%" />
 
 What started as a conversational interface evolved into something much bigger: a fully instrumented, continuously improving analytical system.
 
