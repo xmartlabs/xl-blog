@@ -30,8 +30,6 @@ This created a misalignment that everyone felt. Data Engineers whose core value 
 
 ![Diagram showing the evolution from traditional data systems (databases, warehouses, dashboards, and reports) to a conversational AI interface, connected through a “semantic bridge” that enables natural language queries, generative AI insights, predictive modeling, and automated dialogue.](/images/from-dashboard-to-dialogue-image-2.png "From data infrastructure to conversational AI: bridging the gap with semantic understanding")
 
-
-
 We created a Looker's Conversational Analytics Agent that was powered by the client's existing LookML models, which already powered the dashboard business analysts used. They can now ask questions in plain language and get precise, data-grounded answers without needing to understand the underlying data structure, table relationships, or filtering logic. This significantly reduced the dependency on both data engineering and BI teams for day-to-day analytical needs.
 
 **Before**: A fixed set of supported queries, limited to what the dashboard already exposed. If the answer wasn't in an existing view, it wasn't accessible. If the user needed to combine different metrics into a table, they had to do it manually. Additionally, navigating multiple filters and views to reconstruct a specific analysis made the process slow, error-prone, and highly dependent on each user's dashboard familiarity.
@@ -54,15 +52,15 @@ At first glance, the agent seemed to be doing its job. Accuracy was solid, and a
 
 The biggest issue wasn’t correctness; it was workflow.
 
-* Analysts found themselves repeating the same instructions over and over again. Every new question required reapplying the same filters: *“Product X in Location Y”*, again and again. Since the agent didn’t retain context across conversations, what should have felt like a fluid interaction instead became repetitive and mechanical.
+¿Analysts found themselves repeating the same instructions over and over again. Every new question required reapplying the same filters: *“Product X in Location Y”*, again and again. Since the agent didn’t retain context across conversations, what should have felt like a fluid interaction instead became repetitive and mechanical.
 
 Then came the second layer of friction: usability.
 
-* Even when the agent returned the right answer, users couldn’t easily **do anything with it**. If they wanted to continue analyzing the data, they had to return to Looker, open Explore, download a CSV, and import it into a spreadsheet. What should have been a seamless flow from question to insight turned into a multi-step workaround.
+Even when the agent returned the right answer, users couldn’t easily **do anything with it**. If they wanted to continue analyzing the data, they had to return to Looker, open Explore, download a CSV, and import it into a spreadsheet. What should have been a seamless flow from question to insight turned into a multi-step workaround.
 
 And when things failed, which they inevitably did, the recovery process wasn’t much better.
 
-* Users reported issues via a messaging app, but those reports often lacked context. If the problem happened on the third or fourth question of a session, only the final query would be shared. That left us guessing. We had to go back and forth, asking for missing context and reconstructing the conversation manually.
+Users reported issues via a messaging app, but those reports often lacked context. If the problem happened on the third or fourth question of a session, only the final query would be shared. That left us guessing. We had to go back and forth, asking for missing context and reconstructing the conversation manually.
 
 It worked, but it was messy, slow, and far from scalable.
 
@@ -80,8 +78,6 @@ At the same time, we removed one of the biggest usability pain points: exporting
 
 ![User interface of a conversational analytics platform showing an agent selection panel, including an agent named “Koda” for managing sales and inventory KPIs, with a prompt to start a session and interact through a chat-based interface.](/images/from-dashboard-to-dialogue-gif.gif "Conversational analytics interface with AI agent interaction")
 
-
-
 On the system side, we went deep into observability. Every question, every answer, every intermediate step was tracked. Users could provide feedback directly, and each interaction was linked to a full trace of the events that happened behind the scenes. But we didn’t stop there; we automated the entire feedback loop.
 
 A Pub/Sub pipeline picked up new feedback entries, sent them to our messaging app, and automatically created Jira tickets. Each ticket included the query, the answer, the user feedback, and a trace ID that allowed us to reconstruct the full context instantly. No more chasing users. No more missing information. Everything we needed was already there.
@@ -89,8 +85,6 @@ A Pub/Sub pipeline picked up new feedback entries, sent them to our messaging ap
 Finally, we introduced automated evaluation using Prism. We defined a benchmark of 100 questions, each with expected dimensions and filters, and continuously measured the agent’s accuracy. This gave us a reliable, repeatable way to validate improvements and catch regressions early.
 
 ![Diagram of a validation framework for conversational analytics showing automated validation of instructions and logic, using sets of control questions to evaluate expected dimensions and filters, and measuring precision with a high accuracy score.](/images/from-dashboard-to-dialogue-image-4.png "Conversational analytics interface with AI agent interaction")
-
-
 
 What started as a conversational interface evolved into something much bigger: a fully instrumented, continuously improving analytical system.
 
