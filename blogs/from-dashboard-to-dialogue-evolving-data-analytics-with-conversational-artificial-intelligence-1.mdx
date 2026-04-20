@@ -84,7 +84,7 @@ On the system side, we went deep into observability. Every question, every answe
 
 A Pub/Sub pipeline picked up new feedback entries, sent them to our messaging app, and automatically created Jira tickets. Each ticket included the query, the answer, the user feedback, and a trace ID that allowed us to reconstruct the full context instantly. No more chasing users. No more missing information. Everything we needed was already there.
 
-We relied on Gemini Data Analytics[](https://docs.cloud.google.com/gemini/data-agents/conversational-analytics-api/overview) to power the backend and on BigQuery to store the questions and answers, user preferences, and feedback. 
+We relied on [Gemini Data Analytics](https://docs.cloud.google.com/gemini/data-agents/conversational-analytics-api/overview) to power the backend and on BigQuery to store the questions and answers, user preferences, and feedback. 
 
 Finally, we introduced automated evaluation using Prism. We defined a benchmark of 100 questions, each with expected dimensions and filters, and continuously measured the agent’s accuracy. This gave us a reliable, repeatable way to validate improvements and catch regressions early.
 
