@@ -42,6 +42,8 @@ The Before and After in Practice
 
 ![Comparison table showing the evolution from traditional dashboard-based analytics to conversational AI, highlighting improvements in query coverage, user interaction, time to insight, data accessibility, operational impact on data engineers, and analytical flexibility.](/images/screenshot-2026-04-17-at-12.19.38 pm.png "From dashboards to conversational AI: a comparison of analytics capabilities")
 
+## The Hardest Part: Adapting the LookML Model
+
 The client already had a LookML model that was powering the existing dashboard. But our first tests returned poor results. The agent didn't understand the terms that the analysts used in their day-to-day work.
 
 Making the necessary changes to the LookML model so that the agent could use it effectively was one of the biggest technical challenges of the project. The model had to be structured in a way that let the agent understand relationships between dimensions and metrics, navigate exploration correctly, and return meaningful results for open-ended, unpredictable questions, and not just the queries the dashboard was designed to answer. Since users weren't going to change how they communicated, our mission was to get the agent to speak the way they did. That meant adding dimensions in terms that users understood, rather than requiring them to adjust to how the values are stored in the database. Additionally, we were able to bring all sorts of date-related dimensions into the LookML model because they were aware of seasons and quarters, and the data was stored at the weekly level. This way, users didn't have to specify which weeks they were interested in, and just say, I want the data for Q1 2025 and compare it with Q1 2026.
@@ -90,7 +92,7 @@ What started as a conversational interface evolved into something much bigger: a
 
 ## What's next
 
-The agent was released only to a selected group of users, so we could manually inspect what was failing. As we become more confident in the agent's performance, we will target more users, and at some point, it will be impossible to keep up with all the feedback manually. We are interested in creating an agent that can pull feedback (with relevant context), modify code/instructions, and test the changes using the Prism framework. **A pure self evolving agent.**.
+The agent was released only to a selected group of users, so we could manually inspect what was failing. As we become more confident in the agent's performance, we will target more users, and at some point, it will be impossible to keep up with all the feedback manually. We are interested in creating an agent that can pull feedback (with relevant context), modify code/instructions, and test the changes using the Prism framework. **A pure self evolving agent.**
 
 We would then be reviewing those failing cases where the agent wasn't able to create the proper adjustments to the code/instructions.
 
