@@ -16,8 +16,6 @@ tags:
   - Business Intelligence
 author: gabriel-lema
 ---
-
-
 ## The Challenge: When the Dashboard Isn't Enough
 
 For years, our client's stakeholders navigated a familiar ritual: open the dashboard, locate the right chart, cross-reference a few filters, and piece together an answer to a question that had been on their mind since the morning standup. For straightforward queries, such as total sales by region and inventory levels at a glance, the dashboard did its job. But the moment a business analyst needed something more specific, like comparing inventory levels across two different periods, the workflow broke down entirely. And if the user needed to go one step further, such as building a summary table by slicing the data with multiple filters, the process quickly became time-consuming and impractical.
@@ -30,7 +28,7 @@ This created a misalignment that everyone felt. Data Engineers whose core value 
 
 ## What We Built: Conversational Analytics, Grounded in Real Data
 
-<img src="/images/from-dashboard-to-dialogue-image-1.png" alt="Diagram showing a 'frustration loop' in traditional data workflows: a business analyst requests specific data from a dashboard that fails to answer, leading to a Jira ticket and a data engineer being interrupted for a manual query, before the cycle repeats." width="80%" />
+<img src="/images/from-dashboard-to-dialogue-image-2.png" alt="Diagram showing the evolution from traditional data systems (databases, warehouses, dashboards, and reports) to a conversational AI interface, connected through a 'semantic bridge' that enables natural language queries, generative AI insights, predictive modeling, and automated dialogue." width="80%" />
 
 We created a Looker's Conversational Analytics Agent that was powered by the client's existing LookML models, which already powered the dashboard business analysts used. They can now ask questions in plain language and get precise, data-grounded answers without needing to understand the underlying data structure, table relationships, or filtering logic. This significantly reduced the dependency on both data engineering and BI teams for day-to-day analytical needs.
 
@@ -42,7 +40,7 @@ This approach not only accelerated time-to-insight but also standardized how met
 
 The Before and After in Practice
 
-<img src="/images/from-dashboard-to-dialogue-image-2.png" alt="Diagram showing the evolution from traditional data systems (databases, warehouses, dashboards, and reports) to a conversational AI interface, connected through a 'semantic bridge' that enables natural language queries, generative AI insights, predictive modeling, and automated dialogue." width="80%" />
+![Comparison table showing the evolution from traditional dashboard-based analytics to conversational AI, highlighting improvements in query coverage, user interaction, time to insight, data accessibility, operational impact on data engineers, and analytical flexibility.](/images/screenshot-2026-04-17-at-12.19.38 pm.png "From dashboards to conversational AI: a comparison of analytics capabilities")
 
 The client already had a LookML model that was powering the existing dashboard. But our first tests returned poor results. The agent didn't understand the terms that the analysts used in their day-to-day work.
 
