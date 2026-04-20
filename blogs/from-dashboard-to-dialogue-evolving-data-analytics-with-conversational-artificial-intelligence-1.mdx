@@ -48,7 +48,7 @@ The client already had a LookML model that was powering the existing dashboard. 
 
 Making the necessary changes to the LookML model so that the agent could use it effectively was one of the biggest technical challenges of the project. The model had to be structured in a way that let the agent understand relationships between dimensions and metrics, navigate exploration correctly, and return meaningful results for open-ended, unpredictable questions, and not just the queries the dashboard was designed to answer. Since users weren't going to change how they communicated, our mission was to get the agent to speak the way they did. That meant adding dimensions in terms that users understood, rather than requiring them to adjust to how the values are stored in the database. Additionally, we were able to bring all sorts of date-related dimensions into the LookML model because they were aware of seasons and quarters, and the data was stored at the weekly level. This way, users didn't have to specify which weeks they were interested in, and just say, I want the data for Q1 2025 and compare it with Q1 2026.
 
-### First Impressions 
+### First Impressions
 
 At first glance, the agent seemed to be doing its job. Accuracy was solid, and answers were generally correct. But once analysts started using it in their day-to-day work, friction quickly surfaced.
 
@@ -72,7 +72,7 @@ At that point, it became clear: the problem wasn’t the agent, it was everythin
 
 We realized that improving the agent alone wasn’t enough. The real opportunity was to rethink the entire experience.
 
-So we made a bold decision: we moved away from Looker’s native Conversational Analytics UI and built our own. This gave us full control over two things we were missing: **context management** and **observability**.
+So we made a bold decision: we moved away from Looker’s native Conversational Analytics UI and built our own web app.  This gave us full control over two things we were missing: **context management** and **observability**.
 
 On the user side, we redesigned how context was handled. Instead of forcing analysts to repeat themselves, we introduced persistent instructions. Users could define their context once, either as free text or by selecting from predefined filters, and the system would automatically apply it to every query. Even better, this context was stored. The next time the user came back, everything was already in place. The interaction finally felt natural.
 
@@ -84,9 +84,11 @@ On the system side, we went deep into observability. Every question, every answe
 
 A Pub/Sub pipeline picked up new feedback entries, sent them to our messaging app, and automatically created Jira tickets. Each ticket included the query, the answer, the user feedback, and a trace ID that allowed us to reconstruct the full context instantly. No more chasing users. No more missing information. Everything we needed was already there.
 
+We relied on Gemini Data Analytics[](https://docs.cloud.google.com/gemini/data-agents/conversational-analytics-api/overview) to power the backend and on BigQuery to store the questions and answers, user preferences, and feedback. 
+
 Finally, we introduced automated evaluation using Prism. We defined a benchmark of 100 questions, each with expected dimensions and filters, and continuously measured the agent’s accuracy. This gave us a reliable, repeatable way to validate improvements and catch regressions early.
 
-<img src="/images/from-dashboard-to-dialogue-image-4.png" alt="Diagram of a validation framework for conversational analytics showing automated validation of instructions and logic, using sets of control questions to evaluate expected dimensions and filters, and measuring precision with a high accuracy score." width="80%" />
+![Diagram of a validation framework for conversational analytics showing automated validation of instructions and logic, using sets of control questions to evaluate expected dimensions and filters, and measuring precision with a high accuracy score.](/images/from-dashboard-to-dialogue-image-4.png "Validation framework for conversational analytics")
 
 What started as a conversational interface evolved into something much bigger: a fully instrumented, continuously improving analytical system.
 
