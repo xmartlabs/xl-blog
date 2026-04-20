@@ -48,13 +48,13 @@ The client already had a LookML model that was powering the existing dashboard. 
 
 Making the necessary changes to the LookML model so that the agent could use it effectively was one of the biggest technical challenges of the project. The model had to be structured in a way that let the agent understand relationships between dimensions and metrics, navigate exploration correctly, and return meaningful results for open-ended, unpredictable questions, and not just the queries the dashboard was designed to answer. Since users weren't going to change how they communicated, our mission was to get the agent to speak the way they did. That meant adding dimensions in terms that users understood, rather than requiring them to adjust to how the values are stored in the database. Additionally, we were able to bring all sorts of date-related dimensions into the LookML model because they were aware of seasons and quarters, and the data was stored at the weekly level. This way, users didn't have to specify which weeks they were interested in, and just say, I want the data for Q1 2025 and compare it with Q1 2026.
 
-### First Impressions (v1)
+### First Impressions 
 
 At first glance, the agent seemed to be doing its job. Accuracy was solid, and answers were generally correct. But once analysts started using it in their day-to-day work, friction quickly surfaced.
 
 The biggest issue wasn’t correctness; it was workflow.
 
-¿Analysts found themselves repeating the same instructions over and over again. Every new question required reapplying the same filters: *“Product X in Location Y”*, again and again. Since the agent didn’t retain context across conversations, what should have felt like a fluid interaction instead became repetitive and mechanical.
+Analysts found themselves repeating the same instructions over and over again. Every new question required reapplying the same filters: *“Product X in Location Y”*, again and again. Since the agent didn’t retain context across conversations, what should have felt like a fluid interaction instead became repetitive and mechanical.
 
 Then came the second layer of friction: usability.
 
