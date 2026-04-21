@@ -16,8 +16,6 @@ author: gabriel-lema
 ---
 ## The Challenge: When the Dashboard Isn't Enough
 
-Testing cache
-
 For years, our client's stakeholders navigated a familiar ritual: open the dashboard, locate the right chart, cross-reference a few filters, and piece together an answer to a question that had been on their mind since the morning standup. For straightforward queries, such as total sales by region and inventory levels at a glance, the dashboard did its job. But the moment a business analyst needed something more specific, like comparing inventory levels across two different periods, the workflow broke down entirely. And if the user needed to go one step further, such as building a summary table by slicing the data with multiple filters, the process quickly became time-consuming and impractical.
 
 Our client is a global operation, with business analysts spread across markets worldwide, each focused on their own specialty. Their Looker dashboard is well-built and serves its purpose, but it was designed around a fixed set of views, and that's the core constraint: the teams responsible for maintaining it can't keep up with every ad-hoc need a business analyst has. Adding a new view, filter, or metric for each request isn't sustainable. So when analysts needed data that the dashboard didn't expose, the natural fallback was to go to the source, which meant filing a request with the data engineering team. This often led to additional requests for new data breakdowns tailored to specific analytical needs, further increasing the system's complexity. Over time, the dashboard evolved into a much larger, more difficult-to-manage product, especially for new users, who had to navigate an increasing number of filters and configurations just to find the specific data they needed.
@@ -25,11 +23,6 @@ Our client is a global operation, with business analysts spread across markets w
 ![Diagram illustrating the “frustration loop” in traditional data analytics workflows, where business analysts rely on rigid dashboards that fail to answer ad-hoc questions, leading to Jira tickets and manual intervention from data engineers.](/images/from-dashboard-to-dialogue-image-1.png "The frustration loop of traditional data analytics workflows")
 
 This created a misalignment that everyone felt. Data Engineers whose core value is building robust and reliable data pipelines shouldn't spend time running ad hoc queries for business analysts. And business analysts whose core value is turning data into insights should spend time analyzing the data, not figuring out where the data lives and how to access it.
-
-## What We Built: Conversational Analytics, Grounded in Real Data
-
-![Diagram showing the evolution from traditional data systems (databases, warehouses, dashboards, and reports) to a conversational AI interface, connected through a 'semantic bridge' that enables natural language queries, generative AI insights, predictive modeling, and automated dialogue.](/images/from-dashboard-to-dialogue-image-2.png "Evolution from traditional data systems to conversational AI")
-<p><br /></p>
 
 We created a [Looker's Conversational Analytics Agent](https://docs.cloud.google.com/looker/docs/conversational-analytics-overview) that was powered by the client's existing LookML models, which already powered the dashboard business analysts used. They can now ask questions in plain language and get precise, data-grounded answers without needing to understand the underlying data structure, table relationships, or filtering logic. This significantly reduced the dependency on both data engineering and BI teams for day-to-day analytical needs.
 
