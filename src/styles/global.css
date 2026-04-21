@@ -175,7 +175,7 @@
   --breakpoint-md: 992px;
   --breakpoint-sm: 768px;
   --breakpoint-xs: 576px;
-  --breakpoint-mh-sm: (max-height: 768px);
+  --breakpoint-mh-sm: 768px;
 
   /* Animations */
   --animate-pink-circle-move: pink-circle-move 25s linear infinite;
