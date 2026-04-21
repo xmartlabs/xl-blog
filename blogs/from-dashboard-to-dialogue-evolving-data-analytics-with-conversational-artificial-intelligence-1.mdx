@@ -80,6 +80,7 @@ At the same time, we removed one of the biggest usability pain points: exporting
 
 ![User interface of a conversational analytics platform showing an agent selection panel, including an agent named “Koda” for managing sales and inventory KPIs, with a prompt to start a session and interact through a chat-based interface.](/images/from-dashboard-to-dialogue-gif.gif "Conversational analytics interface with AI agent interaction")
 
+<p><br /></p>
 On the system side, we went deep into observability. Every question, every answer, every intermediate step was tracked. Users could provide feedback directly, and each interaction was linked to a full trace of the events that happened behind the scenes. But we didn’t stop there; we automated the entire feedback loop.
 
 A Pub/Sub pipeline picked up new feedback entries, sent them to our messaging app, and automatically created Jira tickets. Each ticket included the query, the answer, the user feedback, and a trace ID that allowed us to reconstruct the full context instantly. No more chasing users. No more missing information. Everything we needed was already there.
