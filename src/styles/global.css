@@ -287,6 +287,23 @@
     @apply text-paragraph-bold text-neutral-100 font-bold m-0;
   }
 
+  .bodyPostContainer table {
+    @apply border-collapse my-8 text-[1rem] block overflow-x-auto mx-auto w-fit max-w-full;
+  }
+
+  .bodyPostContainer table th,
+  .bodyPostContainer table td {
+    @apply border border-[#d1d5db] px-4 py-3 text-center align-middle whitespace-nowrap;
+  }
+
+  .bodyPostContainer table th {
+    @apply bg-[#f3f4f6] font-semibold text-blue-one;
+  }
+
+  .bodyPostContainer table tr:nth-child(even) td {
+    @apply bg-[#f9fafb];
+  }
+
   @media (max-width: 1600px) {
     .bodyPostContainer {
       @apply pr-[33%];
