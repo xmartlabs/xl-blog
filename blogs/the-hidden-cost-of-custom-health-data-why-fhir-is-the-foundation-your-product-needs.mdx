@@ -59,7 +59,7 @@ Beyond being the most widely adopted standard in healthcare today, FHIR has some
 
 **Theory is useful. But here's what this actually looks like in practice.**
 
-![Diagram comparing the outcomes of custom healthcare data models versus FHIR adoption. Custom schemas lead to technical debt and delays, while standardized FHIR resources enable scalability, EHR integration, analytics, and compliance.](/images/xl-fhir-foundation.png "The FHIR Inflection Point: From Technical Debt to Scalable Healthcare Growth")
+![Diagram comparing the outcomes of custom healthcare data models versus FHIR adoption. Custom schemas lead to technical debt and delays, while standardized FHIR resources enable scalability, EHR integration, analytics, and compliance.](/images/xl-fhir-foundation-1-.png "The FHIR Inflection Point: From Technical Debt to Scalable Healthcare Growth")
 
 **Real case #1 — Building from scratch** *VR-powered consultations in challenging environments*
 
@@ -73,13 +73,9 @@ A health services provider was generating hours of clinical voice conversations 
 
 **The takeaway:** You don't need to stop shipping to fix your foundation. A modular approach to FHIR adoption lets you reduce technical debt without losing momentum.
 
-
-
 >  🗒️ **A practical note:** In the vast majority of cases, especially for focused, single-problem products (which tend to be the ones that win), you don't need to implement the full FHIR specification. Not even close. Getting fluent in just a handful of core resources: **Patient, Practitioner, Encounter, Observation, Condition,** and **MedicationRequest** will cover roughly 90% of your data model needs.
 >
 > Start there, and then do the whole transition if needed.
-
-
 
 ## Now That You're Convinced: The Pragmatic FHIR Stack
 
@@ -96,11 +92,7 @@ Here is what worked for us, broken into three layers.
 * [US Core Implementation Guide](https://hl7.org/fhir/us/core/) — Essential if you are going to write Implementation Guides or define custom profiles.
 * The [\#fhir Zulip chat](https://chat.fhir.org/) — An active community where you can ask very specific implementation questions and get answers from people who maintain the spec itself.
 
-
-
 > 💡**Tip**: Assign a team member as the internal FHIR SME lead. Not a permanent role, just someone who goes deeper and becomes the go-to reference for the rest of the team for the first few months.
-
-
 
 Fair warning: this one is for the engineers on the team. Once you have enough shared context, the next question is tooling. The good news is that the ecosystem has matured significantly. You do not need to build everything from scratch.
 
