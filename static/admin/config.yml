@@ -151,6 +151,7 @@ collections:
           - { value: "conor", label: "Conor Morrissey" }
           - { value: "eli-linardi", label: "Elisa Linardi" }
           - { value: "marcos-soto", label: "Marcos Soto" }
+          - { value: "daniel-mariano", label: "Daniel Mariano" }
       - { name: body, label: Body, widget: markdown }
     identifier_field: title
   - name: "blogMDX"
@@ -280,6 +281,7 @@ collections:
           - { value: "conor", label: "Conor Morrissey" }
           - { value: "eli-linardi", label: "Elisa Linardi" }
           - { value: "marcos-soto", label: "Marcos Soto" }
+          - { value: "daniel-mariano", label: "Daniel Mariano" }
       - { name: body, label: Body, widget: markdown }
     identifier_field: title
     
