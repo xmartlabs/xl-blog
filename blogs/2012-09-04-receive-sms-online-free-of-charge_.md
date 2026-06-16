@@ -1,12 +1,15 @@
 ---
 title: Receive SMS online free of charge
-date: 2012-09-04
-tags:
-- tips
-blogger_orig_url: https://blog.xmartlabs.com/2012/09/receive-sms-online-free-of-charge_4.html
-author: enrique
-category: development
+subtitle: Free online services let you receive and read SMS
 permalink: /receive-sms-online-free-of-charge-4/
+featured: true
+date: 2012-09-04
+category: development
+thumbnail: /images/sms-online-web.png
+tags:
+  - tips
+author: enrique
+blogger_orig_url: https://blog.xmartlabs.com/2012/09/receive-sms-online-free-of-charge_4.html
 ---
 
 <p>
