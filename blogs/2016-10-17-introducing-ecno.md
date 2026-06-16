@@ -1,10 +1,15 @@
 ---
 title: Introducing Ecno!
-date: 2016-10-17
-tags: [Swift, iOS]
-author: dernst
-category: development
+subtitle: ou will discover a new friend
 permalink: /introducing-ecno/
+featured: true
+date: 2016-10-17
+category: development
+thumbnail: /images/ecno-web.png
+tags:
+  - Swift
+  - iOS
+author: dernst
 ---
 
 [Ecno]:        https://github.com/xmartlabs/Ecno
