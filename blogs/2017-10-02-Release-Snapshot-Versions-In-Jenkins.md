@@ -1,11 +1,18 @@
 ---
 title: Easy Continuous Delivery in Android with Jenkins
-date: 2017-10-02
-tags: [Android, Server, CI, Jenkins, Fabric]
-author: mirland
-
-category: development
+subtitle: Jenkins, an amazing CI/CD server, to help us release each one of those changes.
 permalink: /release-snapshot-versions-in-jenkins/
+featured: true
+date: 2017-10-02
+category: development
+thumbnail: /images/jenkins-cd-web.png
+tags:
+  - Android
+  - Server
+  - CI
+  - Jenkins
+  - Fabric
+author: mirland
 ---
 
 Today I want to show how we can release Android *SNAPSHOT* versions using [Beta by Fabric](https://docs.fabric.io/android/beta/overview.html).
