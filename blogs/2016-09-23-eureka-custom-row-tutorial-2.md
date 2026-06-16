@@ -1,10 +1,16 @@
 ---
 title: Creating your own rows for Eureka - Part 2
-date: 2016-09-23
-tags: [Swift, iOS, Eureka]
-author: dernst
-category: development
+subtitle: now we are going to go deeper and see how to build a complex row.
 permalink: /eureka-custom-row-tutorial-2/
+featured: true
+date: 2016-09-23
+category: development
+thumbnail: /images/eureka-custom-rows-part-2-web.png
+tags:
+  - Swift
+  - iOS
+  - Eureka
+author: dernst
 ---
 
 Some days ago, we released the introduction to create custom rows for [Eureka](https://github.com/xmartlabs/Eureka), now we are going to go deeper and see how to build a complex row.
