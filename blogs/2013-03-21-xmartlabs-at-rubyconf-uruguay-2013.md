@@ -1,10 +1,13 @@
 ---
 title: Xmartlabs at RubyConf Uruguay 2013
-date: 2013-03-21
-tags:
-author: agustin
-category: people-events
+subtitle: Xmartlabs is Silver Sponsor of the RubyConf Uruguay
 permalink: /xmartlabs-at-rubyconf-uruguay-2013/
+featured: true
+date: 2013-03-21
+category: people-events
+thumbnail: /images/rubyconf-2013-web.png
+tags: null
+author: agustin
 ---
 
 <p>
