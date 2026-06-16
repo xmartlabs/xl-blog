@@ -1,10 +1,14 @@
 ---
 title: Xmartlabs Open Source Culture
-date: 2015-04-16
-tags: [OSS]
-author: mtnBarreto
-category: people-events
+subtitle: At Xmartlabs we make use of a lot of open source projects.
 permalink: /oss-culture/
+featured: true
+date: 2015-04-16
+category: people-events
+thumbnail: /images/open-source-web.png
+tags:
+  - OSS
+author: mtnBarreto
 ---
 
 Since the past two years we have been in the world of OSS releasing different projects and contributing to community projects through bug reports and fixes, you can check out all our projects at [Xmartlabs Github account](https://github.com/xmartlabs?utf8=%E2%9C%93&query=+only%3Asources+).
