@@ -1,10 +1,18 @@
 ---
 title: Introducing Xniffer, the Swift network profiler built on top of URLSession!
-date: 2017-11-01
-author: xl
-tags: [Swift, iOS, Tutorial, network]
-category: development
+subtitle: "we created Xniffer , a non intrusive framework to intercept outgoing
+  requests and their responses. "
 permalink: /introducing-to-xniffer/
+featured: true
+date: 2017-11-01
+category: development
+thumbnail: /images/xniffer-web.png
+tags:
+  - Swift
+  - iOS
+  - Tutorial
+  - network
+author: xl
 ---
 
 Do you often want to debug or monitor external service responses in you app, recognize latency and work with the data you receive back? Same happens to us!
