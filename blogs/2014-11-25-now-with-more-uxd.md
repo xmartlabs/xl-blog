@@ -1,10 +1,15 @@
 ---
 title: Now with more UXD!
-date: 2014-11-25
-tags: []
-author: alberto
-category: product-design
+subtitle: "An approach to developing a deep relationship between your product
+  and your users through our UXD methodology and services. "
 permalink: /2014-11-25-now-with-more-uxd/
+featured: true
+date: 2014-11-25
+category: product-design
+thumbnail: /images/uxd-web.png
+tags:
+  - Designs
+author: alberto
 ---
 
 <p>
