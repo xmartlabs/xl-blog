@@ -1,9 +1,15 @@
 ---
 title: Xmartlabs moves to LATU
-date: 2012-12-05
-author: agustin
-category: people-events
+subtitle: A new home for our work
 permalink: /xmartlabs-moves-to-latu/
+featured: true
+date: 2012-12-05
+category: people-events
+thumbnail: /images/latu-web.png
+tags:
+  - startup
+  - software company
+author: agustin
 ---
 
 <p>
