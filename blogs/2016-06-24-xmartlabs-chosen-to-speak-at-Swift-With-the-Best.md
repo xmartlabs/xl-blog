@@ -1,10 +1,18 @@
 ---
 title: XMARTLABS chosen to speak at "Swift With The Best"
-date: 2016-06-24
-tags: [Swift, iOS, Opera, UITableView, With the Best]
-author: agustin
-category: people-events
+subtitle: the world's top Swift developers will unite at Swift With The Best
 permalink: /xmartlabs-chosen-to-speak-at-swift-with-the-best/
+featured: true
+date: 2016-06-24
+category: people-events
+thumbnail: /images/swift-with-the-best-web.png
+tags:
+  - Swift
+  - iOS
+  - Opera
+  - UITableView
+  - With the Best
+author: agustin
 ---
 
 This Saturday, June 25th, the world's top Swift developers will unite at [Swift With The Best](http://swift.withthebest.com/), the largest online conference series for mobile developers. Our team will have two speakers at the conference.
