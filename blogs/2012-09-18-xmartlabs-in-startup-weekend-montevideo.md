@@ -1,13 +1,15 @@
 ---
 title: Xmartlabs in Startup Weekend Montevideo
-date: 2012-09-18
-tags:
-- lean startup
-- agile development
-thumbnail: https://4.bp.blogspot.com/-A7kzBv8QgCE/UFd7hpYoKrI/AAAAAAAAABI/l0v_IhIzgfI/s72-c/startup.jpeg
-author: enrique
-category: people-events
+subtitle: Two days, a multidisciplinary team
 permalink: /xmartlabs-in-startup-weekend-montevideo/
+featured: true
+date: 2012-09-18
+category: people-events
+thumbnail: /images/startup-weekend-web.png
+tags:
+  - lean startup
+  - agile development
+author: enrique
 ---
 <p>
 <a href="https://montevideo.startupweekend.org/" target="_blank">Startup Weekend Montevideo</a>&nbsp;took place: an event organized all over the world in which local entrepreneurs participate in the process of making a startup in
