@@ -1,10 +1,18 @@
 ---
 title: Introducing Fountain Part Two
-date: 2018-08-20 09:00:00
-tags: [Android, Android Jetpack, Android Paging Library, Live Data, Android Architecture Components, RxJava, Retrofit, Fountain]
-author: mirland
-category: development
+subtitle: " how we can integrate a numerated paged service, to the best of my
+  knowledge, using our new Fountain library. part2"
 permalink: /introducing-fountain-part-two/
+featured: true
+date: 2018-08-20 09:00:00
+category: development
+thumbnail: /images/fountain-part-2-web.png
+tags:
+  - Android
+  - Android Jetpack
+  - Android Paging Library
+  - Live Data
+author: mirland
 ---
 
 In the [previous part] we presented **[Fountain]** and shown a way, using the `Listing` component, to make the paging as cool and simple as possible.
