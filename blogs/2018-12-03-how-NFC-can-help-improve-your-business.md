@@ -1,10 +1,15 @@
 ---
 title: How NFC can help improve your business
-date: 2018-12-03
-tags: [NFC]
-author: felipe
-category: development
+subtitle: In this post we will explore some real-world use cases to put the
+  benefits of this technology on display.
 permalink: /how-nfc-can-help-improve-your-business/
+featured: true
+date: 2018-12-03
+category: development
+thumbnail: /images/nfc-web.png
+tags:
+  - NFC
+author: felipe
 ---
 
 NFC is a communication protocol that enables two devices to share data within a range of up to 4 cm, launched to the public in 2004. This technology is usually used to share personal or critical data between two devices, since its range restrictions make it more secure than Bluetooth.
