@@ -1,10 +1,17 @@
 ---
-title:  Creating your own rows for Eureka
-date: 2016-09-06
-tags: [Swift, iOS, Eureka]
-author: mathias
-category: development
+title: Creating your own rows for Eureka
+subtitle: Eureka includes many rows that can be used to create forms but we will
+  almost always need a row that has not been implemented yet.
 permalink: /eureka-custom-row-tutorial/
+featured: true
+date: 2016-09-06
+category: development
+thumbnail: /images/eureka-custom-rows-web.png
+tags:
+  - Swift
+  - iOS
+  - Eureka
+author: mathias
 ---
 
 It's been almost a year since Eureka's first release and many developers have been using it since then. We are thankful for all the valuable support and contributions received.
