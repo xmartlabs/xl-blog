@@ -1,10 +1,17 @@
 ---
 title: Ahoy - The Onboarding Library You Were Asking For
-date: 2017-09-11
-author: xl
-tags: [Swift, iOS, Onboarding, Tutorial]
-category: development
+subtitle: Why using Ahoy?
 permalink: /introducing-to-ahoy/
+featured: true
+date: 2017-09-11
+category: development
+thumbnail: /images/ahoy-web.png
+tags:
+  - Swift
+  - iOS
+  - Onboarding
+  - Tutorial
+author: xl
 ---
 
 We’re pretty sure you’ll need to include an onboarding library in the iOS App you’re building. In order to speed up the time spent in development while giving the developers freedom to build an awesome experience for their users, we created [Ahoy](https://github.com/xmartlabs/Ahoy), developed in Swift!
