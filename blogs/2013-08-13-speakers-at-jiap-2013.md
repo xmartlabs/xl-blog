@@ -1,13 +1,16 @@
 ---
 title: Speakers at JIAP 2013
-date: 2013-08-13
-tags:
-- iOS Development
-- Mobile Development
-- Android
-author: agustin
-category: people-events
+subtitle: Speakers at JIAP 2013
 permalink: /speakers-at-jiap-2013/
+featured: true
+date: 2013-08-13
+category: people-events
+thumbnail: /images/jiap-2013-web.png
+tags:
+  - iOS Development
+  - Mobile Development
+  - Android
+author: agustin
 ---
 
 <p>
