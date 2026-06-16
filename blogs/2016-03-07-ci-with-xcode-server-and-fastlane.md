@@ -1,10 +1,17 @@
 ---
 title: CI and automatic deployment to iTunes Connect with Xcode Server
-date: 2016-03-07
-tags: [Server, CI, Fastlane]
-author: remer
-category: development
+subtitle: how I could solve some problems hoping it may help somebody in the
+  same situation.
 permalink: /ci-with-xcode-server-and-fastlane/
+featured: true
+date: 2016-03-07
+category: development
+thumbnail: /images/ci-xcode-server-web.png
+tags:
+  - Server
+  - CI
+  - Fastlane
+author: remer
 ---
 
 In this post I'm going to write about my experience and the problems I faced when setting up Xcode Server for CI and automatic deployment to iTunes Connect at Xmartlabs. I'm going to let you know how I could solve some problems hoping it may help somebody in the same situation.
