@@ -1,10 +1,20 @@
 ---
 title: react-native-line-sdk, the react-native wrapper for LINE
-date:   2017-11-27
-author: mcousillas
-tags: [React Native, JavaScript, Android, iOS, Tutorial]
-category: development
+subtitle: " react-native-line provides an easy-to-use interface for you to use
+  Line's mobile SDK seamlessly on your app, without having to worry about
+  Android or iOS differences."
 permalink: /react-native-line/
+featured: true
+date: 2017-11-27
+category: development
+thumbnail: /images/react-native-line-web.png
+tags:
+  - React Native
+  - JavaScript
+  - Android
+  - iOS
+  - Tutorial
+author: mcousillas
 ---
 
 A few days ago we released our very first React Native framework to the open source community.
