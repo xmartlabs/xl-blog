@@ -1,10 +1,15 @@
 ---
 title: How to revolutionize your company with augmented reality
-date: 2018-08-20
-tags: [AR]
-author: xl
-category: development
+subtitle: at Xmartlabs have built an expert team around computer vision, machine
+  learning, and augmented reality
 permalink: /how-to-revolutionize-your-company-with-augmented-reality/
+featured: true
+date: 2018-08-20
+category: development
+thumbnail: /images/augmented-reality-web.png
+tags:
+  - AR
+author: xl
 ---
 
 We at Xmartlabs have built an expert team around computer vision, machine learning, and augmented reality. In this segment, we’ll be sharing specific AR use cases we believe to be immediately practical and valuable for a range of industries.
