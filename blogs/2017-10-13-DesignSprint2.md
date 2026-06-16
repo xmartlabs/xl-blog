@@ -1,10 +1,16 @@
 ---
 title: How to Make Quick Strategic Decisions With a 1 Week Design Sprint. Part 2
-date: 2017-10-11
-tags: [Design, Product, Sprint]
-author: xl
-category: product-design
+subtitle: It’s time to start the week and put hands on our Clothing Rental Box project.
 permalink: /design-sprint-2/
+featured: true
+date: 2017-10-11
+category: product-design
+thumbnail: /images/design-sprint-part-2-web.png
+tags:
+  - Design
+  - Product
+  - Sprint
+author: xl
 ---
 
 <img src="/images/sprint2/cover.jpg"/>
