@@ -17,11 +17,11 @@ author: nicoh
 ---
 Part of the [Xmartlabs AI Journey series](https://blog.xmartlabs.com/blog/feature-utilization-gap-ai-tool-adoption/). Previously: [Designing IA Level Up](https://blog.xmartlabs.com/blog/designing-ia-level-up-ai-workshop-team-adoption/).
 
-## TL;DR
+# TL;DR
 
 One of our team members shipped a feature in half a day using AI-assisted development. Then, I spent three days fixing the bugs it introduced. This is not an outlier; it is the most common failure mode of AI-assisted development. The good news is that it is entirely preventable. This post breaks down what happened, why the industry data is alarming, and the concrete prevention framework we now apply to every AI-assisted task.
 
-## The Incident
+# The Incident
 
 ### Summary
 
@@ -39,7 +39,7 @@ This is not a story about blame. Mathi did nothing wrong; this is what happens w
 
 The ratio tells the story: half a day building, three days fixing. A 6:1 ratio of debugging to development. The feature was not faster. It was faster to appear done.
 
-## Why This Keeps Happening
+# Why This Keeps Happening
 
 Our experience is not unique. The industry data on AI-generated code quality is sobering:
 
@@ -78,7 +78,7 @@ The problem with the Mathi Problem was not that AI wrote bad code. The problem w
 
 The root cause was not AI. It was the absence of a verification and prevention framework adapted to how AI writes code.
 
-## Prevention > Verification
+# Prevention > Verification
 
 After the Mathi Problem, we developed a principle that now drives how we work with AI: prevention is more valuable than verification.
 
@@ -140,7 +140,7 @@ Our training data suggests Plan Mode can reduce feature development time by 60%,
 
 ![Prevention stack table comparing CLAUDE.md, Skills, and Plan Mode by time investment, what each prevents, and ROI](/images/mathi-prevention-stack-v2.png "The Prevention Stack in Practice — CLAUDE.md, Skills, Plan Mode")
 
-## The Verification Loop
+# The Verification Loop
 
 Prevention reduces the frequency of bugs. Verification catches the ones that get through. Both are necessary.
 
@@ -206,7 +206,7 @@ Verify the code works within the broader system:
 * Does it interact correctly with adjacent services?
 * Are there side effects that the AI might not have anticipated?
 
-## Results
+# Results
 
 ### Before the Prevention Framework
 
