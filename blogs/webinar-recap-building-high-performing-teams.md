@@ -7,11 +7,10 @@ date: 2024-10-07
 category: strategy
 thumbnail: /images/high-performing-teams.jpg
 tags:
-  - Team
-  - Development
-  - Agile
-  - Lean
-  - Management
+  - Team Management
+  - Leadership
+  - Organizational Culture
+  - Team Development
 author: vale
 ---
 In the fast-paced world of startups, assembling the right team can make all the difference between success and failure. At Xmartlabs, we've spent the last 12 years working with diverse teams across industries and cities while also managing our own growing team of over 100 people. This wealth of experience has given us valuable insights into empowering teams and individuals to reach their full potential.
