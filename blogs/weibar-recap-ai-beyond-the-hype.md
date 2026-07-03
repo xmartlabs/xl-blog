@@ -8,9 +8,9 @@ category: strategy
 thumbnail: /images/webinar-recap.jpg
 tags:
   - AI
-  - ProductStrategy
-  - AIBubble
-  - AIProdcut
+  - Product Strategy
+  - AI Products
+  - Startups
   - Founders
 author: vale
 ---
