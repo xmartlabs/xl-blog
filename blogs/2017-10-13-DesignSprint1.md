@@ -1,11 +1,19 @@
 ---
 title: How to Make Quick Strategic Decisions With a 1 Week Design Sprint. Part 1
-date: 2017-10-11
-tags: [Design, Product, Sprint]
-author: xl
-category: product-design
+subtitle: Learn how a one-week Design Sprint can help validate ideas, reduce
+  risk, and accelerate product decisions.
 permalink: /design-sprint-1/
+featured: true
+date: 2017-10-11
+category: product-design
 thumbnail: /images/sprint1/cover.jpg
+tags:
+  - Design Sprint
+  - Product Strategy
+  - Startups
+  - Product Development
+  - Innovation
+author: xl
 ---
 
 # First Part
