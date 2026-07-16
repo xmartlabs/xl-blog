@@ -1,11 +1,18 @@
 ---
 title: SwiftUI looks quite… Fluttery
-date: 2019-06-03
-tags: [UI, Swift, Flutter]
-author: jrocco
-thumbnail: images/swiftui-flutter/featured.jpg
-category: development
+subtitle: A first look at SwiftUI and how Apple's new declarative UI framework
+  compares to Flutter's approach to building mobile interfaces.
 permalink: /swiftui-flutter/
+featured: true
+date: 2019-06-03
+category: development
+thumbnail: images/swiftui-flutter/featured.jpg
+tags:
+  - SwiftUI
+  - Swift Flutter
+  - iOS
+  - Mobile Development
+author: jrocco
 ---
 
 Good day everyone, so Apple just announced its new declarative UI Framework built from the ground up on Swift: **SwiftUI**. It’s for me the most interesting thing announced for developers at this year's WWDC. Let’s take a quick look at the basics:
