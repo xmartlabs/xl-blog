@@ -1,11 +1,19 @@
 ---
 title: ML Kit on iOS and how it performs against Core ML
-date: 2018-06-21 08:00:00
-tags: [ML Kit, Core ML, iOS]
-author: mathias
-thumbnail: images/mlkit/featured.png
-category: machine-learning
+subtitle: A hands-on comparison of Google's ML Kit and Apple's Core ML,
+  evaluating performance, flexibility, and on-device machine learning on iOS.
 permalink: /ml-kit-core-ml/
+featured: true
+date: 2018-06-21 08:00:00
+category: machine-learning
+thumbnail: images/mlkit/featured.png
+tags:
+  - Machine Learning
+  - iOS
+  - Core ML
+  - ML Kit
+  - Mobile Development
+author: mathias
 ---
 
 At Xmartlabs we have been closely involved in the nascent field of on-device Machine Learning.
