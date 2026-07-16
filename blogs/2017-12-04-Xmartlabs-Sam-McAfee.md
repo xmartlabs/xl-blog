@@ -1,15 +1,18 @@
 ---
 title: Sam McAfee - how to develop a game changer business idea in just 12 weeks?
-subtitle: " "
+subtitle: An interview with innovation consultant Sam McAfee on validating
+  ideas, building MVPs, and creating successful products in just 12 weeks.
 permalink: /xmartlabs-sam-mc-afee/
 featured: true
 date: 2017-12-04
 category: strategy
 thumbnail: /images/sam-mc-afee/Sam-Mc-Afee.jpg
 tags:
-  - Design
-  - Product
-  - Sprint
+  - Innovation
+  - Lean Startup
+  - MVP
+  - Product Strategy
+  - Agile
 author: xl
 ---
 
