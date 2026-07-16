@@ -1,11 +1,19 @@
 ---
 title: The First Eureka Webinar
-date: 2016-10-21
-tags: [Swift, iOS, Eureka, Form]
-author: esanchez
-category: people-events
+subtitle: Join the first official Eureka webinar and discover how to build
+  elegant iOS forms with Swift.
 permalink: /the-first-eureka-webinar/
+featured: true
+date: 2016-10-21
+category: people-events
 thumbnail: /images/eureka-webinar/eureka.jpg
+tags:
+  - iOS
+  - Swift
+  - Open Source
+  - Eureka
+  - Webinar
+author: esanchez
 ---
 
 [Eureka]:        https://github.com/xmartlabs/Eureka
