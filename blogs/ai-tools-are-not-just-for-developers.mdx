@@ -16,8 +16,6 @@ author: nicoh
 ---
 Most companies limit AI tools to their engineering teams. We decided to push them to project managers, HR, delivery, and pre-sales. The PM rollout is the furthest along, with five workflows built and in active use. The other roles are still early experiments. Here's the strategic reasoning, the concrete playbook we used, and an honest account of where we are today.
 
-
-
 ## The Strategic Decision
 
 After building [IA Level Up](https://blog.xmartlabs.com/blog/designing-ia-level-up-ai-workshop-team-adoption/) and measuring the [](https://app.notion.com/p/xmartlabs/spoke-1-feature-utilization-gap) [feature utilization gap](https://blog.xmartlabs.com/blog/feature-utilization-gap-ai-tool-adoption/) across our engineering team, a question kept surfacing in our AI Engineering group meetings: if we only optimize developers, what happens to the rest of the pipeline?
@@ -29,8 +27,6 @@ The logic was straightforward. The same agent that writes functions from a spec 
 We weren't trying to make everyone a developer. We were recognizing that the underlying capabilities- reading documents, extracting structured information, connecting to APIs, following multi-step workflows- are role-agnostic. The tool is a developer tool by default. The capabilities are not.
 
 The risk was obvious: non-technical roles don't live in the terminal. The onboarding would be different. The resistance would be different. The way you measure value would be different. We decided to run a proof of concept with project managers first, then expand based on what we learned.
-
-
 
 ## The Playbook
 
@@ -47,10 +43,6 @@ Before targeting a role, we needed a framework that would keep us from guessing.
 For each role, we followed the same implementation sequence:
 
 ![Six-step sequence used for every role: Shadow, Map, Build, Demo, Iterate and Measure, shown as connected steps with Measure highlighted.](/images/body-3b-playbook.png "The role-expansion playbook")
-
-
-
-
 
 1. **Shadow:** Observe the person doing their actual work for a week. Document every task, tool used, and time spent.
 2. **Map:** Identify which tasks are candidates for automation. Match them to available MCPs and skills.
@@ -90,8 +82,6 @@ We tested this with a fictitious delivery app PRD containing 5 epics and 18 user
 **After:** We built a custom skill, a Markdown file with natural language instructions, that processes meeting transcripts. The PM runs the skill with the transcript file as input. Claude reads the transcript, identifies changes (new features, priority shifts, scope removals), connects to Linear to check what already exists, and produces a structured proposal:
 
 ![ AI proposal card awaiting approval, listing backlog changes from a meeting transcript — create Push Notifications and Group Orders, update Real-time Tracking from P1 to P0, and cancel Reviews & Ratings — with Review and Approve actions.](/images/table-5a-proposal.png "Propose, then execute: an agent backlog proposal")
-
-
 
 The critical design decision: Claude proposes but does not execute. It presents the table and waits for confirmation. The PM reviews, adjusts if needed, then approves. Only then does Claude apply the changes to Linear.
 
@@ -150,14 +140,11 @@ All five workflows depend on this MCP configuration:
 
 ![Table mapping each MCP integration to what it connects and the workflows it powers — Linear (project management), Notion (docs & reports), Google Calendar (scheduling), Slack (team communication) and Figma (design).](/images/table-4b-mcp-stack.png "The MCP stack behind the PM workflows")
 
-
-
 Each MCP is configured once in a JSON settings file. After that, Claude can read and write to the connected tool. The technical setup takes an engineer 15-30 minutes per MCP. After configuration, the PM never touches the setup again.
 
 ![Diagram showing a PRD flowing into a single AI agent, which connects out to five tools via MCP — Linear, Notion, Google Calendar, Slack and Figma.](/images/body-3a-stack.png "One agent, every tool: the MCP stack")
 
-## \
-Two Custom Skills
+## Two Custom Skills
 
 Beyond the MCP connections, we built two reusable skills:
 
@@ -221,8 +208,6 @@ What we're not confident about: how far this extends. Some roles may not benefit
 We'll keep building, measuring, and publishing what we learn. The philosophy that runs through everything our AI Engineering group does applies here too: "Try and change. Don't expect a setup that works for years." The tools evolve. The roles evolve. Our approach has to evolve with them.
 
 For the full story of how we got here, from the [85% adoption / 0% Skills discovery](https://blog.xmartlabs.com/blog/feature-utilization-gap-ai-tool-adoption/) to building a [structured training program](https://blog.xmartlabs.com/blog/designing-ia-level-up-ai-workshop-team-adoption/) to developing a [prevention-first approach to AI code quality](https://blog.xmartlabs.com/blog/the-mathi-problem-ai-generated-code/), start at the hub.
-
-
 
 # Further Reading
 
