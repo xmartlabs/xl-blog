@@ -70,7 +70,7 @@ The first depends on a well-defined graph and ontology. A natural language quest
 
 The second skips the strict schema dependency. It extracts candidate triplets from the question, embeds them, and compares those embeddings against pre-embedded triplets already stored in the graph, much like standard RAG's top-k retrieval. The difference shows up after that. Instead of stopping at the top matches, the system performs an n-hop subgraph expansion from the matched nodes before generating the final answer. It trades some precision for flexibility when the ontology is less rigid or still evolving.
 
-![one using natural language to Cypher query translation, the other using triplet embeddings and subgraph expansion.](/images/04-two-architectures.png "Two GraphRAG architectures")
+![one using natural language to Cypher query translation, the other using triplet embeddings and subgraph expansion.](/images/screenshot-2026-09-11-at-3.10.10 pm.png "Two GraphRAG architectures")
 
 RAG vs. GraphRAG: there isn't a universal winner
 
