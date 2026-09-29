@@ -152,6 +152,7 @@ collections:
           - { value: "eli-linardi", label: "Elisa Linardi" }
           - { value: "marcos-soto", label: "Marcos Soto" }
           - { value: "daniel-mariano", label: "Daniel Mariano" }
+          - { value: "federico-balarini", label: "Federico Balarini" }
       - { name: body, label: Body, widget: markdown }
     identifier_field: title
   - name: "blogMDX"
@@ -282,6 +283,7 @@ collections:
           - { value: "eli-linardi", label: "Elisa Linardi" }
           - { value: "marcos-soto", label: "Marcos Soto" }
           - { value: "daniel-mariano", label: "Daniel Mariano" }
+          - { value: "federico-balarini", label: "Federico Balarini" }
       - { name: body, label: Body, widget: markdown }
     identifier_field: title
     
