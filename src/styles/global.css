@@ -226,6 +226,10 @@
     @apply text-paragraph text-blue-one mb-8;
   }
 
+  .bodyPostContainer img + p {
+    @apply mt-8;
+  }
+
   .bodyPostContainer ul,
   .bodyPostContainer li {
     @apply text-paragraph text-blue-one my-0 mx-[1.5rem] mb-4 list-disc;
