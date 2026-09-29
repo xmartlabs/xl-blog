@@ -1,0 +1,84 @@
+---
+title: How We Built Gnomon to See How Engineers Actually Work With AI
+subtitle: A local, open-source tool that turns AI-agent transcripts into an
+  evidence-based profile, including what our scoring got wrong, and how we fixed
+  it in public.
+permalink: gnomon-ai-agent-workflows-adoption
+featured: true
+date: 2026-09-29
+category: development
+thumbnail: /images/gnomon-web.png
+tags:
+  - AI Agents
+  - AI Adoption
+  - Software Engineering
+  - Developer Tools
+  - Open Source
+author: federico-balarini
+---
+Our AI journey at Xmartlabs didn't start with a tool. It started with training; we wrote about the workshop that kicked it off in [Designing IA Level Up](https://blog.xmartlabs.com/blog/designing-ia-level-up-ai-workshop-team-adoption/).
+
+A pull request shows what changed. It doesn't show how an engineer worked with AI agents to get there: whether they planned before making changes, verified the result, or recovered when the first attempt failed. Those habits matter when a team is learning to use AI well, yet they are hard to see in the usual measures of AI adoption.
+
+An [internal survey of AI tool use](https://blog.xmartlabs.com/blog/feature-utilization-gap-ai-tool-adoption/) helped us identify where training could be useful. As we put that training into practice, we wanted a more detailed view: are people planning substantial changes before editing? How do they verify an agent's work? Which habits are becoming part of their workflow over time?
+
+We built [Gnomon](https://github.com/xmartlabs/gnomon) to make that evidence useful. **It reads the AI-agent transcripts already on an engineer's machine and turns them into a profile they can inspect**. We use it to guide adoption across our engineering team, and we've released it as open source so other teams can test the approach, challenge the scoring, and help improve it.
+
+## What Gnomon reads
+
+We didn't start from scratch. Gnomon is a fork of [paxel-local](https://github.com/Photobombastic/paxel-local), created by Max Schilling, and retains its MIT license. That project gave us a local profile and a gstack scorecard for how someone builds with AI. We added our own 0–100 rubric for observable coding-agent practices, which we call Gnomon's Agentic Quotient (AQ). We also expanded the transcript parsing across tools. Today it supports Claude Code, Codex, Gemini CLI, Cursor, Google Antigravity's CLI and IDE, PI, and opencode. It reads existing local transcripts rather than asking engineers to adopt a new wrapper or keep a background monitor running. It produces a profile with the scores and the evidence behind them.
+
+## What the scores measure
+
+* **How do you build with AI?** The gstack scorecard looks at execution, planning, and engineering practices on three separate 0–10 axes.
+* **How do you operate agents?** Gnomon’s AQ is a 0–100 score across four pillars: breadth, craft, efficiency, and savvy. Its underlying measures include practices such as verification, gathering context, and recovering from errors.
+
+![Diagram comparing Gnomon's two scoring systems: the gstack scorecard, which rates execution, planning, and engineering practices on a 0–10 scale, and the Agentic Quotient (AQ), which scores breadth, craft, efficiency, and savvy on a 0–100 scale.](/images/gnomon_scoring_diagram.png "Gnomon's two scoring systems: gstack and Agentic Quotient (AQ)")
+
+﻿The profile shows the evidence behind the scores. Its purpose is to reveal a habit worth examining: perhaps verification is thin, or useful context isn't being gathered before edits. **A score is a prompt for reflection, not a verdict on the engineer or the code they ship.**
+
+## From an individual profile to a team view
+
+Initially, Gnomon ran on each engineer's machine and produced a local HTML profile. It let each person inspect their own habits, but the results stayed with them. We wanted to understand what was changing across teams, so we added a way to share the results and integrated Gnomon into our internal hub.
+
+That shared view lets us spot improvement patterns across teams. It also includes a leaderboard where each person can see how their profile compares with others. More importantly, **it gives engineers a way to share approaches that are working for them and learn from colleagues.**
+
+Having Gnomon in the hub made those conversations more useful and rewarding for us. That experience convinced us the team view should be available beyond Xmartlabs, so we built a [self-hosted dashboard](https://github.com/xmartlabs/gnomon#self-hosted-team-dashboard). Anyone can run it for their own team without depending on our internal systems.
+
+## Where our scoring went wrong
+
+Our first scoring model had a problem any CFO would recognize: more AI activity could raise the score, and potentially the bill, without showing that the engineering work had improved. Someone with a higher usage limit or longer agent sessions could look better on paper. **We didn't want to reward consumption, so we removed raw volume from AQ and recalibrated the measures around how agents are used.**
+
+We found another problem when we compared tools. **A Claude Code session can contain much more work than a single Codex exec run, yet our early formula counted each as one session. Using a Skill three times in a long session might be the same frequency of use as using it once in a short run. Counting uses per session makes those habits look different.** For the measures, we now compare them with the number of actions the agent performed (its tool calls), which reduces that bias.
+
+This is why the scoring rules are public and versioned. A score from one scoring contract shouldn't be presented as a clean improvement or decline against a score from another.
+
+## What changed for our team
+
+Running Gnomon as part of our engineering team's monthly rhythm gives each person a view of their own practices over time. **It gives us a way to see team patterns and gives our AI Pod, our dedicated group of engineers that develop AI practices and helps the team adopt them, a more concrete starting point for training and gaps**: which habits need attention, and which assumptions about tool use deserve another look.
+
+It has also improved the tool itself. Real usage across different agents exposed the scoring mistakes above. We could inspect a misleading result, change the rule, and document why it changed. That feedback loop is a benefit we didn't get from a one-off survey or an isolated local report.
+
+So far, it's given us visibility into practices we previously had to guess at, plus a way to decide what to try next.
+
+## Where Gnomon helps, and where it doesn't
+
+If you're an engineer curious about your own AI workflows, the local profile is a place to start. If you're helping a team adopt agents, the shared view can surface habits to discuss and training to try. In both cases, use the numbers alongside code review, project outcomes, and human judgment.
+
+The score measures practices visible in transcripts. It does not establish whether the resulting code is good, whether the task was valuable, or whether an engineer is productive. **It should not be used as a standalone performance ranking.**
+
+## Try it, and tell us where it fails
+
+You can run Gnomon on your own machine without an account or a dashboard:
+
+```shell
+uvx --from git+https://github.com/xmartlabs/gnomon@latest xl-ai-insights --local
+```
+
+The command opens a local profile. If you want a team view, the repository includes instructions to [run your own dashboard](https://github.com/xmartlabs/gnomon#self-hosted-team-dashboard). The [source code and scoring philosophy](https://github.com/xmartlabs/gnomon) are public under the MIT license.
+
+With --local, **Gnomon analyzes your transcripts on your machine and sends no session data anywhere.** Sharing with a dashboard is a separate, opt-in run: it uploads a computed summary, not your prompts or source files. The [privacy section of the README](https://github.com/xmartlabs/gnomon#privacy) lists the exact fields before you choose to share.
+
+We'd especially like to hear where a score misreads your workflow, where a transcript leaves out an important practice, or where the same behavior looks different across agents. Open an issue, share a reproducible case, or send a pull request; the [contribution guide](https://github.com/xmartlabs/gnomon/blob/main/CONTRIBUTING.md) explains how to get started.
+
+Gnomon is one example of how we approach AI adoption at Xmartlabs: observe how people work, learn from the gaps, and adjust our practices. If your organization is introducing AI agents into its engineering workflow, [talk with our team](https://xmartlabs.com/contact?utm_source=gnomon_difusion&utm_medium=Web+blog&utm_campaign=fulfillmentQ4&utm_id=blogpost) about what you're trying to achieve and where you need support.
