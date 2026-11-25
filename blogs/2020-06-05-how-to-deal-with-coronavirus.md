@@ -5,7 +5,7 @@ date: 2020-06-08
 tags: [COVID-19, Mental Health, Physical Health]
 category: people-events
 author: fer-barrios
-thumbnail: images/dealing-with-covid/dealing-with-covid.jpg
+thumbnail: /images/dealing-with-covid/dealing-with-covid.jpg
 permalink: /2020-06-08-how-to-deal-with-coronavirus/
 ---
 

@@ -1,0 +1,22 @@
+---
+import type { GetStaticPaths } from 'astro';
+import PostListPage from '../../../components/PostListPage.astro';
+import { getCategoryPages } from '../../../lib/category-pages';
+
+export const getStaticPaths = (async () =>
+  (await getCategoryPages())
+    .filter((page) => page.currentPage === 1)
+    .map((page) => ({
+      params: { category: page.category },
+      props: page,
+    }))) satisfies GetStaticPaths;
+
+const { posts, currentPage, numPages, category } = Astro.props;
+---
+
+<PostListPage
+  posts={posts}
+  currentPage={currentPage}
+  numPages={numPages}
+  category={category}
+/>

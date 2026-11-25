@@ -1,13 +1,11 @@
 import React from 'react';
-import PropTypes from 'prop-types';
-import { Link } from 'gatsby';
 
 import { ErrorSafeLocalStorage } from '../../helpers';
 
 const buildPageUrl = ({ page, category }) => {
   let url = '/';
   if (category) url = `/categories/${category}/`;
-  if (page > 1) url = `${url}page/${page}`;
+  if (page > 1) url = `${url}page/${page}/`;
   return url;
 };
 
@@ -42,30 +40,34 @@ const getPagerItems = (currentPage, numPages) => {
   return [1, ...centralItems, numPages];
 };
 
-const PagerLink = ({ text, url, disabled }) => (
-  <Link
+const PagerLink = ({ text, url, disabled, pathname }) => (
+  <a
     className="
       font-link-light no-underline min-w-[32px] text-center text-default-gray cursor-pointer 
       disabled:cursor-not-allowed disabled:text-disabled-gray disabled:pointer-events-none
     "
-    disabled={disabled}
+    aria-current={url === pathname ? 'page' : undefined}
+    aria-disabled={disabled || undefined}
     onClick={() => ErrorSafeLocalStorage.setItem('scrollTo', 'categories')}
-    to={url}
+    // "Prev" on the first page and "Next" on the last one link nowhere (the old site
+    // linked to non-existent pages).
+    href={disabled ? undefined : url}
   >
     {text}
-  </Link>
+  </a>
 );
 
-const Pager = ({ numPages, currentPage, category }) => {
+const Pager = ({ numPages, currentPage, category, pathname }) => {
   return (
     <div className="flex flex-row justify-center my-20 font-medium py-4 px-0 max-sm:my-20 max-sm:mx-auto">
       <PagerLink
         text="← Prev"
         url={buildPageUrl({ page: currentPage - 1, category })}
         disabled={currentPage === 1}
+        pathname={pathname}
       />
       <div className="w-[10px]" />
-      {getPagerItems(currentPage, numPages).map((item) =>
+      {getPagerItems(currentPage, numPages).map((item, index) =>
         item === currentPage ? (
           <span
             key={item}
@@ -75,7 +77,7 @@ const Pager = ({ numPages, currentPage, category }) => {
           </span>
         ) : item === '' ? (
           <span
-            key={item}
+            key={`ellipsis-${index}`}
             className="font-link-light no-underline min-w-[32px] text-center text-default-gray cursor-pointer"
           >
             ...
@@ -86,6 +88,7 @@ const Pager = ({ numPages, currentPage, category }) => {
             text={item}
             url={buildPageUrl({ page: item, category })}
             disabled={item === 'prev' || item === 'next'}
+            pathname={pathname}
           />
         )
       )}
@@ -94,15 +97,10 @@ const Pager = ({ numPages, currentPage, category }) => {
         text="Next →"
         url={buildPageUrl({ page: currentPage + 1, category })}
         disabled={currentPage === numPages}
+        pathname={pathname}
       />
     </div>
   );
-};
-
-Pager.propTypes = {
-  numPages: PropTypes.number.isRequired,
-  currentPage: PropTypes.number.isRequired,
-  category: PropTypes.string,
 };
 
 export { Pager };

@@ -1,0 +1,21 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { getTags } from '../../lib/tags';
+
+const tags = await getTags();
+---
+
+<BaseLayout>
+  <div class="p-[10rem_16%_5rem]">
+    <h1>Tags</h1>
+    <ul>
+      {tags.map((tag) => (
+        <li>
+          <a href={`/tags/${tag.slug}/`}>
+            {tag.name} ({tag.posts.length})
+          </a>
+        </li>
+      ))}
+    </ul>
+  </div>
+</BaseLayout>

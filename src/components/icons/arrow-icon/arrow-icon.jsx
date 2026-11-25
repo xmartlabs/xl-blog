@@ -1,8 +1,6 @@
 import React from 'react';
 
-import PropTypes from 'prop-types';
-
-export const ArrowIcon = ({ className }) => (
+export const ArrowIcon = ({ className = '' }) => (
   <svg
     width="31"
     height="35"
@@ -17,11 +15,3 @@ export const ArrowIcon = ({ className }) => (
     />
   </svg>
 );
-
-ArrowIcon.propTypes = {
-  className: PropTypes.string,
-};
-
-ArrowIcon.defaultProps = {
-  className: '',
-};

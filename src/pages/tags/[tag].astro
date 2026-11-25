@@ -1,0 +1,29 @@
+---
+import type { GetStaticPaths } from 'astro';
+
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { getTags } from '../../lib/tags';
+
+export const getStaticPaths = (async () =>
+  (await getTags()).map((tag) => ({
+    params: { tag: tag.slug },
+    props: { tag },
+  }))) satisfies GetStaticPaths;
+
+const { tag } = Astro.props;
+const header = `${tag.posts.length} post${tag.posts.length === 1 ? '' : 's'} tagged with "${tag.name}"`;
+---
+
+<BaseLayout>
+  <div class="p-[10rem_16%_5rem]">
+    <h1>{header}</h1>
+    <ul>
+      {tag.posts.map((post) => (
+        <li>
+          <a href={`/blog/${post.slug}/`}>{post.title}</a>
+        </li>
+      ))}
+    </ul>
+    <a href="/tags/">All tags</a>
+  </div>
+</BaseLayout>

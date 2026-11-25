@@ -1,0 +1,8 @@
+---
+import PostListPage from '../components/PostListPage.astro';
+import { getPosts, paginate } from '../lib/posts';
+
+const pages = paginate(await getPosts());
+---
+
+<PostListPage posts={pages[0]} currentPage={1} numPages={pages.length} />

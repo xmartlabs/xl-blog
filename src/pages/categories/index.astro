@@ -1,0 +1,10 @@
+---
+// Gatsby also built /categories/ from its category template: every post on one page,
+// with no filter tab selected.
+import PostListPage from '../../components/PostListPage.astro';
+import { getPosts } from '../../lib/posts';
+
+const posts = await getPosts();
+---
+
+<PostListPage posts={posts} currentPage={1} numPages={1} selectedCategory="" />

@@ -1,0 +1,3 @@
+# Files kept out of Cloudflare deploys (Workers static assets max 25 MiB per file).
+# Remove once the video is compressed; see MIGRATION-TODO.md.
+images/vytallyink_demo2.mp4

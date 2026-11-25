@@ -1,289 +1,156 @@
+# Sveltia CMS configuration: https://sveltiacms.app/en/docs
 backend:
-  name: git-gateway
+  name: github
   repo: xmartlabs/xl-blog
   branch: main
-  auth_endpoint: auth
+  # Sveltia CMS Additions worker (Cloudflare) that handles GitHub sign-in.
+  # Placeholder URL: replace it with the deployed worker's URL.
+  auth_type: additions
+  base_url: https://cms-auth.xmartlabs.com
   commit_messages:
-    create: "Create {{collection}} “{{slug}}”"
-    update: "Update {{collection}} “{{slug}}”"
-    delete: "Delete {{collection}} “{{slug}}”"
-    uploadMedia: "[skip ci] Upload “{{path}}”"
-    deleteMedia: "[skip ci] Delete “{{path}}”"
+    create: 'Create {{collection}} “{{slug}}”'
+    update: 'Update {{collection}} “{{slug}}”'
+    delete: 'Delete {{collection}} “{{slug}}”'
+    uploadMedia: '[skip ci] Upload “{{path}}”'
+    deleteMedia: '[skip ci] Delete “{{path}}”'
 
-local_backend: true
+publish_mode: preview
 
 media_folder: static/images
 public_folder: /images
 
-# extension: "mdx"
-# format: "frontmatter"
-
-# media_folder: src/images
-# public_folder: public/assets
-
-publish_mode: editorial_workflow
+site_url: https://blog.xmartlabs.com
 
 collections:
-  - name: "blog"
-    label: "Blog"
-    folder: "blogs"
+  - name: blog
+    label: Blog
+    folder: blogs
     extension: md
     format: frontmatter
     create: true
+    slug: '{{slug}}'
+    identifier_field: title
     fields:
-      - {
-        name: title,
-        label: Title,
-        required: true,
-        pattern: [ ".{12,}", "Must have at least 12 characters" ],
-      }
-      - { name: subtitle, label: Subtitle, widget: string }
-      - {
-        name: permalink,
-        label: Permalink,
-        required: true,
-        pattern: [ ".{12,}", "Must have at least 12 characters" ],
-      }
-      - {
-        name: featured,
-        label: "Featured Post",
-        widget: boolean,
-        default: false,
-      }
-      - {
-        name: date,
-        label: Date,
-        widget: datetime,
-        format: "YYYY-MM-DD",
-        date_format: "YYYY-MM-DD",
-        time_format: false,
-        picker_utc: true,
-      }
+      - name: title
+        label: Title
+        required: true
+        pattern: ['.{12,}', 'Must have at least 12 characters']
+      - { name: subtitle, label: Subtitle, widget: string, required: false }
+      - name: permalink
+        label: Permalink
+        hint: 'The post URL is /blog/<permalink in kebab-case>/'
+        required: true
+        pattern: ['.{12,}', 'Must have at least 12 characters']
+      - name: featured
+        label: Featured Post
+        widget: boolean
+        default: false
+        required: false
+      - name: date
+        label: Date
+        widget: datetime
+        format: 'YYYY-MM-DD'
+        time_format: false
+        picker_utc: true
       - name: category
         label: Category
-        widget: "select"
-        options:
-          - { label: "People", value: "people-events" }
-          - { label: "Design", value: "product-design" }
-          - { label: "Development", value: "development" }
-          - { label: "Machine Learning", value: "machine-learning" }
-          - { label: "Strategy", value: "strategy" }
-          - { label: "QA", value: "qa" }
-      - label: "Thumbnail Image"
-        hint: "image ratio must be .... "
-        name: "thumbnail"
-        widget: "image"
+        widget: relation
+        collection: categories
+        value_field: '{{slug}}'
+        search_fields: [name]
+        display_fields: [name]
+      - name: thumbnail
+        label: Thumbnail Image
+        widget: image
         choose_url: true
-        # media_folder: images
-        # default: "/uploads/chocolate-dogecoin.jpg"
-        media_library:
-          config:
-            multiple: false
-      - { name: tags, label: Tags, widget: "list", max: 5, min: 1 }
+        required: false
+      - { name: tags, label: Tags, widget: list, min: 1, max: 5 }
       - name: author
         label: Author
-        widget: "select"
-        options:
-          - { value: "mtnBarreto", label: "Martin Barreto" }
-          - { value: "agustin", label: "Agustin Hernandez" }
-          - { value: "dernst", label: "Diego Ernst" }
-          - { value: "esanchez", label: "Ezequiel Santiago Sanchez" }
-          - { value: "enrique", label: "Enrique Galindo" }
-          - { value: "alberto", label: "Alberto Attia" }
-          - { value: "maximo", label: "Maximo Mussini" }
-          - { value: "mathias", label: "Mathias Claassen" }
-          - { value: "santiago", label: "Santiago Castro" }
-          - { value: "helen", label: "Helen Olhausen" }
-          - { value: "remer", label: "Miguel Revetria" }
-          - { value: "mirland", label: "Matías Irland" }
-          - { value: "mcousillas", label: "Mauricio Cousillas" }
-          - { value: "xl", label: "Xmartlabs Team" }
-          - { value: "felipe", label: "Felipe de León" }
-          - { value: "mlorenzo", label: "Matías Lorenzo" }
-          - { value: "jrocco", label: "Joaquín Rocco" }
-          - { value: "pbt", label: "Rodrigo Bayá" }
-          - { value: "bruno", label: "Bruno Ferrari" }
-          - { value: "nicoh", label: "Nicolas Hernandez" }
-          - { value: "ceci", label: "Cecilia Pirotto" }
-          - { value: "arsu", label: "Rodrigo Arsuaga" }
-          - { value: "tabu", label: "Jorge Gonzalez" }
-          - { value: "renzo", label: "Renzo Gambone" }
-          - { value: "fer-barrios", label: "Fernanda Barrios" }
-          - { value: "nicolantean", label: "Nicolás Lantean" }
-          - { value: "emi", label: "Emiliano Botti" }
-          - { value: "robert", label: "Roberto Sosa" }
-          - { value: "sante", label: "Agustín Santellán" }
-          - { value: "edu", label: "Eduardo Ferreira" }
-          - { value: "andresh", label: "Andrés Herrera" }
-          - { value: "vale", label: "Valentina Bianco" }
-          - { value: "pablog", label: "Pablo Grill" }
-          - { value: "lazaro", label: "Lázaro Martín" }
-          - { value: "alemachado", label: "Ale Machado" }
-          - { value: "coti", label: "Coti Besozzi" }
-          - { value: "sofitechera", label: "Sofia Techera" }
-          - { value: "jsanchez", label: "Joaquín Sánchez" }
-          - { value: "sol-mendiola", label: "Sol Mendiola" }
-          - { value: "andres-zunini", label: "Andrés Zunini" }
-          - { value: "christian-casaran", label: "Christian Casaran" }
-          - { value: "solo", label: "Juan Oliu" }
-          - { value: "belu", label: "Belen Carozo" }
-          - { value: "maximol", label: "Maximo Lionello" }
-          - { value: "mikaela", label: "Mikaela Márquez" }
-          - { value: "vir-rivedieu", label: "Virginia Rivedieu" }
-          - { value: "carolina-berastegui", label: "Carolina Berastegui" }
-          - { value: "vir-bacigalupe", label: "Virginia Bacigalupe" }
-          - { value: "gabriel-lema", label: "Gabriel Lema" }
-          - { value: "nati-quintana", label: "Natalia Quintana" }
-          - { value: "ceci-herrera", label: "Cecilia Herrera" }
-          - { value: "nat-nobre", label: "Natalia Nobre" }
-          - { value: "qa-team", label: "Team QA" }
-          - { value: "galpe", label: "Mauricio Galperin" }
-          - { value: "joa", label: "Joana Miller" }
-          - { value: "nando", label: "Fernando Gonzalez" }
-          - { value: "augusto", label: "Augusto Lezchik" }
-          - { value: "sante", label: "Agustin Santellan" }
-          - { value: "felifa", label: "Felipe Facio" }
-          - { value: "nico-fripp", label: "Nicolas Fripp" }
-          - { value: "daniel-baena", label: "Daniel Baena" }
-          - { value: "rafael-morante", label: "Rafael Morante" }
-          - { value: "mei", label: "Maité Martinez" }
-          - { value: "facu", label: "Facundo Ruiz" }
-          - { value: "conor", label: "Conor Morrissey" }
-          - { value: "eli-linardi", label: "Elisa Linardi" }
-          - { value: "marcos-soto", label: "Marcos Soto" }
-          - { value: "daniel-mariano", label: "Daniel Mariano" }
-          - { value: "federico-balarini", label: "Federico Balarini" }
+        widget: relation
+        collection: authors
+        value_field: '{{slug}}'
+        search_fields: [name]
+        display_fields: [name]
       - { name: body, label: Body, widget: markdown }
-    identifier_field: title
-  - name: "blogMDX"
-    label: "Blog (MDX)"
-    folder: "blogs"
+
+  - name: blogMDX
+    label: Blog (MDX, advanced)
+    folder: blogs
     extension: mdx
     format: frontmatter
     create: true
+    slug: '{{slug}}'
+    identifier_field: title
     fields:
-      - {
-        name: title,
-        label: Title,
-        required: true,
-        pattern: [ ".{12,}", "Must have at least 12 characters" ],
-      }
-      - { name: subtitle, label: Subtitle, widget: string }
-      - {
-        name: permalink,
-        label: Permalink,
-        required: true,
-        pattern: [ ".{12,}", "Must have at least 12 characters" ],
-      }
-      - {
-        name: featured,
-        label: "Featured Post",
-        widget: boolean,
-        default: false,
-      }
-      - {
-        name: date,
-        label: Date,
-        widget: datetime,
-        format: "YYYY-MM-DD",
-        date_format: "YYYY-MM-DD",
-        time_format: false,
-        picker_utc: true,
-      }
+      - name: title
+        label: Title
+        required: true
+        pattern: ['.{12,}', 'Must have at least 12 characters']
+      - { name: subtitle, label: Subtitle, widget: string, required: false }
+      - name: permalink
+        label: Permalink
+        hint: 'The post URL is /blog/<permalink in kebab-case>/'
+        required: true
+        pattern: ['.{12,}', 'Must have at least 12 characters']
+      - name: featured
+        label: Featured Post
+        widget: boolean
+        default: false
+        required: false
+      - name: date
+        label: Date
+        widget: datetime
+        format: 'YYYY-MM-DD'
+        time_format: false
+        picker_utc: true
       - name: category
         label: Category
-        widget: "select"
-        options:
-          - { label: "People", value: "people-events" }
-          - { label: "Design", value: "product-design" }
-          - { label: "Development", value: "development" }
-          - { label: "Machine Learning", value: "machine-learning" }
-          - { label: "Strategy", value: "strategy" }
-          - { label: "QA", value: "qa" }
-      - label: "Thumbnail Image"
-        hint: "image ratio must be .... "
-        name: "thumbnail"
-        widget: "image"
+        widget: relation
+        collection: categories
+        value_field: '{{slug}}'
+        search_fields: [name]
+        display_fields: [name]
+      - name: thumbnail
+        label: Thumbnail Image
+        widget: image
         choose_url: true
-        # media_folder: images
-        # default: "/uploads/chocolate-dogecoin.jpg"
-        media_library:
-          config:
-            multiple: false
-      - { name: tags, label: Tags, widget: "list", max: 5, min: 1 }
+        required: false
+      - { name: tags, label: Tags, widget: list, min: 1, max: 5 }
       - name: author
         label: Author
-        widget: "select"
-        options:
-          - { value: "mtnBarreto", label: "Martin Barreto" }
-          - { value: "agustin", label: "Agustin Hernandez" }
-          - { value: "dernst", label: "Diego Ernst" }
-          - { value: "esanchez", label: "Ezequiel Santiago Sanchez" }
-          - { value: "enrique", label: "Enrique Galindo" }
-          - { value: "alberto", label: "Alberto Attia" }
-          - { value: "maximo", label: "Maximo Mussini" }
-          - { value: "mathias", label: "Mathias Claassen" }
-          - { value: "santiago", label: "Santiago Castro" }
-          - { value: "helen", label: "Helen Olhausen" }
-          - { value: "remer", label: "Miguel Revetria" }
-          - { value: "mirland", label: "Matías Irland" }
-          - { value: "mcousillas", label: "Mauricio Cousillas" }
-          - { value: "xl", label: "Xmartlabs Team" }
-          - { value: "felipe", label: "Felipe de León" }
-          - { value: "mlorenzo", label: "Matías Lorenzo" }
-          - { value: "jrocco", label: "Joaquín Rocco" }
-          - { value: "pbt", label: "Rodrigo Bayá" }
-          - { value: "bruno", label: "Bruno Ferrari" }
-          - { value: "nicoh", label: "Nicolas Hernandez" }
-          - { value: "ceci", label: "Cecilia Pirotto" }
-          - { value: "arsu", label: "Rodrigo Arsuaga" }
-          - { value: "tabu", label: "Jorge Gonzalez" }
-          - { value: "renzo", label: "Renzo Gambone" }
-          - { value: "fer-barrios", label: "Fernanda Barrios" }
-          - { value: "nicolantean", label: "Nicolás Lantean" }
-          - { value: "emi", label: "Emiliano Botti" }
-          - { value: "robert", label: "Roberto Sosa" }
-          - { value: "sante", label: "Agustín Santellán" }
-          - { value: "edu", label: "Eduardo Ferreira" }
-          - { value: "andresh", label: "Andrés Herrera" }
-          - { value: "vale", label: "Valentina Bianco" }
-          - { value: "pablog", label: "Pablo Grill" }
-          - { value: "lazaro", label: "Lázaro Martín" }
-          - { value: "alemachado", label: "Ale Machado" }
-          - { value: "coti", label: "Coti Besozzi" }
-          - { value: "sofitechera", label: "Sofia Techera" }
-          - { value: "jsanchez", label: "Joaquín Sánchez" }
-          - { value: "sol-mendiola", label: "Sol Mendiola" }
-          - { value: "andres-zunini", label: "Andrés Zunini" }
-          - { value: "christian-casaran", label: "Christian Casaran" }
-          - { value: "solo", label: "Juan Oliu" }
-          - { value: "belu", label: "Belen Carozo" }
-          - { value: "maximol", label: "Maximo Lionello" }
-          - { value: "mikaela", label: "Mikaela Márquez" }
-          - { value: "vir-rivedieu", label: "Virginia Rivedieu" }
-          - { value: "carolina-berastegui", label: "Carolina Berastegui" }
-          - { value: "vir-bacigalupe", label: "Virginia Bacigalupe" }
-          - { value: "gabriel-lema", label: "Gabriel Lema" }
-          - { value: "nati-quintana", label: "Natalia Quintana" }
-          - { value: "ceci-herrera", label: "Cecilia Herrera" }
-          - { value: "nat-nobre", label: "Natalia Nobre" }
-          - { value: "qa-team", label: "Team QA" }
-          - { value: "galpe", label: "Mauricio Galperin" }
-          - { value: "joa", label: "Joana Miller" }
-          - { value: "nando", label: "Fernando Gonzalez" }
-          - { value: "augusto", label: "Augusto Lezchik" }
-          - { value: "sante", label: "Agustin Santellan" }
-          - { value: "felifa", label: "Felipe Facio" }
-          - { value: "nico-fripp", label: "Nicolas Fripp" }
-          - { value: "daniel-baena", label: "Daniel Baena" }
-          - { value: "rafael-morante", label: "Rafael Morante" }
-          - { value: "mei", label: "Maité Martinez" }
-          - { value: "facu", label: "Facundo Ruiz" }
-          - { value: "conor", label: "Conor Morrissey" }
-          - { value: "eli-linardi", label: "Elisa Linardi" }
-          - { value: "marcos-soto", label: "Marcos Soto" }
-          - { value: "daniel-mariano", label: "Daniel Mariano" }
-          - { value: "federico-balarini", label: "Federico Balarini" }
+        widget: relation
+        collection: authors
+        value_field: '{{slug}}'
+        search_fields: [name]
+        display_fields: [name]
       - { name: body, label: Body, widget: markdown }
-    identifier_field: title
-    
+
+  - name: authors
+    label: Authors
+    folder: content/authors
+    extension: yml
+    format: yaml
+    create: true
+    identifier_field: name
+    fields:
+      - { name: name, label: Name }
+      - name: image
+        label: Image
+        widget: image
+        media_folder: /static/images/members
+        public_folder: /images/members
+      - { name: profile_url, label: Profile URL }
+      - { name: github, label: GitHub user, required: false }
+      - { name: twitter, label: Twitter user, required: false }
+
+  - name: categories
+    label: Categories
+    folder: content/categories
+    extension: yml
+    format: yaml
+    create: true
+    identifier_field: name
+    fields:
+      - { name: name, label: Name }
+      - { name: order, label: Order, widget: number, value_type: int }

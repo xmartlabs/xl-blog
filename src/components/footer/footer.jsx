@@ -1,6 +1,6 @@
 import * as React from 'react';
 
-import { SocialElement } from '/src/components/social-element';
+import { SocialElement } from '../social-element';
 import {
   TwitterIcon,
   Facebook,
@@ -8,7 +8,7 @@ import {
   InstagramIcon,
   XmartlabsTextLogoWhite,
   GithubIcon,
-} from '/src/components/icons';
+} from '../icons';
 
 import { navMenuElements } from '../nav-menu';
 

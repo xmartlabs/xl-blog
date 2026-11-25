@@ -382,7 +382,7 @@
     @apply font-title h-[100%] bg-main1;
   }
 
-  .gatsby-highlight code {
+  .code-highlight code {
     @apply !whitespace-pre-wrap !break-words;
   }
 

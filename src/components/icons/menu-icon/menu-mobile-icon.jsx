@@ -1,8 +1,6 @@
 import React from 'react';
 
-import PropTypes from 'prop-types';
-
-export const MenuMobileIcon = ({ className }) => (
+export const MenuMobileIcon = ({ className = '' }) => (
   <svg
     width="29"
     height="12"
@@ -15,11 +13,3 @@ export const MenuMobileIcon = ({ className }) => (
     <rect x="11.9062" y="8.44507" width="17" height="3" fill="black" />
   </svg>
 );
-
-MenuMobileIcon.propTypes = {
-  className: PropTypes.string,
-};
-
-MenuMobileIcon.defaultProps = {
-  className: '',
-};

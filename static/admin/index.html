@@ -1,13 +1,53 @@
 <!doctype html>
-<html>
-<head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Content Manager</title>
-  <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
-</head>
-<body>
-  <!-- Include the script that builds the page and powers Netlify CMS -->
-  <script src="https://unpkg.com/netlify-cms@^2.0.0/dist/netlify-cms.js"></script>
-</body>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="robots" content="noindex" />
+    <title>Content Manager</title>
+  </head>
+  <body>
+    <script src="https://unpkg.com/@sveltia/cms@0.272.0/dist/sveltia-cms.js"></script>
+    <script>
+      // <VideoPlayer /> (MDX posts only): YouTube video by `id`, or a file in /images by `name`.
+      // Only single-line tags with double-quoted attributes are recognized.
+      CMS.registerEditorComponent({
+        id: 'video-player',
+        label: 'Video Player',
+        icon: 'smart_display',
+        fields: [
+          { name: 'id', label: 'YouTube video id', required: false },
+          {
+            name: 'name',
+            label: 'Video file name (in /images)',
+            required: false,
+          },
+          { name: 'title', label: 'Title', required: false },
+          { name: 'width', label: 'Width', required: false },
+          { name: 'height', label: 'Height', required: false },
+        ],
+        pattern: /^<VideoPlayer((?:\s+\w+="[^"]*")*)\s*\/>$/m,
+        fromBlock: (match) => {
+          const values = {};
+          for (const [, key, value] of match[1].matchAll(/(\w+)="([^"]*)"/g)) {
+            values[key] = value;
+          }
+          return values;
+        },
+        toBlock: (values = {}) => {
+          const attributes = ['id', 'name', 'title', 'width', 'height']
+            .filter((key) => values[key])
+            .map(
+              (key) => `${key}="${String(values[key]).replace(/"/g, '&quot;')}"`
+            )
+            .join(' ');
+          return `<VideoPlayer${attributes ? ` ${attributes}` : ''} />`;
+        },
+        toPreview: (values = {}) =>
+          values.id
+            ? `YouTube video: ${values.id}`
+            : `Video: ${values.name || '(no file)'}`,
+      });
+    </script>
+  </body>
 </html>

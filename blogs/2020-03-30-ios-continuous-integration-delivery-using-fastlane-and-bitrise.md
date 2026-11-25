@@ -5,7 +5,7 @@ date: 2020-04-17
 tags: [CI, fastlane, bitrise, iOS]
 category: development
 author: mtnBarreto
-thumbnail: images/ios-fastlane-ci/featured.png
+thumbnail: /images/ios-fastlane-ci/featured.png
 permalink: /ios-continuous-integration-delivery-using-fastlane-and-bitrise/
 ---
 

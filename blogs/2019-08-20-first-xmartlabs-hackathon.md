@@ -4,7 +4,7 @@ date: 2019-09-10
 tags: [hackathon, team, xmartlabs]
 category: people-events
 author: bruno
-thumbnail: images/xmartlabs-first-hackathon/general_view_bbq.jpg
+thumbnail: /images/xmartlabs-first-hackathon/general_view_bbq.jpg
 permalink: /first-xmartlabs-hackathon/
 ---
 

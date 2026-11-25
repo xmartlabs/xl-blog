@@ -1,5 +1,4 @@
 import * as React from 'react';
-import { Link } from 'gatsby';
 
 import { classnames } from '../../helpers';
 
@@ -12,7 +11,7 @@ export const navMenuElements = [
   { label: 'Careers', path: 'https://xmartlabs.com/careers' },
 ];
 
-export const NavMenuElements = ({ className, openMenu }) => {
+export const NavMenuElements = ({ className = '', openMenu = false }) => {
   return navMenuElements.map(({ label, path }) => {
     const text = (
       <h5
@@ -31,16 +30,16 @@ export const NavMenuElements = ({ className, openMenu }) => {
     );
 
     if (path.charAt(0) === '/')
-      // Local link, use <Link> component
+      // Local link
       return (
-        <Link
+        <a
           key={label}
-          to={path}
+          href={path}
           rel="noopener noreferrer"
           className={mergedClassName}
         >
           {text}
-        </Link>
+        </a>
       );
 
     // External link, use <a> tag

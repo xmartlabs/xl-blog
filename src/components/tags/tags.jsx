@@ -1,9 +1,8 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 
 import { classnames } from '../../helpers';
 
-const Tags = ({ blogTags, className }) => (
+const Tags = ({ blogTags, className = '' }) => (
   <div
     className={classnames(
       'flex flex-row flex-wrap w-full justify-start',
@@ -13,6 +12,7 @@ const Tags = ({ blogTags, className }) => (
     {blogTags &&
       blogTags.slice(0, 4).map((post) => (
         <a
+          key={post}
           className="
           text-paragraph-small text-blue-one border-[1.5px] border-[rgba(155,155,155,0.5)]
           rounded-[6.49875px] m-[0_1rem_1rem_0] text-left p-[0.6rem] leading-[1rem] font-primary
@@ -24,14 +24,5 @@ const Tags = ({ blogTags, className }) => (
       ))}
   </div>
 );
-
-Tags.propTypes = {
-  blogTags: PropTypes.arrayOf(PropTypes.string).isRequired,
-  className: PropTypes.string,
-};
-
-Tags.defaultProps = {
-  className: '',
-};
 
 export { Tags };

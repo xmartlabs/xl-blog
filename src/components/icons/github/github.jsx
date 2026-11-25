@@ -1,8 +1,6 @@
 import React from 'react';
 
-import PropTypes from 'prop-types';
-
-export const GithubIcon = ({ className }) => (
+export const GithubIcon = ({ className = '' }) => (
   <svg
     width="24"
     height="24"
@@ -17,11 +15,3 @@ export const GithubIcon = ({ className }) => (
     />
   </svg>
 );
-
-GithubIcon.propTypes = {
-  className: PropTypes.string,
-};
-
-GithubIcon.defaultProps = {
-  className: '',
-};

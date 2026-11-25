@@ -1,66 +1,65 @@
-## XL Blog
+# XL Blog
 
-This project is a static blog built with Gatsby, leveraging Netlify as a CMS and continuous deployment service, integrated with GitHub for version control. The process is automated from the moment content is edited in the CMS or code is pushed to GitHub, triggering builds and deployments to production.
+The Xmartlabs blog (https://blog.xmartlabs.com): a static site built with [Astro](https://astro.build), edited through [Sveltia CMS](https://sveltiacms.app) and served by [Cloudflare Workers](https://developers.cloudflare.com/workers/static-assets/) static assets.
 
-### Key elements
+## Where things live
 
-- [Gatsby](https://www.gatsbyjs.com/): Static site generator that powers the UI of the blog, offering fast, optimized web experiences. We use Gatsby to create the blog's frontend, while the build process is handled by Netlify, which integrates seamlessly with Gatsby to automatically generate and deploy the static site.
+| Path                          | What                                                                                                                        |
+| ----------------------------- | --------------------------------------------------------------------------------------------------------------------------- |
+| `blogs/*.md`, `blogs/*.mdx`   | Posts. Use `.mdx` only when the post needs components (`<VideoPlayer>`, `<Image>`, `<Table>`).                              |
+| `content/authors/<id>.yml`    | Authors (`name`, `image`, `profile_url`, `github`, `twitter`). The file name is the id used in a post's `author`.           |
+| `content/categories/<id>.yml` | Categories (`name`, `order` of the filter tabs). The file name is the id used in a post's `category`.                       |
+| `static/`                     | Served as-is at the site root (`static/images/foo.png` → `/images/foo.png`), including the CMS at `/admin/`.                |
+| `src/content.config.ts`       | Frontmatter schemas. The build fails if a post has a missing/unknown field value.                                           |
+| `src/pages/`                  | Routes: `/`, `/page/<n>/`, `/categories/<id>/[page/<n>/]`, `/blog/<slug>/`, `/authors/<id>/`, `/tags/<tag>/`, 404.          |
+| `src/components/`             | React components (rendered to static HTML; only the nav menu, post list and post table of contents/share bar are hydrated). |
 
-- [Netlify](https://www.netlify.com/) CMS: A git-based content management system integrated directly with GitHub repository, allowing easy content creation and updates.
+A post URL is `/blog/<permalink in kebab-case>/` (lodash `kebabCase`, e.g. `/my-Post/` → `/blog/my-post/`). The build fails if two posts map to the same URL.
 
-- Netlify instance: Handles the deployment pipeline. Every change pushed to GitHub triggers a build on Netlify, deploying the updated site to production seamlessly.
+## Local development
 
-- GitHub: Manages the version control of the blog's code and content.
+Requires Node 24 (see `.nvmrc`).
 
-### Key considerations
-
-Every time a new blog entry is created, it generates a pull request towards the main branch, which is maintained throughout the workflow from draft to publish, when it is merged into the branch and published.
-
-The entire deployment process is managed automatically by Netlify using the Netlify+GitHub integration, which requires configuring access permissions in advance. See [Netlify & GitHub](https://docs.netlify.com/git/repo-permissions-linking/) for details. <br>
-The owner of this instance is associated with the account engineering@xmartlabs.com, which is responsible for creating the PR on behalf of the user who creates a new entry.
-
-It is important to ensure that the Cloudflare domain for blog.xmartlabs.com is associated with the Netlify instance.
-
-| **Url**                                                            | **Description**                                                                                                                     |
-| ------------------------------------------------------------------ | ----------------------------------------------------------------------------------------------------------------------------------- |
-| https://app.netlify.com/sites/blog-xl/overview                     | It is the back-office of the XL blog instance in Netlify. Necessary for configuring integrations, domains, permissions, users, etc. |
-| https://blog.xmartlabs.com/admin                                   | It is the CMS provided by Netlify to manage the blog posts.                                                                         |
-| https://app.netlify.com/sites/blog-xl/configuration/identity#users | CMS access user list.                                                                                                               |
-| https://app.netlify.com/sites/blog-xl/deploys                      | Deploys                                                                                                                             |
-
-### React components in MDX
-
-First, to use a React Component while creating a new blog we need to use the extension `mdx` while creating a blog.
-
-Second, we need to make it globally available in the app and for that we need to inject it the `MDXProvider` and you can find it in the `main-layout.jsx` file.
-
-Here you'll modify the following line
-
-```
-const shortCodes = { [ComponentName]: [ActualReactComponent] };
+```sh
+npm install
+cp env.development.example .env.development   # optional, see below
+npm run dev       # http://localhost:4321
+npm run build     # static site in dist/ (+ checks no file exceeds Cloudflare's 25 MiB limit)
+npm run preview   # serve dist/
 ```
 
-Here `ComponentName` is the name that the user will have to use when creating the blog.
-Example:
+### Environment variables
 
-```
-const shortCodes = { VideoPlayer: VideoPlayerComponent };
-```
+| Variable                | Purpose                                                                                |
+| ----------------------- | -------------------------------------------------------------------------------------- |
+| `PUBLIC_GTM_ID`         | Google Tag Manager container id. GTM is only included when set.                        |
+| `PUBLIC_FORM_URL`       | URL of the "Let's talk" form (iframe).                                                 |
+| `PUBLIC_MEDIA_BASE_URL` | Base URL for `<VideoPlayer name="…" />` files (e.g. an R2 bucket). Empty → `/images/`. |
 
-Then while creating the blog, this is how it's going to be used
+They are read at build time, so set them in the Cloudflare build settings too.
 
-```
-# Title
-This is my new blog using React Components
+## CMS
 
-<VideoPlayer id="dsCiJIhfM5E" width="100%"/>
-```
+The CMS is at https://blog.xmartlabs.com/admin/ (`static/admin/`). It commits to `main` through GitHub; sign-in goes through the Sveltia CMS Additions worker configured as `backend.base_url` in `static/admin/config.yml`.
 
-If the React Component name matches the name to use in the template, then you can simplify it like this
+- **Posts**: "Blog" creates `.md` posts, "Blog (MDX, advanced)" creates `.mdx` posts.
+- **Authors / Categories**: add or edit them from the "Authors" and "Categories" collections; they appear in the post form right away. New categories also get a filter tab and `/categories/<id>/` pages.
+- **Testing locally**: run `npm run dev`, open http://localhost:4321/admin/ and choose "Work with Local Repository" (Chromium-based browsers). Changes are written straight to your checkout; no auth server is needed.
 
-```
-const shortCodes = { VideoPlayer };
-```
+## Deploy
+
+Cloudflare Workers Builds is connected to the GitHub repo (worker config in `wrangler.jsonc`):
+
+- Build command `npm run build`, deploy command `npx wrangler deploy`.
+- Pushes to `main` deploy production; other branches get preview URLs (non-production branch builds/preview URLs enabled in the worker settings).
+- `static/_headers` sets the security and cache headers.
+- Manual deploy: `npm run deploy` (needs `wrangler login`).
+
+Files over 25 MiB can't be deployed as static assets; `npm run build` fails on them (unless they are listed in `static/.assetsignore`, which keeps them out of deploys; see `MIGRATION-TODO.md`).
+
+## Components in MDX posts
+
+`<VideoPlayer>`, `<Image>` and `<Table>` are available in every `.mdx` post without importing them. To add another one, create it in `src/components/` and add it to the `components` map passed to `<Content />` in `src/pages/blog/[slug].astro`.
 
 ## Available Components
 
@@ -70,17 +69,18 @@ The Image component is a flexible React component that can display either a sing
 
 #### Props
 
-| Prop | Type | Default | Required | Description |
-|------|------|---------|----------|-------------|
-| `src` | `string \| string[]` | - | Yes | Image URL for single image or array of URLs for multiple images |
-| `alt` | `string` | `"Xmartlabs"` | No | Alt text for accessibility |
-| `width` | `string` | `"100%"` | No | Width of the image(s) |
-| `height` | `string` | `"315px"` | No | Height of the image(s) |
-| `aspectRatio` | `string` | `"16/9"` | No | CSS aspect ratio property |
+| Prop          | Type                 | Default       | Required | Description                                                     |
+| ------------- | -------------------- | ------------- | -------- | --------------------------------------------------------------- |
+| `src`         | `string \| string[]` | -             | Yes      | Image URL for single image or array of URLs for multiple images |
+| `alt`         | `string`             | `"Xmartlabs"` | No       | Alt text for accessibility                                      |
+| `width`       | `string`             | `"100%"`      | No       | Width of the image(s)                                           |
+| `height`      | `string`             | `"315px"`     | No       | Height of the image(s)                                          |
+| `aspectRatio` | `string`             | `"16/9"`      | No       | CSS aspect ratio property                                       |
 
 #### Usage Examples
 
 **Single Image:**
+
 ```mdx
 <Image
   src="https://example.com/image.jpg"
@@ -91,12 +91,13 @@ The Image component is a flexible React component that can display either a sing
 ```
 
 **Multiple Images:**
+
 ```mdx
 <Image
   src={[
-    "https://example.com/image1.jpg",
-    "https://example.com/image2.jpg",
-    "https://example.com/image3.jpg"
+    'https://example.com/image1.jpg',
+    'https://example.com/image2.jpg',
+    'https://example.com/image3.jpg',
   ]}
   alt="Gallery images"
   height="250px"
@@ -104,6 +105,7 @@ The Image component is a flexible React component that can display either a sing
 ```
 
 **Custom Aspect Ratio:**
+
 ```mdx
 <Image
   src="https://example.com/square-image.jpg"
@@ -125,27 +127,30 @@ The Image component is a flexible React component that can display either a sing
 
 ### VideoPlayer Component
 
-The VideoPlayer component allows you to embed YouTube videos in your blog posts or use videos stored in the CMS.
+The VideoPlayer component allows you to embed YouTube videos in your blog posts or use videos stored in the CMS. The CMS editor also offers it under "Insert" in MDX posts.
 
 The supported formats are: `MP4, WebM, and OGG`
 
 #### Props
 
-| Prop     | Type | Default | Required                     | Description                       |
-|----------|------|---------|------------------------------|-----------------------------------|
-| `id`     | `string` | - | Yes                          | YouTube video ID                  |
-| `name`   | `string` | - | Yes (Only if ID not present) | Name of the file (with extension) |
-| `width`  | `string` | `"100%"` | No                           | Width of the video player         |
-| `height` | `string` | `"560px"` | No                           | Height of the video player        |
+| Prop     | Type     | Default       | Required                     | Description                       |
+| -------- | -------- | ------------- | ---------------------------- | --------------------------------- |
+| `id`     | `string` | -             | Yes                          | YouTube video ID                  |
+| `name`   | `string` | -             | Yes (Only if ID not present) | Name of the file (with extension) |
+| `width`  | `string` | `"100%"`      | No                           | Width of the video player         |
+| `height` | `string` | `"560px"`     | No                           | Height of the video player        |
 | `title`  | `string` | `"Xmartlabs"` | No                           | Title for the iframe              |
 
 #### Usage Example
 
 For Youtube:
+
 ```mdx
 <VideoPlayer id="dsCiJIhfM5E" width="100%" height="400px" />
 ```
+
 For CMS Video:
+
 ```mdx
 <VideoPlayer name="screen recording.mp4" width="100%" height="400px" />
 ```
@@ -153,4 +158,7 @@ For CMS Video:
 ### Documenting the new Component
 
 It's very important to document **how** we can use the components for non-developers that create blogs, this can be documented in the Blog's Notion page, the [Snippet Section](https://www.notion.so/xmartlabs/Blog-Snippets-238fbac623cd80fbb43ffabb3ff38ef2).
+
+```
+
 ```

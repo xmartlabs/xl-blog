@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import PropTypes from 'prop-types';
 
 import { NavMenuElements } from './nav-menu-elements';
 import {
@@ -86,8 +85,6 @@ const MobileNavMenu = () => {
                 </h4>
                 <button
                   onClick={() => setShowTypeForm(true)}
-                  target="_blank"
-                  rel="noopener noreferrer"
                   className="
                     w-56 h-[2.8rem] flex justify-center items-center bg-xl-pink text-neutral-100 m-[1.5rem_0_4rem]
                     no-underline font-primary font-black border-none
@@ -109,13 +106,3 @@ const MobileNavMenu = () => {
 };
 
 export { MobileNavMenu as MobileMenu };
-
-MobileNavMenu.propTypes = {
-  onClick: PropTypes.func,
-  showMenu: PropTypes.bool,
-};
-
-MobileNavMenu.defaultProps = {
-  onClick: () => {},
-  showMenu: false,
-};

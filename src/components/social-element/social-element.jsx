@@ -1,10 +1,8 @@
 import React from 'react';
 
-import PropTypes from 'prop-types';
-
 import { classnames } from '../../helpers/utils';
 
-const SocialElement = ({ className, links }) => {
+const SocialElement = ({ className = '', links }) => {
   return (
     <div
       className={classnames(
@@ -28,18 +26,3 @@ const SocialElement = ({ className, links }) => {
 };
 
 export { SocialElement };
-
-SocialElement.propTypes = {
-  className: PropTypes.string,
-  links: PropTypes.arrayOf(
-    PropTypes.objectOf({
-      path: PropTypes.string.isRequired,
-      icon: PropTypes.element.isRequired,
-      id: PropTypes.string.isRequired,
-    })
-  ).isRequired,
-};
-
-SocialElement.defaultProps = {
-  className: '',
-};

@@ -1,0 +1,79 @@
+---
+import 'prismjs/themes/prism-okaidia.css';
+import '../styles/global.css';
+
+import Seo from '../components/Seo.astro';
+import { NavMenu } from '../components/nav-menu';
+import { Footer } from '../components/footer';
+
+interface Props {
+  title?: string;
+  description?: string;
+  image?: string | null;
+}
+
+const { title, description, image } = Astro.props;
+const gtmId = import.meta.env.PUBLIC_GTM_ID;
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="x-ua-compatible" content="ie=edge" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, shrink-to-fit=no"
+    />
+    <meta name="generator" content={Astro.generator} />
+    <Seo title={title} description={description} image={image} />
+    <link rel="icon" href="/favicon.png" type="image/png" />
+    <link rel="apple-touch-icon" href="/favicon.png" />
+    <link rel="manifest" href="/manifest.webmanifest" />
+    <link rel="sitemap" type="application/xml" href="/sitemap-index.xml" />
+    {gtmId && <script is:inline define:vars={{ gtmId }}>
+      (function (w, d, s, l, i) {
+        w[l] = w[l] || [];
+        w[l].push({ 'gtm.start': new Date().getTime(), event: 'gtm.js' });
+        var f = d.getElementsByTagName(s)[0],
+          j = d.createElement(s),
+          dl = l != 'dataLayer' ? '&l=' + l : '';
+        j.async = true;
+        j.src = 'https://www.googletagmanager.com/gtm.js?id=' + i + dl;
+        f.parentNode.insertBefore(j, f);
+      })(window, document, 'script', 'dataLayer', gtmId);
+    </script>}
+    <!-- Swap broken images for their `data-fallback` (once). Capture phase: error events don't bubble. -->
+    <script is:inline>
+      document.addEventListener(
+        'error',
+        function (event) {
+          var img = event.target;
+          if (!img || img.tagName !== 'IMG') return;
+          var fallback = img.getAttribute('data-fallback');
+          if (!fallback || img.dataset.fallbackApplied) return;
+          img.dataset.fallbackApplied = 'true';
+          img.src = fallback;
+        },
+        true
+      );
+    </script>
+    <slot name="head" />
+  </head>
+  <body>
+    {gtmId && (
+      <noscript>
+        <iframe
+          src={`https://www.googletagmanager.com/ns.html?id=${gtmId}`}
+          height="0"
+          width="0"
+          style="display: none; visibility: hidden"
+          aria-hidden="true"
+        />
+      </noscript>
+    )}
+    <NavMenu client:load />
+    <slot />
+    <Footer />
+  </body>
+</html>

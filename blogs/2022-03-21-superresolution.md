@@ -4,7 +4,7 @@ date: 2022-03-22
 tags: [10 years Xmartlabs, 10 lessons learned in tech industry, 10 years in tech industry]
 author: lazaro
 category: machine-learning
-thumbnail: images/ml-superresolution/Superresolution-blog.jpg
+thumbnail: /images/ml-superresolution/Superresolution-blog.jpg
 permalink: /machine-learning-super-resolution-algorithms/
 ---
 

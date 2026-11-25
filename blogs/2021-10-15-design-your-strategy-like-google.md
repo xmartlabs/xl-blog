@@ -4,7 +4,7 @@ date: 2021-10-15
 tags: [OKR framework, Company Strategy]
 author: vale
 category: development
-thumbnail: images/okrs/image.jpg
+thumbnail: /images/okrs/image.jpg
 permalink: /okr-framework/
 ---
 

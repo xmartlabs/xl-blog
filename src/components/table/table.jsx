@@ -1,5 +1,4 @@
 import React, { useMemo } from 'react';
-import PropTypes from 'prop-types';
 
 const normalizeKey = (label) => label.trim().replace(/\s+/g, '').toLowerCase();
 
@@ -72,12 +71,6 @@ const Table = ({ title, headers = '', rows = '' }) => {
       </div>
     </div>
   );
-};
-
-Table.propTypes = {
-  title: PropTypes.string,
-  headers: PropTypes.string.isRequired,
-  rows: PropTypes.string.isRequired,
 };
 
 export { Table };

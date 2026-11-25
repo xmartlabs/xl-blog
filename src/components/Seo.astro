@@ -1,0 +1,28 @@
+---
+import { SITE } from '../lib/site';
+
+interface Props {
+  title?: string;
+  description?: string;
+  /** Site-relative image path, e.g. `/images/foo.png`. */
+  image?: string | null;
+}
+
+const { title, description, image } = Astro.props;
+
+const seo = {
+  title: title || SITE.title,
+  description: description || SITE.description,
+  url: new URL(Astro.url.pathname, SITE.url).href,
+  image: new URL(image || '/images/og-thumbnail.png', SITE.url).href,
+};
+---
+
+<meta name="title" property="og:title" content={seo.title} />
+<meta name="url" property="og:url" content={seo.url} />
+<meta name="description" property="og:description" content={seo.description} />
+<meta name="image" property="og:image" content={seo.image} />
+<meta name="twitter:card" content="summary_large_image" />
+<title>{seo.title}</title>
+<meta name="description" content={seo.description} />
+<link rel="canonical" href={seo.url} />

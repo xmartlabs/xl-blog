@@ -5,3 +5,8 @@ public
 yarn.lock
 .idea
 .env*
+
+# Astro / Cloudflare
+dist/
+.astro/
+.wrangler/

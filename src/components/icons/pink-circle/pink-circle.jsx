@@ -1,7 +1,5 @@
 import React from 'react';
-import PropTypes from 'prop-types';
-
-export const PinkCircle = ({ className }) => (
+export const PinkCircle = ({ className = '' }) => (
   <svg
     width="9"
     height="9"
@@ -13,11 +11,3 @@ export const PinkCircle = ({ className }) => (
     <circle cx="4.54288" cy="4.8837" r="4.0585" fill="#EE1A64" />
   </svg>
 );
-
-PinkCircle.propTypes = {
-  className: PropTypes.string,
-};
-
-PinkCircle.defaultProps = {
-  className: '',
-};

@@ -1,9 +1,8 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 
 import { CloseIcon } from '../icons';
 
-const TypeForm = ({ onClick }) => {
+const TypeForm = ({ onClick = () => {} }) => {
   return (
     <div
       className="
@@ -21,9 +20,9 @@ const TypeForm = ({ onClick }) => {
         <CloseIcon className="fill-neutral-100 h-[20px] [@media(max-height:_768px)]:fill-blue-one" />
       </button>
       <iframe
-        src={process.env.GATSBY_FORM_URL}
+        src={import.meta.env.PUBLIC_FORM_URL}
         title="typeform"
-        frameborder="0"
+        frameBorder="0"
         className="
           h-[95%] w-full
           [@media(max-height:_768px)]:h-full
@@ -33,14 +32,6 @@ const TypeForm = ({ onClick }) => {
       ></iframe>
     </div>
   );
-};
-
-TypeForm.propTypes = {
-  onCkick: PropTypes.func,
-};
-
-TypeForm.defaultProps = {
-  onClick: () => {},
 };
 
 export { TypeForm };

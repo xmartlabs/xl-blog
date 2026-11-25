@@ -1,28 +1,22 @@
 import React, { useEffect, useRef } from 'react';
-import PropTypes from 'prop-types';
-import { Link } from 'gatsby';
 
 import { Pager } from '../pager';
 import { Card } from '../card';
 import { ErrorSafeLocalStorage, classnames } from '../../helpers';
 
-const Categories = {
-  all: 'All',
-  development: 'Development',
-  'product-design': 'Design',
-  'machine-learning': 'Machine\u00a0Learning',
-  'people-events': 'People',
-  strategy: 'Strategy',
-  qa: 'QA',
-};
-
-export const BlogList = ({ pageContext, data, location: { pathname } }) => {
-  const selectedCategory = pathname.startsWith('/categories/')
-    ? pathname.split('/')[2]
-    : 'all';
-
-  const posts = data?.allMdx?.edges || [];
-
+// Props are plain serializable data so this can be hydrated as an Astro island:
+// - posts: [{ id, title, slug, thumbnail }]
+// - pageContext: { currentPage, numPages, category }
+// - selectedCategory: category id, 'all', or '' (none selected)
+// - categoryTabs: [{ id, label, href }]
+// - pathname: current page path (with trailing slash)
+export const BlogList = ({
+  posts = [],
+  pageContext,
+  selectedCategory = 'all',
+  categoryTabs = [],
+  pathname,
+}) => {
   // Scroll to desired page height
   const categoryFiltersRef = useRef(null);
   useEffect(() => {
@@ -49,26 +43,27 @@ export const BlogList = ({ pageContext, data, location: { pathname } }) => {
       <div
         className="
           w-full max-w-full flex flex-row flex-nowrap 
-          md:m-[8rem_0_5rem_0] md:gap-[6%] md:items-center md:justify-center 
+          md:m-[8rem_0_5rem_0] md:gap-[6%] md:items-center md:justify-center-safe md:overflow-x-auto md:px-[2rem]
           max-md:gap-[3rem] max-md:m-[3rem_0_1.5rem_0] max-md:p-[0_2rem_0.5rem_2rem] max-md:overflow-x-auto
         "
         ref={categoryFiltersRef}
       >
-        {Object.keys(Categories).map((category) => (
-          <Link
-            key={category}
+        {categoryTabs.map(({ id, label, href }) => (
+          <a
+            key={id}
+            aria-current={href === pathname ? 'page' : undefined}
             onClick={() =>
               ErrorSafeLocalStorage.setItem('scrollTo', window.scrollY)
             }
             className={classnames(
               '!text-filter font-primary tracking-[1px] list-none no-underline w-fit text-gray-five',
-              category === selectedCategory &&
+              id === selectedCategory &&
                 'text-xl-pink border-b-[2px] border-xl-pink'
             )}
-            to={category === 'all' ? '/' : `/categories/${category}/`}
+            href={href}
           >
-            {Categories[category]}
-          </Link>
+            {label}
+          </a>
         ))}
       </div>
       <div
@@ -77,24 +72,11 @@ export const BlogList = ({ pageContext, data, location: { pathname } }) => {
           max-sm:m-0 max-sm:gap-[4rem_0] max-sm:grid-cols-[auto]
         "
       >
-        {posts.map(({ node }) => (
-          <Card data={node} key={node.id} withCategory={false} />
+        {posts.map((post) => (
+          <Card data={post} key={post.id} />
         ))}
       </div>
-      <Pager {...pageContext} />
+      <Pager {...pageContext} pathname={pathname} />
     </>
   );
-};
-
-BlogList.propTypes = {
-  data: PropTypes.shape({
-    allMdX: PropTypes.shape({
-      group: PropTypes.arrayOf(
-        PropTypes.shape({
-          fieldValue: PropTypes.string.isRequired,
-          totalCount: PropTypes.number.isRequired,
-        }).isRequired
-      ),
-    }),
-  }),
 };

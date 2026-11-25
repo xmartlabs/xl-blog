@@ -1,8 +1,6 @@
 import React from 'react';
 
-import PropTypes from 'prop-types';
-
-export const Linkedin = ({ className }) => (
+export const Linkedin = ({ className = '' }) => (
   <svg
     viewBox="0 0 19 18"
     fill="none"
@@ -15,11 +13,3 @@ export const Linkedin = ({ className }) => (
     />
   </svg>
 );
-
-Linkedin.propTypes = {
-  className: PropTypes.string,
-};
-
-Linkedin.defaultProps = {
-  className: '',
-};
