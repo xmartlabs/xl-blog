@@ -7,9 +7,9 @@ import { vercelBlobStorage } from '@payloadcms/storage-vercel-blob';
 import { buildConfig } from 'payload';
 import sharp from 'sharp';
 
-import { isAdminUser } from './access';
-import { hasCronSecret } from './lib/cron-auth';
+import { canRunJobs } from './lib/cron-auth';
 import { getGoogleAuthSettings, googleAuthPlugin } from './auth/google';
+import { decidePasswordLogin, withPasswordLogin } from './auth/password-login';
 import { seedFirstAdmin } from './auth/seedFirstAdmin';
 import { Authors } from './collections/Authors';
 import { Categories } from './collections/Categories';
@@ -21,6 +21,8 @@ const filename = fileURLToPath(import.meta.url);
 const dirname = path.dirname(filename);
 
 const googleAuth = getGoogleAuthSettings();
+// DISABLE_PASSWORD_LOGIN=true: Google only (ignored, with a warning, when Google isn't set up).
+const passwordLogin = decidePasswordLogin(process.env, googleAuth !== null);
 
 export default buildConfig({
   admin: {
@@ -54,23 +56,29 @@ export default buildConfig({
           clientProps: {
             enabled: googleAuth !== null,
             allowedDomain: googleAuth?.allowedDomain ?? '',
+            passwordLogin: passwordLogin.enabled,
           },
         },
       ],
     },
   },
-  collections: [Posts, Authors, Categories, Media, Users],
+  collections: [
+    Posts,
+    Authors,
+    Categories,
+    Media,
+    withPasswordLogin(Users, passwordLogin),
+  ],
   jobs: {
     // Scheduled publishing (posts: versions.drafts.schedulePublish) queues jobs that
     // /api/payload-jobs/run executes. `autoRun` needs a long-running server, so on Vercel a
     // cron job (vercel.json, every 5 minutes) calls that endpoint with
     // `Authorization: Bearer $CRON_SECRET`, which Vercel adds when CRON_SECRET is set.
-    access: {
-      run: ({ req }) =>
-        isAdminUser(req.user) ||
-        hasCronSecret(req.headers.get('authorization')),
-    },
+    access: { run: canRunJobs },
   },
+  // The admin panel and the site use REST and the Local API only. (The `graphql` package stays
+  // installed: it's a peer dependency of payload and @payloadcms/next.)
+  graphQL: { disable: true },
   editor: lexicalEditor(),
   secret: process.env.PAYLOAD_SECRET || '',
   typescript: {
@@ -98,8 +106,9 @@ export default buildConfig({
     googleAuthPlugin(googleAuth),
   ],
   onInit: async (payload) => {
+    if (passwordLogin.warning) payload.logger.warn(passwordLogin.warning);
     try {
-      await seedFirstAdmin(payload);
+      await seedFirstAdmin(payload, { passwordLogin: passwordLogin.enabled });
     } catch (error) {
       payload.logger.error(
         { err: error },

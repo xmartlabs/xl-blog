@@ -92,7 +92,7 @@ const MobileNavMenu = () => {
                     no-underline font-primary font-black border-none
                   "
                 >
-                  Let's talk
+                  Let&apos;s talk
                 </button>
               </div>
               <SocialElement

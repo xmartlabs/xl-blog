@@ -1,6 +1,6 @@
 import crypto from 'node:crypto';
 
-import type { Element, ElementContent, RootContent, Text } from 'hast';
+import type { Element, ElementContent, RootContent } from 'hast';
 import { fromHtml } from 'hast-util-from-html';
 import type { SerializedEditorState } from 'lexical';
 

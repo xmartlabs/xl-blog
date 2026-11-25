@@ -1,6 +1,6 @@
 import React from 'react';
 
-export const HeaderCircleIcon = ({ className = '' }) => (
+export const HeaderCircleIcon = () => (
   <svg
     width="241"
     height="242"

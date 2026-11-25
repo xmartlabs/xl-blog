@@ -8,6 +8,7 @@ import {
   authenticated,
   isAdminUser,
 } from '../access';
+import { LOCK_TIME_MS, MAX_LOGIN_ATTEMPTS } from '../auth/password-login';
 
 /**
  * Editors sign in with Google only: they can't give themselves a password or change their
@@ -40,6 +41,10 @@ export const Users: CollectionConfig = {
     // Server-side sessions: logging out or deleting a user revokes its tokens.
     useSessions: true,
     tokenExpiration: 60 * 60 * 24 * 7,
+    // Password login (the break-glass admin): lock the account after 5 wrong passwords for
+    // 10 minutes. DISABLE_PASSWORD_LOGIN turns password login off (payload.config.ts).
+    maxLoginAttempts: MAX_LOGIN_ATTEMPTS,
+    lockTime: LOCK_TIME_MS,
   },
   hooks: {
     beforeChange: [editorsKeepGoogleIdentity],

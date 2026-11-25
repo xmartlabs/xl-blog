@@ -35,7 +35,7 @@ export const NavMenu = () => {
               onClick={() => setShowTypeForm(true)}
             >
               <div className="leading-[22px] text-[14px] font-black tracking-[0.5px] max-h-[17px]">
-                Let's Talk
+                Let&apos;s Talk
               </div>
             </button>
           )}

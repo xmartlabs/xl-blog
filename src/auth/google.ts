@@ -5,12 +5,16 @@ import type { PluginTypes } from 'payload-oauth2';
 import { parseCookies } from 'payload';
 import type { Config, Endpoint, PayloadRequest, Plugin } from 'payload';
 
+import { safeInternalPath } from '../lib/redirects';
+
 /**
  * "Sign in with Google" for the admin panel, restricted to one Google Workspace domain.
  *
- * Flow: /api/users/oauth/google (our authorize endpoint: state cookie + `hd` hint)
- *   → Google → /api/users/oauth/google/callback (payload-oauth2: state check, code exchange,
- *   `getUserInfo` below, find-or-create the user by email, Payload session cookie) → /admin.
+ * Flow: /api/users/oauth/google[?redirect=/admin/…] (our authorize endpoint: state, PKCE
+ *   verifier and return-path cookies + `hd` hint) → Google → /api/users/oauth/google/callback
+ *   (payload-oauth2: state check, code exchange with the PKCE verifier, `getUserInfo` below,
+ *   find-or-create the user by email, Payload session cookie; our wrapper expires the flow
+ *   cookies) → the sanitized return path (default /admin).
  *
  * The domain rule lives in `checkGoogleIdentity`. Google's `hd` claim is only present for
  * Workspace accounts, so a personal Gmail (or any other domain) is rejected even if the
@@ -30,8 +34,15 @@ const GOOGLE_TOKEN_URL = 'https://oauth2.googleapis.com/token';
 export const GOOGLE_USERINFO_URL =
   'https://openidconnect.googleapis.com/v1/userinfo';
 const SCOPES = ['openid', 'email', 'profile'];
-const STATE_COOKIE = 'xl-google-oauth-state';
-const STATE_MAX_AGE = 10 * 60;
+export const STATE_COOKIE = 'xl-google-oauth-state';
+/** Name fixed by payload-oauth2's `defaultGetToken`, which sends it as `code_verifier`. */
+export const PKCE_COOKIE = 'pkce_verifier';
+export const REDIRECT_COOKIE = 'xl-google-oauth-redirect';
+const FLOW_COOKIES = [STATE_COOKIE, PKCE_COOKIE, REDIRECT_COOKIE];
+/** Covers the authorize endpoint and its `/callback`, nothing else. */
+const FLOW_COOKIE_PATH = `/api/${AUTH_COLLECTION}${AUTHORIZE_PATH}`;
+const FLOW_MAX_AGE = 10 * 60;
+export const DEFAULT_SUCCESS_REDIRECT = '/admin';
 
 /** Claims returned by Google's OIDC userinfo endpoint (or ID token). */
 export interface GoogleIdentity {
@@ -131,36 +142,109 @@ export const isGoogleAuthEnabled = () => getGoogleAuthSettings() !== null;
 const callbackUrl = (settings: GoogleAuthSettings) =>
   `${settings.serverURL}/api/${AUTH_COLLECTION}${CALLBACK_PATH}`;
 
+/** PKCE (RFC 7636, S256): 32 random bytes as base64url, and its SHA-256 as the challenge. */
+export const createPkcePair = () => {
+  const verifier = crypto.randomBytes(32).toString('base64url');
+  const challenge = crypto
+    .createHash('sha256')
+    .update(verifier)
+    .digest('base64url');
+  return { verifier, challenge };
+};
+
+const flowCookie = (
+  settings: GoogleAuthSettings,
+  name: string,
+  value: string,
+  maxAge: number
+) => {
+  const secure = settings.serverURL.startsWith('https://') ? '; Secure' : '';
+  return `${name}=${value}; Path=${FLOW_COOKIE_PATH}; HttpOnly; SameSite=Lax; Max-Age=${maxAge}${secure}`;
+};
+
 /**
  * Our own authorize endpoint (payload-oauth2 keeps an endpoint that already exists at the
  * same path). Compared to the plugin's, it adds a CSRF `state` bound to a short-lived
- * HttpOnly cookie, Google's `hd` hint and the account chooser.
+ * HttpOnly cookie, PKCE, Google's `hd` hint, the account chooser, and the page to return to
+ * after signing in (`?redirect=`, as on Payload's login page; sanitized to a same-site path).
  */
 export const createAuthorizeEndpoint = (
   settings: GoogleAuthSettings
 ): Endpoint => ({
   method: 'get',
   path: AUTHORIZE_PATH,
-  handler: async () => {
+  handler: async (req) => {
     const state = crypto.randomBytes(32).toString('base64url');
+    const { verifier, challenge } = createPkcePair();
+    const returnTo = safeInternalPath(
+      req?.searchParams?.get('redirect'),
+      DEFAULT_SUCCESS_REDIRECT
+    );
     const url = new URL(GOOGLE_AUTHORIZE_URL);
     url.searchParams.set('client_id', settings.clientId);
     url.searchParams.set('redirect_uri', callbackUrl(settings));
     url.searchParams.set('response_type', 'code');
     url.searchParams.set('scope', SCOPES.join(' '));
     url.searchParams.set('state', state);
+    url.searchParams.set('code_challenge', challenge);
+    url.searchParams.set('code_challenge_method', 'S256');
     url.searchParams.set('hd', settings.allowedDomain);
     url.searchParams.set('prompt', 'select_account');
-    const secure = settings.serverURL.startsWith('https://') ? '; Secure' : '';
-    return new Response(null, {
-      status: 302,
-      headers: {
-        Location: url.toString(),
-        'Set-Cookie': `${STATE_COOKIE}=${state}; Path=/api/${AUTH_COLLECTION}${AUTHORIZE_PATH}; HttpOnly; SameSite=Lax; Max-Age=${STATE_MAX_AGE}${secure}`,
-      },
-    });
+    const headers = new Headers({ Location: url.toString() });
+    headers.append(
+      'Set-Cookie',
+      flowCookie(settings, STATE_COOKIE, state, FLOW_MAX_AGE)
+    );
+    headers.append(
+      'Set-Cookie',
+      flowCookie(settings, PKCE_COOKIE, verifier, FLOW_MAX_AGE)
+    );
+    headers.append(
+      'Set-Cookie',
+      flowCookie(
+        settings,
+        REDIRECT_COOKIE,
+        encodeURIComponent(returnTo),
+        FLOW_MAX_AGE
+      )
+    );
+    return new Response(null, { status: 302, headers });
   },
 });
+
+/** The page to land on after a successful sign-in: the sanitized return-path cookie. */
+export const successRedirect = (req: PayloadRequest) => {
+  const raw = parseCookies(req.headers).get(REDIRECT_COOKIE);
+  let decoded: string | undefined;
+  try {
+    decoded = raw ? decodeURIComponent(raw) : undefined;
+  } catch {
+    decoded = undefined;
+  }
+  return safeInternalPath(decoded, DEFAULT_SUCCESS_REDIRECT);
+};
+
+/**
+ * Wraps payload-oauth2's callback handler so every outcome (success or failure redirect)
+ * expires the one-time state, PKCE verifier and return-path cookies.
+ */
+export const withExpiredFlowCookies =
+  (
+    settings: GoogleAuthSettings,
+    handler: Endpoint['handler']
+  ): Endpoint['handler'] =>
+  async (req) => {
+    const response = await handler(req);
+    const headers = new Headers(response.headers);
+    for (const name of FLOW_COOKIES) {
+      headers.append('Set-Cookie', flowCookie(settings, name, '', 0));
+    }
+    return new Response(response.body, {
+      status: response.status,
+      statusText: response.statusText,
+      headers,
+    });
+  };
 
 const safeEqual = (a: string, b: string) => {
   const ab = Buffer.from(a);
@@ -239,6 +323,9 @@ export const googlePluginOptions = (
   // Unused (we serve the authorize endpoint ourselves) but kept accurate.
   providerAuthorizationUrl: GOOGLE_AUTHORIZE_URL,
   scopes: SCOPES,
+  // Our authorize endpoint sets the `pkce_verifier` cookie; with this flag the plugin's
+  // token request sends it as `code_verifier`.
+  pkceEnabled: true,
   authorizePath: AUTHORIZE_PATH,
   callbackPath: CALLBACK_PATH,
   onUserNotFoundBehavior: 'create',
@@ -248,7 +335,7 @@ export const googlePluginOptions = (
     : async () => {
         throw new Error('Google sign-in is not configured');
       },
-  successRedirect: () => '/admin',
+  successRedirect,
   failureRedirect: () => LOGIN_ERROR_REDIRECT,
 });
 
@@ -258,7 +345,7 @@ export const googlePluginOptions = (
  */
 export const googleAuthPlugin =
   (settings: GoogleAuthSettings | null = getGoogleAuthSettings()): Plugin =>
-  (incoming: Config) => {
+  async (incoming: Config) => {
     if (!settings) return incoming;
     const config: Config = {
       ...incoming,
@@ -274,5 +361,28 @@ export const googleAuthPlugin =
           : collection
       ),
     };
-    return OAuth2Plugin(googlePluginOptions(settings))(config);
+    const withPlugin = await OAuth2Plugin(googlePluginOptions(settings))(
+      config
+    );
+    return {
+      ...withPlugin,
+      collections: withPlugin.collections?.map((collection) =>
+        collection.slug === AUTH_COLLECTION
+          ? {
+              ...collection,
+              endpoints: (collection.endpoints || []).map((endpoint) =>
+                endpoint.path === CALLBACK_PATH
+                  ? {
+                      ...endpoint,
+                      handler: withExpiredFlowCookies(
+                        settings,
+                        endpoint.handler
+                      ),
+                    }
+                  : endpoint
+              ),
+            }
+          : collection
+      ),
+    };
   };

@@ -3,6 +3,7 @@ import { redirect } from 'next/navigation';
 import type { NextRequest } from 'next/server';
 
 import { getPayloadClient } from '@/lib/payload';
+import { safeInternalPath } from '@/lib/redirects';
 
 /**
  * GET /next/preview?path=/blog/<slug>/
@@ -12,11 +13,12 @@ import { getPayloadClient } from '@/lib/payload';
  * `path`. Only for signed-in Payload users; the post page checks the session again.
  */
 export async function GET(request: NextRequest) {
-  const path = request.nextUrl.searchParams.get('path') ?? '/';
-  // Same-site paths only (no `//host` or `/\host` open redirects).
-  if (!path.startsWith('/') || path.startsWith('//') || path.includes('\\')) {
-    return new Response('Invalid path', { status: 400 });
-  }
+  // Same-site paths only (no `//host`, `/\host` or `/..//host` open redirects).
+  const path = safeInternalPath(
+    request.nextUrl.searchParams.get('path') ?? '/',
+    ''
+  );
+  if (!path) return new Response('Invalid path', { status: 400 });
 
   const payload = await getPayloadClient();
   const { user } = await payload.auth({ headers: request.headers });

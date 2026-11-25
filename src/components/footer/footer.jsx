@@ -3,7 +3,6 @@ import * as React from 'react';
 import { SocialElement } from '../social-element';
 import {
   TwitterIcon,
-  Facebook,
   Linkedin,
   InstagramIcon,
   XmartlabsTextLogoWhite,

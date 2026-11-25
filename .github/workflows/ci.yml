@@ -53,11 +53,19 @@ jobs:
       - name: Check formatting
         run: npm run format:check
 
+      - name: Lint
+        run: npm run lint
+
       - name: Type-check
         run: npm run typecheck
 
       - name: Unit tests
         run: npm test
+
+      # Access control against the real Payload config. Uses its own database, xlblog_test on
+      # the same server (dropped, recreated and migrated by tests/int/global-setup.ts).
+      - name: Integration tests
+        run: npm run test:int
 
       # Same order as the Vercel build (`npm run ci`): migrations first, with schema push off.
       - name: Apply database migrations

@@ -32,19 +32,28 @@ const GoogleMark = () => (
  * Rendered above the admin login form (admin.components.beforeLogin): the main way in.
  * Renders nothing unless Google sign-in is configured (`enabled`, set in payload.config.ts),
  * in which case the email/password form below becomes the secondary "Admin sign-in"
- * (styles in src/app/(payload)/custom.scss). A plain link: the endpoint redirects to Google.
+ * (styles in src/app/(payload)/custom.scss); with `passwordLogin` off Payload hides that form
+ * and this button is the only way in. A plain link: the endpoint redirects to Google, and
+ * forwards Payload's `?redirect=` (the page the user wanted) so they land back on it; the
+ * server sanitizes it.
  */
 export const GoogleLoginButton = ({
   enabled = false,
   allowedDomain = '',
+  passwordLogin = true,
 }: {
   enabled?: boolean;
   allowedDomain?: string;
+  passwordLogin?: boolean;
 }) => {
   const searchParams = useSearchParams();
   if (!enabled) return null;
   const failed = searchParams.get('error') === 'google';
   const domain = allowedDomain || 'xmartlabs.com';
+  const redirect = searchParams.get('redirect');
+  const href = redirect
+    ? `${GOOGLE_LOGIN_HREF}?${new URLSearchParams({ redirect })}`
+    : GOOGLE_LOGIN_HREF;
 
   return (
     <div className="xl-google-login">
@@ -56,7 +65,7 @@ export const GoogleLoginButton = ({
         </p>
       )}
       <a
-        href={GOOGLE_LOGIN_HREF}
+        href={href}
         className="btn btn--style-primary btn--size-large xl-google-login__button"
       >
         <span className="xl-google-login__mark">
@@ -67,12 +76,16 @@ export const GoogleLoginButton = ({
       <p className="xl-google-login__hint">
         First time here? Your account is created when you sign in.
       </p>
-      <div className="xl-google-login__divider" role="separator">
-        <span>Admin sign-in</span>
-      </div>
-      <p className="xl-google-login__note">
-        Email and password, only for the site admin account.
-      </p>
+      {passwordLogin && (
+        <>
+          <div className="xl-google-login__divider" role="separator">
+            <span>Admin sign-in</span>
+          </div>
+          <p className="xl-google-login__note">
+            Email and password, only for the site admin account.
+          </p>
+        </>
+      )}
     </div>
   );
 };

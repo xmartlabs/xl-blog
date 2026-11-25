@@ -1,6 +1,6 @@
 import React from 'react';
 
-export const XlFooter = ({ className = '' }) => (
+export const XlFooter = () => (
   <svg
     width="135"
     height="19"

@@ -5,7 +5,7 @@ Work left before the new blog (branch `nextjs-payload`) replaces the Gatsby site
 ## Vercel setup (needs someone with access)
 
 - [ ] Vercel project linked to `xmartlabs/xl-blog` (Pro team). Framework Next.js; `vercel.json` already sets the build command `npm run ci` and the cron job. Node.js version 24.x in Project Settings → Build.
-- [ ] **Neon Postgres** from the Vercel Marketplace, connected to Production and Preview (sets `DATABASE_URL`). Consider a separate Neon branch/database for Preview so drafts on previews don't touch production data.
+- [ ] **Neon Postgres** from the Vercel Marketplace, connected to Production and Preview (sets `DATABASE_URL`). In the Neon integration settings, enable **a database branch per preview deployment**, so previews (and their migrations) never touch production data. Neon's integration does this natively; no GitHub workflow or tokens are needed.
 - [ ] **Vercel Blob** store connected to the project (sets `BLOB_READ_WRITE_TOKEN`). New uploads go there; the old images stay in `public/images/`.
 - [ ] Environment variables (Production and Preview): `PAYLOAD_SECRET` (different per environment), `GOOGLE_CLIENT_ID`, `GOOGLE_CLIENT_SECRET`, `GOOGLE_ALLOWED_DOMAIN=xmartlabs.com`, `CRON_SECRET` (letters/digits), `NEXT_PUBLIC_GTM_ID`, `NEXT_PUBLIC_FORM_URL`, `FIRST_ADMIN_EMAIL`/`FIRST_ADMIN_PASSWORD` (production, for the first start). `NEXT_PUBLIC_SERVER_URL=https://blog.xmartlabs.com` for Production; for Preview either leave it empty (falls back to the branch URL) or set it to the one preview host registered in Google.
 - [ ] **Deployment Protection**: turn off Vercel Authentication for Preview deployments (or use shareable links), otherwise bloggers can't open previews and Google's OAuth callback can't reach the preview.
@@ -17,7 +17,7 @@ Work left before the new blog (branch `nextjs-payload`) replaces the Gatsby site
 
 - [ ] Google Cloud OAuth client ("Web application") in the xmartlabs.com organization, consent screen **Internal**. Redirect URIs: `http://localhost:3000/api/users/oauth/google/callback`, `https://blog.xmartlabs.com/api/users/oauth/google/callback`, and optionally one fixed preview host. Sign-in can't work on random per-deployment preview URLs (Google needs exact redirect URIs).
 - [ ] End-to-end test with a real account: an @xmartlabs.com account signs in and gets an `editor` user; a personal Gmail is rejected.
-- [ ] Promote the real admins, then consider removing `FIRST_ADMIN_PASSWORD` from the environment (the user stays; keep the password in the vault).
+- [ ] Promote the real admins, then set `DISABLE_PASSWORD_LOGIN=true` in production (Google sign-in only; login tokens then last 8 hours) and remove `FIRST_ADMIN_PASSWORD` from the environment.
 
 ## Verify in the browser (not done by the automated checks)
 

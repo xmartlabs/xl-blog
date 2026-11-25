@@ -41,6 +41,8 @@ export const PostInteractions = ({ pathname }) => {
   useEffect(() => {
     const body = document.querySelector(POST_BODY_SELECTOR);
     refIndexTitles.current = body;
+    // The headings come from the server-rendered post body, readable only after mount.
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     if (body) setTitles(findTitles(Array.from(body.childNodes)));
 
     const handleScroll = () => {
