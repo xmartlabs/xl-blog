@@ -119,7 +119,7 @@ MIGRATE_ONLY=vytallink-app,a-look-back-at-2020 npm run seed:migrate-content
 npx payload run scripts/compare-bodies.ts                      # DB render vs migration/legacy/bodies: expect 175/175 exact
 ```
 
-The import is idempotent (upsert by slug) and publishes posts with their original dates. It reads `migration/legacy/posts.json` and `migration/legacy/bodies/<slug>.html` (the verified rendering of the old site) and `content/{authors,categories}/*.yml`. To run it against production, point `DATABASE_URL` at the production database (after `payload migrate`).
+The import is idempotent (upsert by slug) and publishes posts with their original dates. It reads `migration/legacy/posts.json` and `migration/legacy/bodies/<slug>.html` (the verified rendering of the old site) and `content/{authors,categories}/*.yml`. To run it against production, point `DATABASE_URL` at the production database (after `payload migrate`) and set `REVALIDATE_URL` (the site's origin) and `CRON_SECRET`: at the end the script calls `POST <site>/next/revalidate/` so pages pre-rendered while the database was empty (home, tags, sitemap) are regenerated. That endpoint also works on its own, for `Authorization: Bearer $CRON_SECRET` or a signed-in admin.
 
 ## Deploy (Vercel)
 

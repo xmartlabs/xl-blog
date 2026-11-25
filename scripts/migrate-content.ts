@@ -211,5 +211,29 @@ async function main() {
   );
 }
 
+/**
+ * Pages pre-rendered before the import (home, tags, sitemap on a first deploy) keep their old
+ * content until revalidated. With REVALIDATE_URL (the site's origin, e.g.
+ * https://blog.xmartlabs.com) and CRON_SECRET set, ask the running site to regenerate them.
+ */
+async function revalidateSite() {
+  const origin = process.env.REVALIDATE_URL?.replace(/\/+$/, '');
+  if (!origin) {
+    console.log(
+      'Done. If the site is already deployed, revalidate it: set REVALIDATE_URL and CRON_SECRET and run again, or POST to <site>/next/revalidate/ with `Authorization: Bearer $CRON_SECRET`.'
+    );
+    return;
+  }
+  const response = await fetch(`${origin}/next/revalidate/`, {
+    method: 'POST',
+    headers: { Authorization: `Bearer ${process.env.CRON_SECRET ?? ''}` },
+  });
+  if (!response.ok) {
+    throw new Error(`Revalidating ${origin} failed: HTTP ${response.status}`);
+  }
+  console.log(`Revalidated ${origin}`);
+}
+
 await main();
+await revalidateSite();
 process.exit(0);

@@ -8,6 +8,7 @@ import { buildConfig } from 'payload';
 import sharp from 'sharp';
 
 import { isAdminUser } from './access';
+import { hasCronSecret } from './lib/cron-auth';
 import { getGoogleAuthSettings, googleAuthPlugin } from './auth/google';
 import { seedFirstAdmin } from './auth/seedFirstAdmin';
 import { Authors } from './collections/Authors';
@@ -51,14 +52,9 @@ export default buildConfig({
     // cron job (vercel.json, every 5 minutes) calls that endpoint with
     // `Authorization: Bearer $CRON_SECRET`, which Vercel adds when CRON_SECRET is set.
     access: {
-      run: ({ req }) => {
-        if (isAdminUser(req.user)) return true;
-        const secret = process.env.CRON_SECRET;
-        return (
-          Boolean(secret) &&
-          req.headers.get('authorization') === `Bearer ${secret}`
-        );
-      },
+      run: ({ req }) =>
+        isAdminUser(req.user) ||
+        hasCronSecret(req.headers.get('authorization')),
     },
   },
   editor: lexicalEditor(),
