@@ -116,7 +116,13 @@ async function main() {
   }
   console.log(`\nDatabase render: ${dbExact}/${docs.length} exact`);
   if (baseUrl) console.log(`Pages: ${pageExact}/${docs.length} exact`);
+  return (
+    docs.length > 0 &&
+    dbExact === docs.length &&
+    (!baseUrl || pageExact === docs.length)
+  );
 }
 
-await main();
-process.exit(0);
+// Non-zero exit on any mismatch (or no posts), so CI fails.
+const ok = await main();
+process.exit(ok ? 0 : 1);
