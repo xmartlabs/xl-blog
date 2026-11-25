@@ -134,4 +134,24 @@ describe('getGoogleAuthSettings', () => {
       })?.serverURL
     ).toBe('http://localhost:3000');
   });
+
+  it('falls back to the Vercel production domain or branch URL', () => {
+    const vercel = { ...env, NEXT_PUBLIC_SERVER_URL: '' };
+    expect(
+      getGoogleAuthSettings({
+        ...vercel,
+        VERCEL_ENV: 'production',
+        VERCEL_PROJECT_PRODUCTION_URL: 'blog.xmartlabs.com',
+        VERCEL_BRANCH_URL: 'xl-blog-git-main-xmartlabs.vercel.app',
+      })?.serverURL
+    ).toBe('https://blog.xmartlabs.com');
+    expect(
+      getGoogleAuthSettings({
+        ...vercel,
+        VERCEL_ENV: 'preview',
+        VERCEL_BRANCH_URL: 'xl-blog-git-staging-xmartlabs.vercel.app',
+        VERCEL_URL: 'xl-blog-abc123-xmartlabs.vercel.app',
+      })?.serverURL
+    ).toBe('https://xl-blog-git-staging-xmartlabs.vercel.app');
+  });
 });

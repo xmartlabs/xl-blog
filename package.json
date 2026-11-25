@@ -32,6 +32,7 @@
   },
   "dependencies": {
     "@payloadcms/db-postgres": "3.94.2",
+    "@payloadcms/live-preview-react": "^3.94.2",
     "@payloadcms/next": "3.94.2",
     "@payloadcms/richtext-lexical": "3.94.2",
     "@payloadcms/storage-vercel-blob": "3.94.2",

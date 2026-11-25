@@ -160,6 +160,7 @@ export interface Post {
    * Imported posts: the "N min read" the old site showed. Cleared when the body changes.
    */
   legacyReadingTime?: string | null;
+  legacySourceFile?: string | null;
   content?: {
     root: {
       type: string;
@@ -191,6 +192,10 @@ export interface Category {
    */
   slug: string;
   order: number;
+  /**
+   * Tab above the post lists. The category page exists either way. (The old site hid Blockchain and Data Engineering.)
+   */
+  showInFilters?: boolean | null;
   updatedAt: string;
   createdAt: string;
 }
@@ -464,6 +469,7 @@ export interface PostsSelect<T extends boolean = true> {
   thumbnailUrl?: T;
   featured?: T;
   legacyReadingTime?: T;
+  legacySourceFile?: T;
   content?: T;
   updatedAt?: T;
   createdAt?: T;
@@ -492,6 +498,7 @@ export interface CategoriesSelect<T extends boolean = true> {
   name?: T;
   slug?: T;
   order?: T;
+  showInFilters?: T;
   updatedAt?: T;
   createdAt?: T;
 }

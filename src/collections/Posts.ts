@@ -13,6 +13,10 @@ import {
 
 import { admins, authenticated, authenticatedOrPublished } from '../access';
 import { postBlocks } from '../blocks';
+import {
+  revalidateAfterDelete,
+  revalidatePostAfterChange,
+} from '../lib/revalidate';
 
 /** Set `req.context.legacyImport` to skip the editorial rules (old posts break some of them). */
 const isLegacyImport = (req: PayloadRequest) =>
@@ -23,6 +27,16 @@ const slugFromTitle: FieldHook = ({ value, data }) => {
   if (typeof data?.title === 'string') return kebabCase(data.title);
   return value;
 };
+
+/**
+ * Preview URLs are relative: the admin panel resolves them against its own origin, so they
+ * work on localhost, production and Vercel preview deployments alike. /next/preview turns on
+ * Next.js draft mode (signed-in users only) and redirects to the post.
+ */
+const previewPath = (slug: unknown) =>
+  typeof slug === 'string' && slug
+    ? `/next/preview/?path=${encodeURIComponent(`/blog/${slug}/`)}`
+    : null;
 
 /** The legacy reading time no longer applies once the body is edited. */
 const dropStaleReadingTime: CollectionBeforeChangeHook = ({
@@ -47,6 +61,10 @@ export const Posts: CollectionConfig = {
   admin: {
     useAsTitle: 'title',
     defaultColumns: ['title', 'slug', 'publishedDate', 'author', '_status'],
+    livePreview: {
+      url: ({ data }) => previewPath(data?.slug) ?? '',
+    },
+    preview: (doc) => previewPath(doc?.slug),
   },
   defaultSort: '-publishedDate',
   access: {
@@ -58,6 +76,8 @@ export const Posts: CollectionConfig = {
   },
   hooks: {
     beforeChange: [dropStaleReadingTime],
+    afterChange: [revalidatePostAfterChange],
+    afterDelete: [revalidateAfterDelete],
   },
   versions: {
     drafts: {
@@ -158,6 +178,14 @@ export const Posts: CollectionConfig = {
           'Imported posts: the "N min read" the old site showed. Cleared when the body changes.',
         condition: (data) => Boolean(data?.legacyReadingTime),
       },
+    },
+    {
+      // Imported posts only: the old Markdown file name. Same-day posts and the "more blogs"
+      // cards follow the old file order.
+      name: 'legacySourceFile',
+      type: 'text',
+      index: true,
+      admin: { hidden: true },
     },
     {
       name: 'content',

@@ -27,8 +27,10 @@ This component was presented in the <a href="/2018/07/16/Introducing-Fountain-Pa
 <li>A <a href="https://xmartlabs.gitbook.io/fountain/fountain/cacheddatasourceadapter"><span><code class="language-text">CachedDataSourceAdapter</code></span></a> to update the <a href="https://developer.android.com/reference/android/arch/paging/DataSource"><span><code class="language-text">DataSource</code></span></a>.
 It's the interface that the library will use to take control of the <a href="https://developer.android.com/reference/android/arch/paging/DataSource"><span><code class="language-text">DataSource</code></span></a>.</li>
 </ol>
-<p>The paging strategy that <strong>Fountain</strong> is using can be seen in the following diagram:
-<br> <br> <img src="/images/fountain/paginationStrategy.png" align="center"></p>
+<p>The paging strategy that <strong>Fountain</strong> is using can be seen in the following diagram:</p>
+<br>
+<br>
+<img src="/images/fountain/paginationStrategy.png" align="center">
 <p>It starts with an initial service data request.
 By default the initial data requested is three pages, but this value can be changed calling the <a href="https://developer.android.com/reference/android/arch/paging/PagedList.Config.html#initialLoadSizeHint"><span><code class="language-text">setInitialLoadSizeHint</code></span></a> method in the <a href="https://developer.android.com/reference/android/arch/paging/PagedList.Config.html"><span><code class="language-text">PagedList.Config</code></span></a> configuration object.
 When the service data comes, all the data is refreshed in the <span><code class="language-text">DataSource</code></span> using the <a href="https://xmartlabs.gitbook.io/fountain/fountain/cacheddatasourceadapter"><span><code class="language-text">CachedDataSourceAdapter</code></span></a>.

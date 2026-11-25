@@ -6,12 +6,21 @@ import { Pager } from '../pager';
 import { Card } from '../card';
 import { ErrorSafeLocalStorage, classnames } from '../../helpers';
 
-// Props are plain serializable data so this can be hydrated as an Astro island:
+// Props are plain serializable data so this can be rendered from a Server Component:
 // - posts: [{ id, title, slug, thumbnail }]
 // - pageContext: { currentPage, numPages, category }
 // - selectedCategory: category id, 'all', or '' (none selected)
 // - categoryTabs: [{ id, label, href }]
 // - pathname: current page path (with trailing slash)
+/**
+ * @param {{
+ *   posts?: { id: string | number, title: string, slug: string, thumbnail: string | null }[],
+ *   pageContext: { currentPage: number, numPages: number, category?: string },
+ *   selectedCategory?: string,
+ *   categoryTabs?: { id: string, label: string, href: string }[],
+ *   pathname: string,
+ * }} props
+ */
 export const BlogList = ({
   posts = [],
   pageContext,

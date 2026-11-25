@@ -95,6 +95,19 @@ export interface GoogleAuthSettings {
 }
 
 /**
+ * On Vercel without NEXT_PUBLIC_SERVER_URL: the production domain, or the branch URL on
+ * preview deployments (stable per branch, unlike the per-deployment URL). Google only accepts
+ * redirect URIs registered in the OAuth client, so sign-in works on the hosts registered there.
+ */
+const vercelURL = (env: Record<string, string | undefined>) => {
+  const host =
+    env.VERCEL_ENV === 'production'
+      ? env.VERCEL_PROJECT_PRODUCTION_URL
+      : env.VERCEL_BRANCH_URL || env.VERCEL_URL;
+  return host?.trim() ? `https://${host.trim()}` : '';
+};
+
+/**
  * Reads the Google settings from the environment. Returns null (Google sign-in disabled,
  * no login button) unless the client id, secret, allowed domain and server URL are all set.
  */
@@ -106,6 +119,7 @@ export function getGoogleAuthSettings(
   const allowedDomain = env.GOOGLE_ALLOWED_DOMAIN?.trim().toLowerCase();
   const serverURL = (
     env.NEXT_PUBLIC_SERVER_URL?.trim() ||
+    vercelURL(env) ||
     (env.NODE_ENV !== 'production' ? 'http://localhost:3000' : '')
   ).replace(/\/+$/, '');
   if (!clientId || !clientSecret || !allowedDomain || !serverURL) return null;

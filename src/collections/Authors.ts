@@ -1,5 +1,9 @@
 import type { CollectionConfig } from 'payload';
 
+import {
+  revalidateAfterChange,
+  revalidateAfterDelete,
+} from '../lib/revalidate';
 import { admins, anyone, authenticated } from '../access';
 
 export const Authors: CollectionConfig = {
@@ -13,6 +17,10 @@ export const Authors: CollectionConfig = {
     create: authenticated,
     update: authenticated,
     delete: admins,
+  },
+  hooks: {
+    afterChange: [revalidateAfterChange],
+    afterDelete: [revalidateAfterDelete],
   },
   fields: [
     { name: 'name', type: 'text', required: true },

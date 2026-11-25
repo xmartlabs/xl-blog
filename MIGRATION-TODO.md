@@ -1,34 +1,54 @@
-# Astro migration: pending work
+# Next.js + Payload migration: pending work
 
-Work left before the new blog replaces the Gatsby site in production.
+Work left before the new blog (branch `nextjs-payload`) replaces the Gatsby site in production.
+
+## Vercel setup (needs someone with access)
+
+- [ ] Vercel project linked to `xmartlabs/xl-blog` (Pro team). Framework Next.js; `vercel.json` already sets the build command `npm run ci` and the cron job. Node.js version 24.x in Project Settings → Build.
+- [ ] **Neon Postgres** from the Vercel Marketplace, connected to Production and Preview (sets `DATABASE_URL`). Consider a separate Neon branch/database for Preview so drafts on previews don't touch production data.
+- [ ] **Vercel Blob** store connected to the project (sets `BLOB_READ_WRITE_TOKEN`). New uploads go there; the old images stay in `public/images/`.
+- [ ] Environment variables (Production and Preview): `PAYLOAD_SECRET` (different per environment), `GOOGLE_CLIENT_ID`, `GOOGLE_CLIENT_SECRET`, `GOOGLE_ALLOWED_DOMAIN=xmartlabs.com`, `CRON_SECRET` (letters/digits), `NEXT_PUBLIC_GTM_ID`, `NEXT_PUBLIC_FORM_URL`, `FIRST_ADMIN_EMAIL`/`FIRST_ADMIN_PASSWORD` (production, for the first start). `NEXT_PUBLIC_SERVER_URL=https://blog.xmartlabs.com` for Production; for Preview either leave it empty (falls back to the branch URL) or set it to the one preview host registered in Google.
+- [ ] **Deployment Protection**: turn off Vercel Authentication for Preview deployments (or use shareable links), otherwise bloggers can't open previews and Google's OAuth callback can't reach the preview.
+- [ ] First production deploy: the build runs `payload migrate` on the empty Neon database, then builds an empty site. Then run the content migration once against production (`DATABASE_URL=<neon url> npm run seed:migrate-content`) and redeploy (or publish anything) so the pages are regenerated.
+- [ ] Cron: check after the first deploy that Project → Settings → Cron Jobs lists `/api/payload-jobs/run/` and that its invocations return 200 (401 = `CRON_SECRET` missing/mismatched). Crons only run on production deployments.
+- [ ] Cutover: point `blog.xmartlabs.com` to Vercel. Keep the Netlify site for 2 weeks as a rollback, then turn off Netlify Identity and Git Gateway.
+
+## Google sign-in
+
+- [ ] Google Cloud OAuth client ("Web application") in the xmartlabs.com organization, consent screen **Internal**. Redirect URIs: `http://localhost:3000/api/users/oauth/google/callback`, `https://blog.xmartlabs.com/api/users/oauth/google/callback`, and optionally one fixed preview host. Sign-in can't work on random per-deployment preview URLs (Google needs exact redirect URIs).
+- [ ] End-to-end test with a real account: an @xmartlabs.com account signs in and gets an `editor` user; a personal Gmail is rejected.
+- [ ] Promote the real admins, then consider removing `FIRST_ADMIN_PASSWORD` from the environment (the user stays; keep the password in the vault).
+
+## Verify in the browser (not done by the automated checks)
+
+- [ ] Live preview with a signed-in user: edit a draft's title/body and see the preview pane update; check the **Preview** button; check that a logged-out browser never sees the draft. (Draft mode and access were verified over HTTP: `/next/preview/` returns 403 without a session, and a stale draft-mode cookie without a session shows the published version.)
+- [ ] Schedule a post from the admin UI on a deployed preview and wait for the cron (the jobs endpoint + schedulePublish were tested locally with `CRON_SECRET`).
+- [ ] Create a post that uses every block and a Blob upload, publish it, see it on `/` and its category page, then unpublish it.
 
 ## Content and media
 
-- [ ] **Shrink `static/images/vytallyink_demo2.mp4`.** It's 38.5 MiB, but Cloudflare Workers static assets accept at most 25 MiB per file. It's the demo video in "Introducing VytalLink" (`blogs/introducing-vytallink.mdx`, `/blog/vytallink-app/`).
-  - Preferred: re-encode it with H.264 to under 25 MiB (e.g. `ffmpeg -i in.mp4 -c:v libx264 -crf 28 -preset slow -c:a aac -b:a 96k out.mp4`). Check that it still looks fine, then replace the file.
-  - Alternatives: upload it to YouTube and use `<VideoPlayer id="…" />`, or host it on R2 and set `PUBLIC_MEDIA_BASE_URL`.
-  - Until then, `static/.assetsignore` keeps it out of deploys, so the video doesn't play on deployed previews. Remove that entry once the file is fixed.
+- [ ] **`public/images/vytallyink_demo2.mp4` (38.5 MB)**, the demo video in `/blog/vytallink-app/`. Vercel documents no per-file limit for static files of Git deployments (the documented limits are 1 GB of source files per CLI deployment on Pro and 10 MB for cacheable _function_ responses, which doesn't apply to `public/`). The whole `public/` is 654 MB, under the 1 GB Pro limit. Check on the first preview deploy that the video plays. If it doesn't (or to keep deployments smaller):
+  1. Upload it to the Blob store (Vercel dashboard → Storage → the Blob store → Upload, or `vercel blob put public/images/vytallyink_demo2.mp4`).
+  2. Set `NEXT_PUBLIC_MEDIA_BASE_URL` to the store's public base URL (the video block's legacy file name is appended), or edit the post's video block and upload the file there.
+  3. Remove the file from `public/images/`.
+- [ ] Missing thumbnails, also missing on live (the fallback image shows): `/images/crashlytics-timber-web.png`, `/images/portada.jpg`, `/images/swift-with-the-best-web.png`.
+- [x] Old Jekyll-style URLs (`/YYYY/MM/DD/<name>/`, e.g. `/2014/12/02/linkedin-for-work/`) redirect (308) to `/blog/<slug>/`: `redirects()` in `next.config.mjs`, generated from `migration/legacy/posts.json` (file-name date and post date, case-insensitive). Not covered: `/2021/08/30/Bender-the-best` (a mistyped link; the post is `/blog/how-to-get-the-best-performance-for-ml-models-on-ios/`) and the file name with a space (`2022-06-27-Top EVM-compatible-frameworks.md`). If an editor changes the slug of an old post, its redirect still points to the old slug.
 
-## CMS sign-in with Google
+## Known differences from the live (Gatsby) site
 
-- [ ] **Decide how to ship the "Sign in with Google" button.** The sign-in service already supports it: branch `google-sign-in` in `~/Documents/GitHub/sveltia-cms-additions`, commit `fe8b181`. Sveltia CMS itself still needs a small patch to show the button (4 files).
-  - Upstream PRs for both, plus self-hosting a patched `sveltia-cms.js` until they merge.
-  - Or self-host only.
-- [ ] Deploy the Additions worker to `cms-auth.xmartlabs.com` and set `backend.base_url` in `static/admin/config.yml`.
-- [ ] Google Cloud OAuth client: "Internal" consent screen, redirect URI `https://cms-auth.xmartlabs.com/v1/auth/callback/google`. Worker secrets: `GOOGLE_CLIENT_ID`, `GOOGLE_CLIENT_SECRET`, `GOOGLE_ALLOWED_DOMAINS=xmartlabs.com`.
-- [ ] GitHub App in the xmartlabs org (Contents + Pull requests: write), installed on `xl-blog` only. The Additions setup wizard creates it.
-- [ ] Test the `VideoPlayer` editor component in the CMS. It only recognizes single-line `<VideoPlayer … />` tags.
+Full height sweep at 1440px (175 posts + list pages, tag, author and 404 pages): 178 of 191 pages identical. The rest:
 
-## Hosting
-
-- [ ] Cloudflare Workers Builds connected to `xmartlabs/xl-blog`: build `npm run build`, deploy `npx wrangler deploy`, preview URLs for non-production branches, and the build variables `PUBLIC_GTM_ID`, `PUBLIC_FORM_URL` and `PUBLIC_MEDIA_BASE_URL`.
-- [ ] Cutover: point `blog.xmartlabs.com` to the Worker. Keep the Netlify site for 2 weeks as a rollback, then turn off Netlify Identity and Git Gateway.
+- `/blog/a-look-back-at-2020/`: Instagram embeds render taller (Instagram sizes them itself).
+- `wwdc-2015-by-helen` (+32px), `challenges-of-building-a-web-with-flutter` (−32px), `xmartlabs-in-startup-weekend-montevideo` (+10px): captions written as `<p style=…>` get their intended small/italic style; live ignores it because of nested `<p>` tags.
+- `crypto-landscape-2021`, `techcrunch-disrupt-2021-takeaways-for-entrepreneurs-and-founders`: the embedded tweets render; on live they stay plain blockquotes (Gatsby's hydration replaces them before Twitter's script runs).
+- `pdf-charts-images-processing-with-llm`: the "slide with charts" image shows; on live its relative `../static/…` path is broken.
+- `/tags/`, `/tags/<tag>/`, `/authors/<slug>/`: these pages use the site layout (nav menu, padding, footer), and tag variants such as "AI"/"ai" are merged into one page; live renders them unstyled and keeps one variant per URL (e.g. live `/tags/ai/` lists 1 post, the new one 14).
+- `/categories/`: live shows a broken "NaN" pager; heights match.
+- 404s from `notFound()` (unknown post/category/tag/author/page number) return status 404 but Next 16 sends an error shell and renders the styled 404 on the client. URLs that match no route at all get the fully server-rendered 404 (`app/global-not-found.tsx`, `experimental.globalNotFound`).
+- No `robots.txt`: live's is added by Cloudflare (content signals), not by the site.
 
 ## Small cleanups
 
-- [ ] Redirect the old Jekyll-style URLs (`/YYYY/MM/DD/<name>/`, e.g. `/2014/12/02/linkedin-for-work/`) to the new `/blog/<slug>/` pages with `static/_redirects`. Six posts still link to them, and they already 404 on the live site.
-- [ ] Missing thumbnails, also missing on live (the fallback image shows): `/images/crashlytics-timber-web.png`, `/images/portada.jpg`, `/images/swift-with-the-best-web.png`.
-- Known small differences from live: Instagram embeds in "a look back at 2020" render taller (Instagram sizes them itself). In 3 old posts (`wwdc-2015-by-helen`, `challenges-of-building-a-web-with-flutter`, `xmartlabs-in-startup-weekend-montevideo`), captions written as `<p style=…>` now get their intended small/italic style; live ignored it because of nested `<p>` tags.
-- [ ] `npm run check` needs `@astrojs/check` and `typescript` installed.
 - [ ] `.vscode/launch.json` still points at the Gatsby binary.
-- [ ] Update the internal "XL Blog" how-to (publishing, adding authors, giving CMS access) for the new flow.
+- [ ] Remove `blogs/`, `content/` and the `migration/` snapshot once production runs on Payload (keep `migration/legacy/posts.json` while the Jekyll redirects are generated from it, or inline them).
+- [ ] Update the internal "XL Blog" how-to (publishing, adding authors, giving CMS access) for the new flow; README "Writing posts" is a starting point.

@@ -88,11 +88,13 @@ async function upsertBySlug(
         id: existing.docs[0].id,
         data,
         depth: 0,
+        context: { disableRevalidate: true },
       })
     : await payload.create({
         collection,
         data: { ...data, slug } as never,
         depth: 0,
+        context: { disableRevalidate: true },
       });
   return doc.id as number;
 }
@@ -110,6 +112,7 @@ async function main() {
       await upsertBySlug(payload, 'categories', slug, {
         name: data.name,
         order: typeof data.order === 'number' ? data.order : 99,
+        showInFilters: data.show_in_filters !== false,
       })
     );
   }
@@ -174,6 +177,7 @@ async function main() {
       thumbnailUrl: post.thumbnail,
       featured: post.featured,
       legacyReadingTime: post.readingTime,
+      legacySourceFile: post.sourceFile,
       content: content as never,
       _status: 'published' as const,
     };
