@@ -14,6 +14,7 @@ import type {
   TableBlock,
   VideoBlock,
 } from '../../payload-types';
+import { extractYouTubeId } from '../../lib/youtube';
 import { highlightCode } from './highlight';
 
 /**
@@ -205,10 +206,7 @@ const videoToHTML = (fields: VideoBlock) => {
   const title = fields.title || 'Xmartlabs';
   const youtube = fields.youtubeUrlOrId?.trim();
   if (youtube) {
-    const id =
-      /(?:youtube\.com\/(?:embed\/|watch\?v=)|youtu\.be\/)([\w-]+)/.exec(
-        youtube
-      )?.[1] ?? youtube;
+    const id = extractYouTubeId(youtube);
     return `<iframe${attr('width', width)}${attr('height', height)}${attr('src', `https://www.youtube.com/embed/${id}`)}${attr('title', title)} frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe>`;
   }
   const src =

@@ -29,12 +29,26 @@ export default buildConfig({
       baseDir: path.resolve(dirname),
     },
     meta: {
-      titleSuffix: ' | Xmartlabs Blog',
+      titleSuffix: ' – Xmartlabs Blog',
+      description: 'Write and publish posts for the Xmartlabs blog.',
+      icons: [{ rel: 'icon', type: 'image/png', url: '/favicon.png' }],
+      openGraph: {
+        siteName: 'Xmartlabs Blog',
+        title: 'Xmartlabs Blog – Admin',
+        description: 'Write and publish posts for the Xmartlabs blog.',
+        images: [{ url: '/images/og-thumbnail.png' }],
+      },
     },
     components: {
-      // Always registered (so the import map doesn't depend on env vars); it renders
-      // nothing unless Google sign-in is configured.
-      afterLogin: [
+      graphics: {
+        Logo: '/components/admin/Logo#Logo',
+        Icon: '/components/admin/Icon#Icon',
+      },
+      beforeDashboard: ['/components/admin/Welcome#Welcome'],
+      // Google is the main way in, so its button goes above the email/password form (kept
+      // for the break-glass admin). Always registered (so the import map doesn't depend on
+      // env vars); it renders nothing unless Google sign-in is configured.
+      beforeLogin: [
         {
           path: '/auth/GoogleLoginButton#GoogleLoginButton',
           clientProps: {

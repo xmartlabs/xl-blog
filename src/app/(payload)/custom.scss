@@ -1,0 +1,196 @@
+// Admin panel only (imported by the Payload layout). A light brand touch: the logo, the
+// login page and the dashboard welcome panel. The rest of the admin keeps Payload's theme.
+
+$xl-pink: #ee1a64;
+$xl-pink-dark: #c8104f;
+
+@mixin xl-primary-button {
+  --bg-color: #{$xl-pink};
+  --color: #fff;
+  --hover-bg: #{$xl-pink-dark};
+  --hover-color: #fff;
+}
+
+// Logo (admin.components.graphics.Logo): text in the theme color, pink mark.
+.xl-admin-logo {
+  display: flex;
+  align-items: flex-end;
+  gap: calc(var(--base) * 0.5);
+  color: var(--theme-text);
+
+  svg {
+    display: block;
+    max-width: 100%;
+    height: auto;
+  }
+
+  &__label {
+    font-size: 1.25rem;
+    font-weight: 600;
+    line-height: 1;
+    color: $xl-pink;
+    padding-bottom: 2px;
+  }
+}
+
+// Login page: Google is the main way in (src/auth/GoogleLoginButton.tsx, beforeLogin).
+.login .btn--style-primary {
+  @include xl-primary-button;
+}
+
+.xl-google-login {
+  width: 100%;
+  margin-bottom: calc(var(--base) * 0.5);
+
+  &__error {
+    background: var(--theme-error-100);
+    color: var(--theme-error-750, var(--theme-error-600));
+    border-radius: var(--style-radius-s);
+    padding: calc(var(--base) * 0.6) calc(var(--base) * 0.8);
+    margin: 0 0 var(--base);
+  }
+
+  .btn.xl-google-login__button {
+    display: flex;
+    width: 100%;
+    align-items: center;
+    justify-content: center;
+    gap: calc(var(--base) * 0.6);
+    margin: 0;
+    font-weight: 600;
+    --btn-padding-block-start: calc(var(--base) * 0.6);
+    --btn-padding-block-end: calc(var(--base) * 0.6);
+  }
+
+  &__mark {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 30px;
+    height: 30px;
+    flex-shrink: 0;
+    border-radius: 50%;
+    background: #fff;
+  }
+
+  &__hint {
+    margin: calc(var(--base) * 0.5) 0 0;
+    text-align: center;
+    color: var(--theme-elevation-500);
+    font-size: 0.9em;
+  }
+
+  &__divider {
+    display: flex;
+    align-items: center;
+    gap: calc(var(--base) * 0.6);
+    margin: calc(var(--base) * 2.5) 0 calc(var(--base) * 0.25);
+    color: var(--theme-elevation-500);
+    font-size: 0.85em;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+
+    &::before,
+    &::after {
+      content: '';
+      flex: 1;
+      border-top: 1px solid var(--theme-elevation-150);
+    }
+  }
+
+  &__note {
+    margin: 0;
+    text-align: center;
+    color: var(--theme-elevation-500);
+    font-size: 0.85em;
+  }
+}
+
+// With Google enabled, the email/password form is the secondary, break-glass way in.
+.login:has(.xl-google-login) .login__form .form-submit .btn {
+  --bg-color: transparent;
+  --color: var(--theme-text);
+  --hover-bg: var(--theme-elevation-50);
+  --hover-color: var(--theme-text);
+  --btn-border: 1px solid var(--theme-elevation-300);
+}
+
+// Dashboard welcome panel (src/components/admin/Welcome.tsx, beforeDashboard).
+.xl-welcome {
+  border: 1px solid var(--theme-elevation-100);
+  border-top: 4px solid $xl-pink;
+  border-radius: var(--style-radius-m);
+  background: var(--theme-elevation-0);
+  padding: calc(var(--base) * 1.5);
+  margin-bottom: calc(var(--base) * 2);
+
+  &__header {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: var(--base);
+  }
+
+  &__title {
+    margin: 0;
+  }
+
+  &__intro {
+    margin: calc(var(--base) * 0.25) 0 0;
+    color: var(--theme-elevation-600);
+  }
+
+  &__actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: calc(var(--base) * 0.5);
+
+    .btn {
+      margin: 0;
+    }
+  }
+
+  .btn--style-primary.xl-welcome__new {
+    @include xl-primary-button;
+  }
+
+  &__steps {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: var(--base);
+    list-style: none;
+    padding: 0;
+    margin: calc(var(--base) * 1.5) 0 0;
+  }
+
+  &__step {
+    display: flex;
+    gap: calc(var(--base) * 0.6);
+    align-items: flex-start;
+  }
+
+  &__number {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    background: $xl-pink;
+    color: #fff;
+    font-weight: 600;
+  }
+
+  &__step-title {
+    margin: 0 0 calc(var(--base) * 0.25);
+    font-size: 1.1rem;
+  }
+
+  &__step-text {
+    margin: 0;
+    color: var(--theme-elevation-700);
+    line-height: 1.45;
+  }
+}

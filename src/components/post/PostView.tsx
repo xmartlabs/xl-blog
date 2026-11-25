@@ -46,7 +46,7 @@ export function PostView({
 }: PostViewProps) {
   const author = asDoc<Author>(post.author);
   const category = asDoc<CategoryDoc>(post.category);
-  const thumbnail = postThumbnail(post);
+  const thumbnail = postThumbnail(post, 'hero');
   const usesInstagram = bodyHtml.includes('instagram-media');
   const hasEmbedScripts = externalScriptSources(bodyHtml).length > 0;
 

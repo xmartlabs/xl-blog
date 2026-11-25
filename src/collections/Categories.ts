@@ -10,7 +10,9 @@ export const Categories: CollectionConfig = {
   slug: 'categories',
   admin: {
     useAsTitle: 'name',
-    defaultColumns: ['name', 'slug', 'order'],
+    defaultColumns: ['name', 'slug', 'order', 'showInFilters'],
+    description:
+      'Each post has one category. Only admins can add or change categories.',
   },
   defaultSort: 'order',
   access: {
@@ -24,7 +26,14 @@ export const Categories: CollectionConfig = {
     afterDelete: [revalidateAfterDelete],
   },
   fields: [
-    { name: 'name', type: 'text', required: true },
+    {
+      name: 'name',
+      type: 'text',
+      required: true,
+      admin: {
+        description: 'Shown on posts and as the filter tab label.',
+      },
+    },
     {
       name: 'slug',
       type: 'text',
@@ -36,7 +45,15 @@ export const Categories: CollectionConfig = {
           'Used in /categories/<slug>/. Changing it breaks existing links.',
       },
     },
-    { name: 'order', type: 'number', defaultValue: 99, required: true },
+    {
+      name: 'order',
+      type: 'number',
+      defaultValue: 99,
+      required: true,
+      admin: {
+        description: 'Position of the filter tab: lower numbers come first.',
+      },
+    },
     {
       name: 'showInFilters',
       label: 'Show as a filter tab',

@@ -132,35 +132,24 @@ export interface UserAuthOperations {
   };
 }
 /**
+ * Drafts save automatically. Publish makes a post live; Schedule Publish (next to Publish) does it later.
+ *
  * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "posts".
  */
 export interface Post {
   id: number;
+  /**
+   * The headline, at least 12 characters. Shown on the post, its card and in search results.
+   */
   title: string;
+  /**
+   * Optional. Kept from the old blog; not shown on the site at the moment.
+   */
   subtitle?: string | null;
   /**
-   * URL: /blog/<slug>/. Filled from the title when empty. Changing it breaks existing links.
+   * The post body. Type “/” or click “+” at the start of a line to add images, videos, code, tables or raw HTML.
    */
-  slug: string;
-  publishedDate: string;
-  category: number | Category;
-  author: number | Author;
-  tags?: string[] | null;
-  /**
-   * Hero and card image. Takes precedence over Thumbnail URL.
-   */
-  thumbnail?: (number | null) | Media;
-  /**
-   * Legacy image path, e.g. /images/foo.png.
-   */
-  thumbnailUrl?: string | null;
-  featured?: boolean | null;
-  /**
-   * Imported posts: the "N min read" the old site showed. Cleared when the body changes.
-   */
-  legacyReadingTime?: string | null;
-  legacySourceFile?: string | null;
   content?: {
     root: {
       type: string;
@@ -176,21 +165,66 @@ export interface Post {
     };
     [k: string]: unknown;
   } | null;
+  /**
+   * Becomes the URL: blog.xmartlabs.com/blog/<slug>/. Filled from the title if empty. Changing it on a published post breaks old links.
+   */
+  slug: string;
+  /**
+   * The date shown on the post; lists are sorted by it. Defaults to today. It doesn’t publish anything: to publish later, use Schedule Publish next to Publish.
+   */
+  publishedDate: string;
+  /**
+   * Shown above the title; the post also appears on that category’s page.
+   */
+  category: number | Category;
+  /**
+   * Preselected with your own author profile when an admin has linked it to your user. Not in the list? Create it under Authors.
+   */
+  author: number | Author;
+  /**
+   * 1–5 short lowercase topics, e.g. ios, machine-learning. Press Enter after each tag.
+   */
+  tags?: string[] | null;
+  /**
+   * Kept from the old blog; not used by the site at the moment.
+   */
+  featured?: boolean | null;
+  /**
+   * Post image: the hero on the post page (about 820 px wide) and the card in post lists (cropped to 16:9). Upload a 16:9 image, at least 1600×900 px, and set its focal point so crops keep the important part.
+   */
+  thumbnail?: (number | null) | Media;
+  /**
+   * Old posts only: the image path, e.g. /images/foo.png. An uploaded thumbnail takes precedence.
+   */
+  thumbnailUrl?: string | null;
+  /**
+   * Imported posts: the "N min read" the old site showed. Cleared when the body changes.
+   */
+  legacyReadingTime?: string | null;
+  legacySourceFile?: string | null;
   updatedAt: string;
   createdAt: string;
   _status?: ('draft' | 'published') | null;
 }
 /**
+ * Each post has one category. Only admins can add or change categories.
+ *
  * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "categories".
  */
 export interface Category {
   id: number;
+  /**
+   * Shown on posts and as the filter tab label.
+   */
   name: string;
   /**
    * Used in /categories/<slug>/. Changing it breaks existing links.
    */
   slug: string;
+  /**
+   * Position of the filter tab: lower numbers come first.
+   */
   order: number;
   /**
    * Tab above the post lists. The category page exists either way. (The old site hid Blockchain and Data Engineering.)
@@ -200,36 +234,55 @@ export interface Category {
   createdAt: string;
 }
 /**
+ * The people shown as post authors. An author doesn’t need a user account; admins can link one to a user (Users → Author) so new posts preselect it.
+ *
  * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "authors".
  */
 export interface Author {
   id: number;
+  /**
+   * Full name, as shown on posts.
+   */
   name: string;
   /**
-   * Used in /authors/<slug>/. Legacy ids (e.g. mtnBarreto) are kept as-is.
+   * Used in /authors/<slug>/, e.g. jane-doe. Legacy ids (e.g. mtnBarreto) are kept as-is.
    */
   slug: string;
   /**
-   * Profile picture. Takes precedence over Image URL.
+   * Profile picture, square (shown small next to the author name).
    */
   image?: (number | null) | Media;
   /**
-   * Legacy picture path, e.g. /images/members/foo.jpg.
+   * Old authors only: picture path, e.g. /images/members/foo.jpg. An uploaded image takes precedence.
    */
   imageUrl?: string | null;
+  /**
+   * Link on the author name on posts, e.g. a LinkedIn or GitHub profile.
+   */
   profileUrl?: string | null;
+  /**
+   * Kept from the old blog; not shown on the site.
+   */
   github?: string | null;
+  /**
+   * Kept from the old blog; not shown on the site.
+   */
   twitter?: string | null;
   updatedAt: string;
   createdAt: string;
 }
 /**
+ * Images and videos used in posts. Upload images at least 1600 px wide; click the image after uploading to set the focal point (the part that crops keep).
+ *
  * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "media".
  */
 export interface Media {
   id: number;
+  /**
+   * Describe what the image shows, for screen readers and search engines, e.g. “Team at the 2024 offsite”. For videos, a short title.
+   */
   alt: string;
   updatedAt: string;
   createdAt: string;
@@ -242,18 +295,48 @@ export interface Media {
   height?: number | null;
   focalX?: number | null;
   focalY?: number | null;
+  sizes?: {
+    card?: {
+      url?: string | null;
+      width?: number | null;
+      height?: number | null;
+      mimeType?: string | null;
+      filesize?: number | null;
+      filename?: string | null;
+    };
+    hero?: {
+      url?: string | null;
+      width?: number | null;
+      height?: number | null;
+      mimeType?: string | null;
+      filesize?: number | null;
+      filename?: string | null;
+    };
+  };
 }
 /**
+ * People who can sign in. A user is created on their first Google sign-in, as an editor.
+ *
  * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "users".
  */
 export interface User {
   id: number;
+  /**
+   * Filled from the Google account on the first sign-in.
+   */
   name?: string | null;
+  /**
+   * This person’s author profile: new posts they create preselect it. Set by admins.
+   */
+  author?: (number | null) | Author;
   /**
    * Google account id
    */
   sub?: string | null;
+  /**
+   * Editors write, publish and schedule posts. Admins can also manage users and roles, categories, and delete content.
+   */
   roles: ('admin' | 'editor')[];
   updatedAt: string;
   createdAt: string;
@@ -460,17 +543,17 @@ export interface PayloadMigration {
 export interface PostsSelect<T extends boolean = true> {
   title?: T;
   subtitle?: T;
+  content?: T;
   slug?: T;
   publishedDate?: T;
   category?: T;
   author?: T;
   tags?: T;
+  featured?: T;
   thumbnail?: T;
   thumbnailUrl?: T;
-  featured?: T;
   legacyReadingTime?: T;
   legacySourceFile?: T;
-  content?: T;
   updatedAt?: T;
   createdAt?: T;
   _status?: T;
@@ -519,6 +602,30 @@ export interface MediaSelect<T extends boolean = true> {
   height?: T;
   focalX?: T;
   focalY?: T;
+  sizes?:
+    | T
+    | {
+        card?:
+          | T
+          | {
+              url?: T;
+              width?: T;
+              height?: T;
+              mimeType?: T;
+              filesize?: T;
+              filename?: T;
+            };
+        hero?:
+          | T
+          | {
+              url?: T;
+              width?: T;
+              height?: T;
+              mimeType?: T;
+              filesize?: T;
+              filename?: T;
+            };
+      };
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -526,6 +633,7 @@ export interface MediaSelect<T extends boolean = true> {
  */
 export interface UsersSelect<T extends boolean = true> {
   name?: T;
+  author?: T;
   sub?: T;
   roles?: T;
   updatedAt?: T;
@@ -653,9 +761,12 @@ export interface TaskSchedulePublish {
  */
 export interface CodeBlock {
   /**
-   * Prism language id, e.g. js, ts, swift, kotlin, shell, python. Use "text" for none.
+   * For syntax highlighting: e.g. js, ts, swift, kotlin, shell, python. Use "text" for none.
    */
   language?: string | null;
+  /**
+   * Paste the code as-is; indentation is kept.
+   */
   code: string;
   id?: string | null;
   blockName?: string | null;
@@ -666,21 +777,36 @@ export interface CodeBlock {
  * via the `definition` "ImageGalleryBlock".
  */
 export interface ImageGalleryBlock {
+  /**
+   * One image, or several shown side by side. Upload or pick each image.
+   */
   images: {
     image?: (number | null) | Media;
     /**
-     * Legacy image path (used when no upload is set).
+     * Old posts only: image path, used when no upload is set.
      */
     url?: string | null;
     id?: string | null;
   }[];
+  /**
+   * Describe the image(s) for screen readers and search engines.
+   */
   alt?: string | null;
   /**
-   * Render a plain full-width <img> (like a Markdown image) instead of the sized gallery.
+   * Show each image full width, like a plain Markdown image, instead of the sized row below.
    */
   standalone?: boolean | null;
+  /**
+   * Optional CSS width, e.g. 80%.
+   */
   width?: string | null;
+  /**
+   * Optional CSS height, e.g. 400px.
+   */
   height?: string | null;
+  /**
+   * Optional, e.g. 16/9.
+   */
   aspectRatio?: string | null;
   id?: string | null;
   blockName?: string | null;
@@ -691,14 +817,29 @@ export interface ImageGalleryBlock {
  * via the `definition` "VideoBlock".
  */
 export interface VideoBlock {
+  /**
+   * Paste a YouTube link (youtube.com/watch?v=…, youtu.be/…, /shorts/…) or the video ID. Leave empty to use an uploaded video instead.
+   */
   youtubeUrlOrId?: string | null;
+  /**
+   * Or upload an MP4/WebM video file. Used when there is no YouTube link.
+   */
   file?: (number | null) | Media;
   /**
    * Old posts only: a file name under /images/.
    */
   legacyName?: string | null;
+  /**
+   * Accessible name of the player (read by screen readers).
+   */
   title?: string | null;
+  /**
+   * CSS width, e.g. 100% or 640px.
+   */
   width?: string | null;
+  /**
+   * CSS height, e.g. 560px.
+   */
   height?: string | null;
   id?: string | null;
   blockName?: string | null;
@@ -709,8 +850,17 @@ export interface VideoBlock {
  * via the `definition` "TableBlock".
  */
 export interface TableBlock {
+  /**
+   * Optional caption above the table.
+   */
   title?: string | null;
+  /**
+   * One per column. Press Enter after each header.
+   */
   headers: string[];
+  /**
+   * One entry per row; add its cells in the same order as the headers.
+   */
   rows?:
     | {
         cells?: string[] | null;
@@ -726,6 +876,9 @@ export interface TableBlock {
  * via the `definition` "HtmlEmbedBlock".
  */
 export interface HtmlEmbedBlock {
+  /**
+   * Advanced: inserted into the page as-is. Mostly for content imported from the old blog, or embeds with no block of their own (e.g. a tweet or an iframe). Prefer the other blocks when one fits; broken HTML can break the page layout.
+   */
   html: string;
   id?: string | null;
   blockName?: string | null;

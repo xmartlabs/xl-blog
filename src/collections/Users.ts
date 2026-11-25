@@ -31,7 +31,10 @@ export const Users: CollectionConfig = {
   slug: 'users',
   admin: {
     useAsTitle: 'email',
-    defaultColumns: ['email', 'name', 'roles'],
+    defaultColumns: ['email', 'name', 'roles', 'author'],
+    listSearchableFields: ['email', 'name'],
+    description:
+      'People who can sign in. A user is created on their first Google sign-in, as an editor.',
   },
   auth: {
     // Server-side sessions: logging out or deleting a user revokes its tokens.
@@ -46,6 +49,7 @@ export const Users: CollectionConfig = {
     admin: ({ req: { user } }) => Boolean(user),
     // Accounts are created by Google sign-in (or by an admin), never by self sign-up.
     create: admins,
+    // Editors see the other users too: the "<user> is editing this post" lock notice needs it.
     read: authenticated,
     update: adminsOrSelf,
     delete: admins,
@@ -54,6 +58,25 @@ export const Users: CollectionConfig = {
     {
       name: 'name',
       type: 'text',
+      admin: {
+        description: 'Filled from the Google account on the first sign-in.',
+      },
+    },
+    {
+      // Not linked automatically on Google sign-in (an author with the same name may be a
+      // different person); admins set it. New posts preselect this author.
+      name: 'author',
+      type: 'relationship',
+      relationTo: 'authors',
+      access: {
+        create: adminsField,
+        update: adminsField,
+      },
+      admin: {
+        position: 'sidebar',
+        description:
+          'This person’s author profile: new posts they create preselect it. Set by admins.',
+      },
     },
     {
       // Google account id, set by Google sign-in. Declared here (payload-oauth2 adds it only
@@ -86,6 +109,8 @@ export const Users: CollectionConfig = {
       },
       admin: {
         position: 'sidebar',
+        description:
+          'Editors write, publish and schedule posts. Admins can also manage users and roles, categories, and delete content.',
       },
     },
   ],

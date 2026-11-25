@@ -50,7 +50,7 @@ export default async function PostPage({ params }: Props) {
     <Seo
       pathname={`/blog/${post.slug}/`}
       title={post.title}
-      image={postThumbnail(post)}
+      image={postThumbnail(post, 'hero')}
     />
   );
 

@@ -7,3 +7,5 @@ migration/legacy/
 public/
 dist/
 .next/
+# Local Claude Code worktrees and settings
+.claude/

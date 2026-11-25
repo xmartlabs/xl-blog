@@ -14,11 +14,30 @@ export interface CardData {
   thumbnail: string | null;
 }
 
-const mediaUrl = (value: number | Media | null | undefined) =>
-  value && typeof value === 'object' ? (value.url ?? null) : null;
+/** Generated sizes of uploaded images (Media `upload.imageSizes`). */
+export type MediaSize = 'card' | 'hero';
 
-export const postThumbnail = (post: Pick<Post, 'thumbnail' | 'thumbnailUrl'>) =>
-  mediaUrl(post.thumbnail) ?? post.thumbnailUrl ?? null;
+/**
+ * URL of an uploaded file: the given generated size when it exists, else the original. Sizes
+ * are missing for videos, uploads made before the sizes existed, and images smaller than the
+ * size.
+ */
+export const mediaUrl = (
+  value: number | Media | null | undefined,
+  size?: MediaSize
+) => {
+  if (!value || typeof value !== 'object') return null;
+  return (size && value.sizes?.[size]?.url) || value.url || null;
+};
+
+/**
+ * Post image: the uploaded thumbnail (in `size` when given: `card` for cards, `hero` for the
+ * post page), else the legacy Thumbnail URL, unchanged.
+ */
+export const postThumbnail = (
+  post: Pick<Post, 'thumbnail' | 'thumbnailUrl'>,
+  size?: MediaSize
+) => mediaUrl(post.thumbnail, size) ?? post.thumbnailUrl ?? null;
 
 export const authorImage = (author: Author) =>
   mediaUrl(author.image) ?? author.imageUrl ?? null;
@@ -29,7 +48,7 @@ export const toCardData = (
   id: post.id,
   title: post.title,
   slug: post.slug,
-  thumbnail: postThumbnail(post),
+  thumbnail: postThumbnail(post, 'card'),
 });
 
 export const asDoc = <T extends object>(

@@ -17,6 +17,7 @@ The Xmartlabs blog (https://blog.xmartlabs.com): a [Next.js 16](https://nextjs.o
 | `src/blocks/`                  | Post body blocks: video, image/gallery, table, code, HTML embed.                                                                 |
 | `src/components/rich-text/`    | Lexical → HTML renderer for post bodies (keeps the exact markup of the old site).                                                |
 | `src/components/`              | React components of the site (nav menu, cards, post page, …).                                                                    |
+| `src/components/admin/`        | Admin panel branding: logo, nav icon, dashboard welcome panel. Styles: `src/app/(payload)/custom.scss`.                          |
 | `src/lib/`                     | Data access (`posts.ts`, Payload Local API), SEO helpers, sitemap, revalidation hooks.                                           |
 | `src/auth/`                    | Google sign-in (`payload-oauth2`), domain check, break-glass admin seed.                                                         |
 | `src/migrations/`              | Database migrations (run on every Vercel build).                                                                                 |
@@ -45,7 +46,7 @@ Other commands:
 | --------------------------------- | ----------------------------------------------------------------------- |
 | `npm run build` / `npm start`     | Production build (needs the database: pages are generated from it).     |
 | `npm run ci`                      | `payload migrate` + `next build`. The Vercel build command.             |
-| `npm test`                        | Unit tests (Vitest): Google domain check, rich-text renderer.           |
+| `npm test`                        | Unit tests (Vitest): Google domain check, rich-text renderer, helpers.  |
 | `npm run typecheck`               | `tsc --noEmit`.                                                         |
 | `npm run format` / `format:check` | Prettier.                                                               |
 | `npm run generate:types`          | Regenerate `src/payload-types.ts` after changing collections or blocks. |
@@ -89,14 +90,18 @@ Google only redirects to registered URIs, so Google sign-in works on production,
 
 ## Writing posts (bloggers)
 
-1. Open https://blog.xmartlabs.com/admin and click **Sign in with Google**.
-2. **Posts → Create new.** Fill in the title (12+ characters), category, author, 1–5 tags, thumbnail, and the body. The slug (URL `/blog/<slug>/`) is filled from the title; change it before publishing if needed.
-3. Body: rich text plus blocks (`+` or `/` menu): **Image / gallery**, **Video** (YouTube URL or uploaded file), **Table**, **Code**, **HTML embed** (raw HTML, e.g. tweets or iframes; scripts in it are loaded once per page).
+1. Open https://blog.xmartlabs.com/admin and click **Sign in with your Xmartlabs Google account**. The dashboard shows these steps too.
+2. **Posts → Create new** (or **New post** on the dashboard). Fill in the title (12+ characters), category, author (preselected when your user is linked to an author), 1–5 tags, a 16:9 thumbnail (at least 1600×900; set its focal point), and the body. The slug (URL `/blog/<slug>/`) is filled from the title; change it before publishing if needed.
+3. Body: rich text plus blocks (`+` or `/` menu): **Images (one or a row)**, **YouTube or video file** (any YouTube link — watch, youtu.be, shorts, embed — or the video id; or an uploaded MP4/WebM), **Table**, **Code**, **Raw HTML (advanced)** (mostly imported content; e.g. tweets or iframes; scripts in it are loaded once per page).
 4. **Preview**: drafts autosave. The **Live Preview** tab shows the post next to the editor and updates as you type; **Preview** opens it in a new tab. Only signed-in users see drafts.
 5. **Publish** makes it live within seconds (the affected pages are regenerated). **Unpublish** takes it down.
 6. **Schedule**: next to Publish, choose **Schedule Publish** and pick a date/time. A cron job publishes due posts every 5 minutes.
 
 Authors without an account are plain `authors` entries (name, slug, picture, profile URL); a user doesn't need to be an author and vice versa.
+
+**Linking a user to their author** (admins): Users → open the user → **Author** (sidebar). New posts that user creates then preselect that author. It is never linked automatically on Google sign-in, even when an author with the same name exists (names aren't unique and a wrong link would misattribute posts), so link new bloggers by hand after their first sign-in. Editors can't change their own link.
+
+**Images**: new uploads get a `card` size (800×450, cropped around the focal point) for post cards and a `hero` size (1600 px wide) for the post page and its social image; images smaller than a size, videos and legacy URL-based images use the original file.
 
 ## Database migrations
 
