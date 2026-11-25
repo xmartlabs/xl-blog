@@ -1,0 +1,3303 @@
+[
+  {
+    "slug": "welcome-xl-blog",
+    "title": "Welcome to XL blog!",
+    "subtitle": "subtitle",
+    "permalink": "welcome_xl_blog",
+    "featured": false,
+    "date": "2012-09-03",
+    "category": "people-events",
+    "author": "mtnBarreto",
+    "tags": [
+      "ML",
+      "AI",
+      "Agriculture",
+      "Farmland",
+      "Forestry"
+    ],
+    "thumbnail": "/images/welcome-web.png",
+    "readingTime": "1 min read",
+    "sourceFile": "2012-09-03-welcome.md"
+  },
+  {
+    "slug": "receive-sms-online-free-of-charge-4",
+    "title": "Receive SMS online free of charge",
+    "subtitle": "Free online services let you receive and read SMS",
+    "permalink": "/receive-sms-online-free-of-charge-4/",
+    "featured": true,
+    "date": "2012-09-04",
+    "category": "development",
+    "author": "enrique",
+    "tags": [
+      "tips"
+    ],
+    "thumbnail": "/images/sms-online-web.png",
+    "readingTime": "1 min read",
+    "sourceFile": "2012-09-04-receive-sms-online-free-of-charge_.mdx"
+  },
+  {
+    "slug": "xmartlabs-in-startup-weekend-montevideo",
+    "title": "Xmartlabs in Startup Weekend Montevideo",
+    "subtitle": "Two days, a multidisciplinary team",
+    "permalink": "/xmartlabs-in-startup-weekend-montevideo/",
+    "featured": true,
+    "date": "2012-09-18",
+    "category": "people-events",
+    "author": "enrique",
+    "tags": [
+      "lean startup",
+      "agile development"
+    ],
+    "thumbnail": "/images/startup-weekend-web.png",
+    "readingTime": "4 min read",
+    "sourceFile": "2012-09-18-xmartlabs-in-startup-weekend-montevideo.mdx"
+  },
+  {
+    "slug": "xmartlabs-moves-to-latu",
+    "title": "Xmartlabs moves to LATU",
+    "subtitle": "A new home for our work",
+    "permalink": "/xmartlabs-moves-to-latu/",
+    "featured": true,
+    "date": "2012-12-05",
+    "category": "people-events",
+    "author": "agustin",
+    "tags": [
+      "startup",
+      "software company"
+    ],
+    "thumbnail": "/images/latu-web.png",
+    "readingTime": "1 min read",
+    "sourceFile": "2012-12-05-xmartlabs-moves-to-latu.mdx"
+  },
+  {
+    "slug": "xmartlabs-at-rubyconf-uruguay-2013",
+    "title": "Xmartlabs at RubyConf Uruguay 2013",
+    "subtitle": "Xmartlabs is Silver Sponsor of the RubyConf Uruguay",
+    "permalink": "/xmartlabs-at-rubyconf-uruguay-2013/",
+    "featured": true,
+    "date": "2013-03-21",
+    "category": "people-events",
+    "author": "agustin",
+    "tags": [],
+    "thumbnail": "/images/rubyconf-2013-web.png",
+    "readingTime": "1 min read",
+    "sourceFile": "2013-03-21-xmartlabs-at-rubyconf-uruguay-2013.mdx"
+  },
+  {
+    "slug": "summary-rubyconf-uy-2013",
+    "title": "Summary: RubyConf UY 2013",
+    "subtitle": "Xmartlabs is Silver Sponsor of the RubyConf Uruguay",
+    "permalink": "/summary-rubyconf-uy-2013/",
+    "featured": true,
+    "date": "2013-05-03",
+    "category": "people-events",
+    "author": "agustin",
+    "tags": [
+      "rubyconf",
+      "talk"
+    ],
+    "thumbnail": "/images/rubyconf-summary-web.png",
+    "readingTime": "1 min read",
+    "sourceFile": "2013-05-03-summary-rubyconf-uy-2013.mdx"
+  },
+  {
+    "slug": "wwdc-2013-apple-worldwide-developers",
+    "title": "WWDC 2013 - Apple Worldwide Developers Conference - June 10-14, San Francisco",
+    "subtitle": "Apple Worldwide Developers Conference ",
+    "permalink": "/wwdc-2013-apple-worldwide-developers/",
+    "featured": true,
+    "date": "2013-06-09",
+    "category": "people-events",
+    "author": "mtnBarreto",
+    "tags": [
+      "iOS Development"
+    ],
+    "thumbnail": "/images/wwdc-2013-web.png",
+    "readingTime": "1 min read",
+    "sourceFile": "2013-06-09-wwdc-2013-apple-worldwide-developers.mdx"
+  },
+  {
+    "slug": "speakers-at-jiap-2013",
+    "title": "Speakers at JIAP 2013",
+    "subtitle": "Speakers at JIAP 2013",
+    "permalink": "/speakers-at-jiap-2013/",
+    "featured": true,
+    "date": "2013-08-13",
+    "category": "people-events",
+    "author": "agustin",
+    "tags": [
+      "iOS Development",
+      "Mobile Development",
+      "Android"
+    ],
+    "thumbnail": "/images/jiap-2013-web.png",
+    "readingTime": "1 min read",
+    "sourceFile": "2013-08-13-speakers-at-jiap-2013.mdx"
+  },
+  {
+    "slug": "2014-11-25-now-with-more-uxd",
+    "title": "Now with more UXD!",
+    "subtitle": "An approach to developing a deep relationship between your product and your users through our UXD methodology and services. ",
+    "permalink": "/2014-11-25-now-with-more-uxd/",
+    "featured": true,
+    "date": "2014-11-25",
+    "category": "product-design",
+    "author": "alberto",
+    "tags": [
+      "Designs"
+    ],
+    "thumbnail": "/images/uxd-web.png",
+    "readingTime": "4 min read",
+    "sourceFile": "2014-11-25-now-with-more-uxd.mdx"
+  },
+  {
+    "slug": "linkedin-for-work",
+    "title": "LinkedIn for Work",
+    "subtitle": " ",
+    "permalink": "/linkedin-for-work/",
+    "featured": true,
+    "date": "2014-12-02",
+    "category": "strategy",
+    "author": "alberto",
+    "tags": [
+      "LinkedIn",
+      "HR",
+      "ITJob",
+      "ProfessionalProfile"
+    ],
+    "thumbnail": "/images/linkedin-for-work-pt-2/cover.jpg",
+    "readingTime": "3 min read",
+    "sourceFile": "2014-12-02-linkedin-for-work.mdx"
+  },
+  {
+    "slug": "linkedin-for-work-pt-2-finding",
+    "title": "LinkedIn for Work, pt. 2 : Finding candidates.",
+    "subtitle": " ",
+    "permalink": "/linkedin-for-work-pt-2-finding/",
+    "featured": true,
+    "date": "2015-01-12",
+    "category": "strategy",
+    "author": "alberto",
+    "tags": [
+      "LinkedIn",
+      "HR",
+      "ITJobs",
+      "LinkedInProfile"
+    ],
+    "thumbnail": "/images/linkedin-for-work-pt-2/cover.jpg",
+    "readingTime": "3 min read",
+    "sourceFile": "2015-01-12-linkedin-for-work-pt-2-finding.mdx"
+  },
+  {
+    "slug": "oss-culture",
+    "title": "Xmartlabs Open Source Culture",
+    "subtitle": "At Xmartlabs we make use of a lot of open source projects.",
+    "permalink": "/oss-culture/",
+    "featured": true,
+    "date": "2015-04-16",
+    "category": "people-events",
+    "author": "mtnBarreto",
+    "tags": [
+      "OSS"
+    ],
+    "thumbnail": "/images/open-source-web.png",
+    "readingTime": "3 min read",
+    "sourceFile": "2015-04-16-OSS-Culture.md"
+  },
+  {
+    "slug": "xl-form-using-nspredicates-to-change-form-structure",
+    "title": "XLForm: Using NSPredicates to change form structure",
+    "subtitle": "We have used XLForm in many apps and it's really worth it.",
+    "permalink": "/xl-form-using-nspredicates-to-change-form-structure/",
+    "featured": true,
+    "date": "2015-04-28",
+    "category": "development",
+    "author": "mathias",
+    "tags": [
+      "XLForm",
+      "iOS"
+    ],
+    "thumbnail": "/images/xlform-nspredicates-web.png",
+    "readingTime": "8 min read",
+    "sourceFile": "2015-04-28-XLForm-using-nspredicates-to-change-form-structure.md"
+  },
+  {
+    "slug": "android-logging-with-crashlytics-and-timber",
+    "title": "Android logging with Crashlytics and Timber",
+    "subtitle": " Here is where the Android logging system is available to help you",
+    "permalink": "/android-logging-with-crashlytics-and-timber/",
+    "featured": true,
+    "date": "2015-07-09",
+    "category": "development",
+    "author": "santiago",
+    "tags": [
+      "Android",
+      "Logging",
+      "Timber",
+      "Crashlytics"
+    ],
+    "thumbnail": "/images/crashlytics-timber-web.png",
+    "readingTime": "5 min read",
+    "sourceFile": "2015-07-09-Android-logging-with-Crashlytics-and-Timber.mdx"
+  },
+  {
+    "slug": "introducing-eureka-i-os-form-library-written-in-pure-swift",
+    "title": "Introducing Eureka! - Elegant iOS forms in Pure Swift 2",
+    "subtitle": "our first Swift open source project designed to easily build dynamic table-view forms.",
+    "permalink": "/introducing-eureka-i-os-form-library-written-in-pure-swift/",
+    "featured": true,
+    "date": "2015-09-29",
+    "category": "development",
+    "author": "mtnBarreto",
+    "tags": [
+      "Eureka",
+      "Forms"
+    ],
+    "thumbnail": "/images/eureka-web.png",
+    "readingTime": "8 min read",
+    "sourceFile": "2015-09-29-Introducing-Eureka-iOS-form-library-written-in-pure-Swift.md"
+  },
+  {
+    "slug": "2015-10-16-wwdc-2015-by-helen",
+    "title": "You've won a WWDC 2015 Scholarship",
+    "subtitle": "The story of earning an Apple WWDC 2015 Scholarship and experiencing the conference for the first time.",
+    "permalink": "/2015-10-16-wwdc-2015-by-helen/",
+    "featured": true,
+    "date": "2015-10-16",
+    "category": "people-events",
+    "author": "helen",
+    "tags": [
+      "Apple",
+      "WWDC",
+      "Mobile Development",
+      "iOS"
+    ],
+    "thumbnail": "/images/helen-wwdc/you_won.png",
+    "readingTime": "7 min read",
+    "sourceFile": "2015-10-16-WWDC-2015-by-Helen.mdx"
+  },
+  {
+    "slug": "ci-with-xcode-server-and-fastlane",
+    "title": "CI and automatic deployment to iTunes Connect with Xcode Server",
+    "subtitle": "how I could solve some problems hoping it may help somebody in the same situation.",
+    "permalink": "/ci-with-xcode-server-and-fastlane/",
+    "featured": true,
+    "date": "2016-03-07",
+    "category": "development",
+    "author": "remer",
+    "tags": [
+      "Server",
+      "CI",
+      "Fastlane"
+    ],
+    "thumbnail": "/images/ci-xcode-server-web.png",
+    "readingTime": "17 min read",
+    "sourceFile": "2016-03-07-ci-with-xcode-server-and-fastlane.mdx"
+  },
+  {
+    "slug": "debugging-an-annotator-processor-in-your-project",
+    "title": "Debugging an Annotation Processor in your project",
+    "subtitle": null,
+    "permalink": "/debugging-an-annotator-processor-in-your-project/",
+    "featured": false,
+    "date": "2016-03-28",
+    "category": "development",
+    "author": "santiago",
+    "tags": [
+      "Android",
+      "Annotation Processing",
+      "Android Studio",
+      "Debug"
+    ],
+    "thumbnail": null,
+    "readingTime": "4 min read",
+    "sourceFile": "2016-03-28-Debugging-an-Annotator-Processor-in-your-project.md"
+  },
+  {
+    "slug": "xmartlabs-chosen-to-speak-at-swift-with-the-best",
+    "title": "XMARTLABS chosen to speak at \"Swift With The Best\"",
+    "subtitle": "the world's top Swift developers will unite at Swift With The Best",
+    "permalink": "/xmartlabs-chosen-to-speak-at-swift-with-the-best/",
+    "featured": true,
+    "date": "2016-06-24",
+    "category": "people-events",
+    "author": "agustin",
+    "tags": [
+      "Swift",
+      "iOS",
+      "Opera",
+      "UITableView",
+      "With the Best"
+    ],
+    "thumbnail": "/images/swift-with-the-best-web.png",
+    "readingTime": "1 min read",
+    "sourceFile": "2016-06-24-xmartlabs-chosen-to-speak-at-Swift-With-the-Best.md"
+  },
+  {
+    "slug": "making-a-js-plug-in-a-full-stack-approach",
+    "title": "Making a JS plug-in: a full-stack approach",
+    "subtitle": "we will introduce a way to create a client side JavaScript plug-in that can be easily integrated in any third party websites.",
+    "permalink": "/making-a-js-plug-in-a-full-stack-approach/",
+    "featured": true,
+    "date": "2016-08-30",
+    "category": "development",
+    "author": "remer",
+    "tags": [
+      "JavaScript",
+      "Plugin",
+      "Widget",
+      "CORS",
+      "Ruby"
+    ],
+    "thumbnail": "/images/js-plugin-web.png",
+    "readingTime": "12 min read",
+    "sourceFile": "2016-08-30-making-a-js-plug-in-a-full-stack-approach.md"
+  },
+  {
+    "slug": "eureka-custom-row-tutorial",
+    "title": "Creating your own rows for Eureka",
+    "subtitle": "Eureka includes many rows that can be used to create forms but we will almost always need a row that has not been implemented yet.",
+    "permalink": "/eureka-custom-row-tutorial/",
+    "featured": true,
+    "date": "2016-09-06",
+    "category": "development",
+    "author": "mathias",
+    "tags": [
+      "Swift",
+      "iOS",
+      "Eureka"
+    ],
+    "thumbnail": "/images/eureka-custom-rows-web.png",
+    "readingTime": "7 min read",
+    "sourceFile": "2016-09-06-eureka-custom-row-tutorial.md"
+  },
+  {
+    "slug": "eureka-custom-row-tutorial-2",
+    "title": "Creating your own rows for Eureka - Part 2",
+    "subtitle": "now we are going to go deeper and see how to build a complex row.",
+    "permalink": "/eureka-custom-row-tutorial-2/",
+    "featured": true,
+    "date": "2016-09-23",
+    "category": "development",
+    "author": "dernst",
+    "tags": [
+      "Swift",
+      "iOS",
+      "Eureka"
+    ],
+    "thumbnail": "/images/eureka-custom-rows-part-2-web.png",
+    "readingTime": "12 min read",
+    "sourceFile": "2016-09-23-eureka-custom-row-tutorial-2.mdx"
+  },
+  {
+    "slug": "introducing-ecno",
+    "title": "Introducing Ecno!",
+    "subtitle": "ou will discover a new friend",
+    "permalink": "/introducing-ecno/",
+    "featured": true,
+    "date": "2016-10-17",
+    "category": "development",
+    "author": "dernst",
+    "tags": [
+      "Swift",
+      "iOS"
+    ],
+    "thumbnail": "/images/ecno-web.png",
+    "readingTime": "4 min read",
+    "sourceFile": "2016-10-17-introducing-ecno.md"
+  },
+  {
+    "slug": "the-first-eureka-webinar",
+    "title": "The First Eureka Webinar",
+    "subtitle": "Join the first official Eureka webinar and discover how to build elegant iOS forms with Swift.",
+    "permalink": "/the-first-eureka-webinar/",
+    "featured": true,
+    "date": "2016-10-21",
+    "category": "people-events",
+    "author": "esanchez",
+    "tags": [
+      "iOS",
+      "Swift",
+      "Open Source",
+      "Eureka",
+      "Webinar"
+    ],
+    "thumbnail": "/images/eureka-webinar/eureka.jpg",
+    "readingTime": "1 min read",
+    "sourceFile": "2016-10-21-The-First-Eureka-Webinar.mdx"
+  },
+  {
+    "slug": "introducing-to-ahoy",
+    "title": "Ahoy - The Onboarding Library You Were Asking For",
+    "subtitle": null,
+    "permalink": "/introducing-to-ahoy/",
+    "featured": false,
+    "date": "2017-09-11",
+    "category": "development",
+    "author": "xl",
+    "tags": [
+      "Swift",
+      "iOS",
+      "Onboarding",
+      "Tutorial"
+    ],
+    "thumbnail": null,
+    "readingTime": "4 min read",
+    "sourceFile": "2017-05-01-Introducing-to-Ahoy.md"
+  },
+  {
+    "slug": "introducing-bender",
+    "title": "Introducing Bender",
+    "subtitle": "a framework for real-time Neural Networks inference.",
+    "permalink": "Introducing_Bender",
+    "featured": true,
+    "date": "2017-08-10",
+    "category": "development",
+    "author": "santiago",
+    "tags": [
+      "Machine Learning",
+      "Deep Learning",
+      "Neural Networks",
+      "iOS",
+      "Metal"
+    ],
+    "thumbnail": "/images/bender-web.png",
+    "readingTime": "2 min read",
+    "sourceFile": "2017-08-10-bender.md"
+  },
+  {
+    "slug": "i-os-11-has-arrived",
+    "title": "iOS 11 has arrived!!",
+    "subtitle": "Since September 19, iOS 11 is available to be upgraded in your devices",
+    "permalink": "i-os-11-has-arrived",
+    "featured": true,
+    "date": "2017-09-25",
+    "category": "development",
+    "author": "xl",
+    "tags": [
+      "iOS",
+      "Apple"
+    ],
+    "thumbnail": "/images/ios-11-web.png",
+    "readingTime": "4 min read",
+    "sourceFile": "2017-09-25-iOS11.mdx"
+  },
+  {
+    "slug": "release-snapshot-versions-in-jenkins",
+    "title": "Easy Continuous Delivery in Android with Jenkins",
+    "subtitle": "Jenkins, an amazing CI/CD server, to help us release each one of those changes.",
+    "permalink": "/release-snapshot-versions-in-jenkins/",
+    "featured": true,
+    "date": "2017-10-02",
+    "category": "development",
+    "author": "mirland",
+    "tags": [
+      "Android",
+      "Server",
+      "CI",
+      "Jenkins",
+      "Fabric"
+    ],
+    "thumbnail": "/images/jenkins-cd-web.png",
+    "readingTime": "4 min read",
+    "sourceFile": "2017-10-02-Release-Snapshot-Versions-In-Jenkins.md"
+  },
+  {
+    "slug": "design-sprint-1",
+    "title": "How to Make Quick Strategic Decisions With a 1 Week Design Sprint. Part 1",
+    "subtitle": "Learn how a one-week Design Sprint can help validate ideas, reduce risk, and accelerate product decisions.",
+    "permalink": "/design-sprint-1/",
+    "featured": true,
+    "date": "2017-10-11",
+    "category": "product-design",
+    "author": "xl",
+    "tags": [
+      "Design Sprint",
+      "Product Strategy",
+      "Startups",
+      "Product Development",
+      "Innovation"
+    ],
+    "thumbnail": "/images/sprint1/cover.jpg",
+    "readingTime": "4 min read",
+    "sourceFile": "2017-10-13-DesignSprint1.md"
+  },
+  {
+    "slug": "design-sprint-2",
+    "title": "How to Make Quick Strategic Decisions With a 1 Week Design Sprint. Part 2",
+    "subtitle": "It’s time to start the week and put hands on our Clothing Rental Box project.",
+    "permalink": "/design-sprint-2/",
+    "featured": true,
+    "date": "2017-10-11",
+    "category": "product-design",
+    "author": "xl",
+    "tags": [
+      "Design",
+      "Product",
+      "Sprint"
+    ],
+    "thumbnail": "/images/design-sprint-part-2-web.png",
+    "readingTime": "6 min read",
+    "sourceFile": "2017-10-13-DesignSprint2.md"
+  },
+  {
+    "slug": "disrupt-2017",
+    "title": "TechCrunch Disrupt 2017 ",
+    "subtitle": "Takeaways of one of tech's most important events of the year",
+    "permalink": "/disrupt-2017/",
+    "featured": true,
+    "date": "2017-10-19",
+    "category": "people-events",
+    "author": "agustin",
+    "tags": [
+      "TechCrunch Startups",
+      "Artificial Intelligence",
+      "Product Launch",
+      "Events"
+    ],
+    "thumbnail": "/images/disrupt2017/cover.jpg",
+    "readingTime": "5 min read",
+    "sourceFile": "2017-10-19-Disrupt2017.md"
+  },
+  {
+    "slug": "introducing-to-xniffer",
+    "title": "Introducing Xniffer, the Swift network profiler built on top of URLSession!",
+    "subtitle": "we created Xniffer , a non intrusive framework to intercept outgoing requests and their responses. ",
+    "permalink": "/introducing-to-xniffer/",
+    "featured": true,
+    "date": "2017-11-01",
+    "category": "development",
+    "author": "xl",
+    "tags": [
+      "Swift",
+      "iOS",
+      "Tutorial",
+      "network"
+    ],
+    "thumbnail": "/images/xniffer-web.png",
+    "readingTime": "3 min read",
+    "sourceFile": "2017-11-01-Introducing-to-Xniffer.md"
+  },
+  {
+    "slug": "eureka-4-0",
+    "title": "EUREKA 4.0 is now available!",
+    "subtitle": "Discover what's new in Eureka 4.0, including Swift 4 support and the latest improvements for building iOS forms.",
+    "permalink": "/eureka-4-0/",
+    "featured": true,
+    "date": "2017-11-09",
+    "category": "development",
+    "author": "xl",
+    "tags": [
+      "Eureka",
+      "Swift",
+      "iOS. Open Source",
+      "Mobile Development"
+    ],
+    "thumbnail": "/images/eureka/featured.png",
+    "readingTime": "4 min read",
+    "sourceFile": "2017-11-09-Eureka-4.0.md"
+  },
+  {
+    "slug": "react-native-line",
+    "title": "react-native-line-sdk, the react-native wrapper for LINE",
+    "subtitle": " react-native-line provides an easy-to-use interface for you to use Line's mobile SDK seamlessly on your app, without having to worry about Android or iOS differences.",
+    "permalink": "/react-native-line/",
+    "featured": true,
+    "date": "2017-11-27",
+    "category": "development",
+    "author": "mcousillas",
+    "tags": [
+      "React Native",
+      "JavaScript",
+      "Android",
+      "iOS",
+      "Tutorial"
+    ],
+    "thumbnail": "/images/react-native-line-web.png",
+    "readingTime": "2 min read",
+    "sourceFile": "2017-11-3-React-native-line.md"
+  },
+  {
+    "slug": "xmartlabs-sam-mc-afee",
+    "title": "Sam McAfee - how to develop a game changer business idea in just 12 weeks?",
+    "subtitle": "An interview with innovation consultant Sam McAfee on validating ideas, building MVPs, and creating successful products in just 12 weeks.",
+    "permalink": "/xmartlabs-sam-mc-afee/",
+    "featured": true,
+    "date": "2017-12-04",
+    "category": "strategy",
+    "author": "xl",
+    "tags": [
+      "Innovation",
+      "Lean Startup",
+      "MVP",
+      "Product Strategy",
+      "Agile"
+    ],
+    "thumbnail": "/images/sam-mc-afee/Sam-Mc-Afee.jpg",
+    "readingTime": "7 min read",
+    "sourceFile": "2017-12-04-Xmartlabs-Sam-McAfee.md"
+  },
+  {
+    "slug": "ml-kit-core-ml",
+    "title": "ML Kit on iOS and how it performs against Core ML",
+    "subtitle": "A hands-on comparison of Google's ML Kit and Apple's Core ML, evaluating performance, flexibility, and on-device machine learning on iOS.",
+    "permalink": "/ml-kit-core-ml/",
+    "featured": true,
+    "date": "2018-06-21",
+    "category": "machine-learning",
+    "author": "mathias",
+    "tags": [
+      "Machine Learning",
+      "iOS",
+      "Core ML",
+      "ML Kit",
+      "Mobile Development"
+    ],
+    "thumbnail": "/images/mlkit/featured.png",
+    "readingTime": "14 min read",
+    "sourceFile": "2018-06-21-ML-Kit-CoreML.mdx"
+  },
+  {
+    "slug": "introducing-fountain-part-one",
+    "title": "Introducing Fountain Part One",
+    "subtitle": " how we can integrate a numerated paged service, to the best of my knowledge, using our new Fountain library.",
+    "permalink": "/introducing-fountain-part-one/",
+    "featured": true,
+    "date": "2018-07-16",
+    "category": "development",
+    "author": "mirland",
+    "tags": [
+      "Android",
+      "Android Jetpack",
+      "Android Paging Library",
+      "Live Data"
+    ],
+    "thumbnail": "/images/fountain-part-1-web.png",
+    "readingTime": "10 min read",
+    "sourceFile": "2018-07-16-Introducing-Fountain-Part-One.md"
+  },
+  {
+    "slug": "introducing-fountain-part-two",
+    "title": "Introducing Fountain Part Two",
+    "subtitle": " how we can integrate a numerated paged service, to the best of my knowledge, using our new Fountain library. part2",
+    "permalink": "/introducing-fountain-part-two/",
+    "featured": true,
+    "date": "2018-08-20",
+    "category": "development",
+    "author": "mirland",
+    "tags": [
+      "Android",
+      "Android Jetpack",
+      "Android Paging Library",
+      "Live Data"
+    ],
+    "thumbnail": "/images/fountain-part-2-web.png",
+    "readingTime": "10 min read",
+    "sourceFile": "2018-08-20-Introducing-Fountain-Part-Two.md"
+  },
+  {
+    "slug": "how-to-revolutionize-your-company-with-augmented-reality",
+    "title": "How to revolutionize your company with augmented reality",
+    "subtitle": "at Xmartlabs have built an expert team around computer vision, machine learning, and augmented reality",
+    "permalink": "/how-to-revolutionize-your-company-with-augmented-reality/",
+    "featured": true,
+    "date": "2018-08-20",
+    "category": "development",
+    "author": "xl",
+    "tags": [
+      "AR"
+    ],
+    "thumbnail": "/images/augmented-reality-web.png",
+    "readingTime": "7 min read",
+    "sourceFile": "2018-08-24-How-to-revolutionize-your-company-with-augmented-reality.mdx"
+  },
+  {
+    "slug": "how-ar-can-create-an-roi-for-the-enterprise",
+    "title": "How AR can create an ROI for the enterprise",
+    "subtitle": "mobile AR has suddenly become valuable for several specific use cases.",
+    "permalink": "/how-ar-can-create-an-roi-for-the-enterprise/",
+    "featured": true,
+    "date": "2018-10-08",
+    "category": "development",
+    "author": "xl",
+    "tags": [
+      "AR"
+    ],
+    "thumbnail": "/images/ar-roi-web.png",
+    "readingTime": "6 min read",
+    "sourceFile": "2018-10-08-How-AR-can-create-an-ROI-for-the-enterprise.mdx"
+  },
+  {
+    "slug": "how-nfc-can-help-improve-your-business",
+    "title": "How NFC can help improve your business",
+    "subtitle": "In this post we will explore some real-world use cases to put the benefits of this technology on display.",
+    "permalink": "/how-nfc-can-help-improve-your-business/",
+    "featured": true,
+    "date": "2018-12-03",
+    "category": "development",
+    "author": "felipe",
+    "tags": [
+      "NFC"
+    ],
+    "thumbnail": "/images/nfc-web.png",
+    "readingTime": "5 min read",
+    "sourceFile": "2018-12-03-how-NFC-can-help-improve-your-business.mdx"
+  },
+  {
+    "slug": "xmartlabs-distinguished-amongst-the-clutch-1000",
+    "title": "Xmartlabs distinguished as top 10 mobile app developer in LATAM",
+    "subtitle": null,
+    "permalink": "/xmartlabs-distinguished-amongst-the-clutch-1000/",
+    "featured": false,
+    "date": "2018-12-11",
+    "category": "development",
+    "author": "xl",
+    "tags": [
+      "Marketing"
+    ],
+    "thumbnail": null,
+    "readingTime": "3 min read",
+    "sourceFile": "2018-12-04-xmartlabs-distinguished-amongst-the-clutch-1000.md"
+  },
+  {
+    "slug": "introducing-android-snapshot-publisher",
+    "title": "Introducing Android Snapshot Plugin",
+    "subtitle": "We're happy to announce the release of Android Snapshot Publisher",
+    "permalink": "introducing-android-snapshot-publisher/",
+    "featured": true,
+    "date": "2019-04-18",
+    "category": "development",
+    "author": "mirland",
+    "tags": [
+      "Android",
+      "Gradle Plugin",
+      "Snapshot",
+      "Google Play",
+      "Fabric Beta"
+    ],
+    "thumbnail": "/images/android-snapshot-web.png",
+    "readingTime": "6 min read",
+    "sourceFile": "2019-04-18-Introducing-Android-Snapshot-Publisher.mdx"
+  },
+  {
+    "slug": "url-splitting",
+    "title": "URL Splitting and React (Part 1)",
+    "subtitle": "Learn how URL splitting can improve React application performance by reducing bundle size and scaling large single-page applications.",
+    "permalink": "/url-splitting/",
+    "featured": true,
+    "date": "2019-05-17",
+    "category": "development",
+    "author": "mlorenzo",
+    "tags": [
+      "React",
+      "JavaScript",
+      "Web Development",
+      "Performance",
+      "Webpack"
+    ],
+    "thumbnail": "/images/url-splitting/banner.jpg",
+    "readingTime": "18 min read",
+    "sourceFile": "2019-05-17-url-splitting.mdx"
+  },
+  {
+    "slug": "swiftui-flutter",
+    "title": "SwiftUI looks quite… Fluttery",
+    "subtitle": "A first look at SwiftUI and how Apple's new declarative UI framework compares to Flutter's approach to building mobile interfaces.",
+    "permalink": "/swiftui-flutter/",
+    "featured": true,
+    "date": "2019-06-03",
+    "category": "development",
+    "author": "jrocco",
+    "tags": [
+      "SwiftUI",
+      "Swift Flutter",
+      "iOS",
+      "Mobile Development"
+    ],
+    "thumbnail": "/images/swiftui-flutter/featured.jpg",
+    "readingTime": "4 min read",
+    "sourceFile": "2019-06-3-swiftui-flutter.md"
+  },
+  {
+    "slug": "redshift-snowflake",
+    "title": "Put your data to work: Amazon Redshift vs Snowflake",
+    "subtitle": null,
+    "permalink": "/redshift-snowflake/",
+    "featured": false,
+    "date": "2019-07-04",
+    "category": "development",
+    "author": "pbt",
+    "tags": [
+      "Data analysis",
+      "Data warehouse"
+    ],
+    "thumbnail": "/images/redshift-snowflake/data_center_cloud.jpg",
+    "readingTime": "6 min read",
+    "sourceFile": "2019-07-01-redshift-snowflake.mdx"
+  },
+  {
+    "slug": "first-xmartlabs-hackathon",
+    "title": "Our very first Hackathon!",
+    "subtitle": null,
+    "permalink": "/first-xmartlabs-hackathon/",
+    "featured": false,
+    "date": "2019-09-10",
+    "category": "people-events",
+    "author": "bruno",
+    "tags": [
+      "hackathon",
+      "team",
+      "xmartlabs"
+    ],
+    "thumbnail": "/images/xmartlabs-first-hackathon/general_view_bbq.jpg",
+    "readingTime": "3 min read",
+    "sourceFile": "2019-08-20-first-xmartlabs-hackathon.md"
+  },
+  {
+    "slug": "t-flite-to-core-ml",
+    "title": "How to convert a NN model from TensorFlow Lite to CoreML",
+    "subtitle": null,
+    "permalink": "/t-flite-to-core-ml/",
+    "featured": false,
+    "date": "2019-11-22",
+    "category": "machine-learning",
+    "author": "mathias",
+    "tags": [
+      "machine learning",
+      "tflite",
+      "coreml",
+      "xmartlabs"
+    ],
+    "thumbnail": "/images/tflite_coreml/featured.png",
+    "readingTime": "7 min read",
+    "sourceFile": "2019-11-12-tflite-to-coreml.mdx"
+  },
+  {
+    "slug": "ios-continuous-integration-delivery-using-fastlane-and-bitrise",
+    "title": "iOS Continuous Integration & Delivery using Fastlane and Bitrise",
+    "subtitle": null,
+    "permalink": "/ios-continuous-integration-delivery-using-fastlane-and-bitrise/",
+    "featured": false,
+    "date": "2020-04-17",
+    "category": "development",
+    "author": "mtnBarreto",
+    "tags": [
+      "CI",
+      "fastlane",
+      "bitrise",
+      "iOS"
+    ],
+    "thumbnail": "/images/ios-fastlane-ci/featured.png",
+    "readingTime": "8 min read",
+    "sourceFile": "2020-03-30-ios-continuous-integration-delivery-using-fastlane-and-bitrise.md"
+  },
+  {
+    "slug": "powerful-animations-in-rn",
+    "title": "Powerful animations in React Native",
+    "subtitle": null,
+    "permalink": "/powerful-animations-in-rn/",
+    "featured": false,
+    "date": "2020-04-27",
+    "category": "development",
+    "author": "nicoh",
+    "tags": [
+      "ReactNative",
+      "Animations",
+      "Javascript"
+    ],
+    "thumbnail": "/images/powerful-animations-rn/featured.jpg",
+    "readingTime": "6 min read",
+    "sourceFile": "2020-04-22-powerful-animations-in-RN.mdx"
+  },
+  {
+    "slug": "why-sign-in-with-apple-and-integration-guide",
+    "title": "Sign in with Apple! Is it necessary? at what cost?",
+    "subtitle": null,
+    "permalink": "/why-sign-in-with-apple-and-integration-guide/",
+    "featured": false,
+    "date": "2020-05-04",
+    "category": "development",
+    "author": "ceci",
+    "tags": [
+      "iOS",
+      "Apple",
+      "Swift",
+      "Sign in with Apple"
+    ],
+    "thumbnail": "/images/apple-sign-in/signInWithApple.jpg",
+    "readingTime": "10 min read",
+    "sourceFile": "2020-05-04-why-sign-in-with-apple-and-integration-guide.mdx"
+  },
+  {
+    "slug": "speakers-at-appbuilders-with-covid",
+    "title": "We will be speaking about how we run OSS at App Builders 2020 conference!",
+    "subtitle": null,
+    "permalink": "/speakers-at-appbuilders-with-covid/",
+    "featured": false,
+    "date": "2020-05-07",
+    "category": "people-events",
+    "author": "arsu",
+    "tags": [
+      "iOS Conference"
+    ],
+    "thumbnail": "/images/appbuilders2020/featured.png",
+    "readingTime": "4 min read",
+    "sourceFile": "2020-05-07-speakers-at-appbuilders-with-covid.mdx"
+  },
+  {
+    "slug": "should-we-automate-all-testing-effort",
+    "title": "Should we automate all testing efforts?",
+    "subtitle": null,
+    "permalink": "/should-we-automate-all-testing-effort/",
+    "featured": false,
+    "date": "2020-05-11",
+    "category": "development",
+    "author": "tabu",
+    "tags": [
+      "QA",
+      "Testing"
+    ],
+    "thumbnail": "/images/automate-manual-testing/featured2.png",
+    "readingTime": "9 min read",
+    "sourceFile": "2020-05-11-should-we-automate-all-testing-effort.mdx"
+  },
+  {
+    "slug": "appbuilders-conference-recap",
+    "title": "What happened at AppBuilders?",
+    "subtitle": null,
+    "permalink": "/appbuilders-conference-recap/",
+    "featured": false,
+    "date": "2020-05-19",
+    "category": "people-events",
+    "author": "arsu",
+    "tags": [
+      "iOS Conference"
+    ],
+    "thumbnail": "/images/recap-appbuilders/featured.jpg",
+    "readingTime": "8 min read",
+    "sourceFile": "2020-05-19-appbuilders-conference-recap.mdx"
+  },
+  {
+    "slug": "android-nav-component-part-1",
+    "title": "Android Navigation Component - Expectations, Conclusions & Tips - Part 1",
+    "subtitle": null,
+    "permalink": "/Android-Nav-Component-Part-1/",
+    "featured": false,
+    "date": "2020-05-25",
+    "category": "development",
+    "author": "mirland",
+    "tags": [
+      "Android",
+      "Architecture Components",
+      "Jetpack",
+      "Navigation Component"
+    ],
+    "thumbnail": "/images/android_navigation_blog_part_one/navigation_banner.jpg",
+    "readingTime": "7 min read",
+    "sourceFile": "2020-05-25-android-nav-component-part-1.mdx"
+  },
+  {
+    "slug": "2020-06-01-how-to-speed-up-inference-in-your-deep-learning-model",
+    "title": "5 Practical Ways to Speed Up your Deep Learning Model",
+    "subtitle": null,
+    "permalink": "/2020-06-01-how-to-speed-up-inference-in-your-deep-learning-model/",
+    "featured": false,
+    "date": "2020-06-01",
+    "category": "machine-learning",
+    "author": "renzo",
+    "tags": [
+      "Deep Learning",
+      "Optimization"
+    ],
+    "thumbnail": "/images/how-to-speed-up-inference-in-your-deep-learning-model/speed-up.jpg",
+    "readingTime": "11 min read",
+    "sourceFile": "2020-06-01-how-to-speed-up-inference-in-your-deep-learning-model.mdx"
+  },
+  {
+    "slug": "2020-06-08-how-to-deal-with-coronavirus",
+    "title": "How to stay mentally and physically healthy during covid-19 quarantine",
+    "subtitle": null,
+    "permalink": "/2020-06-08-how-to-deal-with-coronavirus/",
+    "featured": false,
+    "date": "2020-06-08",
+    "category": "people-events",
+    "author": "fer-barrios",
+    "tags": [
+      "COVID-19",
+      "Mental Health",
+      "Physical Health"
+    ],
+    "thumbnail": "/images/dealing-with-covid/dealing-with-covid.jpg",
+    "readingTime": "4 min read",
+    "sourceFile": "2020-06-05-how-to-deal-with-coronavirus.md"
+  },
+  {
+    "slug": "2020-06-22-getting-started-with-jamstack",
+    "title": "New to Jamstack? Everything you need to know to get started",
+    "subtitle": null,
+    "permalink": "/2020-06-22-getting-started-with-jamstack/",
+    "featured": false,
+    "date": "2020-06-22",
+    "category": "development",
+    "author": "mtnBarreto",
+    "tags": [
+      "Jamstack",
+      "Markup",
+      "Static Site Generator",
+      "Static Website",
+      "web stack",
+      "Xmartlabs"
+    ],
+    "thumbnail": "/images/jamstack-intro/featured.jpeg",
+    "readingTime": "12 min read",
+    "sourceFile": "2020-06-19-getting-started-with-jamstack.md"
+  },
+  {
+    "slug": "2020-07-09-frontend-architecture-and-best-practices",
+    "title": "Frontend architecture and best practices for consuming APIs",
+    "subtitle": null,
+    "permalink": "/2020-07-09-frontend-architecture-and-best-practices/",
+    "featured": false,
+    "date": "2020-07-09",
+    "category": "development",
+    "author": "mlorenzo",
+    "tags": [
+      "Frontend architecture",
+      "Frontend best practices",
+      "How to consume APIs",
+      "Frontend architecture patterns",
+      "Frontend",
+      "Js"
+    ],
+    "thumbnail": "/images/2020-07-08/frontend-architecture-and-best-practices.jpg",
+    "readingTime": "16 min read",
+    "sourceFile": "2020-07-09-frontend-architecture-and-best-practices.mdx"
+  },
+  {
+    "slug": "latest-updates-on-apple-machine-learning",
+    "title": "Latest updates on Apple machine learning!",
+    "subtitle": null,
+    "permalink": "/latest-updates-on-apple-machine-learning/",
+    "featured": false,
+    "date": "2020-08-04",
+    "category": "development",
+    "author": "nicolantean",
+    "tags": [
+      "Machine learning",
+      "CoreML",
+      "CreateML",
+      "Vision",
+      "WWDC20"
+    ],
+    "thumbnail": "/images/whats-new-on-apple-machine-learning-at-wwdc-2020/0-preview.png",
+    "readingTime": "14 min read",
+    "sourceFile": "2020-08-04-latest-updates-on-apple-machine-learning.mdx"
+  },
+  {
+    "slug": "sign-in-with-apple-with-swiftui",
+    "title": "Sign in with Apple with SwiftUI",
+    "subtitle": null,
+    "permalink": "/sign-in-with-apple-with-swiftui/",
+    "featured": false,
+    "date": "2020-08-17",
+    "category": "development",
+    "author": "ceci",
+    "tags": [
+      "Sign in with Apple",
+      "SwiftUI",
+      "Apple",
+      "Xmartlabs"
+    ],
+    "thumbnail": "/images/apple-sign-in/signInWithApple.jpg",
+    "readingTime": "12 min read",
+    "sourceFile": "2020-08-17-sign-in-with-apple-with-swiftui.mdx"
+  },
+  {
+    "slug": "react-native-line-2",
+    "title": "Announcing React Native Line v2!",
+    "subtitle": null,
+    "permalink": "/react-native-line-2/",
+    "featured": false,
+    "date": "2020-10-30",
+    "category": "development",
+    "author": "emi",
+    "tags": [
+      "React Native Line",
+      "React Native",
+      "LineSDK",
+      "Xmartlabs"
+    ],
+    "thumbnail": "/images/react-native-line/banner2.png",
+    "readingTime": "4 min read",
+    "sourceFile": "2020-10-02-react-native-line.mdx"
+  },
+  {
+    "slug": "key-metrics-for-growing-digital-startups",
+    "title": "Key metrics for growing digital startups",
+    "subtitle": null,
+    "permalink": "/key-metrics-for-growing-digital-startups/",
+    "featured": false,
+    "date": "2020-12-15",
+    "category": "development",
+    "author": "robert",
+    "tags": [
+      "digital product development",
+      "product metrics",
+      "Analytics",
+      "A/B testing",
+      "Xmartlabs"
+    ],
+    "thumbnail": "/images/key-metrics-for-growing-digital-startups/featured.png",
+    "readingTime": "7 min read",
+    "sourceFile": "2020-12-08-key-metrics-for-growing-digital-startups.md"
+  },
+  {
+    "slug": "a-look-back-at-2020",
+    "title": "Hindsight 20/20 - our year through the eyes of our team",
+    "subtitle": null,
+    "permalink": "/a-look-back-at-2020/",
+    "featured": false,
+    "date": "2020-12-31",
+    "category": "people-events",
+    "author": "mtnBarreto",
+    "tags": [
+      "2020 Recap",
+      "Xmartlabs"
+    ],
+    "thumbnail": "/images/recap2020/look-back-2020-featured.jpg",
+    "readingTime": "15 min read",
+    "sourceFile": "2020-12-31-recap2020.mdx"
+  },
+  {
+    "slug": "extending-material-theme-in-jetpack-compose",
+    "title": "Extending Material theme in Jetpack Compose",
+    "subtitle": null,
+    "permalink": "/extending-material-theme-in-jetpack-compose/",
+    "featured": false,
+    "date": "2021-05-11",
+    "category": "development",
+    "author": "mirland",
+    "tags": [
+      "Material",
+      "Themes",
+      "Material theme",
+      "Custom material theme",
+      "theming compose",
+      "customizing themes",
+      "Jetpack Compose"
+    ],
+    "thumbnail": "/images/extending-material-theme-in-jetpack-compose/banner.jpeg",
+    "readingTime": "8 min read",
+    "sourceFile": "2021-05-11-compose-themes.md"
+  },
+  {
+    "slug": "introducing-pagertabstripview-pager-view-in-swiftui",
+    "title": "Introducing PagerTabStripView! - Finally a PagerView in pure SwiftUI",
+    "subtitle": null,
+    "permalink": "/introducing-pagertabstripview-pager-view-in-swiftui/",
+    "featured": false,
+    "date": "2021-08-06",
+    "category": "development",
+    "author": "mtnBarreto",
+    "tags": [
+      "PagerTabStripView",
+      "SwiftUI PagerView",
+      "XLPagertabStrip"
+    ],
+    "thumbnail": "/images/pager-swiftui/Twitter-1.png",
+    "readingTime": "4 min read",
+    "sourceFile": "2021-07-30-Introducing-pagertabstrip-swiftui-pager-view.mdx"
+  },
+  {
+    "slug": "kickstart-your-new-android-project-with-gong-base-project",
+    "title": "Kickstart your Android Project with Gong Base Project",
+    "subtitle": null,
+    "permalink": "/kickstart-your-new-android-project-with-gong-base-project/",
+    "featured": false,
+    "date": "2021-08-04",
+    "category": "development",
+    "author": "sante",
+    "tags": [
+      "Android App Template",
+      "Android Base project",
+      "Android Compose Base Project",
+      "Xmartlabs Android App",
+      "Jetpack Compose App Template",
+      "Jetpack Compose Base Project",
+      "Android Development",
+      "Kotlin Development",
+      "Jetpack Compose",
+      "Android",
+      "Kotlin"
+    ],
+    "thumbnail": "/images/gong-introduction/banner.png",
+    "readingTime": "4 min read",
+    "sourceFile": "2021-07-30-gong-introduction.mdx"
+  },
+  {
+    "slug": "our-take-on-testinguy-2021",
+    "title": "Our take on Testing UY 2021",
+    "subtitle": null,
+    "permalink": "/our-take-on-testinguy-2021/",
+    "featured": false,
+    "date": "2021-08-12",
+    "category": "people-events",
+    "author": "edu",
+    "tags": [
+      "TestingUY",
+      "QA",
+      "Testing Event"
+    ],
+    "thumbnail": "/images/our-take-on-testinguy/blogpost3.png",
+    "readingTime": "5 min read",
+    "sourceFile": "2021-08-11-testing-uy.mdx"
+  },
+  {
+    "slug": "deep-learning-approach-for-dog-identification",
+    "title": "Find your missing pet with deep learning",
+    "subtitle": null,
+    "permalink": "/deep-learning-approach-for-dog-identification/",
+    "featured": false,
+    "date": "2021-08-20",
+    "category": "machine-learning",
+    "author": "andresh",
+    "tags": [
+      "Deep Learning",
+      "Machine Learning",
+      "Computer Vision",
+      "Classification"
+    ],
+    "thumbnail": "/images/dogface/featured.jpg",
+    "readingTime": "8 min read",
+    "sourceFile": "2021-08-17-dogface.mdx"
+  },
+  {
+    "slug": "how-to-get-the-best-performance-for-ml-models-on-ios",
+    "title": "CoreML not fast enough? Use Bender!",
+    "subtitle": null,
+    "permalink": "/how-to-get-the-best-performance-for-ml-models-on-ios/",
+    "featured": false,
+    "date": "2021-08-30",
+    "category": "machine-learning",
+    "author": "mathias",
+    "tags": [
+      "Machine Learning",
+      "iOS",
+      "CoreML",
+      "TFlite",
+      "MetalPerformanceShaders",
+      "Bender"
+    ],
+    "thumbnail": "/images/bender-is-the-best/featured.jpg",
+    "readingTime": "8 min read",
+    "sourceFile": "2021-08-30-bender-is-the-best.mdx"
+  },
+  {
+    "slug": "computer-vision-techniques-for-body-detection",
+    "title": "Body Detection using Computer Vision",
+    "subtitle": null,
+    "permalink": "/computer-vision-techniques-for-body-detection/",
+    "featured": false,
+    "date": "2021-10-19",
+    "category": "machine-learning",
+    "author": "vale",
+    "tags": [
+      "Pose Estimation",
+      "Body Segmentation",
+      "Human Detection",
+      "Machine Learning",
+      "Computer Vision"
+    ],
+    "thumbnail": "/images/body-detection-with-computer-vision/body-detection-with-computer-vision.jpg",
+    "readingTime": "19 min read",
+    "sourceFile": "2021-09-30-body-detection-with-computer-vision.mdx"
+  },
+  {
+    "slug": "techcrunch-disrupt-2021-takeaways-for-entrepreneurs-and-founders",
+    "title": "What TechCrunch Disrupt 2021 Taught Us About the Startup Landscape",
+    "subtitle": null,
+    "permalink": "/techcrunch-disrupt-2021-takeaways-for-entrepreneurs-and-founders/",
+    "featured": false,
+    "date": "2021-10-11",
+    "category": "people-events",
+    "author": "vale",
+    "tags": [
+      "TechCrunch Disrupt 2021",
+      "Startups",
+      "Venture Capital",
+      "TC Disrupt Recap"
+    ],
+    "thumbnail": "/images/tcd21-startup-landscape/disrupt2021.jpg",
+    "readingTime": "26 min read",
+    "sourceFile": "2021-10-07-techcrunch-disrupt2021.mdx"
+  },
+  {
+    "slug": "okr-framework",
+    "title": "Design your strategy like Google",
+    "subtitle": null,
+    "permalink": "/okr-framework/",
+    "featured": false,
+    "date": "2021-10-15",
+    "category": "development",
+    "author": "vale",
+    "tags": [
+      "OKR framework",
+      "Company Strategy"
+    ],
+    "thumbnail": "/images/okrs/image.jpg",
+    "readingTime": "4 min read",
+    "sourceFile": "2021-10-15-design-your-strategy-like-google.md"
+  },
+  {
+    "slug": "crypto-landscape-2021",
+    "title": "What's going on with crypto? (TC Disrupt 2021)",
+    "subtitle": null,
+    "permalink": "/crypto-landscape-2021/",
+    "featured": false,
+    "date": "2021-10-21",
+    "category": "people-events",
+    "author": "mtnBarreto",
+    "tags": [
+      "TechCrunch Disrupt 2021",
+      "Crypto Landscape",
+      "Crypto 2021",
+      "TC Disrupt Recap"
+    ],
+    "thumbnail": "/images/tcd21-crypto-landscape/disrupt2021.png",
+    "readingTime": "14 min read",
+    "sourceFile": "2021-10-15-techcrunch-disrupt2021-crypto-landscape.mdx"
+  },
+  {
+    "slug": "kaggle-competition-2021",
+    "title": "Our Solution for the NFL Helmet Assignment Kaggle Competition",
+    "subtitle": null,
+    "permalink": "/kaggle-competition-2021/",
+    "featured": false,
+    "date": "2021-11-30",
+    "category": "machine-learning",
+    "author": "andresh",
+    "tags": [
+      "Kaggle Competition 2021",
+      "Computer Vision",
+      "NFL",
+      "Video Tracking",
+      "Machine Learning"
+    ],
+    "thumbnail": "/images/nfl-kaggle-competition/nfl_cover.jpg",
+    "readingTime": "12 min read",
+    "sourceFile": "2021-11-30-nfl-kaggle-competition.mdx"
+  },
+  {
+    "slug": "computer-vision-and-object-detection-use-case",
+    "title": "Occupancy Analytics powered by Edge-AI & Object Detection models",
+    "subtitle": null,
+    "permalink": "/computer-vision-and-object-detection-use-case/",
+    "featured": false,
+    "date": "2022-01-26",
+    "category": "machine-learning",
+    "author": "pablog",
+    "tags": [
+      "Object Detection",
+      "Computer Vision",
+      "Video Tracking",
+      "Machine Learning"
+    ],
+    "thumbnail": "/images/object-detection/ObjectDetecion_Blog.jpg",
+    "readingTime": "17 min read",
+    "sourceFile": "2022-01-24-object-detection-use-case-occupancy-analytics.mdx"
+  },
+  {
+    "slug": "taskflow-the-airflow-new-feature-you-should-know",
+    "title": "4 reasons why you should use Airflow's Taskflow API",
+    "subtitle": null,
+    "permalink": "/taskflow-the-airflow-new-feature-you-should-know/",
+    "featured": false,
+    "date": "2022-02-22",
+    "category": "development",
+    "author": "remer",
+    "tags": [
+      "ETL",
+      "Airflow",
+      "Taskflow"
+    ],
+    "thumbnail": "/images/taskflow/taskflow-blogpost.jpg",
+    "readingTime": "12 min read",
+    "sourceFile": "2022-01-28-airflow-taskflow-a-must.mdx"
+  },
+  {
+    "slug": "recommendations-engines-what-they-do-and-why-they-are-useful",
+    "title": "How To Get The Most Out Of A Recommendation Engine",
+    "subtitle": null,
+    "permalink": "/recommendations-engines-what-they-do-and-why-they-are-useful/",
+    "featured": false,
+    "date": "2022-02-25",
+    "category": "machine-learning",
+    "author": "mtnBarreto",
+    "tags": [
+      "Recommendation Engine",
+      "Recommendation Systems",
+      "Recommendation engine challenges",
+      "How Recommendation system works"
+    ],
+    "thumbnail": "/images/recommendation-engines/RecEngine.jpg",
+    "readingTime": "14 min read",
+    "sourceFile": "2022-02-24-intro-to-recommendations-engine.mdx"
+  },
+  {
+    "slug": "10-years-in-the-tech-industry",
+    "title": "10 Things We've Learned After 10 Years Running A Tech Agency",
+    "subtitle": null,
+    "permalink": "/10-years-in-the-tech-industry/",
+    "featured": false,
+    "date": "2022-03-07",
+    "category": "people-events",
+    "author": "xl",
+    "tags": [
+      "10 years Xmartlabs",
+      "10 lessons learned in tech industry",
+      "10 years in tech industry"
+    ],
+    "thumbnail": "/images/10-lessons-in-tech-industry/10_things_cover.jpg",
+    "readingTime": "8 min read",
+    "sourceFile": "2022-03-03-10-years-in-tech-industry.mdx"
+  },
+  {
+    "slug": "machine-learning-super-resolution-algorithms",
+    "title": "From Low to High-Quality Image — Practical Application of Super-Resolution Algorithms",
+    "subtitle": null,
+    "permalink": "/machine-learning-super-resolution-algorithms/",
+    "featured": false,
+    "date": "2022-03-22",
+    "category": "machine-learning",
+    "author": "lazaro",
+    "tags": [
+      "10 years Xmartlabs",
+      "10 lessons learned in tech industry",
+      "10 years in tech industry"
+    ],
+    "thumbnail": "/images/ml-superresolution/Superresolution-blog.jpg",
+    "readingTime": "11 min read",
+    "sourceFile": "2022-03-21-superresolution.md"
+  },
+  {
+    "slug": "10-years-xmartlabs",
+    "title": "10 Years XL",
+    "subtitle": null,
+    "permalink": "/10-years-xmartlabs/",
+    "featured": false,
+    "date": "2022-04-05",
+    "category": "people-events",
+    "author": "mtnBarreto",
+    "tags": [
+      "Xmartlabs",
+      "10 years Xmartlabs",
+      "10 years in tech industry"
+    ],
+    "thumbnail": "/images/10-years-XL/10-years-xl.jpg",
+    "readingTime": "12 min read",
+    "sourceFile": "2022-03-24-10-years-xl.mdx"
+  },
+  {
+    "slug": "precision-agriculture-and-the-future-of-farming-with-machine-learning",
+    "title": "Precision Agriculture And The Future of Farming with Machine Learning",
+    "subtitle": null,
+    "permalink": "/precision-agriculture-and-the-future-of-farming-with-machine-learning/",
+    "featured": false,
+    "date": "2022-03-29",
+    "category": "machine-learning",
+    "author": "vale",
+    "tags": [
+      "applied Machine Learning",
+      "Machine Learning in Agriculture",
+      "deep learning for agriculture",
+      "production costs"
+    ],
+    "thumbnail": "/images/farming-ml/MLAgriculture.jpg",
+    "readingTime": "10 min read",
+    "sourceFile": "2022-03-28-farming-with-machine-learning.mdx"
+  },
+  {
+    "slug": "user-research-process",
+    "title": "Spoiler alert: User research is like a movie",
+    "subtitle": null,
+    "permalink": "/user-research-process/",
+    "featured": false,
+    "date": "2022-05-06",
+    "category": "product-design",
+    "author": "alemachado",
+    "tags": [
+      "UX/UI"
+    ],
+    "thumbnail": "/images/user-research-is-like-a-movie/image.jpg",
+    "readingTime": "8 min read",
+    "sourceFile": "2022-05-06-user-research-process.mdx"
+  },
+  {
+    "slug": "2022-05-11-the-xl-way-closing-the-gender-gap",
+    "title": "The XL Way — Closing the Gender Gap",
+    "subtitle": " ",
+    "permalink": "/2022-05-11-the-xl-way-closing-the-gender-gap/",
+    "featured": true,
+    "date": "2022-05-12",
+    "category": "people-events",
+    "author": "vale",
+    "tags": [
+      "8M"
+    ],
+    "thumbnail": "/images/the-xl-way-closing-the-gender-gap/8m_cover.jpg",
+    "readingTime": "9 min read",
+    "sourceFile": "2022-05-11-the-xl-way-closing-the-gender-gap.md"
+  },
+  {
+    "slug": "right-blockchain-for-nft-platform",
+    "title": "Choosing the right blockchain for your next NFT project",
+    "subtitle": null,
+    "permalink": "/right-blockchain-for-nft-platform/",
+    "featured": false,
+    "date": "2022-06-08",
+    "category": "blockchain",
+    "author": "mtnBarreto",
+    "tags": [
+      "NFT Development",
+      "Blockchain Development",
+      "DApp Development",
+      "Smart Contract Development"
+    ],
+    "thumbnail": "/images/choosing-the-right-blockchain/CHOOSING_THE_RIGHT_BLOCKCHAIN.png",
+    "readingTime": "13 min read",
+    "sourceFile": "2022-06-03-Choosing-the-right-Blockchain-for-your-next-NFT.md"
+  },
+  {
+    "slug": "2022-06-06-the-impact-of-tech-on-the-environment",
+    "title": "#OnlyOneEarth - The Impact of Tech On The Environment",
+    "subtitle": null,
+    "permalink": "/2022-06-06-the-impact-of-tech-on-the-environment/",
+    "featured": false,
+    "date": "2022-06-06",
+    "category": "people-events",
+    "author": "coti",
+    "tags": [
+      "Ecology",
+      "Carbon Credits",
+      "E-waste"
+    ],
+    "thumbnail": "/images/only-one-earth/OnlyOneEarth.png",
+    "readingTime": "5 min read",
+    "sourceFile": "2022-06-06-only-one-earth.md"
+  },
+  {
+    "slug": "a-bright-future-ahead-react-native-appjs-conf",
+    "title": "A bright future ahead: React Native in App.js Conf 2022",
+    "subtitle": null,
+    "permalink": "/a-bright-future-ahead-react-native-appjs-conf/",
+    "featured": false,
+    "date": "2022-06-23",
+    "category": "development",
+    "author": "nicoh",
+    "tags": [
+      "Mobile",
+      "Cross-Platform",
+      "React Native"
+    ],
+    "thumbnail": "/images/rn-future/app.js-takeaways-react-native.png",
+    "readingTime": "7 min read",
+    "sourceFile": "2022-06-23-appjs-conf-takeaways.md"
+  },
+  {
+    "slug": "best-blockchain-development-framework",
+    "title": "Top EVM-compatible frameworks to build dApps - Truffle vs Hardhat",
+    "subtitle": null,
+    "permalink": "/best-blockchain-development-framework/",
+    "featured": false,
+    "date": "2022-06-28",
+    "category": "blockchain",
+    "author": "mtnBarreto",
+    "tags": [
+      "DApp Frameworks",
+      "Truffle",
+      "Hardhat"
+    ],
+    "thumbnail": "/images/evm-compatible-frameworks/TopEVM-compatible-frameworks-to-build-dApps-Truffle-vs-Hardhat.png",
+    "readingTime": "14 min read",
+    "sourceFile": "2022-06-27-Top EVM-compatible-frameworks.md"
+  },
+  {
+    "slug": "challenges-of-building-a-web-with-flutter",
+    "title": "Challenges of building a web with Flutter",
+    "subtitle": null,
+    "permalink": "/challenges-of-building-a-web-with-flutter/",
+    "featured": false,
+    "date": "2022-08-10",
+    "category": "development",
+    "author": "felipe",
+    "tags": [
+      "Flutter",
+      "Flutter web",
+      "Web"
+    ],
+    "thumbnail": "/images/building-a-web-with-flutter/featured.png",
+    "readingTime": "7 min read",
+    "sourceFile": "2022-07-25-challenges-of-building-a-web-with-flutter.mdx"
+  },
+  {
+    "slug": "going-international",
+    "title": "Going International - The Ups and Downs of Being a Distributed Team",
+    "subtitle": null,
+    "permalink": "/going-international/",
+    "featured": false,
+    "date": "2022-07-25",
+    "category": "people-events",
+    "author": "fer-barrios",
+    "tags": [
+      "Xmartlabs"
+    ],
+    "thumbnail": "/images/going-international/going-international.png",
+    "readingTime": "8 min read",
+    "sourceFile": "2022-07-25-going-international.md"
+  },
+  {
+    "slug": "blog-basic-infrastructure-in-aws-using-terraform",
+    "title": "Basic Infrastructure in AWS using Terraform",
+    "subtitle": null,
+    "permalink": "/blog-basic-infrastructure-in-aws-using-terraform/",
+    "featured": false,
+    "date": "2022-08-01",
+    "category": "development",
+    "author": "pablog",
+    "tags": [
+      "aws",
+      "terraform",
+      "aws infraestructure"
+    ],
+    "thumbnail": "/images/basic-infrastructure-in-AWS-using-terraform/Basic-Infrastructure-in-AWS-using-Terraform.png",
+    "readingTime": "17 min read",
+    "sourceFile": "2022-07-27-basic-infrastructure-in-AWS-using-terraform.md"
+  },
+  {
+    "slug": "quality-assurance-development-process",
+    "title": "The importance QA in the development process",
+    "subtitle": null,
+    "permalink": "/quality-assurance-development-process/",
+    "featured": false,
+    "date": "2022-09-29",
+    "category": "development",
+    "author": "sofitechera",
+    "tags": [
+      "QA",
+      "quality assurance",
+      "Testing",
+      "Software Test"
+    ],
+    "thumbnail": "/images/importance-qa/cover.png",
+    "readingTime": "7 min read",
+    "sourceFile": "2022-09-29-importance-qa.md"
+  },
+  {
+    "slug": "introducing-stock",
+    "title": "Introducing stock",
+    "subtitle": null,
+    "permalink": "/introducing-stock/",
+    "featured": false,
+    "date": "2022-10-05",
+    "category": "development",
+    "author": "mirland",
+    "tags": [
+      "stock",
+      "flutter",
+      "dart",
+      "pub",
+      "package",
+      "plugin",
+      "hacktoberfest"
+    ],
+    "thumbnail": "/images/introducing-stock/banner.png",
+    "readingTime": "4 min read",
+    "sourceFile": "2022-10-05-introducing-stock.md"
+  },
+  {
+    "slug": "data-analytics",
+    "title": "How your business can take advantage of Big Data",
+    "subtitle": null,
+    "permalink": "/data-analytics/",
+    "featured": false,
+    "date": "2022-11-18",
+    "category": "development",
+    "author": "jsanchez",
+    "tags": [
+      "big data",
+      "data analytics",
+      "business intelligence",
+      "data services"
+    ],
+    "thumbnail": "/images/data-analytics/data-analytics-cover.png",
+    "readingTime": "8 min read",
+    "sourceFile": "2022-11-18-posts_data_analytics.md"
+  },
+  {
+    "slug": "fluttips",
+    "title": "Explore the Benefits of Fluttips - A Comprehensive Flutter Resource for Developers",
+    "subtitle": null,
+    "permalink": "/fluttips/",
+    "featured": false,
+    "date": "2023-02-10",
+    "category": "development",
+    "author": "sol-mendiola",
+    "tags": [
+      "Flutter tips",
+      "Flutter Best Practices",
+      "Learn Flutter"
+    ],
+    "thumbnail": "/images/fluttips/Blog_Fluttips.png",
+    "readingTime": "5 min read",
+    "sourceFile": "2023-02-09-Fluttips.mdx"
+  },
+  {
+    "slug": "machine-learning-sign-language-recognition",
+    "title": "Building a zero-shot Sign Pose Embedding model",
+    "subtitle": null,
+    "permalink": "/machine-learning-sign-language-recognition/",
+    "featured": false,
+    "date": "2023-03-16",
+    "category": "machine-learning",
+    "author": "mathias",
+    "tags": [
+      "machine-learning",
+      "pose estimation",
+      "pose embedding model",
+      "sign language recognition"
+    ],
+    "thumbnail": "/images/building-a-zero-shot-sign-pose-embedding-model/LSU.png",
+    "readingTime": "9 min read",
+    "sourceFile": "2023-03-15-building-a-zero-shot-sign-pose-embedding-model.md"
+  },
+  {
+    "slug": "from-idea-to-mvp-the-lean-inception-process",
+    "title": "From Idea to MVP - The Journey of Designing a Tool for Practicing Sign Language",
+    "subtitle": null,
+    "permalink": "/from-idea-to-mvp-the-lean-inception-process/",
+    "featured": false,
+    "date": "2023-03-16",
+    "category": "product-design",
+    "author": "andres-zunini",
+    "tags": [
+      "lean inception",
+      "product design",
+      "mvp"
+    ],
+    "thumbnail": "/images/from-idea-to-mvp/LSU_Design.png",
+    "readingTime": "17 min read",
+    "sourceFile": "2023-03-15-from-idea-to-MVP-the-journey-of-designing-a-tool-for-practicing-sign-language.mdx"
+  },
+  {
+    "slug": "a-comprehensive-guide-to-alpaca-trading-api",
+    "title": "Unlocking the Potential of Alpaca Trading API - A Comprehensive Guide",
+    "subtitle": null,
+    "permalink": "/a-comprehensive-guide-to-alpaca-trading-api/",
+    "featured": false,
+    "date": "2023-03-28",
+    "category": "development",
+    "author": "christian-casaran",
+    "tags": [
+      "frontend-development",
+      "alpaca API",
+      "javascript development"
+    ],
+    "thumbnail": "/images/alpaca-trading-API/Alpaca_trading.png",
+    "readingTime": "20 min read",
+    "sourceFile": "2023-03-24-alpaca-trading-API.mdx"
+  },
+  {
+    "slug": "the-power-of-neobanking-with-synapse-fi",
+    "title": "Unleash the Power of Neobanking with SynapseFi - Your Guide to the Future of Finance",
+    "subtitle": null,
+    "permalink": "/the-power-of-neobanking-with-synapse-fi/",
+    "featured": false,
+    "date": "2023-03-24",
+    "category": "development",
+    "author": "christian-casaran",
+    "tags": [
+      "frontend-development",
+      "alpaca API",
+      "javascript development"
+    ],
+    "thumbnail": "/images/neobanking-and-synapseFi/Neobanking-1.png",
+    "readingTime": "19 min read",
+    "sourceFile": "2023-03-24-neobanking-and-synapseFi.mdx"
+  },
+  {
+    "slug": "streaming-data-sources-with-kafka",
+    "title": "Streaming data sources with Kafka",
+    "subtitle": null,
+    "permalink": "/streaming-data-sources-with-kafka/",
+    "featured": false,
+    "date": "2023-03-30",
+    "category": "development",
+    "author": "jsanchez",
+    "tags": [
+      "kafka"
+    ],
+    "thumbnail": "/images/streaming-data-sources-with-kafka/kafka-blogpost.png",
+    "readingTime": "6 min read",
+    "sourceFile": "2023-03-30-streaming-data-sources-with-kafka.mdx"
+  },
+  {
+    "slug": "type-script-type-guards-writing-safer-code",
+    "title": "TypeScript Type Guards - An Introduction to Writing Safer Code",
+    "subtitle": null,
+    "permalink": "/type-script-type-guards-writing-safer-code/",
+    "featured": false,
+    "date": "2023-04-13",
+    "category": "development",
+    "author": "solo",
+    "tags": [
+      "Typescript"
+    ],
+    "thumbnail": "/images/typeScript-Type-Guards-An-Introduction-to-Writing/Infinite_scrolling.png",
+    "readingTime": "13 min read",
+    "sourceFile": "2023-04-12-typeScript-type-guards-an-introduction-to-writing-infinite-scrolling.mdx"
+  },
+  {
+    "slug": "how-to-implement-infinite-scrolling-in-react-native",
+    "title": "Mastering Infinite Scrolling with React Native",
+    "subtitle": null,
+    "permalink": "/how-to-implement-infinite-scrolling-in-react-native/",
+    "featured": false,
+    "date": "2023-04-19",
+    "category": "development",
+    "author": "solo",
+    "tags": [
+      "React Native"
+    ],
+    "thumbnail": "/images/effortless-scrolling/Infinite_scrolling.png",
+    "readingTime": "7 min read",
+    "sourceFile": "2023-04-19-effortless-scrolling-how-to-implement-infinite-scrolling-in-react.mdx"
+  },
+  {
+    "slug": "atomic-design-systems-on-figma",
+    "title": "Atomic Design Systems on Figma (+ Figma community file!)",
+    "subtitle": null,
+    "permalink": "/atomic-design-systems-on-figma/",
+    "featured": false,
+    "date": "2023-07-07",
+    "category": "product-design",
+    "author": "mikaela",
+    "tags": [
+      "Figma",
+      "UI",
+      "UX"
+    ],
+    "thumbnail": "/images/atomic-design-systems-on-figma/Atomic_design.png",
+    "readingTime": "13 min read",
+    "sourceFile": "2023-07-05-atomic-design-systems-on-figma.mdx"
+  },
+  {
+    "slug": "i-tested-react-native-new-architecture-improvements",
+    "title": "I Tested React Native’s New Architecture Improvements So You Don't Have To",
+    "subtitle": null,
+    "permalink": "/i-tested-react-native-new-architecture-improvements/",
+    "featured": false,
+    "date": "2023-07-12",
+    "category": "development",
+    "author": "belu",
+    "tags": [
+      "React Native",
+      "Mobile Development",
+      "Performance"
+    ],
+    "thumbnail": "/images/i-tested-react-native-new-architecture-improvements/featured.png",
+    "readingTime": "7 min read",
+    "sourceFile": "2023-07-12-i-tested-react-native-new-architecture-improvements.mdx"
+  },
+  {
+    "slug": "tf-recommenders-encode-user-watch-history-using-openai-embeddings",
+    "title": "TF Recommenders: Encode user watch history using OpenAI embeddings",
+    "subtitle": "  ",
+    "permalink": "/tf-recommenders-encode-user-watch-history-using-openai-embeddings/",
+    "featured": true,
+    "date": "2023-07-21",
+    "category": "machine-learning",
+    "author": "mathias",
+    "tags": [
+      "Machine Learning",
+      "Recommendation System",
+      "TensorFlow Recommenders",
+      "LLM",
+      "Large Language Model"
+    ],
+    "thumbnail": "/images/tf-recommenders-encode-user-watch-history-using-openai-embeddings/featured.png",
+    "readingTime": "10 min read",
+    "sourceFile": "2023-07-21-tf-recommenders-encode-user-watch-history-using-openai-embeddings.md"
+  },
+  {
+    "slug": "ai-driven-product-hyper-personalization",
+    "title": "AI-Driven Hyper-Personalization: Elevating Product Lifecycle Management (PLM) to New Heights",
+    "subtitle": " ",
+    "permalink": "/ai-driven-product-hyper-personalization/",
+    "featured": true,
+    "date": "2023-08-03",
+    "category": "data-engineering",
+    "author": "vale",
+    "tags": [
+      "AI Personalization",
+      "Product Lifecycle Management",
+      "Customer Experience",
+      "Hyper-Personalization"
+    ],
+    "thumbnail": "/images/ai-driven-product-hyper-personalization/featured.png",
+    "readingTime": "7 min read",
+    "sourceFile": "2023-08-03-ai-driven-product-hyper-personalization.mdx"
+  },
+  {
+    "slug": "deploying-a-recommendation-system-using-fastapi-tf-serving-and-feast",
+    "title": "Deploying a Recommendation system using FastAPI, TF Serving and Feast",
+    "subtitle": " ",
+    "permalink": "/deploying-a-recommendation-system-using-fastapi-tf-serving-and-feast/",
+    "featured": true,
+    "date": "2023-08-24",
+    "category": "machine-learning",
+    "author": "mathias",
+    "tags": [
+      "Recommendation Systems",
+      "FastAPI",
+      "TF Serving",
+      "Feast",
+      "Machine Learning"
+    ],
+    "thumbnail": "/images/deploying-a-recommendation-system-using-fastapi-tf-serving-and-feast/featured_image.png",
+    "readingTime": "9 min read",
+    "sourceFile": "2023-09-24-deploying-a-recommendation-system-using-fastapi-tf-serving-and-feast.mdx"
+  },
+  {
+    "slug": "ml-model-monitoring-boosting-performance-and-reliability",
+    "title": "ML Model Monitoring: Boosting Performance & Reliability",
+    "subtitle": " ",
+    "permalink": "/ml-model-monitoring-boosting-performance-and-reliability/",
+    "featured": true,
+    "date": "2023-08-24",
+    "category": "machine-learning",
+    "author": "maximol",
+    "tags": [
+      "Model Monitoring",
+      "Model Performance",
+      "Prometheus",
+      "Grafana",
+      "Recommendation Systems"
+    ],
+    "thumbnail": "/images/ml-model-monitoring-boosting-performance-and-reliability/featured.png",
+    "readingTime": "13 min read",
+    "sourceFile": "2023-09-24-ml-model-monitoring-boosting-performance-and-reliability.md"
+  },
+  {
+    "slug": "2023-10-04-adapting-teams-to-enterprise-needs",
+    "title": "Adapting Teams to Enterprise Needs: The Key to Successful Collaborations",
+    "subtitle": " ",
+    "permalink": "/2023-10-04-adapting-teams-to-enterprise-needs/",
+    "featured": true,
+    "date": "2023-10-04",
+    "category": "strategy",
+    "author": "vale",
+    "tags": [
+      "Flexible Development Teams",
+      "Adaptable Outsourcing Services",
+      "Custom Software Development",
+      "Tailored Enterprise Solutions",
+      "Vendor Flexibility in Project Management"
+    ],
+    "thumbnail": "/images/adapting-teams-to-enterprise-needs/featured.png",
+    "readingTime": "10 min read",
+    "sourceFile": "2023-10-04-adapting-teams-to-enterprise-needs.mdx"
+  },
+  {
+    "slug": "2023-10-05-securing-development-and-ensuring-compliance",
+    "title": "Securing Development and Ensuring Compliance: Tips, Guidance, and Best Practices",
+    "subtitle": " ",
+    "permalink": "/2023-10-05-securing-development-and-ensuring-compliance/",
+    "featured": true,
+    "date": "2023-10-06",
+    "category": "strategy",
+    "author": "vir-rivedieu",
+    "tags": [
+      "Security Compliance",
+      "Secure Development Practices",
+      "Compliance Best Practices",
+      "Secure Coding"
+    ],
+    "thumbnail": "/images/securing-development-and-ensuring-compliance/featured.png",
+    "readingTime": "13 min read",
+    "sourceFile": "2023-10-05-securing-development-and-ensuring-compliance.md"
+  },
+  {
+    "slug": "estimating-accurate-budgets-for-dev",
+    "title": "How to Estimate an Accurate Budget for Your Product Development Project ",
+    "subtitle": " ",
+    "permalink": "/estimating-accurate-budgets-for-dev/",
+    "featured": true,
+    "date": "2023-10-20",
+    "category": "strategy",
+    "author": "vir-rivedieu",
+    "tags": [
+      "Product",
+      "Budgeting",
+      ""
+    ],
+    "thumbnail": "/images/frame-2608226.png",
+    "readingTime": "12 min read",
+    "sourceFile": "2023-10-20-how-to-estimate-an-accurate-budget-for-your-product-development-project.md"
+  },
+  {
+    "slug": "2025-retrospective",
+    "title": "2025 in retrospect: Lessons, focus, and what's ahead in the new year.",
+    "subtitle": "Lessons, focus, and what's ahead in the new year.",
+    "permalink": "/2025-retrospective",
+    "featured": false,
+    "date": "2026-02-09",
+    "category": "strategy",
+    "author": "xl",
+    "tags": [
+      "retrospective",
+      "companyupdate",
+      "yearinreview",
+      "strategy",
+      "what’snext"
+    ],
+    "thumbnail": "/images/2025-in-retrospect.jpg",
+    "readingTime": "5 min read",
+    "sourceFile": "2025-in-retrospect.mdx"
+  },
+  {
+    "slug": "rails-activestorage-cloudfront-media-optimization",
+    "title": "ActiveStorage + CloudFront: Optimizing Media Download Speed in Rails",
+    "subtitle": " ",
+    "permalink": "rails-activestorage-cloudfront-media-optimization",
+    "featured": true,
+    "date": "2024-08-12",
+    "category": "development",
+    "author": "mlorenzo",
+    "tags": [
+      "Rails",
+      "AWS",
+      "CloudFront",
+      "ActiveStorage",
+      "WebPerformance"
+    ],
+    "thumbnail": "/images/active-storage-portada.jpg",
+    "readingTime": "19 min read",
+    "sourceFile": "activestorage-cloudfront-optimizing-media-download-speed-in-rails.md"
+  },
+  {
+    "slug": "agentic-qa-the-future-of-testing",
+    "title": "Agentic QA: The future of testing",
+    "subtitle": "Exploring how AI-driven agents are transforming testing from repetitive tasks to strategic decision-making.",
+    "permalink": "/agentic-qa-the-future-of-testing",
+    "featured": false,
+    "date": "2025-10-24",
+    "category": "qa",
+    "author": "nat-nobre",
+    "tags": [
+      "AI",
+      "Machine Learning",
+      "QA",
+      "Software Testing",
+      "Agentic System"
+    ],
+    "thumbnail": "/images/portada-qa.jpg",
+    "readingTime": "7 min read",
+    "sourceFile": "agentic-qa-the-future-of-testing.mdx"
+  },
+  {
+    "slug": "ai-product-discovery-fasten-health",
+    "title": "AI Product Discovery: A Journey with Fasten Health",
+    "subtitle": " ",
+    "permalink": "ai-product-discovery-fasten-health",
+    "featured": true,
+    "date": "2024-11-04",
+    "category": "strategy",
+    "author": "rafael-morante",
+    "tags": [
+      "ProductDiscovery",
+      "AI",
+      "Healthtech",
+      "PHR",
+      "AIproduct"
+    ],
+    "thumbnail": "/images/ai-product-discovery.jpg",
+    "readingTime": "6 min read",
+    "sourceFile": "ai-product-discovery-a-journey-with-fasten-health.md"
+  },
+  {
+    "slug": "ai-tools-beyond-engineering",
+    "title": "AI Tools Are Not Just for Developers",
+    "subtitle": "How We're Expanding Beyond Engineering",
+    "permalink": "ai-tools-beyond-engineering",
+    "featured": true,
+    "date": "2026-07-21",
+    "category": "machine-learning",
+    "author": "nicoh",
+    "tags": [
+      "AI Adoption",
+      "Claude Code",
+      "Project Management",
+      "MCP",
+      "AI Engineering"
+    ],
+    "thumbnail": "/images/ai-tools-beyond-engineering-cover-web.png",
+    "readingTime": "18 min read",
+    "sourceFile": "ai-tools-are-not-just-for-developers.mdx"
+  },
+  {
+    "slug": "ai-trends-2024",
+    "title": "AI Trends To Watch In 2024",
+    "subtitle": " ",
+    "permalink": "AI-trends-2024",
+    "featured": true,
+    "date": "2023-12-13",
+    "category": "machine-learning",
+    "author": "vir-rivedieu",
+    "tags": [
+      "Artificial Intelligence",
+      "Trends 2024",
+      "Machine Learning",
+      "RAG",
+      "AI Tools"
+    ],
+    "thumbnail": "/images/ai-trends-1-.png",
+    "readingTime": "6 min read",
+    "sourceFile": "ai-trends-to-watch-in-2024.md"
+  },
+  {
+    "slug": "apple-intelligence-ai-data-privacy",
+    "title": "Apple Intelligence: Personalized AI with Privacy at its Core",
+    "subtitle": " ",
+    "permalink": "apple-intelligence-ai-data-privacy",
+    "featured": true,
+    "date": "2024-09-16",
+    "category": "development",
+    "author": "felifa",
+    "tags": [
+      "AI",
+      "DataPrivacy",
+      "Apple",
+      "iOS",
+      "Personalization"
+    ],
+    "thumbnail": "/images/apple-intelligence.jpg",
+    "readingTime": "7 min read",
+    "sourceFile": "apple-intelligence-personalized-ai-with-privacy-at-its-core.md"
+  },
+  {
+    "slug": "automate-yes-dehumanize-no",
+    "title": "Automate, Yes. Dehumanize, No.",
+    "subtitle": "A recruiter's take on where AI genuinely helps in hiring, and where empathy still can't be replaced.",
+    "permalink": "/automate-yes-dehumanize-no",
+    "featured": false,
+    "date": "2026-07-13",
+    "category": "people-events",
+    "author": "ceci-herrera",
+    "tags": [
+      "Hiring Process",
+      "Candidate Experience",
+      "AI in Recruitment"
+    ],
+    "thumbnail": "/images/cover-web-1200x627.png",
+    "readingTime": "6 min read",
+    "sourceFile": "automate-yes-dehumanize-no.mdx"
+  },
+  {
+    "slug": "cyber-security-tips",
+    "title": "Bedtime (Cybersecurity) Stories",
+    "subtitle": " ",
+    "permalink": "cyber-security-tips",
+    "featured": true,
+    "date": "2024-03-21",
+    "category": "development",
+    "author": "belu",
+    "tags": [
+      "cybersecurity",
+      "phishing",
+      "Adware",
+      "Botnet",
+      "TaskScams"
+    ],
+    "thumbnail": "/images/portada-cybersecurity-stories.png",
+    "readingTime": "14 min read",
+    "sourceFile": "bedtime-cybersecurity-stories.md"
+  },
+  {
+    "slug": "impostor-syndrome",
+    "title": "Behind Self-Doubt: Understanding Impostor Syndrome",
+    "subtitle": "How it shapes the way we see ourselves",
+    "permalink": "/impostor-syndrome",
+    "featured": false,
+    "date": "2025-12-18",
+    "category": "people-events",
+    "author": "eli-linardi",
+    "tags": [
+      "Impostor Syndrome",
+      "Self-Doubt",
+      "Mental Health at Work",
+      "Professional Growth"
+    ],
+    "thumbnail": "/images/portada-is-english.jpg",
+    "readingTime": "6 min read",
+    "sourceFile": "behind-self-doubt-understanding-impostor-syndrome.mdx"
+  },
+  {
+    "slug": "blog-building-health-apps-mcp-llms",
+    "title": "Build a Local Health Data Server on Your Phone with Flutter + MCP",
+    "subtitle": "Access your health data from your phone in a simple, natural way with Flutter and MCP.",
+    "permalink": "/blog/building-health-apps-mcp-llms/",
+    "featured": false,
+    "date": "2025-08-29",
+    "category": "development",
+    "author": "nicolantean",
+    "tags": [
+      "Healthcare AI",
+      "AI/ML",
+      "Cloud LLM",
+      "Mobile Development",
+      "Wearables"
+    ],
+    "thumbnail": "/images/portada.jpg",
+    "readingTime": "6 min read",
+    "sourceFile": "build-a-local-health-data-server-on-your-phone-with-flutter-mcp.mdx"
+  },
+  {
+    "slug": "gender-equality-it",
+    "title": "Building Bridges: How We're Crafting a Woman-Safe Workplace",
+    "subtitle": " ",
+    "permalink": "gender-equality-it",
+    "featured": true,
+    "date": "2024-03-27",
+    "category": "people-events",
+    "author": "ceci",
+    "tags": [
+      "People",
+      "Gender",
+      "WomenIT",
+      ""
+    ],
+    "thumbnail": "/images/linkedin-comision.png",
+    "readingTime": "9 min read",
+    "sourceFile": "building-bridges-how-were-crafting-a-woman-safe-workplace.md"
+  },
+  {
+    "slug": "tech-recruiting-process-enterprise",
+    "title": "Building High-Performing Teams: Inside Xmartlabs' Recruitment Process",
+    "subtitle": " ",
+    "permalink": "tech-recruiting-process-enterprise",
+    "featured": true,
+    "date": "2024-02-16",
+    "category": "people-events",
+    "author": "vale",
+    "tags": [
+      "Recruiting",
+      "Tech",
+      "Enterprise",
+      "Team"
+    ],
+    "thumbnail": "/images/portada-recruitment.png",
+    "readingTime": "6 min read",
+    "sourceFile": "building-high-performing-teams-inside-xmartlabs-recruitment-process.md"
+  },
+  {
+    "slug": "pop-up-ux-design",
+    "title": "Closing the Pop-Up Dilemma: A Deep Dive into UX Discontent",
+    "subtitle": " ",
+    "permalink": "pop-up-ux-design",
+    "featured": true,
+    "date": "2024-03-16",
+    "category": "product-design",
+    "author": "carolina-berastegui",
+    "tags": [
+      "Design",
+      "PopUps",
+      "UX",
+      "UserExperience",
+      "UX/UI"
+    ],
+    "thumbnail": "/images/portada-popups.png",
+    "readingTime": "6 min read",
+    "sourceFile": "closing-the-pop-up-dilemma-a-deep-dive-into-ux-discontent.md"
+  },
+  {
+    "slug": "communication-at-xmartlabs",
+    "title": "Communication at Xmartlabs: How We Stay Aligned as Projects Evolve.",
+    "subtitle": "How We Stay Aligned as Projects Evolve.",
+    "permalink": "/communication-at-xmartlabs",
+    "featured": false,
+    "date": "2026-02-26",
+    "category": "development",
+    "author": "augusto",
+    "tags": [
+      "Communication",
+      "Project Management",
+      "Software Projects",
+      "Collaboration",
+      "Agile Practices"
+    ],
+    "thumbnail": "/images/portada-communication-.jpg",
+    "readingTime": "8 min read",
+    "sourceFile": "communication-at-xmartlabs.mdx"
+  },
+  {
+    "slug": "data-governance",
+    "title": "Data Governance Framework: Elevating Data's Potential",
+    "subtitle": " ",
+    "permalink": "data-governance",
+    "featured": true,
+    "date": "2023-11-16",
+    "category": "machine-learning",
+    "author": "jsanchez",
+    "tags": [
+      "data",
+      "datagovernance",
+      "dataquality",
+      "ai",
+      "bigdata"
+    ],
+    "thumbnail": "/images/data-gov-cover.png",
+    "readingTime": "6 min read",
+    "sourceFile": "data-governance-framework-elevating-datas-potential.md"
+  },
+  {
+    "slug": "effective-ml-project-design",
+    "title": "Designing Effective ML Projects: Best Practices",
+    "subtitle": " ",
+    "permalink": "effective-ml-project-design",
+    "featured": true,
+    "date": "2023-11-20",
+    "category": "machine-learning",
+    "author": "mathias",
+    "tags": [
+      "MachineLearning",
+      "MLEngineering",
+      "MLmodels",
+      "ProjectDesign"
+    ],
+    "thumbnail": "/images/blogpost-cover.png",
+    "readingTime": "11 min read",
+    "sourceFile": "designing-effective-ml-projects-best-practices.md"
+  },
+  {
+    "slug": "designing-ia-level-up-ai-workshop-team-adoption",
+    "title": "Designing IA Level Up: A 3-Hour Workshop That Changed How Our Team Uses AI",
+    "subtitle": "How we designed a hands-on AI workshop to help our team move from basic adoption to confident, everyday AI usage.",
+    "permalink": "designing-ia-level-up-ai-workshop-team-adoption",
+    "featured": false,
+    "date": "2026-05-12",
+    "category": "machine-learning",
+    "author": "nicoh",
+    "tags": [
+      "AI",
+      "Generative AI",
+      "AI Workshop",
+      "AI Adoption"
+    ],
+    "thumbnail": "/images/designing_ia_level_up_cover_v6.png",
+    "readingTime": "18 min read",
+    "sourceFile": "designing-ia-level-up-a-3-hour-workshop-that-changed-how-our-team-uses-ai.mdx"
+  },
+  {
+    "slug": "devops-explained",
+    "title": "DevOps 101: Optimizing Tech Solutions",
+    "subtitle": " ",
+    "permalink": "devops-explained",
+    "featured": true,
+    "date": "2024-05-25",
+    "category": "strategy",
+    "author": "vale",
+    "tags": [
+      "DevOps",
+      "Development",
+      "Strategy",
+      "Operations",
+      "Agile"
+    ],
+    "thumbnail": "/images/linkedin-devops.png",
+    "readingTime": "9 min read",
+    "sourceFile": "devops-101-optimizing-tech-solutions.md"
+  },
+  {
+    "slug": "distilling-intelligence-llm-training",
+    "title": "Distilling Intelligence: How to Train a Small LLM Without Sacrificing Quality",
+    "subtitle": "Is it possible to get the reasoning of a +100B parameter model packed into a 400MB binary that runs on a phone? Yes, and here's how.",
+    "permalink": "/distilling-intelligence-llm-training",
+    "featured": false,
+    "date": "2026-05-13",
+    "category": "machine-learning",
+    "author": "marcos-soto",
+    "tags": [
+      "Machine Learning",
+      "LLM",
+      "Fine-Tuning",
+      "HealthTech",
+      "AI"
+    ],
+    "thumbnail": "/images/distilling-intelligence.png",
+    "readingTime": "11 min read",
+    "sourceFile": "distilling-intelligence-llm-training.mdx"
+  },
+  {
+    "slug": "ai-value-based-care",
+    "title": "Empowering Value-Base Care with AI",
+    "subtitle": " ",
+    "permalink": "ai-value-based-care",
+    "featured": true,
+    "date": "2024-08-15",
+    "category": "development",
+    "author": "vale",
+    "tags": [
+      "ValueBasedCare",
+      "ArtificialIntelligence",
+      "HealthTech",
+      "CareCoordination",
+      "AI"
+    ],
+    "thumbnail": "/images/vbc-portada.jpg",
+    "readingTime": "6 min read",
+    "sourceFile": "empowering-value-base-care-with-ai.md"
+  },
+  {
+    "slug": "experiment-tracking-machine-learning",
+    "title": "Experiment Tracking Done Right: Relevancy and Best Practices",
+    "subtitle": " ",
+    "permalink": "experiment-tracking-machine-learning",
+    "featured": true,
+    "date": "2024-04-04",
+    "category": "machine-learning",
+    "author": "gabriel-lema",
+    "tags": [
+      "MachineLearning",
+      "ExperimentTracking",
+      "MLmodel",
+      "MLFlow",
+      "ClearML"
+    ],
+    "thumbnail": "/images/portada-experiment-tracking.png",
+    "readingTime": "11 min read",
+    "sourceFile": "experiment-tracking-done-right-relevancy-and-best-practices.mdx"
+  },
+  {
+    "slug": "apple-vision-pro",
+    "title": "Exploring Apple Vision Pro: Key Takeaways From Our Devs",
+    "subtitle": " ",
+    "permalink": "apple-vision-pro",
+    "featured": true,
+    "date": "2023-11-28",
+    "category": "development",
+    "author": "nicolantean",
+    "tags": [
+      "AppleVision",
+      "iOS",
+      "Mobile",
+      "visionOS",
+      "ARKit"
+    ],
+    "thumbnail": "/images/apple-vision-pro.png",
+    "readingTime": "11 min read",
+    "sourceFile": "exploring-apple-vision-pro-key-takeaways-from-our-devs.md"
+  },
+  {
+    "slug": "blog-on-device-ai-health-assistant-xlcare",
+    "title": "Forget the Cloud: Can Your Health App Run AI On-Device?",
+    "subtitle": " ",
+    "permalink": "/blog/on-device-ai-health-assistant-xlcare",
+    "featured": true,
+    "date": "2025-06-12",
+    "category": "development",
+    "author": "belu",
+    "tags": [
+      "On-device AI",
+      "Edge computing",
+      "Privacy-First AI",
+      "Mobile health apps",
+      "AI Assistants"
+    ],
+    "thumbnail": "/images/forget-the-cloud-portada.jpg",
+    "readingTime": "8 min read",
+    "sourceFile": "forget-the-cloud-can-your-health-app-run-ai-on-device.mdx"
+  },
+  {
+    "slug": "from-black-box-to-control-panel",
+    "title": "The Production Challenge in the GenAI Era: From Black Box to Control Panel",
+    "subtitle": "A Work Methodology Focused on Observability for LLM Systems in Production",
+    "permalink": "/from-black-box-to-control-panel/",
+    "featured": false,
+    "date": "2025-11-04",
+    "category": "machine-learning",
+    "author": "marcos-soto",
+    "tags": [
+      "AI",
+      "GenAI",
+      "Agents",
+      "LLMs",
+      "Production"
+    ],
+    "thumbnail": "/images/from-black-box-to-control-panel/the_production_challenge.jpg",
+    "readingTime": "25 min read",
+    "sourceFile": "from-black-box-to-control-panel.mdx"
+  },
+  {
+    "slug": "conversational-ai-for-data-analytics",
+    "title": "From Dashboard to Dialogue: Evolving data analytics with conversational Artificial Intelligence",
+    "subtitle": "Turning static dashboards into dynamic conversations that unlock faster, smarter decisions.",
+    "permalink": "/conversational-ai-for-data-analytics",
+    "featured": false,
+    "date": "2026-04-20",
+    "category": "machine-learning",
+    "author": "gabriel-lema",
+    "tags": [
+      "Data Analytics",
+      "Conversational",
+      "Artificial Intelligence",
+      "Data Insights",
+      "Business Intelligence"
+    ],
+    "thumbnail": "/images/from-dashboard-to-dialogue.jpg",
+    "readingTime": "10 min read",
+    "sourceFile": "from-dashboard-to-dialogue-evolving-data-analytics-with-conversational-artificial-intelligence-1.mdx"
+  },
+  {
+    "slug": "react-native-react-js-guideline",
+    "title": "From React Native to React JS: A Developer's Journey",
+    "subtitle": " ",
+    "permalink": "ReactNative-ReactJS-Guideline",
+    "featured": true,
+    "date": "2024-03-12",
+    "category": "development",
+    "author": "vir-bacigalupe",
+    "tags": [
+      "ReactNative",
+      "ReactJS",
+      "MobileDevelopment",
+      "WebDevelopment"
+    ],
+    "thumbnail": "/images/react-native-to-react-js.png",
+    "readingTime": "9 min read",
+    "sourceFile": "from-react-native-to-react-js-a-developers-journey.md"
+  },
+  {
+    "slug": "graphrag-for-healthcare-ai",
+    "title": "GraphRAG for Healthcare AI",
+    "subtitle": "When Structure Beats Similarity",
+    "permalink": "/graphrag-for-healthcare-ai",
+    "featured": true,
+    "date": "2026-09-11",
+    "category": "machine-learning",
+    "author": "xl",
+    "tags": [
+      "GraphRAG",
+      "Healthcare AI",
+      "Knowledge Graphs",
+      "RAG",
+      "FHIR"
+    ],
+    "thumbnail": "/images/a-web-header-1600x900.png",
+    "readingTime": "10 min read",
+    "sourceFile": "graphrag-for-healthcare-ai.mdx"
+  },
+  {
+    "slug": "fhir-data-optimization-rag-systems",
+    "title": "Healthcare Data Optimization: Parsing FHIR data into RAG",
+    "subtitle": " ",
+    "permalink": "fhir-data-optimization-rag-systems",
+    "featured": true,
+    "date": "2024-10-23",
+    "category": "machine-learning",
+    "author": "daniel-baena",
+    "tags": [
+      "Healthcare",
+      "FHIR",
+      "RAG",
+      "Data",
+      "AI"
+    ],
+    "thumbnail": "/images/parsing-fhir-data-into-rag-cover.jpg",
+    "readingTime": "8 min read",
+    "sourceFile": "healthcare-data-optimization-parsing-fhir-data-into-rag.md"
+  },
+  {
+    "slug": "on-device-agent",
+    "title": "How Far Can On-Device AI Go? Toward Agentic Health Capabilities on Mobile",
+    "subtitle": "How Far Can On-Device AI Go? Toward Agentic Health Capabilities on Mobile",
+    "permalink": "/on-device-agent/",
+    "featured": true,
+    "date": "2025-07-08",
+    "category": "development",
+    "author": "belu",
+    "tags": [
+      "health",
+      "ai agent",
+      "mobile agent",
+      "local llm",
+      "health ai"
+    ],
+    "thumbnail": "/images/group-2-1-1-1-.png",
+    "readingTime": "13 min read",
+    "sourceFile": "how-far-can-on-device-ai-go.md"
+  },
+  {
+    "slug": "okr-business-goals-methodology",
+    "title": "How OKR implementation elevated our performance (+ Practical tips for your organization)",
+    "subtitle": " ",
+    "permalink": "OKR-business-goals-methodology",
+    "featured": true,
+    "date": "2024-04-18",
+    "category": "strategy",
+    "author": "nati-quintana",
+    "tags": [
+      "OKR",
+      "Business",
+      "Strategy",
+      "Goals",
+      "Methodology"
+    ],
+    "thumbnail": "/images/portada-okrs.png",
+    "readingTime": "8 min read",
+    "sourceFile": "how-okr-implementation-elevated-our-performance-practical-tips-for-your-organization.md"
+  },
+  {
+    "slug": "wereables-react-native-integration",
+    "title": "How to Integrate ANY Wearable with Your React Native App",
+    "subtitle": " ",
+    "permalink": "wereables-react-native-integration",
+    "featured": true,
+    "date": "2024-10-16",
+    "category": "development",
+    "author": "belu",
+    "tags": [
+      "reactnative",
+      "wereables",
+      "mobile",
+      "development",
+      "healthcare"
+    ],
+    "thumbnail": "/images/wereables-cover.jpg",
+    "readingTime": "11 min read",
+    "sourceFile": "how-to-integrate-any-wearable-with-your-react-native-app.md"
+  },
+  {
+    "slug": "surviving-a-spike",
+    "title": "How to tackle a Spike and live to tell it",
+    "subtitle": " ",
+    "permalink": "surviving-a-spike",
+    "featured": true,
+    "date": "2025-04-29",
+    "category": "development",
+    "author": "mei",
+    "tags": [
+      "SoftwareDevelopment",
+      "Agile",
+      "DevTips",
+      "TechTeam"
+    ],
+    "thumbnail": "/images/portada-surviving-to-spikes.jpg",
+    "readingTime": "9 min read",
+    "sourceFile": "how-to-tackle-a-spike-and-live-to-tell-it.md"
+  },
+  {
+    "slug": "gnomon-ai-agent-workflows-adoption",
+    "title": "How We Built Gnomon to See How Engineers Actually Work With AI",
+    "subtitle": "A local, open-source tool that turns AI-agent transcripts into an evidence-based profile, including what our scoring got wrong, and how we fixed it in public.",
+    "permalink": "gnomon-ai-agent-workflows-adoption",
+    "featured": true,
+    "date": "2026-09-29",
+    "category": "development",
+    "author": "federico-balarini",
+    "tags": [
+      "AI Agents",
+      "AI Adoption",
+      "Software Engineering",
+      "Developer Tools",
+      "Open Source"
+    ],
+    "thumbnail": "/images/gnomon-web.png",
+    "readingTime": "7 min read",
+    "sourceFile": "how-we-built-gnomon-to-see-how-engineers-actually-work-with-ai.mdx"
+  },
+  {
+    "slug": "team-collaboration-monthly-sessions",
+    "title": " Improving team collaboration with Monthly ‘Meet & Learn’ Sessions",
+    "subtitle": " ",
+    "permalink": "team-collaboration-monthly-sessions",
+    "featured": true,
+    "date": "2024-10-08",
+    "category": "strategy",
+    "author": "galpe",
+    "tags": [
+      "ProjectManagement",
+      "InternalCommunication",
+      "TeamCollaboration",
+      "TeamStrategy"
+    ],
+    "thumbnail": "/images/meet-learn-portada.jpg",
+    "readingTime": "6 min read",
+    "sourceFile": "improving-team-collaboration-with-monthly-‘meet-learn’-sessions.md"
+  },
+  {
+    "slug": "ai-data-governance-panel",
+    "title": "Insights from Experts on AI and Data Governance",
+    "subtitle": " ",
+    "permalink": "ai-data-governance-panel",
+    "featured": true,
+    "date": "2024-05-25",
+    "category": "strategy",
+    "author": "xl",
+    "tags": [
+      "AI",
+      "DataGovernance",
+      "DataRegulation",
+      "GenAI",
+      "Data"
+    ],
+    "thumbnail": "/images/experts-panel.png",
+    "readingTime": "5 min read",
+    "sourceFile": "insights-from-experts-on-ai-and-data-governance.md"
+  },
+  {
+    "slug": "blog-healthcare-interoperability",
+    "title": "Interoperability: Make Your Systems Speak to Each Other",
+    "subtitle": " ",
+    "permalink": "/blog/healthcare-interoperability",
+    "featured": true,
+    "date": "2025-07-07",
+    "category": "strategy",
+    "author": "conor",
+    "tags": [
+      "Interoperability",
+      "EHR",
+      "Digital Health",
+      "Data Standards",
+      "Healthtech"
+    ],
+    "thumbnail": "/images/interoperability-portada.jpg",
+    "readingTime": "5 min read",
+    "sourceFile": "interoperability-make-your-systems-speak-to-each-other.md"
+  },
+  {
+    "slug": "interruption-testing-qa",
+    "title": "Interruption Testing: What Is it and why it matters",
+    "subtitle": " ",
+    "permalink": "interruption-testing-QA",
+    "featured": true,
+    "date": "2024-07-15",
+    "category": "qa",
+    "author": "nat-nobre",
+    "tags": [
+      "QA",
+      "Testing",
+      "InterruptionTesting",
+      "Mobile"
+    ],
+    "thumbnail": "/images/interruption-testing-cover.png",
+    "readingTime": "5 min read",
+    "sourceFile": "interruption-testing-what-is-it-and-why-it-matters.md"
+  },
+  {
+    "slug": "react-native-health-link",
+    "title": "Introducing react-native-health-link: User Health Data In Your React Native App",
+    "subtitle": " ",
+    "permalink": "react-native-health-link",
+    "featured": true,
+    "date": "2025-03-26",
+    "category": "development",
+    "author": "belu",
+    "tags": [
+      "mobile development",
+      "react native",
+      "healthtech",
+      "wearables",
+      "health link"
+    ],
+    "thumbnail": "/images/react-native-health-link-front.jpg",
+    "readingTime": "4 min read",
+    "sourceFile": "introducing-react-native-health-link-user-health-data-in-your-react-native-app.md"
+  },
+  {
+    "slug": "vytallink-app",
+    "title": "Introducing VytalLink: Making Real Sense of Your Wearable Data",
+    "subtitle": "Making Real Sense of Your Wearable Data",
+    "permalink": "vytallink-app",
+    "featured": false,
+    "date": "2025-10-10",
+    "category": "development",
+    "author": "mirland",
+    "tags": [
+      "Wearable Technology",
+      "Digital Health",
+      "Health Data",
+      "Data Insights",
+      "AI in Healthcare"
+    ],
+    "thumbnail": "/images/group-8.png",
+    "readingTime": "5 min read",
+    "sourceFile": "introducing-vytallink.mdx"
+  },
+  {
+    "slug": "automation-bias-medical-ai-chatbot",
+    "title": "Is Your Chatbot Overconfident? Taming \"Automation Bias\" in Medical AI",
+    "subtitle": "Why the way your chatbot talks can be just as dangerous as what it says.",
+    "permalink": "automation-bias-medical-ai-chatbot",
+    "featured": false,
+    "date": "2026-06-11",
+    "category": "qa",
+    "author": "sofitechera",
+    "tags": [
+      "Medical AI",
+      "AI Testing",
+      "Automation Bias",
+      "Patient Safety",
+      "LLM Evaluation"
+    ],
+    "thumbnail": "/images/cover-web.png",
+    "readingTime": "8 min read",
+    "sourceFile": "is-your-chatbot-overconfident-taming-automation-bias-in-medical-ai.mdx"
+  },
+  {
+    "slug": "jira-setup-streamlined-scrum-product-development",
+    "title": "Jira Setup for Streamlined Scrum: Balancing Product and Development Needs",
+    "subtitle": " ",
+    "permalink": "jira-setup-streamlined-scrum-product-development",
+    "featured": true,
+    "date": "2024-10-30",
+    "category": "strategy",
+    "author": "sante",
+    "tags": [
+      "Jira",
+      "ProjectManagement",
+      "Product",
+      "Development",
+      "Agile"
+    ],
+    "thumbnail": "/images/jira-setup-for-streamlined-scrum.jpg",
+    "readingTime": "6 min read",
+    "sourceFile": "jira-setup-for-streamlined-scrum-balancing-product-and-development-needs.md"
+  },
+  {
+    "slug": "checkable-compliance-deployments",
+    "title": "Making Compliance Requirements Checkable at Every Deployment",
+    "subtitle": "Turn compliance from a last-minute checkpoint into a continuous part of your delivery process.",
+    "permalink": "/checkable-compliance-deployments",
+    "featured": true,
+    "date": "2026-08-07",
+    "category": "machine-learning",
+    "author": "daniel-baena",
+    "tags": [
+      "Compliance",
+      "DevOps",
+      "CI/CD",
+      "DevSecOps",
+      "Automation"
+    ],
+    "thumbnail": "/images/1c-blog-header-1600x900.png",
+    "readingTime": "6 min read",
+    "sourceFile": "making-compliance-requirements-checkable-at-every-deployment.mdx"
+  },
+  {
+    "slug": "contentful-migration-data-performance",
+    "title": "Migrating to Contentful: Streamlining Data for Better Performance and Workflows",
+    "subtitle": " ",
+    "permalink": "/contentful-migration-data-performance",
+    "featured": true,
+    "date": "2025-05-29",
+    "category": "development",
+    "author": "facu",
+    "tags": [
+      "Migration",
+      "Contentful",
+      "CMS",
+      "SEO",
+      "Workflows"
+    ],
+    "thumbnail": "/images/migrating-to-contentful-portada.jpg",
+    "readingTime": "7 min read",
+    "sourceFile": "migrating-to-contentful-streamlining-data-for-better-performance-and-workflows.md"
+  },
+  {
+    "slug": "pdf-charts-images-processing-with-llm",
+    "title": "PDF and image processing with LLMs: Text extraction, charts and image interpretation.",
+    "subtitle": " ",
+    "permalink": "/pdf-charts-images-processing-with-llm",
+    "featured": true,
+    "date": "2025-11-24",
+    "category": "development",
+    "author": "gastonv",
+    "tags": [
+      "LLM",
+      "OpenAI",
+      "PDF Processing"
+    ],
+    "thumbnail": "/images/pdf-processing-with-llm/front-page.jpg",
+    "readingTime": "14 min read",
+    "sourceFile": "pdf-processing-with-llm.mdx"
+  },
+  {
+    "slug": "blog-flexible-usability-testing",
+    "title": "Planning for the unpredictable: creating a usability test that adjusts to user behavior",
+    "subtitle": " ",
+    "permalink": "/blog/flexible-usability-testing",
+    "featured": true,
+    "date": "2025-08-01",
+    "category": "product-design",
+    "author": "mikaela",
+    "tags": [
+      "Usability testing",
+      "UXresearch",
+      "Information architecture"
+    ],
+    "thumbnail": "/images/planning-for-the-unpredictable.jpg",
+    "readingTime": "7 min read",
+    "sourceFile": "planning-for-the-unpredictable-creating-a-usability-test-that-adjusts-to-user-behavior.mdx"
+  },
+  {
+    "slug": "founder-investors-startup-funding",
+    "title": "Power Dynamics: The Founder-Investor Relationship in the Startup Industry",
+    "subtitle": " ",
+    "permalink": "founder-investors-startup-funding",
+    "featured": true,
+    "date": "2024-04-09",
+    "category": "development",
+    "author": "vale",
+    "tags": [
+      "founder",
+      "startup",
+      "funding",
+      "investor",
+      "MVP"
+    ],
+    "thumbnail": "/images/founders.png",
+    "readingTime": "8 min read",
+    "sourceFile": "power-dynamics-the-founder-investor-relationship-in-the-startup-industry.md"
+  },
+  {
+    "slug": "scaling-ai-agents",
+    "title": "Scaling AI Agents: Challenges, Bottlenecks, and solutions",
+    "subtitle": "Challenges, Bottlenecks, and solutions",
+    "permalink": "/scaling-AI-Agents",
+    "featured": true,
+    "date": "2025-09-19",
+    "category": "development",
+    "author": "nico-fripp",
+    "tags": [
+      "LLMs",
+      "AI/ML",
+      "RAG",
+      "Information Retrieval",
+      "Vector Databases"
+    ],
+    "thumbnail": "/images/portada-ai-agents.jpg",
+    "readingTime": "8 min read",
+    "sourceFile": "scaling-rag-system.mdx"
+  },
+  {
+    "slug": "section-174-us-startup-regulations",
+    "title": "Section 174 Decoded: Its Unspoken Role in the US Startup Ecosystem",
+    "subtitle": " ",
+    "permalink": "Section-174-US-startup-regulations",
+    "featured": true,
+    "date": "2024-02-08",
+    "category": "development",
+    "author": "vale",
+    "tags": [
+      "Regulation",
+      "USStartUps",
+      "Innovation",
+      "Tech"
+    ],
+    "thumbnail": "/images/portada-section-174.png",
+    "readingTime": "8 min read",
+    "sourceFile": "section-174-decoded-its-unspoken-role-in-the-us-startup-ecosystem.mdx"
+  },
+  {
+    "slug": "secure-local-rag-system-for-healthcare-data",
+    "title": "Setting up a Privacy-First Local RAG",
+    "subtitle": " ",
+    "permalink": "secure-local-rag-system-for-healthcare-data",
+    "featured": true,
+    "date": "2024-11-12",
+    "category": "machine-learning",
+    "author": "daniel-baena",
+    "tags": [
+      "RAG",
+      "DataPrivacy",
+      "DataOptimization",
+      "Security",
+      "Healthcare"
+    ],
+    "thumbnail": "/images/privacy-firts-local-rag-portada.jpg",
+    "readingTime": "5 min read",
+    "sourceFile": "setting-up-a-privacy-first-local-rag.md"
+  },
+  {
+    "slug": "stakeholder-alignment-enterprise",
+    "title": "Stakeholder Alignment in Enterprise Digital Projects",
+    "subtitle": " ",
+    "permalink": "stakeholder-alignment-enterprise",
+    "featured": true,
+    "date": "2023-11-30",
+    "category": "development",
+    "author": "vale",
+    "tags": [
+      "Enterprise",
+      "Stakeholder",
+      "Business",
+      "DigitalProduct",
+      "DiscoveryService"
+    ],
+    "thumbnail": "/images/stakeholder.png",
+    "readingTime": "6 min read",
+    "sourceFile": "stakeholder-alignment-in-enterprise-digital-projects.md"
+  },
+  {
+    "slug": "custom-ai-assistant",
+    "title": "Streamlining Information: Crafting an AI Assistant at Xmartlabs",
+    "subtitle": " ",
+    "permalink": "custom-AI-assistant",
+    "featured": true,
+    "date": "2024-01-18",
+    "category": "development",
+    "author": "nicolantean",
+    "tags": [
+      "DigitalTransformation",
+      "DataAccess",
+      "ChatBot",
+      "AIAssistant"
+    ],
+    "thumbnail": "/images/portada-ai-assistant.png",
+    "readingTime": "10 min read",
+    "sourceFile": "streamlining-information-crafting-an-ai-assistant-at-xmartlabs.md"
+  },
+  {
+    "slug": "ai-team-integration",
+    "title": "Successful AI Integration",
+    "subtitle": "Getting a team AI-ready",
+    "permalink": "AI-team-integration",
+    "featured": true,
+    "date": "2023-12-06",
+    "category": "machine-learning",
+    "author": "vale",
+    "tags": [
+      "AI",
+      "Machine Learning",
+      "Tech Team"
+    ],
+    "thumbnail": "/images/ai-integration.png",
+    "readingTime": "9 min read",
+    "sourceFile": "successful-ai-integration.md"
+  },
+  {
+    "slug": "testing-uy-2024-ai",
+    "title": "TestingUy 2024: Embracing AI Without Fear",
+    "subtitle": " ",
+    "permalink": "testing-uy-2024-ai",
+    "featured": true,
+    "date": "2024-05-03",
+    "category": "qa",
+    "author": "qa-team",
+    "tags": [
+      "QA",
+      "Testing",
+      "AI",
+      "TestingUy"
+    ],
+    "thumbnail": "/images/testinguy-2024-blog.png",
+    "readingTime": "5 min read",
+    "sourceFile": "testinguy-2024-embracing-ai-without-fear.md"
+  },
+  {
+    "slug": "blog-ai-healthtech-2025",
+    "title": "The AI Revolution in Healthtech: How Four Technologies Are Reshaping Care in 2025",
+    "subtitle": " ",
+    "permalink": "/blog/ai-healthtech-2025",
+    "featured": true,
+    "date": "2025-06-12",
+    "category": "strategy",
+    "author": "conor",
+    "tags": [
+      "AI in Healthcare",
+      "Digital Twins",
+      "Ambient Intelligence",
+      "Remote Patient Monitoring",
+      "AI Health Companions"
+    ],
+    "thumbnail": "/images/the-ai-revolution-in-healthtech-portada.jpg",
+    "readingTime": "6 min read",
+    "sourceFile": "the-ai-revolution-in-healthtech-how-four-technologies-are-reshaping-care-in-2025.md"
+  },
+  {
+    "slug": "feature-utilization-gap-ai-tool-adoption",
+    "title": "The Feature Utilization Gap: What 85% AI Tool Adoption Really Looks Like",
+    "subtitle": "How an engineering team reached 85% AI tool adoption but still missed the features that create real leverage—and the framework we used to measure the gap.",
+    "permalink": "feature-utilization-gap-ai-tool-adoption",
+    "featured": false,
+    "date": "2026-04-27",
+    "category": "development",
+    "author": "nicoh",
+    "tags": [
+      "Artificial Intelligence",
+      "AI Adoption",
+      "Engineering Leadership",
+      "Developer Productivity"
+    ],
+    "thumbnail": "/images/the-feature-utilization-gap-4.jpg",
+    "readingTime": "13 min read",
+    "sourceFile": "the-feature-utilization-gap-what-85-ai-tool-adoption-really-looks-like.mdx"
+  },
+  {
+    "slug": "why-fhir-is-the-foundation-healthcare-products-need",
+    "title": "The Hidden Cost of Custom Health Data: Why FHIR Is the Foundation Your Product Needs",
+    "subtitle": "Discover how adopting FHIR from the start can reduce technical debt, accelerate development, and make healthcare products easier to scale.",
+    "permalink": "why-fhir-is-the-foundation-healthcare-products-need",
+    "featured": false,
+    "date": "2026-06-02",
+    "category": "development",
+    "author": "daniel-mariano",
+    "tags": [
+      "Healthcare Technology",
+      "FHIR",
+      "Interoperability",
+      "Digital Health"
+    ],
+    "thumbnail": "/images/cover-final-tibu.png",
+    "readingTime": "12 min read",
+    "sourceFile": "the-hidden-cost-of-custom-health-data-why-fhir-is-the-foundation-your-product-needs.mdx"
+  },
+  {
+    "slug": "understanding-workaholism-causes-strategies",
+    "title": "The Hidden Costs of Success: Understanding Workaholism",
+    "subtitle": " ",
+    "permalink": "understanding-workaholism-causes-strategies",
+    "featured": true,
+    "date": "2024-10-10",
+    "category": "people-events",
+    "author": "ceci-herrera",
+    "tags": [
+      "Workaholism",
+      "Burnout",
+      "MentalHealth",
+      "TeamCare"
+    ],
+    "thumbnail": "/images/workaholism-cover.jpg",
+    "readingTime": "7 min read",
+    "sourceFile": "the-hidden-costs-of-success-understanding-workaholism.md"
+  },
+  {
+    "slug": "the-mathi-problem-ai-generated-code",
+    "title": "The Mathi Problem: Why AI-Generated Features Ship Fast and Break Slow",
+    "subtitle": "We shipped a feature in half a day with AI. Then spent three days fixing it. Here's what we learned.",
+    "permalink": "/the-mathi-problem-ai-generated-code",
+    "featured": true,
+    "date": "2026-06-25",
+    "category": "development",
+    "author": "nicoh",
+    "tags": [
+      "AI Development",
+      "Software Engineering",
+      "Claude Code",
+      "Code Quality",
+      "Developer Productivity"
+    ],
+    "thumbnail": "/images/mathi-cover-web-v3-1-.png",
+    "readingTime": "13 min read",
+    "sourceFile": "the-mathi-problem-why-ai-generated-features-ship-fast-and-break-slow.mdx"
+  },
+  {
+    "slug": "tips-improve-relationship-with-frontend-developers",
+    "title": "Tips & tricks to improve your relationship with frontend devs: From designer to designer",
+    "subtitle": "  ",
+    "permalink": "tips-improve-relationship-with-frontend-developers",
+    "featured": true,
+    "date": "2024-09-23",
+    "category": "product-design",
+    "author": "carolina-berastegui",
+    "tags": [
+      "Design",
+      "UX/UI",
+      "FrontendDevelopment",
+      "Designer",
+      "UserExperience"
+    ],
+    "thumbnail": "/images/design-frontend-portada.jpg",
+    "readingTime": "12 min read",
+    "sourceFile": "tips-tricks-to-improve-your-relationship-with-frontend-devs-from-designer-to-designer.md"
+  },
+  {
+    "slug": "designing-human-friendly-ai-chat-interfaces",
+    "title": "UX meets AI: designing smart chat interactions",
+    "subtitle": " ",
+    "permalink": "/designing-human-friendly-ai-chat-interfaces",
+    "featured": true,
+    "date": "2025-08-08",
+    "category": "product-design",
+    "author": "carolina-berastegui",
+    "tags": [
+      "UX Design",
+      "Conversational UX",
+      "AI Chatbots",
+      "Human-Centered AI"
+    ],
+    "thumbnail": "/images/ux-meets-ai.jpg",
+    "readingTime": "7 min read",
+    "sourceFile": "ux-meets-ai-designing-smart-chat-interactions.md"
+  },
+  {
+    "slug": "agile-teams-devs",
+    "title": "Webinar Recap: Building High-Performing Teams",
+    "subtitle": " ",
+    "permalink": "agile-teams-devs",
+    "featured": true,
+    "date": "2024-10-07",
+    "category": "strategy",
+    "author": "vale",
+    "tags": [
+      "Team",
+      "Development",
+      "Agile",
+      "Lean",
+      "Management"
+    ],
+    "thumbnail": "/images/high-performing-teams.jpg",
+    "readingTime": "6 min read",
+    "sourceFile": "webinar-recap-building-high-performing-teams.md"
+  },
+  {
+    "slug": "ai-product-strategy-webinar",
+    "title": "Webinar Recap \"AI: Beyond the Hype\"",
+    "subtitle": " ",
+    "permalink": "ai-product-strategy-webinar",
+    "featured": true,
+    "date": "2024-09-11",
+    "category": "strategy",
+    "author": "vale",
+    "tags": [
+      "AI",
+      "ProductStrategy",
+      "AIBubble",
+      "AIProdcut",
+      "Founders"
+    ],
+    "thumbnail": "/images/webinar-recap.jpg",
+    "readingTime": "11 min read",
+    "sourceFile": "weibar-recap-ai-beyond-the-hype.md"
+  },
+  {
+    "slug": "xmartlabs-select-services-partner-claude-partner-network",
+    "title": "Xmartlabs is now a Select Services Partner in the Claude Partner Network",
+    "subtitle": "Strengthening our collaboration with Anthropic to help teams build and scale AI-powered solutions.",
+    "permalink": "xmartlabs-select-services-partner-claude-partner-network",
+    "featured": true,
+    "date": "2026-11-20",
+    "category": "strategy",
+    "author": "xl",
+    "tags": [
+      "Claude",
+      "Anthropic",
+      "AI Adoption",
+      "Healthtech",
+      "AI Engineering"
+    ],
+    "thumbnail": "/images/claude-partner-network-cover.png",
+    "readingTime": "5 min read",
+    "sourceFile": "xmartlabs-is-now-a-select-services-partner-in-the-claude-partner-network.mdx"
+  }
+]

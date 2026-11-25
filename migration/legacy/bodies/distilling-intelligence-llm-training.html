@@ -1,0 +1,190 @@
+ <p>Is it possible to get the reasoning of a +100B parameter model packed into a 400MB binary that runs on a phone? Yes. In this post I&#39;ll show you how I integrated the reasoning capabilities of a frontier model like Gemini 3.1 Pro into a small model like Qwen with just 500 million parameters, using an SFT (Supervised Fine-Tuning) strategy on real-world data. The result? Minimal latency, zero cost, and complete privacy.</p>
+<h2 id="1-the-bias-of-ai-obesity">1. The Bias of &quot;AI Obesity&quot;</h2>
+<p>In agent development, technical inertia pushes us to always use the most powerful model available: &quot;For any problem, the natural instinct is to reach for GPT-5.5 or Claude 4.6 Sonnet.&quot; However, in production environments (and even more so in HealthTech), this approach runs into three hard walls:</p>
+<ol>
+<li>
+<p><strong>Latency:</strong> For a chat interface, waiting 5–10 seconds for Time To First Token (TTFT) destroys the user experience.</p>
+</li>
+<li>
+<p><strong>Privacy:</strong> In healthcare, privacy isn&#39;t a &quot;feature&quot; it&#39;s a legal requirement. Sending patient data to third-party clouds complicates compliance with regulations like HIPAA or GDPR.</p>
+</li>
+<li>
+<p><strong>Scalability and Vendor Lock-in:</strong> Building on top of third-party APIs ties your product to a critical dependency on external providers (vendor lock-in). At high volumes, variable operational costs become prohibitive, threatening the long-term financial viability of the agent. Local execution transforms a marginal per-token cost into a fixed, controllable infrastructure cost.</p>
+</li>
+</ol>
+<p><strong>The necessary insight:</strong> We don&#39;t need a model that can write COBOL and explain quantum physics for a task that specifically requires structuring medical information under a protocol. This is where <strong>Distillation</strong> comes in.</p>
+<h2 id="2-the-concept-model-distillation-teacher-student">2. The Concept: Model Distillation (Teacher-Student)</h2>
+<p>Distillation isn&#39;t just &quot;copying&quot; the large model. It&#39;s a process where a <strong>Teacher Model</strong>, in our case Gemini, generates high-quality &quot;rationales&quot; or responses that serve as labels for training a much smaller <strong>Student Model</strong>.</p>
+<h3 id="the-use-case-redi-medical-preparation-agent">The Use Case: Redi (Medical Preparation Agent)</h3>
+<p>Our agent helps patients synthesize their condition before seeing a doctor, using the <strong>SBAR</strong> framework (<em>Situation, Background, Assessment, Recommendation</em>).</p>
+<h3 id="infrastructure-evolution">Infrastructure Evolution</h3>
+<p>We moved from a complex architecture on <strong>AWS Bedrock</strong> (with VPCs, Private Links, and fixed management costs) to a model that can live in a lightweight container or even on the <em>edge</em>.</p>
+<h2 id="3-the-data-strategy-supervised-fine-tuning-building-the-golden-dataset">3. The Data Strategy (Supervised Fine-Tuning): Building the &quot;Golden Dataset&quot;</h2>
+<p>The success of fine-tuning depends not on quantity, but on <strong>information density</strong>. Many developers fail when they try to fine-tune on thousands of noisy examples. We bet on quality: <strong>327 perfect examples</strong>.</p>
+<h3 id="the-data-pipeline-data-engineering">The Data Pipeline (Data Engineering)</h3>
+<p>Before training, we transformed logs from real (anonymized) conversations into a training dataset. The flow was:</p>
+<ol>
+<li><strong>Observability:</strong> Capturing real AI-User interactions.</li>
+<li><strong>Cleaning:</strong> Chronological ordering by <span><code class="language-text">conversation_id</code></span> and role normalization (<span><code class="language-text">human</code></span> -&gt; <span><code class="language-text">user</code></span>).</li>
+<li><strong>Rationalization Filtering:</strong> This is where the magic happens. We used the &quot;Teacher&quot; to clean the noise.</li>
+</ol>
+<h3 id="the-distillation-prompt-the-brain-of-the-process">The Distillation Prompt (The &quot;Brain&quot; of the Process)</h3>
+<p>We didn&#39;t ask the small model to learn from raw logs. We used a rewriting prompt to have Gemini act as an <strong>expert curator</strong>.</p>
+<p>This is the script we used to generate our <strong>JSONL compatible with <span><code class="language-text">apply_chat_template</code></span></strong>:</p>
+<span><div class="code-highlight" data-language="python"><pre class="language-python" data-language="python"><code class="language-python"><span class="token keyword">import</span> json
+<span class="token keyword">from</span> typing <span class="token keyword">import</span> Optional<span class="token punctuation">,</span> Dict
+
+<span class="token keyword">def</span> <span class="token function">distill_conversation</span><span class="token punctuation">(</span>json_line<span class="token punctuation">:</span> <span class="token builtin">str</span><span class="token punctuation">)</span> <span class="token operator">-</span><span class="token operator">&gt;</span> Optional<span class="token punctuation">[</span>Dict<span class="token punctuation">]</span><span class="token punctuation">:</span>
+    <span class="token triple-quoted-string string">&quot;&quot;&quot;
+    Transforms a raw conversation into a &#39;Gold Standard&#39; example
+    using a Teacher LLM to align the output with the SBAR framework.
+    &quot;&quot;&quot;</span>
+    base_prompt <span class="token operator">=</span> <span class="token triple-quoted-string string">&quot;&quot;&quot;
+    You are an expert in Data Engineering for LLMs and a specialist in SBAR medical communication.
+    
+    MISSION:
+    You will receive a real conversation between a user and the assistant &#39;Redi&#39;.
+    Your task is to rewrite the assistant&#39;s response to make it a perfect training example.
+    
+    GOLDEN RULES:
+    1. SBAR Framework: The response MUST include: Situation, Background, Assessment, Recommendation.
+    2. No Diagnosing: Validate symptoms and prepare the consultation, but never give a medical diagnosis.
+    3. Consistency: Empathetic, professional, and structured tone.
+    4. Quality Filter: If the conversation is trivial (e.g., just a &#39;hello&#39;), respond with &#39;SKIP&#39;.
+    
+    OUTPUT: Return EXCLUSIVELY a JSON with the structure:
+    {&quot;messages&quot;: [{&quot;role&quot;: &quot;system&quot;, &quot;content&quot;: &quot;...&quot;}, {&quot;role&quot;: &quot;user&quot;, &quot;content&quot;: &quot;...&quot;}, {&quot;role&quot;: &quot;assistant&quot;, &quot;content&quot;: &quot;...&quot;}]}
+    &quot;&quot;&quot;</span>
+    
+    <span class="token keyword">try</span><span class="token punctuation">:</span>
+        <span class="token comment"># Call to the Teacher model (Gemini 3.1 Pro)</span>
+        full_prompt <span class="token operator">=</span> <span class="token string-interpolation"><span class="token string">f&quot;</span><span class="token interpolation"><span class="token punctuation">{</span>base_prompt<span class="token punctuation">}</span></span><span class="token string">\n\nORIGINAL CONVERSATION:\n</span><span class="token interpolation"><span class="token punctuation">{</span>json_line<span class="token punctuation">}</span></span><span class="token string">&quot;</span></span>
+        response <span class="token operator">=</span> model<span class="token punctuation">.</span>generate_content<span class="token punctuation">(</span>full_prompt<span class="token punctuation">)</span>
+        text <span class="token operator">=</span> response<span class="token punctuation">.</span>text<span class="token punctuation">.</span>strip<span class="token punctuation">(</span><span class="token punctuation">)</span>
+
+        <span class="token keyword">if</span> <span class="token string">&quot;SKIP&quot;</span> <span class="token keyword">in</span> text<span class="token punctuation">:</span> <span class="token keyword">return</span> <span class="token boolean">None</span>
+
+        <span class="token comment"># Clean markdown if the model responds with code blocks</span>
+        clean_json <span class="token operator">=</span> text<span class="token punctuation">.</span>replace<span class="token punctuation">(</span><span class="token string">&quot;```json&quot;</span><span class="token punctuation">,</span> <span class="token string">&quot;&quot;</span><span class="token punctuation">)</span><span class="token punctuation">.</span>replace<span class="token punctuation">(</span><span class="token string">&quot;```&quot;</span><span class="token punctuation">,</span> <span class="token string">&quot;&quot;</span><span class="token punctuation">)</span><span class="token punctuation">.</span>strip<span class="token punctuation">(</span><span class="token punctuation">)</span>
+        <span class="token keyword">return</span> json<span class="token punctuation">.</span>loads<span class="token punctuation">(</span>clean_json<span class="token punctuation">)</span>
+        
+    <span class="token keyword">except</span> Exception <span class="token keyword">as</span> e<span class="token punctuation">:</span>
+        <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string-interpolation"><span class="token string">f&quot;Distillation error: </span><span class="token interpolation"><span class="token punctuation">{</span>e<span class="token punctuation">}</span></span><span class="token string">&quot;</span></span><span class="token punctuation">)</span>
+        <span class="token keyword">return</span> <span class="token boolean">None</span></code></pre></div></span>
+<h1 id></h1>
+<p>An example of the resulting training record:</p>
+<h1 id="-1"></h1>
+<span><div class="code-highlight" data-language="json"><pre class="language-json" data-language="json"><code class="language-json"><span class="token punctuation">{</span>
+  <span class="token property">&quot;messages&quot;</span><span class="token operator">:</span> <span class="token punctuation">[</span>
+    <span class="token punctuation">{</span><span class="token property">&quot;role&quot;</span><span class="token operator">:</span> <span class="token string">&quot;system&quot;</span><span class="token punctuation">,</span> <span class="token property">&quot;content&quot;</span><span class="token operator">:</span> <span class="token string">&quot;You are a medical intake assistant.&quot;</span><span class="token punctuation">}</span><span class="token punctuation">,</span>
+    <span class="token punctuation">{</span><span class="token property">&quot;role&quot;</span><span class="token operator">:</span> <span class="token string">&quot;user&quot;</span><span class="token punctuation">,</span> <span class="token property">&quot;content&quot;</span><span class="token operator">:</span> <span class="token string">&quot;I have frequent headaches.&quot;</span><span class="token punctuation">}</span><span class="token punctuation">,</span>
+    <span class="token punctuation">{</span><span class="token property">&quot;role&quot;</span><span class="token operator">:</span> <span class="token string">&quot;assistant&quot;</span><span class="token punctuation">,</span> <span class="token property">&quot;content&quot;</span><span class="token operator">:</span> <span class="token string">&quot;How long have you been experiencing them?&quot;</span><span class="token punctuation">}</span>
+  <span class="token punctuation">]</span>
+<span class="token punctuation">}</span></code></pre></div></span>
+<h3 id="why-is-this-approach-superior">Why is this approach superior?</h3>
+<ul>
+<li><strong>Strict Alignment:</strong> We force the small model to learn the SBAR format from day one.</li>
+<li><strong>Hallucination Elimination:</strong> By using real data rewritten by a superior model, the small model learns safe and accurate response patterns.</li>
+<li><strong>Cost-Effective:</strong> We only pay for Gemini API calls during the dataset creation phase, just once.</li>
+</ul>
+<h2 id="4-technical-implementation-from-theory-to-95-seconds-of-training">4. Technical Implementation: From Theory to 95 Seconds of Training</h2>
+<p>To train a model faster than it takes to make a cup of coffee, we used an optimized &quot;heavy artillery&quot; stack: <strong>Unsloth + QLoRA</strong>.</p>
+<h3 id="the-heart-of-the-pipeline-qlora-and-adapters">The Heart of the Pipeline: QLoRA and Adapters</h3>
+<p>We don&#39;t update all 500 million parameters of the model. That would be inefficient. Instead, we use <strong>LoRA (Low-Rank Adaptation)</strong>.</p>
+<p><strong>The technical intuition:</strong> Think of the base model as a general medicine textbook. Instead of rewriting the whole book (full fine-tuning), we add &quot;sticky notes&quot; (Adapters) on the key pages that teach it to structure information in SBAR format. Mathematically, we factorize the weight update matrix into two much smaller matrices (A and B), drastically reducing the computational load.</p>
+<h3 id="training-configuration">Training Configuration</h3>
+<p>These are the &quot;magic numbers&quot; that allowed the model to converge rapidly:</p>
+<table><thead><tr><th>Parameter</th><th>Value</th></tr></thead><tbody><tr><td><strong>Model</strong></td><td>Qwen 2.5 0.5B (4-bit quantization)</td></tr><tr><td><strong>LoRA Rank (r)</strong></td><td>16</td></tr><tr><td><strong>Learning Rate</strong></td><td>2e-4</td></tr><tr><td><strong>Effective Batch Size</strong></td><td>8</td></tr><tr><td><strong>Training Time</strong></td><td>~95 seconds (single RTX 3090)</td></tr></tbody></table>
+<h3 id="responses-only-training">Responses-Only Training</h3>
+<p>One of the keys to our precision was enabling <span><code class="language-text">--train_responses_only</code></span>. We didn&#39;t want the model to learn how to imitate how the user speaks, but <strong>exclusively how the medical assistant should respond</strong>. This concentrates all the gradient on the output policy.</p>
+<h3 id="code-snippet-for-reproduction">Code Snippet for Reproduction</h3>
+<span><div class="code-highlight" data-language="python"><pre class="language-python" data-language="python"><code class="language-python"><span class="token keyword">from</span> unsloth <span class="token keyword">import</span> FastLanguageModel
+<span class="token keyword">from</span> trl <span class="token keyword">import</span> SFTTrainer
+<span class="token keyword">from</span> unsloth<span class="token punctuation">.</span>chat_templates <span class="token keyword">import</span> train_on_responses_only
+
+<span class="token comment"># Load the model in 4-bit to democratize training (runs on 8GB GPUs)</span>
+model<span class="token punctuation">,</span> tokenizer <span class="token operator">=</span> FastLanguageModel<span class="token punctuation">.</span>from_pretrained<span class="token punctuation">(</span>
+    model_name <span class="token operator">=</span> <span class="token string">&quot;unsloth/Qwen2.5-0.5B-Instruct-bnb-4bit&quot;</span><span class="token punctuation">,</span>
+    max_seq_length <span class="token operator">=</span> <span class="token number">2048</span><span class="token punctuation">,</span>
+    load_in_4bit <span class="token operator">=</span> <span class="token boolean">True</span><span class="token punctuation">,</span>
+<span class="token punctuation">)</span>
+
+<span class="token comment"># Insert adapters into the Attention and MLP modules</span>
+model <span class="token operator">=</span> FastLanguageModel<span class="token punctuation">.</span>get_peft_model<span class="token punctuation">(</span>
+    model<span class="token punctuation">,</span>
+    r <span class="token operator">=</span> <span class="token number">16</span><span class="token punctuation">,</span>
+    target_modules <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token string">&quot;q_proj&quot;</span><span class="token punctuation">,</span> <span class="token string">&quot;k_proj&quot;</span><span class="token punctuation">,</span> <span class="token string">&quot;v_proj&quot;</span><span class="token punctuation">,</span> <span class="token string">&quot;o_proj&quot;</span><span class="token punctuation">,</span> <span class="token string">&quot;gate_proj&quot;</span><span class="token punctuation">,</span> <span class="token string">&quot;up_proj&quot;</span><span class="token punctuation">,</span> <span class="token string">&quot;down_proj&quot;</span><span class="token punctuation">]</span><span class="token punctuation">,</span>
+    lora_alpha <span class="token operator">=</span> <span class="token number">16</span><span class="token punctuation">,</span>
+    lora_dropout <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">,</span>
+<span class="token punctuation">)</span></code></pre></div></span>
+<h2 id="5-results-how-good-is-a-05b-model">5. Results: How Good Is a 0.5B Model?</h2>
+<p>The biggest risk with fine-tuning on such small models is <strong>&quot;catastrophic forgetting&quot;</strong> or the model simply learning to repeat the format without understanding the underlying logic. To avoid confirmation bias, we subjected the model to a two-level evaluation process.</p>
+<h3 id="a-internal-metrics-optimization-health">A. Internal Metrics (Optimization Health)</h3>
+<p>First, we verified that the learning process was stable. We weren&#39;t just looking for the loss to drop, we wanted it to drop smoothly, indicating the model is generalizing patterns rather than noisily memorizing.</p>
+<img src="/images/distilling-intelligence-training-loss.png" alt="MLflow training logs showing 46% loss reduction with stable gradient convergence" width="80%"/>
+<h1 id="-2"></h1>
+<blockquote>
+<p><strong>Evidence:</strong> As shown in the <strong>MLflow</strong> logs (image above), we achieved a 46% reduction in <em>loss</em> with a stable gradient. This confirms that the &quot;Student&quot; (Qwen) has healthily absorbed the structure from the &quot;Teacher&quot; (Gemini).</p>
+</blockquote>
+<h3 id="b-external-benchmark-healthbench">B. External Benchmark (HealthBench)</h3>
+<p>For the test, we didn&#39;t use data that the model had already seen. We used a test battery based on the <strong>HealthBench</strong> framework (inspired by OpenAI and Google protocols for healthcare).</p>
+<p><strong>Why this benchmark?</strong> Because it doesn&#39;t just measure &quot;whether the sentence sounds nice.&quot; It measures critical dimensions:</p>
+<ol>
+<li><strong>Clinical Accuracy:</strong> Is the medical information correct?</li>
+<li><strong>Safety:</strong> Does it avoid giving dangerous or incorrect diagnoses?</li>
+<li><strong>Key Omissions:</strong> Did it forget to ask about allergies or key medical history?</li>
+<li><strong>SBAR Compliance:</strong> Did it follow the professional communication structure?</li>
+</ol>
+<p>We compared three models under equal conditions: the <strong>original Qwen 2.5 0.5B</strong>, our <strong>Qwen FT (Fine-Tuned)</strong> version, and the &quot;upper bound&quot; (market reference), <strong>Claude 4.6 Sonnet</strong>.</p>
+<table><thead><tr><th><strong>Metric</strong></th><th><strong>Qwen 2.5 (Base)</strong></th><th><strong>Qwen 2.5 (FT)</strong></th><th><strong>Claude 4.6 (Cloud)</strong></th></tr></thead><tbody><tr><td><strong>Clinical Accuracy</strong></td><td>5.90</td><td><strong>6.06</strong></td><td>6.42</td></tr><tr><td><strong>Safety</strong></td><td>8.54</td><td><strong>8.74</strong></td><td>9.82</td></tr><tr><td><strong>Conciseness</strong></td><td>7.02</td><td><strong>7.56</strong></td><td>8.04</td></tr><tr><td><strong>Latency (t/s)</strong></td><td>267</td><td><strong>100</strong></td><td>46</td></tr></tbody></table>
+<p><strong>The big surprise:</strong> Although Claude remains the king of pure reasoning, our model with just <strong>0.5B parameters</strong> managed to outperform the base model on every quality metric, and came dangerously close to frontier-model performance on the specific SBAR task.</p>
+<img src="/images/distilling-intelligence-benchmark-results.png" alt="Side-by-side benchmark comparison: Qwen base vs Qwen fine-tuned vs Claude on HealthBench metrics" width="80%"/>
+<h3 id="1-the-quality-leap-baseline-vs-ft">1. The Quality Leap (Baseline vs FT)</h3>
+<p>The fine-tuned model doesn&#39;t just &quot;speak better&quot; it is safer and more precise than its base version:</p>
+<ul>
+<li><strong>Clinical Accuracy:</strong> Increased from 5.90 to <strong>6.06</strong>.</li>
+<li><strong>Safety Check:</strong> Improved from 8.54 to <strong>8.74</strong> (critical in healthcare).</li>
+<li><strong>Conciseness:</strong> Jumped from 7.02 to <strong>7.56</strong>, eliminating the unnecessary &quot;verbosity&quot; common in generic LLMs.</li>
+</ul>
+<h3 id="2-the-latency-and-cost-victory">2. The Latency and Cost Victory</h3>
+<p>This is where the SLM (Small Language Model) shines against giants like Claude 4.6 Sonnet:</p>
+<table><thead><tr><th><strong>Metric</strong></th><th><strong>Claude 4.6 Sonnet (Cloud)</strong></th><th><strong>Qwen 2.5 FT (Local)</strong></th></tr></thead><tbody><tr><td><strong>Tokens per Second</strong></td><td>46.74 t/s</td><td><strong>100.47 t/s</strong> (2x faster)</td></tr><tr><td><strong>Average Latency</strong></td><td>~23 seconds</td><td><strong>~10 seconds</strong></td></tr><tr><td><strong>Cost per Token</strong></td><td>$$$</td><td><strong>$0.00</strong></td></tr><tr><td><strong>Privacy</strong></td><td>Data travels to Cloud</td><td><strong>100% On-Device</strong></td></tr></tbody></table>
+<h3 id="inference-conclusion">Inference Conclusion</h3>
+<p>The resulting model weighs just <strong>400MB in GGUF format</strong> (Q4_K_M quantization). This means it can run locally in <strong>Ollama</strong>, in a lightweight Docker container, or even on a Raspberry Pi, while maintaining a level of medical reasoning that competes with models 200 times larger.</p>
+<h2 id="6-from-training-to-reality-local-inference-with-ollama">6. From Training to Reality: Local Inference with Ollama</h2>
+<p>Having a trained model in a PyTorch adapter is great for experimentation, but production requires portability. This is where we transform our work into something any user can run with a single command.</p>
+<h3 id="the-export-process-gguf">The Export Process (GGUF)</h3>
+<p>Using Unsloth to convert the fine-tuned model to <strong>GGUF</strong> format. This format not only packages the model and adapter into a single file, but also allows aggressive quantization without losing precision.</p>
+<ul>
+<li><strong>Chosen format:</strong> Q4_K_M (4-bit).</li>
+<li><strong>Final weight:</strong> ~400 MB.</li>
+</ul>
+<h3 id="how-to-integrate-it-in-ollama-in-3-steps">How to Integrate It in Ollama in 3 Steps</h3>
+<p><strong>1. Create a <span><code class="language-text">Modelfile</code></span>:</strong> This file tells Ollama how the model should behave and what its &quot;personality&quot; is.</p>
+<span><div class="code-highlight" data-language="dockerfile"><pre class="language-dockerfile" data-language="dockerfile"><code class="language-dockerfile"><span class="token instruction"><span class="token keyword">FROM</span> ./qwen-redi-sft.gguf</span>
+PARAMETER temperature 0.3
+SYSTEM &quot;&quot;&quot;You are Redi, a medical assistant specialized in consultation preparation.
+Your goal is to gather patient information using strictly the SBAR format.&quot;&quot;&quot;</code></pre></div></span>
+<p><strong>2. Build the model:</strong></p>
+<span><div class="code-highlight" data-language="bash"><pre class="language-bash" data-language="bash"><code class="language-bash">ollama create redi-med <span class="token parameter variable">-f</span> Modelfile</code></pre></div></span>
+<p><strong>3. Run it:</strong></p>
+<span><div class="code-highlight" data-language="bash"><pre class="language-bash" data-language="bash"><code class="language-bash">ollama run redi-med</code></pre></div></span>
+<p><strong>Result:</strong> Inference with a latency of <strong>&lt;50ms per token on a standard CPU</strong>, with no dedicated GPU required.</p>
+<h2 id="7-final-thoughts-quality--quantity">7. Final Thoughts: Quality &gt; Quantity</h2>
+<p>This experiment shows that the era of &quot;giant models for everything&quot; is giving way to the era of <strong>specialized models</strong>.</p>
+<h3 id="key-takeaways">Key Takeaways</h3>
+<ul>
+<li><strong>The &quot;Golden Dataset&quot; is real:</strong> 300 examples curated by a &quot;Teacher&quot; model (Gemini 3.1 Pro) are worth more than 100,000 rows of raw logs.</li>
+<li><strong>SLMs are the future of the Edge:</strong> A well-trained 500M parameter model can handle niche tasks with surprising effectiveness, eliminating API bills and privacy concerns.</li>
+<li><strong>Distillation is accessible:</strong> Thanks to tools like <strong>Unsloth</strong>, the cost of training these models has dropped from thousands of dollars to just a few cents of electricity.</li>
+</ul>
+<h3 id="whats-next">What&#39;s Next?</h3>
+<p>If you&#39;re a developer, my recommendation is to stop seeing LLMs as a black-box API and start seeing them as infrastructure you can own. Follow us on our social media for more content like this.</p>
+<h3 id="references-and-further-reading">References and Further Reading</h3>
+<ul>
+<li><strong>Hu, J. J., et al. (2021).</strong> <em>LoRA: Low-Rank Adaptation of Large Language Models.</em></li>
+<li><strong>Dettmers, T., et al. (2023).</strong> <em>QLoRA: Efficient Finetuning of Quantized LLMs.</em></li>
+<li><strong>Hsieh, C. Y., et al. (2023).</strong> <em>Distilling Step-by-Step! Outperforming Larger Language Models with Less Training Data.</em></li>
+<li><strong>Yang, A., et al. (2024).</strong> <em>Qwen2.5 Technical Report.</em></li>
+<li><strong>OpenAI (2024).</strong> <em>HealthBench: A benchmark for evaluating LLMs in healthcare.</em></li>
+</ul> 

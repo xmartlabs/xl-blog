@@ -1,0 +1,64 @@
+ <img src="/images/figure-1-regulation-to-control.png" alt="Two cards side by side. Left, HIPAA Security Rule §164.312(e)(1) Transmission Security and §164.312(e)(2)(ii) Encryption (Addressable). An arrow labeled 'translate' points right to a card for control CTRL-H-DH-01, ePHI encryption in transit: all network endpoints that accept ePHI enforce encrypted transport, marked testable and evidence-backed." title="From HIPAA text to an auditable control"/>
+<h2 id="introduction">Introduction</h2>
+<p>If you&#39;re building software that handles patient data or offers a SaaS product to enterprise clients, you&#39;re likely dealing with HIPAA, SOC 2, or any other regulation.</p>
+<p>The problem is that regulations don&#39;t specify what compliance looks like in code. They describe objectives. Translating those objectives to your infrastructure, evaluating them, and keeping pace with your evolving codebase is left entirely to you.</p>
+<p>We built GRC XL to close that gap: a compliance knowledge framework that translates regulatory requirements into structured, checkable controls tied to specific AWS configurations, with a pipeline that automatically evaluates your Terraform infrastructure against those controls. It starts with HIPAA and SOC 2, but the model is extensible for any regulation, cloud, and programming language.</p>
+<p>If your team ships software that needs to stay compliant with every deployment, not just at audit time, this can help you build that assurance into your development process and stay on top of exactly what gets evaluated and how. In this post, we walk through how the framework is structured, how the pipeline works, and what it surfaced when we ran it against a real open source healthtech codebase.</p>
+<hr/>
+<h2 id="from-regulation-to-checkable-control">From Regulation to Checkable Control</h2>
+<p>To better understand how to perform that technical translation and how to conduct automated evaluations, we break down regulation into categories, each category into domains, and each domain into controls. This is what each of them is:</p>
+<ul>
+<li>Framework: the regulatory standard the organization is measured against: SOC 2, HIPAA, but extendable.</li>
+<li>Category: a broad area of concern within that framework. For instance, SOC 2 groups its requirements into Security, Privacy, Process Integrity, Availability, and Confidentiality. We try to stick to them when we consider that it’s applicable to code review.</li>
+<li>Domain: a specific subject inside a category: access control, data handling, network security, for instance. The domain is where an abstract requirement becomes a concrete topic an engineer or agent can reason about.</li>
+<li>Control: a single, checkable requirement inside a domain. It states what must be true, why, and how to demonstrate it.</li>
+</ul>
+<p>One real path through the tree:</p>
+<p>SOC 2  &gt; Security &gt; Access Control &gt; CTRL-S-AC-01: IAM Role-Based Access Architecture: </p>
+<p>“IAM role-based access architecture is used for all AWS account access; long-lived IAM user credentials are not used for production workloads”</p>
+<p>But how do we evaluate the controls? Each domain has a runbook: a document that lists all the controls for that domain, provides detailed instructions on how to evaluate them, and documents when to classify them as “fail,” “pass,” or “needs more evidence.”</p>
+<p>An example of a SOC 2 /  Privacy / Data Handling control is included at the end of this article.</p>
+<hr/>
+<h2 id="from-controls-to-findings-how-the-pipeline-works">From Controls to Findings: How the Pipeline Works</h2>
+<img src="/images/figure-2-evaluation-pipeline.png" alt="Four-step pipeline: Controls (regulation restated as testable requirements), Evidence (config, logs and docs pulled from the live system), Assessment workflow (agents reason over evidence control by control), and Evaluation report (a verdict per control with reasoning attached)" title="The compliance evaluation pipeline"/>
+<p>The pipeline has one job: check the controls defined in the framework against real infrastructure.</p>
+<p>For each control, the system collects the Terraform files that count as evidence: IAM policies, S3 configurations, KMS settings, and any other resources identified by the control’s evaluation logic. That evidence is paired with the control definition and evaluated through a structured, rules-based assessment workflow. The result is a control verdict, supporting reasoning, and references to the exact resources examined.</p>
+<p>The following are the three possible verdicts:</p>
+<img src="/images/figure-3-verdicts.png" alt="Table of verdicts. Passed: the control is satisfied, the evidence is there. Failed: a specific issue was identified, with the resource and reasoning documented. Needs more evidence: more information is required to validate a control — for instance, an S3 bucket does not necessarily contain PHI or sensitive data." title="The three verdicts an assessment can return"/>
+<p>Because the assessment workflow reads static configuration, it can run anywhere the code lives, including on every pull request.</p>
+<hr/>
+<h2 id="running-grc-xl-on-open-source-healthtech-infrastructure">Running GRC XL on Open Source Healthtech Infrastructure</h2>
+<p>We ran GRC XL against the public Terraform repository of <a href="https://github.com/the-momentum/healthstack">HealthStack</a> from Momentum, a healthcare software and development company.</p>
+<p>The pipeline returned findings on two transmission security controls: CTRL-H-DH-01 (ePHI Encryption in Transit) and CTRL-H-DH-05 (Minimum TLS Version Policy Enforcement). The reasoning in each finding pointed to the same thing: S3 buckets across three modules had no explicit bucket policy denying unencrypted transport or connections below TLS 1.2.</p>
+<p>AWS&#39;s default allows both HTTP and HTTPS unless a deny policy is present. Without it, plaintext access is not explicitly blocked, even in infrastructure designed for healthcare data.</p>
+<p>The change is two deny statements per bucket:</p>
+<span><div class="code-highlight" data-language="text"><pre class="language-text" data-language="text"><code class="language-text"># HIPAA §164.312(e) - Transmission Security
+{
+  Sid       = &quot;DenyInsecureTransport&quot;
+  Effect    = &quot;Deny&quot;
+  Principal = &quot;*&quot;
+  Action    = &quot;s3:*&quot;
+  Resource  = [&quot;${aws_s3_bucket.data.arn}&quot;, &quot;${aws_s3_bucket.data.arn}/*&quot;]
+  Condition = {
+    Bool = { &quot;aws:SecureTransport&quot; = &quot;false&quot; }
+  }
+},
+{
+  Sid       = &quot;DenyOutdatedTLS&quot;
+  Effect    = &quot;Deny&quot;
+  Principal = &quot;*&quot;
+  Action    = &quot;s3:*&quot;
+  Resource  = [&quot;${aws_s3_bucket.data.arn}&quot;, &quot;${aws_s3_bucket.data.arn}/*&quot;]
+  Condition = {
+    NumericLessThan = { &quot;s3:TlsVersion&quot; = &quot;1.2&quot; }
+  }
+}</code></pre></div></span>
+<p><br/>
+The Momentum evaluation ran in minutes, surfaced concrete findings, and the PR was merged.</p>
+<hr/>
+<h2 id="what-this-means-for-your-team">What This Means for Your Team</h2>
+<p>GRC XL keeps compliance in the codebase. As your infrastructure changes, the pipeline re-evaluates it automatically. A change that affects a control gets flagged before it merges.</p>
+<p>GRC XL is built and maintained by Xmartlabs. If you want to evaluate your infrastructure against HIPAA or SOC 2 controls, identify where it meets the requirements and where it doesn&#39;t, and integrate compliance checks into your CI workflow, we&#39;d like to help. <a href="https://xmartlabs.com/contact">Talk to the Xmartlabs team</a></p>
+<hr/>
+<p>Are you handling compliance as part of your development cycle, or is it something that gets addressed when an audit comes up? We&#39;d like to know</p>
+<img src="/images/figure-4-anatomy-of-a-control.png" alt="Full specification of control CTRL-SDH-01, Transmission encryption at network boundaries. Regulatory reference SOC 2 CC6.7. Rows cover evidence expectations (configuration state, all network boundaries where sensitive data crosses), what must be demonstrated, cloud architectural expectations such as HTTPS with TLS 1.2 or higher, and the pass, fail and insufficient-data conditions." title="Anatomy of a control: CTRL-SDH-01"/> 

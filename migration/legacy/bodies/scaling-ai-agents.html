@@ -1,0 +1,137 @@
+ <h1 id="-introduction">🧠 Introduction</h1>
+<p>In our last GenAI project, we faced some problems that we feel may be of help to many of you. The project was to build an AI agent system capable of generating new product proposals optimized for different countries and user profiles. To achieve this, the agent needed to use, among other things, a RAG (Retrieval-Augmented Generation) component that accessed our official documents, technical reports, and product descriptions.</p>
+<h1 id="️-initial-system-architecture">⚙️ Initial system architecture</h1>
+<h2 id="tools-used">Tools used</h2>
+<ul>
+<li>Language: Python</li>
+<li>Frameworks: LangGraph, LangChain, LangFuse</li>
+<li>Infrastructure: Azure</li>
+<li>Vector storage: PGVector</li>
+<li>LLM: OpenAI</li>
+</ul>
+<h1 id="-context-and-modeling">🎨 Context and modeling</h1>
+<p>We decided to model the solution as an agentic workflow because it allowed us to represent the process in a much clearer way. In our system, we had multiple data sources, different types of transformations, and variable conditions (such as country or user profile), which made the logic complex.</p>
+<p>This type of solution allowed us to divide that logic into independent nodes. Each node represented a well-defined unit of work, and the connections between nodes explicitly defined the dependencies between tasks, which also resulted in a more organized codebase.</p>
+<h2 id="graph-composition">Graph composition</h2>
+<img src="/images/image-1.webp" alt="Flowchart showing retriever, branching nodes, and a final result in a RAG system" title="RAG Pipeline Flow"/>
+<p><strong>Retriever Node</strong></p>
+<p>In order to better understand the graph without going too much into the business logic, the Retriever node was responsible for obtaining the relevant information for the execution of the flow. For that we used an Asynchronous PGVector retriever, which consulted a vector base previously built from documents. These documents were previously processed and embedded using OpenAI embedding models.</p>
+<p><strong>Nodes A, B, C, D and E</strong></p>
+<ul>
+<li>Node A generated 9 different outputs, each of which served as input for nodes B, C, D and E.</li>
+<li>These nodes performed further processing and, for each input received, produced a variable number of outputs - on average, about 9.</li>
+</ul>
+<p>Finally, the <em>Final Result</em> node processed the final results.</p>
+<h2 id="-interaction-with-openai">🤖 Interaction with OpenAI.</h2>
+<p>Each node made requests to OpenAI using a system prompt accompanied by multiple inputs. These inputs could come from different data sources, people&#39;s profiles, etc. The amount of information could be very large, depending on the information the user wanted to process.</p>
+<h2 id="pseudocode-of-the-initial-graph-generation">Pseudocode of the initial graph generation</h2>
+<span><div class="code-highlight" data-language="python"><pre class="language-python" data-language="python"><code class="language-python">add_edge<span class="token punctuation">(</span>START<span class="token punctuation">,</span> <span class="token string">&quot;retriever_node&quot;</span><span class="token punctuation">)</span>
+add_edge<span class="token punctuation">(</span><span class="token string">&quot;retriever_node&quot;</span><span class="token punctuation">,</span> <span class="token string">&quot;node_a&quot;</span><span class="token punctuation">)</span>
+add_edge<span class="token punctuation">(</span>
+    <span class="token string">&quot;node_a&quot;</span><span class="token punctuation">,</span>
+    <span class="token punctuation">[</span><span class="token string">&quot;node_b&quot;</span><span class="token punctuation">,</span> <span class="token string">&quot;node_c&quot;</span><span class="token punctuation">,</span> <span class="token string">&quot;node_d&quot;</span><span class="token punctuation">,</span> <span class="token string">&quot;node_e&quot;</span><span class="token punctuation">]</span>
+<span class="token punctuation">)</span>
+
+add_edge<span class="token punctuation">(</span>
+    <span class="token punctuation">[</span>
+        <span class="token string">&quot;node_b&quot;</span><span class="token punctuation">,</span>
+        <span class="token string">&quot;node_c&quot;</span><span class="token punctuation">,</span>
+        <span class="token string">&quot;node_d&quot;</span><span class="token punctuation">,</span>
+        <span class="token string">&quot;node_e&quot;</span><span class="token punctuation">,</span>
+    <span class="token punctuation">]</span><span class="token punctuation">,</span>
+    <span class="token string">&quot;final_result_node&quot;</span><span class="token punctuation">,</span>
+<span class="token punctuation">)</span>
+
+add_edge<span class="token punctuation">(</span><span class="token string">&quot;final_result_node&quot;</span><span class="token punctuation">,</span> END<span class="token punctuation">)</span></code></pre></div></span>
+<h2 id="-scaling-the-solution-first-drawbacks">📈 Scaling the solution: First drawbacks</h2>
+<p>In simple scenarios, the system worked smoothly, even in the first releases of the system, where there were few country profiles, and little information to process, we had no problems.</p>
+<p>However, as the volume of data grew, we ran into two problems that, combined, made the system unusable: on the one hand, the entire processing exceeded the time limit defined by Azure (we use Azure app Service, and for HTTPS requests, the connection is maintained for 4 minutes 20 seconds approximately); on the other hand, the size of the requests to OpenAI exceeded the limit of tokens of the context window (32k tokens), which made it directly impossible to process certain requests.</p>
+<p>These two bottlenecks were related: the more data included, the greater the amount of processing required and the larger the size of the prompt, and therefore of the output. In other words, the greater the input, the worse the performance and the greater the risk that the request could not even be processed.</p>
+<p>Faced with this situation, we decided to redesign the graph, incorporating parallelization in certain edges (represented in blue). </p>
+<img src="/images/image-2.webp" alt="Flowchart of a RAG system with selected paths from Node A highlighted in blue." title="RAG Pipeline with Highlighted Paths"/>
+<h2 id="pseudocode-of-the-graph-generation-after-parallelizing">Pseudocode of the graph generation after parallelizing.</h2>
+<span><div class="code-highlight" data-language="python"><pre class="language-python" data-language="python"><code class="language-python">add_edge<span class="token punctuation">(</span>START<span class="token punctuation">,</span> <span class="token string">&quot;retriever_node&quot;</span><span class="token punctuation">)</span>
+add_edge<span class="token punctuation">(</span><span class="token string">&quot;retriever_node&quot;</span><span class="token punctuation">,</span> <span class="token string">&quot;node_a&quot;</span><span class="token punctuation">)</span>
+add_conditional_edges<span class="token punctuation">(</span>
+    <span class="token string">&quot;node_a&quot;</span><span class="token punctuation">,</span>
+    parallel_node_a_to_b<span class="token punctuation">,</span>
+    <span class="token punctuation">[</span><span class="token string">&quot;node_b&quot;</span><span class="token punctuation">]</span><span class="token punctuation">,</span>
+<span class="token punctuation">)</span>
+
+add_conditional_edges<span class="token punctuation">(</span>
+    <span class="token string">&quot;node_a&quot;</span><span class="token punctuation">,</span>
+    parallel_node_a_to_c<span class="token punctuation">,</span>
+    <span class="token punctuation">[</span><span class="token string">&quot;node_c&quot;</span><span class="token punctuation">]</span><span class="token punctuation">,</span>
+<span class="token punctuation">)</span>
+
+add_conditional_edges<span class="token punctuation">(</span>
+    <span class="token string">&quot;node_a&quot;</span><span class="token punctuation">,</span>
+    parallel_node_a_to_d<span class="token punctuation">,</span>
+    <span class="token punctuation">[</span><span class="token string">&quot;node_d&quot;</span><span class="token punctuation">]</span><span class="token punctuation">,</span>
+<span class="token punctuation">)</span>
+
+add_conditional_edges<span class="token punctuation">(</span>
+    <span class="token string">&quot;node_a&quot;</span><span class="token punctuation">,</span>
+    parallel_node_a_to_e<span class="token punctuation">,</span>
+    <span class="token punctuation">[</span><span class="token string">&quot;node_e&quot;</span><span class="token punctuation">]</span><span class="token punctuation">,</span>
+<span class="token punctuation">)</span>
+
+add_edge<span class="token punctuation">(</span>
+    <span class="token punctuation">[</span>
+        <span class="token string">&quot;node_b&quot;</span><span class="token punctuation">,</span>
+        <span class="token string">&quot;node_c&quot;</span><span class="token punctuation">,</span>
+        <span class="token string">&quot;node_d&quot;</span><span class="token punctuation">,</span>
+        <span class="token string">&quot;node_e&quot;</span><span class="token punctuation">,</span>
+    <span class="token punctuation">]</span><span class="token punctuation">,</span>
+    <span class="token string">&quot;final_result_node&quot;</span><span class="token punctuation">,</span>
+<span class="token punctuation">)</span>
+
+add_edge<span class="token punctuation">(</span><span class="token string">&quot;final_result_node&quot;</span><span class="token punctuation">,</span> END<span class="token punctuation">)</span></code></pre></div></span>
+<p>each of the functions <span><code class="language-text">parallel_node_a_to_*</code></span>, is in charge of dividing the inputs coming from node A into chunks and distributing them in parallel to the corresponding nodes (B, C, D or E). An example of implementation of this function is shown below.</p>
+<span><div class="code-highlight" data-language="python"><pre class="language-python" data-language="python"><code class="language-python"><span class="token keyword">async</span> <span class="token keyword">def</span> <span class="token function">parallel_concept_node_a_to_b</span><span class="token punctuation">(</span>state<span class="token punctuation">:</span> GraphState<span class="token punctuation">)</span> <span class="token operator">-</span><span class="token operator">&gt;</span> <span class="token builtin">list</span><span class="token punctuation">[</span>Send<span class="token punctuation">]</span><span class="token punctuation">:</span>
+    send_list<span class="token punctuation">:</span> <span class="token builtin">list</span><span class="token punctuation">[</span>Send<span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token punctuation">]</span>
+    <span class="token keyword">for</span> elem <span class="token keyword">in</span> state<span class="token punctuation">.</span>results_from_node_a<span class="token punctuation">:</span>
+        <span class="token keyword">for</span> country <span class="token keyword">in</span> state<span class="token punctuation">.</span>countries<span class="token punctuation">:</span>
+            send_list<span class="token punctuation">.</span>append<span class="token punctuation">(</span>
+                Send<span class="token punctuation">(</span>
+                    <span class="token string">&quot;node_b&quot;</span><span class="token punctuation">,</span>
+                    <span class="token punctuation">{</span>
+                        elem<span class="token operator">=</span>elem<span class="token punctuation">,</span>
+                        country<span class="token operator">=</span>country<span class="token punctuation">,</span>
+                    <span class="token punctuation">}</span>
+                <span class="token punctuation">)</span>
+            <span class="token punctuation">)</span>
+
+    <span class="token keyword">return</span> send_list</code></pre></div></span>
+<p>For this purpose, we used <a href="https://langchain-ai.github.io/langgraph/concepts/low_level/?h=reducer#send">Send</a> from LangGraph.</p>
+<p>Parallelization not only allowed us to distribute the processing load and reduce processing times, but also enabled us to divide the inputs into smaller chunks, avoiding exceeding the token limit of the context window without sacrificing the text quality generated by the LLM. In other words, we were able to allow the system to process large volumes of information without breaking down in terms of time or input size (in principle).</p>
+<p>This led to more than 400 tasks running concurrently for certain graph inputs. This parallelization not only significantly reduced processing times, but also allowed solving one of the main bottlenecks of the system: the token limit of the OpenAI context window. By dividing the inputs into smaller chunks and distributing them in parallel executions, we avoided exceeding the maximum allowed per request.</p>
+<p>However, despite that improvement, in cases with heavy processing we still exceeded the Azure limit mentioned above. To definitively solve this problem, we implemented data streams from Langgraph, which were then sent to a websocket, allowing us to maintain persistent communication between client and server, and avoid timeout errors. This solution involved backend and frontend adjustments to adapt to the new communication model.</p>
+<h1 id="-limitations-when-scaling-parallelization">❌🧵 <strong>Limitations when scaling parallelization.</strong></h1>
+<p>At the time of performing a more exhaustive testing, we noticed that we had a new bug in the system. The problem was that the logic defined in each node of the graph used <span><code class="language-text">Langchain</code></span> to build chains, and those chains, in turn, invoked OpenAI models through the <span><code class="language-text">langchain-openai</code></span> and <span><code class="language-text">openAI</code></span> packages, which internally use <span><code class="language-text">httpx</code></span> to make requests.</p>
+<p>When we implemented parallelization, the number of asynchronous executions grew considerably -in some cases exceeding 400 concurrent tasks. It was in this context that we started to experience ConnectionError errors.</p>
+<p>While this error was initially related to an HTTPS issue that seemed to fail with many concurrent requests, we also suspected that our Azure machine was running out of resources. Although these operations are primarily limited to I/O, handling so many simultaneous requests and network calls can also significantly overload the CPU.</p>
+<p>We were then faced with the following dilemma:</p>
+<ul>
+<li>If we parallelized to the maximum, we would get errors.</li>
+<li>If we avoided parallelization, we exceeded the context window limit</li>
+<li>Scaling the infra would increase our costs</li>
+</ul>
+<h1 id="️-final-solution-find-a-balance-when-parallelizing">⚖️ Final solution: Find a balance when parallelizing.</h1>
+<p>nstead of taking parallelization to the maximum level, we decided to parallelize by grouping a certain number of elements in such a way that there is parallelization but it does not exceed the limits of the context window.</p>
+<p>We went from 400 concurrent tasks to approximately 50. The tradeoff of this decision was that the complete execution of the graph increased by a few seconds. However, thanks to the fact that we had already implemented data streaming from LangGraph combined with WebSockets, this increase in time did not imply new errors and did not worsen the user experience.</p>
+<p>Below you can see a complete execution of the final graph.</p>
+<ul>
+<li>812774 input tokens</li>
+<li>187176 output tokens.</li>
+</ul>
+<p>So we are looking at approximately 1M tokens per graph run.</p>
+<img src="/images/screenshot_2025-07-08_at_3.33.35_pm.webp" alt="Screenshot of an LLM usage dashboard showing input and output token counts, latency, and cost per generation" title="LLM Usage Breakdown Dashboard"/>
+<h1 id="-conclusions">✅ Conclusions</h1>
+<p>Throughout the development of this system, we faced several technical challenges that forced us to rethink our architecture. Initially, the system worked well with little information, but as the data volume scaled, two critical limitations appeared: the time limit imposed by Azure for HTTP requests and the context window token limit in OpenAI models.</p>
+<p>Network parallelization was the first major improvement. It allowed us not only to reduce processing times, but also to split the inputs into smaller parts, thus avoiding exceeding the maximum number of tokens allowed. However, pushing this strategy to the extreme - with more than 400 concurrent tasks - brought up new bugs related to Connection Errors.</p>
+<p>This put us in a dilemma: if we didn&#39;t parallelize, the system would fail due to too many tokens or timeout; if we parallelized too much, it would fail due to connection errors. The solution was to find a break-even point. We clustered the data and reduced parallelization to approximately 50 simultaneous tasks, which allowed us to maintain good performance without system failure.</p>
+<p>Finally, this experience taught us a lesson: it&#39;s key to carefully design the graph, analyze the number of tasks to be executed, and the architecture of the application from the beginning.</p>
+<p>This leads us to the next question: what if, instead of having a single machine with a fixed number of instances, the LLM logic were managed using a serverless solution? We could explore whether a service like Azure Functions offers better performance, as it would automatically manage the creation of new instances and avoid issues related to overloading the system.</p>
+<h2 id="aknowledgements">Aknowledgements</h2>
+<p>Special thanks to Nicolás Hernandez for his outstanding leadership throughout this project, and to Gaston Valvassori for being a great teammate and collaborator.</p> 

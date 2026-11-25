@@ -4,7 +4,13 @@ import { Card } from '../card';
 
 export const MORE_BLOGS_SECTION_ID = 'more-blogs-section';
 
-// `relatedPosts`: [{ id, title, slug, thumbnail }]
+/**
+ * @param {{
+ *   relatedPosts?: { id: string | number, title: string, slug: string, thumbnail: string | null }[],
+ *   title?: string,
+ *   categoryId?: string,
+ * }} props
+ */
 const MoreBlogsSection = ({
   relatedPosts = [],
   title = '',

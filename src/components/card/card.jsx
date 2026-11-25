@@ -28,6 +28,8 @@ const Card = ({ data, className = '' }) => (
           className="w-full h-full absolute top-0 left-0 rounded-[3%] object-cover object-left"
           src={data.thumbnail || CARD_FALLBACK_IMAGE}
           data-fallback={CARD_FALLBACK_IMAGE}
+          // The fallback script may swap `src` before hydration.
+          suppressHydrationWarning
         />
       </div>
       <h1 className="text-heading-two-separated text-blue-one font-link max-sm:text-[1.4rem]">

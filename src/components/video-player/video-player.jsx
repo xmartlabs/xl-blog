@@ -1,8 +1,8 @@
 import React from 'react';
 
-// Self-hosted videos live in /images by default; set PUBLIC_MEDIA_BASE_URL
+// Self-hosted videos live in /images by default; set NEXT_PUBLIC_MEDIA_BASE_URL
 // (e.g. an R2 bucket URL) to serve them from somewhere else.
-const MEDIA_BASE_URL = (import.meta.env.PUBLIC_MEDIA_BASE_URL || '').replace(
+const MEDIA_BASE_URL = (process.env.NEXT_PUBLIC_MEDIA_BASE_URL || '').replace(
   /\/+$/,
   ''
 );

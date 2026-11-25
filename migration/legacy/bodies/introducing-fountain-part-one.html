@@ -1,0 +1,216 @@
+ <p>There are plenty of articles out there talking about the amazing Android Architecture Components, how we can combine them in an MVVM architecture and make them work as a charm.
+From my point of view, that's true, the <strong>Android Architecture Components are awesome!</strong></p>
+<p>There's also a ton of articles talking about the new <a href="https://developer.android.com/topic/libraries/architecture/paging/">Android Paging Library</a> and how we can combine it with <a href="https://developer.android.com/topic/libraries/architecture/room">Room Persistence Library</a> and <a href="https://developer.android.com/topic/libraries/architecture/livedata">LiveData</a> to make paging as easy as possible.
+I suppose that you are already familiar with the topic :)</p>
+<p>So I don't want to write about the new Android Components or how we should use them.
+Today I want to tell you how we can <strong>integrate a numerated paged service</strong>, to the best of my knowledge, <strong>using our new <a href="https://github.com/xmartlabs/fountain">Fountain</a> library.</strong>
+A numerated paged service is an endpoint which returns a list of entities structured in pages with sequential page numbers.</p>
+<p>Why not use the <a href="https://developer.android.com/topic/libraries/architecture/paging/">Android Paging Library</a> directly?
+To be able to integrate these kind of services you'll have to write a lot of code to obtain the necessary paging component, <span><code class="language-text">LiveData&#x3C;PagedList&#x3C;T>></code></span>.
+Once you have it, the paging issue becomes trivial, but getting it is not. And this is only if you don't need database support, in that case you'll have to write a lot more code.
+This is where <a href="https://github.com/xmartlabs/fountain">Fountain</a> comes to life.
+It provides everything you'll need to work with these services and more, easily and without boilerplate.</p>
+<p>To read this post, you should already know the Repository Architectural Pattern and the basics of these libraries:</p>
+<ul>
+<li><a href="https://square.github.io/retrofit/">Retrofit</a></li>
+<li><a href="https://github.com/ReactiveX/RxJava">Rxjava</a></li>
+<li><a href="https://developer.android.com/topic/libraries/architecture/">Android Architecture Components</a>
+<ul>
+<li><a href="https://developer.android.com/topic/libraries/architecture/livedata">LiveData</a></li>
+<li><a href="https://developer.android.com/topic/libraries/architecture/room">Room Persistence Library</a></li>
+<li><a href="https://developer.android.com/topic/libraries/architecture/paging/">Android Paging Library</a></li>
+</ul>
+</li>
+</ul>
+<p>Let's get down to the nitty-gritty stuff!</p>
+<h1 id="listing-component">Listing Component</h1>
+<p>First I want to tell you about a cool idea from Google, that they are using in some of their <a href="https://github.com/googlesamples/android-architecture">example projects</a> to handle all services that return a list.
+They believe that you can handle all list streams with a <span><code class="language-text">Listing</code></span> component, which contains basically five elements:</p>
+<span><div class="code-highlight" data-language="kotlin"><pre class="language-kotlin" data-language="kotlin"><code class="language-kotlin"><span class="token keyword">data</span> <span class="token keyword">class</span> Listing<span class="token operator">&#x3C;</span>T<span class="token operator">></span><span class="token punctuation">(</span>
+    <span class="token keyword">val</span> pagedList<span class="token operator">:</span> LiveData<span class="token operator">&#x3C;</span>PagedList<span class="token operator">&#x3C;</span>T<span class="token operator">></span><span class="token operator">></span><span class="token punctuation">,</span>
+    <span class="token keyword">val</span> networkState<span class="token operator">:</span> LiveData<span class="token operator">&#x3C;</span>NetworkState<span class="token operator">></span><span class="token punctuation">,</span>
+    <span class="token keyword">val</span> refresh<span class="token operator">:</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">-></span> Unit<span class="token punctuation">,</span>
+    <span class="token keyword">val</span> refreshState<span class="token operator">:</span> LiveData<span class="token operator">&#x3C;</span>NetworkState<span class="token operator">></span><span class="token punctuation">,</span>
+    <span class="token keyword">val</span> retry<span class="token operator">:</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">-></span> Unit
+<span class="token punctuation">)</span></code></pre></div></span>
+<ol>
+<li><strong>pagedList:</strong> A changing data stream of type <span><code class="language-text">T</code></span> represented as a <a href="https://developer.android.com/topic/libraries/architecture/livedata"><span><code class="language-text">LiveData</code></span></a> of a <a href="https://developer.android.com/reference/android/arch/paging/PagedList"><span><code class="language-text">PagedList</code></span></a>.</li>
+<li><strong>networkState:</strong> A stream that notifies network state changes, such as when a new page started loading (so you can show a spinner in the UI).</li>
+<li><strong>refresh:</strong> A refresh function, to refresh all data.</li>
+<li><strong>refreshState:</strong> A stream that notifies the status of the refresh request.</li>
+<li><strong>retry:</strong> A retry function to execute if something failed.</li>
+</ol>
+<p>The network state is represented as:</p>
+<span><div class="code-highlight" data-language="kotlin"><pre class="language-kotlin" data-language="kotlin"><code class="language-kotlin"><span class="token keyword">enum</span> <span class="token keyword">class</span> Status <span class="token punctuation">{</span>
+  RUNNING<span class="token punctuation">,</span>
+  SUCCESS<span class="token punctuation">,</span>
+  FAILED
+<span class="token punctuation">}</span>
+
+<span class="token keyword">data</span> <span class="token keyword">class</span> NetworkState <span class="token keyword">private</span> <span class="token keyword">constructor</span><span class="token punctuation">(</span>
+    <span class="token keyword">val</span> status<span class="token operator">:</span> Status<span class="token punctuation">,</span>
+    <span class="token keyword">val</span> throwable<span class="token operator">:</span> Throwable<span class="token operator">?</span> <span class="token operator">=</span> <span class="token keyword">null</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+
+  <span class="token keyword">companion</span> <span class="token keyword">object</span> <span class="token punctuation">{</span>
+    <span class="token keyword">val</span> LOADED <span class="token operator">=</span> <span class="token function">NetworkState</span><span class="token punctuation">(</span>Status<span class="token punctuation">.</span>SUCCESS<span class="token punctuation">)</span>
+    <span class="token keyword">val</span> LOADING <span class="token operator">=</span> <span class="token function">NetworkState</span><span class="token punctuation">(</span>Status<span class="token punctuation">.</span>RUNNING<span class="token punctuation">)</span>
+    <span class="token keyword">fun</span> <span class="token function">error</span><span class="token punctuation">(</span>throwable<span class="token operator">:</span> Throwable<span class="token operator">?</span><span class="token punctuation">)</span> <span class="token operator">=</span> <span class="token function">NetworkState</span><span class="token punctuation">(</span>Status<span class="token punctuation">.</span>FAILED<span class="token punctuation">,</span> throwable<span class="token punctuation">)</span>
+  <span class="token punctuation">}</span>
+<span class="token punctuation">}</span></code></pre></div></span>
+<h2 id="the-problem">The problem</h2>
+<p>Suppose that you are following the Repository Pattern and you want to expose a paged entity list from a service source.
+In that case, your repository should implement a method which returns a <span><code class="language-text">Listing</code></span> of that entities.
+I'll give you an example.
+Suppose that you have an app which lists the GitHub users whose usernames contain a specific word.</p>
+<p>So, if you use Retrofit and RxJava, you can define the service call as:</p>
+<span><div class="code-highlight" data-language="kotlin"><pre class="language-kotlin" data-language="kotlin"><code class="language-kotlin"><span class="token keyword">data</span> <span class="token keyword">class</span> GhListResponse<span class="token operator">&#x3C;</span>T<span class="token operator">></span><span class="token punctuation">(</span>
+  <span class="token keyword">val</span> total_count<span class="token operator">:</span> Long<span class="token punctuation">,</span>
+  <span class="token keyword">val</span> items<span class="token operator">:</span> List<span class="token operator">&#x3C;</span>T<span class="token operator">></span>
+<span class="token punctuation">)</span>
+
+<span class="token keyword">data</span> <span class="token keyword">class</span> <span class="token function">User</span><span class="token punctuation">(</span>
+  <span class="token keyword">var</span> id<span class="token operator">:</span> Long<span class="token punctuation">,</span>
+  <span class="token keyword">var</span> login<span class="token operator">:</span> String<span class="token operator">?</span><span class="token punctuation">,</span>
+  <span class="token keyword">var</span> avatarUrl<span class="token operator">:</span> String<span class="token operator">?</span>
+<span class="token punctuation">)</span>
+
+<span class="token annotation builtin">@GET</span><span class="token punctuation">(</span><span class="token string-literal singleline"><span class="token string">"/search/users"</span></span><span class="token punctuation">)</span>
+<span class="token keyword">fun</span> <span class="token function">searchUsers</span><span class="token punctuation">(</span><span class="token annotation builtin">@Query</span><span class="token punctuation">(</span><span class="token string-literal singleline"><span class="token string">"q"</span></span><span class="token punctuation">)</span> name<span class="token operator">:</span> String<span class="token punctuation">,</span>
+                <span class="token annotation builtin">@Query</span><span class="token punctuation">(</span><span class="token string-literal singleline"><span class="token string">"page"</span></span><span class="token punctuation">)</span> page<span class="token operator">:</span> Int<span class="token punctuation">,</span>
+                <span class="token annotation builtin">@Query</span><span class="token punctuation">(</span><span class="token string-literal singleline"><span class="token string">"per_page"</span></span><span class="token punctuation">)</span> pageSize<span class="token operator">:</span> Int
+<span class="token punctuation">)</span><span class="token operator">:</span> Single<span class="token operator">&#x3C;</span>GhListResponse<span class="token operator">&#x3C;</span>User<span class="token operator">></span><span class="token operator">></span></code></pre></div></span>
+<p>This service is pretty similar to most paged services I've seen, so the big question here is how we can integrate this service in a repository using the new Paging Component.
+Furthermore, the question could be how we could convert the <span><code class="language-text">Single&#x3C;GhListResponse&#x3C;User>></code></span> response to a <span><code class="language-text">Listing&#x3C;User></code></span> structure.</p>
+<p>The first thing that we should consider, is <strong>deciding if we need a database source to cache the data</strong>.
+It could seem easy, but it's not.
+Some people could say that if we want to search entities by a key, a database cache isn't the best option because the response may change constantly and frequently, and at the same time the app user doesn't repeat the same search query multiple times.
+However, saving data in a database source has some advantages.
+For example, you can make your app work offline, make less use of the backend, hide network problems, manage data better and share entities easier.</p>
+<p>Personally, I prefer taking the cache approach, but I know that it depends on the problem.
+In this post we will explore both strategies using <strong><a href="https://github.com/xmartlabs/fountain">Fountain</a></strong>.</p>
+<h1 id="fountain">Fountain</h1>
+<p><a href="https://github.com/xmartlabs/fountain">Fountain</a> is an <strong>Android Kotlin library</strong> conceived to make your life easier when dealing with paged endpoint services, where the paging is based on incremental page numbers (e.g. 1, 2, 3, ...).</p>
+<p>The features are:</p>
+<ul>
+<li><strong>Network:</strong> Provide a <span><code class="language-text">Listing</code></span> structure based on a Retrofit and RxJava service.</li>
+<li><strong>Network + Cache:</strong> Provide a <span><code class="language-text">Listing</code></span> structure with cache support using Retrofit and RxJava for the service layer and a <a href="https://developer.android.com/reference/android/arch/paging/DataSource"><span><code class="language-text">DataSource</code></span></a> for caching the data. In the examples we will use <a href="https://developer.android.com/topic/libraries/architecture/room">Room Persistence Library</a> to provide the <a href="https://developer.android.com/reference/android/arch/paging/DataSource"><span><code class="language-text">DataSource</code></span></a> but you could use any other <a href="https://developer.android.com/reference/android/arch/paging/DataSource"><span><code class="language-text">DataSource</code></span></a>.</li>
+</ul>
+<p>In this first part of the series we'll see how we can integrate the first functionality.
+The second one will be explained in the <a href="/2018/08/20/Introducing-Fountain-Part-Two/">next part</a>.</p>
+<h2 id="integration">Integration</h2>
+<p>To integrate <a href="https://github.com/xmartlabs/fountain">Fountain</a> into your app, you have to include the following dependency in your gradle app.</p>
+<span><div class="code-highlight" data-language="groovy"><pre class="language-groovy" data-language="groovy"><code class="language-groovy">repositories <span class="token punctuation">{</span>
+    maven <span class="token punctuation">{</span> url <span class="token interpolation-string"><span class="token string">"https://jitpack.io"</span></span> <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+
+dependencies <span class="token punctuation">{</span>
+    implementation <span class="token string">'com.github.xmartlabs:fountain:0.2.+'</span>
+<span class="token punctuation">}</span></code></pre></div></span>
+<h2 id="fountain-network-support">Fountain Network Support</h2>
+<p>The library defines two structures to handle the network requests.
+The <span><code class="language-text">PageFetcher</code></span> is used to fetch each page from the service, whereas the <span><code class="language-text">NetworkDataSourceAdapter</code></span> will be used to handle the paging state.</p>
+<span><div class="code-highlight" data-language="kotlin"><pre class="language-kotlin" data-language="kotlin"><code class="language-kotlin"><span class="token keyword">interface</span> PageFetcher<span class="token operator">&#x3C;</span>T<span class="token operator">></span> <span class="token punctuation">{</span>
+  <span class="token annotation builtin">@CheckResult</span>
+  <span class="token keyword">fun</span> <span class="token function">fetchPage</span><span class="token punctuation">(</span>page<span class="token operator">:</span> Int<span class="token punctuation">,</span> pageSize<span class="token operator">:</span> Int<span class="token punctuation">)</span><span class="token operator">:</span> Single<span class="token operator">&#x3C;</span><span class="token keyword">out</span> T<span class="token operator">></span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword">interface</span> NetworkDataSourceAdapter<span class="token operator">&#x3C;</span>T<span class="token operator">></span> <span class="token operator">:</span> PageFetcher<span class="token operator">&#x3C;</span>T<span class="token operator">></span> <span class="token punctuation">{</span>
+  <span class="token annotation builtin">@CheckResult</span>
+  <span class="token keyword">fun</span> <span class="token function">canFetch</span><span class="token punctuation">(</span>page<span class="token operator">:</span> Int<span class="token punctuation">,</span> pageSize<span class="token operator">:</span> Int<span class="token punctuation">)</span><span class="token operator">:</span> Boolean
+<span class="token punctuation">}</span></code></pre></div></span>
+<p>The paging state will be managed by the library using mainly two methods:</p>
+<ol>
+<li>A method to <strong>fetch</strong> a specific page, by a page number and a page size.
+This method must return a <span><code class="language-text">Single&#x3C;out T></code></span>, where <span><code class="language-text">T</code></span> can be anything.</li>
+<li>A method to <strong>check</strong> if a page can be fetched.
+For example, if you know that the server has only 3 pages of 10 items each, and the library invokes <span><code class="language-text">canFetch(page = 5, pageSize = 10)</code></span> then you should return <span><code class="language-text">false</code></span>.
+You have to implement this function using the service specification.
+Sometimes the service returns the page amount or the entity amount in the response headers or in the response body, so you'll have to use that information to implement this function.
+However, if you know exactly the page or entity count, the library provides a way to make this work easier.
+I will show that later.</li>
+</ol>
+<p>To use the <strong>Fountain Network support</strong>, you just have to implement a <span><code class="language-text">NetworkDataSourceAdapter&#x3C;ListResponse&#x3C;T>></code></span>, where the <span><code class="language-text">ListResponse&#x3C;T></code></span> is how the library expects the service response.</p>
+<span><div class="code-highlight" data-language="kotlin"><pre class="language-kotlin" data-language="kotlin"><code class="language-kotlin"><span class="token keyword">interface</span> ListResponse<span class="token operator">&#x3C;</span>T<span class="token operator">></span> <span class="token punctuation">{</span>
+  <span class="token keyword">fun</span> <span class="token function">getElements</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">:</span> List<span class="token operator">&#x3C;</span>T<span class="token operator">></span>
+<span class="token punctuation">}</span></code></pre></div></span>
+<p>So, following the example, our paging handler would be:</p>
+<span><div class="code-highlight" data-language="kotlin"><pre class="language-kotlin" data-language="kotlin"><code class="language-kotlin"><span class="token keyword">data</span> <span class="token keyword">class</span> GhListResponse<span class="token operator">&#x3C;</span>T<span class="token operator">></span><span class="token punctuation">(</span>
+    <span class="token keyword">val</span> total_count<span class="token operator">:</span> Long<span class="token punctuation">,</span>
+    <span class="token keyword">val</span> items<span class="token operator">:</span> List<span class="token operator">&#x3C;</span>T<span class="token operator">></span>
+<span class="token punctuation">)</span> <span class="token operator">:</span> ListResponse<span class="token operator">&#x3C;</span>T<span class="token operator">></span> <span class="token punctuation">{</span>
+  <span class="token keyword">override</span> <span class="token keyword">fun</span> <span class="token function">getElements</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=</span> items
+<span class="token punctuation">}</span>
+
+<span class="token keyword">val</span> networkDataSourceAdapter <span class="token operator">=</span>
+    <span class="token punctuation">(</span><span class="token keyword">object</span> <span class="token operator">:</span> NetworkDataSourceAdapter<span class="token operator">&#x3C;</span>ListResponse<span class="token operator">&#x3C;</span>User<span class="token operator">></span><span class="token operator">></span> <span class="token punctuation">{</span>
+      <span class="token keyword">override</span> <span class="token keyword">fun</span> <span class="token function">canFetch</span><span class="token punctuation">(</span>page<span class="token operator">:</span> Int<span class="token punctuation">,</span> pageSize<span class="token operator">:</span> Int<span class="token punctuation">)</span> <span class="token operator">=</span> <span class="token boolean">true</span>
+
+      <span class="token keyword">override</span> <span class="token keyword">fun</span> <span class="token function">fetchPage</span><span class="token punctuation">(</span>page<span class="token operator">:</span> Int<span class="token punctuation">,</span> pageSize<span class="token operator">:</span> Int<span class="token punctuation">)</span> <span class="token operator">=</span>
+          userService<span class="token punctuation">.</span><span class="token function">searchUsers</span><span class="token punctuation">(</span>userName<span class="token punctuation">,</span> page<span class="token punctuation">,</span> pageSize<span class="token punctuation">)</span>
+    <span class="token punctuation">}</span><span class="token punctuation">)</span></code></pre></div></span>
+<p>It's not so hard, right?
+However, the example has a problem: the <span><code class="language-text">canFetch</code></span> method is returning <span><code class="language-text">true</code></span> for all invocations, so we have implemented an endless paging solution.
+In most cases the solution will not be so useful, so let's fix it.</p>
+<p>If we take a look at the GitHub response, we can see that GitHub is returning the amount of entities in each response.
+That is great, we can use that information to implement a real <span><code class="language-text">canFetch</code></span> method.
+Remember that <strong>Fountain</strong> provides a way to achieve it automatically.
+To do that, the library defines two response interfaces and two <span><code class="language-text">NetworkDataSourceAdapter</code></span> providers:</p>
+<span><div class="code-highlight" data-language="kotlin"><pre class="language-kotlin" data-language="kotlin"><code class="language-kotlin"><span class="token keyword">interface</span> ListResponseWithEntityCount<span class="token operator">&#x3C;</span>T<span class="token operator">></span> <span class="token operator">:</span> ListResponse<span class="token operator">&#x3C;</span>T<span class="token operator">></span> <span class="token punctuation">{</span>
+  <span class="token keyword">fun</span> <span class="token function">getEntityCount</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">:</span> Long
+<span class="token punctuation">}</span>
+
+<span class="token keyword">interface</span> ListResponseWithPageCount<span class="token operator">&#x3C;</span>T<span class="token operator">></span> <span class="token operator">:</span> ListResponse<span class="token operator">&#x3C;</span>T<span class="token operator">></span> <span class="token punctuation">{</span>
+  <span class="token keyword">fun</span> <span class="token function">getPageCount</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">:</span> Long
+<span class="token punctuation">}</span>
+
+<span class="token keyword">class</span> NetworkDataSourceWithTotalEntityCountAdapter<span class="token operator">&#x3C;</span>T<span class="token operator">></span><span class="token punctuation">(</span>
+  <span class="token keyword">val</span> pageFetcher<span class="token operator">:</span> PageFetcher<span class="token operator">&#x3C;</span><span class="token keyword">out</span> ListResponseWithEntityCount<span class="token operator">&#x3C;</span>T<span class="token operator">></span><span class="token operator">></span><span class="token punctuation">,</span>
+  firstPage<span class="token operator">:</span> Int <span class="token operator">=</span> <span class="token number">1</span>
+<span class="token punctuation">)</span> <span class="token operator">:</span> NetworkDataSourceAdapter<span class="token operator">&#x3C;</span>ListResponse<span class="token operator">&#x3C;</span>T<span class="token operator">></span><span class="token operator">></span>
+
+<span class="token keyword">class</span> NetworkDataSourceWithTotalPageCountAdapter<span class="token operator">&#x3C;</span>T<span class="token operator">></span><span class="token punctuation">(</span>
+  <span class="token keyword">val</span> pageFetcher<span class="token operator">:</span> PageFetcher<span class="token operator">&#x3C;</span><span class="token keyword">out</span> ListResponseWithPageCount<span class="token operator">&#x3C;</span>T<span class="token operator">></span><span class="token operator">></span><span class="token punctuation">,</span>
+  firstPage<span class="token operator">:</span> Int <span class="token operator">=</span> <span class="token number">1</span>
+<span class="token punctuation">)</span> <span class="token operator">:</span> NetworkDataSourceAdapter<span class="token operator">&#x3C;</span>ListResponse<span class="token operator">&#x3C;</span>T<span class="token operator">></span><span class="token operator">></span></code></pre></div></span>
+<p>Depending on whether we know the entity or the page count, we will use either <span><code class="language-text">NetworkDataSourceWithTotalEntityCountAdapter&#x3C;T></code></span> or <span><code class="language-text">NetworkDataSourceWithTotalPageCountAdapter&#x3C;T></code></span>.
+Given that the GitHub response has the amount of entities, we have to update the <span><code class="language-text">GhListResponse&#x3C;T></code></span> to implement <span><code class="language-text">NetworkDataSourceWithTotalEntityCountAdapter&#x3C;T></code></span></p>
+<span><div class="code-highlight" data-language="kotlin"><pre class="language-kotlin" data-language="kotlin"><code class="language-kotlin"><span class="token keyword">data</span> <span class="token keyword">class</span> GhListResponse<span class="token operator">&#x3C;</span>T<span class="token operator">></span><span class="token punctuation">(</span>
+    <span class="token keyword">val</span> total_count<span class="token operator">:</span> Long<span class="token punctuation">,</span>
+    <span class="token keyword">val</span> items<span class="token operator">:</span> List<span class="token operator">&#x3C;</span>T<span class="token operator">></span><span class="token punctuation">)</span>
+  <span class="token operator">:</span> ListResponseWithEntityCount<span class="token operator">&#x3C;</span>T<span class="token operator">></span> <span class="token punctuation">{</span>
+
+  <span class="token keyword">override</span> <span class="token keyword">fun</span> <span class="token function">getEntityCount</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=</span> total_count
+
+  <span class="token keyword">override</span> <span class="token keyword">fun</span> <span class="token function">getElements</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=</span> items
+<span class="token punctuation">}</span></code></pre></div></span>
+<p>Then, what's left to create the <span><code class="language-text">NetworkDataSourceAdapter</code></span> is to build a <span><code class="language-text">PageFetcher&#x3C;GhListResponse&#x3C;T>></code></span>.</p>
+<span><div class="code-highlight" data-language="kotlin"><pre class="language-kotlin" data-language="kotlin"><code class="language-kotlin"><span class="token keyword">val</span> pageFetcher <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token keyword">object</span> <span class="token operator">:</span> PageFetcher<span class="token operator">&#x3C;</span>GhListResponse<span class="token operator">&#x3C;</span>User<span class="token operator">></span><span class="token operator">></span> <span class="token punctuation">{</span>
+  <span class="token keyword">override</span> <span class="token keyword">fun</span> <span class="token function">fetchPage</span><span class="token punctuation">(</span>page<span class="token operator">:</span> Int<span class="token punctuation">,</span> pageSize<span class="token operator">:</span> Int<span class="token punctuation">)</span> <span class="token operator">=</span>
+      userService<span class="token punctuation">.</span><span class="token function">searchUsers</span><span class="token punctuation">(</span>userName<span class="token punctuation">,</span> page<span class="token punctuation">,</span> pageSize<span class="token punctuation">)</span>
+<span class="token punctuation">}</span><span class="token punctuation">)</span>
+
+<span class="token keyword">val</span> networkDataSourceAdapter <span class="token operator">=</span>
+    <span class="token function">NetworkDataSourceWithTotalEntityCountAdapter</span><span class="token punctuation">(</span>pageFetcher<span class="token punctuation">)</span></code></pre></div></span>
+<p>Recall that at the beginning I said that the only required thing to create a <span><code class="language-text">Listing</code></span> structure using the <strong>Fountain Network support</strong> was a <span><code class="language-text">NetworkDataSourceAdapter</code></span>.
+So we can invoke the listing creator this way:</p>
+<span><div class="code-highlight" data-language="kotlin"><pre class="language-kotlin" data-language="kotlin"><code class="language-kotlin">Fountain<span class="token punctuation">.</span><span class="token function">createNetworkListing</span><span class="token punctuation">(</span>networkDataSourceAdapter<span class="token punctuation">)</span></code></pre></div></span>
+<p>And that's all, we have our <span><code class="language-text">Listing&#x3C;User></code></span> structure!</p>
+<p>In addition, there are some optional parameters that you can define when you are constructing the <span><code class="language-text">Listing</code></span> object:</p>
+<ul>
+<li><span><code class="language-text">firstPage: Int</code></span>: The initial page number, by default its value is 1.</li>
+<li><span><code class="language-text">ioServiceExecutor : Executor</code></span>: The executor with which the service call will be made. By default, the library will use a pool of 5 threads.</li>
+<li><span><code class="language-text">pagedListConfig: PagedList.Config</code></span> : The paged list configuration.
+In this object you can specify several options, for example the <span><code class="language-text">pageSize</code></span> and the <span><code class="language-text">initialPageSize</code></span>.</li>
+</ul>
+<p>In the <a href="/2018/08/20/Introducing-Fountain-Part-Two/">next part of this series</a> we'll see how we could get a <span><code class="language-text">Listing</code></span> component which uses a <span><code class="language-text">DataSource</code></span> cache to store the data.</p>
+<p>Example code can be found in the <a href="https://github.com/xmartlabs/fountain/tree/master/app">sample app</a>.</p>
+<h3 id="conclusion">Conclusion</h3>
+<p>The <span><code class="language-text">Listing</code></span> component is the key of the library.
+It provides an awesome way of displaying the paged entity list and reflecting the network state in the UI.
+If you have this component implemented, you can create an MVVM architecture app and combine it with the repository pattern.
+If you get a repository which provides a <span><code class="language-text">Listing</code></span> component of each paged list, you will be creating a robuster app.</p>
+<p><strong>Fountain</strong> provides a way to create a <span><code class="language-text">Listing</code></span> component easily for a common paged service type, which are the services where the paginated strategy is based on an incremental page number.</p>
+<p>It also provides two ways to go: a mode with <strong>network</strong> support and a mode with <strong>network + cache</strong> support.
+The strategy you choose will depend on your problem.</p>
+<p>I suggest you give it a shot.
+We'll be glad if you provide feedback :)</p> 

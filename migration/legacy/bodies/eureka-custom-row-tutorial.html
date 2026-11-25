@@ -1,0 +1,139 @@
+ <p>It's been almost a year since Eureka's first release and many developers have been using it since then. We are thankful for all the valuable support and contributions received.</p>
+<p>If you are not familiar with what Eureka is and how to create forms with it then you should start by reading <a href="https://blog.xmartlabs.com/2015/09/29/Introducing-Eureka-iOS-form-library-written-in-pure-Swift/">Introducing Eureka iOS form library written in pure Swift</a> or heading over to <a href="https://github.com/xmartlabs/Eureka">Eureka's GitHub page</a>.</p>
+<p>Eureka includes many rows that can be used to create forms but we will almost always need a row that has not been implemented yet. Eureka was designed so that you can add your own rows the same way the default rows were created. You just have to define a row and its cell and start using it.</p>
+<p>Some of the custom rows we have created include a <a href="https://github.com/EurekaCommunity/GooglePlacesRow">GooglePlacesRow</a> which uses the Google Places API to suggest a location to the user and a <a href="https://github.com/EurekaCommunity/SuggestionRow">SuggestionRow</a> which is a generic abstraction of the previous row. These rows are published at <a href="https://github.com/EurekaCommunity">EurekaCommunity</a> which is a GitHub organization for Eureka's custom rows. You can also see some custom rows in the <a href="https://github.com/xmartlabs/Eureka#example-project">Examples project</a> of Eureka like a <span><code class="language-text">WeekDayRow</code></span>, a <span><code class="language-text">FloatLabelRow</code></span> and a <span><code class="language-text">LocationRow</code></span> which lets the user select a location from a Map.</p>
+<blockquote>
+<p>Sometimes we just want to add or change the functionality of an already existing row. In that case we normally subclass that row to implement our features.</p>
+</blockquote>
+<p>One thing that we realized is that many developers struggle when creating custom rows in Eureka, but doing this easily was one of the main factors behind Eureka's design. That is why we decided to provide a guide on how to do this with a simple example to help you get started.</p>
+<p>We will create a <span><code class="language-text">UserInfoRow</code></span> which will display an image and some labels representing user profile data. Sometimes we have a two-or-more-step registration process in which the user enters some basic information at first and then goes to a new screen to enter advanced information. In these cases we sometimes show a summary of the previously entered profile data. We will create a row to show such information.</p>
+<p>This example has been updated for Swift 3 syntax.</p>
+<p>In this example we will use a simple struct <span><code class="language-text">User</code></span> defined like the following:</p>
+<span><div class="code-highlight" data-language="swift"><pre class="language-swift" data-language="swift"><code class="language-swift"><span class="token keyword">struct</span> <span class="token class-name">User</span><span class="token punctuation">:</span> <span class="token class-name">Equatable</span> <span class="token punctuation">{</span>
+    <span class="token keyword">var</span> name<span class="token punctuation">:</span> <span class="token class-name">String</span>
+    <span class="token keyword">var</span> email<span class="token punctuation">:</span> <span class="token class-name">String</span>
+    <span class="token keyword">var</span> dateOfBirth<span class="token punctuation">:</span> <span class="token class-name">Date</span>
+    <span class="token keyword">var</span> pictureUrl<span class="token punctuation">:</span> <span class="token constant">URL</span><span class="token operator">?</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword">func</span> <span class="token operator">==</span><span class="token punctuation">(</span>lhs<span class="token punctuation">:</span> <span class="token class-name">User</span><span class="token punctuation">,</span> rhs<span class="token punctuation">:</span> <span class="token class-name">User</span><span class="token punctuation">)</span> <span class="token operator">-></span> <span class="token class-name">Bool</span> <span class="token punctuation">{</span>
+    <span class="token keyword">return</span> lhs<span class="token punctuation">.</span>email <span class="token operator">==</span> rhs<span class="token punctuation">.</span>email
+<span class="token punctuation">}</span></code></pre></div></span>
+<p>We will create the <span><code class="language-text">UserInfoCell</code></span> using interface builder and designing the table view cell in a nib file. We could also create it programatically, but it is much simpler to use a nib file.</p>
+<p>So, we created the following nib file containing an <span><code class="language-text">UITableViewCell</code></span>. Then we added an UIImageView and three UILabels to cell's <span><code class="language-text">contentView</code></span>. The cell will show the picture of the user and the user's name, email and date of birth.</p>
+<p>After adding the necessary constraint the cell looks like this:</p>
+<img src="/images/eureka-custom-row/nib-file-example.png" alt="Nib file example">
+<p>Now we have to create two classes: <span><code class="language-text">UserInfoRow</code></span> and <span><code class="language-text">UserInfoCell</code></span>. Let's see the <span><code class="language-text">UserInfoCell</code></span> first, it must be a subclass of the generic type <span><code class="language-text">Cell</code></span> and its value will be of the type <span><code class="language-text">User</code></span> we defined before:</p>
+<blockquote>
+<p>Note: All cells have to be final and conform to the <span><code class="language-text">CellType</code></span> protocol.</p>
+</blockquote>
+<span><div class="code-highlight" data-language="swift"><pre class="language-swift" data-language="swift"><code class="language-swift"><span class="token keyword">final</span> <span class="token keyword">class</span> <span class="token class-name">UserInfoCell</span><span class="token punctuation">:</span> <span class="token class-name">Cell</span><span class="token operator">&#x3C;</span><span class="token class-name">User</span><span class="token operator">></span><span class="token punctuation">,</span> <span class="token class-name">CellType</span> <span class="token punctuation">{</span>
+
+    <span class="token attribute atrule">@IBOutlet</span> <span class="token keyword">weak</span> <span class="token keyword">var</span> userImageView<span class="token punctuation">:</span> <span class="token class-name">UIImageView</span><span class="token operator">!</span>
+    <span class="token attribute atrule">@IBOutlet</span> <span class="token keyword">weak</span> <span class="token keyword">var</span> nameLabel<span class="token punctuation">:</span> <span class="token class-name">UILabel</span><span class="token operator">!</span>
+    <span class="token attribute atrule">@IBOutlet</span> <span class="token keyword">weak</span> <span class="token keyword">var</span> emailLabel<span class="token punctuation">:</span> <span class="token class-name">UILabel</span><span class="token operator">!</span>
+    <span class="token attribute atrule">@IBOutlet</span> <span class="token keyword">weak</span> <span class="token keyword">var</span> dateLabel<span class="token punctuation">:</span> <span class="token class-name">UILabel</span><span class="token operator">!</span>
+
+    <span class="token keyword">required</span> <span class="token keyword">init</span><span class="token punctuation">(</span>style<span class="token punctuation">:</span> <span class="token class-name">UITableViewCellStyle</span><span class="token punctuation">,</span> reuseIdentifier<span class="token punctuation">:</span> <span class="token class-name">String</span><span class="token operator">?</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">super</span><span class="token punctuation">.</span><span class="token keyword">init</span><span class="token punctuation">(</span>style<span class="token punctuation">:</span> style<span class="token punctuation">,</span> reuseIdentifier<span class="token punctuation">:</span> reuseIdentifier<span class="token punctuation">)</span>
+    <span class="token punctuation">}</span>
+
+    <span class="token keyword">required</span> <span class="token keyword">init</span><span class="token operator">?</span><span class="token punctuation">(</span>coder aDecoder<span class="token punctuation">:</span> <span class="token class-name">NSCoder</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">super</span><span class="token punctuation">.</span><span class="token keyword">init</span><span class="token punctuation">(</span>coder<span class="token punctuation">:</span> aDecoder<span class="token punctuation">)</span>
+    <span class="token punctuation">}</span></code></pre></div></span>
+<p>We have already added the outlets for our nib file which we have to connect. Now let's create the <span><code class="language-text">UserInfoRow</code></span>:</p>
+<blockquote>
+<p>Note: Eureka rows also have to be final and they must conform to RowType protocol</p>
+</blockquote>
+<span><div class="code-highlight" data-language="swift"><pre class="language-swift" data-language="swift"><code class="language-swift"><span class="token keyword">final</span> <span class="token keyword">class</span> <span class="token class-name">UserInfoRow</span><span class="token punctuation">:</span> <span class="token class-name">Row</span><span class="token operator">&#x3C;</span><span class="token class-name">UserInfoCell</span><span class="token operator">></span><span class="token punctuation">,</span> <span class="token class-name">RowType</span> <span class="token punctuation">{</span>
+    <span class="token keyword">required</span> <span class="token keyword">init</span><span class="token punctuation">(</span>tag<span class="token punctuation">:</span> <span class="token class-name">String</span><span class="token operator">?</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">super</span><span class="token punctuation">.</span><span class="token keyword">init</span><span class="token punctuation">(</span>tag<span class="token punctuation">:</span> tag<span class="token punctuation">)</span>
+        cellProvider <span class="token operator">=</span> <span class="token class-name">CellProvider</span><span class="token operator">&#x3C;</span><span class="token class-name">UserInfoCell</span><span class="token operator">></span><span class="token punctuation">(</span>nibName<span class="token punctuation">:</span> <span class="token string-literal"><span class="token string">"UserInfoCell"</span></span><span class="token punctuation">)</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span></code></pre></div></span>
+<p>In the first line we say that our row will have a value of type <span><code class="language-text">User</code></span> and its cell will be a <span><code class="language-text">UserInfoCell</code></span>.</p>
+<p>Then we defined the required init method, which we have to implement to conform to the <span><code class="language-text">RowType</code></span> protocol, and we specify that we want our cell to be created by loading it from the nib file named "UserInfoCell". If our cell did not rely on a nib file and we wanted to create it programmatically then we do not have to specify a <span><code class="language-text">cellProvider</code></span>.</p>
+<p>Our <span><code class="language-text">UserInfoRow</code></span> is ready. But the <span><code class="language-text">UserInfoCell</code></span> still needs some customization. Let's start by setting some styles to our labels in the <span><code class="language-text">setup()</code></span> method.</p>
+<blockquote>
+<p>Remember: <span><code class="language-text">setup</code></span> will be called after the cell is instantiated while <span><code class="language-text">update</code></span> will be called each time the cell is refreshed, specifically from the <span><code class="language-text">cellForRowAtIndexPath</code></span> of the FormViewController's tableView. Therefore, in the <span><code class="language-text">setup</code></span> method we should put code that shall be executed once to set up our cell. On the other hand, the <span><code class="language-text">update</code></span> method should include the code that depends on external variables that (may) change over time like the value of the row for example.</p>
+</blockquote>
+<span><div class="code-highlight" data-language="swift"><pre class="language-swift" data-language="swift"><code class="language-swift"><span class="token keyword">override</span> <span class="token keyword">func</span> <span class="token function-definition function">setup</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">super</span><span class="token punctuation">.</span><span class="token function">setup</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+    <span class="token comment">// we do not want our cell to be selected in this case. If you use such a cell in a list then you might want to change this.</span>
+    selectionStyle <span class="token operator">=</span> <span class="token punctuation">.</span><span class="token keyword">none</span>
+
+    <span class="token comment">// configure our profile picture imageView</span>
+    userImageView<span class="token punctuation">.</span>contentMode <span class="token operator">=</span> <span class="token punctuation">.</span>scaleAspectFill
+    userImageView<span class="token punctuation">.</span>clipsToBounds <span class="token operator">=</span> <span class="token boolean">true</span>
+
+    <span class="token comment">// define fonts for our labels</span>
+
+    nameLabel<span class="token punctuation">.</span>font <span class="token operator">=</span> <span class="token punctuation">.</span><span class="token function">systemFont</span><span class="token punctuation">(</span>ofSize<span class="token punctuation">:</span> <span class="token number">18</span><span class="token punctuation">)</span>
+    emailLabel<span class="token punctuation">.</span>font <span class="token operator">=</span> <span class="token punctuation">.</span><span class="token function">systemFont</span><span class="token punctuation">(</span>ofSize<span class="token punctuation">:</span> <span class="token number">13.3</span><span class="token punctuation">)</span>
+    dateLabel<span class="token punctuation">.</span>font <span class="token operator">=</span> <span class="token punctuation">.</span><span class="token function">systemFont</span><span class="token punctuation">(</span>ofSize<span class="token punctuation">:</span> <span class="token number">13.3</span><span class="token punctuation">)</span>
+
+    <span class="token comment">// set the textColor for our labels</span>
+    <span class="token keyword">for</span> label <span class="token keyword">in</span> <span class="token punctuation">[</span>emailLabel<span class="token punctuation">,</span> dateLabel<span class="token punctuation">,</span> nameLabel<span class="token punctuation">]</span> <span class="token punctuation">{</span>
+        label<span class="token operator">?</span><span class="token punctuation">.</span>textColor <span class="token operator">=</span> <span class="token punctuation">.</span>gray
+    <span class="token punctuation">}</span>
+
+    <span class="token comment">// specify the desired height for our cell</span>
+    height <span class="token operator">=</span> <span class="token punctuation">{</span> <span class="token keyword">return</span> <span class="token number">94</span> <span class="token punctuation">}</span>
+
+    <span class="token comment">// set a light background color for our cell</span>
+    backgroundColor <span class="token operator">=</span> <span class="token class-name">UIColor</span><span class="token punctuation">(</span>red<span class="token punctuation">:</span><span class="token number">0.984</span><span class="token punctuation">,</span> green<span class="token punctuation">:</span><span class="token number">0.988</span><span class="token punctuation">,</span> blue<span class="token punctuation">:</span><span class="token number">0.976</span><span class="token punctuation">,</span> alpha<span class="token punctuation">:</span><span class="token number">1.00</span><span class="token punctuation">)</span>
+<span class="token punctuation">}</span></code></pre></div></span>
+<p>But we also have to set the user information to our labels. This will be done in the <span><code class="language-text">update</code></span> method as this is information that could change.</p>
+<blockquote>
+<p>In this case, the user information will not change but in general it is good practice to update the labels of the cell on each update as the value of the row could possibly change</p>
+</blockquote>
+<p>So let's add an <span><code class="language-text">update</code></span> method:</p>
+<span><div class="code-highlight" data-language="swift"><pre class="language-swift" data-language="swift"><code class="language-swift"><span class="token keyword">override</span> <span class="token keyword">func</span> <span class="token function-definition function">update</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">super</span><span class="token punctuation">.</span><span class="token function">update</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+
+    <span class="token comment">// we do not want to show the default UITableViewCell's textLabel</span>
+    textLabel<span class="token operator">?</span><span class="token punctuation">.</span>text <span class="token operator">=</span> <span class="token nil constant">nil</span>
+
+    <span class="token comment">// get the value from our row</span>
+    <span class="token keyword">guard</span> <span class="token keyword">let</span> user <span class="token operator">=</span> row<span class="token punctuation">.</span>value <span class="token keyword">else</span> <span class="token punctuation">{</span> <span class="token keyword">return</span> <span class="token punctuation">}</span>
+
+    <span class="token comment">// set the image to the userImageView. You might want to do this with AlamofireImage or another similar framework in a real project</span>
+    <span class="token keyword">if</span> <span class="token keyword">let</span> url <span class="token operator">=</span> user<span class="token punctuation">.</span>pictureUrl<span class="token punctuation">,</span> <span class="token keyword">let</span> data <span class="token operator">=</span> <span class="token keyword">try</span><span class="token operator">?</span> <span class="token class-name">Data</span><span class="token punctuation">(</span>contentsOf<span class="token punctuation">:</span> url<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        userImageView<span class="token punctuation">.</span>image <span class="token operator">=</span> <span class="token class-name">UIImage</span><span class="token punctuation">(</span>data<span class="token punctuation">:</span> data<span class="token punctuation">)</span>
+    <span class="token punctuation">}</span> <span class="token keyword">else</span> <span class="token punctuation">{</span>
+        userImageView<span class="token punctuation">.</span>image <span class="token operator">=</span> <span class="token class-name">UIImage</span><span class="token punctuation">(</span>named<span class="token punctuation">:</span> <span class="token string-literal"><span class="token string">"placeholder"</span></span><span class="token punctuation">)</span>
+    <span class="token punctuation">}</span>
+
+    <span class="token comment">// set the texts to the labels</span>
+    emailLabel<span class="token punctuation">.</span>text <span class="token operator">=</span> user<span class="token punctuation">.</span>email
+    nameLabel<span class="token punctuation">.</span>text <span class="token operator">=</span> user<span class="token punctuation">.</span>name
+    dateLabel<span class="token punctuation">.</span>text <span class="token operator">=</span> <span class="token class-name">UserInfoCell</span><span class="token punctuation">.</span>dateFormatter<span class="token punctuation">.</span><span class="token function">string</span><span class="token punctuation">(</span>from<span class="token punctuation">:</span> user<span class="token punctuation">.</span>dateOfBirth<span class="token punctuation">)</span>
+<span class="token punctuation">}</span></code></pre></div></span>
+<p>Now this is pretty much everything. We can now use our row in any Form. For example, we added a new <span><code class="language-text">UserRegistrationViewController</code></span> to Eureka's examples and then added a <span><code class="language-text">UserInfoRow</code></span> and two other rows:</p>
+<span><div class="code-highlight" data-language="swift"><pre class="language-swift" data-language="swift"><code class="language-swift"><span class="token keyword">class</span> <span class="token class-name">UserRegistrationViewController</span><span class="token punctuation">:</span> <span class="token class-name">FormViewController</span> <span class="token punctuation">{</span>
+
+    <span class="token keyword">override</span> <span class="token keyword">func</span> <span class="token function-definition function">viewDidLoad</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">super</span><span class="token punctuation">.</span><span class="token function">viewDidLoad</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+
+        form <span class="token operator">+++</span> <span class="token class-name">Section</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+            <span class="token operator">&#x3C;&#x3C;&#x3C;</span> <span class="token class-name">UserInfoRow</span> <span class="token punctuation">{</span> row <span class="token keyword">in</span>
+                row<span class="token punctuation">.</span>value <span class="token operator">=</span> <span class="token class-name">User</span><span class="token punctuation">(</span>name<span class="token punctuation">:</span> <span class="token string-literal"><span class="token string">"Mathias"</span></span><span class="token punctuation">,</span>
+                                 email<span class="token punctuation">:</span> <span class="token string-literal"><span class="token string">"mathias@xmartlabs.com"</span></span><span class="token punctuation">,</span>
+                                 dateOfBirth<span class="token punctuation">:</span> <span class="token class-name">Date</span><span class="token punctuation">(</span>timeIntervalSince1970<span class="token punctuation">:</span> <span class="token number">712119600</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+                                 pictureUrl<span class="token punctuation">:</span> <span class="token function">URL</span><span class="token punctuation">(</span>string<span class="token punctuation">:</span> <span class="token string-literal"><span class="token string">"http://lh4.ggpht.com/VpeucXbRtK2pmVY6At76vU45Q7YWXB6kz25Sm_JKW1tgfmJDP3gSAlDwowjGEORSM-EW=w300"</span></span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+        <span class="token punctuation">}</span>
+
+        <span class="token operator">+++</span> <span class="token class-name">Section</span><span class="token punctuation">(</span><span class="token string-literal"><span class="token string">"Other information"</span></span><span class="token punctuation">)</span>
+            <span class="token operator">&#x3C;&#x3C;&#x3C;</span> <span class="token class-name">LocationRow</span> <span class="token punctuation">{</span>
+                <span class="token short-argument">$0</span><span class="token punctuation">.</span>title <span class="token operator">=</span> <span class="token string-literal"><span class="token string">"Where do you live?"</span></span>
+            <span class="token punctuation">}</span>
+            <span class="token operator">&#x3C;&#x3C;&#x3C;</span> <span class="token class-name">PhoneRow</span> <span class="token punctuation">{</span>
+                <span class="token short-argument">$0</span><span class="token punctuation">.</span>title <span class="token operator">=</span> <span class="token string-literal"><span class="token string">"Your phone number"</span></span>
+        <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span></code></pre></div></span>
+<p>And this is the result:</p>
+<img src="/images/eureka-custom-row/user-info-cell.png" alt="Nib file example">
+<p>You can see the source files <a href="https://gist.github.com/mats-claassen/7add73434216ee9cd70309c7e8deba31">in this gist</a>. The code has recently been updated to Swift 3.</p>
+<h2 id="where-to-go-from-here">Where to go from here</h2>
+<p>This is just a very simple row without user interaction. I hope it helps and encourages some readers to create their own custom rows. But the potential is much greater. We can create really awesome rows with much more functionality, some of them have been published at <a href="https://github.com/EurekaCommunity">EurekaCommunity</a>. If you have created a custom row and think that it could be reused then you could share it by creating a repository at EurekaCommunity. If you plan to do this, drop a mail to me or anyone at Xmartlabs to get access to the EurekaCommunity organization.</p> 

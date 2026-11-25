@@ -1,0 +1,60 @@
+ <p>In a <a href="https://blog.xmartlabs.com/blog/wereables-react-native-integration/">previous blog post</a>, we looked into the benefits of using Health Kit and Health Connect to use wearable data on your React Native app. By combining two distinct libraries with separate interfaces, we managed to unlock real-time health insights. But did you know these tools can do much more than just handle wearable-recorded data? Enter react-native-health-link, a developer-friendly library that simplifies health data integration by providing a unified interface for both HealthKit and Health Connect.</p>
+<h2 id="why-react-native-health-link">Why react-native-health-link?</h2>
+<p>While developing health-related applications in React Native, working with health data can be tricky. While platform-specific libraries like HealthKit (iOS) and Health Connect (Android) are powerful, they each have their own APIs and data structures. This often results in duplicated efforts and a fragmented codebase.</p>
+<p>react-native-health-link eliminates these headaches by bridging the gap, offering:</p>
+<ul>
+<li>A single API for both platforms.</li>
+<li>Simplified permission handling.</li>
+<li>Reduced maintenance of platform-specific codebases.</li>
+</ul>
+<p>No more juggling separate implementations—this library keeps everything streamlined and developer-friendly.</p>
+<h3 id="key-features">Key Features</h3>
+<p>With this library you can manage permissions for HealthKit and Health Connect for its supported data types, namely:</p>
+<ul>
+<li>Blood glucose (read/write)</li>
+<li>Weight (read/write)</li>
+<li>Height (read/write)</li>
+<li>Heart rate (read/write)</li>
+<li>Resting heart rate (read)</li>
+<li>Blood pressure (read)</li>
+<li>Oxygen saturation (read)</li>
+<li>Steps (read/write)</li>
+</ul>
+<p>This open-source library is actively developed, and the list of supported data types will grow based on community needs. This first integration covers the most commonly used health metrics supported by the <span><code class="language-text">react-native-health</code></span> and <span><code class="language-text">react-native-health-link</code></span> libraries. We eventually plan to extend support to any data types compatible with HealthKit and Health Connect.</p>
+<p>The library lets your app read and write supported data types, making it easy to access and update them. It also includes a utility to check whether the native SDKs (HealthKit/Health Connect) are available on the user’s device.</p>
+<img src="/images/react-native-health-link1.png" alt="">
+<h3 id="how-it-works">How It Works</h3>
+<p>Getting started with react-native-health-link is a breeze. You can initialize health data access in just a few lines of code. To initialize, simply use the <span><code class="language-text">initializeHealth</code></span> function and provide an object specifying the permissions you want to request from the user.</p>
+<blockquote>
+<span><div class="code-highlight" data-language="javascript"><pre class="language-javascript" data-language="javascript"><code class="language-javascript"><span class="token keyword">import</span> <span class="token punctuation">{</span>
+ initializeHealth<span class="token punctuation">,</span>
+ HealthLinkPermissions<span class="token punctuation">,</span>
+<span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'react-native-health-link'</span><span class="token punctuation">;</span>
+
+<span class="token function">initializeHealth</span><span class="token punctuation">(</span><span class="token punctuation">{</span>
+  read<span class="token operator">:</span> <span class="token punctuation">[</span>HealthLinkPermissions<span class="token punctuation">.</span>BloodGlucose<span class="token punctuation">]</span><span class="token punctuation">,</span>
+  write<span class="token operator">:</span> <span class="token punctuation">[</span>HealthLinkPermissions<span class="token punctuation">.</span>BloodGlucose<span class="token punctuation">]</span><span class="token punctuation">,</span>
+<span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span></code></pre></div></span>
+</blockquote>
+<h3 id="read-function">read Function</h3>
+<p>To read data, use the read function along with the <span><code class="language-text">HealthLinkDataType</code></span> enum to specify the desired data type. You can also pass additional options, such as <span><code class="language-text">startDate</code></span>, <span><code class="language-text">endDate,</code></span> <span><code class="language-text">limit</code></span>, or <span><code class="language-text">ascending</code></span>, to customize your query.</p>
+<span><div class="code-highlight" data-language="javascript"><pre class="language-javascript" data-language="javascript"><code class="language-javascript"><span class="token function">read</span><span class="token punctuation">(</span>HealthLinkDataType<span class="token punctuation">.</span>BloodGlucose<span class="token punctuation">,</span> <span class="token punctuation">{</span>
+  <span class="token literal-property property">startDate</span><span class="token operator">:</span> <span class="token keyword">new</span> <span class="token class-name">Date</span><span class="token punctuation">(</span><span class="token string">'2025-01-01'</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">toISOString</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+<span class="token punctuation">}</span><span class="token punctuation">)</span></code></pre></div></span>
+<h3 id="write-function">write Function</h3>
+<p>Similarly, to use the write function and select a data type from the <span><code class="language-text">WriteDataType</code></span> enum. Then, pass any necessary options as the second argument to configure the data input.</p>
+<span><div class="code-highlight" data-language="javascript"><pre class="language-javascript" data-language="javascript"><code class="language-javascript"><span class="token function">write</span><span class="token punctuation">(</span>HealthLinkDataType<span class="token punctuation">.</span>BloodGlucose<span class="token punctuation">,</span> <span class="token punctuation">{</span><span class="token punctuation">[</span>
+  <span class="token literal-property property">value</span><span class="token operator">:</span> <span class="token number">4</span><span class="token punctuation">,</span>
+  <span class="token literal-property property">unit</span><span class="token operator">:</span> BloodGlucoseUnit<span class="token punctuation">.</span>MmolPerL<span class="token punctuation">,</span>
+<span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span></code></pre></div></span>
+<h2 id="looking-ahead">Looking ahead</h2>
+<p>The library is currently at the beginning of its development, and we have big plans for its future. Here’s what you can expect: </p>
+<ul>
+<li>We aim to support all data types compatible with HealthKit and Health Connect, giving you unparalleled flexibility.</li>
+<li>Enhanced querying options to provide developers with more control over data access.</li>
+<li>We'll work on improving documentation with more detailed examples for each data type.</li>
+<li>Community input will mean a lot for the roadmap of this library. We’re committed to solving real problems faced by developers.</li>
+</ul>
+<h2 id="who-should-use-react-native-health-link">Who Should Use react-native-health-link?</h2>
+<p>Whether you're building a fitness tracker, a wellness app, or a personalized health assistant, this library is perfect for saving time and providing a unified interface. To get started today, follow the installation guide available in <a href="https://github.com/xmartlabs/react-native-health-link?tab=readme-ov-file">react-native-health-link’s documentation</a>.</p>
+<p>If you're looking for a partner to help you streamline your healthcare app, we could be just what you’re looking for. Feel free to reach out and thanks for reading!</p> 

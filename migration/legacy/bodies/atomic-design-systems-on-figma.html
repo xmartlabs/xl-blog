@@ -1,0 +1,104 @@
+ <p>If you&#39;re a designer who&#39;s ever struggled to keep track of complex interfaces, then Atomic Design is something you&#39;ll want to know.</p>
+<p>Imagine being able to break down complex interfaces into smaller, manageable parts; wouldn&#39;t you jump at the chance? Atomic Design can help you ensure consistency, efficiency, and improved collaboration with the development team when designing and deploying a product.</p>
+<p>In this post, we&#39;ll delve into the world of Atomic Design Systems on Figma. We&#39;ll analyze different approaches, including using base components and how they can impact your workflow. Furthermore, we&#39;ll explore Figma&#39;s component properties, a powerful feature that enhances the Atomic Design experience.</p>
+<p>To make things even more easy and exciting, we’ve prepared a Figma community file showcasing how we structure button and modal components in our design system template. Let&#39;s dive in!</p>
+<h2 id="atomic-design">Atomic design</h2>
+<p><strong><a href="https://bradfrost.com/blog/post/atomic-web-design/">Atomic Design</a></strong> is a design methodology created by Brad Frost based on the idea that complex systems can be broken down into smaller, more manageable parts.</p>
+<p>The name &quot;Atomic Design&quot; comes from the idea that just as atoms are the building blocks of matter, small components are the building blocks of design, and they can be combined to create something bigger and more complex, like building with LEGO blocks:</p>
+<p><strong>Atoms</strong> are like LEGO pieces; the basic building blocks of a digital product that include things like buttons, form labels, and icons. By themselves, they&#39;re simple, but when combined, they can create something more complex.</p>
+<p><strong>Molecules</strong> are groups of atoms that snap together to form a single functional unit, like a search form made up of a ‘text input’ atom, a ‘button’ atom, and a &#39;label’ atom.</p>
+<p><strong>Organisms</strong> are groups of molecules that work together to form a product section, like a header made up of a logo atom, a navigation molecule, and a search molecule.</p>
+<p><strong>Templates</strong> define the overall structure of a product, including things like the header, footer, and sidebar, like the instruction booklet that comes with a LEGO set.</p>
+<img src="/images/atomic-design-systems-on-figma/Frame_2608165.png" alt="Frame 2608165.png"/>
+<img src="/images/atomic-design-systems-on-figma/Frame_2608162.png" alt="Frame 2608162.png"/>
+<h2 id="design-systems">Design systems</h2>
+<p>If you’re familiar with product design, Atomic Design might remind you of <strong>Design Systems</strong>. A Design System is a set of guidelines defining the visual style and functionality of design elements, with a focus on establishing visual foundations such as color palettes, typography, and UI patterns.</p>
+<aside><p>💡 Atomic Design provides a framework for breaking down a design into smaller parts that design systems can apply when defining the visual style, behavior, and functionality of each component.</p></aside>
+<h2 id="benefits-of-atomic-design">Benefits of Atomic Design</h2>
+<p><strong>Consistency:</strong> By creating reusable components from the combination of smaller parts, designers can ensure that the design stays consistent across the entire product, even when the same elements are used in different contexts.</p>
+<p><strong>Efficiency:</strong> Atomic design makes the design process more methodical. With this approach, designers can focus on creating and updating individual atoms or molecules rather than trying to tackle the entire design at once.</p>
+<p><strong>Scalability:</strong> Making ****modifications and building new components is easier and faster with an atomic design system since the base building blocks are established from the beginning and can be reused to build more complex organisms and templates as needed.</p>
+<p><strong>Improved collaboration:</strong> Atomic design allows designers to communicate more effectively with developers, who can focus on building the individual atoms &amp; molecules with the certainty that they can be reused throughout the entire product. Having set guidelines also allows for an easier feedback loop.</p>
+<h2 id="challenges-of-atomic-design">Challenges of Atomic Design</h2>
+<p><strong>Time &amp; setup:</strong> Setting up the design system is an upfront investment. It requires a bit of extra time and care to create and structure the necessary components in a way that can scale, but it will save you time in the long run. A workaround we use at Xmartlabs is having a design system template that we modify to fit different projects.</p>
+<p><strong>Learning curve:</strong> To create a practical atomic design system you need to understand the software you’re going to use and its current best practices, as well as the scope and strategy of the project you’re working on. For example, if you’re going to be working as part of a team, you need to make sure everyone is aligned, following the same guidelines and naming conventions, and understanding how styles and overrides work.</p>
+<p><strong>Flexibility:</strong> While consistency is this approach’s biggest selling point, it comes at a cost: If you adhere to a strict set of guidelines, you will run into situations where your options feel limited. In those cases, it’s up to the designer to first ensure there aren’t any modifications or alternatives left to explore and only then decide if making an exception would improve the user experience.</p>
+<p><strong>Software limitations:</strong> While Figma has revolutionized how user interfaces are designed, and it’s still improving and adding new features constantly, there are still limitations you need to keep in mind when structuring your design system to follow this approach. We will explore some of these issues and the different alternatives that different designers take in the next section.</p>
+<h2 id="how-we-approach-atomic-design-systems-on-figma">How we approach Atomic Design Systems on Figma</h2>
+<p>When it comes to executing this framework, it’s easy to find conflicting opinions coming from several influential designers in the industry.</p>
+<p>To analyze their arguments and explore the different options, we have published a <a href="https://www.figma.com/community/file/1256597253162623762">Figma community file</a> showing how we structure the button and modal components in our design system template. Feel free to duplicate it for your teams and re-use them as you wish!</p>
+<h3 id="the-case-for-base-components">The case for base components</h3>
+<p>Base components are hidden, unpublished components that are used internally within other components, also known as <a href="https://www.figma.com/best-practices/component-architecture/nested-components/">nesting</a> or <a href="https://uxdesign.cc/cascading-components-a-way-to-organize-figma-component-variants-5c272b4ad7ab">cascading</a> components.</p>
+<p>Base components allow you to reduce the number of variants needed to achieve all the combinations you need in a component set, making design systems smaller and making changes to existing components faster, since you only need to edit the base component for the change to ‘cascade’ to all variants that come from it.</p>
+<p>Buttons are a good way to visualize the impact base components can have, since they usually involve handling a large combination of variants. Here’s the difference in Xmartlabs buttons: v1 uses base components and component properties (don’t worry, we will talk about them in the next section!), v2 only uses only component properties. Check out both versions in the Figma community file.</p>
+<img src="/images/atomic-design-systems-on-figma/Screen_Shot_2023-05-25_at_11.51.56.png" alt="Using a base button to handle button sizes and then customizing it for the different statuses and types allows you to downsize from 30 to 13 variants."/>
+<p>Using a base button to handle button sizes and then customizing it for the different statuses and types allows you to downsize from 30 to 13 variants.</p>
+<p>However, base components have been criticized for some of their common issues, mostly regarding how Figma handles overrides and hidden components.</p>
+<p>As explored by Bruno Temporim Carneiro in his <a href="https://uxdesign.cc/cascading-components-a-way-to-organize-figma-component-variants-5c272b4ad7ab">medium article</a> on cascading components:</p>
+<blockquote>
+<p>Also, this method has its own limitations. While Figma is a powerful tool, it may not always handle different properties as expected. After the component is finalized, when you are using it and selecting which state, style, type, and so on, you want to have, going back and forth can cause the component to malfunction. I’ve realized that the <strong>order in which the changes are applied matters</strong>, so it’s important to make a coherent order with the properties. (…) Changing colors can also sometimes be problematic and may not apply correctly. For example, when you change the state, sometimes the right color isn’t applied to the icon.</p>
+</blockquote>
+<p>Basically, his advice is to make changes starting from the base component and avoid changing properties back and forth. But granted, that can be very limiting, especially during early exploration.</p>
+<p>In my own experience, I have found that working with nested components can cause issues when modifying color styles. Specifically, when I modify the hex code associated with a color style in a library, it does not update (or turns a different color, usually black) on the file where the library is being used, but only for the components that used nesting.</p>
+<p>After a bit of research, I’ve found this only happens if these conditions apply:</p>
+<ol>
+<li>The design file uses an external published library.</li>
+<li><a href="https://forum.figma.com/t/component-instance-is-not-updating-after-the-master-component-is-changed/13068">The base component is hidden</a>.</li>
+<li>The instance has changes that override something in the base component.</li>
+</ol>
+<p>If the base component is hidden, but the instance has only changes that are related to the published component (for example, changing the state instead of the size), the color will update correctly.</p>
+<p>Once the colors are glitched, publishing the hidden base component won’t fix the issue. You’ll have to use the ‘reset all changes’ option and customize your button once again for it to update.</p>
+<p>The way to get around this is not to hide the base component or make sure it is published if any changes need to be made. Neither of these solutions is ideal, the first one clutters the library with components that are not meant to be used, and the second one requires everyone working with the design system to be aware of the issue and remember to follow the correct steps when making modifications, with the risk of buttons in the design file needing to be manually reset if changes are made incorrectly.</p>
+<p>Using base components used to be the standard for building atomic components, so dealing with these issues was unavoidable, but thankfully Figma has recently introduced component properties that cover some of their functionality more smoothly. And that’s why at Xmartlabs, we’ve moved on to using only component properties for our v2 buttons.</p>
+<h3 id="figmas-newish-component-properties">Figma’s new(ish) component properties</h3>
+<p>Last year Figma introduced component properties, aiming to reduce the amount of variants needed in component sets and making base components expendable in some cases.</p>
+<aside><p>💡 <a href="https://help.figma.com/hc/en-us/articles/5579474826519/">Component properties</a> are the changeable aspects of a component. You can define which parts of a component others can change by tying them to specific design properties. This allows you to control things like:</p><ul>
+<li>Layers you can hide or show</li>
+<li>Whether an instance can be swapped</li>
+<li>Which text strings can be changed</li>
+</ul></aside>
+<p>Some argue that the goal of component properties is for designers to stop using nested instances altogether. But alongside this update, Figma also introduced the ‘expose nested instances’ feature, allowing you to see the properties of all nested instances when selecting the variant that contains them, making them easier to use.</p>
+<p>Component properties also have limitations: you can’t set padding or alignment as properties, which can lead to, for example, needing more variants to cover size options.</p>
+<p>In our experience, in cases like buttons, it’s worth sacrificing having fewer variants in exchange for a less glitchy user experience. But combining base components and properties is still useful in other cases, such as creating components for modals.</p>
+<img src="/images/atomic-design-systems-on-figma/Screen_Shot_2023-06-15_at_13.07.19.png" alt="XL modals."/>
+<p>A common issue we faced when adding modals to our design system was the seemingly always growing amount of instances needed to cover all the different content that could possibly be shown in a modal and in all different screen sizes.</p>
+<p>This led to designers creating an instance of the modal and detaching it to make modifications. While that might not seem like a problem at first, it can get complicated when the same modal is used throughout different flows of an app, and you need to do something as simple as update the copy: now what could have been a 2 minutes job has turned into 30.</p>
+<h3 id="a-workaround-for-our-modals-problem">A workaround for our modals problem</h3>
+<p>The way we solved this issue was by structuring our modals in the following way. Feel free to explore our Figma community file to try it out yourself and get a better understanding of how it works.</p>
+<img src="/images/atomic-design-systems-on-figma/Screen_Shot_2023-06-19_at_17.46.48.png" alt="Layers."/>
+<p>Layers.</p>
+<img src="/images/atomic-design-systems-on-figma/Screen_Shot_2023-06-19_at_17.50.25.png" alt="Component properties."/>
+<p>Component properties.</p>
+<img src="/images/atomic-design-systems-on-figma/Screen_Shot_2023-06-15_at_13.24.10.png" alt="Exposed properties from nested instances"/>
+<p>Exposed properties from nested instances</p>
+<p>First, we create three different variants of our modal to cover 3 different sizes. Then we use component properties to handle customization of layer visibility (does this modal need buttons? or a title?), and we turn on the ‘expose properties of nested instances’ option to be able to customize the buttons when they’re visible.</p>
+<p>Secondly, we create what we call our modal content placeholder, which is simply a base component for the content of any modal we need in our design, and we nest an instance of that new component inside our modal component. You can also go ahead and create other modal contents you already know you’re going to need, like a basic paragraph.</p>
+<p>Now we can return to our component properties, select the nested instance and create a new component property as an ‘instance swap’.</p>
+<img src="/images/atomic-design-systems-on-figma/Screen_Shot_2023-06-19_at_17.54.27.png" alt="1. Select the instance inside the modal component."/>
+<ol>
+<li>Select the instance inside the modal component.</li>
+</ol>
+<img src="/images/atomic-design-systems-on-figma/Screen_Shot_2023-06-19_at_17.52.58.png" alt="2. Click icon to add an ‘instance swap’ property."/>
+<ol start="2">
+<li>Click icon to add an ‘instance swap’ property.</li>
+</ol>
+<img src="/images/atomic-design-systems-on-figma/Screen_Shot_2023-06-19_at_17.53.20.png" alt="3. Name and create your property. "/>
+<ol start="3">
+<li>Name and create your property.</li>
+</ol>
+<aside><p>💡 Tip: If you name your contents consistently, using the / convention, you can easily set them all up as ‘preferred values’, making it easier to swap between them from the properties panel.</p></aside>
+<p>All you need to remember when creating new content for your modals in the future is to set up your alignment and auto-layout correctly if you need the content to adjust to different modal sizes.</p>
+<p>And that’s it! You have now successfully created a modal that can adapt to any type of content using both nested instances and component properties!</p>
+<h2 id="too-long-didnt-read">Too long, didn’t read…</h2>
+<p>Atomic Design is a methodology that breaks down complex systems into manageable components. It offers benefits such as consistency, efficiency, scalability, and improved collaboration.</p>
+<p>It can be implemented when creating design systems in Figma. However, there are considerations you need to keep in mind:</p>
+<ul>
+<li>Using base components in Figma can reduce the number of variants needed, but it can also lead to issues with overrides and hidden components.</li>
+<li>Component properties in Figma provide a smoother alternative, allowing designers to control changeable aspects of a component without relying on nesting.</li>
+<li>Combining base components and component properties can be useful in specific cases.</li>
+</ul>
+<p>Our buttons &amp; modals community file shows two examples of how to create atomic components in Figma. You can duplicate and re-use in your own projects!</p>
+<h2 id="one-last-note">One last note</h2>
+<p><a href="https://config.figma.com/">Config 2023</a> has brought us tons of <a href="https://www.figma.com/whats-new/">new features</a>, amongst them the new option to use <a href="https://help.figma.com/hc/en-us/articles/14506821864087">variables</a> to store values - such as fill color, paddings, corner radius, visibility, and more - that can be reused throughout designs.</p>
+<p>These variables will inevitably impact and improve the way we build atomic components, probably replacing the need for styles and finally addressing the limitations of component properties, but for now, they’ve only been in open beta for a couple of weeks, and there’s not really a consensus on what’s the best way to integrate them into the design process. We can’t wait to explore them and come back with an updated version of this post!</p>
+<p>If you have any comments or feedback or would like to learn more about our design process and capabilities, don&#39;t hesitate to <a href="https://form.typeform.com/to/D1PhDJIR">reach out to our team</a>. Thanks for reading!</p> 

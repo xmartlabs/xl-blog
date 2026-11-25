@@ -1,0 +1,71 @@
+ <p>October is a special month for Open Source contributors thanks to <a href="https://hacktoberfest.com/">Hacktoberfest</a> taking place.
+In this wonderful month, we are thrilled to announce <a href="https://pub.dev/packages/stock"><strong>Stock</strong></a>, Xmartlabs' latest Flutter Open Source Project.</p>
+<h2 id="what-is-stock">What is <a href="https://pub.dev/packages/stock">Stock</a>?</h2>
+<p><a href="https://pub.dev/packages/stock">Stock</a> is a dart package whose main feature is combining different data sources on Flutter.
+Most mobile projects need the same thing, to share data with a cloud service.
+For instance, it could be a Rest API or a real-time service like <a href="https://firebase.google.com/docs/database">Firebase Database</a> or <a href="https://supabase.com/">Supabase</a>.
+If this is your case, this blog may be helpful for you.</p>
+<p>Stock is based on the repository pattern, one of the most used patterns in mobile.
+A repository uses different data sources, we usually use a remote and a local data source.
+We created <a href="https://pub.dev/packages/stock">Stock</a> to make this process smoother. It allows you to combine these data sources and get one data <span><code class="language-text">Stream</code></span> containing its states.
+Furthermore, if you only use a remote source, Stock can be used as a local cache, improving your app experience in just a few lines of code.</p>
+<img width="100%" src="/images/introducing-stock/repository-pattern.jpg">
+<h2 id="should-i-consider-caching-the-network-data">Should I consider caching the network data?</h2>
+<p><a href="https://pub.dev/packages/stock">Stock</a> exists because of the need to add a cache. It could be a memory or disk cache, but it doesn't really matter which type are you using, instead it only matters the need of one.
+You may ask, do I need a cache in my app?</p>
+<p>From my perspective, that's an excellent question, and one that should be asked.
+Nowadays, the internet connection is good in most places, and phone resources have never been better, so why waste my time adding a local cache?</p>
+<p>The answer is simple: you are not wasting time, you are saving it.
+The cache allows you to leverage the app experience, removing ugly loading indicators, adding better transitions, and, in the end, making your user happier.</p>
+<p>On the other hand, having a stream that emits the data changes helps us improve our code, avoid issues, and have consistency in our app.</p>
+<p>Some services, like Supabase, provide a data stream.
+However, creating this stream might not be that straightforward if we use a remote service, like a Rest API.
+We can do it, but it could become a headache.
+With <a href="https://pub.dev/packages/stock">Stock</a>, getting a data stream is trivial, that's why you should consider adding it to your project.</p>
+<h2 id="how-does-it-work">How does it work?</h2>
+<p>Stock uses two important components:</p>
+<ul>
+<li>The <span><code class="language-text">Fetcher</code></span> defines how data will be fetched over the network.</li>
+<li>The <span><code class="language-text">SourceOfTruth</code></span> defines how local data will be read and written in your local cache. Although Stock can be used without it, we recommend its usage.</li>
+</ul>
+<p>Suppose that we have an app that displays the Tweets of a particular user.
+In this case, we can create our <span><code class="language-text">Fetcher</code></span> and <span><code class="language-text">SourceOfThruth</code></span> in the following way:</p>
+<span><div class="code-highlight" data-language="dart"><pre class="language-dart" data-language="dart"><code class="language-dart">  <span class="token keyword">final</span> fetcher <span class="token operator">=</span> <span class="token class-name">Fetcher</span><span class="token punctuation">.</span>ofFuture<span class="token generics"><span class="token punctuation">&#x3C;</span><span class="token class-name">String</span><span class="token punctuation">,</span> <span class="token class-name">List</span><span class="token punctuation">&#x3C;</span><span class="token class-name">Tweet</span><span class="token punctuation">></span><span class="token punctuation">></span></span><span class="token punctuation">(</span>
+    <span class="token punctuation">(</span>userId<span class="token punctuation">)</span> <span class="token operator">=</span><span class="token operator">></span> _api<span class="token punctuation">.</span><span class="token function">getUserTweets</span><span class="token punctuation">(</span>userId<span class="token punctuation">)</span><span class="token punctuation">,</span>
+  <span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+  <span class="token keyword">final</span> sourceOfTruth <span class="token operator">=</span> <span class="token class-name">SourceOfTruth</span><span class="token generics"><span class="token punctuation">&#x3C;</span><span class="token class-name">String</span><span class="token punctuation">,</span> <span class="token class-name">List</span><span class="token punctuation">&#x3C;</span><span class="token class-name">Tweet</span><span class="token punctuation">></span><span class="token punctuation">></span></span><span class="token punctuation">(</span>
+    reader<span class="token punctuation">:</span> <span class="token punctuation">(</span>userId<span class="token punctuation">)</span> <span class="token operator">=</span><span class="token operator">></span> _database<span class="token punctuation">.</span><span class="token function">getUserTweets</span><span class="token punctuation">(</span>userId<span class="token punctuation">)</span><span class="token punctuation">,</span>
+    writer<span class="token punctuation">:</span> <span class="token punctuation">(</span>userId<span class="token punctuation">,</span> tweets<span class="token punctuation">)</span> <span class="token operator">=</span><span class="token operator">></span> _database<span class="token punctuation">.</span><span class="token function">writeUserTweets</span><span class="token punctuation">(</span>userId<span class="token punctuation">,</span> tweets<span class="token punctuation">)</span><span class="token punctuation">,</span>
+  <span class="token punctuation">)</span><span class="token punctuation">;</span>
+</code></pre></div></span>
+<p>Then we can proceed to create the <span><code class="language-text">Stock</code></span>, which will be used in the repository:</p>
+<span><div class="code-highlight" data-language="dart"><pre class="language-dart" data-language="dart"><code class="language-dart">  <span class="token keyword">final</span> stock <span class="token operator">=</span> <span class="token class-name">Stock</span><span class="token generics"><span class="token punctuation">&#x3C;</span><span class="token class-name">String</span><span class="token punctuation">,</span> <span class="token class-name">List</span><span class="token punctuation">&#x3C;</span><span class="token class-name">Tweet</span><span class="token punctuation">></span><span class="token punctuation">></span></span><span class="token punctuation">(</span>
+    fetcher<span class="token punctuation">:</span> fetcher<span class="token punctuation">,</span>
+    sourceOfTruth<span class="token punctuation">:</span> sourceOfTruth<span class="token punctuation">,</span>
+  <span class="token punctuation">)</span><span class="token punctuation">;</span></code></pre></div></span>
+<p>Now that we've done the hardest work, how should you use it?
+Stock provides some methods to get the data, but the most important one is <span><code class="language-text">stream()</code></span>.
+It returns a <span><code class="language-text">Stream</code></span> of data containing the data state.</p>
+<p>This state has 3 possible values:</p>
+<ul>
+<li>Data: New data arrived</li>
+<li>Error: Something went wrong</li>
+<li>Loading: The data is loading</li>
+</ul>
+<span><div class="code-highlight" data-language="dart"><pre class="language-dart" data-language="dart"><code class="language-dart">  stock
+      <span class="token punctuation">.</span><span class="token function">stream</span><span class="token punctuation">(</span>userId<span class="token punctuation">,</span> refresh<span class="token punctuation">:</span> <span class="token boolean">true</span><span class="token punctuation">)</span>
+      <span class="token punctuation">.</span><span class="token function">listen</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token class-name">StockResponse</span><span class="token generics"><span class="token punctuation">&#x3C;</span><span class="token class-name">List</span><span class="token punctuation">&#x3C;</span><span class="token class-name">Tweet</span><span class="token punctuation">></span><span class="token punctuation">></span></span> stockResponse<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        stockResponse<span class="token punctuation">.</span><span class="token function">when</span><span class="token punctuation">(</span>
+          onLoading<span class="token punctuation">:</span> <span class="token punctuation">(</span>origin<span class="token punctuation">)</span> <span class="token operator">=</span><span class="token operator">></span> <span class="token function">_displayLoadingIndicator</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+          onData<span class="token punctuation">:</span> <span class="token punctuation">(</span>origin<span class="token punctuation">,</span> data<span class="token punctuation">)</span> <span class="token operator">=</span><span class="token operator">></span> <span class="token function">_displayTweetsInUI</span><span class="token punctuation">(</span>data<span class="token punctuation">)</span><span class="token punctuation">,</span>
+          onError<span class="token punctuation">:</span> <span class="token punctuation">(</span>origin<span class="token punctuation">,</span> error<span class="token punctuation">,</span> stacktrace<span class="token punctuation">)</span> <span class="token operator">=</span><span class="token operator">></span> <span class="token function">_displayErrorInUi</span><span class="token punctuation">(</span>error<span class="token punctuation">)</span><span class="token punctuation">,</span>
+        <span class="token punctuation">)</span><span class="token punctuation">;</span>
+      <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span></code></pre></div></span>
+<h2 id="whats-next">What's next?</h2>
+<p>In this blog, we analyzed why adding a cache layer is essential, and we gave a brief introduction to Stock and its main features.
+However, if you want to go further, I recommend you read the <a href="https://pub.dev/packages/stock">project documentation</a> and try it out.</p>
+<p>We have been using this plugin internally with excellent results and now we are announcing the first stable release!
+One of the greatest things about this plugin is its flexibility to be used in multiple situations.
+An interesting example is <a href="https://blog.xmartlabs.com/blog/get-flutter-offline-support-in-supabase/">using it to add offline support in Supabase</a>.</p>
+<p>So go check it out, we welcome any feedback you have. If you like it, don't forget to <a href="https://github.com/xmartlabs/stock">give us a star</a>!</p> 

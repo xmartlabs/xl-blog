@@ -1,3 +1,5 @@
+'use client';
+
 import React, { useMemo } from 'react';
 
 const normalizeKey = (label) => label.trim().replace(/\s+/g, '').toLowerCase();

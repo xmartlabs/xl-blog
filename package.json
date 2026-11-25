@@ -5,56 +5,78 @@
   "description": "Xmartlabs Blog",
   "author": "Martin Barreto",
   "keywords": [
-    "astro",
+    "nextjs",
+    "payload",
     "blog"
   ],
+  "type": "module",
   "scripts": {
-    "dev": "astro dev",
-    "start": "astro dev",
-    "build": "astro build && node scripts/check-asset-sizes.mjs",
-    "preview": "astro preview",
-    "check": "astro check",
+    "dev": "cross-env NODE_OPTIONS=--no-deprecation next dev",
+    "build": "cross-env NODE_OPTIONS=\"--no-deprecation --max-old-space-size=8000\" next build",
+    "start": "cross-env NODE_OPTIONS=--no-deprecation next start",
+    "ci": "cross-env NODE_OPTIONS=--no-deprecation payload migrate && npm run build",
+    "payload": "cross-env NODE_OPTIONS=--no-deprecation payload",
+    "generate:types": "cross-env NODE_OPTIONS=--no-deprecation payload generate:types",
+    "generate:importmap": "cross-env NODE_OPTIONS=--no-deprecation payload generate:importmap",
+    "seed:migrate-content": "cross-env NODE_OPTIONS=--no-deprecation payload run scripts/migrate-content.ts",
+    "test": "vitest run",
+    "typecheck": "tsc --noEmit",
+    "db:up": "docker compose up -d postgres",
     "prepare": "husky",
-    "format": "prettier --write \"**/*.{js,jsx,mjs,ts,tsx,json,css,scss,astro}\"",
-    "format:check": "prettier --check \"**/*.{js,jsx,mjs,ts,tsx,json,css,scss,astro}\"",
-    "pre-push": ".husky/pre-push",
-    "deploy": "astro build && wrangler deploy"
+    "format": "prettier --write \"**/*.{js,jsx,mjs,ts,tsx,json,css,scss}\"",
+    "format:check": "prettier --check \"**/*.{js,jsx,mjs,ts,tsx,json,css,scss}\"",
+    "pre-push": ".husky/pre-push"
   },
   "engines": {
-    "node": ">=22.23.4"
+    "node": ">=24.22.3"
   },
   "dependencies": {
-    "@astrojs/markdown-remark": "^7.3.10",
-    "@astrojs/mdx": "^8.1.6",
-    "@astrojs/react": "^7.1.9",
-    "@astrojs/sitemap": "^3.7.6",
-    "@tailwindcss/vite": "^4.3.5",
-    "astro": "^7.4.13",
+    "@payloadcms/db-postgres": "3.94.2",
+    "@payloadcms/next": "3.94.2",
+    "@payloadcms/richtext-lexical": "3.94.2",
+    "@payloadcms/storage-vercel-blob": "3.94.2",
+    "@payloadcms/ui": "3.94.2",
+    "cross-env": "^7.0.3",
+    "escape-html": "^1.0.3",
+    "github-slugger": "^2.0.0",
+    "graphql": "^16.8.1",
     "lodash": "^4.18.1",
-    "mdast-util-to-string": "^4.0.0",
+    "next": "16.4.6",
+    "payload": "3.94.2",
+    "payload-oauth2": "1.0.21",
     "prismjs": "^1.30.0",
     "react": "^19.3.1",
     "react-dom": "^19.3.1",
     "reading-time": "^1.5.0",
-    "remark-gfm": "^4.0.1",
-    "remark-unwrap-images": "^4.0.1",
-    "tailwind-merge": "^3.7.1",
-    "tailwindcss": "^4.3.5"
+    "server-only": "^0.0.1",
+    "sharp": "0.35.4",
+    "tailwind-merge": "^3.7.1"
   },
-  "lint-staged": {
-    "*.{js,jsx,mjs,ts,tsx,astro,json,css,scss}": [
-      "prettier --write"
-    ]
-  },
-  "type": "module",
   "devDependencies": {
+    "@tailwindcss/postcss": "^4.3.5",
+    "@types/escape-html": "^1.0.4",
     "@types/lodash": "^4.17.27",
+    "@types/node": "^24.0.0",
+    "@types/prismjs": "^1.26.5",
     "@types/react": "^19.3.1",
     "@types/react-dom": "^19.3.0",
+    "dotenv": "^16.4.7",
+    "hast-util-from-html": "^2.0.3",
+    "hast-util-to-html": "^9.0.5",
     "husky": "^9.1.7",
     "lint-staged": "^17.6.2",
+    "parse5": "^8.0.0",
+    "postcss": "^8.5.6",
     "prettier": "^3.10.1",
-    "prettier-plugin-astro": "^1.1.2",
-    "wrangler": "^4.168.0"
+    "tailwindcss": "^4.3.5",
+    "tsx": "^4.23.15",
+    "typescript": "^5.9.3",
+    "vitest": "^4.0.18",
+    "yaml": "^2.8.1"
+  },
+  "lint-staged": {
+    "*.{js,jsx,mjs,ts,tsx,json,css,scss}": [
+      "prettier --write"
+    ]
   }
 }

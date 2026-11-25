@@ -1,0 +1,181 @@
+ <p>Web3.0 space is exploding right now. There's an unprecedented demand for blockchain developers to build the next revolutionary dApp. But for those giving their first steps in the field, choosing a framework from all those available can be overwhelming.</p>
+<p>In addition, building a well-developed dApp requires solid computer science skills, dealing with different technologies, handling several environments, setting up a testing library, deploying smart contracts, forking the chain, and integrating plug-ins (among other things).</p>
+<p><strong>The question is... which framework should I use?</strong> There are too many smart contract development frameworks, and it's hard to have real development experience with all of them.</p>
+<p>In this blog post, I'll list two popular frameworks for building EVM-compatible dApps. I'll also share some valuable tools to speed up your dApp building time even more. Let's get into it!</p>
+<h1 id="whats-a-dapp-framework">What’s a dApp Framework?</h1>
+<p>Smart contract frameworks are software development platforms to develop, compile, test, and deploy decentralized applications (dApps). Using a framework, you can build a simple dApp in a matter of minutes while ensuring the usage of best practices and tools, and mitigating significant risks around dApp development.</p>
+<h2 id="what-dapp-frameworks-have-to-offer">What dApp Frameworks have to offer</h2>
+<ul>
+<li>The ability to run a local blockchain node for testing and development proposes.</li>
+<li>Tools to compile your solidity code to bytecode.</li>
+<li>A testing framework.</li>
+<li>Multiple environments. Connection to local development, Testnet, and Mainnet networks to deploy, test, and debug smart contracts.</li>
+<li>DApp end-to-end development tools to develop both the blockchain and client-side functionality (frontend framework, web3.js helpers, and base code).</li>
+<li>Easy integration with IPFS (decentralized storage) to store large files off-chain.</li>
+<li>Tooling for verifying and publishing smart contracts source code.</li>
+</ul>
+<h2 id="what-happens-if-you-dont-want-to-use-a-framework">What happens if you don't want to use a framework?</h2>
+<p>Well, you could still develop dApps from scratch (without the set of tools that a framework provides). Still, you'll have to handle a bunch of complexity, create a lot of boilerplate code, integrate tools, add-ons, configuration files, set up testing frameworks, and so on.</p>
+<p>If you want to save time and have fun, you should use a framework.</p>
+<h2 id="main-challenges-when-developing-dapps">Main challenges when developing dApps</h2>
+<ul>
+<li>It’s challenging to manage and fix problems in decentralized systems once they're deployed.</li>
+<li>The lack of proper development and testing tools increases programming errors significantly.</li>
+<li>Security risks: There's real money involved, smart contracts code mints, trades and burns tokens, and your app is exposed to hacks and attacks.</li>
+<li>Manage multiple environments, upgrade dApp and blockchain forks.</li>
+</ul>
+<h1 id="frameworks-to-build-evm-dapps">Frameworks to build EVM dApps</h1>
+<h2 id="truffle">Truffle</h2>
+<p>Probably the most popular framework. Initially created for Ethereum, you can develop any EVM-compatible dApp using it. Almost every EVM-compatible blockchain (Avalanche, Ethereum, Polygon, etc.) tutorial uses <a href="https://trufflesuite.com/">Truffle</a> to guide you through each step of building a dApp.</p>
+<p>Truffle provides a suite of tools and solves every major dApp development challenge. It’s internally written in javascript, and you can easily install it using npm (node package manager) by executing <span><code class="language-text">npm install -g truffle</code></span><em>.</em></p>
+<p><strong>Project structure</strong></p>
+<p>Once you install Truffle, you can create a new Ethereum project by running <span><code class="language-text">truffle init</code></span>. It will make the project structure and base project files within the current folder, but it won't contain any smart contracts.</p>
+<blockquote>
+<p>Alternatively, you can use <span><code class="language-text">truffle unbox &#x3C;box-name></code></span>  to initialize the base template that contains actual dApp functionality (more on that later). As you can see, Truffle offers many command-line commands to perform tasks. For instance, <span><code class="language-text">truffle compile</code></span> compiles your smart contracts into their bytecode.</p>
+</blockquote>
+<p><img src="/images/evm-compatible-frameworks/poject-structure.png" alt="Truffle project’s folder structure">
+<em>Truffle project’s folder structure</em></p>
+<ul>
+<li><strong>contracts:</strong> directory for smart contract files.</li>
+<li><strong>migrations:</strong> directory for deployment scripts.</li>
+<li><strong>test:</strong> directory for testing files.</li>
+<li><strong>truffle-config.js:</strong> framework and project configuration file.</li>
+</ul>
+<p><strong>Testing</strong></p>
+<p>Testing dApps is super important since once you deploy the smart contracts, it’s impossible to change the code.</p>
+<p>In Truffle, you can write test code in solidity or javascript (Mocha.js testing framework). <span><code class="language-text">truffle test</code></span> runs tests using the chosen framework. Every time you run the tests using Truffle, a local development blockchain (Ganache) gets started to run on this fresh local development node.</p>
+<p><strong>Local development blockchain</strong></p>
+<p>Truffle provides a local development blockchain for testing and debugging proposes.</p>
+<p><span><code class="language-text">truffle develop</code></span> lets you work with smart contracts interactively. It runs a <a href="https://trufflesuite.com/ganache/">ganache</a> instance and attaches the console to the environment.</p>
+<p><img src="/images/evm-compatible-frameworks/truffle-develop.png" alt="truffle develop terminal output">
+<em><span><code class="language-text">truffle develop</code></span> terminal output</em></p>
+<p>As seen in the image above, it automatically provides ten blockchain accounts and their corresponding private keys so you can play interactively with the blockchain network.</p>
+<p>Once you execute the command, you'll immediately see the following prompt:</p>
+<span><div class="code-highlight" data-language="jsx"><pre class="language-jsx" data-language="jsx"><code class="language-jsx"><span class="token function">truffle</span><span class="token punctuation">(</span>development<span class="token punctuation">)</span><span class="token operator">></span></code></pre></div></span>
+<p><span><code class="language-text">truffle console -network &#x3C;name></code></span> it’s pretty much the same as the last command but with some significant differences. It won't run the local development node nor provide specific accounts and private keys. But it allows connecting to any other network such as testnet and mainnet. </p>
+<p>You can execute <span><code class="language-text">migrate —reset</code></span> to deploy de contracts on the connected network.</p>
+<img src="/images/evm-compatible-frameworks/migrate_-reset.png" alt="migrate -reset.png">
+<p>Using an interactive console is super helpful to debug the app accordingly in different environments. For instance, you can quickly get the transaction hash and receipt to look up the transaction log in the real distributed blockchain (you can see the log for Avalanche and Binance Smart Chain at <a href="https://testnet.snowtrace.io/">https://testnet.snowtrace.io/</a> and <a href="https://testnet.bscscan.com/">https://testnet.bscscan.com/</a> respectively).</p>
+<p>This section aims to give you a sense of how simple it is to create and interact with smart contracts using a framework like Truffle. You can visit the <a href="https://trufflesuite.com/docs/truffle/getting-started/using-truffle-develop-and-the-console/">official Truffle documentation</a> for more information on how to interact with contracts.</p>
+<blockquote>
+<p>Suppose your dApp needs third-party services (other dApps). In that case, you can set up the configuration to fork the necessary blockchain chain and have those services available on the local development node.</p>
+</blockquote>
+<h3 id="most-essential-tools-in-truffle">Most <strong>essential</strong> tools in truffle</h3>
+<p><a href="https://trufflesuite.com/ganache/">Ganache:</a> An open-source personal blockchain to develop, test, and debug your dApp without spending actual gas fees. Ganache UI is super helpful to test dApp for confidence before deployment. </p>
+<p><img src="/images/evm-compatible-frameworks/ganache-window.png" alt="Gatache UI">
+<em>Gatache UI</em></p>
+<p>Using Ganache, you can track blockchain account status such as transactions, addresses, keys, balance, etc. Ganache provides many other helpers, simulating mining, blockchain activity log output, and a rich UI to explore blockchain blocks.</p>
+<p><strong><a href="https://trufflesuite.com/boxes/">Truffle Boxes:</a></strong></p>
+<p>Boxes are just helpful boilerplates. Some of them are project scaffolds (templates), so you can quickly start your project using the best tooling and practices and focus on your dApp functionality. All boxes created by the community are listed <a href="https://trufflesuite.com/boxes/">on their website</a>.</p>
+<p><span><code class="language-text">truffle unbox &#x3C;box_name></code></span> download a box to the current directory.</p>
+<p><strong><a href="https://trufflesuite.com/drizzle/">Truffle drizzle:</a></strong></p>
+<p>A collection of libraries to quickly develop dApp user interfaces. It will feel familiar if you have developed frontends with react and redux. Drizzle provides a redux state for contracts, addresses, transactions, and events, so it’s easy to interact and sync the UI components according to the dApp state.</p>
+<p>If you don't know where to start when it comes to developing the dApp user interface and interacting with the smart contract from a frontend, I strongly recommend you take a look at <a href="https://trufflesuite.com/drizzle/">drizzle</a>. Many boxes already provide the frontend code, many of which use drizzle as the main library.</p>
+<h2 id="hardhat">Hardhat</h2>
+<p><strong><a href="https://hardhat.org/">Hardhat</a></strong> is another popular smart contract development framework for Ethereum and EVM-compatible blockchains which shares many similarities with Truffle, although with a fair share of differences.</p>
+<p>Regarding what you can do with Hardhat, it’s pretty much the same as Truffle, so I won't go deeper on that as we did with Truffle, but I will focus on the main implementation differences and reasons to use one over the other.</p>
+<p>Hardhat, like Truffle, is written in javascript, so you only need to have a node.js environment to install it.</p>
+<h3 id="popularity">Popularity</h3>
+<p>Truffle was the first framework for smart contracts development, but Hardhat has gained broad popularity (check out npm weekly installation chart in the images below).</p>
+<table>
+ <tbody><tr>
+    <td>
+      <figure>
+        <img src="/images/evm-compatible-frameworks/truffle-adoption.png">
+        <figcaption>Weekly download for truffle is pretty stable and in a downtrend.</figcaption>
+      </figure>
+    </td>
+    <td>
+      <figure>
+        <img src="/images/evm-compatible-frameworks/hardhat-adoption.png">
+        <figcaption>Weekly download for hardhat is growing since its release.</figcaption>
+      </figure>
+    </td>
+  </tr>
+</tbody></table>
+<p><strong>Does this mean something?</strong> Well, it shows some developer preference for Hardhat over Truffle. Something important to consider because once you develop a dApp using one framework it’s hard to migrate to another. Also, the Hardhat downloads uptrend looks like it will continue.</p>
+<h3 id="the-biggest-difference-between-hardhat-and-truffle">The biggest difference between Hardhat and Truffle.</h3>
+<p><strong>Testing capabilities and local development blockchain</strong></p>
+<p>Like Truffle, Hardhat also provides a local development blockchain for testing, which is its default network called <a href="https://hardhat.org/getting-started#connecting-a-wallet-or-dapp-to-hardhat-network">Hardhat Network</a>. Unlike Truffle, Hardhat does not provide a UI for the local development network that comes out of the box. We just have a CLI (command-line interface) version of a <a href="https://hardhat.org/getting-started#connecting-a-wallet-or-dapp-to-hardhat-network">local development blockchain</a> to develop, test, and debug the dApp before deploying it to the mainnet.</p>
+<p><strong>Is it better to have the UI?</strong> Again, it depends on the developer's preferences. Some developers feel more comfortable having a UI that shows blockchain information like accounts, transactions, and so on in real-time; instead of having to execute CLI commands to get this information.</p>
+<blockquote>
+<p>BTW, Hardhat developers can also use Ganache and its UI, but it’s not the default configuration.</p>
+</blockquote>
+<p><strong>Debugging capabilities</strong></p>
+<p>The main difference with Truffle is the solidity <span><code class="language-text">console.log</code></span> which allows printing log information at any point of the smart contract when running on Hardhat Network. Whether you are running tests or interacting with the development network doesn't matter. This is super important (especially for complex dApps) since most developers are familiar with using these debugging capabilities in traditional applications. Still, smart contract development works differently, in a more atomic way, when developers can execute transactions and get results. Still, getting information within the smart contract execution process is complex.</p>
+<span><div class="code-highlight" data-language="jsx"><pre class="language-jsx" data-language="jsx"><code class="language-jsx">pragma solidity <span class="token operator">^</span><span class="token number">0.6</span><span class="token number">.0</span><span class="token punctuation">;</span>
+
+<span class="token keyword">import</span> <span class="token string">"hardhat/console.sol"</span><span class="token punctuation">;</span>
+
+contract Token  <span class="token punctuation">{</span>
+
+	<span class="token keyword">function</span> <span class="token function">transfer</span><span class="token punctuation">(</span><span class="token parameter">address to<span class="token punctuation">,</span> uint256 amount</span><span class="token punctuation">)</span> external <span class="token punctuation">{</span>
+	    console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token string">"Sender balance is %s tokens"</span><span class="token punctuation">,</span> balances<span class="token punctuation">[</span>msg<span class="token punctuation">.</span>sender<span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+	    console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token string">"Trying to send %s tokens to %s"</span><span class="token punctuation">,</span> amount<span class="token punctuation">,</span> to<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+	    <span class="token function">require</span><span class="token punctuation">(</span>balances<span class="token punctuation">[</span>msg<span class="token punctuation">.</span>sender<span class="token punctuation">]</span> <span class="token operator">>=</span> amount<span class="token punctuation">,</span> <span class="token string">"Not enough tokens"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+	    balances<span class="token punctuation">[</span>msg<span class="token punctuation">.</span>sender<span class="token punctuation">]</span> <span class="token operator">-=</span> amount<span class="token punctuation">;</span>
+	    balances<span class="token punctuation">[</span>to<span class="token punctuation">]</span> <span class="token operator">+=</span> amount<span class="token punctuation">;</span>
+	<span class="token punctuation">}</span>
+
+<span class="token punctuation">}</span></code></pre></div></span>
+<p>The login information is shown when tests are executed. Nice right?</p>
+<span><div class="code-highlight" data-language="jsx"><pre class="language-jsx" data-language="jsx"><code class="language-jsx">$ npx hardhat test
+
+  Token contract
+    Deployment
+      ✓ Should <span class="token keyword">set</span> the right owner
+      ✓ Should assign the total supply <span class="token keyword">of</span> tokens to the owner
+    Transactions
+<span class="token operator">**</span>Sender balance is <span class="token number">1000</span> tokens
+Trying to send <span class="token number">50</span> tokens to <span class="token number">0xead9c93b79ae7c1591b1fb5323bd777e86e150d4</span>
+Sender balance is <span class="token number">50</span> tokens
+Trying to send <span class="token number">50</span> tokens to <span class="token number">0xe5904695748fe4a84b40b3fc79de2277660bd1d3</span><span class="token operator">**</span>
+      ✓ Should transfer tokens between <span class="token function">accounts</span> <span class="token punctuation">(</span>373ms<span class="token punctuation">)</span>
+      ✓ Should fail <span class="token keyword">if</span> sender doesn’t have enough tokens
+<span class="token operator">**</span>Sender balance is <span class="token number">1000</span> tokens
+Trying to send <span class="token number">100</span> tokens to <span class="token number">0xead9c93b79ae7c1591b1fb5323bd777e86e150d4</span>
+Sender balance is <span class="token number">900</span> tokens
+Trying to send <span class="token number">100</span> tokens to <span class="token number">0xe5904695748fe4a84b40b3fc79de2277660bd1d3</span><span class="token operator">**</span>
+      ✓ Should update balances after <span class="token function">transfers</span> <span class="token punctuation">(</span>187ms<span class="token punctuation">)</span>
+
+  <span class="token number">5</span> <span class="token function">passing</span> <span class="token punctuation">(</span>2s<span class="token punctuation">)</span></code></pre></div></span>
+<p>Truffle has been improving its <a href="https://trufflesuite.com/docs/truffle/getting-started/using-the-truffle-debugger/">debugging capabilities</a> to provide similar features.</p>
+<p><strong>Documentation</strong></p>
+<p>In my opinion, Truffle's documentation looks clearer, more organized, and more detailed. I guess this advantage exists because Truffle has had more time in the market. Still, I have to say Truffle doc is some steps ahead of Hardhat, and most EVM-compatible platforms use Truffle as the default framework in tutorials.</p>
+<p><strong>Opinioned vs. unopinionated framework</strong></p>
+<p>Regardless of the tools you end up using in your project; Hardhat is more flexible (unopinionated) than Truffle. Of course, both come with build-in default tooling, but with Hardhat, you can easily override the out-of-the-box configuration to your favorite plug-ins and tooling set.</p>
+<p>For instance, in Hardhat, you can use our favorite libraries for testing, such as Waffle, ether.js, chai, and mocha, or any other combination. Hardhat is super flexible when it comes to compound and select plug-ins, libraries, and tools; much more flexible than Truffle.</p>
+<p>Let’s get into some examples to clarify that.</p>
+<p><strong>Using web3.js vs. ether.js:</strong> Truffle uses web3.js by default; Hardhat is more plug-in oriented by default and it’s easy to switch from web3.js to ether.js, whereas in Truffle, this could be more tricky.</p>
+<p><strong>Migrations folder in Truffle vs. Scripting folder to interact with blockchain in Hardhat.</strong></p>
+<p>To deploy a smart contract in Truffle, we must add a migration file to the migrations folder. In contrast, in Hardhat, there is a script js file where we can add any needed script to interact and deploy to networks (deployment scripts work like any other script).</p>
+<p>Is this flexibility good or bad? It depends on the developer's preference. Personally, I leave the configuration as it comes out of the box, but at the same time, I like some level of flexibility to tweak things (when the requirements force me to do so).</p>
+<h2 id="additional-tools-typically-used-along-with-dapp-frameworks"><strong>Additional tools typically used along with dApp frameworks</strong></h2>
+<h3 id="openzepplin"><strong><a href="https://openzeppelin.com/">OpenZepplin</a></strong></h3>
+<p>OpenZeppelin provides a set of tools and smart contracts to security build, automate, and operate decentralized applications.</p>
+<p>As I have already mentioned, it’s super hard to fix security and functional issues after deployment. Using audited, well-written base code minimizes those risks and speeds up development time. OpenZepplin provides modular, reusable, and secure smart contract implementations for ERC standards. It also includes helper libraries such as <a href="https://docs.openzeppelin.com/contracts/2.x/api/math">Math</a> to wrap Solidity arithmetic operations which makes your code more secure (avoiding overflows and so on).</p>
+<blockquote>
+<p>Just in case, there are some tricks to upgrade a dApp by using a smart contract proxy and delegating implementation to another smart contract. This way, we can change the contract code while preserving the state, balance, and address of the dApp.</p>
+</blockquote>
+<p>OpenZeppelin Defender (another product) is an automated tool to ship and manage smart contracts after deployment. Read more on their <a href="https://www.openzeppelin.com/defender">site</a>.</p>
+<p>Most popular NFT and Defi EVM-compatible platforms trust OpenZeppelin, and I strongly recommend it if you are building something that matters.</p>
+<h3 id="figmentio-datahubs"><a href="https://www.figment.io/">Figment.io</a> Datahubs</h3>
+<p>Figment’s development platform, DataHub, allows developers to use the most powerful and unique blockchain features without becoming protocol experts.</p>
+<p>With DataHub, developers now have access to Web 3 protocols through the <strong><a href="https://learn.datahub.figment.io/guides/datahub-infrastructure">enterprise-grade infrastructure</a></strong>.  They provide reliable access to the RPC and REST APIs of supported protocols for both the latest mainnets and testnets so developers can test and implement their products safely.</p>
+<p><img src="/images/evm-compatible-frameworks/datahub.png" alt="datahub.png">
+<em>Datahubs hi-level architecture wrapping popular EVM-compatible protocols.</em></p>
+<h3 id="alchemy"><a href="https://www.alchemy.com/">Alchemy</a></h3>
+<p>Alchemy platform has some similarities with Figment in regards with infrastructure provided and services to develop complex dApps like analytics, performance monitoring and webhooks to get notified about on-chain events.</p>
+<h3 id="remix"><a href="https://remix-project.org/">Remix</a></h3>
+<p>A "no-setup" browser and desktop app to develop and learn Ethereum smart contracts. They provide an online IDE super interesting to learn and play with EVM-compatible smart contracts.</p>
+<h2 id="final-thoughts">Final Thoughts</h2>
+<p>We have seen two of the most popular frameworks for building dApps. Are there more frameworks?</p>
+<p><a href="https://ethereum.org/en/developers/docs/frameworks/">For sure</a>. But I don't recommend anything other than Truffle or Hardhat, especially if you take EVM-compatible dApp development seriously. You would have to learn Javascript, Solidity, and several other tools, but it's well worth it. As I said, framework selection is critical, and you must evaluate both.</p>
+<p><strong>So the question is Truffle or Hardhat? Which one is definitely the best framework?</strong></p>
+<p>That's hard to answer. It depends on your personal preferences, what you value the most, and how you like to do things.</p>
+<p>Do you prefer opinionated or unopinionated frameworks? Does Hardhat's growth trend mean something to you? Do you want to have more flexibility with the plug-ins and tools? Do you value having a local development blockchain with a UI where you can see balances, addresses, and transaction information without using the CLI? How much do you need to fork features to the local development node?</p>
+<p>I feel comfortable with Truffle; it was the first framework I learned. Still, I have been progressively switching over to Hardhat to get comfortable, feel its developer experience and be able to compare both. I think I will continue using Hardhat for the dApps to come. Although I use the out-of-the-box configuration, I like to have the ability to tweak things according to app requirements and my personal developer preferences. Also, the market trend of Hardhat means something to me; somehow, Hardhat adoption is growing faster than Truffle, at least according to npm installation metrics.</p>
+<p>I would say you'll do well with any of them. Both do their job, both are solid frameworks and provide almost the same capabilities to develop dApps, and both are getting a lot better over time. Just some things are more easily on Truffle while others are on Hardhat. So, if you have time, play with both and decide for yourself.</p>
+<p>That being said, sometimes the project you jump into is already using Truffle or Hardhat (because you are a freelancer or you are running an agency), and choosing one is not an option. If this is the case, invest time learning both.</p> 

@@ -1,0 +1,262 @@
+ <p>Airflow introduced several changes in its second version a year ago. Since then we&#39;ve had the opportunity to experience most of them. And we especially had a good time working with its new <a href="https://airflow.apache.org/docs/apache-airflow/stable/concepts/taskflow.html">Taskflow API</a>. After considering whether we should adopt this new feature, we finally decided to make Taskflow a part of our daily work. This blog post will show why you should too.</p>
+<h2 id="first-things-first-whats-taskflow">First thing&#39;s first, What&#39;s TaskFlow?</h2>
+<p>The Taskflow API is an abstraction built on top of <a href="https://airflow.apache.org/docs/apache-airflow/stable/concepts/xcoms.html">XComs</a> that allows developers to send messages between tasks in a DAG (Directed Acyclic Graph). It seems pretty straightforward, right? But it also comes with several tools to make our life easier, primarily if most of your DAGs are written as Python tasks. Let&#39;s dive into them with an example.</p>
+<h2 id="1-creating-dags-with-ease">1) Creating DAGs with ease</h2>
+<p>Imagine you need to write an ETL process with Airflow to process sales information about our customers. The data comes from two different sources: a third-party CRM via a RESTfull API and an owned relational database. We want to process the information we&#39;ve recovered from those two sources, unify the data&#39;s schema, and keep relevant information for us. Finally, we&#39;d store the transformed data in persistent storage to be consumed later by the analysis team.</p>
+<blockquote>
+<p>You can find the complete code on GitHub following <a href="https://github.com/xmartlabs/airflow-v2-blogpost">this link</a>.</p>
+</blockquote>
+<h3 id="the-old-way-dag-definition-before-taskflow">The old way, DAG Definition before Taskflow</h3>
+<p>For our ETL process, we need to implement some tasks to get the data out of its source, transform it, and load it into the persistent storage. Traditionally, we&#39;d write our DAGs following a structure similar to the one shown next:</p>
+<span><div class="code-highlight" data-language="python"><pre class="language-python" data-language="python"><code class="language-python"><span class="token keyword">def</span> <span class="token function">extract_from_api</span><span class="token punctuation">(</span><span class="token operator">**</span>kwargs<span class="token punctuation">)</span><span class="token punctuation">:</span>
+    <span class="token comment"># TODO: Fetch the data from an API and store it where it can be</span>
+    <span class="token comment"># read later</span>
+    <span class="token keyword">pass</span>
+
+<span class="token keyword">def</span> <span class="token function">extract_from_db</span><span class="token punctuation">(</span><span class="token operator">**</span>kwargs<span class="token punctuation">)</span><span class="token punctuation">:</span>
+    <span class="token comment"># TODO: Fetch the data from our database and store it where it can </span>
+    <span class="token comment"># be read later</span>
+    <span class="token keyword">pass</span>
+
+<span class="token keyword">def</span> <span class="token function">transform</span><span class="token punctuation">(</span><span class="token operator">**</span>kwargs<span class="token punctuation">)</span><span class="token punctuation">:</span>
+    <span class="token comment"># TODO: Read the data extracted, transform it to fit our needs and</span>
+    <span class="token comment"># then store it where it can be read later</span>
+    <span class="token keyword">pass</span>
+
+<span class="token keyword">def</span> <span class="token function">load</span><span class="token punctuation">(</span><span class="token operator">**</span>kwargs<span class="token punctuation">)</span><span class="token punctuation">:</span>
+    <span class="token comment"># TODO: Read the transformed data and save it where it can be analyzed later</span>
+    <span class="token keyword">pass</span>
+
+<span class="token keyword">with</span> DAG<span class="token punctuation">(</span><span class="token string">&#39;awesome_etl_v1&#39;</span><span class="token punctuation">)</span> <span class="token keyword">as</span> dag<span class="token punctuation">:</span>
+    ext1 <span class="token operator">=</span> PythonOperator<span class="token punctuation">(</span>
+        task_id<span class="token operator">=</span><span class="token string">&#39;extract_from_api&#39;</span><span class="token punctuation">,</span>
+        python_callable<span class="token operator">=</span>extract_from_api<span class="token punctuation">,</span>
+        provide_context<span class="token operator">=</span><span class="token boolean">True</span><span class="token punctuation">,</span>
+    <span class="token punctuation">)</span>
+    ext2 <span class="token operator">=</span> PythonOperator<span class="token punctuation">(</span>
+        task_id<span class="token operator">=</span><span class="token string">&#39;extract_from_db&#39;</span><span class="token punctuation">,</span>
+        python_callable<span class="token operator">=</span>extract_from_api<span class="token punctuation">,</span>
+        provide_context<span class="token operator">=</span><span class="token boolean">True</span><span class="token punctuation">,</span>
+    <span class="token punctuation">)</span>
+    trn <span class="token operator">=</span> PythonOperator<span class="token punctuation">(</span>
+        task_id<span class="token operator">=</span><span class="token string">&#39;transform&#39;</span><span class="token punctuation">,</span>
+        python_callable<span class="token operator">=</span>extract_from_api<span class="token punctuation">,</span>
+        provide_context<span class="token operator">=</span><span class="token boolean">True</span><span class="token punctuation">,</span>
+    <span class="token punctuation">)</span>
+    load <span class="token operator">=</span> PythonOperator<span class="token punctuation">(</span>
+        task_id<span class="token operator">=</span><span class="token string">&#39;load&#39;</span><span class="token punctuation">,</span>
+        python_callable<span class="token operator">=</span>extract_from_api<span class="token punctuation">,</span>
+        provide_context<span class="token operator">=</span><span class="token boolean">True</span><span class="token punctuation">,</span>
+    <span class="token punctuation">)</span>
+
+    <span class="token punctuation">[</span>ext1<span class="token punctuation">,</span> ext2<span class="token punctuation">]</span> <span class="token operator">&lt;&lt;</span> trn <span class="token operator">&lt;&lt;</span> load</code></pre></div></span>
+<p>Without Taskflow, we ended up writing a lot of repetitive code. And this was an example; imagine how much of this code there would be in a real-life pipeline!</p>
+<h3 id="the-taskflow-way-dag-definition-using-taskflow">The Taskflow way, DAG definition using Taskflow</h3>
+<p>Taskflow simplifies how a DAG and its tasks are declared. This is done by encapsulating in decorators all the boilerplate needed in the past. Using these decorators makes the code more intuitive and make easier to read.</p>
+<span><div class="code-highlight" data-language="python"><pre class="language-python" data-language="python"><code class="language-python"><span class="token decorator annotation punctuation">@task</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token keyword">def</span> <span class="token function">extract_from_api</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
+    <span class="token comment"># TODO: Fetch the data from an API and store it where it can be </span>
+    <span class="token comment"># read later</span>
+    <span class="token keyword">return</span> <span class="token punctuation">{</span><span class="token punctuation">}</span>
+
+<span class="token decorator annotation punctuation">@task</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token keyword">def</span> <span class="token function">extract_from_db</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
+    <span class="token comment"># TODO: Fetch the data from our database and store it where it can </span>
+    <span class="token comment"># be read later</span>
+    <span class="token keyword">return</span> <span class="token punctuation">{</span><span class="token punctuation">}</span>
+
+<span class="token decorator annotation punctuation">@task</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token keyword">def</span> <span class="token function">transform</span><span class="token punctuation">(</span>api_data<span class="token punctuation">,</span> db_data<span class="token punctuation">)</span><span class="token punctuation">:</span>
+    <span class="token comment"># TODO: Read the data extracted, transform it to fit our needs and </span>
+    <span class="token comment"># then store it where it can be read later</span>
+    <span class="token keyword">return</span> <span class="token punctuation">{</span><span class="token punctuation">}</span>
+
+<span class="token decorator annotation punctuation">@task</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token keyword">def</span> <span class="token function">load</span><span class="token punctuation">(</span>data_to_load<span class="token punctuation">)</span><span class="token punctuation">:</span>
+    <span class="token comment"># TODO: Read the transformed data and save it where it can be analyzed later</span>
+    <span class="token keyword">pass</span>
+
+<span class="token decorator annotation punctuation">@dag</span><span class="token punctuation">(</span>schedule_interval<span class="token operator">=</span><span class="token string">&#39;@Daily&#39;</span><span class="token punctuation">)</span>
+<span class="token keyword">def</span> <span class="token function">awesome_etl_v2</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
+    data <span class="token operator">=</span> transform<span class="token punctuation">(</span>extract_from_api<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span> extract_from_db<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+    load<span class="token punctuation">(</span>data<span class="token punctuation">)</span>
+
+etl_dag <span class="token operator">=</span> awesome_etl_v2<span class="token punctuation">(</span><span class="token punctuation">)</span></code></pre></div></span>
+<p>Let&#39;s see what&#39;s new in the code above:</p>
+<ul>
+<li><strong>The <span><code class="language-text">@task</code></span> decorator:</strong> turning a python function into an Airflow <span><code class="language-text">PythonOperator</code></span> task is as simple as annotating it with <span><code class="language-text">@task</code></span>. Additionally, any value returned by one of these operators can be passed to another operator, making it really simple to send messages between tasks. We&#39;ll dig into this in the next section.</li>
+<li><strong>The <span><code class="language-text">@dag</code></span> decorator</strong>: in a similar way, we can turn a python function into a DAG generator using this decorator.</li>
+<li><strong>Dependency inference</strong>: notice we haven&#39;t used either one of Airflow&#39;s dependency operators (<span><code class="language-text">&lt;&lt;</code></span>, <span><code class="language-text">&gt;&gt;</code></span>).  With Taskflow, Airflow can infer the relationships among tasks based on how their called. In the example above, Airflow determines that <span><code class="language-text">transform</code></span> depends on both <span><code class="language-text">extract_from_api</code></span> and <span><code class="language-text">extract_from_db</code></span>. Analogously, Airflow determines the <span><code class="language-text">load</code></span> task depends on <span><code class="language-text">transform</code></span>. And it&#39;s done automatically, sweet! This is how our DAG would look in Airflow&#39;s UI:</li>
+</ul>
+<img src="/images/taskflow/DAG-1.png" alt="DAG 1 diagram"/>
+<h2 id="2-simplified-tasks-communication">2) Simplified tasks communication</h2>
+<p>Tasks are isolated and can&#39;t share data as we typically do in Python code. We can only share information between tasks by using <strong>XComs</strong>.</p>
+<p>To continue with our example, let&#39;s see how we can do this using the old API:</p>
+<span><div class="code-highlight" data-language="python"><pre class="language-python" data-language="python"><code class="language-python"><span class="token keyword">def</span> <span class="token function">extract_from_api</span><span class="token punctuation">(</span><span class="token operator">**</span>kwargs<span class="token punctuation">)</span><span class="token punctuation">:</span>
+    json <span class="token operator">=</span> <span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span>  <span class="token comment"># TODO: Fetch data from the API</span>
+    
+    <span class="token comment"># Store results in XComs to share, in a real world solution, </span>
+    <span class="token comment"># a reference to the data should be returned here</span>
+    task_instance <span class="token operator">=</span> kwargs<span class="token punctuation">[</span><span class="token string">&#39;ti&#39;</span><span class="token punctuation">]</span>
+    task_instance<span class="token punctuation">.</span>xcom_push<span class="token punctuation">(</span>key<span class="token operator">=</span><span class="token string">&#39;contacts&#39;</span><span class="token punctuation">,</span> value<span class="token operator">=</span>json<span class="token punctuation">[</span><span class="token string">&#39;results&#39;</span><span class="token punctuation">]</span><span class="token punctuation">)</span>
+
+<span class="token keyword">def</span> <span class="token function">extract_from_db</span><span class="token punctuation">(</span><span class="token operator">**</span>kwargs<span class="token punctuation">)</span><span class="token punctuation">:</span>
+    data <span class="token operator">=</span> <span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span>  <span class="token comment"># TODO: Fetch data from DB</span>
+    
+    <span class="token comment"># Store results in XComs to share, in a real world solution, </span>
+    <span class="token comment"># a reference to the data should be returned here</span>
+    task_instance <span class="token operator">=</span> kwargs<span class="token punctuation">[</span><span class="token string">&#39;ti&#39;</span><span class="token punctuation">]</span>
+    task_instance<span class="token punctuation">.</span>xcom_push<span class="token punctuation">(</span>key<span class="token operator">=</span><span class="token string">&#39;contacts&#39;</span><span class="token punctuation">,</span> value<span class="token operator">=</span><span class="token punctuation">[</span>row <span class="token keyword">for</span> row <span class="token keyword">in</span> data<span class="token punctuation">]</span><span class="token punctuation">)</span>
+
+<span class="token keyword">def</span> <span class="token function">transform</span><span class="token punctuation">(</span><span class="token operator">**</span>kwargs<span class="token punctuation">)</span><span class="token punctuation">:</span>
+    task_instance <span class="token operator">=</span> kwargs<span class="token punctuation">[</span><span class="token string">&#39;ti&#39;</span><span class="token punctuation">]</span>
+    <span class="token comment"># Read the results from previous tasks stored in Xcoms</span>
+    api_data <span class="token operator">=</span> task_instance<span class="token punctuation">.</span>xcom_pull<span class="token punctuation">(</span>key<span class="token operator">=</span><span class="token string">&#39;contacts&#39;</span><span class="token punctuation">,</span> task_ids<span class="token operator">=</span><span class="token string">&#39;extract_from_api&#39;</span><span class="token punctuation">)</span>
+    db_data <span class="token operator">=</span> task_instance<span class="token punctuation">.</span>xcom_pull<span class="token punctuation">(</span>key<span class="token operator">=</span><span class="token string">&#39;contacts&#39;</span><span class="token punctuation">,</span> task_ids<span class="token operator">=</span><span class="token string">&#39;extract_from_db&#39;</span><span class="token punctuation">)</span>
+
+    <span class="token comment"># TODO: process the data and save the results</span>
+
+<span class="token comment"># ...</span>
+
+<span class="token keyword">with</span> DAG<span class="token punctuation">(</span><span class="token string">&#39;awesome_etl_v1&#39;</span><span class="token punctuation">)</span> <span class="token keyword">as</span> dag<span class="token punctuation">:</span>
+  <span class="token comment"># ...</span>
+
+  <span class="token comment"># Intentionally missed ext2 in the dependencies definition.</span>
+  ext1 <span class="token operator">&lt;&lt;</span> trn <span class="token operator">&lt;&lt;</span> load</code></pre></div></span>
+<p>| To have access to XComs, we need a <span><code class="language-text">task_instance</code></span>, which is passed as an argument to the python functions referenced by the <span><code class="language-text">PythonOperator</code></span> instances. <span><code class="language-text">task_instance</code></span> provides <span><code class="language-text">xcom_pull</code></span> and <span><code class="language-text">xcom_push</code></span> to read and write argument values, respectively.</p>
+<p>Reading a value from XComs written there by another task defines a dependency between those two tasks. However, they&#39;re not explicit, which makes it hard to see them as we&#39;d need to dive into the DAG&#39;s implementation. Airflow won&#39;t infer those dependencies either, and we can&#39;t visualize them in the Graph view in Airflow UI. If we forgot to explicitly define it, either with <span><code class="language-text">&gt;&gt;</code></span> or <span><code class="language-text">&lt;&lt;</code></span>, Airflow won&#39;t guarantee the tasks will run in the appropriate order. This may cause runtime errors in our pipeline that would be hard to debug. <strong>This can be one of the most confusing parts of a DAG!</strong></p>
+<p>In the example above, I intentionally left the <span><code class="language-text">ext2</code></span> task out of the dependencies list of the <span><code class="language-text">trn</code></span> task. And even the <span><code class="language-text">trn</code></span> task is getting a value from XComs written by <span><code class="language-text">ext2</code></span>, Airflow won&#39;t know about the dependency between those two tasks. As there&#39;s no explicit dependency between <span><code class="language-text">ext2</code></span> and <span><code class="language-text">trn</code></span>, Airflow will execute <span><code class="language-text">trn</code></span> as soon as <span><code class="language-text">ext1</code></span> has finished, regardless of the state of <span><code class="language-text">ext2</code></span>. You see the race condition, right?</p>
+<p>This is how this DAG would look in the Airflow Graph view:</p>
+<img src="/images/taskflow/DAG-2.png" alt="The dependency between extract_from_db and transform, based on XComs data sharing, is not expressed in terms of the graph."/>
+<p>| The implicit dependency between <span><code class="language-text">extract_from_db</code></span> and <span><code class="language-text">transform</code></span>, based on XComs data sharing, is not expressed in terms of the graph.</p>
+<p>With the new Taskflow, we can eliminate almost all the code involved in reading from and writing to XComs. The most significant advantage is Airflow will automatically infer dependencies!</p>
+<span><div class="code-highlight" data-language="python"><pre class="language-python" data-language="python"><code class="language-python"><span class="token decorator annotation punctuation">@dag</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token keyword">def</span> <span class="token function">awesome_etl_v2</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
+
+  <span class="token decorator annotation punctuation">@task</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+  <span class="token keyword">def</span> <span class="token function">extract_from_api</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
+      json <span class="token operator">=</span> <span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span>  <span class="token comment"># TODO: Fetch data from the API</span>
+      <span class="token keyword">return</span> <span class="token punctuation">{</span><span class="token string">&#39;contacts&#39;</span><span class="token punctuation">:</span> json<span class="token punctuation">[</span><span class="token string">&#39;results&#39;</span><span class="token punctuation">]</span><span class="token punctuation">}</span>
+
+  <span class="token decorator annotation punctuation">@task</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+  <span class="token keyword">def</span> <span class="token function">extract_from_db</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
+      data <span class="token operator">=</span> <span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span>  <span class="token comment"># TODO: Fetch data from DB</span>
+      <span class="token keyword">return</span> <span class="token punctuation">{</span> <span class="token string">&#39;contacts&#39;</span><span class="token punctuation">:</span> <span class="token punctuation">[</span>row <span class="token keyword">for</span> row <span class="token keyword">in</span> data<span class="token punctuation">]</span> <span class="token punctuation">}</span>
+
+  <span class="token decorator annotation punctuation">@task</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+  <span class="token keyword">def</span> <span class="token function">transform</span><span class="token punctuation">(</span>api_data<span class="token punctuation">,</span> db_data<span class="token punctuation">)</span><span class="token punctuation">:</span>
+      api_data <span class="token operator">=</span> api_data<span class="token punctuation">[</span><span class="token string">&#39;contacts&#39;</span><span class="token punctuation">]</span>
+      db_data <span class="token operator">=</span> db_data<span class="token punctuation">[</span><span class="token string">&#39;contacts&#39;</span><span class="token punctuation">]</span>
+
+			<span class="token comment"># TODO: save the transformation result to disk.</span>
+      <span class="token keyword">return</span> <span class="token punctuation">{</span> <span class="token string">&#39;output_file&#39;</span><span class="token punctuation">:</span> <span class="token string">&#39;/awesome_etl/output/transformed_data.json&#39;</span> <span class="token punctuation">}</span>
+
+  transform<span class="token punctuation">(</span>extract_from_api<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span> extract_from_db<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+
+dag <span class="token operator">=</span> awesome_etl_v2<span class="token punctuation">(</span><span class="token punctuation">)</span></code></pre></div></span>
+<p>Any value returned by a <span><code class="language-text">PythonOperator</code></span> task is automatically saved into XComs with the <span><code class="language-text">return_value</code></span> key. To make usage of the stored values, the only thing we have to do is pass them as arguments to other python tasks, as shown in the call to the <span><code class="language-text">transform</code></span> function.</p>
+<p>As we mentioned before, Airflow infers the relationship between tasks based on the usage of their returned values. And those dependencies are explicitly expressed in terms of the graph. Now Airflow runs the transformation task right after both extraction tasks have been completed. No more race conditions!</p>
+<h2 id="3-interoperability">3) Interoperability</h2>
+<p>A nice thing about these new features is that you can gradually adopt them into existing projects. There&#39;s no need to do an all-at-once migration. Existing <span><code class="language-text">PythonOperator</code></span> tasks can be migrated to use the new <span><code class="language-text">@task</code></span> decorator one at a time.</p>
+<p>Next, we will migrate only <span><code class="language-text">extract_from_api</code></span> and <span><code class="language-text">transform</code></span> tasks from the example that does not use Taskflow to show how this works.</p>
+<span><div class="code-highlight" data-language="python"><pre class="language-python" data-language="python"><code class="language-python"><span class="token decorator annotation punctuation">@task</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token keyword">def</span> <span class="token function">extract_from_api</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
+    json <span class="token operator">=</span> <span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span>  <span class="token comment"># TODO: Fetch data from the API</span>
+	  <span class="token keyword">return</span> json<span class="token punctuation">[</span><span class="token string">&#39;results&#39;</span><span class="token punctuation">]</span>
+
+<span class="token keyword">def</span> <span class="token function">extract_from_db</span><span class="token punctuation">(</span><span class="token operator">**</span>kwargs<span class="token punctuation">)</span><span class="token punctuation">:</span>
+    data <span class="token operator">=</span> <span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span>  <span class="token comment"># TODO: Fetch data from DB</span>
+    
+    <span class="token comment"># Store results in XComs to share, in a real world solution, </span>
+    <span class="token comment"># a reference to the data should be saved here</span>
+    task_instance <span class="token operator">=</span> kwargs<span class="token punctuation">[</span><span class="token string">&#39;ti&#39;</span><span class="token punctuation">]</span>
+    task_instance<span class="token punctuation">.</span>xcom_push<span class="token punctuation">(</span>key<span class="token operator">=</span><span class="token string">&#39;contacts&#39;</span><span class="token punctuation">,</span> value<span class="token operator">=</span><span class="token punctuation">[</span>row <span class="token keyword">for</span> row <span class="token keyword">in</span> data<span class="token punctuation">]</span><span class="token punctuation">)</span>
+
+<span class="token decorator annotation punctuation">@task</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token keyword">def</span> <span class="token function">transform</span><span class="token punctuation">(</span>api_data<span class="token punctuation">,</span> db_data<span class="token punctuation">)</span><span class="token punctuation">:</span>
+    <span class="token comment"># TODO: process the data and save the results</span>
+		<span class="token keyword">return</span> <span class="token punctuation">{</span><span class="token punctuation">}</span>
+
+<span class="token keyword">with</span> DAG<span class="token punctuation">(</span><span class="token string">&#39;&#39;</span><span class="token punctuation">)</span> <span class="token keyword">as</span> dag<span class="token punctuation">:</span>
+  ext1_data <span class="token operator">=</span> extract_from_api<span class="token punctuation">(</span><span class="token punctuation">)</span>
+  ext2 <span class="token operator">=</span> PythonOperator<span class="token punctuation">(</span>
+      task_id<span class="token operator">=</span><span class="token string">&#39;extract_from_db&#39;</span><span class="token punctuation">,</span>
+      python_callable<span class="token operator">=</span>extract_from_db<span class="token punctuation">,</span>
+  <span class="token punctuation">)</span>
+  transform<span class="token punctuation">(</span>ext1_data<span class="token punctuation">,</span> ext2<span class="token punctuation">.</span>output<span class="token punctuation">)</span></code></pre></div></span>
+<p>| <span><code class="language-text">output</code></span> is a property available for every operator, this means we can use it for every existing task in our DAGs.</p>
+<p>As <span><code class="language-text">extract_from_api</code></span> is using the new Taskflow API we can get rid of the XComs functions it was using and just return its output and assign it to <span><code class="language-text">ext1_data</code></span> variable, which then is passed as an argument to the <span><code class="language-text">transform</code></span> task. On the other hand, <span><code class="language-text">extract_from_db</code></span> is still using the old API, and we can access the values it saves into XComs by accessing its <span><code class="language-text">output</code></span> property without executing any of the XComs functions.</p>
+<h2 id="4-xcoms-custom-backends">4) XComs custom backends</h2>
+<p>Even though <a href="https://airflow.apache.org/docs/apache-airflow/stable/concepts/xcoms.html">XComs</a> is what powers Taskflow up, it has it&#39;s own limitations. One of them is that only JSON-serializable values can be stored in XComs, this prevents us from storing custom classes instances. Moreover, those values are saved into Airflow&#39;s metadata database, limiting the size of the data we can store. These two points mean we can&#39;t save different types like <span><code class="language-text">numpy</code></span> objects, dates, <span><code class="language-text">pandas</code></span> data frames, etc., and we can&#39;t store values that are greater than 1 GB either.</p>
+<p>This imposes some limitations to the data we can pass through our DAG&#39;s tasks. Luckily, using <a href="https://airflow.apache.org/docs/apache-airflow/stable/concepts/xcoms.html#custom-backends">XComs custom backends</a>, available Airflow version 2 and greater, gets rid of these limitations. This allows us to implement serializers to encode any object we need and save them to a destination of our preferences.</p>
+<p>For example, we could save the DAG&#39;s XComs variables in a reliable and scalable low-cost cloud storage service as AWS S3. Additionally, we can save any encodable python type, like a <span><code class="language-text">pandas</code></span> data frame. Let&#39;s see with an example how easy we can do both looking at the following code snippet:</p>
+<span><div class="code-highlight" data-language="python"><pre class="language-python" data-language="python"><code class="language-python"><span class="token keyword">from</span> airflow<span class="token punctuation">.</span>models<span class="token punctuation">.</span>xcom <span class="token keyword">import</span> BaseXCom
+<span class="token keyword">from</span> airflow<span class="token punctuation">.</span>providers<span class="token punctuation">.</span>amazon<span class="token punctuation">.</span>aws<span class="token punctuation">.</span>hooks<span class="token punctuation">.</span>s3 <span class="token keyword">import</span> S3Hook
+
+<span class="token keyword">import</span> pandas <span class="token keyword">as</span> pd
+<span class="token keyword">import</span> uuid
+
+
+<span class="token keyword">class</span> <span class="token class-name">PandasToS3XComBackend</span><span class="token punctuation">(</span>BaseXCom<span class="token punctuation">)</span><span class="token punctuation">:</span>
+  DATA_SCHEMA <span class="token operator">=</span> <span class="token string">&quot;awesome-etl-s3://&quot;</span>
+
+  <span class="token decorator annotation punctuation">@staticmethod</span>
+  <span class="token keyword">def</span> <span class="token function">serialize_value</span><span class="token punctuation">(</span>value<span class="token punctuation">)</span><span class="token punctuation">:</span>
+    <span class="token keyword">if</span> <span class="token builtin">isinstance</span><span class="token punctuation">(</span>value<span class="token punctuation">,</span> pd<span class="token punctuation">.</span>DataFrame<span class="token punctuation">)</span><span class="token punctuation">:</span>
+      <span class="token keyword">from</span> airflow<span class="token punctuation">.</span>models <span class="token keyword">import</span> Variable
+
+      bucket <span class="token operator">=</span> Variable<span class="token punctuation">.</span>get<span class="token punctuation">(</span><span class="token string">&#39;awesome_etl_bucket&#39;</span><span class="token punctuation">)</span>
+      hook <span class="token operator">=</span> S3Hook<span class="token punctuation">(</span>Variable<span class="token punctuation">.</span>get<span class="token punctuation">(</span><span class="token string">&#39;awesome_etl_aws_connection_id&#39;</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+      file_name <span class="token operator">=</span> <span class="token string-interpolation"><span class="token string">f&#39;data_</span><span class="token interpolation"><span class="token punctuation">{</span><span class="token builtin">str</span><span class="token punctuation">(</span>uuid<span class="token punctuation">.</span>uuid4<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">}</span></span><span class="token string">.json&#39;</span></span>
+      key <span class="token operator">=</span> <span class="token string-interpolation"><span class="token string">f&#39;</span><span class="token interpolation"><span class="token punctuation">{</span>AWS_BUCKET_PREFIX<span class="token punctuation">}</span></span><span class="token string">/</span><span class="token interpolation"><span class="token punctuation">{</span>file_name<span class="token punctuation">}</span></span><span class="token string">&#39;</span></span>
+
+      <span class="token keyword">with</span> <span class="token builtin">open</span><span class="token punctuation">(</span>file_name<span class="token punctuation">,</span> <span class="token string">&#39;w&#39;</span><span class="token punctuation">)</span> <span class="token keyword">as</span> <span class="token builtin">file</span><span class="token punctuation">:</span>
+        value<span class="token punctuation">.</span>to_csv<span class="token punctuation">(</span><span class="token builtin">file</span><span class="token punctuation">)</span>
+      hook<span class="token punctuation">.</span>load_file<span class="token punctuation">(</span>file_name<span class="token punctuation">,</span> key<span class="token punctuation">,</span> bucket<span class="token punctuation">,</span> replace<span class="token operator">=</span><span class="token boolean">True</span><span class="token punctuation">)</span>
+      
+      value <span class="token operator">=</span> PandasToS3XComBackend<span class="token punctuation">.</span>DATA_SCHEMA <span class="token operator">+</span> key
+    
+    <span class="token keyword">return</span> BaseXCom<span class="token punctuation">.</span>serialize_value<span class="token punctuation">(</span>value<span class="token punctuation">)</span>
+
+  <span class="token decorator annotation punctuation">@staticmethod</span>
+  <span class="token keyword">def</span> <span class="token function">deserialize_value</span><span class="token punctuation">(</span>result<span class="token punctuation">)</span><span class="token punctuation">:</span>
+    result <span class="token operator">=</span> BaseXCom<span class="token punctuation">.</span>deserialize_value<span class="token punctuation">(</span>result<span class="token punctuation">)</span>
+    <span class="token keyword">if</span> <span class="token builtin">isinstance</span><span class="token punctuation">(</span>result<span class="token punctuation">,</span> <span class="token builtin">str</span><span class="token punctuation">)</span> <span class="token keyword">and</span> result<span class="token punctuation">.</span>startswith<span class="token punctuation">(</span>PandasToS3XComBackend<span class="token punctuation">.</span>DATA_SCHEMA<span class="token punctuation">)</span><span class="token punctuation">:</span>
+      <span class="token keyword">from</span> airflow<span class="token punctuation">.</span>models <span class="token keyword">import</span> Variable
+      
+      bucket <span class="token operator">=</span> Variable<span class="token punctuation">.</span>get<span class="token punctuation">(</span><span class="token string">&#39;awesome_etl_bucket&#39;</span><span class="token punctuation">)</span>
+      hook <span class="token operator">=</span> S3Hook<span class="token punctuation">(</span>Variable<span class="token punctuation">.</span>get<span class="token punctuation">(</span><span class="token string">&#39;awesome_etl_aws_connection_id&#39;</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+      key <span class="token operator">=</span> result<span class="token punctuation">.</span>replace<span class="token punctuation">(</span>PandasToS3XComBackend<span class="token punctuation">.</span>DATA_SCHEMA<span class="token punctuation">,</span> <span class="token string">&quot;&quot;</span><span class="token punctuation">)</span>
+      file_name <span class="token operator">=</span> hook<span class="token punctuation">.</span>download_file<span class="token punctuation">(</span>key<span class="token punctuation">,</span> bucket<span class="token punctuation">,</span> <span class="token string">&quot;/tmp&quot;</span><span class="token punctuation">)</span>
+      result <span class="token operator">=</span> pd<span class="token punctuation">.</span>read_csv<span class="token punctuation">(</span>file_name<span class="token punctuation">)</span>
+    
+    <span class="token keyword">return</span> result
+
+  <span class="token keyword">def</span> <span class="token function">orm_deserialize_value</span><span class="token punctuation">(</span>self<span class="token punctuation">)</span><span class="token punctuation">:</span>
+    result <span class="token operator">=</span> BaseXCom<span class="token punctuation">.</span>deserialize_value<span class="token punctuation">(</span>self<span class="token punctuation">)</span>
+    <span class="token keyword">if</span> <span class="token builtin">isinstance</span><span class="token punctuation">(</span>result<span class="token punctuation">,</span> <span class="token builtin">str</span><span class="token punctuation">)</span> <span class="token keyword">and</span> result<span class="token punctuation">.</span>startswith<span class="token punctuation">(</span>PandasToS3XComBackend<span class="token punctuation">.</span>DATA_SCHEMA<span class="token punctuation">)</span><span class="token punctuation">:</span>
+      result <span class="token operator">=</span> <span class="token string-interpolation"><span class="token string">f&#39;</span><span class="token interpolation"><span class="token punctuation">{</span>result<span class="token punctuation">}</span></span><span class="token string"> (serialized by &quot;PandasToS3XComBackend&quot;)&#39;</span></span>
+    <span class="token keyword">return</span> result</code></pre></div></span>
+<p>Let&#39;s quickly explain the code above. There are two main methods we have to implement for our custom backend:</p>
+<ol>
+<li><span><code class="language-text">serialize_value</code></span> returns what&#39;s stored in the XComs&#39; database registry. In our example, we only care about encoding <span><code class="language-text">pandas</code></span> <span><code class="language-text">DataFrame</code></span> instances, in which case we serialize it as a CSV file and upload it to S3. Finally, we return the path to that file in S3, so later, when we need to get the original value, we can download the correct file and deserialize its content as the original <span><code class="language-text">pandas</code></span> <span><code class="language-text">DataFrame</code></span>. Otherwise, we delegate the serialization job to <span><code class="language-text">BaseXCom</code></span>.</li>
+<li><span><code class="language-text">deserialize_value</code></span> takes whatever <span><code class="language-text">serialize_value</code></span> returned and returns back the original value. In our case, we determine whether the serialized value must be deserialized as a <span><code class="language-text">pandas</code></span> <span><code class="language-text">DataFrame</code></span> based on the custom URI schema we used in the serialization&#39;s result. Otherwise, we let <span><code class="language-text">BaseXCom</code></span> do its job.</li>
+<li>finally, if we prefer, we can implement <span><code class="language-text">orm_deserialize_value</code></span> to change how the serialized values are shown in Airflow&#39;s UI.</li>
+</ol>
+<p>And this is how our custom XComs variables will look:</p>
+<img src="/images/taskflow/taskflow-xcoms.png" alt="XComs custom variable"/>
+<p>This gives us a lot of extra freedom. Even though, in theory, we could save a big chunk of information this way, it&#39;s not the idea to use XComs to support a data-driven pipeline. I mean, we should keep information backed up by XComs to small chunks as Airflow itself isn&#39;t designed to move much information.</p>
+<h2 id="final-thoughts">Final thoughts</h2>
+<p>We have seen the advantages of implementing a DAG by using Taskflow.</p>
+<ul>
+<li>It reduces boilerplate code.</li>
+<li>Simplifies the tedious process of passing arguments among tasks.</li>
+<li>Infers task dependencies, and much more.</li>
+</ul>
+<p>All these Taskflow features cut off development, maintenance, and ETL pipeline understanding time. Not to mention that is less prone to error.</p>
+<p>The best part is there&#39;s much more to come, you can find these in the <a href="https://github.com/apache/airflow">Airflow&#39;s git repository</a>.</p>
+<p>Thanks for reading! ❤️</p>
+<p>Got stuck developing ETL solutions? We&#39;d love to help! Get in touch to start leveraging the power of your data today!</p>
+<div><a data-mode="popup" data-hide-footer="true" target="_blank" href="https://form.typeform.com/to/D1PhDJIR" class="button is-nav ipad-hidden typeform-share w-inline-block header-getintouch" style="opacity:1"><div class="button-text no-pointer">Let&#39;s talk</div></a></div>
+<br/>
+<br/> 

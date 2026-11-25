@@ -1,3 +1,5 @@
+'use client';
+
 import React, { useState } from 'react';
 
 import { NavMenuElements } from './nav-menu-elements';

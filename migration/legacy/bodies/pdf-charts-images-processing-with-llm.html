@@ -1,0 +1,289 @@
+ <h2 id="pdf-and-image-processing-with-llms-text-extraction-charts-and-image-interpretation"><strong>PDF and image processing with LLMs: Text extraction, charts and image interpretation.</strong></h2>
+<p>In a <a href="https://blog.xmartlabs.com/blog/scaling-rag-system/">recent GenAI project</a>, to give context to the system prompt it was necessary to process a large number of PDF files that were presentations (PPT) from the client&#39;s marketing and business area. These PDFs had a lot of charts from past campaigns and market data, some slides had plain text as well. In addition to PDFs, we had to process images, in this case they were supermarket aisles photos and photos uploaded to social networks where you could see different types of products, brands and prices.</p>
+<p>PDFs and images were not the only types of files we had to process, it was also necessary to process <span><code class="language-text">xlsx</code></span> files that contained scans from social networks (and each of them could have images or not) and Amazon reviews.</p>
+<p>The goal was to be able to have all the data in plain text to later make embeddings and store them in <a href="https://github.com/pgvector/pgvector">PGVector</a>.  Now, when one works with PDFs that have only plain text it is simpler to extract that text because there are native Python libraries such as <span><code class="language-text">pdfplumber</code></span>, <span><code class="language-text">PyPDF2</code></span> or <span><code class="language-text">fitz</code></span> that facilitate the conversion from PDF to plain text. In this case, once the plain text file is obtained, it is straightforward to proceed with the embedding generation (previously partitioning the text). However, when the PDF has images such as charts, product pictures, designs, etc., the aforementioned libraries are no longer sufficient since they do not have the ability to interpret the content in a visual element.</p>
+<aside><p>💡</p><p>Given a natural language input from a human, one needs to search for the documents that are most related to that human input, which is why it is necessary to embed our data because then, with the human input, <a href="https://en.wikipedia.org/wiki/Cosine_similarity">cosine similarity</a> is used to find the documents most related to that input.</p></aside>
+<h2 id="image-interpretation"><strong>Image interpretation</strong></h2>
+ <img src="/_astro/slide-with-charts-example.CRtUDdnT_zLX8L.webp" alt="slide-with-charts-example.png" loading="lazy" decoding="async" width="1280" height="720">
+<p>Suppose that in a PDF (which was originally a PPT) we have many slides with charts, text, diagrams, etc., similar to the example above. We, as humans, have the ability to view such a slide and interpret it. The brain process is similar to:</p>
+<ol>
+<li>Overview.</li>
+<li>We detect a title that tells us a very brief summary of what is in the content.</li>
+<li>We see that there is a pie chart → We analyze the chart detecting that option 1 is predominant with 65% over the total sample. Then we detect that the second most relevant is option 2 with 17%. And so on. Relating the colors of the pie chart with the colors of the labels of each option.</li>
+<li>Then we read the description of each element, finding what each object represents (in this case each &quot;option&quot;).</li>
+<li>We can make an analysis, for example: 65% of the sample prefers to read a book, 17% prefers to write an essay, 10% prefers to do various experiments and only 8% spends some time resting.</li>
+</ol>
+<p>With all this we could write in plain text an interpretation of such a slide that could be something like:</p>
+<blockquote>
+<p>On the slide we see a title that is &quot;Pie Chart with Text Boxes&quot;. In the content we see a pie chart where we analyze a sample of people who were asked what they spend their free time on. Finding that 65% prefer to spend their free time reading books, 17% prefer to spend it writing essays or personal notes....</p>
+</blockquote>
+<p>Non-multimodal LLMs, such as the one used in this project, are capable of processing only plain text. They do not have the ability to interpret images or visual elements present in documents such as diagrams, chart or photographs. For this reason, it is required that all content is previously interpreted and available in a structured textual format that can be consumed by the model.</p>
+<h3 id="how-to-transform-visual-content-from-slides-into-plain-text"><strong>How to transform visual content from slides into plain text?</strong></h3>
+<p>Several years ago, the answer would have been: OCR (<em>Optical Character Recognition</em>). This has certain limitations because it would allow us to extract plain text, characters, from any image and convert it to plain text. Today, we have multimodal language models:</p>
+<aside><p>💡</p><p>A multimodal language model is an artificial intelligence model capable of processing and interpreting information coming from multiple types of data, such as text, images, audio or video. In particular, a multimodal language model can understand both written language and visual content (e.g., images), allowing it to reason and generate responses based on both types of input.</p></aside>
+<p>With this we now have everything we need to answer the question: use a multimodal language model, with a system prompt and delegate everything for the model to interpret and output according to the given instructions.</p>
+<h3 id="are-there-tools-or-libraries-that-already-solve-this-problem"><strong>Are there tools or libraries that already solve this problem?</strong></h3>
+<p>The answer is <strong>yes.</strong> Some of the alternatives currently available are:</p>
+<ul>
+<li><a href="https://github.com/microsoft/markitdown">MarkItDown</a>: a lightweight Python utility for converting various file types to Markdown, designed for use with language models (LLMs) and related text parsing streams.</li>
+<li><a href="https://llamaocr.com/">LlamaOCR</a>: An AI-powered OCR for converting documents (of any type, and to date without support for PDFs) to Markdown.</li>
+<li><a href="https://docling-project.github.io/docling/">Docling</a>: simplifies document processing, enabling parsing of various formats - including advanced PDF file understanding, and offering seamless integrations with the generative AI ecosystem.</li>
+</ul>
+<p>Given the context of a short and intense project, we only managed to test MarkItDown which what it does is take a PDF and convert it to Markdown using OpenAI. Based on our tests, we did not have good results with PDFs that had a lot of visual elements. On the other hand, by the time of the project we had not yet discovered Docling.</p>
+<h2 id="now-lets-interpret-visual-elements"><strong>Now, let&#39;s interpret visual elements</strong></h2>
+<p>The main library to be able to do the processing of PDFs and images with a multimodal language model is <a href="https://www.langchain.com/">Langchain</a>. The model used for the PDFs was <a href="https://openai.com/index/gpt-4-1/"><span><code class="language-text">gpt-4.1</code></span></a>.</p>
+<p>As an example, our PDF processor is (in a summarized way and without going into so much code)</p>
+<span><div class="code-highlight" data-language="python"><pre class="language-python" data-language="python"><code class="language-python"><span class="token keyword">class</span> <span class="token class-name">DocumentInterpretation</span><span class="token punctuation">(</span>BaseProcessor<span class="token punctuation">)</span><span class="token punctuation">:</span>
+    <span class="token keyword">def</span> <span class="token function">__init__</span><span class="token punctuation">(</span>
+        self<span class="token punctuation">,</span>
+        llm<span class="token punctuation">:</span> ChatOpenAI<span class="token punctuation">,</span>
+        parser<span class="token punctuation">:</span> PydanticOutputParser<span class="token punctuation">,</span>
+        prompt<span class="token punctuation">:</span> <span class="token builtin">str</span><span class="token punctuation">,</span>
+        formatter<span class="token punctuation">:</span> <span class="token builtin">str</span><span class="token punctuation">,</span>
+    <span class="token punctuation">)</span><span class="token punctuation">:</span>
+        <span class="token builtin">super</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span>__init__<span class="token punctuation">(</span>llm<span class="token punctuation">,</span> prompt<span class="token punctuation">)</span>
+
+    <span class="token keyword">def</span> <span class="token function">__image_to_base64</span><span class="token punctuation">(</span>self<span class="token punctuation">,</span> image<span class="token punctuation">)</span> <span class="token operator">-</span><span class="token operator">&gt;</span> <span class="token builtin">str</span><span class="token punctuation">:</span>
+        <span class="token triple-quoted-string string">&quot;&quot;&quot;
+        Convert an image to a base64-encoded string.
+
+        Args:
+            image (_type_): The image to convert.
+
+        Returns:
+            str: Base64-encoded string of the image.
+        &quot;&quot;&quot;</span>
+        <span class="token builtin">buffer</span> <span class="token operator">=</span> BytesIO<span class="token punctuation">(</span><span class="token punctuation">)</span>
+        image<span class="token punctuation">.</span>save<span class="token punctuation">(</span><span class="token builtin">buffer</span><span class="token punctuation">,</span> <span class="token builtin">format</span><span class="token operator">=</span><span class="token string">&quot;PNG&quot;</span><span class="token punctuation">)</span>
+        <span class="token keyword">return</span> base64<span class="token punctuation">.</span>b64encode<span class="token punctuation">(</span><span class="token builtin">buffer</span><span class="token punctuation">.</span>getvalue<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">.</span>decode<span class="token punctuation">(</span><span class="token string">&quot;utf-8&quot;</span><span class="token punctuation">)</span>
+
+    <span class="token keyword">def</span> <span class="token function">__extract_images_from_pdf</span><span class="token punctuation">(</span>self<span class="token punctuation">,</span> file_path<span class="token punctuation">:</span> <span class="token builtin">str</span><span class="token punctuation">)</span> <span class="token operator">-</span><span class="token operator">&gt;</span> <span class="token builtin">list</span><span class="token punctuation">:</span>
+        <span class="token triple-quoted-string string">&quot;&quot;&quot;Convert each page of a PDF file to an image.
+        This function uses the pdf2image library to convert each page of a PDF file
+        into an image. The images are returned as a list of PIL Image objects.
+
+        The images are resized to a maximum of 2000x2000 pixels.
+
+        Args:
+            file_path (str): The path to the PDF file.
+
+        Returns:
+            list: A list of PIL Image objects representing each page of the PDF.
+        &quot;&quot;&quot;</span>
+        <span class="token keyword">return</span> convert_from_path<span class="token punctuation">(</span>file_path<span class="token punctuation">,</span> size<span class="token operator">=</span><span class="token punctuation">(</span><span class="token number">2000</span><span class="token punctuation">,</span> <span class="token number">2000</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+
+    <span class="token keyword">def</span> <span class="token function">process_image</span><span class="token punctuation">(</span>
+        self<span class="token punctuation">,</span>
+        base64_img<span class="token punctuation">:</span> <span class="token builtin">str</span><span class="token punctuation">,</span>
+        max_size<span class="token punctuation">:</span> <span class="token builtin">tuple</span> <span class="token operator">|</span> <span class="token boolean">None</span> <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token number">3000</span><span class="token punctuation">,</span> <span class="token number">3000</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+    <span class="token punctuation">)</span> <span class="token operator">-</span><span class="token operator">&gt;</span> <span class="token builtin">tuple</span><span class="token punctuation">[</span><span class="token builtin">dict</span><span class="token punctuation">[</span><span class="token builtin">str</span><span class="token punctuation">,</span> Any<span class="token punctuation">]</span><span class="token punctuation">,</span> <span class="token builtin">dict</span><span class="token punctuation">[</span><span class="token builtin">str</span><span class="token punctuation">,</span> Any<span class="token punctuation">]</span><span class="token punctuation">]</span><span class="token punctuation">:</span>
+        resized_image_bytes <span class="token operator">=</span> self<span class="token punctuation">.</span>__resize_image_if_needed<span class="token punctuation">(</span>base64_img<span class="token punctuation">,</span> max_size<span class="token punctuation">)</span>
+        img_base64 <span class="token operator">=</span> base64<span class="token punctuation">.</span>b64encode<span class="token punctuation">(</span>resized_image_bytes<span class="token punctuation">)</span><span class="token punctuation">.</span>decode<span class="token punctuation">(</span><span class="token string">&quot;utf-8&quot;</span><span class="token punctuation">)</span>
+
+        system_message <span class="token operator">=</span> SystemMessage<span class="token punctuation">(</span>content<span class="token operator">=</span>self<span class="token punctuation">.</span>prompt<span class="token punctuation">)</span>
+        human_message <span class="token operator">=</span> HumanMessage<span class="token punctuation">(</span>
+            content<span class="token operator">=</span><span class="token punctuation">[</span>
+                <span class="token punctuation">{</span>
+                    <span class="token string">&quot;type&quot;</span><span class="token punctuation">:</span> <span class="token string">&quot;image_url&quot;</span><span class="token punctuation">,</span>
+                    <span class="token string">&quot;image_url&quot;</span><span class="token punctuation">:</span> <span class="token punctuation">{</span><span class="token string">&quot;url&quot;</span><span class="token punctuation">:</span> <span class="token string-interpolation"><span class="token string">f&quot;data:image/png;base64,</span><span class="token interpolation"><span class="token punctuation">{</span>img_base64<span class="token punctuation">}</span></span><span class="token string">&quot;</span></span><span class="token punctuation">}</span><span class="token punctuation">,</span>
+                <span class="token punctuation">}</span><span class="token punctuation">,</span>
+            <span class="token punctuation">]</span>
+        <span class="token punctuation">)</span>
+
+        <span class="token keyword">with</span> get_openai_callback<span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token keyword">as</span> cb<span class="token punctuation">:</span>
+            <span class="token comment"># With structured output, we get the parsed object directly</span>
+            parsed_response <span class="token operator">=</span> self<span class="token punctuation">.</span>llm<span class="token punctuation">.</span>invoke<span class="token punctuation">(</span><span class="token punctuation">[</span>system_message<span class="token punctuation">,</span> human_message<span class="token punctuation">]</span><span class="token punctuation">)</span>
+            llm_usage_data <span class="token operator">=</span> <span class="token punctuation">{</span>
+                <span class="token string">&quot;total_tokens_used&quot;</span><span class="token punctuation">:</span> cb<span class="token punctuation">.</span>total_tokens<span class="token punctuation">,</span>
+                <span class="token string">&quot;prompt_tokens_used&quot;</span><span class="token punctuation">:</span> cb<span class="token punctuation">.</span>prompt_tokens<span class="token punctuation">,</span>
+                <span class="token string">&quot;completion_tokens_used&quot;</span><span class="token punctuation">:</span> cb<span class="token punctuation">.</span>completion_tokens<span class="token punctuation">,</span>
+                <span class="token string">&quot;total_cost&quot;</span><span class="token punctuation">:</span> cb<span class="token punctuation">.</span>total_cost<span class="token punctuation">,</span>
+            <span class="token punctuation">}</span>
+
+        logger<span class="token punctuation">.</span>info<span class="token punctuation">(</span><span class="token string">&quot;Successfully processed image with structured output&quot;</span><span class="token punctuation">)</span>
+        <span class="token keyword">return</span> parsed_response<span class="token punctuation">,</span> llm_usage_data
+
+    <span class="token keyword">def</span> <span class="token function">process_document</span><span class="token punctuation">(</span>self<span class="token punctuation">,</span> file_path<span class="token punctuation">:</span> <span class="token builtin">str</span><span class="token punctuation">)</span> <span class="token operator">-</span><span class="token operator">&gt;</span> <span class="token builtin">dict</span><span class="token punctuation">[</span><span class="token builtin">str</span><span class="token punctuation">,</span> Any<span class="token punctuation">]</span><span class="token punctuation">:</span>
+        <span class="token triple-quoted-string string">&quot;&quot;&quot;Process a PDF document and return the analysis.
+
+        Args:
+            file_path (str): The path to the PDF file.
+
+        Returns:
+            dict[str, Any]: A dictionary containing the analysis of the document.
+        &quot;&quot;&quot;</span>
+        file_ext <span class="token operator">=</span> os<span class="token punctuation">.</span>path<span class="token punctuation">.</span>splitext<span class="token punctuation">(</span>file_path<span class="token punctuation">)</span><span class="token punctuation">[</span><span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">.</span>lower<span class="token punctuation">(</span><span class="token punctuation">)</span>
+        <span class="token keyword">assert</span> file_ext <span class="token keyword">in</span> <span class="token punctuation">[</span><span class="token string">&quot;.pdf&quot;</span><span class="token punctuation">]</span>
+
+        start_time <span class="token operator">=</span> time<span class="token punctuation">.</span>time<span class="token punctuation">(</span><span class="token punctuation">)</span>
+        logger<span class="token punctuation">.</span>info<span class="token punctuation">(</span><span class="token string-interpolation"><span class="token string">f&quot;Converting PDF pages to images: </span><span class="token interpolation"><span class="token punctuation">{</span>file_path<span class="token punctuation">}</span></span><span class="token string">&quot;</span></span><span class="token punctuation">)</span>
+        images <span class="token operator">=</span> self<span class="token punctuation">.</span>__extract_images_from_pdf<span class="token punctuation">(</span>file_path<span class="token punctuation">)</span>
+
+        pages <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token punctuation">]</span>
+        total_tokens <span class="token operator">=</span> <span class="token number">0</span>
+        total_cost <span class="token operator">=</span> <span class="token number">0</span>
+        <span class="token keyword">for</span> i<span class="token punctuation">,</span> img <span class="token keyword">in</span> <span class="token builtin">enumerate</span><span class="token punctuation">(</span>images<span class="token punctuation">)</span><span class="token punctuation">:</span>
+            logger<span class="token punctuation">.</span>info<span class="token punctuation">(</span><span class="token string-interpolation"><span class="token string">f&quot;Processing page </span><span class="token interpolation"><span class="token punctuation">{</span>i <span class="token operator">+</span> <span class="token number">1</span><span class="token punctuation">}</span></span><span class="token string">/</span><span class="token interpolation"><span class="token punctuation">{</span><span class="token builtin">len</span><span class="token punctuation">(</span>images<span class="token punctuation">)</span><span class="token punctuation">}</span></span><span class="token string">&quot;</span></span><span class="token punctuation">)</span>
+            encoded_img <span class="token operator">=</span> self<span class="token punctuation">.</span>__image_to_base64<span class="token punctuation">(</span>img<span class="token punctuation">)</span>
+            interpretation<span class="token punctuation">,</span> llm_usage_data <span class="token operator">=</span> self<span class="token punctuation">.</span>process_image<span class="token punctuation">(</span>
+                encoded_img<span class="token punctuation">,</span> <span class="token punctuation">(</span><span class="token number">2000</span><span class="token punctuation">,</span> <span class="token number">2000</span><span class="token punctuation">)</span>
+            <span class="token punctuation">)</span>
+            pages<span class="token punctuation">.</span>append<span class="token punctuation">(</span>
+                <span class="token punctuation">{</span>
+                    <span class="token string">&quot;page_number&quot;</span><span class="token punctuation">:</span> i <span class="token operator">+</span> <span class="token number">1</span><span class="token punctuation">,</span>
+                    <span class="token string">&quot;llm_usage_data&quot;</span><span class="token punctuation">:</span> llm_usage_data<span class="token punctuation">,</span>
+                    <span class="token string">&quot;interpretation&quot;</span><span class="token punctuation">:</span> interpretation<span class="token punctuation">.</span>model_dump<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span>  
+                <span class="token punctuation">}</span>
+            <span class="token punctuation">)</span>
+            total_tokens <span class="token operator">+=</span> llm_usage_data<span class="token punctuation">[</span><span class="token string">&quot;total_tokens_used&quot;</span><span class="token punctuation">]</span>
+            total_cost <span class="token operator">+=</span> llm_usage_data<span class="token punctuation">[</span><span class="token string">&quot;total_cost&quot;</span><span class="token punctuation">]</span>
+
+        end_time <span class="token operator">=</span> time<span class="token punctuation">.</span>time<span class="token punctuation">(</span><span class="token punctuation">)</span>
+
+        <span class="token keyword">return</span> <span class="token punctuation">{</span>
+            <span class="token string">&quot;file_name&quot;</span><span class="token punctuation">:</span> os<span class="token punctuation">.</span>path<span class="token punctuation">.</span>basename<span class="token punctuation">(</span>file_path<span class="token punctuation">)</span><span class="token punctuation">,</span>
+            <span class="token string">&quot;file_type&quot;</span><span class="token punctuation">:</span> file_ext<span class="token punctuation">,</span>
+            <span class="token string">&quot;page_count&quot;</span><span class="token punctuation">:</span> <span class="token builtin">len</span><span class="token punctuation">(</span>images<span class="token punctuation">)</span><span class="token punctuation">,</span>
+            <span class="token string">&quot;total_tokens_used&quot;</span><span class="token punctuation">:</span> total_tokens<span class="token punctuation">,</span>
+            <span class="token string">&quot;estimated_cost_usd&quot;</span><span class="token punctuation">:</span> <span class="token builtin">round</span><span class="token punctuation">(</span>total_cost<span class="token punctuation">,</span> <span class="token number">4</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+            <span class="token string">&quot;processing_time_seconds&quot;</span><span class="token punctuation">:</span> <span class="token builtin">round</span><span class="token punctuation">(</span>end_time <span class="token operator">-</span> start_time<span class="token punctuation">,</span> <span class="token number">2</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+            <span class="token string">&quot;pages&quot;</span><span class="token punctuation">:</span> pages<span class="token punctuation">,</span>
+        <span class="token punctuation">}</span></code></pre></div></span>
+<p>The important thing about this class is the <span><code class="language-text">process_image</code></span> method that works with the system prompt and the human input, which in this case is the image encoded in <span><code class="language-text">base64</code></span>. To get the interpretation, we can look at the line containing <span><code class="language-text">parsed_response = self.llm.invoke([system_message, human_message])</code></span>, this returns the result of the multimodal LLM. In the background, we use <a href="https://platform.openai.com/docs/guides/structured-outputs?api-mode=responses">Structured Outputs</a> which allows us to have control over the LLM response respecting a user-defined structure.</p>
+<p>The rest of the code inside the image processing method is simply to have token consumption and price data. Then, the main <span><code class="language-text">process_document</code></span> method is in charge of orchestrating everything necessary to process all the pages of the PDF and give as a result</p>
+<span><div class="code-highlight" data-language="json"><pre class="language-json" data-language="json"><code class="language-json"><span class="token punctuation">{</span>
+   <span class="token property">&quot;file_name&quot;</span><span class="token operator">:</span> <span class="token string">&quot;name of the PDF file&quot;</span><span class="token punctuation">,</span>
+   <span class="token property">&quot;file_type&quot;</span><span class="token operator">:</span> <span class="token string">&quot;file extension&quot;</span><span class="token punctuation">,</span>
+   <span class="token property">&quot;page_count&quot;</span><span class="token operator">:</span> <span class="token string">&quot;amount of pages in the PDF file&quot;</span><span class="token punctuation">,</span>
+   <span class="token property">&quot;total_tokens_used&quot;</span><span class="token operator">:</span> <span class="token string">&quot;total tokens used&quot;</span><span class="token punctuation">,</span>
+   <span class="token property">&quot;estimated_cost_usd&quot;</span><span class="token operator">:</span> <span class="token string">&quot;total cost&quot;</span><span class="token punctuation">,</span>
+   <span class="token property">&quot;processing_time_seconds&quot;</span><span class="token operator">:</span> <span class="token string">&quot;time in seconds&quot;</span><span class="token punctuation">,</span>
+   <span class="token property">&quot;pages&quot;</span><span class="token operator">:</span> <span class="token string">&quot;an object with intrepreted data&quot;</span>
+<span class="token punctuation">}</span></code></pre></div></span>
+<p>Each <span><code class="language-text">&quot;pages&quot;</code></span> object looks like</p>
+<span><div class="code-highlight" data-language="json"><pre class="language-json" data-language="json"><code class="language-json"><span class="token punctuation">{</span>
+  <span class="token property">&quot;text_content&quot;</span><span class="token operator">:</span> <span class="token string">&quot;USB Aromatherapy – Portable and practical...&quot;</span><span class="token punctuation">,</span>
+  <span class="token property">&quot;tables&quot;</span><span class="token operator">:</span> <span class="token string">&quot;| Rank | Idea | Action | ...&quot;</span><span class="token punctuation">,</span>
+  <span class="token property">&quot;charts_and_graphs&quot;</span><span class="token operator">:</span> <span class="token string">&quot;This chart compares fragrance appeal scores...&quot;</span><span class="token punctuation">,</span>
+  <span class="token property">&quot;visual_elements&quot;</span><span class="token operator">:</span> <span class="token string">&quot;One product mockup. Ad for new scent. Appears to be part of campaign.&quot;</span><span class="token punctuation">,</span>
+  <span class="token property">&quot;supermarket_aisles&quot;</span><span class="token operator">:</span> <span class="token string">&quot;&quot;</span><span class="token punctuation">,</span>
+  <span class="token property">&quot;key_insights&quot;</span><span class="token operator">:</span> <span class="token punctuation">[</span>
+    <span class="token string">&quot;Great way to sync scent with mood.&quot;</span><span class="token punctuation">,</span>
+    <span class="token string">&quot;Concerns about smartphone dependency.&quot;</span>
+  <span class="token punctuation">]</span><span class="token punctuation">,</span>
+  <span class="token property">&quot;page_summary&quot;</span><span class="token operator">:</span> <span class="token string">&quot;This page presents concept evaluations for aromatherapy devices...&quot;</span>
+<span class="token punctuation">}</span></code></pre></div></span>
+<p>And, last but not least, the system prompt:</p>
+<span><div class="code-highlight" data-language="markdown"><pre class="language-markdown" data-language="markdown"><code class="language-markdown">You are an expert document analyst specializing in interpreting complex marketing materials.
+
+You will be shown a scanned image of a page from a PDF document. Your task is to interpret the content and structure of the page, extract relevant information, and return it in a <span class="token bold"><span class="token punctuation">**</span><span class="token content">strict JSON format</span><span class="token punctuation">**</span></span> that matches a predefined schema.
+
+This document may contain marketing slides, promotional visual sequences, concept cards, product displays, or charts.
+
+Perform the following steps:
+
+<span class="token hr punctuation">---</span>
+
+<span class="token title important"><span class="token punctuation">###</span> Step-by-Step Instructions</span>
+
+<span class="token list punctuation">1.</span> <span class="token bold"><span class="token punctuation">**</span><span class="token content">Text Extraction</span><span class="token punctuation">**</span></span>:
+   <span class="token list punctuation">-</span> Extract all visible written text from the page.
+   <span class="token list punctuation">-</span> Preserve logical reading order.
+   <span class="token list punctuation">-</span> Ignore decorative or stylistic artifacts unless they convey meaning.
+
+<span class="token list punctuation">2.</span> <span class="token bold"><span class="token punctuation">**</span><span class="token content">Table Interpretation</span><span class="token punctuation">**</span></span>:
+   <span class="token list punctuation">-</span> Detect any tables.
+   <span class="token list punctuation">-</span> Extract structured data in Markdown or CSV format inside a string.
+   <span class="token list punctuation">-</span> Summarize what the table conveys (e.g., comparisons, trends, key metrics).
+
+<span class="token list punctuation">3.</span> <span class="token bold"><span class="token punctuation">**</span><span class="token content">Chart and Graph Analysis</span><span class="token punctuation">**</span></span>:
+   <span class="token list punctuation">-</span> Identify charts or graphs.
+   <span class="token list punctuation">-</span> Explain the kind of data being visualized.
+   <span class="token list punctuation">-</span> Describe insights and what the data suggests.
+
+<span class="token list punctuation">4.</span> <span class="token bold"><span class="token punctuation">**</span><span class="token content">Visual Element Analysis</span><span class="token punctuation">**</span></span>:
+   <span class="token list punctuation">-</span> Describe other visual elements such as:
+     <span class="token list punctuation">-</span> Logos
+     <span class="token list punctuation">-</span> Concept cards
+     <span class="token list punctuation">-</span> Advertisements
+     <span class="token list punctuation">-</span> Storyboards or sequences
+   <span class="token list punctuation">-</span> Identify the <span class="token bold"><span class="token punctuation">**</span><span class="token content">type</span><span class="token punctuation">**</span></span> of each visual element.
+   <span class="token list punctuation">-</span> If there’s a <span class="token bold"><span class="token punctuation">**</span><span class="token content">sequence</span><span class="token punctuation">**</span></span> or <span class="token bold"><span class="token punctuation">**</span><span class="token content">thematic grouping</span><span class="token punctuation">**</span></span>, describe the relationship.
+
+<span class="token list punctuation">5.</span> <span class="token bold"><span class="token punctuation">**</span><span class="token content">Supermarket Aisles (If Applicable)</span><span class="token punctuation">**</span></span>:
+   <span class="token list punctuation">-</span> Only if the image clearly shows supermarket shelves:
+     <span class="token list punctuation">-</span> Identify brands and products.
+     <span class="token list punctuation">-</span> Extract prices (if visible).
+     <span class="token list punctuation">-</span> Describe each item briefly.
+
+<span class="token list punctuation">6.</span> <span class="token bold"><span class="token punctuation">**</span><span class="token content">Key Quotes &amp; Insights</span><span class="token punctuation">**</span></span>:
+   <span class="token list punctuation">-</span> Extract 1 to 3 key <span class="token bold"><span class="token punctuation">**</span><span class="token content">insights, slogans, or quotes</span><span class="token punctuation">**</span></span> from the page.
+   <span class="token list punctuation">-</span> These should be standout pieces that may be useful in presentations or summaries.
+
+<span class="token list punctuation">7.</span> <span class="token bold"><span class="token punctuation">**</span><span class="token content">Page Summary</span><span class="token punctuation">**</span></span>:
+   <span class="token list punctuation">-</span> Write a concise, plain-language summary of the overall content and communication of the page.
+
+<span class="token hr punctuation">---</span>
+
+<span class="token title important"><span class="token punctuation">###</span> Output Format</span>
+
+Return your response <span class="token bold"><span class="token punctuation">**</span><span class="token content">as a strict JSON object</span><span class="token punctuation">**</span></span> with the following fields:
+
+
+{
+  &quot;text_content&quot;: &quot;&quot;,
+  &quot;tables&quot;: &quot;&quot;,
+  &quot;charts_and_graphs&quot;: &quot;&quot;,
+  &quot;visual_elements&quot;: &quot;&quot;,
+  &quot;supermarket_aisles&quot;: &quot;&quot;,
+  &quot;key_insights&quot;: [
+    &quot;&quot;,
+    &quot;&quot;,
+    &quot;&quot;
+  ],
+  &quot;page_summary&quot;: &quot;&quot;
+}
+
+
+<span class="token list punctuation">-</span> All fields are required.
+
+<span class="token list punctuation">-</span> If a field has no content, return &quot;&quot; for strings or [] for lists.
+
+<span class="token list punctuation">-</span> Do not include markdown, extra formatting, or any explanation outside the JSON.
+
+<span class="token list punctuation">-</span> Only output valid JSON, with no trailing commas or extra text.
+
+<span class="token hr punctuation">---</span>
+
+<span class="token title important"><span class="token punctuation">###</span> Example (shortened)</span>
+
+
+{
+  &quot;text_content&quot;: &quot;USB Aromatherapy – Portable and practical...&quot;,
+  &quot;tables&quot;: &quot;| Rank | Idea | Action | ...&quot;,
+  &quot;charts_and_graphs&quot;: &quot;This chart compares fragrance appeal scores...&quot;,
+  &quot;visual_elements&quot;: &quot;One product mockup. Ad for new scent. Appears to be part of campaign.&quot;,
+  &quot;supermarket_aisles&quot;: &quot;&quot;,
+  &quot;key_insights&quot;: [
+    &quot;Great way to sync scent with mood.&quot;,
+    &quot;Concerns about smartphone dependency.&quot;
+  ],
+  &quot;page_summary&quot;: &quot;This page presents concept evaluations for aromatherapy devices...&quot;
+}</code></pre></div></span>
+<p>It is worth mentioning that even though we are using Structured Outputs, it was useful to detail how the expected output looks like and add a one-shot example of the expected result, doing this we obtained better results than if we had not specified the expected output structure.</p>
+<h3 id="we-already-have-the-interpretation-now-what-do-we-do"><strong>We already have the interpretation, now what do we do?</strong></h3>
+<p>Once we have achieved the goal of processing many visual elements and obtaining an interpretation in json format, it is time to assemble everything in plain text. This is relatively simple because we have to go through each key of the json and extract the value and then arrange everything in plain text.</p>
+<p>After that post processing, we use <a href="https://api.python.langchain.com/en/latest/embeddings/langchain_openai.embeddings.base.OpenAIEmbeddings.html"><span><code class="language-text">langchain_openai.OpenAIEmbeddings</code></span></a> with the <a href="https://platform.openai.com/docs/models/text-embedding-3-small"><span><code class="language-text">text-embedding-3-small</code></span></a> model together with some partitioning algorithm, for the case of PDFs we used <a href="https://api.python.langchain.com/en/latest/text_splitter/langchain_experimental.text_splitter.SemanticChunker.html"><span><code class="language-text">langchain_experimental.text_splitter.SemanticChunker</code></span></a>. It is very important to use a proper partitioning strategy to avoid future problems, the choice of a semantic partitioner is that it results in the document being partitioned without losing context. That is, it avoids that two or more consecutive partitions have cut text.</p>
+<p>After creating the embeddings, we have everything we need to save our embeddings in the vector store of preference, in our case we use <a href="https://github.com/pgvector/pgvector">PGVector</a>.</p>
+<h2 id="what-about-supermarket-aisles-photos-or-photos-uploaded-to-social-networks"><strong>What about supermarket aisles photos or photos uploaded to social networks?</strong></h2>
+<p>For this type of files, the approach was identical to the one used to process PDFs, except that the system prompt and post-processing changes. The biggest difference is that for this case we used the <a href="https://openai.com/index/introducing-o3-and-o4-mini/">OpenAI&#39;s <span><code class="language-text">o3</code></span></a> model which has a higher reasoning capacity, is multimodal and gives much more accurate results for this task given the visual complexity of the processed photos.</p>
+<h2 id="xlsx-file-processing"><strong>XLSX file processing</strong></h2>
+<p>The same strategy was used for these files with the particularity that in the excels there is plain text that can be extracted without the need to be processed by an LLM. Taking into account that in the case of posts in social networks, if the post had an image attached, it was processed with the same processor that was shown in the PDF section.</p>
+<p>The implementation of the excel processor changes a little but its core is shared with the PDFs and images. In this case, as mentioned in the section on photos, the OpenAI&#39;s <span><code class="language-text">o3</code></span> model was used for its reasoning capacity.</p>
+<p>For the embeddings, we opted not to partition but to consider each row of the excel as a <a href="https://python.langchain.com/api_reference/core/documents/langchain_core.documents.base.Document.html">Document</a>. At first we tried partitioning, but due to the structure of the data, information was lost between partitions because they were poorly done, so we chose not to partition it. The result was very good.</p>
+<h2 id="conclusions"><strong>Conclusions</strong></h2>
+<p>In recent years, data within companies have gained much relevance. Information that was previously little used, or even not used at all, now has a great potential to be exploited. Initially, data was understood as something structured or unstructured, but without the need for interpretation.</p>
+<p>Nowadays, with the great boom of LLMs and their potential, it opened the playing field to incorporate data that need intensive processing from the interpretative point of view, allowing to exploit even more the documentation of all kinds that a company or industry may have. It is well known that working with PDFs is not an easy task, there are many challenges that developers face, but with the advent of powerful models such as <span><code class="language-text">gpt-4.1</code></span> and <span><code class="language-text">o3</code></span>, which are multimodal, we can achieve products such as those discussed in this post and in <a href="https://blog.xmartlabs.com/blog/scaling-rag-system/">Scaling RAG Systems: Challenges, Bottlenecks, and Real Solutions.</a>.</p>
+<p>Given the difficulty of dealing with PDFs and images, having a processor for these files is a great help and allows us to expand the capabilities of new applications that focus on GenAI.</p>
+<h2 id="aknowledgements"><strong>Aknowledgements</strong></h2>
+<p>Special thanks to Nicolás Hernandez for his outstanding leadership throughout this project, and to Nicolás Fripp for being an exceptional teammate and collaborator.</p> 

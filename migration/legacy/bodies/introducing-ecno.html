@@ -1,0 +1,77 @@
+ <p>Have you ever been using <span><code class="language-text">UserDefaults</code></span> to store something that the user did in the past and then check whether or not he did it? Maybe you wanted to display certain tutorial or prompt the user to subscribe just oncE? (the capital E ;)</p>
+<p>If you feel familiar with those situations, you will discover a new friend, <a href="https://github.com/xmartlabs/Ecno">Ecno</a>.</p>
+<h2 id="introduction">Introduction</h2>
+<p><a href="https://github.com/xmartlabs/Ecno">Ecno</a> is an open source library inspired by <a href="https://github.com/jonfinerty/Once">Once</a>, built on top of <span><code class="language-text">UserDefaults</code></span> and written in pure <span><code class="language-text">Swift 3</code></span>. Its main purpose is to keep track of user-defined tasks allowing you to mark them as <strong>done</strong>, <strong>to-do</strong> and check for those states. Within this context, a task can be any conceptual action or activity that you want to track. The following list shows a few examples:</p>
+<ul>
+<li>Show the app tutorial.</li>
+<li>Update a token.</li>
+<li>Prompt the user to subscribe.</li>
+<li>Perform a sync operation.</li>
+</ul>
+<p>You will end up doing things like this:</p>
+<span><div class="code-highlight" data-language="swift"><pre class="language-swift" data-language="swift"><code class="language-swift"><span class="token keyword">if</span> <span class="token operator">!</span><span class="token class-name">Ecno</span><span class="token punctuation">.</span><span class="token function">beenDone</span><span class="token punctuation">(</span><span class="token string-literal"><span class="token string">"display subscribe prompt"</span></span><span class="token punctuation">,</span> scope<span class="token punctuation">:</span> <span class="token punctuation">.</span><span class="token function">since</span><span class="token punctuation">(</span><span class="token number">2</span><span class="token punctuation">.</span>days<span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+
+  <span class="token comment">// prompt the user to subscribe!</span>
+
+  <span class="token class-name">Ecno</span><span class="token punctuation">.</span><span class="token function">markDone</span><span class="token punctuation">(</span><span class="token string-literal"><span class="token string">"display subscribe prompt"</span></span><span class="token punctuation">)</span>
+
+<span class="token punctuation">}</span></code></pre></div></span>
+<h2 id="task">Task</h2>
+<p>As we already mentioned, a task can be any conceptual activity. Technically speaking, a task must be a type conforming to the <span><code class="language-text">Task</code></span> protocol:</p>
+<span><div class="code-highlight" data-language="swift"><pre class="language-swift" data-language="swift"><code class="language-swift"><span class="token keyword">protocol</span> <span class="token class-name">Task</span> <span class="token punctuation">{</span>
+
+    <span class="token keyword">var</span> tag<span class="token punctuation">:</span> <span class="token class-name">String</span> <span class="token punctuation">{</span> <span class="token keyword">get</span> <span class="token punctuation">}</span>
+
+<span class="token punctuation">}</span></code></pre></div></span>
+<p>As it will be the most common case, the <span><code class="language-text">String</code></span> type already conforms to it, so <span><code class="language-text">"Task example"</code></span> can be used as a task by default. Additionally, you can create your own task structures to fit your needs if you want.</p>
+<h2 id="scope">Scope</h2>
+<p><a href="https://github.com/xmartlabs/Ecno">Ecno</a> introduces the concept of <strong>scope</strong>. Scopes define certain time intervals within the entire application life cycle. Basically you can query if a task was <strong>done</strong> or set it as <strong>to-do</strong> within a specific scope. For instance:</p>
+<span><div class="code-highlight" data-language="swift"><pre class="language-swift" data-language="swift"><code class="language-swift"><span class="token keyword">if</span> <span class="token operator">!</span><span class="token class-name">Ecno</span><span class="token punctuation">.</span><span class="token function">beenDone</span><span class="token punctuation">(</span><span class="token string-literal"><span class="token string">"sync operation"</span></span><span class="token punctuation">,</span> scope<span class="token punctuation">:</span> <span class="token punctuation">.</span><span class="token function">since</span><span class="token punctuation">(</span><span class="token number">3</span><span class="token punctuation">.</span>hours<span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+
+  <span class="token comment">// perform sync operation</span>
+
+  <span class="token class-name">Ecno</span><span class="token punctuation">.</span><span class="token function">markDone</span><span class="token punctuation">(</span><span class="token string-literal"><span class="token string">"sync operation"</span></span><span class="token punctuation">)</span>
+<span class="token punctuation">}</span></code></pre></div></span>
+<blockquote>
+<p>meaning "If there's been at least 3 hours since the last sync operation, then perform another sync".</p>
+</blockquote>
+<p>If you want to show a tutorial every time your app gets updated:</p>
+<span><div class="code-highlight" data-language="swift"><pre class="language-swift" data-language="swift"><code class="language-swift"><span class="token keyword">if</span> <span class="token operator">!</span><span class="token class-name">Ecno</span><span class="token punctuation">.</span><span class="token function">beenDone</span><span class="token punctuation">(</span><span class="token string-literal"><span class="token string">"show tutorial"</span></span><span class="token punctuation">,</span> scope<span class="token punctuation">:</span> <span class="token punctuation">.</span>appVersion<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+
+  <span class="token comment">// show tutorial for this app version</span>
+
+  <span class="token class-name">Ecno</span><span class="token punctuation">.</span><span class="token function">markDone</span><span class="token punctuation">(</span><span class="token string-literal"><span class="token string">"show tutorial"</span></span><span class="token punctuation">)</span>
+<span class="token punctuation">}</span></code></pre></div></span>
+<p>On the other hand, setting a task as <strong>to-do</strong> within a specific scope will only have effect if that task was not already done in that scope. A <strong>to-do</strong> task is useful in those cases when a certain action triggers another one.</p>
+<p>For instance:</p>
+<span><div class="code-highlight" data-language="swift"><pre class="language-swift" data-language="swift"><code class="language-swift"><span></span>
+<span class="token comment">// user was searching for blue t-shirts</span>
+
+<span class="token keyword">let</span> info <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token string-literal"><span class="token string">"interestedIn"</span></span><span class="token punctuation">:</span> <span class="token string-literal"><span class="token string">"t-shirts"</span></span><span class="token punctuation">,</span> <span class="token string-literal"><span class="token string">"color"</span></span><span class="token punctuation">:</span> <span class="token string-literal"><span class="token string">"blue"</span></span><span class="token punctuation">]</span>
+<span class="token class-name">Ecno</span><span class="token punctuation">.</span><span class="token function">toDo</span><span class="token punctuation">(</span><span class="token string-literal"><span class="token string">"show banner"</span></span><span class="token punctuation">,</span> scope<span class="token punctuation">:</span> <span class="token punctuation">.</span>appSession<span class="token punctuation">,</span> info<span class="token punctuation">:</span> info<span class="token punctuation">)</span></code></pre></div></span>
+<p>and then, in another section of the app:</p>
+<span><div class="code-highlight" data-language="swift"><pre class="language-swift" data-language="swift"><code class="language-swift"><span class="token keyword">if</span> <span class="token class-name">Ecno</span><span class="token punctuation">.</span><span class="token function">needToDo</span><span class="token punctuation">(</span><span class="token string-literal"><span class="token string">"show banner"</span></span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  <span class="token keyword">let</span> info <span class="token operator">=</span> <span class="token class-name">Ecno</span><span class="token punctuation">.</span><span class="token function">infoForToDo</span><span class="token punctuation">(</span><span class="token string-literal"><span class="token string">"show banner"</span></span><span class="token punctuation">)</span> <span class="token comment">// ["interestedIn": "t-shirts", "color": "blue"]</span>
+
+  <span class="token comment">// show your gorgeous banner offering blue t-shirts</span>
+
+  <span class="token class-name">Ecno</span><span class="token punctuation">.</span><span class="token function">markDone</span><span class="token punctuation">(</span><span class="token string-literal"><span class="token string">"show banner"</span></span><span class="token punctuation">)</span>
+<span class="token punctuation">}</span></code></pre></div></span>
+<p>This last example shows how to set a <strong>to-do</strong> task (only valid since the current app session start time) in order to show a user-search-related banner.</p>
+<p>To see a full specification of the available scopes and their definitions please refer to <a href="https://github.com/xmartlabs/Ecno">Ecno's readme at GitHub</a>.</p>
+<h2 id="count-checker">Count checker</h2>
+<p>Another cool feature that <a href="https://github.com/xmartlabs/Ecno">Ecno</a> offers is the ability to query the number of times that a certain task was done. A good example could be to show a certain tutorial if you detect that the user drops when facing some specific screen more than 3 times:</p>
+<span><div class="code-highlight" data-language="swift"><pre class="language-swift" data-language="swift"><code class="language-swift"><span></span>
+<span class="token comment">// user drops in screen X</span>
+
+<span class="token class-name">Ecno</span><span class="token punctuation">.</span><span class="token function">markDone</span><span class="token punctuation">(</span><span class="token string-literal"><span class="token string">"dropped user at screen X"</span></span><span class="token punctuation">)</span></code></pre></div></span>
+<p>and then, when presenting screen X</p>
+<span><div class="code-highlight" data-language="swift"><pre class="language-swift" data-language="swift"><code class="language-swift"><span class="token keyword">if</span> <span class="token class-name">Ecno</span><span class="token punctuation">.</span><span class="token function">beenDone</span><span class="token punctuation">(</span><span class="token string-literal"><span class="token string">"dropped user at screen X"</span></span><span class="token punctuation">,</span> numberOfTimes<span class="token punctuation">:</span> <span class="token punctuation">.</span><span class="token function">moreThan</span><span class="token punctuation">(</span><span class="token number">3</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+
+  <span class="token comment">// show tutorial</span>
+  <span class="token comment">// either the user doesn't understand what he's doing</span>
+  <span class="token comment">// or our UX sucks :)</span>
+
+<span class="token punctuation">}</span></code></pre></div></span>
+<h2 id="where-to-go-from-here">Where to go from here</h2>
+<p>I hope it has served as a good introduction to the <a href="https://github.com/xmartlabs/Ecno">Ecno</a> library. On GitHub you will find an installation and usage guide to get started. You probably have been doing something similar (using <span><code class="language-text">UserDefaults</code></span>) to support the scenarios we've discussed here, so hopefully it will help a lot of developers out there. Feel free to <a href="https://github.com/xmartlabs/Ecno">contribute</a> to this small and powerful library.</p> 

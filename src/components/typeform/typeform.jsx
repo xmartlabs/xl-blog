@@ -1,3 +1,5 @@
+'use client';
+
 import React from 'react';
 
 import { CloseIcon } from '../icons';
@@ -20,7 +22,7 @@ const TypeForm = ({ onClick = () => {} }) => {
         <CloseIcon className="fill-neutral-100 h-[20px] [@media(max-height:_768px)]:fill-blue-one" />
       </button>
       <iframe
-        src={import.meta.env.PUBLIC_FORM_URL}
+        src={process.env.NEXT_PUBLIC_FORM_URL}
         title="typeform"
         frameBorder="0"
         className="

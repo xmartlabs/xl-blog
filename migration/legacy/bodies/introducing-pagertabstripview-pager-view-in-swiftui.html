@@ -1,0 +1,91 @@
+ <p style="text-align:left;width:100%"><img src="/images/pager-swiftui/Blog-skinny.png" alt="Project banner"/></p>
+<p>We&#39;re incredibly thrilled to announce <a href="https://github.com/xmartlabs/PagerTabStripView">PagerTabStripView</a>, the most powerful pager view entirely written in SwiftUI.</p>
+<p>Creating a production-ready pager view could take several hours, even days, for an engineering team. Apple recently introduced a pager version on top of its native TabView, trying to address the growing demand for pager views, but it lacks flexibility. It is pretty much the TabView with swipe gestures. Its customization level is so limited that it ends up not working in most cases.</p>
+<p>What if I told you that with the PagerTabStripView, you can create those pagers in a matter of minutes and not days. This exactly was our vision when we started to build this flexible yet powerful library.</p>
+<p>Let&#39;s move on and see how you can build a sophisticated pager view in a matter of seconds, a code snippet is worth more than a thousand words 😂.</p>
+<img align="right" width="30%" src="/images/pager-swiftui/LogOutExample.gif"/>
+<span><div class="code-highlight" data-language="swift"><pre class="language-swift" data-language="swift"><code class="language-swift"><span class="token keyword">struct</span> <span class="token class-name">MyPagerView</span><span class="token punctuation">:</span> <span class="token class-name">View</span> <span class="token punctuation">{</span>
+	<span class="token operator">...</span>
+	<span class="token operator">..</span>
+	<span class="token punctuation">.</span>
+	<span class="token keyword">var</span> body<span class="token punctuation">:</span> <span class="token keyword">some</span> <span class="token class-name">View</span> <span class="token punctuation">{</span>
+        <span class="token class-name">PagerTabStripView</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            <span class="token class-name">MyHomeView</span><span class="token punctuation">(</span>model<span class="token punctuation">:</span> $homeModel<span class="token punctuation">)</span><span class="token punctuation">.</span>pagerTabItem <span class="token punctuation">{</span>
+                <span class="token class-name">MyNavBarItem</span><span class="token punctuation">(</span>title<span class="token punctuation">:</span> <span class="token string-literal"><span class="token string">&quot;Home&quot;</span></span><span class="token punctuation">,</span> imageName<span class="token punctuation">:</span> <span class="token string-literal"><span class="token string">&quot;home&quot;</span></span><span class="token punctuation">)</span>
+            <span class="token punctuation">}</span><span class="token punctuation">.</span>onPageAppear <span class="token punctuation">{</span>
+                homeModel<span class="token punctuation">.</span><span class="token function">reloadData</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+            <span class="token punctuation">}</span>
+
+            <span class="token class-name">MyTrendingView</span><span class="token punctuation">(</span>model<span class="token punctuation">:</span> $trendingModel<span class="token punctuation">)</span><span class="token punctuation">.</span>pagerTabItem <span class="token punctuation">{</span>
+                <span class="token class-name">MyNavBarItem</span><span class="token punctuation">(</span>title<span class="token punctuation">:</span> <span class="token string-literal"><span class="token string">&quot;Trending&quot;</span></span><span class="token punctuation">,</span> imageName<span class="token punctuation">:</span> <span class="token string-literal"><span class="token string">&quot;trending&quot;</span></span><span class="token punctuation">)</span>
+            <span class="token punctuation">}</span>
+            <span class="token punctuation">.</span>onPageAppear <span class="token punctuation">{</span>
+                trendingModel<span class="token punctuation">.</span><span class="token function">reloadData</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+            <span class="token punctuation">}</span>
+            <span class="token keyword">if</span> user<span class="token punctuation">.</span>isLoggedIn <span class="token punctuation">{</span>
+                <span class="token class-name">MyProfileView</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span>pagerTabItem <span class="token punctuation">{</span>
+                    <span class="token class-name">MyNavBarItem</span><span class="token punctuation">(</span>title<span class="token punctuation">:</span> <span class="token string-literal"><span class="token string">&quot;Account&quot;</span></span><span class="token punctuation">,</span> imageName<span class="token punctuation">:</span> <span class="token string-literal"><span class="token string">&quot;account&quot;</span></span><span class="token punctuation">)</span>
+                <span class="token punctuation">}</span>
+            <span class="token punctuation">}</span>
+        <span class="token punctuation">}</span>
+        <span class="token punctuation">.</span><span class="token function">pagerTabStripViewStyle</span><span class="token punctuation">(</span><span class="token class-name">PagerTabViewStyle</span><span class="token punctuation">(</span>tabItemSpacing<span class="token punctuation">:</span> <span class="token number">0</span><span class="token punctuation">,</span>
+                                                  tabItemHeight<span class="token punctuation">:</span> <span class="token number">70</span><span class="token punctuation">,</span>
+                                                  indicatorBarHeight<span class="token punctuation">:</span> <span class="token number">7</span><span class="token punctuation">,</span>
+                                                  indicatorBarColor<span class="token punctuation">:</span> selectedColor<span class="token punctuation">)</span><span class="token punctuation">)</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span></code></pre></div></span>
+<h1 id="why-we-built-pagertabstripview">Why we built PagerTabStripView?</h1>
+<p>Nowadays, almost every popular iOS app contains a pager view, the benefits are clear. Often, the app information architecture works best with a pager since it&#39;s simple to switch among these &quot;equally relevant&quot; information. Apps like YouTube, Instagram, Spotify, and Twitter use pager views to bring better UX, but none of these pagers can be created using the native TabView. It&#39;s an unfortunate thing, but it&#39;s true.</p>
+<p>On top of that, we are the creators of XLPagerTabStrip, the most popular pager view in UIKit with almost 7k stars in GitHub. We also noticed the Apple community is constantly looking for a powerful SwiftUI pager view that leverages SwiftUI capabilities such as declarative syntax and the state-driven way to update the UI. Let&#39;s be honest, it&#39;s hard to find reusable SwiftUI components apart from these developed by Apple, so we embraced the challenge to raise the state of community components, and PagerTabStripView is our first step.</p>
+<h1 id="what-does-in-pure-swiftui-mean">What does &quot;In Pure SwiftUI&quot; mean?</h1>
+<p>From the beginning, we designed the library to provide the same development experience as using a native Apple component such as TabView. So if you&#39;re familiar with TabView, PagerTabStripView will seem super straightforward to use; just add the child views and provide the pagerTabItem view for each one.</p>
+<p><strong>PagerTabStripView defines the UI using the elegant SwiftUI declarative approach.</strong> From day one, we banned collections of views to updates the UI.</p>
+<span><div class="code-highlight" data-language="swift"><pre class="language-swift" data-language="swift"><code class="language-swift"><span class="token class-name">PagerTabStripView</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token class-name">MyFirstView</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+        <span class="token punctuation">.</span>pagerTabItem <span class="token punctuation">{</span>
+            <span class="token class-name">TitleNavBarItem</span><span class="token punctuation">(</span>title<span class="token punctuation">:</span> <span class="token string-literal"><span class="token string">&quot;Tab 1&quot;</span></span><span class="token punctuation">)</span>
+        <span class="token punctuation">}</span>
+    <span class="token class-name">MySecondView</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+        <span class="token punctuation">.</span>pagerTabItem <span class="token punctuation">{</span>
+            <span class="token class-name">TitleNavBarItem</span><span class="token punctuation">(</span>title<span class="token punctuation">:</span> <span class="token string-literal"><span class="token string">&quot;Tab 2&quot;</span></span><span class="token punctuation">)</span>
+        <span class="token punctuation">}</span>
+    <span class="token keyword">if</span> <span class="token class-name">User</span><span class="token punctuation">.</span>isLoggedIn <span class="token punctuation">{</span>
+        <span class="token class-name">MyProfileView</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+            <span class="token punctuation">.</span>pagerTabItem <span class="token punctuation">{</span>
+                <span class="token class-name">TitleNavBarItem</span><span class="token punctuation">(</span>title<span class="token punctuation">:</span> <span class="token string-literal"><span class="token string">&quot;Profile&quot;</span></span><span class="token punctuation">)</span>
+            <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span></code></pre></div></span>
+<p><strong>We never interface with UIKit, which means we don&#39;t import UIKit anywhere.</strong> No usage of <span><code class="language-text">UIViewRepresentable</code></span> and <span><code class="language-text">UIViewControllerRepresentable</code></span> protocols.</p>
+<p><strong>PagerTabStripView interface looks like native component SwiftUI interfaces.</strong> It uses pretty much the same syntax and approach to customize the pager view as native TabView.</p>
+<span><div class="code-highlight" data-language="swift"><pre class="language-swift" data-language="swift"><code class="language-swift"><span class="token class-name">PagerTabStripView</span><span class="token punctuation">(</span>selection<span class="token punctuation">:</span> $selection<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token class-name">ForEach</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token operator">...</span><span class="token number">10</span><span class="token punctuation">,</span> id<span class="token punctuation">:</span> <span class="token punctuation">\</span><span class="token punctuation">.</span><span class="token keyword">self</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+        <span class="token class-name">MyPagerChildView</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+            <span class="token punctuation">.</span>pagerTabItem <span class="token punctuation">{</span>
+                <span class="token class-name">TabInfoView</span><span class="token punctuation">(</span>title<span class="token punctuation">:</span> <span class="token string-literal"><span class="token string">&quot;Page Info Title </span><span class="token interpolation-punctuation punctuation">\(</span><span class="token interpolation"><span class="token short-argument">$0</span></span><span class="token interpolation-punctuation punctuation">)</span><span class="token string">&quot;</span></span><span class="token punctuation">)</span>
+            <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span></code></pre></div></span>
+<p><strong>State variables and conditional blocks are used to declaratively update the shown pages of the pager view.</strong> Of course, you can also use SwiftUI <span><code class="language-text">ForEach</code></span> (as the example above shown) to provide child views on demand from an underlying collection if you wish so.</p>
+<p><strong>Associated views to select a page by tap gesture are declaratively defined using a View Modifier on each child page view.</strong></p>
+<span><div class="code-highlight" data-language="swift"><pre class="language-swift" data-language="swift"><code class="language-swift"><span class="token class-name">PagerTabStripView</span><span class="token punctuation">(</span>selection<span class="token punctuation">:</span> $selection<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token class-name">ForEach</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token operator">...</span><span class="token number">10</span><span class="token punctuation">,</span> id<span class="token punctuation">:</span> <span class="token punctuation">\</span><span class="token punctuation">.</span><span class="token keyword">self</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+        <span class="token class-name">MyPagerChildView</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+            <span class="token punctuation">.</span>pagerTabItem <span class="token punctuation">{</span>
+                <span class="token class-name">VStack</span> <span class="token punctuation">{</span>
+                    <span class="token class-name">Text</span><span class="token punctuation">(</span><span class="token string-literal"><span class="token string">&quot;Page </span><span class="token interpolation-punctuation punctuation">\(</span><span class="token interpolation"><span class="token short-argument">$0</span></span><span class="token interpolation-punctuation punctuation">)</span><span class="token string">&quot;</span></span><span class="token punctuation">)</span>
+                    <span class="token punctuation">.</span><span class="token function">foregroundColor</span><span class="token punctuation">(</span>theme<span class="token punctuation">.</span>textColor<span class="token punctuation">)</span>
+                    <span class="token punctuation">.</span><span class="token function">font</span><span class="token punctuation">(</span><span class="token punctuation">.</span>subheadline<span class="token punctuation">)</span>
+                <span class="token punctuation">}</span>
+                <span class="token punctuation">.</span><span class="token function">frame</span><span class="token punctuation">(</span>maxWidth<span class="token punctuation">:</span> <span class="token punctuation">.</span>infinity<span class="token punctuation">,</span> maxHeight<span class="token punctuation">:</span> <span class="token punctuation">.</span>infinity<span class="token punctuation">)</span>
+                <span class="token punctuation">.</span><span class="token function">background</span><span class="token punctuation">(</span><span class="token class-name">Color</span><span class="token punctuation">.</span>white<span class="token punctuation">)</span>
+            <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span></code></pre></div></span>
+<p>And many more you will figure out down the road 😜!</p>
+<h1 id="and-were-planning-much-more">And we&#39;re planning much more...</h1>
+<p>We believe that PagerTabStripView&#39;s first release is super capable, but we plan to further enhance it. We have plans to integrate every XLPagerTabStrip <a href="https://github.com/xmartlabs/XLPagerTabStrip#pager-types">style</a>, among other functionalities.</p>
+<p>As this post is just intended to announce the library, if you&#39;re interested in using the PagerTabStripView, I suggest you look at its <a href="https://github.com/xmartlabs/PagerTabStripView">GitHub repository readme</a>. You can also run the example project, contained in the PagerTabStripView workspace, which showcases different pager views.</p>
+<table><tr><th><img src="/images/pager-swiftui/twitterStyleExample.gif" width="90%"/></th><th><img src="/images/pager-swiftui/LogOutExample.gif" width="90%"/></th><th><img src="/images/pager-swiftui/instagramStyleExample.gif" width="90%"/></th></tr></table>
+<p>If you liked the library, want to contribute to the project, or need some help using it, please drop us a line on <a href="https://twitter.com/xmartlabs">twitter</a>, comment down below, or open an issue or a pull request.</p>
+<p>That&#39;s all, folks! Hope the library saves you the day sometime! See you in the next post!</p> 

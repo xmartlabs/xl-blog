@@ -1,0 +1,41 @@
+ <p>Do you often want to debug or monitor external service responses in you app, recognize latency and work with the data you receive back? Same happens to us!
+That’s why we created <a href="https://github.com/xmartlabs/Xniffer">Xniffer</a> , a non intrusive framework to intercept outgoing requests and their responses. Developed in Swift for iOS platforms, inspired by <a href="https://github.com/netguru/ResponseDetective">Response detective</a>.</p>
+<h2 id="why-use-xniffer">Why use Xniffer?</h2>
+<p>Xniffer not only returns the responses' result, it also has a UI component that shows them to you in real time, feature which other libraries don't have. It displays the latency of HTTP messages, and you can set up your own delegate to do whatever you want with the returned data.
+Wanna start to use it right away? Just setup some configurations, choose how you want to see the requests and that's it!</p>
+<img src="https://raw.githubusercontent.com/xmartlabs/Xniffer/master/Example/curl.gif" alt="">
+<h2 id="how-to-use-it">How to use it?</h2>
+<p>To start working with Xniffer, it needs to be added as a middleware between your URLSession and the Internet. After the initial setup, a window will be displayed on top of the UI that will show all the current requests and their latency.</p>
+<h4 id="basic-usage">Basic usage</h4>
+<span><div class="code-highlight" data-language="swift"><pre class="language-swift" data-language="swift"><code class="language-swift"><span class="token keyword">let</span> configuration <span class="token operator">=</span> <span class="token class-name">URLSessionConfiguration</span><span class="token punctuation">.</span><span class="token keyword">default</span>
+<span class="token comment">// The setup method adds the Xniffer's custom protocol as a middleware.</span>
+<span class="token class-name">Xniffer</span><span class="token punctuation">.</span><span class="token function">setup</span><span class="token punctuation">(</span>with<span class="token punctuation">:</span> configuration<span class="token punctuation">)</span>
+<span class="token keyword">let</span> session <span class="token operator">=</span> <span class="token class-name">URLSession</span><span class="token punctuation">(</span>configuration<span class="token punctuation">:</span> configuration<span class="token punctuation">)</span></code></pre></div></span>
+<p>Now we can start using this session instance for our requests!</p>
+<h3 id="using-alamofire">Using Alamofire</h3>
+<p>If you're using Alamofire you can start using the Xniffer by initializing your Manager with the following:</p>
+<span><div class="code-highlight" data-language="swift"><pre class="language-swift" data-language="swift"><code class="language-swift"><span class="token keyword">let</span> configuration <span class="token operator">=</span> <span class="token class-name">URLSessionConfiguration</span><span class="token punctuation">.</span><span class="token keyword">default</span>
+configuration<span class="token punctuation">.</span>httpAdditionalHeaders <span class="token operator">=</span> <span class="token class-name">SessionManager</span><span class="token punctuation">.</span>defaultHTTPHeaders
+<span class="token class-name">Xniffer</span><span class="token punctuation">.</span><span class="token function">setup</span><span class="token punctuation">(</span>with<span class="token punctuation">:</span> configuration<span class="token punctuation">)</span>
+<span class="token keyword">let</span> sessionManager <span class="token operator">=</span> <span class="token class-name">SessionManager</span><span class="token punctuation">(</span>configuration<span class="token punctuation">:</span> configuration<span class="token punctuation">)</span>
+<span class="token keyword">let</span> manager <span class="token operator">=</span> <span class="token class-name">NetworkManager</span><span class="token punctuation">(</span>manager<span class="token punctuation">:</span> sessionManager <span class="token punctuation">)</span></code></pre></div></span>
+<p>Now you're ready to go! You can also change the way you see the responses (by default you will see them displayed in a window on top of the status bar).</p>
+<h3 id="ui-modes">UI Modes</h3>
+<p>The Xniffer currently supports three modes, <span><code class="language-text">.window</code></span>, <span><code class="language-text">.console</code></span> and <span><code class="language-text">.custom</code></span>. The default value is <span><code class="language-text">.window</code></span> but this can be changed easily on the setup: <span><code class="language-text">Xniffer.setup(with configuration: URLSessionConfiguration, mode: XnifferUI = .window)</code></span>. Each one uses a different implementation of the <span><code class="language-text">XnifferDelegate</code></span>.</p>
+<ul>
+<li><span><code class="language-text">.window</code></span>: Displays a window on top of the status bar which can be expanded to display a list of the profiled requests. This is the default value.</li>
+<li><span><code class="language-text">.console</code></span>: Prints the results on the Xcode console.</li>
+<li><span><code class="language-text">.custom</code></span>: This one receives a closure of type <span><code class="language-text">() -> ()</code></span> so you can use your own implementation of the <span><code class="language-text">XnifferDelegate</code></span>.</li>
+</ul>
+<p>To see these three different ways of displaying the results we invite you to visit our <a href="https://github.com/xmartlabs/Xniffer">Github project</a>.</p>
+<h3 id="installation">Installation</h3>
+<h5 id="cocoapods">CocoaPods</h5>
+<p>CocoaPods is a dependency manager for Cocoa projects.</p>
+<p>To install Xniffer, simply add the following line to your Podfile:</p>
+<span><div class="code-highlight" data-language="ruby"><pre class="language-ruby" data-language="ruby"><code class="language-ruby">pod <span class="token string-literal"><span class="token string">'Xniffer'</span></span><span class="token punctuation">,</span> <span class="token string-literal"><span class="token string">'~> 1.0'</span></span></code></pre></div></span>
+<h5 id="carthage">Carthage</h5>
+<p>Carthage is a simple, decentralized dependency manager for Cocoa.</p>
+<p>To install Xniffer, simply add the following line to your Cartfile:</p>
+<span><div class="code-highlight" data-language="text"><pre class="language-text" data-language="text"><code class="language-text">github "xmartlabs/Xniffer" ~> 1.0</code></pre></div></span>
+<h2 id="where-to-go-from-here">Where to go from here</h2>
+<p>We hope this works as a good introduction to this open source library. On GitHub you'll find everything you need to get started. If you want to collaborate, feel free to  <a href="https://github.com/xmartlabs/Xniffer">contribute</a> with this library.</p> 

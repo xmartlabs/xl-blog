@@ -1,0 +1,147 @@
+ <p>In this post I'll walk you through the Continuous Integration and Deployment set up used by Xmartlabs iOS team. We will configure <a href="https://fastlane.tools/">Fastlane</a> and <a href="https://www.bitrise.io/">Bitrise</a> to automate the app release process to <a href="https://developer.apple.com/testflight/">TestFlight</a>.</p>
+<p>Why Continuous Integration and Deploy? It is a well-known technique, widely adopted by agile engineering teams. It's main benefits are: a) Reduce waste. You can free up time by automating repetitive and time-consuming tasks, b) Improve build quality. We can use automated tests to detect defects and regressions earlier in the development process, or use a linter to check compliance with coding standards c) Be more agile and boost team morale in the process (this is the killer benefit if you ask me). The team is prone to release more often because it's cheaper and less cumbersome, you can get product feedback earlier so you reduce risks and can adjust to deliver more value, users and other stakeholders are happier, team motivation improves.. you get the idea.</p>
+<h3 id="whats-fastlane">What's Fastlane</h3>
+<p><a href="https://https://fastlane.tools/">Fastlane</a> is an open-source platform that both simplifies and speeds up the development process by automating development workflows. It also has Continuous Integration support through different CI platforms including Bitrise, CircleCI, Jenkins, and TravisCI.</p>
+<h3 id="whats-bitrise">What's Bitrise</h3>
+<p><a href="https://www.bitrise.io/">Bitrise</a> is a Continuous Integration and Delivery (CI/CD) Platform as a Service (PaaS), focused in mobile app development.</p>
+<blockquote>
+<p>This blogpost is not intended to explain the products or underlaying concepts in detail. We will focus on the configuration and set up process instead. If you want to know more about each tool, we recommend their websites and official documentation.</p>
+</blockquote>
+<h3 id="how-do-we-optimize-our-integration-and-release-process">How do we optimize our integration and release process?</h3>
+<p>In the following sections we will configure a development workflow that goes like this:</p>
+<ul>
+<li>A new PR is opened.</li>
+<li>The repo is cloned and build steps are run in the CI server. A new release based on the latest PR is built and signed. In our case we also fetch external dependencies from Cocoapods.</li>
+<li>The test suite is executed against the new build.</li>
+<li>Optionally, the new build is released to beta testers through TestFlight.</li>
+<li>We get notified (and can check the status in our Git management tool of choice) at every step of the process.</li>
+</ul>
+<h2 id="how-to-set-up-fastlane-in-an-ios-project">How to set up fastlane in an iOS project</h2>
+<blockquote>
+<p>We'll assume you have already installed Fastlane on your computer. If not, you can follow the <a href="https://docs.fastlane.tools/getting-started/ios/setup/">Fastlane documentation</a> and then come back to this section.</p>
+</blockquote>
+<p>From your terminal, navigate to your iOS project's directory and run:</p>
+<span><div class="code-highlight" data-language="bash"><pre class="language-bash" data-language="bash"><code class="language-bash">fastlane init</code></pre></div></span>
+<p>This will automatically generate several Fastlane config files, with the most important being <span><code class="language-text">Fastfile</code></span>, which is the file that stores the  configuration where you'll see different lanes. Each lane is there to automate a different task, such as screenshots, code signing, or pushing new releases.</p>
+<p>We can add as many lanes as we need. Each lane automates a development process and can be run through the command <span><code class="language-text">fastlane &#x3C;lane_name></code></span>.
+So, let's create a test lane in order to run unit tests by running <span><code class="language-text">fastlane test</code></span>.</p>
+<span><div class="code-highlight" data-language="ruby"><pre class="language-ruby" data-language="ruby"><code class="language-ruby">desc <span class="token string-literal"><span class="token string">"Runs all the tests"</span></span>
+
+lane <span class="token symbol">:test</span> <span class="token keyword">do</span>
+  xctest<span class="token punctuation">(</span>
+    <span class="token symbol">clean</span><span class="token operator">:</span> <span class="token boolean">false</span><span class="token punctuation">,</span>
+    <span class="token symbol">code_coverage</span><span class="token operator">:</span> <span class="token boolean">true</span><span class="token punctuation">,</span>
+    <span class="token symbol">scheme</span><span class="token operator">:</span> <span class="token string-literal"><span class="token string">"xmartlabs"</span></span><span class="token punctuation">,</span>
+    <span class="token symbol">workspace</span><span class="token operator">:</span> <span class="token string-literal"><span class="token string">"xmartlabs.xcworkspace"</span></span><span class="token punctuation">,</span>
+    <span class="token symbol">destination</span><span class="token operator">:</span> <span class="token string-literal"><span class="token string">"name=iPhone 11,OS=13.4"</span></span>
+  <span class="token punctuation">)</span>
+<span class="token keyword">end</span></code></pre></div></span>
+<blockquote>
+<p>xctest is a built-in fastlane action available to everyone that uses Xcode command line tools and runs Xcode tests.</p>
+</blockquote>
+<p>So now we are able to run our iOS project tests by running <span><code class="language-text">fastlane tests</code></span>.</p>
+<p>Now our next goal is to automatically trigger this lane whenever any developer opens a pull request in our git remote repository. To accomplish so we are going to use Bitrise which allows us to do continuous integration and continuous delivery as a service.</p>
+<p>In short, Bitrise allows the developer to define workflows, a sequence of tasks that run one at a time until one fails or all completes. Bitrise also provides triggers that execute a workflow whenever a git tag, pull request or push is performed on a remote git repository.</p>
+<img width="100%" src="/images/ios-fastlane-ci/triggers.png">
+<p>We still need to define our <span><code class="language-text">pr</code></span> workflow that should run <span><code class="language-text">fastlane tests</code></span>. Bitrise provides the computer hardware with basic configuration and setup like Xcode and CocoaPods and some other tools. We only need to define the sequence of tasks that belong to the workflow.</p>
+<p>The first step is to clone the repository for which Bitrise already provides a task named <span><code class="language-text">Git Clone Repository</code></span>.</p>
+<p>We also have to install any needed tool not provided by default in <a href="https://github.com/bitrise-io/bitrise.io/blob/master/system_reports/osx-xcode-11.3.x.log">Bitrise environment stack</a>. It could be a missing functionality or we might need another version of a particular tool.
+Even though Fastlane is part of the Bitrise stack, I'm using a newer version of it so I'm gonna install it. We will also update the cocoapods repo. We can do so by adding a new step to the workflow that runs a script named 'Do anything with Script step'.</p>
+<p>Below you can see the content of the script.</p>
+<span><div class="code-highlight" data-language="bash"><pre class="language-bash" data-language="bash"><code class="language-bash"><span class="token shebang important">#!/usr/bin/env bash</span>
+<span class="token comment"># fail if any commands fails</span>
+<span class="token builtin class-name">set</span> <span class="token parameter variable">-e</span>
+<span class="token comment"># debug log</span>
+<span class="token builtin class-name">set</span> <span class="token parameter variable">-x</span>
+
+<span class="token comment"># write your script here</span>
+gem update cocoapods
+pod repo update
+
+<span class="token builtin class-name">set</span> <span class="token parameter variable">-ex</span>
+gem <span class="token function">install</span> fastlane <span class="token parameter variable">--version</span> <span class="token number">2.142</span>.0 --no-document</code></pre></div></span>
+<p>After this, we need to run our Fastlane lane, Bitrise also provides a Workflow task to accomplish this named <span><code class="language-text">fastlane</code></span> where we only need to specify the name of our already defined lane (which is <span><code class="language-text">test</code></span>).</p>
+<p>Here is the entire workflow already created in Bitrise.</p>
+<img width="100%" src="/images/ios-fastlane-ci/workflow.png">
+<p>At this point, the <span><code class="language-text">test</code></span> lane will be executed whenever a pull request is created/updated. Cool right? Bitrise integrates with GitHub/Bitbucket and many other git solutions to indicate if everything goes well or not.</p>
+<p>Another automated task we strongly use is the release of new versions. Basically we send a new build to TestFlight whenever a new tag (named <span><code class="language-text">&#x3C;version_*></code></span>) is created in . As we said Bitrise provides us with push, pull request and tag triggers, this time we are going to use a tag trigger.</p>
+<p>Let's create the Bitrise <span><code class="language-text">testflight</code></span> workflow first.</p>
+<img width="100%" src="/images/ios-fastlane-ci/addNewWorkflow.gif">
+<p>The most important task to set up the Bitrise workflow is running the <span><code class="language-text">release_appstore</code></span> lane, all the rest are tasks dedicated to cloning the repo, and setting up the environment (same as <span><code class="language-text">pr</code></span> workflow).</p>
+<p>Now let's see how to implement the fastlane <span><code class="language-text">release_appstore</code></span> lane...</p>
+<span><div class="code-highlight" data-language="ruby"><pre class="language-ruby" data-language="ruby"><code class="language-ruby">lane <span class="token symbol">:release_appstore</span>  <span class="token keyword">do</span>
+
+  build_type <span class="token operator">=</span> <span class="token string-literal"><span class="token string">"AppStore"</span></span>
+  build_app_id <span class="token operator">=</span> <span class="token constant">ENV</span><span class="token punctuation">[</span><span class="token string-literal"><span class="token string">"APP_BUNDLE_ID"</span></span><span class="token punctuation">]</span>
+  build_sign_team_id <span class="token operator">=</span> <span class="token constant">ENV</span><span class="token punctuation">[</span><span class="token string-literal"><span class="token string">"APP_SIGN_TEAM_ID"</span></span><span class="token punctuation">]</span>
+  build_sign_profile_name <span class="token operator">=</span> <span class="token constant">ENV</span><span class="token punctuation">[</span><span class="token string-literal"><span class="token string">"APP_APPSTORE_SIGN_PROFILE_NAME"</span></span><span class="token punctuation">]</span>
+  build_sign_certificate_name <span class="token operator">=</span> <span class="token constant">ENV</span><span class="token punctuation">[</span><span class="token string-literal"><span class="token string">"APP_APPSTORE_SIGN_CERTIFICATE_NAME"</span></span><span class="token punctuation">]</span>
+
+  build_folder <span class="token operator">=</span> <span class="token builtin">Time</span><span class="token punctuation">.</span>now<span class="token punctuation">.</span>strftime<span class="token punctuation">(</span><span class="token string-literal"><span class="token string">"%Y.%m.%d-%H.%M.%S+"</span></span><span class="token punctuation">)</span> <span class="token operator">+</span> Random<span class="token punctuation">.</span>rand<span class="token punctuation">(</span><span class="token number">20</span><span class="token punctuation">)</span><span class="token punctuation">.</span>to_s
+  build_derived_data_path <span class="token operator">=</span> <span class="token string-literal"><span class="token string">"./fastlane/builds/</span><span class="token interpolation"><span class="token delimiter punctuation">#{</span><span class="token content">build_type</span><span class="token delimiter punctuation">}</span></span><span class="token string">/</span><span class="token interpolation"><span class="token delimiter punctuation">#{</span><span class="token content">build_folder</span><span class="token delimiter punctuation">}</span></span><span class="token string">/derived_data/"</span></span>
+  build_output_path <span class="token operator">=</span> <span class="token string-literal"><span class="token string">"./fastlane/builds/</span><span class="token interpolation"><span class="token delimiter punctuation">#{</span><span class="token content">build_type</span><span class="token delimiter punctuation">}</span></span><span class="token string">/</span><span class="token interpolation"><span class="token delimiter punctuation">#{</span><span class="token content">build_folder</span><span class="token delimiter punctuation">}</span></span><span class="token string">/artifacts/"</span></span>
+  build_output_name <span class="token operator">=</span> <span class="token string-literal"><span class="token string">"xmartlabs_"</span></span> <span class="token operator">+</span> build_type
+
+  <span class="token comment"># `automatic_code_signing` configures Xcode's Codesigning options.</span>
+  automatic_code_signing<span class="token punctuation">(</span>
+    <span class="token symbol">use_automatic_signing</span><span class="token operator">:</span> <span class="token boolean">false</span><span class="token punctuation">,</span>
+    <span class="token symbol">path</span><span class="token operator">:</span> <span class="token string-literal"><span class="token string">"xmartlabs.xcodeproj"</span></span><span class="token punctuation">,</span>
+    <span class="token symbol">team_id</span><span class="token operator">:</span> build_sign_team_id<span class="token punctuation">,</span>
+    <span class="token symbol">profile_name</span><span class="token operator">:</span> build_sign_profile_name<span class="token punctuation">,</span>
+    <span class="token symbol">code_sign_identity</span><span class="token operator">:</span> build_sign_certificate_name<span class="token punctuation">,</span>
+    <span class="token symbol">targets</span><span class="token operator">:</span> <span class="token punctuation">[</span><span class="token string-literal"><span class="token string">"xmartlabs"</span></span><span class="token punctuation">]</span>
+  <span class="token punctuation">)</span>
+
+  <span class="token comment">#`cocoapods` runs pod install for the project.</span>
+  cocoapods<span class="token punctuation">(</span>
+    <span class="token symbol">try_repo_update_on_error</span><span class="token operator">:</span> <span class="token boolean">true</span>
+  <span class="token punctuation">)</span>
+
+  <span class="token comment">#`build_ios_app` Easily build and sign your iOS app.</span>
+  build_ios_app<span class="token punctuation">(</span>
+    <span class="token symbol">workspace</span><span class="token operator">:</span> <span class="token string-literal"><span class="token string">"xmartlabs.xcworkspace"</span></span><span class="token punctuation">,</span>
+    <span class="token symbol">configuration</span><span class="token operator">:</span> <span class="token string-literal"><span class="token string">"Release"</span></span><span class="token punctuation">,</span>
+    <span class="token symbol">scheme</span><span class="token operator">:</span> <span class="token string-literal"><span class="token string">"xmartlabs"</span></span><span class="token punctuation">,</span>
+    <span class="token symbol">clean</span><span class="token operator">:</span> <span class="token boolean">true</span><span class="token punctuation">,</span>
+    <span class="token symbol">output_name</span><span class="token operator">:</span> build_output_name<span class="token punctuation">,</span>
+    <span class="token symbol">output_directory</span><span class="token operator">:</span> build_output_path<span class="token punctuation">,</span>
+    <span class="token symbol">derived_data_path</span><span class="token operator">:</span> build_derived_data_path<span class="token punctuation">,</span>
+    <span class="token symbol">build_path</span><span class="token operator">:</span> build_output_path<span class="token punctuation">,</span>
+    <span class="token symbol">include_bitcode</span><span class="token operator">:</span> <span class="token boolean">true</span><span class="token punctuation">,</span>
+    <span class="token symbol">include_symbols</span><span class="token operator">:</span> <span class="token boolean">true</span><span class="token punctuation">,</span>
+    <span class="token symbol">export_options</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+      <span class="token symbol">compileBitcode</span><span class="token operator">:</span> <span class="token boolean">false</span><span class="token punctuation">,</span>
+      <span class="token symbol">uploadBitcode</span><span class="token operator">:</span> <span class="token boolean">false</span><span class="token punctuation">,</span>
+      <span class="token symbol">uploadSymbols</span><span class="token operator">:</span> <span class="token boolean">true</span><span class="token punctuation">,</span>
+      <span class="token symbol">signingStyle</span><span class="token operator">:</span> <span class="token string-literal"><span class="token string">"manual"</span></span><span class="token punctuation">,</span>
+      <span class="token symbol">method</span><span class="token operator">:</span> <span class="token string-literal"><span class="token string">"app-store"</span></span><span class="token punctuation">,</span>
+      <span class="token symbol">teamID</span><span class="token operator">:</span> build_sign_team_id<span class="token punctuation">,</span>
+      <span class="token symbol">provisioningProfiles</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+        <span class="token string-literal"><span class="token string">"com.xmartlabsinc.xmartlabs"</span></span><span class="token operator">:</span> <span class="token string-literal"><span class="token string">"Xmartlabs Distribution"</span></span><span class="token punctuation">,</span>
+        <span class="token string-literal"><span class="token string">"com.xmartlabsinc.xmartlabs.xmartlabs-notification-content-extension"</span></span><span class="token operator">:</span> <span class="token string-literal"><span class="token string">"Xmartlabs Notification Content Distribution"</span></span><span class="token punctuation">,</span>
+        <span class="token string-literal"><span class="token string">"com.xmartlabsinc.xmartlabs.xmartlabs-notification-service-extension"</span></span><span class="token operator">:</span> <span class="token string-literal"><span class="token string">"Xmartlabs Notification Service Distribution"</span></span><span class="token punctuation">,</span>
+      <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+  <span class="token punctuation">)</span>
+
+  <span class="token comment">#deliver uploads screenshots, metadata and binaries to App Store Connect. Use deliver to submit your app for App Store review.</span>
+  deliver<span class="token punctuation">(</span><span class="token symbol">skip_screenshots</span><span class="token operator">:</span> <span class="token boolean">true</span><span class="token punctuation">,</span> <span class="token symbol">skip_metadata</span><span class="token operator">:</span> <span class="token boolean">true</span><span class="token punctuation">,</span> <span class="token symbol">skip_app_version_update</span><span class="token operator">:</span> <span class="token boolean">true</span><span class="token punctuation">)</span>
+
+<span class="token keyword">end</span></code></pre></div></span>
+<p>Let's see what each release_appstore's lane action does:</p>
+<p><span><code class="language-text">automatic_code_signing</code></span> allows us to configure how we are going to sign the binary.</p>
+<p><span><code class="language-text">cocoapods</code></span> installs cocoapods dependencies by running <span><code class="language-text">pod install</code></span>.</p>
+<p><span><code class="language-text">build_ios_app</code></span> builds and signs our app.</p>
+<p><span><code class="language-text">deliver</code></span> uploads the build to app store, we are actually sharing the app with TestFlight beta testers.</p>
+<blockquote>
+<p>Explaining each parameter and details of each fastlane action is out of the scope of this blogpost. Please visit specific fastlane action documentation references if needed.</p>
+</blockquote>
+<p>Now a new TestFlight app version will be released each time we create a new tag named <span><code class="language-text">version_&#x3C;number></code></span>.</p>
+<p>Although we could have accomplished the same result with Bitrise tasks alone, we prefer to do so in combination with Fastlane due to the following reasons:</p>
+<ul>
+<li>Anyone in the team can run Fastlane lanes locally without the need of having CI/CD as a service.</li>
+<li>We have more freedom to change our CI/CD platform at any time. In the real world, each customer has its own CI/CD preference. Migrating to another CI/CD platform like GitHub Actions or TravisCI should be very straightforward since we just need to run the fastlane lane.</li>
+</ul>
+<p>Well, hope you now have a better idea of how to use automation to optimize your development workflow. We promise the benefits are worth it!</p>
+<p><em><strong>Are you doing CI with Bitrise and Fastlane in your iOS projects and have learned something not covered in this post? Let me know in the comments. I'd be interested to get your perspective.</strong></em></p>
+<p><em><strong>Have questions about CI, Bitrise, Fastlane? I'd be happy to answer those in the comments if I can.</strong></em></p> 

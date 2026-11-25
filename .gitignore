@@ -1,12 +1,24 @@
 node_modules/
 .cache/
-public
 .DS_Store
 yarn.lock
 .idea
-.env*
 
-# Astro / Cloudflare
+# Env files (keep the example tracked)
+.env*
+!.env.example
+
+# Next.js / Vercel
+.next/
+out/
+next-env.d.ts
+.vercel
+*.tsbuildinfo
+
+# Old Astro build (kept locally as the migration reference)
 dist/
 .astro/
 .wrangler/
+
+# Payload local uploads (production uses Vercel Blob)
+/media/

@@ -1,0 +1,43 @@
+ <p>Starting a software project is not an easy task, and Android is no exception.
+There&#39;s a bunch of complex decisions to make, such as code conventions, app architecture, frameworks, libraries, continuous integrations, and best practices, to mention a few.
+That&#39;s why we created <a href="https://github.com/xmartlabs/gong">Gong</a>, to consolidate all our discussions and research in one base project that we could use to boost our productivity and give other teams a solid base from which to start their projects.</p>
+<p>This blog post introduces Gong, the Android App Template we use to kickstart every Android app we build.
+Gong results from years of experience in creating well-written and maintainable Android code using Kotlin and, recently, Jetpack Compose, and our Android team actively maintains it.</p>
+<h1 id="what-exactly-is-gong">What exactly is Gong?</h1>
+<p><a href="https://github.com/xmartlabs/gong">Gong</a> is our Android App Template to effortlessly kickstart Android projects and get us quickly ready to implement product features.
+By using Gong, in a matter of seconds, you can create the base project for your android app, the same base project we use at Xmartlabs.</p>
+<p>Gong is entirely written in <a href="https://kotlinlang.org/">Kotlin</a>, and it leverages the language&#39;s capabilities and modern syntax (if you&#39;re still programming Android apps in <a href="https://java.com">Java</a>, give Kotlin a try, you won&#39;t regret it 😉).
+It also uses <a href="https://developer.android.com/jetpack/compose">Jetpack Compose</a>, the new declarative toolkit for creating UI in Android.</p>
+<p>In short, Gong is a base project which gives you a good structure, well-constructed architecture, good practices, and modern features and toolkits with virtually no effort and in no time, so you can start implementing features right away.</p>
+<h1 id="kickstarting-your-project-using-gong">Kickstarting your project using Gong</h1>
+<p>Creating your app base code using Gong is super simple. You just have to run one command that fetches and executes a script that asks for your project information, such as project and package name. That&#39;s all!</p>
+<p>The command is available on <a href="https://github.com/xmartlabs/gong#setup">Gong&#39;s Github readme page</a>, along with instructions to do the setup manually if you prefer to do so.</p>
+<p>Once you provide the project&#39;s information, Gong automatically renames and refactors the package and class names containing <span><code class="language-text">Gong</code></span> replacing it for your project name (you don&#39;t need to do any manual refactoring).<br/>
+You can even provide your Git remote URL to set up your project pointing to your remote repository.</p>
+<p>Let&#39;s see how easy it&#39;s below:</p>
+<p style="text-align:center"><img style="width:100%" src="/images/gong-introduction/howto.gif" alt="How to start using it"/></p>
+<h1 id="the-generated-base-android-project">The Generated base Android project</h1>
+<p>Once the script execution finishes, you can open the generated Android project in Android Studio (or the ide of your preference).</p>
+<p>Checking out the generated project, you can find a well-constructed package structure to organize your files storing them where they belong. It also provides you with common build variants (dev, prod) ready to use.</p>
+<p style="text-align:center"><img src="/images/gong-introduction/projectTree.png" alt="Generated project tree"/></p>
+<ul>
+<li>
+<p><strong>Data:</strong> The package for all your models and data sources (local or remote). Make sure to organize your models and data sources according to its relation to keep the structure clean and understandable. Gong uses the Repository pattern to provide data to where it&#39;s needed.</p>
+</li>
+<li>
+<p><strong>Device:</strong> Here, you get a base definition for dependency injection using <a href="https://insert-koin.io/">Koin</a> where you can place all your modules, Kotlin extensions, and logger definitions. Also, as Gong uses Compose&#39;s UI declarative approach, it provides a template class called <span><code class="language-text">ProcessState</code></span>, which manages the state required by the Model-View-Intent (MVI) architecture.</p>
+</li>
+<li>
+<p><strong>Domain:</strong> In this package you get the aforementioned repositories as well as a template use case definition accompanied by a few implementation examples.</p>
+</li>
+<li>
+<p><strong>UI:</strong> This package is meant to have all your user interface-related elements such as composables, classic views, fragments, and activities.
+Besides, we provide an extension to Compose&#39;s proposed theme management, which gives you more flexibility to manage all your color palettes, fonts, and shapes. It also gives you an easy way to add more elements to fit your definition of theme. For more information about this, our team released another <a href="https://blog.xmartlabs.com/blog/extending-material-theme-in-jetpack-compose/">blog post</a> about this some time ago.</p>
+</li>
+</ul>
+<h1 id="final-thoughts">Final thoughts</h1>
+<p>In this blog post, we introduced our Android base project, the base code we use to kick off every Android project rapidly.
+If you liked it and want to know more about using Gong in your own projects, please head to its <a href="https://github.com/xmartlabs/gong">GitHub documentation</a>.</p>
+<p>Of course, we are open to contributions, so feel free to create issues with proposals or pull requests to incorporate improvements!</p>
+<p>If you have an app idea to develop, don&#39;t hesitate to contact us! We&#39;re more than happy to help!</p>
+<p>Finally, we want to thank <a href="https://github.com/xmartlabs/gong/graphs/contributors">everyone</a> who helped create and maintain this project! 💪 🚀</p> 

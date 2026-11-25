@@ -1,0 +1,36 @@
+ <p>Today I want to show how we can release Android <em>SNAPSHOT</em> versions using <a href="https://docs.fabric.io/android/beta/overview.html">Beta by Fabric</a>.
+Have you ever been in a situation where you release new features between long periods of time and find yourself with tons of bugs to deal with? The process could be a lot smoother if you consider each change you merge into your main development branch to be ready for release. Once you're at that stage, you could automatically and effortlessly generate and release a new build of your application for each merge, that could be tested earlier. Moreover, you could run tests, check lints and any other task you normally do, automatically (yes, magic, I know ;). That's the beauty of having a CI/CD server. It could "change your life".</p>
+<p>We're going to use <em>Jenkins</em>, an amazing CI/CD server, to help us release each one of those changes. Each release generates what is called a <em>SNAPSHOT</em>. Our goal is to release something that is useful, not just the build. For that reason, we'll need the following <em>Jenkins</em> plugins to get started:</p>
+<p>First of all, let's check which <a href="https://wiki.jenkins.io/display/JENKINS/Plugins">Jenkins plugins</a> will be required for the work:</p>
+<ol>
+<li><a href="https://wiki.jenkins.io/display/JENKINS/EnvInject+Plugin">EnvInject Plugin</a></li>
+<li><a href="https://wiki.jenkins.io/display/JENKINS/Conditional+BuildStep+Plugin">Conditional BuildStep Plugin</a></li>
+<li><a href="https://wiki.jenkins.io/display/JENKINS/Flexible+Publish+Plugin">Flexible Publish Plugin</a></li>
+<li><a href="https://wiki.jenkins.io/display/JENKINS/Fabric+Beta+Publisher+Plugin">Fabric Beta Publisher Plugin</a></li>
+</ol>
+<p>Well, now we're ready to go.</p>
+<p>Firstly, in order to release a new <em>SNAPSHOT</em>, we need to do some work:</p>
+<ul>
+<li>Check that the build branch is <em>develop</em> (or the one you use for main development)</li>
+<li>Update the build <em>versionName</em> in order to track possible issues with the right version. In this example the version name will be built using the app current <em>versionName</em>, plus the current hash of the commit.</li>
+<li>Create a release note file, including for example:
+<ul>
+<li>Commit message</li>
+<li>Author name</li>
+<li>Last 10 commits (in order to see what are the last changes introduced)</li>
+<li>And all things that you want</li>
+</ul>
+</li>
+</ul>
+<p>In order to make this work, we should create a new "Execute shell" build task before the compilation, run tests, check lints and that stuff.</p>
+<img src="/images/jenkins-snapshot/1-shell_script.png">
+<p>This <a href="https://gist.github.com/matir91/5a8c24196c0fd4408adaabfdab6f198a">script is public on GitHub</a></p>
+<p>Afterwards, we have to add the <em>Invoke gradle script</em> build task, which should have all gradle tasks that we usually do (compile, run tests, check lints, etc.). In addition, we should add a new gradle task, in order to make the release apk. However, we should be careful, it should only be done if the current build is from the <em>develop</em> branch. In consequence, we have to define another build task to compile the new release build if the new commit comes from the <em>develop</em> branch.</p>
+<p>First of all, we should inject the properties file that we created in the system environment variables. To do that, we will use the <a href="https://wiki.jenkins.io/display/JENKINS/EnvInject+Plugin">EnvInject Plugin</a>.</p>
+<img src="/images/jenkins-snapshot/2-inject_variables.png">
+<p>Then we should add a conditional build task, in order to generate the release apk only if build branch is <em>develop</em>. For this, we will use the <a href="https://wiki.jenkins.io/display/JENKINS/Conditional+BuildStep+Plugin">Conditional BuildStep Plugin</a>.</p>
+<img src="/images/jenkins-snapshot/3-build.png">
+<p>Now that all "Build" actions have been done, we have to add a new "Post-Build Action" in order to release the build using Beta. In this case, we'll use 2 plugins, <a href="https://wiki.jenkins.io/display/JENKINS/Flexible+Publish+Plugin">Flexible Publish Plugin</a> to check that the build branch is <em>develop</em> and <a href="https://wiki.jenkins.io/display/JENKINS/Fabric+Beta+Publisher+Plugin">Fabric Beta Publisher Plugin</a> to upload the build. Furthermore, we will save the generated apk in the release build information using the "Archive the artifacts" post-build task.</p>
+<img src="/images/jenkins-snapshot/4-release.png">
+<p>Using this configuration, the <em>SNAPSHOT</em> build will be uploaded, will have useful release notes and all your team will be notified.</p>
+<p>By doing this, you will be releasing each new feature asap with <em>no</em> effort at all, and anyone will be able to test it to find bugs at an earlier stage, as well as making it easier to find them.</p> 

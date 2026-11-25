@@ -1,0 +1,114 @@
+ <p>Good day everyone, so Apple just announced its new declarative UI Framework built from the ground up on Swift: <strong>SwiftUI</strong>. It’s for me the most interesting thing announced for developers at this year's WWDC. Let’s take a quick look at the basics:</p>
+<p>The first example in the new website is:</p>
+<span><div class="code-highlight" data-language="swift"><pre class="language-swift" data-language="swift"><code class="language-swift"><span class="token class-name">List</span><span class="token punctuation">(</span>landmarks<span class="token punctuation">)</span> <span class="token punctuation">{</span> landmark <span class="token keyword">in</span>
+   <span class="token class-name">HStack</span> <span class="token punctuation">{</span>
+      <span class="token class-name">Image</span><span class="token punctuation">(</span>landmark<span class="token punctuation">.</span>thumbnail<span class="token punctuation">)</span>
+      <span class="token class-name">Text</span><span class="token punctuation">(</span>landmark<span class="token punctuation">.</span>name<span class="token punctuation">)</span>
+      <span class="token class-name">Spacer</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+
+      <span class="token keyword">if</span> landmark<span class="token punctuation">.</span>isFavorite <span class="token punctuation">{</span>
+         <span class="token class-name">Image</span><span class="token punctuation">(</span>systemName<span class="token punctuation">:</span> <span class="token string-literal"><span class="token string">"star.fill"</span></span><span class="token punctuation">)</span>
+            <span class="token punctuation">.</span><span class="token function">foregroundColor</span><span class="token punctuation">(</span><span class="token punctuation">.</span>yellow<span class="token punctuation">)</span>
+      <span class="token punctuation">}</span>
+   <span class="token punctuation">}</span>
+<span class="token punctuation">}</span></code></pre></div></span>
+<p>At first glance, JUST WOW, this is such a departure from the current workflow which would involve creating a TableView and the cell, setting delegates and linking outlets, configuring the cell, etc…</p>
+<blockquote>
+<p>Lists rule mobile UI</p>
+</blockquote>
+<p>Lists are by far the most common UI layout used today (just think about how everything scrolls down in modern apps). And given how tedious it was to create a list using UIKit it makes a lot of sense that Apple shows this as their first demo. It’s like shouting to their audience a big <em>“Look! This doesn’t suck anymore!”</em>. These announcements go perfectly in line with the other WWDC keynote announcements, all which respond to long-awaited needs.</p>
+<h3 id="new-ui-familiar-syntax">New UI, familiar syntax</h3>
+<p>This is all great, but when we saw the conference we couldn't help but think of how similar this declarative syntax looks to Google’s. Flutter is looking at <a href="http://gittrends.io/#/repos/flutter/flutter">huge growth in the developer community </a>, and a big part of that can probably be attributed to the UI framework being really simple to use.</p>
+<h4 id="how-similar-is-swiftui-to-flutter">How similar is SwiftUI to Flutter?</h4>
+<p>Let’s take that first example from <a href="https://developer.apple.com/tutorials/swiftui/">Apple’s site</a> again:</p>
+<p align="center">
+<img width="300px" src="/images/swiftui-flutter/swiftui-example.png">
+</p>
+<p><strong>Swift</strong></p>
+<span><div class="code-highlight" data-language="swift"><pre class="language-swift" data-language="swift"><code class="language-swift"><span class="token class-name">List</span><span class="token punctuation">(</span>landmarks<span class="token punctuation">)</span> <span class="token punctuation">{</span> landmark <span class="token keyword">in</span>
+   <span class="token class-name">HStack</span> <span class="token punctuation">{</span>
+      <span class="token class-name">Image</span><span class="token punctuation">(</span>landmark<span class="token punctuation">.</span>thumbnail<span class="token punctuation">)</span>
+      <span class="token class-name">Text</span><span class="token punctuation">(</span>landmark<span class="token punctuation">.</span>name<span class="token punctuation">)</span>
+      <span class="token class-name">Spacer</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+
+      <span class="token keyword">if</span> landmark<span class="token punctuation">.</span>isFavorite <span class="token punctuation">{</span>
+         <span class="token class-name">Image</span><span class="token punctuation">(</span>systemName<span class="token punctuation">:</span> <span class="token string-literal"><span class="token string">"star.fill"</span></span><span class="token punctuation">)</span>
+            <span class="token punctuation">.</span><span class="token function">foregroundColor</span><span class="token punctuation">(</span><span class="token punctuation">.</span>yellow<span class="token punctuation">)</span>
+      <span class="token punctuation">}</span>
+   <span class="token punctuation">}</span>
+<span class="token punctuation">}</span></code></pre></div></span>
+<p><strong>Now in Flutter</strong></p>
+<span><div class="code-highlight" data-language="swift"><pre class="language-swift" data-language="swift"><code class="language-swift"><span class="token class-name">ListView</span><span class="token punctuation">(</span> children<span class="token punctuation">:</span> landmarks<span class="token punctuation">.</span><span class="token function">map</span><span class="token punctuation">(</span><span class="token punctuation">(</span>landmark<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">return</span> <span class="token class-name">Row</span><span class="token punctuation">(</span> children<span class="token punctuation">:</span> <span class="token operator">&#x3C;</span><span class="token class-name">Widget</span><span class="token operator">></span><span class="token punctuation">[</span>
+      <span class="token class-name">Image</span><span class="token punctuation">.</span><span class="token function">asset</span><span class="token punctuation">(</span>landmark<span class="token punctuation">.</span>thumbnail<span class="token punctuation">)</span><span class="token punctuation">,</span>
+      <span class="token class-name">Text</span><span class="token punctuation">(</span>landmark<span class="token punctuation">.</span>name<span class="token punctuation">)</span><span class="token punctuation">,</span>
+      <span class="token class-name">Spacer</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+
+      landmark<span class="token punctuation">.</span>isFavorite <span class="token operator">?</span> <span class="token class-name">Image</span><span class="token punctuation">.</span><span class="token function">asset</span><span class="token punctuation">(</span><span class="token string-literal"><span class="token string">"assets/star.png"</span></span><span class="token punctuation">)</span><span class="token punctuation">:</span> <span class="token class-name">SizedBox</span><span class="token punctuation">.</span><span class="token function">shrink</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+      <span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+  <span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">toList</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">,</span></code></pre></div></span>
+<h2 id="thats-really-similar-isnt-it"><strong>That’s really similar! Isn’t it?</strong></h2>
+<p>There are a few Swift vs Dart syntax differences (Swift is definitely cleaner, with the help of some nice syntax sugar), but <strong>the overall structure is <em>almost identical</em>.</strong></p>
+<p>Although a really basic example, we can pick up some differences:</p>
+<ul>
+<li>
+<p>SwiftUI Lists receive a model and automatically maps it to the cell builder function. (nice!), in Flutter we need to use a map function and then turn it into a List. (Although this would probably be done using <a href="https://api.flutter.dev/flutter/widgets/ListView/ListView.builder.html">List.builder</a>).</p>
+</li>
+<li>
+<p>Adding optional elements is a bit trickier in Flutter, given a Widget lists cannot contain nulls (<a href="https://github.com/flutter/flutter/issues/3783">currently in discussion</a>).</p>
+</li>
+</ul>
+<p>I’m wondering how much of this is on purpose, Apple has had a few years to look at what Google and others have been doing to use as inspiration. In the end, developers don’t want to learn 5 different ways of doing things, just one that works well is enough.</p>
+<h3 id="the-devils-in-the-details">The devil’s in the details</h3>
+<p>Apple’s demo images don’t really match with the example code (which makes sense for explanatory purposes). There are layout details (paddings, separators, chevrons) being left out, and one should probably wrap the cell in its own file. You can go over the <a href="https://developer.apple.com/tutorials/swiftui/building-lists-and-navigation">SwiftUI tutorial to see the details</a>.</p>
+<p><em>Wondering how the complete screen would be done in Flutter?</em></p>
+<p>Without encapsulating widgets (which is heavily encouraged) it looks something like this:</p>
+<span><div class="code-highlight" data-language="swift"><pre class="language-swift" data-language="swift"><code class="language-swift"><span class="token keyword">class</span> <span class="token class-name">HomeScreen</span> extends <span class="token class-name">StatelessWidget</span> <span class="token punctuation">{</span>
+  <span class="token keyword">final</span> <span class="token class-name">List</span><span class="token operator">&#x3C;</span><span class="token class-name">Landmark</span><span class="token operator">></span> landmarks<span class="token punctuation">;</span>
+
+  <span class="token class-name">HomeScreen</span><span class="token punctuation">(</span>this<span class="token punctuation">.</span>landmarks<span class="token punctuation">,</span> <span class="token punctuation">{</span><span class="token class-name">Key</span> key<span class="token punctuation">}</span><span class="token punctuation">)</span> <span class="token punctuation">:</span> <span class="token keyword">super</span><span class="token punctuation">(</span>key<span class="token punctuation">:</span> key<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+  <span class="token attribute atrule">@override</span>
+  <span class="token class-name">Widget</span> <span class="token function">build</span><span class="token punctuation">(</span><span class="token class-name">BuildContext</span> context<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">return</span> <span class="token class-name">CupertinoPageScaffold</span><span class="token punctuation">(</span>
+        child<span class="token punctuation">:</span> <span class="token class-name">CustomScrollView</span><span class="token punctuation">(</span>
+        slivers<span class="token punctuation">:</span> <span class="token operator">&#x3C;</span><span class="token class-name">Widget</span><span class="token operator">></span><span class="token punctuation">[</span>
+          const <span class="token class-name">CupertinoSliverNavigationBar</span><span class="token punctuation">(</span>
+            largeTitle<span class="token punctuation">:</span> <span class="token class-name">Text</span><span class="token punctuation">(</span><span class="token string-literal"><span class="token string">"Landmarks"</span></span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+          <span class="token punctuation">)</span><span class="token punctuation">,</span>
+          <span class="token class-name">SliverList</span><span class="token punctuation">(</span>
+            delegate<span class="token punctuation">:</span> <span class="token class-name">SliverChildBuilderDelegate</span><span class="token punctuation">(</span><span class="token punctuation">(</span>c<span class="token punctuation">,</span> i<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+              <span class="token keyword">var</span> landmark <span class="token operator">=</span> landmarks<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">;</span>
+              <span class="token keyword">return</span> <span class="token class-name">Container</span><span class="token punctuation">(</span>
+                  padding<span class="token punctuation">:</span> <span class="token class-name">EdgeInsets</span><span class="token punctuation">.</span><span class="token function">symmetric</span><span class="token punctuation">(</span>vertical<span class="token punctuation">:</span> <span class="token number">5</span><span class="token punctuation">,</span> horizontal<span class="token punctuation">:</span> <span class="token number">20</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+                  child<span class="token punctuation">:</span> <span class="token class-name">Row</span><span class="token punctuation">(</span>
+                    children<span class="token punctuation">:</span> <span class="token operator">&#x3C;</span><span class="token class-name">Widget</span><span class="token operator">></span><span class="token punctuation">[</span>
+                      landmark<span class="token punctuation">.</span>thumbnailImage<span class="token punctuation">,</span>
+                      <span class="token class-name">Text</span><span class="token punctuation">(</span>landmark<span class="token punctuation">.</span>name<span class="token punctuation">)</span><span class="token punctuation">,</span>
+                      <span class="token class-name">Spacer</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+                      <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+                        <span class="token keyword">return</span> landmark<span class="token punctuation">.</span>isFavorite
+                            <span class="token operator">?</span> <span class="token class-name">Image</span><span class="token punctuation">.</span><span class="token function">asset</span><span class="token punctuation">(</span>
+                                <span class="token string-literal"><span class="token string">"assets/star.png"</span></span><span class="token punctuation">,</span>
+                                width<span class="token punctuation">:</span> <span class="token number">28</span><span class="token punctuation">,</span>
+                              <span class="token punctuation">)</span>
+                            <span class="token punctuation">:</span> <span class="token class-name">SizedBox</span><span class="token punctuation">.</span><span class="token function">shrink</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+                      <span class="token punctuation">}</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+                      <span class="token class-name">Image</span><span class="token punctuation">.</span><span class="token function">asset</span><span class="token punctuation">(</span>
+                        <span class="token string-literal"><span class="token string">"assets/right_chevron.png"</span></span><span class="token punctuation">,</span>
+                        width<span class="token punctuation">:</span> <span class="token number">8</span><span class="token punctuation">,</span>
+                      <span class="token punctuation">)</span><span class="token punctuation">,</span>
+                    <span class="token punctuation">]</span><span class="token punctuation">,</span>
+                  <span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+            <span class="token punctuation">}</span><span class="token punctuation">,</span> childCount<span class="token punctuation">:</span> landmarks<span class="token punctuation">.</span>length<span class="token punctuation">)</span><span class="token punctuation">,</span>
+          <span class="token punctuation">)</span><span class="token punctuation">,</span>
+        <span class="token punctuation">]</span><span class="token punctuation">,</span>
+      <span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token punctuation">}</span>
+<span class="token punctuation">}</span></code></pre></div></span>
+<p align="center">
+<img width="300px" src="/images/swiftui-flutter/flutter-screenshot.png">
+</p>
+<p>You can <a href="https://github.com/joaquinrok/swiftui_fluttter">try it yourself in github</a>. Have fun!</p>
+<p>What do you guys think about SwiftUI and Flutter?</p> 

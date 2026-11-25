@@ -1,0 +1,95 @@
+ <p>Jamstack is a top trend in web development nowadays. Everyone is talking about the modern web development architecture. In this blogpost, I'm gonna cover what caused JAMSTack quick's adoption, how's the JAMStack community and ecosystem, and of course, what does JAMStack mean.</p>
+<h2 id="jamstack-what-does-it-means">Jamstack, What does it means?</h2>
+<p>You may have already worked on a Jamstack site! First of all, it's worth noting that Jamstack has nothing to do with operating systems, specific web servers, backend programming languages, or databases. It's completely agnostic in terms of these concepts.</p>
+<p>Jamstack is a modern web stack architecture and ecosystem which delivers better performance, higher security, lower cost of scaling, and better developer experience. When compared with the well-known monolithic web architecture.</p>
+<p>What all Jamstack apps have in common is that they do not depend on a monolithic web server, they are serverless. Jamstack is fast emerging as the modern approach to building dynamic serverless applications.</p>
+<p>Let's see how people define Jamstack:</p>
+<p>According <a href="https://jamstack.org/">jamstack.org</a></p>
+<blockquote>
+<p>Fast and secure sites and apps delivered by pre-rendering files and serving them directly from a CDN, removing the requirement to manage or run web servers.</p>
+</blockquote>
+<blockquote>
+<p>Pre-rendered sites can be enhanced with JavaScript and the growing capabilities of browsers and services available via APIs.</p>
+</blockquote>
+<p>Mathias Biilmann, the CEO of Netlify, describes Jamstack as:</p>
+<blockquote>
+<p>A modern web development architecture based on client-side JavaScript, reusable APIs, and prebuilt Markup.</p>
+</blockquote>
+<p><strong>JAM</strong>Stack stands for Javascript, APIs and Markup.</p>
+<p><strong>Javascript (J)</strong> running on the browser handles any dynamic programming during the request/response
+cycle. Could be any front-end framework (e.g. Vue.js, React.js), js library, or even raw javascript.</p>
+<p><strong>APIs (A)</strong> All server-side actions are encapsulated into microservices, usually managed by a third party. The Javascript code running on the browser consumes these reusable API services through HTTP calls and typically exchanges data in JSON format (instead of HTML).</p>
+<p><strong>Markup/Markdown (M)</strong> A template system engine is used to pre-build the entire static site at deploy time. The main alternatives for this are a static site generator (SSG) for content sites, or a build tool for dynamic web apps (e.g. Gatsby.js). Markdown is a relatively easy markup language to learn, HTML content can be generated from it using a SSG.</p>
+<p>The main point behind Jamstack is leveraging the browser and JS capabilities by prebuilding as much content as possible so we can serve it from a CDN. By doing that we are decoupling the front-end from the backend (microservices in this context). Instead of having a monolithic server rendering and serving the resources, this modern web architecture splits these functionalities into small microservices that are consumed from the main app running on a browser. The main app is statically served through CDN nodes. Static refers to how sites are built and served, not the level of interactivity the users have with the site neither how dynamic is the content of the site.</p>
+<h2 id="why-the-jamstack">Why the Jamstack?</h2>
+<p>Jamstack aims to deliver better performance, higher security, lower cost of scaling, and a better developer experience compared with the well-know monolithic web architecture.</p>
+<p><strong>Better Performance</strong><br>
+When it comes to minimizing the time to first byte (TTFB), nothing beats pre-built files served over a CDN.
+The Jamstack is faster because the browser does tasks that the back-end traditionally executed (e.g. rendering documents on the fly on a server).</p>
+<p><strong>Higher Security</strong><br>
+With server-side processes abstracted into microservice APIs and the lack of a monolithic server, the surface area for attacks is reduced. Jamstack also leverages the security domain expertise of specialist third-party services.</p>
+<p><strong>Cheaper, Easier Scaling</strong><br>
+There is no need for a managed monolithic server, DevOps or costly infrastructure to be developed and maintained. When your deployment amounts to a stack of files that can be served anywhere, scaling is a matter of serving those files in more places. CDNs are perfect for this, static content can be placed on a CDN making it easier to dynamically scale.</p>
+<p><strong>Better Developer Experience</strong><br>
+Jamstack also changes how developers work. They can focus on value-added features since they leverage microservices functionality.
+Jamstack encourage a git centric workflow where developers create branches, pull requests and merge these changes into a production branch and a continuous delivery process automatically runs, pre-building the front-end static content and deploying the site to a CDN. So any changes in git will automatically be reflected and distributed to the CDN all over the world.
+Developers just need to rely on the git versioning system since deployments are automatically performed saving a lot of time.</p>
+<p>Additionally, using a Git repository allows the entire website to be centrally hosted so any developer can run the app locally since there is no need to set up servers, DB, and so on. This greatly simplifies the setup of the development environment and reduces contributor friction.</p>
+<h2 id="monolithic-web-stack-vs-jamstack">Monolithic web stack vs Jamstack</h2>
+<p>Web stack architecture and ecosystem has been evolving since the very beginning, let's compare the traditional web (monolithic) stack against the Jamstack.</p>
+<img src="/images/jamstack-intro/jamstack.jpeg">
+<p><strong>Monolithic web stack</strong></p>
+<p>The monolithic web architecture is the way we have been creating web apps over the last decade and a half. In its simplest form, each document is created on the fly: a monolithic server receives a request, queries a database and combines the data from the page's markup generating a new HTML document upon an HTTP request (Ruby on Rails, Express, Django/Flask are some web 2.0 frameworks that follow this approach).</p>
+<p>Here the browser communicates with a central server which communicates to a DB layer. This approach has caused a lot of security issues since we create almost every document from scratch. It also suffers performance and scalability issues. Normally we end up adding many caching layers, DB caching, memory caching and HTTP caching and so on. We could say that the website needs to build each time it's served (even though caching makes this viable).
+<em>LAMP and MEAN stacks are examples of this architecture.</em></p>
+<p><strong>Modern web stack</strong></p>
+<p>In contrast to the monolithic web approach, there is no single origin of content, there is no single point of failure. We can also say that the loading time from any part of the world is pretty much the same since the front-end static code is distributed all over the world through the CDN.</p>
+<img src="/images/jamstack-intro/JAMStack-diagram.jpg">
+<p>The git centric workflow allows us to host the entire website in its own git repository, also allowing us to pre-build and deploy the front-end static code whenever something is merged into the production branch.
+As the diagram shows, the app relies on several microservices to perform server-side functionalities like sending emails or performing a payment flow. Microservices typically solve a specific problem and are highly composable.</p>
+<h2 id="what-caused-jamstack-fast-adoption">What caused Jamstack fast adoption</h2>
+<p>In the last years, front-end development ecosystem has changed drastically. Modern browsers, static site generators (SSG), expansive Content Delivery Networks, and the API microservices economy caused the Jamstack’s emergence.</p>
+<h3 id="git-growth">Git growth</h3>
+<p>Git has become more popular, not only for version control but also as a way developers collaborate, communicate and publish apps. At the same time, FTP lost many users to it.</p>
+<h3 id="browser-capabilities--front-end-build-tools">Browser capabilities &#x26; Front-end build tools</h3>
+<p>Browsers have become really powerful. Nowadays a browser is way more than a document viewer, it's also a JS application runtime. Moreover, the front-end build ecosystem has evolved rapidly based on open-source tools primarily. All these tools completely changed the front-end developers' workflow. Building and compiling stuff is becoming an essential part of the modern web development workflow.</p>
+<h3 id="microservices-economy-emerging">Microservices economy emerging</h3>
+<p>And finally, API microservices have become really popular. There are specialized 3rd party services to manage the most common functionality we find in a web app. Web developers started to rely on, combine, and integrate these (instead of building and managing complex software systems). For small and medium-sized systems, they can deliver cost reduction, quality improvement, agility, and decreased time to market. Typically microservices are implemented by a third party company but it can be developed in-house too.</p>
+<h2 id="jamstack-best-practices">Jamstack Best Practices</h2>
+<p>As we have seen, this new web architecture stack is possible thanks to the evolution of web developer tools, static site generators, and an emerging microservices economy among others.</p>
+<p>When building Jamstack websites, we can really get the most out of the stack if we stick to the following best practices:</p>
+<p><strong>Use CDN to serve your files</strong></p>
+<p>Because Jamstack projects don’t need to rely on server-side code, they can be distributed instead of living on a single server. Serving directly from a CDN unlocks speed and performance improvements that are hard to match. The more of your app you can push to the edge, the better the user experience.</p>
+<p><strong>Modern Build tools</strong></p>
+<p>Ideally, we can also take advantage of modern build tools. By using tools like Babel, PostCSS, Webpack, Gulp/Grunt we are able to use web standards not currently supported in the market-leading browsers. We can also adopt good practices for asset optimization with minimal effort, and automate repetitive and time-consuming tasks.</p>
+<p><strong>Everything lives in git</strong></p>
+<p>Git is fundamental to the Jamstack because it holds all the site’s components, the entire site should be pushed to a git repository. There are publishing platforms that offer CI &#x26; CD, and app distribution to CDN services so the site is automatically pre-build and deploy whenever a git remote branch changes. This workflow embodies the modern software development life cycle practice of Continuous Integration and Deployment (CI/CD).
+Having the entire site code centralized in git reduces the contribution friction since anyone is able to clone it and execute a command (e.g. npm install) to set up dependencies and run the website locally. There are no databases to clone, no complex installations. This extremely simplifies staging and testing workflows.</p>
+<p><strong>Automated builds</strong></p>
+<p>Because Jamstack markup is prebuilt, content changes won’t go live until you run another build. Automating this process will save you lots of frustration. You can do this yourself with webhooks, or use a publishing platform that automatically includes this service.</p>
+<p><strong>Atomic deploys</strong></p>
+<p>Any CDN content update must be performed at the same time, despite the app size and the number of files involved. No changes should go live until all changed files have been updated otherwise the state can become inconsistent
+while the update process completes.</p>
+<p><strong>Instant cache invalidation</strong></p>
+<p>Cache-Control values in each file must be properly set up to avoid inconsistent outdated files after deploying a new version to the CDN.</p>
+<h2 id="jamstack-ecosystem-resources">Jamstack ecosystem resources</h2>
+<p>At this point you should have enough information on Jamstack to define if it would be useful to your app or not. Now, I would like to share some community tools and useful microservices available to leverage in your app. An important part when creating a Jamstack site is the microservices selection which mostly depend on the app functionality.</p>
+<p><a href="https://www.netlify.com/">Netlify</a> It's a publishing platform for Jamstack apps. It offers CI &#x26; CD and app distribution to CDN.
+<a href="https://vercel.com/">Vercel</a> is an alternative to Netlify.</p>
+<p><a href="https://www.staticgen.com">staticgen.com</a> lists all SSG alternatives including the frameworks to build a static site with react or vue.js web frameworks.<br>
+<a href="https://gohugo.io/">Hugo</a> and <a href="https://www.11ty.dev/">Eleventy</a> seems to me the most interesting SSG. Hugo because is super fast pre-building the entire website markup and Eleventy because is easy to use and flexible in terms of template system language.</p>
+<p><a href="https://nextjs.org/">nextjs</a> and <a href="https://www.gatsbyjs.org/">gatsbyjs</a> are popular static site generators for react.js.<br>
+<a href="https://nuxtjs.org/">nuxtjs</a> and <a href="https://gridsome.org/">gridsome</a> allows us to generate a static site using vue.js.</p>
+<p>In many cases a Jamstack site needs to run code, there are microservices that allows us to do so without provisioning or managing servers.
+<a href="https://aws.amazon.com/lambda/">AWS Lambda</a> is a very popular one. Netlify has Functions which allows to deploy serverless AWS Lambda functions on Netlify just by adding a file to your Git repository.
+<a href="https://cloud.google.com/serverless-options">Google serverless computing solutions</a> and <a href="https://azure.microsoft.com/en-us/overview/serverless-computing/">Microsoft serverless computing solutions</a> are others serverless compute services out there.</p>
+<p>There are also many microservices providing content management system solutions (CMS), each one with its pros and cons. <a href="https://www.sanity.io/">sanity.io</a>, <a href="https://www.storyblok.com/">storyblok</a>, <a href="https://prismic.io/">prismic.io</a>, <a href="https://www.contentful.com/">contentful</a>, <a href="https://ghost.org/">ghost</a>, <a href="https://www.netlifycms.org/">netlifycms</a> are some of them.</p>
+<p>In terms of DB solutions, there are also a big list of them. <a href="https://fauna.com/">faunaDB</a>, <a href="https://firebase.com/">firebase</a>, <a href="https://aws.amazon.com/dynamodb/">Amazon DynamoDB</a>, <a href="https://azure.microsoft.com/en-us/services/cosmos-db/">Azure Cosmos DB</a>, <a href="https://aws.amazon.com/rds/aurora/serverless/">Amazon Aurora Serverless</a>, <a href="https://aws.amazon.com/rds/">Amazon Relational Database Service</a>, <a href="https://cloud.google.com/sql/docs/">Cloud SQL</a> are some alternatives. By the way, we have collaborated with fauna team to create a swift language client for its DB.</p>
+<p>Services like <a href="https://auth0.com/">Auth0</a>, <a href="https://www.okta.com/">Okta</a>, and <a href="https://docs.netlify.com/visitor-access/identity/">Netlify Identity</a> offer a cloud-based identity management service.</p>
+<p>The microservices list above is not intended to be exhaustive by any means, it's just to give a picture of how mature the microservices industry is.</p>
+<h2 id="final-thoughts">Final thoughts</h2>
+<p>We have seen that the front-end tooling, static site generators, and microservices ecosystem are mature enough and Jamstack is a reality.
+Benefits of adopting a Jamstack architecture are clear, maybe the most interesting question is: Can any site adopt Jamstack?
+It depends on the app's complexity. Making a super dynamic site sticks to Jamstack approach could be really hard. In my opinion, every site requires a deep analysis and evaluation of the Jamstack adoption trade-off. Clearly, there are some sites (blogs, corporate websites, CMS among others) more suitable for Jamstack architecture.</p>
+<p>Time and community evolution will give us the answers!
+API microservices emergence and front-end development tooling will continue getting better and better. Let's see what Jamstack has for us in the years to come!</p> 

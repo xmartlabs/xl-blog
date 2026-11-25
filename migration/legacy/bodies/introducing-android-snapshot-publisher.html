@@ -1,0 +1,90 @@
+ <p>We&#39;re happy to announce the release of <a href="https://github.com/xmartlabs/android-snapshot-publisher"><strong>Android Snapshot Publisher</strong>, our first open source Android Gradle Plugin</a>, a plugin to <strong>create Android Snapshot versions</strong> in the simplest way we know!</p>
+<p>Here at <a href="https://xmartlabs.com/">Xmartlabs</a> we love engineering new products, adding new features to existing ones and also improving and fixing up our client&#39;s apps.
+Our awesome clients are oftentimes so excited about the work we do that they want to try it ASAP.
+Furthermore, our QA team or even other team members could also be anxiously waiting for our changes to be deployed to test them themselves.
+That&#39;s why we prepare and deliver new <em>Snapshot Builds</em> as soon as possible.</p>
+<p>Do you find this familiar? If you do, you probably know that preparing and distributing new builds is not too hard but can take up valuable time.
+Nowadays, the CI/CD servers are of great help as they can compile and deliver our applications with ease.
+Additionally, they let you schedule tasks so you don&#39;t have to care about tests or linter checks running, they will simply be executed before every deployment.</p>
+<p>However, there&#39;s always some work that must be done before releasing a new build.
+In my opinion, two of the most important tasks we have to perform before deploying any build are:</p>
+<ol>
+<li>Adding information to track possible issues.
+For example, if a crash happens, you&#39;ll want to know which was the specific build that caused that crash.</li>
+<li>Generating reasonable release notes (including a changelog) to be aware of what changed with respect to previous versions.
+This is essential as you must communicate what should be tested.</li>
+</ol>
+<p>We&#39;ve already discussed <a href="/2017/10/02/Release-Snapshot-Versions-In-Jenkins/">how we can do some of these tasks in a Jenkins-specific way</a>.
+In this blogpost we introduce a different approach that&#39;s platform agnostic.
+<a href="https://github.com/xmartlabs/android-snapshot-publisher"><strong>Android Snapshot Publisher Gradle plugin</strong></a> is a plugin to prepare and distribute snapshot builds in a simple and common way.</p>
+<h2 id="whatre-the-plugins-main-features">What&#39;re the plugin&#39;s main features?</h2>
+<p>It was designed to <strong>prepare and distribute Android Snapshot builds</strong>.</p>
+<p>The main features of the preparation process are:</p>
+<ul>
+<li>Update the Android Version Name to keep track of the distributed versions.
+The default behavior appends the commit identifier to the Android Version name. For instance, a version name may look similar to <span><code class="language-text">1.0.2-b799fbc</code></span>.</li>
+<li>Create and customize rich release notes based on Git&#39;s history.</li>
+</ul>
+<p>After this preparation work, the plugin will proceed to compile and publish the snapshot build.
+Currently, the available distribution sources are:</p>
+<ul>
+<li><a href="https://play.google.com/apps/publish">Google Play</a></li>
+<li><a href="https://docs.fabric.io/android/beta/overview.html">Fabric Beta</a></li>
+</ul>
+<p>Here&#39;s an illustration of the process:</p>
+<div class="separator" style="text-align:center;clear:both"><img border="0" src="/images/android-snapshot-plugin/snapshot-sample.png"/></div>
+<br/>
+<h2 id="what-is-the-preparation-work-based-on">What is the preparation work based on?</h2>
+<p>The plugin makes good use of your project&#39;s Git repository to perform the prep work.
+To get the most out of this plugin, you have to be as neat as you can when managing it.
+My team typically follows a simple but nice Git flow.
+We have two main branches: <span><code class="language-text">master</code></span> which contains the production code and <span><code class="language-text">develop</code></span> which contains the newest changes that have not been released to production yet.
+Then, if we want to add a new feature or fix an existing issue, we create a new branch from <span><code class="language-text">develop</code></span> and start coding!
+The next step is to create a new pull request, and wait for the reviewers to review the code we want to merge.
+After we get approval, we can integrate our changes into the <span><code class="language-text">develop</code></span> branch. But, how should we really integrate them?
+GitHub provides 3 predefined ways to do that, &quot;Merge&quot;, &quot;Rebase and Merge&quot; or &quot;Squash and Merge&quot; (if you are not using GitHub you can just use Git&#39;s commands to get the same result).
+Based on how the branch was created it could contain multiple commits but all of them related to only one feature or fix.
+So the main value of that branch is the feature or fix you are introducing.
+For this reason, some time ago we decided to start using the &quot;Squash and Merge&quot; option, together with a good and descriptive message.
+The key to this flow is that if you check the Git history of your main branches, each commit has an understandable and important value.
+This was just an introduction to our Git flow, following it is not mandatory to use this plugin.
+However, if you use a similar flow where each commit is of value and has a descriptive message, your <strong>Snapshot Build</strong> will be great!</p>
+<h2 id="how-to-get-started">How to get started?</h2>
+<p>The first step is to <a href="https://github.com/xmartlabs/android-snapshot-publisher#installation">include the plugin dependency in your project and apply it in your Android module</a>. It&#39;s the typical setup of any plugin.</p>
+<p>Then, the plugin defines a <span><code class="language-text">snapshotPublisher</code></span> block where you can customize your configuration alongside the Android modules.</p>
+<span><div class="code-highlight" data-language="groovy"><pre class="language-groovy" data-language="groovy"><code class="language-groovy">snapshotPublisher <span class="token punctuation">{</span>
+    version <span class="token punctuation">{</span>
+        <span class="token comment">// Version customization</span>
+    <span class="token punctuation">}</span>
+    releaseNotes <span class="token punctuation">{</span>
+        <span class="token comment">// Release notes customization</span>
+    <span class="token punctuation">}</span>
+    fabric <span class="token punctuation">{</span>
+        <span class="token comment">// Fabric Beta setup</span>
+    <span class="token punctuation">}</span>
+    googlePlay <span class="token punctuation">{</span>
+        <span class="token comment">// Google Play setup</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span></code></pre></div></span>
+<p><span><code class="language-text">version</code></span>: Defines the Android Version Name customizations for the delivered build.
+The default value is the current version name and the short-hash commit, joined by a hyphen.
+<span><code class="language-text">releaseNotes</code></span>: Defines the release notes customizations.
+<span><code class="language-text">fabric</code></span>: Defines the configuration needed to deploy the artifacts in Fabric&#39;s Beta.
+<span><code class="language-text">googlePlay</code></span>: Defines the configuration needed to deploy the artifacts in Google Play.</p>
+<p>You can read more about each of the blocks in the <a href="https://github.com/xmartlabs/android-snapshot-publisher#setup">project&#39;s GitHub Repository</a>, but I promise you that the setup is really easy.</p>
+<p>After the setup process is finished, the plugin defines some Gradle tasks that can be run.
+The naming convention is as follows: <span><code class="language-text">[action][Variant][BuildType]</code></span>.
+For example, <span><code class="language-text">publishSnapshotGooglePlayStagingRelease</code></span> will be generated if the app has a <span><code class="language-text">staging</code></span> variant and <span><code class="language-text">release</code></span> build type.</p>
+<p>To find available tasks, run <span><code class="language-text">./gradlew tasks</code></span> and look under the &quot;Snapshot Publishing&quot; section.</p>
+<p>The main available tasks are:</p>
+<ul>
+<li><span><code class="language-text">publishSnapshotFabric[Variant][BuildType]</code></span>: it&#39;ll publish a snapshot version in Fabric&#39;s Beta.</li>
+<li><span><code class="language-text">publishSnapshotGooglePlay[Variant][BuildType]</code></span>: it&#39;ll publish a snapshot version in Google Play.</li>
+</ul>
+<h2 id="conclusion">Conclusion</h2>
+<p>This project was designed to release quick and valuable builds without wasting your time.
+One of the most interesting features is that you can integrate it easily with a CI/CD server.
+For instance, you could schedule a build every night or you could subscribe to some GitHub hook and perform the release after a merge is made or a Git tag created.
+We&#39;re currently using it and it&#39;s helping us a lot.
+We are glad that we don&#39;t end up spending significant time with releases, our coworkers are happy because they can try the latest version of our different apps and the clients are pleased to receive builds more frequently than ever before. It&#39;s a win-win-win! 😄
+For all these reasons and more, we recommend you give it a try and then tell us what are your thoughts!</p> 

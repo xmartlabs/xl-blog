@@ -1,0 +1,23 @@
+# Local Postgres for development: `docker compose up -d postgres` (or `npm run db:up`).
+# Matches DATABASE_URL in .env.example.
+services:
+  postgres:
+    image: postgres:17
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: xlblog
+      POSTGRES_PASSWORD: xlblog
+      POSTGRES_DB: xlblog
+    ports:
+      # Host port; override with POSTGRES_PORT in .env if 5432 is taken.
+      - '${POSTGRES_PORT:-5432}:5432'
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    healthcheck:
+      test: ['CMD-SHELL', 'pg_isready -U xlblog -d xlblog']
+      interval: 5s
+      timeout: 5s
+      retries: 10
+
+volumes:
+  pgdata:

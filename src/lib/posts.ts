@@ -1,74 +1,87 @@
-import { getCollection, type CollectionEntry } from 'astro:content';
-import kebabCase from 'lodash/kebabCase.js';
+import 'server-only';
 
-import { POSTS_PER_PAGE } from './site';
+import type { Author, Category, Media, Post } from '../payload-types';
+import { getPayloadClient } from './payload';
 
-export type Post = CollectionEntry<'blog'>;
-export type Category = CollectionEntry<'categories'>;
+/** Plain card data, as the Card component expects. */
+export interface CardData {
+  id: number;
+  title: string;
+  slug: string;
+  thumbnail: string | null;
+}
 
-/** URL slug of a post: `/blog/<slug>/`. Same rule the Gatsby site used. */
-export const postSlug = (post: Post) => kebabCase(post.data.permalink);
+const mediaUrl = (value: number | Media | null | undefined) =>
+  value && typeof value === 'object' ? (value.url ?? null) : null;
 
-/** Plain, serializable card data (passed to React islands). */
-export const toCardData = (post: Post) => ({
+export const postThumbnail = (post: Pick<Post, 'thumbnail' | 'thumbnailUrl'>) =>
+  mediaUrl(post.thumbnail) ?? post.thumbnailUrl ?? null;
+
+export const authorImage = (author: Author) =>
+  mediaUrl(author.image) ?? author.imageUrl ?? null;
+
+export const toCardData = (post: Post): CardData => ({
   id: post.id,
-  title: post.data.title,
-  slug: postSlug(post),
-  thumbnail: post.data.thumbnail ?? null,
+  title: post.title,
+  slug: post.slug,
+  thumbnail: postThumbnail(post),
 });
 
-let postsCache: Post[] | undefined;
+export const asDoc = <T extends object>(
+  value: number | T | null | undefined
+): T | null => (value && typeof value === 'object' ? value : null);
 
-/** All posts, newest first. Fails the build if two posts map to the same URL. */
-export const getPosts = async (): Promise<Post[]> => {
-  if (postsCache) return postsCache;
+/** Published post by slug, with author, category and body uploads populated. */
+export async function getPostBySlug(slug: string): Promise<Post | null> {
+  const payload = await getPayloadClient();
+  const { docs } = await payload.find({
+    collection: 'posts',
+    where: { slug: { equals: slug }, _status: { equals: 'published' } },
+    limit: 1,
+    depth: 2,
+    overrideAccess: false,
+  });
+  return docs[0] ?? null;
+}
 
-  const posts = await getCollection('blog');
-  const bySlug = new Map<string, Post>();
-  for (const post of posts) {
-    const slug = postSlug(post);
-    const other = bySlug.get(slug);
-    if (other) {
-      throw new Error(
-        `Duplicate post URL /blog/${slug}/: "${other.filePath}" and "${post.filePath}" have permalinks that map to the same slug.`
-      );
-    }
-    bySlug.set(slug, post);
-  }
+export async function getAllPostSlugs(): Promise<string[]> {
+  const payload = await getPayloadClient();
+  const { docs } = await payload.find({
+    collection: 'posts',
+    where: { _status: { equals: 'published' } },
+    pagination: false,
+    depth: 0,
+    select: { slug: true },
+    overrideAccess: false,
+  });
+  return docs.map((doc) => doc.slug);
+}
 
-  postsCache = posts.sort(
-    (a, b) =>
-      b.data.date.getTime() - a.data.date.getTime() || a.id.localeCompare(b.id)
-  );
-  return postsCache;
-};
+/**
+ * Up to 3 other posts of the same category. The old site used file order (oldest first);
+ * publication date ascending is the closest equivalent.
+ */
+export async function getRelatedPosts(post: Post): Promise<CardData[]> {
+  const category = asDoc<Category>(post.category);
+  if (!category) return [];
+  const payload = await getPayloadClient();
+  const { docs } = await payload.find({
+    collection: 'posts',
+    where: {
+      category: { equals: category.id },
+      id: { not_equals: post.id },
+      _status: { equals: 'published' },
+    },
+    sort: ['publishedDate', 'createdAt'],
+    limit: 3,
+    depth: 1,
+    overrideAccess: false,
+  });
+  return docs.map(toCardData);
+}
 
-/** Categories sorted by their `order` field. */
-export const getCategories = async (): Promise<Category[]> =>
-  (await getCollection('categories')).sort(
-    (a, b) => a.data.order - b.data.order
-  );
-
-/** Filter tabs shown above the post list. */
-export const getCategoryTabs = async () => [
-  { id: 'all', label: 'All', href: '/' },
-  ...(await getCategories()).map((category) => ({
-    id: category.id,
-    // Keep multi-word names on one line, like the old tabs did.
-    label: category.data.name.replace(/ /g, ' '),
-    href: `/categories/${category.id}/`,
-  })),
-];
-
-/** Splits `items` into pages of POSTS_PER_PAGE. */
-export const paginate = <T>(items: T[]) =>
-  Array.from(
-    { length: Math.max(1, Math.ceil(items.length / POSTS_PER_PAGE)) },
-    (_, i) => items.slice(i * POSTS_PER_PAGE, (i + 1) * POSTS_PER_PAGE)
-  );
-
-export const formatPostDate = (date: Date) =>
-  date.toLocaleDateString('en-US', {
+export const formatPostDate = (date: string) =>
+  new Date(date).toLocaleDateString('en-US', {
     timeZone: 'UTC',
     month: 'long',
     day: 'numeric',

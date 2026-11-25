@@ -1,0 +1,384 @@
+ <p>In this occasion we will introduce a way to create a client side JavaScript plug-in that can be easily integrated in any third party websites.
+This plug-in will allow us to execute custom actions such as filling a registration form or maybe displaying information related with your website.</p>
+<p>Since it's all done with JavaScript, we won't care about the stack of the website but we will use and take advantages of native web technologies: HTML, CSS and JavaScript.</p>
+<p>Additionally, we are going to show some set up that must be done server side in the case you are using Rails.</p>
+<h2 id="1-designing-the-plug-in">1. Designing the plug-in</h2>
+<p>We are going to simplify the plug-in created in order to focus on its design and implementation.
+You will be able to reuse the source code and ideas presented here even if you want to do something more complex than this example.</p>
+<p>Suppose that our plug-in clients are hair cutting web sites and we want to allow the users of these sites to schedule a hair cutting.
+We are going to let the users schedule a haircut from within our plug-in.</p>
+<p>We have to take in mind that this client-side plug-in must be compatible with all kind of web applications and browsers in order to be used by all of our possible clients.
+For this reason, we will use only pure JavaScript code along with CSS and HTML.
+This means, that we won't use any external library in the client since we want to be the less intrusive as possible.</p>
+<p>We want to make this plug-in easy to be integrated by client web sites' developers, that's why we will make public the constructor and a few methods and we will keep under the hood all the auxiliary code (internal variables and any detail of the implementation).
+We will keep private all the auxiliary code used by the plug-in in order to correctly work, hiding it from developers.</p>
+<blockquote>
+<p>Global variables and that kind of patterns will be avoided in our code.
+Below we have a starting template for our plug-in:</p>
+</blockquote>
+<span><div class="code-highlight" data-language="javascript"><pre class="language-javascript" data-language="javascript"><code class="language-javascript"><span class="token punctuation">(</span><span class="token keyword">function</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+
+  <span class="token keyword">var</span> defaults <span class="token operator">=</span> <span class="token punctuation">{</span>
+    <span class="token literal-property property">clientId</span><span class="token operator">:</span> <span class="token keyword">undefined</span>
+  <span class="token punctuation">}</span>
+
+  <span class="token comment">/******* Public Methods *******/</span>
+
+  <span class="token keyword">this</span><span class="token punctuation">.</span><span class="token function-variable function">Widget</span> <span class="token operator">=</span> <span class="token keyword">function</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  <span class="token punctuation">}</span>
+
+  <span class="token class-name">Widget</span><span class="token punctuation">.</span>prototype<span class="token punctuation">.</span><span class="token function-variable function">init</span> <span class="token operator">=</span> <span class="token keyword">function</span><span class="token punctuation">(</span><span class="token parameter">options<span class="token punctuation">,</span> doc</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">this</span><span class="token punctuation">.</span>doc <span class="token operator">=</span> doc <span class="token operator">||</span> window<span class="token punctuation">.</span>document
+    <span class="token keyword">this</span><span class="token punctuation">.</span>options <span class="token operator">=</span> <span class="token function">merge</span><span class="token punctuation">(</span>defaults<span class="token punctuation">,</span> options<span class="token punctuation">)</span>
+
+    <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token operator">!</span><span class="token keyword">this</span><span class="token punctuation">.</span>options<span class="token punctuation">.</span>clientId<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+      <span class="token comment">// Validate options as needed</span>
+      console<span class="token punctuation">.</span><span class="token function">error</span><span class="token punctuation">(</span><span class="token string">"Undefined `clientId`. You must set it before start using Widget"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+      <span class="token keyword">return</span>
+    <span class="token punctuation">}</span>
+
+    <span class="token comment">// Will create the widget</span>
+  <span class="token punctuation">}</span>
+
+  <span class="token comment">/******* Private Methods *******/</span>
+
+  <span class="token keyword">function</span> <span class="token function">merge</span><span class="token punctuation">(</span><span class="token parameter">source<span class="token punctuation">,</span> overrides</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">var</span> property<span class="token punctuation">;</span>
+    <span class="token keyword">for</span> <span class="token punctuation">(</span>property <span class="token keyword">in</span> overrides<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+      <span class="token keyword">if</span> <span class="token punctuation">(</span>overrides<span class="token punctuation">.</span><span class="token function">hasOwnProperty</span><span class="token punctuation">(</span>property<span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span>overrides<span class="token punctuation">[</span>property<span class="token punctuation">]</span> <span class="token keyword">instanceof</span> <span class="token class-name">Object</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+          source<span class="token punctuation">[</span>property<span class="token punctuation">]</span> <span class="token operator">=</span> source<span class="token punctuation">[</span>property<span class="token punctuation">]</span> <span class="token operator">||</span> <span class="token keyword">new</span> <span class="token class-name">Object</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+          <span class="token function">merge</span><span class="token punctuation">(</span>source<span class="token punctuation">[</span>property<span class="token punctuation">]</span><span class="token punctuation">,</span> overrides<span class="token punctuation">[</span>property<span class="token punctuation">]</span><span class="token punctuation">)</span>
+        <span class="token punctuation">}</span> <span class="token keyword">else</span> <span class="token punctuation">{</span>
+          source<span class="token punctuation">[</span>property<span class="token punctuation">]</span> <span class="token operator">=</span> overrides<span class="token punctuation">[</span>property<span class="token punctuation">]</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+      <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+    <span class="token keyword">return</span> source<span class="token punctuation">;</span>
+  <span class="token punctuation">}</span>
+
+<span class="token punctuation">}</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span></code></pre></div></span>
+<p>This way all the client code only needs to access to <span><code class="language-text">Widget</code></span> function, in order to create an instance of our plug-in and to its <span><code class="language-text">init</code></span> function.</p>
+<p>We have added defaults options that can be overridden by clients code.
+Next code shows you how to add the widget to the client web site, add it within the <span><code class="language-text">body</code></span> tag.</p>
+<span><div class="code-highlight" data-language="html"><pre class="language-html" data-language="html"><code class="language-html"><span class="token tag"><span class="token tag"><span class="token punctuation">&#x3C;</span>script</span> <span class="token attr-name">type</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>text/javascript<span class="token punctuation">"</span></span><span class="token punctuation">></span></span><span class="token script"><span class="token language-javascript">
+  <span class="token keyword">var</span> <span class="token function-variable function">widgetInit</span> <span class="token operator">=</span> <span class="token keyword">function</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    widget<span class="token punctuation">.</span><span class="token function">init</span><span class="token punctuation">(</span><span class="token punctuation">{</span>
+      <span class="token literal-property property">clientId</span><span class="token operator">:</span> <span class="token string">'7b4a03708a19ed6669ca00f4975a42b3'</span>
+    <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token punctuation">}</span><span class="token punctuation">;</span>
+
+  <span class="token punctuation">(</span><span class="token keyword">function</span><span class="token punctuation">(</span><span class="token parameter">window<span class="token punctuation">,</span> document<span class="token punctuation">,</span> tag<span class="token punctuation">,</span> source<span class="token punctuation">,</span> objectName<span class="token punctuation">,</span> init</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">var</span> element <span class="token operator">=</span> document<span class="token punctuation">.</span><span class="token function">createElement</span><span class="token punctuation">(</span>tag<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    element<span class="token punctuation">.</span>async <span class="token operator">=</span> <span class="token number">1</span><span class="token punctuation">;</span>
+    element<span class="token punctuation">.</span>defer <span class="token operator">=</span> <span class="token string">'defer'</span><span class="token punctuation">;</span>
+    element<span class="token punctuation">.</span>src <span class="token operator">=</span> source<span class="token punctuation">;</span>
+    element<span class="token punctuation">.</span><span class="token function-variable function">onload</span> <span class="token operator">=</span> <span class="token keyword">function</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+      window<span class="token punctuation">[</span><span class="token string">'MyAppWidget'</span><span class="token punctuation">]</span> <span class="token operator">=</span> objectName<span class="token punctuation">;</span>
+      window<span class="token punctuation">[</span>objectName<span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Widget</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+      <span class="token function">init</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span><span class="token punctuation">;</span>
+    <span class="token keyword">var</span> parent <span class="token operator">=</span> document<span class="token punctuation">.</span><span class="token function">getElementsByTagName</span><span class="token punctuation">(</span>tag<span class="token punctuation">)</span><span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+    parent<span class="token punctuation">.</span>parentNode<span class="token punctuation">.</span><span class="token function">insertBefore</span><span class="token punctuation">(</span>element<span class="token punctuation">,</span> parent<span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">(</span>window<span class="token punctuation">,</span> document<span class="token punctuation">,</span> <span class="token string">'script'</span><span class="token punctuation">,</span> <span class="token string">'//widget-server-domain/widget/widget.js?client_id=7b4a03708a19ed6669ca00f4975a42b3'</span><span class="token punctuation">,</span> <span class="token string">'widget'</span><span class="token punctuation">,</span> widgetInit<span class="token punctuation">)</span><span class="token punctuation">;</span>
+</span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&#x3C;/</span>script</span><span class="token punctuation">></span></span></code></pre></div></span>
+<blockquote>
+<p>Previous code asynchronously loads the widget's JavaScript.
+A global variable <span><code class="language-text">widget</code></span> will be created with our plug-in prototype and the function <span><code class="language-text">widgetInit</code></span> will be called immediately after the widget's JavaScript was loaded.
+We recommend to minify all the code, except the <span><code class="language-text">widgetInit</code></span> function (like most of the existing SDKs), before adding it in your client's webpage.</p>
+</blockquote>
+<p>Now that we've created the code base for applying the plug-in and we introduced a generic way to load it into any web page, we are going to go deep in our goal by adding some styles and functionalities to our widget.</p>
+<blockquote>
+<p>Note: we are going to need a CSS file where to place the widget's styles.</p>
+</blockquote>
+<span><div class="code-highlight" data-language="javascript"><pre class="language-javascript" data-language="javascript"><code class="language-javascript"><span class="token punctuation">(</span><span class="token keyword">function</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+
+  <span class="token keyword">var</span> defaults <span class="token operator">=</span> <span class="token punctuation">{</span>
+    <span class="token literal-property property">clientId</span><span class="token operator">:</span> <span class="token keyword">undefined</span><span class="token punctuation">,</span>
+  <span class="token punctuation">}</span>
+
+  <span class="token comment">/******* Public Methods *******/</span>
+
+  <span class="token keyword">this</span><span class="token punctuation">.</span><span class="token function-variable function">Widget</span> <span class="token operator">=</span> <span class="token keyword">function</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  <span class="token punctuation">}</span>
+
+  <span class="token class-name">Widget</span><span class="token punctuation">.</span>prototype<span class="token punctuation">.</span><span class="token function-variable function">init</span> <span class="token operator">=</span> <span class="token keyword">function</span><span class="token punctuation">(</span><span class="token parameter">options<span class="token punctuation">,</span> doc</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">this</span><span class="token punctuation">.</span>doc <span class="token operator">=</span> doc <span class="token operator">||</span> window<span class="token punctuation">.</span>document
+    <span class="token keyword">this</span><span class="token punctuation">.</span>options <span class="token operator">=</span> <span class="token function">merge</span><span class="token punctuation">(</span>defaults<span class="token punctuation">,</span> options<span class="token punctuation">)</span>
+
+    <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token operator">!</span><span class="token keyword">this</span><span class="token punctuation">.</span>options<span class="token punctuation">.</span>clientId<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+      <span class="token comment">// Validate options as needed</span>
+      console<span class="token punctuation">.</span><span class="token function">error</span><span class="token punctuation">(</span><span class="token string">"Undefined `clientId`. You must set it before start using Widget"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+      <span class="token keyword">return</span>
+    <span class="token punctuation">}</span>
+
+    <span class="token function">loadCss</span><span class="token punctuation">(</span><span class="token keyword">this</span><span class="token punctuation">.</span>doc<span class="token punctuation">,</span> <span class="token keyword">this</span><span class="token punctuation">.</span>options<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token function">createWidgetMarker</span><span class="token punctuation">(</span><span class="token keyword">this</span><span class="token punctuation">.</span>doc<span class="token punctuation">,</span> <span class="token keyword">this</span><span class="token punctuation">.</span>options<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token function">createWidget</span><span class="token punctuation">(</span><span class="token keyword">this</span><span class="token punctuation">.</span>doc<span class="token punctuation">,</span> <span class="token keyword">this</span><span class="token punctuation">.</span>options<span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token punctuation">}</span>
+
+  <span class="token comment">/******* Private Methods *******/</span>
+
+  <span class="token keyword">function</span> <span class="token function">merge</span><span class="token punctuation">(</span><span class="token parameter">source<span class="token punctuation">,</span> overrides</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">var</span> property<span class="token punctuation">;</span>
+    <span class="token keyword">for</span> <span class="token punctuation">(</span>property <span class="token keyword">in</span> overrides<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+      <span class="token keyword">if</span> <span class="token punctuation">(</span>overrides<span class="token punctuation">.</span><span class="token function">hasOwnProperty</span><span class="token punctuation">(</span>property<span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span>overrides<span class="token punctuation">[</span>property<span class="token punctuation">]</span> <span class="token keyword">instanceof</span> <span class="token class-name">Object</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+          source<span class="token punctuation">[</span>property<span class="token punctuation">]</span> <span class="token operator">=</span> source<span class="token punctuation">[</span>property<span class="token punctuation">]</span> <span class="token operator">||</span> <span class="token keyword">new</span> <span class="token class-name">Object</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+          <span class="token function">merge</span><span class="token punctuation">(</span>source<span class="token punctuation">[</span>property<span class="token punctuation">]</span><span class="token punctuation">,</span> overrides<span class="token punctuation">[</span>property<span class="token punctuation">]</span><span class="token punctuation">)</span>
+        <span class="token punctuation">}</span> <span class="token keyword">else</span> <span class="token punctuation">{</span>
+          source<span class="token punctuation">[</span>property<span class="token punctuation">]</span> <span class="token operator">=</span> overrides<span class="token punctuation">[</span>property<span class="token punctuation">]</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+      <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+    <span class="token keyword">return</span> source<span class="token punctuation">;</span>
+  <span class="token punctuation">}</span>
+
+  <span class="token keyword">function</span> <span class="token function">me</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token comment">// In the code added to the client web page, we have used `MyAppWidget` to store the name of the variable which holds the instance of our plug-in.</span>
+    <span class="token comment">// Next line will return the object stored in the `window` which the stored in the key `MyAppWidget` of `window`.</span>
+    <span class="token keyword">return</span> window<span class="token punctuation">[</span>window<span class="token punctuation">[</span><span class="token string">'MyAppWidget'</span><span class="token punctuation">]</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+  <span class="token punctuation">}</span>
+
+  <span class="token keyword">function</span> <span class="token function">loadCss</span><span class="token punctuation">(</span><span class="token parameter">doc<span class="token punctuation">,</span> options</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token comment">// Load widget CSS into the page's head</span>
+    <span class="token keyword">var</span> css <span class="token operator">=</span> <span class="token function">me</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span>doc<span class="token punctuation">.</span><span class="token function">createElement</span><span class="token punctuation">(</span><span class="token string">'style'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    css<span class="token punctuation">.</span>href <span class="token operator">=</span> <span class="token string">"&#x3C;URL to the plug-in's css file>"</span><span class="token punctuation">;</span>
+    <span class="token function">me</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span>doc<span class="token punctuation">.</span><span class="token function">getElementsByTagName</span><span class="token punctuation">(</span><span class="token string">'head'</span><span class="token punctuation">)</span><span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">.</span><span class="token function">appendChild</span><span class="token punctuation">(</span>css<span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token punctuation">}</span>
+
+  <span class="token keyword">function</span> <span class="token function">createWidgetMarker</span><span class="token punctuation">(</span><span class="token parameter">doc<span class="token punctuation">,</span> options</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">var</span> widgetMarker <span class="token operator">=</span> doc<span class="token punctuation">.</span><span class="token function">createElement</span><span class="token punctuation">(</span><span class="token string">'div'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    widgetMarker<span class="token punctuation">.</span>className <span class="token operator">=</span> <span class="token string">'myapp-widget-marker myapp-widget-hoverable myapp-widget-unselectable'</span><span class="token punctuation">;</span>
+    widgetMarker<span class="token punctuation">.</span>innerHTML <span class="token operator">=</span> <span class="token string">'&#x3C;div class="myapp-widget-title">Schedule your cute&#x3C;/div>'</span><span class="token punctuation">;</span>
+    widgetMarker<span class="token punctuation">.</span>onclick <span class="token operator">=</span> toggleWidgetCollapsed<span class="token punctuation">;</span>
+
+    <span class="token function">customizeMarker</span><span class="token punctuation">(</span>widgetMarker<span class="token punctuation">,</span> options<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+    doc<span class="token punctuation">.</span><span class="token function">getElementsByTagName</span><span class="token punctuation">(</span><span class="token string">'body'</span><span class="token punctuation">)</span><span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">.</span><span class="token function">appendChild</span><span class="token punctuation">(</span>widgetMarker<span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token punctuation">}</span>
+
+  <span class="token keyword">function</span> <span class="token function">createWidget</span><span class="token punctuation">(</span><span class="token parameter">doc<span class="token punctuation">,</span> options</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">var</span> widget <span class="token operator">=</span> doc<span class="token punctuation">.</span><span class="token function">createElement</span><span class="token punctuation">(</span><span class="token string">'div'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    widget<span class="token punctuation">.</span>className <span class="token operator">=</span> <span class="token string">'myapp-widget-widget myapp-widget-centered myapp-widget-hidden'</span><span class="token punctuation">;</span>
+    widget<span class="token punctuation">.</span>isCollpased <span class="token operator">=</span> <span class="token boolean">true</span><span class="token punctuation">;</span>
+    widget<span class="token punctuation">.</span>onclick <span class="token operator">=</span> hideWidget<span class="token punctuation">;</span>
+    widget<span class="token punctuation">.</span><span class="token function-variable function">onscroll</span> <span class="token operator">=</span> <span class="token keyword">function</span><span class="token punctuation">(</span><span class="token parameter">ev</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>  ev<span class="token punctuation">.</span><span class="token function">stopPropagation</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token punctuation">}</span>
+    widget<span class="token punctuation">.</span><span class="token function-variable function">ontouchmove</span> <span class="token operator">=</span> <span class="token keyword">function</span><span class="token punctuation">(</span><span class="token parameter">ev</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+      event<span class="token punctuation">.</span><span class="token function">preventDefault</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+      e<span class="token punctuation">.</span><span class="token function">preventDefault</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+
+    <span class="token keyword">var</span> body <span class="token operator">=</span> doc<span class="token punctuation">.</span><span class="token function">createElement</span><span class="token punctuation">(</span><span class="token string">'div'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    body<span class="token punctuation">.</span>className <span class="token operator">=</span> <span class="token string">'myapp-widget-body'</span><span class="token punctuation">;</span>
+    body<span class="token punctuation">.</span><span class="token function-variable function">onclick</span> <span class="token operator">=</span> <span class="token keyword">function</span><span class="token punctuation">(</span><span class="token parameter">evt</span><span class="token punctuation">)</span> <span class="token punctuation">{</span> evt<span class="token punctuation">.</span><span class="token function">stopPropagation</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token punctuation">}</span>
+    <span class="token function">customizeWidgetBody</span><span class="token punctuation">(</span>body<span class="token punctuation">,</span> options<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+    widget<span class="token punctuation">.</span><span class="token function">appendChild</span><span class="token punctuation">(</span>body<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+    <span class="token keyword">var</span> bodyContent <span class="token operator">=</span> doc<span class="token punctuation">.</span><span class="token function">createElement</span><span class="token punctuation">(</span><span class="token string">'div'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    bodyContent<span class="token punctuation">.</span>className <span class="token operator">=</span> <span class="token string">'myapp-widget-body-container'</span><span class="token punctuation">;</span>
+    body<span class="token punctuation">.</span><span class="token function">appendChild</span><span class="token punctuation">(</span>bodyContent<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+    bodyContent<span class="token punctuation">.</span><span class="token function">appendChild</span><span class="token punctuation">(</span><span class="token function">createScheduleForm</span><span class="token punctuation">(</span>doc<span class="token punctuation">,</span> options<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+    doc<span class="token punctuation">.</span><span class="token function">getElementsByTagName</span><span class="token punctuation">(</span><span class="token string">'body'</span><span class="token punctuation">)</span><span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">.</span><span class="token function">appendChild</span><span class="token punctuation">(</span>widget<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+    <span class="token function">me</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span>widget <span class="token operator">=</span> widget<span class="token punctuation">;</span>
+  <span class="token punctuation">}</span>
+
+  <span class="token keyword">function</span> <span class="token function">createScheduleForm</span><span class="token punctuation">(</span><span class="token parameter">doc<span class="token punctuation">,</span> options</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">var</span> page <span class="token operator">=</span> doc<span class="token punctuation">.</span><span class="token function">createElement</span><span class="token punctuation">(</span><span class="token string">'div'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    page<span class="token punctuation">.</span>className <span class="token operator">=</span> <span class="token string">'myapp-widget-container myapp-widget-centered'</span><span class="token punctuation">;</span>
+    page<span class="token punctuation">.</span>innerHTML <span class="token operator">=</span>
+      <span class="token string">'&#x3C;div class="myapp-widget-content">'</span> <span class="token operator">+</span>
+        <span class="token string">'&#x3C;div class="myapp-widget-title">Schedule your hair cute&#x3C;/div>'</span> <span class="token operator">+</span>
+        <span class="token string">'&#x3C;div class="myapp-widget-form">'</span> <span class="token operator">+</span>
+          <span class="token string">'&#x3C;div class="myapp-widget-row">'</span> <span class="token operator">+</span>
+            <span class="token string">'&#x3C;input id="myapp-widget-first-name" type="text" placeholder="First Name" />'</span> <span class="token operator">+</span>
+            <span class="token string">'&#x3C;input id="myapp-widget-last-name" type="text" placeholder="Last Name" />'</span> <span class="token operator">+</span>
+          <span class="token string">'&#x3C;/div>'</span> <span class="token operator">+</span>
+          <span class="token string">'&#x3C;div class="myapp-widget-row">'</span> <span class="token operator">+</span>
+            <span class="token string">'&#x3C;input id="myapp-widget-date" type="date" />'</span> <span class="token operator">+</span>
+          <span class="token string">'&#x3C;/div>'</span> <span class="token operator">+</span>
+          <span class="token string">'&#x3C;div id="myapp-widget-subscribe-action" class="myapp-widget-action myapp-widget-unselectable">Schedule&#x3C;/div>'</span> <span class="token operator">+</span>
+        <span class="token string">'&#x3C;/div>'</span> <span class="token operator">+</span>
+      <span class="token string">'&#x3C;/div>'</span><span class="token punctuation">;</span>
+
+    <span class="token keyword">var</span> inputs <span class="token operator">=</span> page<span class="token punctuation">.</span><span class="token function">getElementsByTagName</span><span class="token punctuation">(</span><span class="token string">'input'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">var</span> ind <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span> inputs<span class="token punctuation">[</span>ind<span class="token punctuation">]</span> <span class="token operator">!=</span> <span class="token keyword">undefined</span><span class="token punctuation">;</span> ind<span class="token operator">++</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+      <span class="token function">customizeInput</span><span class="token punctuation">(</span>inputs<span class="token punctuation">[</span>ind<span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+
+    <span class="token keyword">var</span> action <span class="token operator">=</span> page<span class="token punctuation">.</span><span class="token function">getElementsByClassName</span><span class="token punctuation">(</span><span class="token string">'myapp-widget-action'</span><span class="token punctuation">)</span><span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+    action<span class="token punctuation">.</span>onclick <span class="token operator">=</span> scheduleButtonClicked<span class="token punctuation">;</span>
+    <span class="token function">customizeAction</span><span class="token punctuation">(</span>action<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+    <span class="token keyword">return</span> page<span class="token punctuation">;</span>
+  <span class="token punctuation">}</span>
+
+  <span class="token keyword">function</span> <span class="token function">toggleWidgetCollapsed</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">var</span> widget <span class="token operator">=</span> <span class="token function">me</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span>widget<span class="token punctuation">;</span>
+    widget<span class="token punctuation">.</span>isCollpased <span class="token operator">?</span> <span class="token function">showWidget</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">:</span> <span class="token function">hideWidget</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token punctuation">}</span>
+
+  <span class="token keyword">function</span> <span class="token function">hideWidget</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">var</span> widget <span class="token operator">=</span> <span class="token function">me</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span>widget<span class="token punctuation">;</span>
+    widget<span class="token punctuation">.</span>className <span class="token operator">=</span> <span class="token string">'myapp-widget-widget myapp-widget-centered myapp-widget-hidden'</span><span class="token punctuation">;</span>
+    widget<span class="token punctuation">.</span>isCollpased <span class="token operator">=</span> <span class="token boolean">true</span><span class="token punctuation">;</span>
+    <span class="token function">clearWidgetForm</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token punctuation">}</span>
+
+  <span class="token keyword">function</span> <span class="token function">showWidget</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">var</span> widget <span class="token operator">=</span> <span class="token function">me</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span>widget<span class="token punctuation">;</span>
+    widget<span class="token punctuation">.</span>className <span class="token operator">=</span> <span class="token string">'myapp-widget-widget myapp-widget-centered myapp-widget-visible'</span><span class="token punctuation">;</span>
+    widget<span class="token punctuation">.</span>isCollpased <span class="token operator">=</span> <span class="token boolean">false</span><span class="token punctuation">;</span>
+  <span class="token punctuation">}</span>
+
+  <span class="token keyword">function</span> <span class="token function">scheduleButtonClicked</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">var</span> xhttp <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">XMLHttpRequest</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    xhttp<span class="token punctuation">.</span><span class="token function">open</span><span class="token punctuation">(</span><span class="token string">"POST"</span><span class="token punctuation">,</span> <span class="token string">"&#x3C;URL to the appropriate resource>"</span><span class="token punctuation">,</span> <span class="token boolean">true</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    xhttp<span class="token punctuation">.</span><span class="token function">setRequestHeader</span><span class="token punctuation">(</span><span class="token string">"Content-type"</span><span class="token punctuation">,</span> <span class="token string">"application/json"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    xhttp<span class="token punctuation">.</span><span class="token function-variable function">onreadystatechange</span> <span class="token operator">=</span> <span class="token keyword">function</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+      <span class="token keyword">if</span> <span class="token punctuation">(</span>xhttp<span class="token punctuation">.</span>readyState <span class="token operator">!=</span> <span class="token number">4</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">return</span>
+      <span class="token punctuation">}</span>
+
+      <span class="token keyword">var</span> responseText <span class="token operator">=</span> xhttp<span class="token punctuation">.</span>responseText<span class="token punctuation">;</span>
+      <span class="token keyword">try</span> <span class="token punctuation">{</span>
+        <span class="token keyword">var</span> response <span class="token operator">=</span> <span class="token constant">JSON</span><span class="token punctuation">.</span><span class="token function">parse</span><span class="token punctuation">(</span>responseText<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span>xhttp<span class="token punctuation">.</span>status <span class="token operator">>=</span> <span class="token number">200</span> <span class="token operator">&#x26;&#x26;</span> xhttp<span class="token punctuation">.</span>status <span class="token operator">&#x3C;</span> <span class="token number">300</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+          <span class="token function">hideWidget</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span> <span class="token keyword">else</span> <span class="token punctuation">{</span>
+          <span class="token keyword">var</span> msg <span class="token operator">=</span> response<span class="token punctuation">.</span>error<span class="token punctuation">.</span>message
+          <span class="token function">alert</span><span class="token punctuation">(</span><span class="token string">"Oops! Something went wrong. "</span> <span class="token operator">+</span> response<span class="token punctuation">.</span>error<span class="token punctuation">.</span>message<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+      <span class="token punctuation">}</span> <span class="token keyword">catch</span> <span class="token punctuation">(</span>error<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token function">alert</span><span class="token punctuation">(</span><span class="token string">"Oops! Something went wrong, please try again later."</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        console<span class="token punctuation">.</span><span class="token function">error</span><span class="token punctuation">(</span>error<span class="token punctuation">)</span>
+      <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span><span class="token punctuation">;</span>
+
+    <span class="token keyword">var</span> params <span class="token operator">=</span> <span class="token punctuation">{</span>
+      <span class="token string-property property">'client_id'</span><span class="token operator">:</span> <span class="token function">me</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span>options<span class="token punctuation">.</span>clientId<span class="token punctuation">,</span>
+      <span class="token string-property property">'schedule'</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+        <span class="token string-property property">'date'</span><span class="token operator">:</span> <span class="token function">me</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span>doc<span class="token punctuation">.</span><span class="token function">getElementById</span><span class="token punctuation">(</span><span class="token string">'myapp-widget-date'</span><span class="token punctuation">)</span><span class="token punctuation">.</span>value<span class="token punctuation">,</span>
+        <span class="token string-property property">'first_name'</span><span class="token operator">:</span> <span class="token function">me</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span>doc<span class="token punctuation">.</span><span class="token function">getElementById</span><span class="token punctuation">(</span><span class="token string">'myapp-widget-first-name'</span><span class="token punctuation">)</span><span class="token punctuation">.</span>value<span class="token punctuation">,</span>
+        <span class="token string-property property">'last_name'</span><span class="token operator">:</span> <span class="token function">me</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span>doc<span class="token punctuation">.</span><span class="token function">getElementById</span><span class="token punctuation">(</span><span class="token string">'myapp-widget-last-name'</span><span class="token punctuation">)</span><span class="token punctuation">.</span>value
+      <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span><span class="token punctuation">;</span>
+    xhttp<span class="token punctuation">.</span><span class="token function">send</span><span class="token punctuation">(</span><span class="token constant">JSON</span><span class="token punctuation">.</span><span class="token function">stringify</span><span class="token punctuation">(</span>params<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>    
+  <span class="token punctuation">}</span>
+
+  <span class="token comment">/******* DIY: straightforward functions *******/</span>
+
+  <span class="token comment">// change marker style properties according to the options passed</span>
+  <span class="token keyword">function</span> <span class="token function">customizeMarker</span><span class="token punctuation">(</span><span class="token parameter">marker<span class="token punctuation">,</span> options</span><span class="token punctuation">)</span> <span class="token punctuation">{</span> <span class="token punctuation">}</span>
+
+  <span class="token comment">// change widget body style properties according to the options passed</span>
+  <span class="token keyword">function</span> <span class="token function">customizeWidgetBody</span><span class="token punctuation">(</span><span class="token parameter">body<span class="token punctuation">,</span> options</span><span class="token punctuation">)</span> <span class="token punctuation">{</span> <span class="token punctuation">}</span>
+
+  <span class="token comment">// change input style properties according to the options passed</span>
+  <span class="token keyword">function</span> <span class="token function">customizeInput</span><span class="token punctuation">(</span><span class="token parameter">input<span class="token punctuation">,</span> options</span><span class="token punctuation">)</span> <span class="token punctuation">{</span> <span class="token punctuation">}</span>
+
+  <span class="token comment">// change action style properties according to the options passed</span>
+  <span class="token keyword">function</span> <span class="token function">customizeAction</span><span class="token punctuation">(</span><span class="token parameter">action<span class="token punctuation">,</span> options</span><span class="token punctuation">)</span> <span class="token punctuation">{</span> <span class="token punctuation">}</span>
+
+  <span class="token comment">// clear form input values</span>
+  <span class="token keyword">function</span> <span class="token function">clearWidgetForm</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span> <span class="token punctuation">}</span>
+<span class="token punctuation">}</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span></code></pre></div></span>
+<blockquote>
+<p>To keep this blogpost simple we omitted some implementations and the entire CSS file. Don't worry, these files are in the templates code base in a <a href="https://github.com/xmartlabs/javascript-plugin">repo at GitHub</a>.</p>
+</blockquote>
+<h2 id="2-server-time">2. Server Time</h2>
+<p>Now that we've done our brand new JavaScript plug-in, it's time to handle some concerns in the server side:</p>
+<h3 id="21-dynamic-javascript">2.1. Dynamic JavaScript</h3>
+<p>In some cases you may need to do some minor modifications in the plug-in, based on the client that is currently requiring the widget.
+Let's see this with an example: imagine that we allow our clients to modify the widget's positioning and styles dynamically (that way it will be integrated smoothly).</p>
+<p>With this information accessible, we need a way to retrieve it depending on the client web site that is requesting our plug-in.
+So, you need to add an endpoint to serve the plug-in and remove the static JavaScript file.
+Such endpoint will accept a <span><code class="language-text">clientId</code></span> parameter included in the request in order to get our plug-in JavaScript customized with the client preferences.</p>
+<p>If <span><code class="language-text">clientId</code></span> is not present we can return a default JavaScript without any customization.</p>
+<p>You can save the plug-in code and the CSS files as a template (ERB, HAML, etc., if you are using Ruby) and use an engine to render them.
+The following code will help you to achieve this.</p>
+<span><div class="code-highlight" data-language="javascript"><pre class="language-javascript" data-language="javascript"><code class="language-javascript"><span class="token comment">// Instead of setting the `href` property of the style element, just add the parse CSS file</span>
+<span class="token comment">// content as its `innerHTML`</span>
+<span class="token keyword">var</span> css <span class="token operator">=</span> <span class="token function">me</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span>doc<span class="token punctuation">.</span><span class="token function">createElement</span><span class="token punctuation">(</span><span class="token string">'style'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token comment">// As an example, we are passing an additionally option arguments in order to make some</span>
+<span class="token comment">// modifications to the CSS template file.</span>
+css<span class="token punctuation">.</span>innerHTML <span class="token operator">=</span> <span class="token string">"&#x3C;%=j render('widget/widget.css', options: options) %>"</span><span class="token punctuation">;</span>
+<span class="token function">me</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span>doc<span class="token punctuation">.</span><span class="token function">getElementsByTagName</span><span class="token punctuation">(</span><span class="token string">'head'</span><span class="token punctuation">)</span><span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">.</span><span class="token function">appendChild</span><span class="token punctuation">(</span>css<span class="token punctuation">)</span><span class="token punctuation">;</span></code></pre></div></span>
+<blockquote>
+<p>We have embed the CSS result within the script as a HTML <span><code class="language-text">style</code></span> element.</p>
+</blockquote>
+<h3 id="22-cross-domain-calls">2.2. Cross Domain Calls</h3>
+<p>As is expected our plug-in must be accessible from other domains than ours.
+If we go deeper, any additionally call made from JavaScript must be accessible from any domains rather than ours.</p>
+<p>A way to achieve this is enabling CORS (Cross-origin Resource Sharing) in our backend.</p>
+<blockquote>
+<p>This can be done just for the necessary resources to make our plug-in works properly.</p>
+</blockquote>
+<p>If you are using Rails like us, you can do it by installing <a href="https://github.com/cyu/rack-cors">rack-cors</a>.</p>
+<p>Code below shows an example configuration for <span><code class="language-text">rack-cors</code></span>, it should be included in your application config file:</p>
+<span><div class="code-highlight" data-language="ruby"><pre class="language-ruby" data-language="ruby"><code class="language-ruby"><span class="token keyword">module</span> <span class="token class-name">MyApp</span>
+  <span class="token comment"># Application class</span>
+  <span class="token keyword">class</span> <span class="token class-name">Application</span> <span class="token operator">&#x3C;</span> Rails<span class="token double-colon punctuation">::</span>Application
+
+    config<span class="token punctuation">.</span>middleware<span class="token punctuation">.</span>insert_before <span class="token number">0</span><span class="token punctuation">,</span> <span class="token string-literal"><span class="token string">'Rack::Cors'</span></span> <span class="token keyword">do</span>
+      allow <span class="token keyword">do</span>
+        origins <span class="token string-literal"><span class="token string">'*'</span></span>
+        resource <span class="token string-literal"><span class="token string">'/widget/widget.js'</span></span><span class="token punctuation">,</span> <span class="token symbol">headers</span><span class="token operator">:</span> <span class="token symbol">:any</span><span class="token punctuation">,</span> <span class="token symbol">methods</span><span class="token operator">:</span> <span class="token punctuation">[</span><span class="token symbol">:get</span><span class="token punctuation">,</span> <span class="token symbol">:options</span><span class="token punctuation">]</span>
+        resource <span class="token string-literal"><span class="token string">'/widget/schedule'</span></span><span class="token punctuation">,</span> <span class="token symbol">headers</span><span class="token operator">:</span> <span class="token symbol">:any</span><span class="token punctuation">,</span> <span class="token symbol">methods</span><span class="token operator">:</span> <span class="token punctuation">[</span><span class="token symbol">:post</span><span class="token punctuation">,</span> <span class="token symbol">:options</span><span class="token punctuation">]</span>
+      <span class="token keyword">end</span>
+    <span class="token keyword">end</span>
+
+  <span class="token keyword">end</span>
+<span class="token keyword">end</span></code></pre></div></span>
+<h3 id="23-identifying-client-web-sites">2.3. Identifying Client Web Sites</h3>
+<p>In the sample code of the widget we have created a form allowing users to schedule a hair cut.
+We'd like to be sure that customers registering from the widget are using it from the hair cutting web site and prevent that someone else executes the schedule service from non-allowed domains (remember that we have enabled CORS for the service related to the plug-in).</p>
+<p>The best approach to resolve this, it's having a whitelist of the domains that will be allowed to hit your server.</p>
+<blockquote>
+<p>Remember that a client could have more than one domain from where we should accept requests.</p>
+</blockquote>
+<p>Don't forget to include the <span><code class="language-text">clientId</code></span> in the endpoint that will be secured with this approach, because is going to be required to check that the request was made from one of the client's allowed domains</p>
+<h3 id="24-security">2.4. Security</h3>
+<p>Like everything that is public on internet, it will be tried to be hacked.
+Don't worry we know it's not personal but it's something we shouldn't skip.
+Additionally we have to keep an eye on naively-written scrapers.</p>
+<p>The most common attacks used in the web are <strong>DoS</strong> and <strong>brute force login</strong>, and you don't need any special skill to achieve them… so, everybody is a potential hacker.</p>
+<p>We included <a href="https://github.com/kickstarter/rack-attack">rack-attack</a> in our Ruby backends to protect our public server from evil clients.
+You have to define a set of rules that will be checked in each request prior to continue processing it.</p>
+<p>So, to protect yourself against <strong>DoS</strong> and <strong>brute force</strong> attacks is recommended to specify a max number of requests in a time window in function of specific parameters from each request.
+You can also set a max number of requests by IP or a max number of login attempts with the same username without too much effort.</p>
+<h3 id="25-iframe-vs-plain-html">2.5. iframe vs plain HTML</h3>
+<p>Like every solution, there are always alternatives, each alternative has pros and cons.</p>
+<p>Trying to solve this problem, we considered using <span><code class="language-text">iframes</code></span>, as you may know, <span><code class="language-text">iframes</code></span> are not so popular when you're trying to look like something secure.
+Rendering this <span><code class="language-text">iframe</code></span> will be managed in our server and this could be the bottleneck of this solution.</p>
+<p>Taking this into account is enough to discard the <span><code class="language-text">iframe</code></span> solution, even without considering the advantage that the JS file can be hosted in a CDN server.</p>
+<h3 id="26-css-common-issues">2.6. CSS common issues</h3>
+<p>As we are adding an external CSS file, there are a few things you should consider:</p>
+<ul>
+<li>
+<p><strong>Class name collisions:</strong> you should prevent this by adding a prefix on each class name, something like <span><code class="language-text">myapp-widget-</code></span> should be good enough.
+You know this is a pain in the butt, so be smart and handle it from the beginning.</p>
+</li>
+<li>
+<p><strong>External styles:</strong> since we are including HTML and CSS in an external web site, it's going to be affected by all the rules that are already present on it.
+Something like <span><code class="language-text">* { background: red }</code></span> will change your widget's style and that is something you must avoid.
+You can add a generic selector in your CSS filtering by the previous prefix, where you will override the appropriate values for CSS properties.
+The following code will help you to do it.</p>
+<span><div class="code-highlight" data-language="css"><pre class="language-css" data-language="css"><code class="language-css"><span class="token selector">*[class^='myapp-widget-'],
+*[class^='myapp-widget-'] *</span> <span class="token punctuation">{</span>
+  <span class="token comment">/* Configure some property */</span>
+<span class="token punctuation">}</span></code></pre></div></span>
+</li>
+<li>
+<p><strong>Avoiding a resident evil:</strong> the previous point was about preventing the widget style from being affected by the web site CSS rules, as you know, this is a two way issue, so if you want your clients to use your plug-in you must ensure you don't change anything else in the host.
+So, avoid using generic selectors, try to use the most complete path to the components in your widget.</p>
+</li>
+</ul>
+<h2 id="3-conclusions">3. Conclusions</h2>
+<p>Now you will be able to create your own client side JavaScript plug-in.
+You should know the do's and dont's to make it secure, flexible, non-intrusive, and scalable.</p>
+<p>Do you have any comments or tips? Drop us a line below!</p> 
