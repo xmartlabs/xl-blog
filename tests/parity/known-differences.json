@@ -1,0 +1,107 @@
+{
+  "$comment": "Accepted differences between the live Gatsby blog and the new site. Each entry matches a `path` (exact) or a `pattern` (regex on the path), optionally only some `viewports`, and lists the `checks` it explains (status, height, width, meta, text, blocks, pixels; `meta:<tag>` for one meta tag; * for all). A page whose failing checks are all listed is reported as 'known', not as a failure. Entries with `normalize: true` are site-wide intended fixes: the checks they explain count as equal (the page can still pass); `liveMetaRewrite` ({tag: [regex, replacement]}) fixes a live meta value before comparing.",
+  "differences": [
+    {
+      "pattern": ".*",
+      "normalize": true,
+      "checks": ["meta:canonical", "meta:og:url"],
+      "reason": "SEO fix: the new site emits <link rel=canonical> (live has none) and og:url is the page URL (live uses the site root on list pages and /blog//<slug> on posts)."
+    },
+    {
+      "pattern": ".*",
+      "normalize": true,
+      "liveMetaRewrite": {
+        "og:image": [
+          "^https://blog\\.xmartlabs\\.com(?=[^/])",
+          "https://blog.xmartlabs.com/"
+        ]
+      },
+      "reason": "SEO fix: live og:image misses the slash after the domain on some posts (https://blog.xmartlabs.comimages/…)."
+    },
+    {
+      "path": "/parity-check-this-page-does-not-exist/",
+      "checks": ["meta"],
+      "reason": "The live 404 page has no description/Open Graph tags; the new one has the site defaults."
+    },
+    {
+      "path": "/blog/a-look-back-at-2020/",
+      "checks": ["height", "blocks", "pixels"],
+      "reason": "Instagram embed is sized differently."
+    },
+    {
+      "path": "/blog/2015-10-16-wwdc-2015-by-helen/",
+      "checks": ["height", "blocks", "pixels"],
+      "reason": "Post is 32px taller at 1440px (accepted during the migration)."
+    },
+    {
+      "path": "/blog/challenges-of-building-a-web-with-flutter/",
+      "checks": ["height", "blocks", "pixels"],
+      "reason": "Post is 32px shorter at 1440px (accepted during the migration)."
+    },
+    {
+      "path": "/blog/xmartlabs-in-startup-weekend-montevideo/",
+      "checks": ["height", "blocks", "pixels"],
+      "reason": "Post is 10px taller at 1440px (accepted during the migration)."
+    },
+    {
+      "path": "/blog/crypto-landscape-2021/",
+      "checks": ["height", "text", "blocks", "pixels"],
+      "reason": "Embedded tweets now render (they don't on the live site)."
+    },
+    {
+      "path": "/blog/techcrunch-disrupt-2021-takeaways-for-entrepreneurs-and-founders/",
+      "checks": ["height", "text", "blocks", "pixels"],
+      "reason": "Embedded tweets now render (they don't on the live site)."
+    },
+    {
+      "path": "/blog/pdf-charts-images-processing-with-llm/",
+      "checks": ["height", "blocks", "pixels"],
+      "reason": "An image that is broken on the live site now shows."
+    },
+    {
+      "path": "/tags/",
+      "checks": ["height", "width", "meta", "text", "pixels"],
+      "reason": "Tag index now uses the site layout; tag case variants are merged."
+    },
+    {
+      "pattern": "^/tags/[^/]+/$",
+      "checks": ["height", "width", "meta", "text", "pixels"],
+      "reason": "Tag pages now use the site layout; tag case variants are merged."
+    },
+    {
+      "pattern": "^/authors/[^/]+/$",
+      "checks": ["height", "width", "meta", "text", "pixels"],
+      "reason": "Author pages now use the site layout."
+    },
+    {
+      "path": "/categories/",
+      "checks": ["height", "text", "pixels"],
+      "reason": "The live page has a broken pager (NaN pages)."
+    },
+    {
+      "path": "/tags//",
+      "checks": ["*"],
+      "reason": "Live sitemap lists an empty tag (/tags//), an artefact of the Gatsby site."
+    },
+    {
+      "path": "/categories/development/page/5/",
+      "checks": ["pixels"],
+      "reason": "A card thumbnail points to a relative images/generic.jpg that never loads on the live site; the new site shows the fallback image."
+    },
+    {
+      "path": "/categories/development/page/6/",
+      "checks": ["pixels"],
+      "reason": "A card thumbnail points to a relative images/generic.jpg that never loads on the live site; the new site shows the fallback image."
+    },
+    {
+      "path": "/categories/development/page/7/",
+      "checks": ["pixels"],
+      "reason": "A card thumbnail points to a relative images/generic.jpg that never loads on the live site; the new site shows the fallback image."
+    },
+    {
+      "path": "/categories/people-events/page/2/",
+      "checks": ["pixels"],
+      "reason": "A card thumbnail points to a relative images/generic.jpg that never loads on the live site; the new site shows the fallback image."
+    }
+  ]
+}

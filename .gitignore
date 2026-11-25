@@ -22,3 +22,7 @@ dist/
 
 # Payload local uploads (production uses Vercel Blob)
 /media/
+
+# Parity test (tests/parity): live-site cache and generated report
+tests/parity/.cache/
+tests/parity/report/
