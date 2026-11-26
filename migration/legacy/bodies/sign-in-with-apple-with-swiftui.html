@@ -1,0 +1,170 @@
+ <p>Apple recently updated Swift UI so that integrating <em>Sign In With Apple</em> through it is as seamless as it gets. This and all other new SwiftUI improvements are an indication that Apple is taking seriously the new state-driven, reactive, and declarative way of creating Apple apps. Which also motivates us to update <a href="https://blog.xmartlabs.com/2020/05/04/Why-Sign-in-with-Apple-and-integration-guide/">our guide</a> about integrating Sign in with Apple, but now using SwiftUI.</p>
+<p>First, we&#39;ll cover the benefits of integrating <em>Sign in with Apple</em> in your app, so you can decide if it&#39;s worth a feature, then in the latter part, we&#39;ll provide a step by step <em>Sign in with Apple</em> integration guide for a SwiftUI app.</p>
+<h3 id="whats-sign-in-with-apple-in-case-you-dont-know-yet">What’s Sign in with Apple, in case you don’t know yet…</h3>
+<p><em>Sign in with Apple</em> is a new Apple service that makes it easy for users to authenticate and sign-in into your apps and websites using their Apple ID. Instead of filling out forms, verifying email addresses, and choosing new passwords, they can use Sign in with Apple to set up an account and start using your app right away.</p>
+<blockquote>
+<p>Please note that if your app already provides other third-party social media authentication (such as Facebook, Google, Twitter, etc), Apple demands you to implement <em>Sign in with Apple</em> in order to publish your app in the AppStore. You can visit <a href="https://developer.apple.com/app-store/review/guidelines/#sign-in-with-apple">App Store Review Guidelines</a> for more info about Apple Store review.</p>
+</blockquote>
+<h3 id="what-does-sign-in-with-apple-put-on-the-table">What does <em>Sign in with Apple</em> put on the table?</h3>
+<p>It provides a one-tap frictionless login and authentication system to your app, which means more users will log in after downloading your app, securing a faster growth in the number of app users, especially for Apple device owners who only need to check their identity through Touch Id or Face Id. By using <em>Sign in with Apple</em>, users don’t need to remember app credentials, apps don’t need to provide a password reset and identity and validation workflow in the app, neither provide a specific register nor login form.</p>
+<div style="text-align:center"><img width="60%" src="/images/sign-in-with-apple-swiftui/sign-in-with-apple.gif"/></div>
+<p></p>
+<p><em>Sign in with Apple</em> is FIDO U2F standard complaint, which means security aspects are met and we don’t need to care about it. Apple adds two-factor authentication support by default, providing an extra layer of security.</p>
+<p>Sometimes an app user would prefer <em>Sign in with Apple</em> over the alternatives because it provides the ability to hide its real email. This still allows the app to reach the user real email through Apple servers, the difference is that Apple provided private emails are only reachable from the app registered email domains, so not a single user&#39;s email has value outside app servers (which protects the user from spam servers purchasing your email address).</p>
+<p>Even though <em>Sign in with Apple</em> is multiplatform which means we can make it work on the web, Android devices, Windows apps and platforms provided by Apple. The user still needs to have an Apple device to complete the two-factor authentication, upon Apple Id login the user receives a 2FA code from apple in their device. So if your app is available for non-Apple devices owners just allowing <em>Sign in with Apple</em> is not an option.</p>
+<p>At this point, you should have gotten the idea behind the benefits in adopting <em>Sign in with Apple</em> in your app and be able to decide if it’s useful for your app. So now let’s move on to a step by step integration guide.</p>
+<h2 id="integration-guide">Integration guide</h2>
+<h3 id="prerequisites">Prerequisites</h3>
+<p>iOS 14+ and Xcode 12+.</p>
+<h3 id="add-sign-in-with-apple-capability">Add Sign in with Apple capability</h3>
+<p>We need to add <em>Sign in with Apple</em> capability to our project. Open the Xcode project file. In the project editor, select the target and open the <em>Signing &amp; Capabilities</em> tab. In the toolbar, click the <em>+ Capability</em> button to open the Capabilities library and add the <em>Sign in with Apple</em> capability.</p>
+<img width="100%" src="/images/sign-in-with-apple-swiftui/addCapability.png"/>
+<h3 id="add-capability-on-apple-developer-account">Add capability on Apple Developer Account</h3>
+<p>It’s necessary to configure your project on <strong>Apple Developer Program</strong> portal. Go to <em>Certificates, Identifiers &amp; Profiles</em> → <em>Identifiers</em> and search the identifier to the project. Search <em>Sign in with Apple</em> capability and if it’s not enabled, enable it. Then, click <em>Edit</em> and choose <em>Enable as primary App ID</em> option as it’s shown in the screenshot. Save the new configuration.</p>
+<img width="100%" src="/images/sign-in-with-apple-swiftui/editAppleIDConf.png"/>
+<p>Go back to <em>Certificates, Identifiers &amp; Profile</em> screen and go to the <em>Keys</em> page to register the new key. Press the <em>+</em> button and add the <em>Sign in with Apple</em> capability, then press the <em>Configure</em> button.</p>
+<img width="100%" src="/images/sign-in-with-apple-swiftui/registerNewKey.png"/>
+<p>Make sure to select the correct Primary App ID and save the configuration key.</p>
+<img width="100%" src="/images/sign-in-with-apple-swiftui/configurekey.png"/>
+<p>Now, we have the environment setup done, let’s get into the code.</p>
+<h3 id="sign-in-with-apple-button-for-swift-ui">Sign in with Apple button for Swift UI</h3>
+<p>By using the <em>Sign in with Apple</em> <em>button</em> for Swift UI you can create the authorization request and handle the response as the code snippet below shows.</p>
+<span><div class="code-highlight" data-language="swift"><pre class="language-swift" data-language="swift"><code class="language-swift">        <span class="token class-name">VStack</span> <span class="token punctuation">{</span>
+            <span class="token class-name">SignInWithAppleButton</span><span class="token punctuation">(</span><span class="token punctuation">.</span>signIn<span class="token punctuation">,</span>              <span class="token comment">//1</span>
+                  onRequest<span class="token punctuation">:</span> <span class="token punctuation">{</span> <span class="token punctuation">(</span>request<span class="token punctuation">)</span> <span class="token keyword">in</span>             <span class="token comment">//2</span>
+				    <span class="token comment">//Set up request</span>
+                  <span class="token punctuation">}</span><span class="token punctuation">,</span>
+                  onCompletion<span class="token punctuation">:</span> <span class="token punctuation">{</span> <span class="token punctuation">(</span>result<span class="token punctuation">)</span> <span class="token keyword">in</span>           <span class="token comment">//3</span>
+                    <span class="token keyword">switch</span> result <span class="token punctuation">{</span>
+                    <span class="token keyword">case</span> <span class="token punctuation">.</span><span class="token function">success</span><span class="token punctuation">(</span><span class="token keyword">let</span> authorization<span class="token punctuation">)</span><span class="token punctuation">:</span>
+                        <span class="token comment">//Handle autorization</span>
+                        <span class="token keyword">break</span><span class="token label important">
+                    case</span> <span class="token punctuation">.</span><span class="token function">failure</span><span class="token punctuation">(</span><span class="token keyword">let</span> error<span class="token punctuation">)</span><span class="token punctuation">:</span>
+                        <span class="token comment">//Handle error</span>
+                        <span class="token keyword">break</span>
+                    <span class="token punctuation">}</span>
+                  <span class="token punctuation">}</span><span class="token punctuation">)</span>
+        <span class="token punctuation">}</span><span class="token punctuation">.</span><span class="token function">signInWithAppleButtonStyle</span><span class="token punctuation">(</span><span class="token punctuation">.</span>black<span class="token punctuation">)</span>            <span class="token comment">//4</span></code></pre></div></span>
+<p>Unlike UIKit implementation, there is no need to conform to protocols to handle responses. Let&#39;s elaborate more in the <em>SignInWithAppleButton</em> init parameters (comment 1, 2, 3) and <em>signInWithAppleButtonStyle</em> modifier.</p>
+<ol>
+<li>First parameter allows us to select the button title, choosing between <em>sign in</em>, <em>sign up</em> or <em>continue</em>.</li>
+<li>Second parameter, <span><code class="language-text">onRequest</code></span> closure, allows us to set up the request and scopes.</li>
+<li>The third parameter, <span><code class="language-text">onCompletion</code></span> closure, provides a way to handle the result of the authorization process.</li>
+<li><span><code class="language-text">signInWithAppleButtonStyle(Style)</code></span> set up the button&#39;s color and style.</li>
+</ol>
+<h3 id="request-authorization-with-apple-id">Request Authorization with Apple ID</h3>
+<p>Once the app user taps the button, authorization flow starts displaying the request dialog which is completely handled by Apple, we just need to configure the request in <span><code class="language-text">onRequest</code></span> closure.</p>
+<span><div class="code-highlight" data-language="swift"><pre class="language-swift" data-language="swift"><code class="language-swift">onRequest<span class="token punctuation">:</span> <span class="token punctuation">{</span> <span class="token punctuation">(</span>request<span class="token punctuation">)</span> <span class="token keyword">in</span>  <span class="token comment">//2           </span>
+    request<span class="token punctuation">.</span>requestedScopes <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token punctuation">.</span>fullName<span class="token punctuation">,</span> <span class="token punctuation">.</span>email<span class="token punctuation">]</span>
+    request<span class="token punctuation">.</span>nonce <span class="token operator">=</span> <span class="token function">myNonceString</span><span class="token punctuation">(</span><span class="token punctuation">)</span>               
+    request<span class="token punctuation">.</span>state <span class="token operator">=</span> <span class="token function">myStateString</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+ <span class="token punctuation">}</span><span class="token punctuation">,</span></code></pre></div></span>
+<p><span><code class="language-text">requestedScopes</code></span> specifies the contact information to be requested from the user.</p>
+<p>Including <span><code class="language-text">nonce</code></span> and <span><code class="language-text">state</code></span> value in the request is optional,  they&#39;re used to make our request even more secure.</p>
+<p>Both values are an optional opaque blob of data, sent as String in the request and will be verified later to prevent replay attacks. It’s important to generate a unique value every time you create a new request.</p>
+<h3 id="which-user-authentication-data-does-we-get-from-apple">Which user authentication data does we get from Apple?</h3>
+<p>We’ll receive an <span><code class="language-text">ASAuthorization</code></span>  which has an <span><code class="language-text">ASAuthorizationCredential</code></span>   instance, here are the principal information included:</p>
+<ul>
+<li><strong>User ID</strong>: The unique user ID.</li>
+<li><strong>Full name:</strong> User could edit its full name before sharing it with your app.</li>
+<li><strong>Email</strong>: A user’s email address, which could either be the real user email or an obscured one</li>
+<li><strong>Authorization Code:</strong> Should be sent to backend which uses it to verify the token claims with Apple servers, and exchange them for refresh tokens. For more information, see Generate and Validate Tokens apple documentation.</li>
+<li><strong>Identity Token</strong>: This is a JWT that contains relevant information about user&#39;s authentication.  It should be sent to the backend so it can validate and get the information’s authenticity.</li>
+<li><strong>State</strong>: The state value mentioned before, it must match with state value configured in the request.</li>
+</ul>
+<p>We only receive <em>state</em> value if it was sent in the request.</p>
+<p><strong>nonce</strong> value, if set up in the request, is returned embedded in the <strong>identity token</strong> and should be verified in your server.</p>
+<h3 id="how-do-we-get-this-data">How do we get this data?</h3>
+<p>App invokes <span><code class="language-text">onCompletion</code></span> closure with the result of the authorization request. If successful we receive the authorization credential mentioned before.</p>
+<span><div class="code-highlight" data-language="swift"><pre class="language-swift" data-language="swift"><code class="language-swift">onCompletion<span class="token punctuation">:</span> <span class="token punctuation">{</span> <span class="token punctuation">(</span>result<span class="token punctuation">)</span> <span class="token keyword">in</span>    
+	<span class="token keyword">switch</span> result <span class="token punctuation">{</span>
+	<span class="token keyword">case</span> <span class="token punctuation">.</span><span class="token function">success</span><span class="token punctuation">(</span><span class="token keyword">let</span> authorization<span class="token punctuation">)</span><span class="token punctuation">:</span>
+	    <span class="token comment">//Handle autorization</span>
+	    <span class="token keyword">if</span> <span class="token keyword">let</span> appleIDCredential <span class="token operator">=</span> authorization<span class="token punctuation">.</span>credential <span class="token keyword">as</span><span class="token operator">?</span> <span class="token class-name">ASAuthorizationAppleIDCredential</span> <span class="token punctuation">{</span>
+	        <span class="token keyword">let</span> userId <span class="token operator">=</span> appleIDCredential<span class="token punctuation">.</span>user
+	        <span class="token keyword">let</span> identityToken <span class="token operator">=</span> appleIDCredential<span class="token punctuation">.</span>identityToken
+	        <span class="token keyword">let</span> authCode <span class="token operator">=</span> appleIDCredential<span class="token punctuation">.</span>authorizationCode
+	        <span class="token keyword">let</span> email <span class="token operator">=</span> appleIDCredential<span class="token punctuation">.</span>email
+	        <span class="token keyword">let</span> givenName <span class="token operator">=</span> appleIDCredential<span class="token punctuation">.</span>fullName<span class="token operator">?</span><span class="token punctuation">.</span>givenName
+	        <span class="token keyword">let</span> familyName <span class="token operator">=</span> appleIDCredential<span class="token punctuation">.</span>fullName<span class="token operator">?</span><span class="token punctuation">.</span>familyName
+	        <span class="token keyword">let</span> state <span class="token operator">=</span> appleIDCredential<span class="token punctuation">.</span>state
+	        <span class="token comment">// Here you have to send the data to the backend and according to the response let the user get into the app.</span>
+	    <span class="token punctuation">}</span>
+	    <span class="token keyword">break</span><span class="token label important">
+	case</span> <span class="token punctuation">.</span><span class="token function">failure</span><span class="token punctuation">(</span><span class="token keyword">let</span> error<span class="token punctuation">)</span><span class="token punctuation">:</span>
+	    <span class="token comment">//Handle error</span>
+	    <span class="token keyword">break</span>
+	<span class="token punctuation">}</span>
+<span class="token punctuation">}</span></code></pre></div></span>
+<p>It’s worth highlighting that we only receive all the information if it’s a new user, otherwise we don’t receive <span><code class="language-text">fullName</code></span> neither <span><code class="language-text">email</code></span>. Email data is always included in the identityToken JWT data.</p>
+<p>If something goes wrong the error is shown to the user by Apple SDK through a dialog. Anyway, we might still be interested in handling the error, for instance, in order to log it.</p>
+<h3 id="handling-changes">Handling changes</h3>
+<p>Users could revoke permission for your app from <em>Setting → Apple ID → Password &amp; Security → Apps Using Your Apple ID</em>.</p>
+<div style="text-align:center"><img width="60%" src="/images/sign-in-with-apple-swiftui/revoke.png"/></div>
+<p>Apple provides a way to know when an authentication change happens through <span><code class="language-text">ASAuthorizationAppleIDProvider.credentialRevokedNotification</code></span>  notification.</p>
+<p>To handle the change we need to register for the notification:</p>
+<span><div class="code-highlight" data-language="swift"><pre class="language-swift" data-language="swift"><code class="language-swift"><span class="token class-name">NotificationCenter</span><span class="token punctuation">.</span><span class="token keyword">default</span><span class="token punctuation">.</span><span class="token function">addObserver</span><span class="token punctuation">(</span><span class="token keyword">self</span><span class="token punctuation">,</span> selector<span class="token punctuation">:</span> <span class="token other-directive property">#selector</span><span class="token punctuation">(</span><span class="token function">appleIDCredentialRevoked</span><span class="token punctuation">(</span><span class="token omit keyword">_</span><span class="token punctuation">:</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">,</span> name<span class="token punctuation">:</span> <span class="token class-name">ASAuthorizationAppleIDProvider</span><span class="token punctuation">.</span>credentialRevokedNotification<span class="token punctuation">,</span> object<span class="token punctuation">:</span> <span class="token nil constant">nil</span><span class="token punctuation">)</span></code></pre></div></span>
+<p>We can check the credential state with <span><code class="language-text">getCredentialState</code></span> as the notification handler in the code below shows. Remember that we should have saved the user identifier in our app keychain as we told earlier.</p>
+<span><div class="code-highlight" data-language="swift"><pre class="language-swift" data-language="swift"><code class="language-swift"><span class="token comment">// ASAuthorizationAppleIDProvider.credentialRevokedNotification handler</span>
+<span class="token attribute atrule">@objc</span> <span class="token keyword">func</span> <span class="token function-definition function">appleIDCredentialRevoked</span><span class="token punctuation">(</span><span class="token omit keyword">_</span> notification<span class="token punctuation">:</span> <span class="token class-name">Notification</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">let</span> appleIDProvider <span class="token operator">=</span> <span class="token class-name">ASAuthorizationAppleIDProvider</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+    appleIDProvider<span class="token punctuation">.</span><span class="token function">getCredentialState</span><span class="token punctuation">(</span>forUserID<span class="token punctuation">:</span> userIdentifier<span class="token punctuation">)</span> <span class="token punctuation">{</span> <span class="token punctuation">(</span>credentialState<span class="token punctuation">,</span> error<span class="token punctuation">)</span> <span class="token keyword">in</span>
+        <span class="token keyword">switch</span> credentialState <span class="token punctuation">{</span>
+        <span class="token keyword">case</span> <span class="token punctuation">.</span>authorized<span class="token punctuation">:</span>
+            <span class="token comment">// The Apple ID credential is valid.</span>
+            <span class="token keyword">break</span><span class="token label important">
+        case</span> <span class="token punctuation">.</span>revoked<span class="token punctuation">:</span>
+            <span class="token comment">// The Apple ID credential is revoked. Sign out.</span>
+            <span class="token keyword">break</span><span class="token label important">
+        case</span> <span class="token punctuation">.</span>notFound<span class="token punctuation">:</span>
+            <span class="token comment">// No credential was found. Show login UI.</span>
+            <span class="token keyword">break</span><span class="token label important">
+        case</span> <span class="token punctuation">.</span>transferred<span class="token punctuation">:</span>
+            <span class="token comment">// The application was transferred from one development team to another.</span>
+					  <span class="token comment">// You can use the same code used to authenticate the user adding the locally saved user identifier in the request.</span>
+        <span class="token keyword">default</span><span class="token punctuation">:</span>
+            <span class="token keyword">break</span>
+        <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span></code></pre></div></span>
+<p><strong>Transferred</strong> is the less common credential state since it represents that the application was recently transferred from one development team to another. <strong>UserIDs</strong> are unique within a development team so it must be migrated. For more information about how to migrate, see Apple official documentation.</p>
+<h2 id="web-and-android-solution">Web and Android solution</h2>
+<p>Apple provides a JavaScript SDK for Android and Web integration. You can take a look at the <a href="https://developer.apple.com/documentation/sign_in_with_apple/sign_in_with_apple_js">Sign in with Apple JS</a> documentation for information about it.</p>
+<h2 id="communication-between-your-backend-and-apple">Communication between your backend and Apple</h2>
+<p>Apple provides a REST API to communicate between your app server and Apple’s authentication servers. You can use it to validate the tokens used to verify a user’s identity. You can read more about it in the following <a href="https://developer.apple.com/documentation/sign_in_with_apple/sign_in_with_apple_rest_api">documentation</a>.</p>
+<h3 id="server-to-server-developer-notifications">Server to server developer notifications</h3>
+<p>This is a new feature introduced this year which allows us to monitor the users&#39; authentication state. To start listening to these notifications you have to register your <em>server endpoint</em> on the <em>Apple developer’s Website</em>. Events will be sent as JSON web tokens signed by Apple. We can receive some of these events:</p>
+<ul>
+<li><strong>consent-revoked:</strong> when a user decides to stop using their Apple ID with your application. It should be triggered as a sign out by the user.</li>
+<li><strong>account-deleted:</strong> when a user deletes their Apple ID. When the user deletes their account the user identifier associated will no longer be valid.</li>
+</ul>
+<p>If the user previously decided to use a private email relay for their account you can also receive these notifications:</p>
+<ul>
+<li><strong>email-disabled:</strong> when a user has decided to stop receiving emails on their email relay.</li>
+<li><strong>email-enabled:</strong> when the user opted back into receiving emails.</li>
+</ul>
+<p>Here we can see how this JWT looks like:</p>
+<div style="text-align:center"><img width="60%" src="/images/sign-in-with-apple-swiftui/JWT-server-to-server-notification.png"/></div>
+<h2 id="register-your-email-domains">Register your email domains</h2>
+<p>As we mentioned before, to communicate with app users who tap the <em>hide my email</em> option we must register the app email server domain. You must have already configured Sender Policy Framework (SPF) in order to use it at this point.</p>
+<p>In order to configure your email domains enter to <strong>Apple Developer Program</strong>. Go to <em>Certificates, Identifiers &amp; Profile → More</em> and tap <em>Configure</em> button</p>
+<img width="100%" src="/images/sign-in-with-apple-swiftui/emailComunication.png"/>
+<p>Tap <em>+</em> to register your email sources. In <em>Domains and Subdomains</em> section add your domain name, click <em>Next</em> and <em>Register</em></p>
+<img width="100%" src="/images/sign-in-with-apple-swiftui/registerEmailSources.png"/>
+<blockquote>
+<p>The register will fail if you don&#39;t use SPF. If you&#39;re using Google to send mails, <a href="https://support.google.com/a/answer/33786?hl=en">here</a> you have a configuration guide.</p>
+</blockquote>
+<p>After you get your domain registered, click <em>Download</em> and place the file in the specified location (<a href="https://YourDomain/.well-known/apple-developer-domain-association.txt">https://YourDomain/.well-known/apple-developer-domain-association.txt</a>) and click <em>Verify</em>.</p>
+<img width="100%" src="/images/sign-in-with-apple-swiftui/downloadRegister.jpeg"/>
+<p>You will see a green checkmark if your domain passes the verification:</p>
+<img width="100%" src="/images/sign-in-with-apple-swiftui/checkDomain.jpeg"/>
+<h2 id="upgrading-users-to-sign-in-with-apple">Upgrading users to Sign in with Apple</h2>
+<p><em>Sign in with Apple</em> provides multiple benefits to current app users as we have discussed, so at a certain point some app users would be interested in start using Sign in with Apple over its current authentication system. Before iOS 14, there wasn&#39;t a simple way to do so, normally we ended up losing their account information or having a duplicated user.</p>
+<p>iOS 14 introduced a new API to help users migrate to Sign in with Apple. This new API provides you with the support for adding your custom UI in case any custom security verification needs to be completed before asking for a Sign in with Apple credential.</p>
+<h2 id="aspects-to-keep-in-mind">Aspects to keep in mind</h2>
+<p>There are some aspects you should consider if you decide to integrate Sign in with Apple.</p>
+<p>As we mentioned before, developers only receive the user&#39;s email and full name once, so if there is a connection issue and you don’t save this data locally you won’t be able to recover it.</p>
+<p>If users choose the <em>hide my email</em> option, it could be difficult to identify the user since the app only holds its apple identifier and its apple private email. So any communication should be done through the app.</p>
+<p>Well, I hope now you have a better understanding of <em>Sign in with Apple</em>, what&#39;s its integration cost, and if it’s desirable for your app!</p>
+<p><em><strong>Are you integrating Sign in with Apple in your app and did you encounter something that wasn&#39;t covered in this post? Let me know in the comments. I’d be interested to add it to this blogpost.</strong></em></p>
+<p><em><strong>Have questions about Sign in with Apple? I’d be happy to answer those in the comments if I can.</strong></em></p> 

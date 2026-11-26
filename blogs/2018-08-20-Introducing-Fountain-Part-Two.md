@@ -4,7 +4,7 @@ subtitle: " how we can integrate a numerated paged service, to the best of my
   knowledge, using our new Fountain library. part2"
 permalink: /introducing-fountain-part-two/
 featured: true
-date: 2018-08-20 09:00:00
+date: 2018-08-20
 category: development
 thumbnail: /images/fountain-part-2-web.png
 tags:

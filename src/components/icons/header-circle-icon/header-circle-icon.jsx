@@ -1,8 +1,6 @@
 import React from 'react';
 
-import PropTypes from 'prop-types';
-
-export const HeaderCircleIcon = ({ className }) => (
+export const HeaderCircleIcon = () => (
   <svg
     width="241"
     height="242"
@@ -300,11 +298,3 @@ export const HeaderCircleIcon = ({ className }) => (
     />
   </svg>
 );
-
-HeaderCircleIcon.propTypes = {
-  className: PropTypes.string,
-};
-
-HeaderCircleIcon.defaultProps = {
-  className: '',
-};

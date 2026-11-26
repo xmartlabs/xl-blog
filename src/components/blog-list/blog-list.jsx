@@ -1,28 +1,33 @@
+'use client';
+
 import React, { useEffect, useRef } from 'react';
-import PropTypes from 'prop-types';
-import { Link } from 'gatsby';
 
 import { Pager } from '../pager';
 import { Card } from '../card';
 import { ErrorSafeLocalStorage, classnames } from '../../helpers';
 
-const Categories = {
-  all: 'All',
-  development: 'Development',
-  'product-design': 'Design',
-  'machine-learning': 'Machine\u00a0Learning',
-  'people-events': 'People',
-  strategy: 'Strategy',
-  qa: 'QA',
-};
-
-export const BlogList = ({ pageContext, data, location: { pathname } }) => {
-  const selectedCategory = pathname.startsWith('/categories/')
-    ? pathname.split('/')[2]
-    : 'all';
-
-  const posts = data?.allMdx?.edges || [];
-
+// Props are plain serializable data so this can be rendered from a Server Component:
+// - posts: [{ id, title, slug, thumbnail }]
+// - pageContext: { currentPage, numPages, category }
+// - selectedCategory: category id, 'all', or '' (none selected)
+// - categoryTabs: [{ id, label, href }]
+// - pathname: current page path (with trailing slash)
+/**
+ * @param {{
+ *   posts?: { id: string | number, title: string, slug: string, thumbnail: string | null }[],
+ *   pageContext: { currentPage: number, numPages: number, category?: string },
+ *   selectedCategory?: string,
+ *   categoryTabs?: { id: string, label: string, href: string }[],
+ *   pathname: string,
+ * }} props
+ */
+export const BlogList = ({
+  posts = [],
+  pageContext,
+  selectedCategory = 'all',
+  categoryTabs = [],
+  pathname,
+}) => {
   // Scroll to desired page height
   const categoryFiltersRef = useRef(null);
   useEffect(() => {
@@ -54,21 +59,22 @@ export const BlogList = ({ pageContext, data, location: { pathname } }) => {
         "
         ref={categoryFiltersRef}
       >
-        {Object.keys(Categories).map((category) => (
-          <Link
-            key={category}
+        {categoryTabs.map(({ id, label, href }) => (
+          <a
+            key={id}
+            aria-current={href === pathname ? 'page' : undefined}
             onClick={() =>
               ErrorSafeLocalStorage.setItem('scrollTo', window.scrollY)
             }
             className={classnames(
               '!text-filter font-primary tracking-[1px] list-none no-underline w-fit text-gray-five',
-              category === selectedCategory &&
+              id === selectedCategory &&
                 'text-xl-pink border-b-[2px] border-xl-pink'
             )}
-            to={category === 'all' ? '/' : `/categories/${category}/`}
+            href={href}
           >
-            {Categories[category]}
-          </Link>
+            {label}
+          </a>
         ))}
       </div>
       <div
@@ -77,24 +83,11 @@ export const BlogList = ({ pageContext, data, location: { pathname } }) => {
           max-sm:m-0 max-sm:gap-[4rem_0] max-sm:grid-cols-[auto]
         "
       >
-        {posts.map(({ node }) => (
-          <Card data={node} key={node.id} withCategory={false} />
+        {posts.map((post) => (
+          <Card data={post} key={post.id} />
         ))}
       </div>
-      <Pager {...pageContext} />
+      <Pager {...pageContext} pathname={pathname} />
     </>
   );
-};
-
-BlogList.propTypes = {
-  data: PropTypes.shape({
-    allMdX: PropTypes.shape({
-      group: PropTypes.arrayOf(
-        PropTypes.shape({
-          fieldValue: PropTypes.string.isRequired,
-          totalCount: PropTypes.number.isRequired,
-        }).isRequired
-      ),
-    }),
-  }),
 };

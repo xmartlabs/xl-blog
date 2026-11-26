@@ -1,3 +1,6 @@
+'use client';
+/* eslint-disable @next/next/no-html-link-for-pages -- Plain <a> on purpose: same markup and full-page navigation as the old site (the list pages restore scroll position on load). */
+
 import React, { useState } from 'react';
 
 import { NavMenuElements } from './nav-menu-elements';
@@ -33,7 +36,7 @@ export const NavMenu = () => {
               onClick={() => setShowTypeForm(true)}
             >
               <div className="leading-[22px] text-[14px] font-black tracking-[0.5px] max-h-[17px]">
-                Let's Talk
+                Let&apos;s Talk
               </div>
             </button>
           )}

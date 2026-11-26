@@ -1,8 +1,6 @@
 import React from 'react';
 
-import PropTypes from 'prop-types';
-
-export const LinkedInIcon = ({ className }) => (
+export const LinkedInIcon = ({ className = '' }) => (
   <svg
     width="21"
     height="22"
@@ -17,11 +15,3 @@ export const LinkedInIcon = ({ className }) => (
     />
   </svg>
 );
-
-LinkedInIcon.propTypes = {
-  className: PropTypes.string,
-};
-
-LinkedInIcon.defaultProps = {
-  className: '',
-};

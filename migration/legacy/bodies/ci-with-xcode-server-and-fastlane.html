@@ -1,0 +1,456 @@
+ <p>In this post I&#39;m going to write about my experience and the problems I faced when setting up Xcode Server for CI and automatic deployment to iTunes Connect at Xmartlabs. I&#39;m going to let you know how I could solve some problems hoping it may help somebody in the same situation.</p>
+<p>There are a lot of blogs that explain how to set up Xcode Server, create an integration bot, and explore the results on Xcode (issue tracking, tests code coverage, etc). However, when you try to make something more sophisticated, you may encounter some errors and it will be difficult to find resources for a solution.</p>
+<h4 id="why-did-we-have-our-own-ci-server">Why did we have our own CI server?</h4>
+<p>Well, almost everybody knows the benefits of having a CI server; it can automatically analyze code, run unit and UI tests, build your project among some other valuable task. If something goes wrong, it will notify the results to people that may have introduced the issue. Xcode bot tracks all new issues of each integration as well as solved ones. For new issues, the bot will display a range of commits where the issue may have introduced. Moreover, we no longer need to deal with deployment provisioning profiles and certificates allowing anyone on the team to easily release a new version of the app.</p>
+<p>In short, this allows the programmer to spend more time on app development and less on app integration and deployment. Meanwhile it ensures the code has certain minimum quality level.</p>
+<h2 id="setting-up-xcode-server">Setting up Xcode server</h2>
+<p>The guide <a href="https://developer.apple.com/library/ios/documentation/IDEs/Conceptual/xcode_guide-continuous_integration/">Xcode Server and Continuous Integration Guide</a> from Apple will give you a good introduction on how to setup and use Xcode Server. We recommend that you read the guide first because we are not going too deep into the basics of setting up Xcode Server.</p>
+<h4 id="cocoapods--fastlane">Cocoapods &amp; Fastlane</h4>
+<p>Once we have installed the Server app and enabled Xcode service, we have to install <a href="https://cocoapods.org/">Cocoapods</a> and <a href="https://fastlane.tools/">Fastlane</a>. Fastlane will help us with many common tasks that are necessary for building a project and uploading the app to iTunes Connect.
+To prevent permissions issues we will install all the gems only for the builder user using <span><code class="language-text">gem install --user-install some_gem</code></span>. Additionally we need to create a symlink to access the Cocoapods and Fastlane binaries in order to access them when our bot is running.</p>
+<p>Before starting, include the ruby bin folder to builder&#39;s path by adding the line below to the files <span><code class="language-text">~/.bashrc</code></span> and <span><code class="language-text">~/.bash_login</code></span>:</p>
+<span><div class="code-highlight" data-language="shell"><pre class="language-shell" data-language="shell"><code class="language-shell"><span></span>
+<span class="token comment"># It may change depending on the ruby&#39;s version on your system</span>
+<span class="token builtin class-name">export</span> <span class="token assign-left variable"><span class="token environment constant">PATH</span></span><span class="token operator">=</span><span class="token string">&quot;<span class="token environment constant">$PATH</span>:/var/_xcsbuildd/.gem/ruby/2.0.0/bin&quot;</span>
+</code></pre></div></span>
+<p>Now let&#39;s install these gems:</p>
+<span><div class="code-highlight" data-language="shell"><pre class="language-shell" data-language="shell"><code class="language-shell"><span></span>
+$ <span class="token function">sudo</span> <span class="token function">su</span> - _xcsbuildd
+
+$ gem <span class="token function">install</span> --user-install cocoapods
+$ pod setup
+$ <span class="token function">ln</span> <span class="token parameter variable">-s</span> <span class="token variable"><span class="token variable">`</span><span class="token function">which</span> pod<span class="token variable">`</span></span> /Applications/Xcode.app/Contents/Developer/usr/bin/pod
+
+$ gem <span class="token function">install</span> --user-install fastlane
+$ <span class="token function">ln</span> <span class="token parameter variable">-s</span> <span class="token variable"><span class="token variable">`</span><span class="token function">which</span> fastlane<span class="token variable">`</span></span> /Applications/Xcode.app/Contents/Developer/usr/bin/fastlane
+</code></pre></div></span>
+<h4 id="emails--notifications">Emails &amp; Notifications</h4>
+<p>A nice Xcode Server feature has the ability to send an email to selected people depending on the integration result. For example, if the integration fails because the project is not compiling, or some tests are not passing, the bot will send an email to the last committers notifying that the build has been broken.</p>
+<p>Since we use a Gmail account to send emails, we had to change the settings on the Mail service on Server app.
+First enable the Mail service on Server. Then check the option <em>Relay outgoing mail through ISP</em>. On the Relay option dialog you have to put <span><code class="language-text">smtp.gmail.com:587</code></span> in <em>Outgoing Mail Relay</em>, enable authentication and enter valid credentials. That&#39;s all you have to set up for your Server to send the email using your Gmail account.</p>
+<img src="/images/remer-xcode-server/mail-setup.png" alt="Mail setup"/>
+<h2 id="creating-the-bots">Creating the bots</h2>
+<p>Now that we have our Xcode server up and running, it&#39;s time to create our Xcode bots. At Xmartlabs, we set up two different bots for each Xcode project.</p>
+<h3 id="continuous-integration-bot">Continuous Integration bot</h3>
+<p>Indented to make sure the project builds properly and code analysis, Unit &amp; UI tests pass accordingly. This bot is triggered automatically each time a pull request is merged into develop branch. Committers will be notified if something goes wrong.</p>
+<p>We can create the bot by following these simple steps:</p>
+<ol>
+<li>Within Xcode project, select menu option Product &gt; Create Bot.</li>
+<li>Follow the creation wizard, it is not too hard to complete. You may encounter some difficulties when setting git credentials. We opted to create a ssh key and use it for our bots. So we ended up selecting ​<em>Existing SSH Keys</em>​ and using the same key for all our bots.</li>
+<li>Integrate it and see if everything is OK.</li>
+</ol>
+<img src="/images/remer-xcode-server/after-trigger-email.png" alt="After trigger email"/>
+<blockquote>
+<p>Something cool is that the email will be sent to all committers that may have introduced the issue and you can specify additional receivers.</p>
+</blockquote>
+<h3 id="deployer-bot">Deployer bot</h3>
+<p>The second bot is in charge of building and uploading the app IPA to iTunes Connect. It will also be responsible for creating and pushing a new git tag using the most recent code base. We&#39;re going to use Fastlane to achieve this.</p>
+<p>Normally we configure it to run on demand or weekly schedules since we usually need to release beta versions once a week.</p>
+<img src="/images/remer-xcode-server/schedule-setup.png" alt="Schedule"/>
+<h4 id="certificates--private-keys">Certificates &amp; Private keys</h4>
+<p>We have to ensure that distribution/development certificates and their associated private key are installed on the System Keychain.</p>
+<img src="/images/remer-xcode-server/keychain.png" alt="Keychain"/>
+<p>To build the IPA, we have to put required provisioning profiles in the folder below since bots run on its own user <span><code class="language-text">_xcsbuildd</code></span> and search provisioning profiles in this folder:</p>
+<p>/Library/Developer/XcodeServer/ProvisioningProfiles</p>
+<h3 id="before-integration-script">Before integration script</h3>
+<p>Xcode integration allows us to provide a before and a after integration script.</p>
+<p>Before our Deployer Bot starts integrating, we have to perform some tasks which will be run from a triggered command:</p>
+<ul>
+<li>Increase build number</li>
+<li>Download required provisioning profiles</li>
+<li>Install the correct versions of the libraries used by the project</li>
+</ul>
+<p>Fastlane tools will look for useful information at <span><code class="language-text">Appfile</code></span> file to deploy the lanes such as <strong>Apple ID</strong> and <strong>application Bundle Identifier</strong>. Code snippet below illustrates how <span><code class="language-text">Appfile</code></span> could looks like:</p>
+<span><div class="code-highlight" data-language="ruby"><pre class="language-ruby" data-language="ruby"><code class="language-ruby"><span></span>
+app_identifier <span class="token string-literal"><span class="token string">&quot;&lt;MY_APP_BUNDLE_ID&gt;&quot;</span></span> <span class="token comment"># The bundle identifier of your app</span>
+
+apple_dev_portal_id <span class="token string-literal"><span class="token string">&quot;&lt;apple_dev_program_email@server.com&gt;&quot;</span></span>  <span class="token comment"># Your Apple email address</span>
+itunes_connect_id <span class="token string-literal"><span class="token string">&quot;&lt;itunes_connect_email@server.com&gt;&quot;</span></span>
+
+<span class="token comment"># You can uncomment the lines below and add your own</span>
+<span class="token comment"># team selection in case you are on multiple teams</span>
+<span class="token comment"># team_name &quot;&lt;TEAM_NAME&gt;&quot;</span>
+<span class="token comment"># team_id &quot;&lt;TEAM_ID&gt;&quot;</span>
+
+<span class="token comment"># To select a team for iTunes Connect use</span>
+<span class="token comment"># itc_team_name &quot;&lt;ITC_TEAM_NAME&gt;&quot;</span>
+<span class="token comment"># itc_team_id &quot;&lt;ITC_TEAM_ID&gt;&quot;</span>
+</code></pre></div></span>
+<p>Downloading and configuring provisioning profiles is done by Fastlane <a href="https://github.com/fastlane/sigh">sigh</a> tool. Its usage is really straightforward, just set up the <span><code class="language-text">Appfile</code></span> correctly and it&#39;ll do the rest.</p>
+<p>The <span><code class="language-text">before_integration</code></span> lane is defined in the <span><code class="language-text">Fastfile</code></span> file as shown below:</p>
+<span><div class="code-highlight" data-language="ruby"><pre class="language-ruby" data-language="ruby"><code class="language-ruby"><span></span>
+lane <span class="token symbol">:before_integration</span> <span class="token keyword">do</span>
+  <span class="token comment"># fetch the number of commits in the current branch</span>
+  build_number <span class="token operator">=</span> number_of_commits
+
+  <span class="token comment"># Set number of commits as the build number in the project&#39;s plist file before the bot actually start building the project.</span>
+  <span class="token comment"># This way, the generated archive will have an auto-incremented build number.</span>
+  set_info_plist_value<span class="token punctuation">(</span>
+    <span class="token symbol">path</span><span class="token operator">:</span> <span class="token string-literal"><span class="token string">&#39;./MyApp-Info.plist&#39;</span></span><span class="token punctuation">,</span>
+    <span class="token symbol">key</span><span class="token operator">:</span> <span class="token string-literal"><span class="token string">&#39;CFBundleVersion&#39;</span></span><span class="token punctuation">,</span>
+    <span class="token symbol">value</span><span class="token operator">:</span> <span class="token string-literal"><span class="token string">&quot;</span><span class="token interpolation"><span class="token delimiter punctuation">#{</span><span class="token content">build_number</span><span class="token delimiter punctuation">}</span></span><span class="token string">&quot;</span></span>
+  <span class="token punctuation">)</span>
+
+  <span class="token comment"># Run `pod install`</span>
+  cocoapods
+
+  <span class="token comment"># Download provisioning profiles for the app and copy them to the correct folder.</span>
+  sigh<span class="token punctuation">(</span><span class="token symbol">output_path</span><span class="token operator">:</span> <span class="token string-literal"><span class="token string">&#39;/Library/Developer/XcodeServer/ProvisioningProfiles&#39;</span></span><span class="token punctuation">,</span> <span class="token symbol">skip_install</span><span class="token operator">:</span> <span class="token boolean">true</span><span class="token punctuation">)</span>
+<span class="token keyword">end</span>
+</code></pre></div></span>
+<blockquote>
+<p><span><code class="language-text">number_of_commits</code></span> and <span><code class="language-text">cocoapods</code></span> are Fastlane actions. Both <span><code class="language-text">Appfile</code></span> and <span><code class="language-text">Fastfile</code></span> files must be within a <span><code class="language-text">fastlane</code></span> folder in the root directory of your project.</p>
+</blockquote>
+<p>If we run <span><code class="language-text">fastlane before_integration</code></span>, it will connect to iOS Member Center and download the profiles for the app indicated by its bundle id in the <span><code class="language-text">Appfile</code></span>. Additionally, we have to send the password to fastlane. To make this work with Xcode bots, we pass it through the environment variable <span><code class="language-text">FASTLANE_PASSWORD</code></span>:</p>
+<span><div class="code-highlight" data-language="shell"><pre class="language-shell" data-language="shell"><code class="language-shell"><span></span>
+$ <span class="token builtin class-name">export</span> <span class="token assign-left variable">FASTLANE_PASSWORD</span><span class="token operator">=</span><span class="token string">&quot;&lt;APPLE_ID_PASSWORD&gt;&quot;</span>
+$ fastlane before_integration
+</code></pre></div></span>
+<blockquote>
+<p>Initially we attempted to use Keychain to pass the passwords to Fastlane <span><code class="language-text">sigh</code></span> but it doesn&#39;t work, for further info about this see <a href="#attempting-to-developer-password-to-fastlane-tools">here</a>.</p>
+</blockquote>
+<p>We will modify the deployer bot by adding a before trigger command on the <em>Triggers</em> tab, that will execute <span><code class="language-text">before_integration</code></span> lane.</p>
+<img src="/images/remer-xcode-server/before-trigger.png" alt="Before trigger"/>
+<blockquote>
+<p>Note that before calling <span><code class="language-text">fastlane</code></span>, we are moving to <span><code class="language-text">myapp</code></span> folder which is the git remote repository name. <strong>Triggers run in the parent project folder</strong>.</p>
+</blockquote>
+<h3 id="after-integration-script">After integration script</h3>
+<p>After the bot finishes integrating the project, we will be able to access the created archive file, export it as an IPA file and upload it to iTunes Connect. We&#39;re going to create an additional lane which be in charge of uploading the IPA to iTunes Connect and also creating a git tag.</p>
+<p>Let&#39;s start simple without taking care of the upload to iTunes Connect for now:</p>
+<span><div class="code-highlight" data-language="ruby"><pre class="language-ruby" data-language="ruby"><code class="language-ruby"><span></span>
+lane <span class="token symbol">:after_integration</span> <span class="token keyword">do</span>
+  plistFile <span class="token operator">=</span> <span class="token string-literal"><span class="token string">&#39;./MyApp-Info.plist&#39;</span></span>
+
+  <span class="token comment"># Get the build and version numbers from the project&#39;s plist file</span>
+  build_number <span class="token operator">=</span> get_info_plist_value<span class="token punctuation">(</span>
+    <span class="token symbol">path</span><span class="token operator">:</span> plist_file<span class="token punctuation">,</span>
+    <span class="token symbol">key</span><span class="token operator">:</span> <span class="token string-literal"><span class="token string">&#39;CFBundleVersion&#39;</span></span><span class="token punctuation">,</span>
+  <span class="token punctuation">)</span>
+  version_number <span class="token operator">=</span> get_info_plist_value<span class="token punctuation">(</span>
+    <span class="token symbol">path</span><span class="token operator">:</span> plist_file<span class="token punctuation">,</span>
+    <span class="token symbol">key</span><span class="token operator">:</span> <span class="token string-literal"><span class="token string">&#39;CFBundleShortVersionString&#39;</span></span><span class="token punctuation">,</span>
+  <span class="token punctuation">)</span>
+
+  <span class="token comment"># Commit changes done in the plist file</span>
+  git_commit<span class="token punctuation">(</span>
+    <span class="token symbol">path</span><span class="token operator">:</span> <span class="token punctuation">[</span><span class="token string-literal"><span class="token string">&quot;</span><span class="token interpolation"><span class="token delimiter punctuation">#{</span><span class="token content">plistFile</span><span class="token delimiter punctuation">}</span></span><span class="token string">&quot;</span></span><span class="token punctuation">]</span><span class="token punctuation">,</span>
+    <span class="token symbol">message</span><span class="token operator">:</span> <span class="token string-literal"><span class="token string">&quot;Version bump to </span><span class="token interpolation"><span class="token delimiter punctuation">#{</span><span class="token content">version_number</span><span class="token delimiter punctuation">}</span></span><span class="token string"> (</span><span class="token interpolation"><span class="token delimiter punctuation">#{</span><span class="token content">build_number</span><span class="token delimiter punctuation">}</span></span><span class="token string">) by CI Builder&quot;</span></span>
+  <span class="token punctuation">)</span>
+
+  <span class="token comment"># TODO: upload to iTunes Connect</span>
+
+  add_git_tag<span class="token punctuation">(</span>
+    <span class="token symbol">tag</span><span class="token operator">:</span> <span class="token string-literal"><span class="token string">&quot;beta/v</span><span class="token interpolation"><span class="token delimiter punctuation">#{</span><span class="token content">version_number</span><span class="token delimiter punctuation">}</span></span><span class="token string">_</span><span class="token interpolation"><span class="token delimiter punctuation">#{</span><span class="token content">build_number</span><span class="token delimiter punctuation">}</span></span><span class="token string">&quot;</span></span>
+  <span class="token punctuation">)</span>
+
+  push_to_git_remote
+
+  push_git_tags
+<span class="token keyword">end</span>
+</code></pre></div></span>
+<p>Now we are going to export the IPA from the archive file created by the bot during the integration. We do this by running the command <span><code class="language-text">xcrun xcodebuild</code></span> in the <span><code class="language-text">after_integration</code></span> lane. Additionally, we&#39;re going to upload the IPA to iTunes Connect using Fastlane <a href="https://github.com/fastlane/deliver">deliver</a> tool. See details below:</p>
+<span><div class="code-highlight" data-language="ruby"><pre class="language-ruby" data-language="ruby"><code class="language-ruby"><span></span>
+lane <span class="token symbol">:after_integration</span> <span class="token keyword">do</span>
+  plistFile <span class="token operator">=</span> <span class="token string-literal"><span class="token string">&#39;./MyApp-Info.plist&#39;</span></span>
+
+  <span class="token comment"># ...</span>
+
+  ipa_folder <span class="token operator">=</span> <span class="token string-literal"><span class="token string">&quot;</span><span class="token interpolation"><span class="token delimiter punctuation">#{</span><span class="token content"><span class="token constant">ENV</span><span class="token punctuation">[</span><span class="token string-literal"><span class="token string">&#39;XCS_DERIVED_DATA_DIR&#39;</span></span><span class="token punctuation">]</span></span><span class="token delimiter punctuation">}</span></span><span class="token string">/deploy/</span><span class="token interpolation"><span class="token delimiter punctuation">#{</span><span class="token content">version_number</span><span class="token delimiter punctuation">}</span></span><span class="token string">.</span><span class="token interpolation"><span class="token delimiter punctuation">#{</span><span class="token content">build_number</span><span class="token delimiter punctuation">}</span></span><span class="token string">/&quot;</span></span>
+  ipa_path <span class="token operator">=</span> <span class="token string-literal"><span class="token string">&quot;</span><span class="token interpolation"><span class="token delimiter punctuation">#{</span><span class="token content">ipa_folder</span><span class="token delimiter punctuation">}</span></span><span class="token string">/</span><span class="token interpolation"><span class="token delimiter punctuation">#{</span><span class="token content">target</span><span class="token delimiter punctuation">}</span></span><span class="token string">.ipa&quot;</span></span>
+  sh <span class="token string-literal"><span class="token string">&quot;mkdir -p </span><span class="token interpolation"><span class="token delimiter punctuation">#{</span><span class="token content">ipa_folder</span><span class="token delimiter punctuation">}</span></span><span class="token string">&quot;</span></span>
+
+  <span class="token comment"># Export the IPA from the archive file created by the bot</span>
+  sh <span class="token string-literal"><span class="token string">&quot;xcrun xcodebuild -exportArchive -archivePath \&quot;</span><span class="token interpolation"><span class="token delimiter punctuation">#{</span><span class="token content"><span class="token constant">ENV</span><span class="token punctuation">[</span><span class="token string-literal"><span class="token string">&#39;XCS_ARCHIVE&#39;</span></span><span class="token punctuation">]</span></span><span class="token delimiter punctuation">}</span></span><span class="token string">\&quot; -exportPath \&quot;</span><span class="token interpolation"><span class="token delimiter punctuation">#{</span><span class="token content">ipa_path</span><span class="token delimiter punctuation">}</span></span><span class="token string">\&quot; -IDEPostProgressNotifications=YES -DVTAllowServerCertificates=YES -DVTSigningCertificateSourceLogLevel=3 -DVTSigningCertificateManagerLogLevel=3 -DTDKProvisioningProfileExtraSearchPaths=/Library/Developer/XcodeServer/ProvisioningProfiles -exportOptionsPlist &#39;./ExportOptions.plist&#39;&quot;</span></span>
+
+  <span class="token comment"># Upload the build to iTunes Connect, it won&#39;t submit this IPA for review.</span>
+  deliver<span class="token punctuation">(</span>
+    <span class="token symbol">force</span><span class="token operator">:</span> <span class="token boolean">true</span><span class="token punctuation">,</span>
+    <span class="token symbol">ipa</span><span class="token operator">:</span> ipa_path
+  <span class="token punctuation">)</span>
+
+  <span class="token comment"># Keep committing and tagging actions after export &amp; upload to prevent confirm the changes to the repo if something went wrong</span>
+  add_git_tag<span class="token punctuation">(</span>
+    <span class="token symbol">tag</span><span class="token operator">:</span> <span class="token string-literal"><span class="token string">&quot;beta/v</span><span class="token interpolation"><span class="token delimiter punctuation">#{</span><span class="token content">version_number</span><span class="token delimiter punctuation">}</span></span><span class="token string">_</span><span class="token interpolation"><span class="token delimiter punctuation">#{</span><span class="token content">build_number</span><span class="token delimiter punctuation">}</span></span><span class="token string">&quot;</span></span>
+  <span class="token punctuation">)</span>
+
+  <span class="token comment"># ...</span>
+
+<span class="token keyword">end</span>
+</code></pre></div></span>
+<blockquote>
+<p>We are not using the bot to create the IPA file because it is not available yet during trigger execution time. We are not using <a href="https://github.com/fastlane/gym">gym</a> either because of the Keychain restriction problem.</p>
+</blockquote>
+<h4 id="supporting-multiples-targets">Supporting multiples targets</h4>
+<p>Typically our projects have production and staging application targets. <span><code class="language-text">Fastfile</code></span> file will require different lanes for each target that we want to upload to iTunes Connect. We need to  modify the <span><code class="language-text">Appfile</code></span> file to set up the correct app identifier depending on each lane:</p>
+<span><div class="code-highlight" data-language="ruby"><pre class="language-ruby" data-language="ruby"><code class="language-ruby"><span></span>
+for_platform <span class="token symbol">:ios</span> <span class="token keyword">do</span>
+  for_lane <span class="token symbol">:before_integration_staging</span> <span class="token keyword">do</span>
+      app_identifier <span class="token string-literal"><span class="token string">&quot;com.xmartlabs.myapp.staging&quot;</span></span>
+  <span class="token keyword">end</span>
+
+  for_lane <span class="token symbol">:after_integration_staging</span> <span class="token keyword">do</span>
+    app_identifier <span class="token string-literal"><span class="token string">&quot;com.xmartlabs.myapp.staging&quot;</span></span>
+  <span class="token keyword">end</span>
+
+  for_lane <span class="token symbol">:before_integration_production</span> <span class="token keyword">do</span>
+      app_identifier <span class="token string-literal"><span class="token string">&quot;com.xmartlabs.myapp&quot;</span></span>
+  <span class="token keyword">end</span>
+
+  for_lane <span class="token symbol">:after_integration_production</span> <span class="token keyword">do</span>
+    app_identifier <span class="token string-literal"><span class="token string">&quot;com.xmartlabs.myapp&quot;</span></span>
+  <span class="token keyword">end</span>
+<span class="token keyword">end</span>
+
+apple_dev_portal_id <span class="token string-literal"><span class="token string">&quot;&lt;apple_dev_program_email@server.com&gt;&quot;</span></span>
+itunes_connect_id <span class="token string-literal"><span class="token string">&quot;&lt;itunes_connect_email@server.com&gt;&quot;</span></span>
+
+<span class="token comment"># team_name &quot;&lt;TEAM_NAME&gt;&quot;</span>
+<span class="token comment"># team_id &quot;&lt;TEAM_ID&gt;&quot;</span>
+</code></pre></div></span>
+<blockquote>
+<p>Setting up apple_dev_portal_id and itunes_connect_id allows us to use different accounts for fetching profiles and uploading to iTunes Connect respectively.</p>
+</blockquote>
+<p>Finally, after some refactor, the <span><code class="language-text">Fastfile</code></span> file may looks like as shown below:</p>
+<span><div class="code-highlight" data-language="ruby"><pre class="language-ruby" data-language="ruby"><code class="language-ruby"><span></span>
+<span class="token keyword">require</span> <span class="token string-literal"><span class="token string">&#39;./libs/utils.rb&#39;</span></span>
+
+fastlane_version <span class="token string-literal"><span class="token string">&#39;1.63.1&#39;</span></span>
+
+default_platform <span class="token symbol">:ios</span>
+
+platform <span class="token symbol">:ios</span> <span class="token keyword">do</span>  
+  before_all <span class="token keyword">do</span>
+    <span class="token constant">ENV</span><span class="token punctuation">[</span><span class="token string-literal"><span class="token string">&quot;SLACK_URL&quot;</span></span><span class="token punctuation">]</span> <span class="token operator">||=</span> <span class="token string-literal"><span class="token string">&quot;https://hooks.slack.com/services/#####/#####/#########&quot;</span></span>
+  <span class="token keyword">end</span>
+
+  after_all <span class="token keyword">do</span> <span class="token operator">|</span>lane<span class="token operator">|</span>
+  <span class="token keyword">end</span>
+
+  error <span class="token keyword">do</span> <span class="token operator">|</span>lane<span class="token punctuation">,</span> exception<span class="token operator">|</span>
+    reset_git_repo<span class="token punctuation">(</span><span class="token symbol">force</span><span class="token operator">:</span> <span class="token boolean">true</span><span class="token punctuation">)</span>
+    slack<span class="token punctuation">(</span>
+      <span class="token symbol">message</span><span class="token operator">:</span> <span class="token string-literal"><span class="token string">&quot;Failed to build </span><span class="token interpolation"><span class="token delimiter punctuation">#{</span><span class="token content"><span class="token constant">ENV</span><span class="token punctuation">[</span><span class="token string-literal"><span class="token string">&#39;XL_TARGET&#39;</span></span><span class="token punctuation">]</span></span><span class="token delimiter punctuation">}</span></span><span class="token string">: </span><span class="token interpolation"><span class="token delimiter punctuation">#{</span><span class="token content">exception<span class="token punctuation">.</span>message</span><span class="token delimiter punctuation">}</span></span><span class="token string">&quot;</span></span><span class="token punctuation">,</span>
+      <span class="token symbol">success</span><span class="token operator">:</span> <span class="token boolean">false</span>
+    <span class="token punctuation">)</span>
+  <span class="token keyword">end</span>
+
+  <span class="token comment"># Custom lanes</span>
+
+  desc <span class="token string-literal"><span class="token string">&#39;Do basic setup, as installing cocoapods dependencies and fetching profiles, before start integration.&#39;</span></span>
+  lane <span class="token symbol">:before_integration</span> <span class="token keyword">do</span>
+    ensure_git_status_clean
+
+    plist_file <span class="token operator">=</span> <span class="token constant">ENV</span><span class="token punctuation">[</span><span class="token string-literal"><span class="token string">&#39;XL_TARGET_PLIST_FILE&#39;</span></span><span class="token punctuation">]</span>
+
+    <span class="token comment"># This is a custom action that could be find in the libs/utils.rb</span>
+    increase_build_number<span class="token punctuation">(</span>plist_file<span class="token punctuation">)</span>
+
+    cocoapods
+    sigh<span class="token punctuation">(</span><span class="token symbol">output_path</span><span class="token operator">:</span> <span class="token string-literal"><span class="token string">&#39;/Library/Developer/XcodeServer/ProvisioningProfiles&#39;</span></span><span class="token punctuation">,</span> <span class="token symbol">skip_install</span><span class="token operator">:</span> <span class="token boolean">true</span><span class="token punctuation">)</span>
+  <span class="token keyword">end</span>
+
+  desc <span class="token string-literal"><span class="token string">&#39;Required tasks before integrate the staging app.&#39;</span></span>
+  lane <span class="token symbol">:before_integration_staging</span> <span class="token keyword">do</span>
+    <span class="token constant">ENV</span><span class="token punctuation">[</span><span class="token string-literal"><span class="token string">&#39;XL_TARGET_PLIST_FILE&#39;</span></span><span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token string-literal"><span class="token string">&#39;./MyAppStaging-Info.plist&#39;</span></span>
+    before_integration
+  <span class="token keyword">end</span>
+
+  desc <span class="token string-literal"><span class="token string">&#39;Required tasks before build the production app.&#39;</span></span>
+  lane <span class="token symbol">:before_integration_production</span> <span class="token keyword">do</span>
+    <span class="token constant">ENV</span><span class="token punctuation">[</span><span class="token string-literal"><span class="token string">&#39;XL_TARGET_PLIST_FILE&#39;</span></span><span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token string-literal"><span class="token string">&#39;./MyApp-Info.plist&#39;</span></span>
+    before_integration
+  <span class="token keyword">end</span>
+
+  desc <span class="token string-literal"><span class="token string">&#39;Submit a new Beta Build to Apple iTunes Connect&#39;</span></span>
+  lane <span class="token symbol">:after_integration</span> <span class="token keyword">do</span>
+    branch <span class="token operator">=</span> <span class="token constant">ENV</span><span class="token punctuation">[</span><span class="token string-literal"><span class="token string">&#39;XL_BRANCH&#39;</span></span><span class="token punctuation">]</span>
+    deliver_flag <span class="token operator">=</span> <span class="token constant">ENV</span><span class="token punctuation">[</span><span class="token string-literal"><span class="token string">&#39;XL_DELIVER_FLAG&#39;</span></span><span class="token punctuation">]</span><span class="token punctuation">.</span>to_i
+    plist_file <span class="token operator">=</span> <span class="token constant">ENV</span><span class="token punctuation">[</span><span class="token string-literal"><span class="token string">&#39;XL_TARGET_PLIST_FILE&#39;</span></span><span class="token punctuation">]</span>
+    tag_base_path <span class="token operator">=</span> <span class="token constant">ENV</span><span class="token punctuation">[</span><span class="token string-literal"><span class="token string">&#39;XL_TAG_BASE_PATH&#39;</span></span><span class="token punctuation">]</span>
+    tag_base_path <span class="token operator">=</span> <span class="token string-literal"><span class="token string">&quot;</span><span class="token interpolation"><span class="token delimiter punctuation">#{</span><span class="token content">tag_base_path</span><span class="token delimiter punctuation">}</span></span><span class="token string">/&quot;</span></span> <span class="token keyword">unless</span> tag_base_path<span class="token punctuation">.</span><span class="token keyword">nil</span><span class="token operator">?</span> <span class="token operator">||</span> tag_base_path <span class="token operator">==</span> <span class="token string-literal"><span class="token string">&#39;&#39;</span></span>
+    tag_link <span class="token operator">=</span> <span class="token constant">ENV</span><span class="token punctuation">[</span><span class="token string-literal"><span class="token string">&#39;XL_TAG_LINK&#39;</span></span><span class="token punctuation">]</span>
+    target <span class="token operator">=</span> <span class="token constant">ENV</span><span class="token punctuation">[</span><span class="token string-literal"><span class="token string">&#39;XL_TARGET&#39;</span></span><span class="token punctuation">]</span>
+
+    build_number <span class="token operator">=</span> get_info_plist_value<span class="token punctuation">(</span>
+      <span class="token symbol">path</span><span class="token operator">:</span> plist_file<span class="token punctuation">,</span>
+      <span class="token symbol">key</span><span class="token operator">:</span> <span class="token string-literal"><span class="token string">&#39;CFBundleVersion&#39;</span></span><span class="token punctuation">,</span>
+    <span class="token punctuation">)</span>
+    version_number <span class="token operator">=</span> get_info_plist_value<span class="token punctuation">(</span>
+      <span class="token symbol">path</span><span class="token operator">:</span> plist_file<span class="token punctuation">,</span>
+      <span class="token symbol">key</span><span class="token operator">:</span> <span class="token string-literal"><span class="token string">&#39;CFBundleShortVersionString&#39;</span></span><span class="token punctuation">,</span>
+    <span class="token punctuation">)</span>
+
+    <span class="token constant">ENV</span><span class="token punctuation">[</span><span class="token string-literal"><span class="token string">&#39;XL_VERSION_NUMBER&#39;</span></span><span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token string-literal"><span class="token string">&quot;</span><span class="token interpolation"><span class="token delimiter punctuation">#{</span><span class="token content">version_number</span><span class="token delimiter punctuation">}</span></span><span class="token string">&quot;</span></span>
+    <span class="token constant">ENV</span><span class="token punctuation">[</span><span class="token string-literal"><span class="token string">&#39;XL_BUILD_NUMBER&#39;</span></span><span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token string-literal"><span class="token string">&quot;</span><span class="token interpolation"><span class="token delimiter punctuation">#{</span><span class="token content">build_number</span><span class="token delimiter punctuation">}</span></span><span class="token string">&quot;</span></span>
+
+    tag_path <span class="token operator">=</span> <span class="token string-literal"><span class="token string">&quot;</span><span class="token interpolation"><span class="token delimiter punctuation">#{</span><span class="token content">tag_base_path</span><span class="token delimiter punctuation">}</span></span><span class="token string">release_</span><span class="token interpolation"><span class="token delimiter punctuation">#{</span><span class="token content">version_number</span><span class="token delimiter punctuation">}</span></span><span class="token string">_</span><span class="token interpolation"><span class="token delimiter punctuation">#{</span><span class="token content">build_number</span><span class="token delimiter punctuation">}</span></span><span class="token string">&quot;</span></span>
+    tag_link <span class="token operator">=</span> <span class="token string-literal"><span class="token string">&quot;</span><span class="token interpolation"><span class="token delimiter punctuation">#{</span><span class="token content">tag_link</span><span class="token delimiter punctuation">}</span></span><span class="token interpolation"><span class="token delimiter punctuation">#{</span><span class="token content">tag_path</span><span class="token delimiter punctuation">}</span></span><span class="token string">&quot;</span></span>
+    update_changelog<span class="token punctuation">(</span><span class="token punctuation">{</span>
+      <span class="token symbol">name</span><span class="token operator">:</span> tag_path<span class="token punctuation">,</span>
+      <span class="token symbol">version</span><span class="token operator">:</span> version_number<span class="token punctuation">,</span>
+      <span class="token symbol">build</span><span class="token operator">:</span> build_number<span class="token punctuation">,</span>
+      <span class="token symbol">link</span><span class="token operator">:</span> tag_link
+    <span class="token punctuation">}</span><span class="token punctuation">)</span>
+
+    <span class="token constant">ENV</span><span class="token punctuation">[</span><span class="token string-literal"><span class="token string">&#39;XL_TAG_LINK&#39;</span></span><span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token string-literal"><span class="token string">&quot;</span><span class="token interpolation"><span class="token delimiter punctuation">#{</span><span class="token content">tag_link</span><span class="token delimiter punctuation">}</span></span><span class="token string">&quot;</span></span>
+    <span class="token constant">ENV</span><span class="token punctuation">[</span><span class="token string-literal"><span class="token string">&#39;XL_TAG_PATH&#39;</span></span><span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token string-literal"><span class="token string">&quot;</span><span class="token interpolation"><span class="token delimiter punctuation">#{</span><span class="token content">tag_path</span><span class="token delimiter punctuation">}</span></span><span class="token string">&quot;</span></span>
+
+    sh <span class="token string-literal"><span class="token string">&quot;git config user.name &#39;CI Builder&#39;&quot;</span></span>
+    sh <span class="token string-literal"><span class="token string">&quot;git config user.email &#39;builder@server.com&#39;&quot;</span></span>
+
+    git_commit<span class="token punctuation">(</span>
+      <span class="token symbol">path</span><span class="token operator">:</span> <span class="token punctuation">[</span><span class="token string-literal"><span class="token string">&quot;./CHANGELOG.md&quot;</span></span><span class="token punctuation">,</span> plist_file<span class="token punctuation">]</span><span class="token punctuation">,</span>
+      <span class="token symbol">message</span><span class="token operator">:</span> <span class="token string-literal"><span class="token string">&quot;Version bump to </span><span class="token interpolation"><span class="token delimiter punctuation">#{</span><span class="token content">version_number</span><span class="token delimiter punctuation">}</span></span><span class="token string"> (</span><span class="token interpolation"><span class="token delimiter punctuation">#{</span><span class="token content">build_number</span><span class="token delimiter punctuation">}</span></span><span class="token string">) by CI Builder&quot;</span></span>
+    <span class="token punctuation">)</span>
+
+    <span class="token keyword">if</span> deliver_flag <span class="token operator">!=</span> <span class="token number">0</span>
+      ipa_folder <span class="token operator">=</span> <span class="token string-literal"><span class="token string">&quot;</span><span class="token interpolation"><span class="token delimiter punctuation">#{</span><span class="token content"><span class="token constant">ENV</span><span class="token punctuation">[</span><span class="token string-literal"><span class="token string">&#39;XCS_DERIVED_DATA_DIR&#39;</span></span><span class="token punctuation">]</span></span><span class="token delimiter punctuation">}</span></span><span class="token string">/deploy/</span><span class="token interpolation"><span class="token delimiter punctuation">#{</span><span class="token content">version_number</span><span class="token delimiter punctuation">}</span></span><span class="token string">.</span><span class="token interpolation"><span class="token delimiter punctuation">#{</span><span class="token content">build_number</span><span class="token delimiter punctuation">}</span></span><span class="token string">/&quot;</span></span>
+      ipa_path <span class="token operator">=</span> <span class="token string-literal"><span class="token string">&quot;</span><span class="token interpolation"><span class="token delimiter punctuation">#{</span><span class="token content">ipa_folder</span><span class="token delimiter punctuation">}</span></span><span class="token string">/</span><span class="token interpolation"><span class="token delimiter punctuation">#{</span><span class="token content">target</span><span class="token delimiter punctuation">}</span></span><span class="token string">.ipa&quot;</span></span>
+      sh <span class="token string-literal"><span class="token string">&quot;mkdir -p </span><span class="token interpolation"><span class="token delimiter punctuation">#{</span><span class="token content">ipa_folder</span><span class="token delimiter punctuation">}</span></span><span class="token string">&quot;</span></span>
+      sh <span class="token string-literal"><span class="token string">&quot;xcrun xcodebuild -exportArchive -archivePath \&quot;</span><span class="token interpolation"><span class="token delimiter punctuation">#{</span><span class="token content"><span class="token constant">ENV</span><span class="token punctuation">[</span><span class="token string-literal"><span class="token string">&#39;XCS_ARCHIVE&#39;</span></span><span class="token punctuation">]</span></span><span class="token delimiter punctuation">}</span></span><span class="token string">\&quot; -exportPath \&quot;</span><span class="token interpolation"><span class="token delimiter punctuation">#{</span><span class="token content">ipa_path</span><span class="token delimiter punctuation">}</span></span><span class="token string">\&quot; -IDEPostProgressNotifications=YES -DVTAllowServerCertificates=YES -DVTSigningCertificateSourceLogLevel=3 -DVTSigningCertificateManagerLogLevel=3 -DTDKProvisioningProfileExtraSearchPaths=/Library/Developer/XcodeServer/ProvisioningProfiles -exportOptionsPlist &#39;./ExportOptions.plist&#39;&quot;</span></span>
+
+      deliver<span class="token punctuation">(</span>
+        <span class="token symbol">force</span><span class="token operator">:</span> <span class="token boolean">true</span><span class="token punctuation">,</span>
+        <span class="token symbol">ipa</span><span class="token operator">:</span> ipa_path
+      <span class="token punctuation">)</span>
+    <span class="token keyword">end</span>
+
+    add_git_tag<span class="token punctuation">(</span><span class="token symbol">tag</span><span class="token operator">:</span> tag_path<span class="token punctuation">)</span>
+
+    push_to_git_remote<span class="token punctuation">(</span><span class="token symbol">local_branch</span><span class="token operator">:</span> branch<span class="token punctuation">)</span>
+
+    push_git_tags
+
+    slack<span class="token punctuation">(</span>
+      <span class="token symbol">message</span><span class="token operator">:</span> <span class="token string-literal"><span class="token string">&quot;</span><span class="token interpolation"><span class="token delimiter punctuation">#{</span><span class="token content"><span class="token constant">ENV</span><span class="token punctuation">[</span><span class="token string-literal"><span class="token string">&#39;XL_TARGET&#39;</span></span><span class="token punctuation">]</span></span><span class="token delimiter punctuation">}</span></span><span class="token string"> </span><span class="token interpolation"><span class="token delimiter punctuation">#{</span><span class="token content"><span class="token constant">ENV</span><span class="token punctuation">[</span><span class="token string-literal"><span class="token string">&#39;XL_VERSION_NUMBER&#39;</span></span><span class="token punctuation">]</span></span><span class="token delimiter punctuation">}</span></span><span class="token string">.</span><span class="token interpolation"><span class="token delimiter punctuation">#{</span><span class="token content"><span class="token constant">ENV</span><span class="token punctuation">[</span><span class="token string-literal"><span class="token string">&#39;XL_BUILD_NUMBER&#39;</span></span><span class="token punctuation">]</span></span><span class="token delimiter punctuation">}</span></span><span class="token string"> successfully released and tagged to </span><span class="token interpolation"><span class="token delimiter punctuation">#{</span><span class="token content"><span class="token constant">ENV</span><span class="token punctuation">[</span><span class="token string-literal"><span class="token string">&#39;XL_TAG_LINK&#39;</span></span><span class="token punctuation">]</span></span><span class="token delimiter punctuation">}</span></span><span class="token string">&quot;</span></span><span class="token punctuation">,</span>
+    <span class="token punctuation">)</span>
+  <span class="token keyword">end</span>
+
+  desc <span class="token string-literal"><span class="token string">&quot;Deploy a new version of MyApp Staging to the App Store&quot;</span></span>
+  lane <span class="token symbol">:after_integration_staging</span> <span class="token keyword">do</span>
+    <span class="token constant">ENV</span><span class="token punctuation">[</span><span class="token string-literal"><span class="token string">&#39;XL_BRANCH&#39;</span></span><span class="token punctuation">]</span> <span class="token operator">=</span> current_branch
+    <span class="token constant">ENV</span><span class="token punctuation">[</span><span class="token string-literal"><span class="token string">&#39;XL_DELIVER_FLAG&#39;</span></span><span class="token punctuation">]</span> <span class="token operator">||=</span> <span class="token string-literal"><span class="token string">&#39;1&#39;</span></span>
+    <span class="token constant">ENV</span><span class="token punctuation">[</span><span class="token string-literal"><span class="token string">&#39;XL_TAG_BASE_PATH&#39;</span></span><span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token string-literal"><span class="token string">&#39;beta&#39;</span></span>
+    <span class="token constant">ENV</span><span class="token punctuation">[</span><span class="token string-literal"><span class="token string">&#39;XL_TARGET_PLIST_FILE&#39;</span></span><span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token string-literal"><span class="token string">&#39;./MyApp Staging-Info.plist&#39;</span></span>
+    <span class="token constant">ENV</span><span class="token punctuation">[</span><span class="token string-literal"><span class="token string">&#39;XL_TARGET&#39;</span></span><span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token string-literal"><span class="token string">&#39;MyApp Staging&#39;</span></span>
+    <span class="token constant">ENV</span><span class="token punctuation">[</span><span class="token string-literal"><span class="token string">&#39;XL_TAG_LINK&#39;</span></span><span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token string-literal"><span class="token string">&#39;https://github.com/xmartlabs/MyApp/releases/tag/&#39;</span></span>
+
+    after_integration
+  <span class="token keyword">end</span>
+
+  desc <span class="token string-literal"><span class="token string">&quot;Deploy a new version of MyApp to the App Store&quot;</span></span>
+  lane <span class="token symbol">:after_integration_production</span> <span class="token keyword">do</span>
+    <span class="token constant">ENV</span><span class="token punctuation">[</span><span class="token string-literal"><span class="token string">&#39;XL_BRANCH&#39;</span></span><span class="token punctuation">]</span> <span class="token operator">=</span> current_branch
+    <span class="token constant">ENV</span><span class="token punctuation">[</span><span class="token string-literal"><span class="token string">&#39;XL_DELIVER_FLAG&#39;</span></span><span class="token punctuation">]</span> <span class="token operator">||=</span> <span class="token string-literal"><span class="token string">&#39;1&#39;</span></span>
+    <span class="token constant">ENV</span><span class="token punctuation">[</span><span class="token string-literal"><span class="token string">&#39;XL_TARGET_PLIST_FILE&#39;</span></span><span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token string-literal"><span class="token string">&#39;./MyApp-Info.plist&#39;</span></span>
+    <span class="token constant">ENV</span><span class="token punctuation">[</span><span class="token string-literal"><span class="token string">&#39;XL_TARGET&#39;</span></span><span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token string-literal"><span class="token string">&#39;MyApp&#39;</span></span>
+    <span class="token constant">ENV</span><span class="token punctuation">[</span><span class="token string-literal"><span class="token string">&#39;XL_TAG_LINK&#39;</span></span><span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token string-literal"><span class="token string">&#39;https://github.com/company/MyApp/releases/tag/&#39;</span></span>
+
+    after_integration
+  <span class="token keyword">end</span>
+<span class="token keyword">end</span>
+</code></pre></div></span>
+<p>Notes about previous <span><code class="language-text">Fastfile</code></span> file:</p>
+<ul>
+<li>Defines two <span><code class="language-text">before_integration</code></span> lanes for both production and staging environments in order to setup the correct app identifiers using the <span><code class="language-text">Appfile</code></span>.</li>
+<li>Build, git, and deploy actions are encapsulated in the <span><code class="language-text">after_integration</code></span> lane. This allow us to have production and staging lanes that, basically, will setup some parameters and invoke the internal <span><code class="language-text">after_integration</code></span> lane.</li>
+<li><span><code class="language-text">ensure_git_status_clean</code></span> will check if the bot&#39;s working folder has changes and will fail in such case. This will ensure that the bot’s working copy is exactly the same to the remote repository files. As we are changing local files on our <span><code class="language-text">after_integration</code></span> lane, if something went wrong we&#39;ll want to reset all of them. So we added the action <span><code class="language-text">reset_git_repo</code></span> in the <span><code class="language-text">error</code></span> block.</li>
+<li>The command <span><code class="language-text">xcrun xcodebuild -exportArchive</code></span> requires a configuration file specified with the option <span><code class="language-text">-exportOptionsPlist</code></span>. We created the file <span><code class="language-text">ExportOptions.plist</code></span> within <span><code class="language-text">fastlane</code></span> folder and its content is similar to:</li>
+</ul>
+<span><div class="code-highlight" data-language="xml"><pre class="language-xml" data-language="xml"><code class="language-xml"><span></span>
+<span class="token prolog">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;</span>
+<span class="token doctype"><span class="token punctuation">&lt;!</span><span class="token doctype-tag">DOCTYPE</span> <span class="token name">plist</span> <span class="token name">PUBLIC</span> <span class="token string">&quot;-//Apple//DTD PLIST 1.0//EN&quot;</span> <span class="token string">&quot;http://www.apple.com/DTDs/PropertyList-1.0.dtd&quot;</span><span class="token punctuation">&gt;</span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>plist</span> <span class="token attr-name">version</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>1.0<span class="token punctuation">&quot;</span></span><span class="token punctuation">&gt;</span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>dict</span><span class="token punctuation">&gt;</span></span>
+        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>key</span><span class="token punctuation">&gt;</span></span>teamID<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>key</span><span class="token punctuation">&gt;</span></span>
+        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>string</span><span class="token punctuation">&gt;</span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>TEAM_ID</span><span class="token punctuation">&gt;</span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>string</span><span class="token punctuation">&gt;</span></span>
+        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>key</span><span class="token punctuation">&gt;</span></span>method<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>key</span><span class="token punctuation">&gt;</span></span>
+        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>string</span><span class="token punctuation">&gt;</span></span>app-store<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>string</span><span class="token punctuation">&gt;</span></span>
+        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>key</span><span class="token punctuation">&gt;</span></span>uploadSymbols<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>key</span><span class="token punctuation">&gt;</span></span>
+        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>true</span><span class="token punctuation">/&gt;</span></span>
+        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>key</span><span class="token punctuation">&gt;</span></span>uploadBitcode<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>key</span><span class="token punctuation">&gt;</span></span>
+        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>true</span><span class="token punctuation">/&gt;</span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>dict</span><span class="token punctuation">&gt;</span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>plist</span><span class="token punctuation">&gt;</span></span>
+</code></pre></div></span>
+<p>As the last step, add a new after integration trigger that executes our <span><code class="language-text">after_integration_staging</code></span> lane:</p>
+<img src="/images/remer-xcode-server/after-trigger-deploy.png" alt="After trigger deploy"/>
+<p>You can find a template for the Fastlane files shown before in this github repo <a href="https://github.com/xmartlabs/Fastlane-CI-Files">Fastlane CI files</a></p>
+<h2 id="troubleshooting">Troubleshooting</h2>
+<p>During our process of setting up Xcode Server, we faced many drawbacks and issues that weren&#39;t easy to solve, mainly because we couldn&#39;t find any information on the web. We decided to make a comprehensive list so it can be help anyone in the same situation.</p>
+<h4 id="attempting-to-developer-password-to-fastlane-tools">Attempting to Developer password to Fastlane tools</h4>
+<p><span><code class="language-text">sigh</code></span> will attempt to store the password in the keychain and try to access it later if no password is provided, but this doesn&#39;t work when running <span><code class="language-text">sigh</code></span> from a bot&#39;s trigger since the triggers commands have no access to bot user&#39;s keychain.</p>
+<p>We tried by unlocking it before running <span><code class="language-text">sigh</code></span> as shown below without luck:</p>
+<span><div class="code-highlight" data-language="shell"><pre class="language-shell" data-language="shell"><code class="language-shell"><span></span>
+<span class="token comment"># Try to unlock the keychain to be accessed by fastlane actions</span>
+$ security <span class="token parameter variable">-v</span> unlock-keychain <span class="token parameter variable">-p</span> <span class="token variable"><span class="token variable">`</span><span class="token function">cat</span> /Library/Developer/XcodeServer/SharedSecrets/PortalKeychainSharedSecret<span class="token variable">`</span></span> /Library/Developer/XcodeServer/Keychains/Portal.keychain
+
+<span class="token comment"># Will download profiles using sigh</span>
+$ fastlane before_integration_staging
+</code></pre></div></span>
+<p>On the output log appears next messages:
+security: SecKeychainAddInternetPassword <span><code class="language-text">&lt;NULL&gt;</code></span>: User interaction is not allowed.
+Could not store password in keychain
+We simply couldn&#39;t access the keychain when running Fastlane. We opted to just save the password as a system environment variable.</p>
+<h4 id="cocoapods-is-not-able-to-update-dependencies">CocoaPods is not able to update dependencies</h4>
+<p>[!] Unable to satisfy the following requirements:</p>
+<ul>
+<li><span><code class="language-text">SwiftDate</code></span> required by <span><code class="language-text">Podfile</code></span></li>
+<li><span><code class="language-text">SwiftDate (= 3.0.2)</code></span> required by <span><code class="language-text">Podfile.lock</code></span></li>
+</ul>
+<blockquote>
+<p>NOTE: dependencies seems to be OK in Podfile, it might be a permissions error when pods try to update its repo folder in the user&#39;s folder.</p>
+</blockquote>
+<p>We ended up deleting CocoaPods and installing it as a described above:</p>
+<span><div class="code-highlight" data-language="shell"><pre class="language-shell" data-language="shell"><code class="language-shell"><span></span>
+$ <span class="token function">sudo</span> <span class="token function">rm</span> <span class="token parameter variable">-fr</span> /var/_xcsbuildd/.cocoapods
+
+$ <span class="token function">sudo</span> <span class="token function">su</span> - _xcsbuildd
+$ gem <span class="token function">install</span> --user-install cocoapods
+$ pod setup
+$ <span class="token function">ln</span> <span class="token parameter variable">-s</span> <span class="token variable"><span class="token variable">`</span><span class="token function">which</span> pod<span class="token variable">`</span></span> /Applications/Xcode.app/Contents/Developer/usr/bin/pod
+</code></pre></div></span>
+<h4 id="fastlane---sigh--gym-cannot-access-to-keychain">Fastlane - Sigh &amp; Gym cannot access to keychain</h4>
+<p>That&#39;s all, they cannot access to keychain. Seeing this message (or similar) when running <span><code class="language-text">gym</code></span>or <span><code class="language-text">sigh</code></span> is the symptom:
+security: SecKeychainAddInternetPassword <span><code class="language-text">&lt;NULL&gt;</code></span>: User interaction is not allowed.</p>
+<ul>
+<li>They cannot access stored login password, you must pass the password through env variables to <span><code class="language-text">sigh</code></span> using <span><code class="language-text">FASTLANE_PASSWORD</code></span>.</li>
+<li><span><code class="language-text">gym</code></span> cannot access to distribution certificates installed in keychain, so make the IPA using <span><code class="language-text">xcrun xcodebuild</code></span> instead of <span><code class="language-text">gym</code></span>.</li>
+</ul>
+<h4 id="certificates--private-keys-1">Certificates &amp; private keys</h4>
+<p>Ensure that:</p>
+<ul>
+<li>They must be installed in System keychain so Xcode Bot can access them.</li>
+<li>On the keychain app, change certificates and private keys <em>Access Control</em> allowing <span><code class="language-text">codesign</code></span> and <span><code class="language-text">security</code></span> binaries to access them.</li>
+</ul>
+<h4 id="cannot-select-xcode-in-server-app">Cannot select Xcode in Server app</h4>
+<p>After updating Xcode to version 7.2.1 we were able to select it on Server app, then Xcode service was disabled. When we tried to select the correct Xcode app there was a dialog saying <em>&quot;You must agree to the terms of the xcode software license agreement&quot;</em> was shown. We found the solution on an Apple Forum thread <a href="https://forums.developer.apple.com/thread/34683">Can not choose Xcode in Server App - &quot;You must agree to the terms...&quot;</a>, running next command will allow you to select Xcode on Server app:</p>
+<span><div class="code-highlight" data-language="shell"><pre class="language-shell" data-language="shell"><code class="language-shell"><span></span>
+$ <span class="token function">sudo</span> /Applications/Xcode.app/Contents/Developer/usr/bin/xcscontrol <span class="token parameter variable">--initialize</span>
+</code></pre></div></span>
+<h4 id="ipa-not-available">IPA not available</h4>
+<p>The IPA built by the bot is copied to this path after the build finishes:</p>
+<p>/Library/Developer/XcodeServer/IntegrationAssets/$XCS_BOT_ID-$XCS_BOT_NAME/$XCS_INTEGRATION_NUMBER/$TARGET_NAME.ipa</p>
+<p>But it&#39;s not available at the time that bot&#39;s after integration trigger is running.</p>
+<h4 id="xcs_archive-not-defined">XCS_ARCHIVE not defined</h4>
+<p>The env variable XCS_ARCHIVE is defined only when the bot is set to perform the archive action.</p>
+<h4 id="using-a-custom-ssh-key">Using a custom ssh key</h4>
+<p>To commit changelog changes and a build number bump we need to have access to the repo from <span><code class="language-text">_xcsbuildd</code></span>&#39;s shell. If you prefer use SSH to access the git server you will need to add a valid key in the builder user <span><code class="language-text">.ssh</code></span> folder. Note that this key should not have a passphrase set. Otherwise, the trigger will ask you to enter the shh key password stopping its process until you enter it.</p>
+<ul>
+<li>Log in as <span><code class="language-text">_xcsbuildd</code></span>:
+<span><code class="language-text">$ sudo su - _xcsbuildd</code></span></li>
+<li>Copy a valid ssh key to <span><code class="language-text">~/.ssh</code></span>.</li>
+<li>Modify <span><code class="language-text">~/.bash_login</code></span> in order to automatically add your custom key to ssh agent:
+<span><div class="code-highlight" data-language="shell"><pre class="language-shell" data-language="shell"><code class="language-shell">$ <span class="token builtin class-name">echo</span> <span class="token string">&#39;eval &quot;$(ssh-agent -s)&quot;&#39;</span> <span class="token operator">&gt;&gt;</span> ~/.bash_login
+$ <span class="token builtin class-name">echo</span> <span class="token string">&#39;ssh-add ~/.ssh/id_rsa_github&#39;</span> <span class="token operator">&gt;&gt;</span> ~/.bash_login</code></pre></div></span>
+</li>
+<li>Determine which key should be used to access git repo by changing <span><code class="language-text">~/.ssh/config</code></span> file, for example add next lines:
+<span><div class="code-highlight" data-language="text"><pre class="language-text" data-language="text"><code class="language-text"> Host github.com
+    HostName github.com
+  IdentityFile ~/.ssh/id_rsa_github</code></pre></div></span>
+</li>
+</ul>
+<p>This will also be helpful to fetch git submodules.</p>
+<h4 id="invalid-signature-a-sealed-resource-is-missing-or-invalid">Invalid Signature. A sealed resource is missing or invalid.</h4>
+<p>If the upload to iTunes Connect fails with an error similar to &quot;Invalid Signature. A sealed resource is missing or invalid.&quot;, it may happen because the export archive command (xcodebuild command) is not receiving the option <span><code class="language-text">-exportOptionsPlist</code></span>. i it up and the path to the file is OK. The full error message is:</p>
+<span><div class="code-highlight" data-language="text"><pre class="language-text" data-language="text"><code class="language-text">parameter ErrorMessage = ERROR ITMS-90035: &quot;Invalid Signature. A sealed resource is missing or invalid. Make sure you have signed your application with a distribution certificate, not an ad hoc certificate or a development certificate. Verify that the code signing settings in Xcode are correct at the target level (which override any values at the project level). Additionally, make sure the bundle you are uploading was built using a Release target in Xcode, not a Simulator target. If you are certain your code signing settings are correct, choose &quot;Clean All&quot; in Xcode, delete the &quot;build&quot; directory in the Finder, and rebuild your release target. For more information, please consult https://developer.apple.com/library/ios/documentation/Security/Conceptual/CodeSigningGuide/Introduction/Introduction.html</code></pre></div></span> 

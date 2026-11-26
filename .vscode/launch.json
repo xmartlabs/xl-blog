@@ -2,28 +2,22 @@
   "version": "0.2.0",
   "configurations": [
     {
-      "name": "Gatsby develop",
-      "type": "pwa-node",
+      "name": "Next.js: dev server",
+      "type": "node-terminal",
       "request": "launch",
-      "program": "${workspaceRoot}/node_modules/.bin/gatsby",
-      "windows": {
-        "program": "${workspaceRoot}/node_modules/gatsby/dist/bin/gatsby"
-      },
-      "args": ["develop"],
-      "runtimeArgs": ["--nolazy"],
-      "console": "integratedTerminal"
+      "command": "npm run dev"
     },
     {
-      "name": "Gatsby build",
-      "type": "pwa-node",
+      "name": "Next.js: debug server-side",
+      "type": "node-terminal",
       "request": "launch",
-      "program": "${workspaceRoot}/node_modules/.bin/gatsby",
-      "windows": {
-        "program": "${workspaceRoot}/node_modules/gatsby/dist/bin/gatsby"
-      },
-      "args": ["build"],
-      "runtimeArgs": ["--nolazy"],
-      "console": "integratedTerminal"
+      "command": "npm run dev -- --inspect"
+    },
+    {
+      "name": "Next.js: production build",
+      "type": "node-terminal",
+      "request": "launch",
+      "command": "npm run build"
     }
   ]
 }

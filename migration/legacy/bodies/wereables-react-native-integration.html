@@ -1,0 +1,217 @@
+ <p>Have you ever considered integrating data from a wearable device into your app, only to be overwhelmed by the maze of wearables, each with its unique implementations? I've been there. In fact, it made me briefly contemplate quitting software engineering for good. But instead of trading my keyboard for a paintbrush I found a solution, a way to integrate wearables without the agony of being tied to a specific one. Sounds too good to be true, right? Let me show you how it works.</p>
+<h2 id="our-problem">Our problem</h2>
+<p>I've been working on developing a platform that enables doctors to monitor patients' conditions and create personalized treatment plans. This approach based on model-informed precision dosing, requires vast amounts of patient data to accurately simulate the concentration in the bloodstream of medication doses over time. To achieve that, we needed to integrate a wide variety of real-time patient health data into our app.</p>
+<p>Developing software for just a select group of wearables wasn’t an option. Our models rely on everything from basic metrics like heart rate (easily measured by a smartwatch) to more complex metrics, like blood glucose levels.</p>
+<h2 id="letting-other-apps-do-the-heavy-lifting">Letting other apps do the heavy lifting</h2>
+<p>What if there were a way to avoid communicating directly with each wearable and navigating through the nightmare of endless different protocol support? Imagine letting each manufacturer handle the hard work, while your app simply consumes data from a perfectly consistent API? Good news: there's a way. Presenting: HealthKit and Health Connect!</p>
+<img src="/images/wereableshealth-1.png" alt="">
+<h3 id="healthkit--health-connect">HealthKit &#x26; Health Connect</h3>
+<p><a href="https://developer.apple.com/documentation/healthkit/">HealthKit</a> and <a href="https://developer.android.com/health-and-fitness/guides/health-connect">Health Connect</a> are services that create a central repository for fitness and health data. While both tools serve the same purpose, HealthKit was developed by Apple for iOS while Health Connect is Android's alternative.</p>
+<p>The purpose of these tools? Offering a secure, centralized, and consistent way to store and access user health data, allowing users to control which apps have access to their information. Let’s say your user has a specific wearable that measures something that you need (eg. a continuous glucose monitoring device that controls the patient’s blood glucose) but the wearable’s software is proprietary and the communication with the wearable can only be achieved by using the manufacturer’s app.</p>
+<p>If the app is integrated with HealthKit or Health Connect, this shouldn't be a problem since the glucose monitoring device app would write the data to the shared repository, and other apps could access the measurements (with the user’s permission, of course). The data is stored locally on the user's device, which is excellent for security.</p>
+<h3 id="security-considerations">Security Considerations</h3>
+<p>When handling health data, you must keep security and privacy in mind. Both HealthKit and Health Connect take several measures to protect data, but it's essential for developers to handle the data responsibly as well. Here's what you need to remember:</p>
+<h4 id="data-privacy-and-user-consent"><strong>Data Privacy and User Consent</strong></h4>
+<p>Health data is highly sensitive, meaning user consent to handle it is crucial. Both HealthKit and Health Connect require apps to ask for user permissions to read or write any health data. However, beyond technical implementation, you should consider clearly communicating <em>why</em> the data is requested, <em>how</em> it will be used and <em>who</em> will access it. Apart from building user trust, this can also help prevent your app from being rejected by the app stores.</p>
+<p>Keep in mind that you can be as granular as you like with these tools. Try to ask only for permissions over the data types you absolutely need, in order to minimize the risk in case of data breaches.</p>
+<h4 id="compliance-with-regulations"><strong>Compliance with Regulations</strong></h4>
+<p>When working with health data, your app may need to comply with local or international regulations, like the <strong>Health Insurance Portability and Accountability Act (HIPAA)</strong> in the U.S.</p>
+<p>This often depends on how your app uses the data, but there are some recommended practices. It's important to provide users with the ability to view, delete, or export their data, and to let them revoke permissions and ask to delete all their data from the server. Establishing clear data retention policies is also good: avoid storing health data indefinitely. Last but not least, keeping an audit trail of data access and modifications can ensure compliance with regulations and provide accountability in case of breaches or disputes.</p>
+<h4 id="backend-security"><strong>Backend Security</strong></h4>
+<p>Not all mobile developers have access to the implementation of the server, but securing the mobile app is pointless if the data is sent to an insecure backend. It's essential that both the app and server maintain high security standards to protect user data effectively. Encryption and proper user role management can go a long way. Another good practice would be to anonymize the data, so that in the event of a breach, the health information cannot be traced back to an individual.</p>
+<h2 id="implementation">Implementation</h2>
+<p>As an example implementation of how these tools can be used in a React Native app, we will read the blood glucose information using both tools, and then let the user choose whether they want to share it with their doctor to improve their treatment. You can check my <a href="https://github.com/carozo/health-poc">health-poc repository</a>, which contains all the code examples for HealthKit and Health Connect mentioned in this article.</p>
+<p>There are many other data types that can be integrated apart from blood glucose. A full list of those can be found <a href="https://developer.apple.com/documentation/healthkit/data_types">here</a> for HealthKit and <a href="https://developer.android.com/health-and-fitness/guides/health-connect/plan/data-types">here</a> for Health Connect.</p>
+<h3 id="installation">Installation</h3>
+<p>To use HealthKit and Health Connect in your React Native app, you need to install the following libraries:</p>
+<span><div class="code-highlight" data-language="javascript"><pre class="language-javascript" data-language="javascript"><code class="language-javascript">react<span class="token operator">-</span>native<span class="token operator">-</span>health
+react<span class="token operator">-</span>native<span class="token operator">-</span>health<span class="token operator">-</span>connect</code></pre></div></span>
+<p>And follow the installation instructions for <a href="https://github.com/agencyenterprise/react-native-health">react-native-health</a> and <a href="https://github.com/matinzd/react-native-health-connect">react-native-health-connect</a>.</p>
+<h3 id="getting-the-blood-glucose-data">Getting the blood glucose data</h3>
+<h4 id="always-ask-for-permission">Always ask for permission</h4>
+<p>The first thing we need to do is to get the user’s permission to read the data type that we want to use. This must be done on both iOS and Android, and it's a crucial aspect of protecting user privacy.</p>
+<p>On iOS, we need to initialize the service with the specific permissions we plan to request:</p>
+<span><div class="code-highlight" data-language="typescript"><pre class="language-typescript" data-language="typescript"><code class="language-typescript"> <span class="token keyword">import</span> AppleHealthKit<span class="token punctuation">,</span> <span class="token punctuation">{</span> HealthKitPermissions <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'react-native-health'</span><span class="token punctuation">;</span>
+ 
+ <span class="token comment">//iOS</span>
+ <span class="token keyword">const</span> permissionsToAsk<span class="token operator">:</span> HealthKitPermissions <span class="token operator">=</span> <span class="token punctuation">{</span>
+          permissions<span class="token operator">:</span> <span class="token punctuation">{</span>
+            read<span class="token operator">:</span> <span class="token punctuation">[</span>AppleHealthKit<span class="token punctuation">.</span>Constants<span class="token punctuation">.</span>Permissions<span class="token punctuation">.</span>BloodGlucose<span class="token punctuation">]</span><span class="token punctuation">,</span>
+            write<span class="token operator">:</span> <span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">,</span>
+          <span class="token punctuation">}</span><span class="token punctuation">,</span>
+        <span class="token punctuation">}</span><span class="token punctuation">;</span>
+        AppleHealthKit<span class="token punctuation">.</span><span class="token function">initHealthKit</span><span class="token punctuation">(</span>permissionsToAsk<span class="token punctuation">,</span> <span class="token punctuation">(</span>error<span class="token operator">:</span> <span class="token builtin">string</span><span class="token punctuation">)</span> <span class="token operator">=></span> <span class="token punctuation">{</span>
+          <span class="token builtin">console</span><span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>error<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span></code></pre></div></span>
+<p>While on Android, we first need to initialize Health Connect and then ask for permissions:</p>
+<span><div class="code-highlight" data-language="typescript"><pre class="language-typescript" data-language="typescript"><code class="language-typescript">        <span class="token keyword">import</span> <span class="token punctuation">{</span>
+  initialize<span class="token punctuation">,</span>
+  readRecords<span class="token punctuation">,</span>
+  requestPermission<span class="token punctuation">,</span>
+<span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'react-native-health-connect'</span><span class="token punctuation">;</span>
+ 
+ <span class="token comment">//Android</span>
+  <span class="token keyword">await</span> <span class="token function">initialize</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token keyword">await</span> <span class="token function">requestPermission</span><span class="token punctuation">(</span><span class="token punctuation">[</span>
+    <span class="token punctuation">{</span>accessType<span class="token operator">:</span> <span class="token string">'read'</span><span class="token punctuation">,</span> recordType<span class="token operator">:</span> <span class="token string">'BloodGlucose'</span><span class="token punctuation">}</span><span class="token punctuation">,</span>
+  <span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span></code></pre></div></span>
+<p>We can create a function to initialize both services at the same time. When you put it all together, it looks like this:</p>
+<span><div class="code-highlight" data-language="typescript"><pre class="language-typescript" data-language="typescript"><code class="language-typescript"><span class="token keyword">import</span> <span class="token punctuation">{</span>
+  initialize<span class="token punctuation">,</span>
+  readRecords<span class="token punctuation">,</span>
+  requestPermission<span class="token punctuation">,</span>
+<span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'react-native-health-connect'</span><span class="token punctuation">;</span>
+
+<span class="token keyword">import</span> AppleHealthKit<span class="token punctuation">,</span> <span class="token punctuation">{</span> HealthKitPermissions <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'react-native-health'</span><span class="token punctuation">;</span>
+  
+  <span class="token keyword">const</span> <span class="token function-variable function">initializeHealth</span> <span class="token operator">=</span> <span class="token keyword">async</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=></span> <span class="token punctuation">{</span>
+     <span class="token keyword">if</span> <span class="token punctuation">(</span>Platform<span class="token punctuation">.</span><span class="token constant">OS</span> <span class="token operator">===</span> <span class="token string">'ios'</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+      <span class="token keyword">const</span> permissionsToAsk<span class="token operator">:</span> HealthKitPermissions <span class="token operator">=</span> <span class="token punctuation">{</span>
+        permissions<span class="token operator">:</span> <span class="token punctuation">{</span>
+          read<span class="token operator">:</span> <span class="token punctuation">[</span>AppleHealthKit<span class="token punctuation">.</span>Constants<span class="token punctuation">.</span>Permissions<span class="token punctuation">.</span>BloodGlucose<span class="token punctuation">]</span><span class="token punctuation">,</span>
+          write<span class="token operator">:</span> <span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">,</span>
+        <span class="token punctuation">}</span><span class="token punctuation">,</span>
+      <span class="token punctuation">}</span><span class="token punctuation">;</span>
+      AppleHealthKit<span class="token punctuation">.</span><span class="token function">initHealthKit</span><span class="token punctuation">(</span>permissionsToAsk<span class="token punctuation">,</span> <span class="token punctuation">(</span>error<span class="token operator">:</span> <span class="token builtin">string</span><span class="token punctuation">)</span> <span class="token operator">=></span> <span class="token punctuation">{</span>
+        <span class="token builtin">console</span><span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>error<span class="token punctuation">)</span><span class="token punctuation">;</span>
+      <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span> <span class="token keyword">else</span> <span class="token keyword">if</span> <span class="token punctuation">(</span>Platform<span class="token punctuation">.</span><span class="token constant">OS</span> <span class="token operator">===</span> <span class="token string">'android'</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+      <span class="token keyword">await</span> <span class="token function">initialize</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+      <span class="token keyword">await</span> <span class="token function">requestPermission</span><span class="token punctuation">(</span><span class="token punctuation">[</span>
+        <span class="token punctuation">{</span>accessType<span class="token operator">:</span> <span class="token string">'read'</span><span class="token punctuation">,</span> recordType<span class="token operator">:</span> <span class="token string">'BloodGlucose'</span><span class="token punctuation">}</span><span class="token punctuation">,</span>
+      <span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+  <span class="token punctuation">}</span><span class="token punctuation">;</span></code></pre></div></span>
+<p>This will take the user to this screen, where they can select which permissions they want to grant the app. In this case, we are asking for the BloodGlucose information.</p>
+<img src="/images/wereableshealth-2.png" alt="">
+<h3 id="obtaining-the-blood-glucose-value">Obtaining the blood glucose value</h3>
+<p>The next step, after configuring permissions, is to read the data. To do this, we need to specify a time interval for the data we want to retrieve. In this example, we will get today’s data:</p>
+<span><div class="code-highlight" data-language="typescript"><pre class="language-typescript" data-language="typescript"><code class="language-typescript">    <span class="token comment">//set up the time range for the query</span>
+    <span class="token keyword">const</span> dayStart <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Date</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">const</span> dayEnd <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Date</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    dayStart<span class="token punctuation">.</span><span class="token function">setHours</span><span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">,</span> <span class="token number">405</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    dayEnd<span class="token punctuation">.</span><span class="token function">setHours</span><span class="token punctuation">(</span><span class="token number">23</span><span class="token punctuation">,</span> <span class="token number">59</span><span class="token punctuation">,</span> <span class="token number">15</span><span class="token punctuation">,</span> <span class="token number">405</span><span class="token punctuation">)</span><span class="token punctuation">;</span></code></pre></div></span>
+<p>The data provided by both services and how to get it is structured differently. Let’s break it down for blood glucose.</p>
+<p>In HealthKit (iOS), some options need to be set before getting the object, like the desired unit of measurement.</p>
+<span><div class="code-highlight" data-language="typescript"><pre class="language-typescript" data-language="typescript"><code class="language-typescript">  <span class="token comment">//iOS</span>
+  unit<span class="token operator">:</span> <span class="token builtin">string</span><span class="token punctuation">;</span> <span class="token comment">// default: 'mmolPerL'</span>
+  startDate<span class="token operator">:</span> <span class="token builtin">string</span><span class="token punctuation">;</span>
+  endDate<span class="token operator">?</span><span class="token operator">:</span> <span class="token builtin">string</span><span class="token punctuation">;</span>
+  ascending<span class="token operator">?</span><span class="token operator">:</span> <span class="token builtin">boolean</span><span class="token punctuation">;</span>
+  limit<span class="token operator">?</span><span class="token operator">:</span> <span class="token builtin">number</span><span class="token punctuation">;</span></code></pre></div></span>
+<p>Meanwhile, on Android, the object retrieved by the library contains all the available units, and you can select which one to use with keys such as <span><code class="language-text">inMillimolesPerLiter</code></span>. However, you can still set some of the options beforehand:</p>
+<span><div class="code-highlight" data-language="typescript"><pre class="language-typescript" data-language="typescript"><code class="language-typescript">  <span class="token comment">//Android</span>
+  timeRangeFilter<span class="token operator">:</span> <span class="token punctuation">{</span>
+	    operator<span class="token operator">:</span> <span class="token string">'between'</span> <span class="token operator">|</span> <span class="token string">'before'</span> <span class="token operator">|</span> <span class="token string">'after'</span><span class="token punctuation">;</span>
+      startTime<span class="token operator">?</span><span class="token operator">:</span> <span class="token builtin">string</span><span class="token punctuation">;</span>
+      endTime<span class="token operator">?</span><span class="token operator">:</span> <span class="token builtin">string</span><span class="token punctuation">;</span>
+  <span class="token punctuation">}</span><span class="token punctuation">;</span>
+  dataOriginFilter<span class="token operator">?</span><span class="token operator">:</span> <span class="token builtin">string</span><span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+  ascendingOrder<span class="token operator">?</span><span class="token operator">:</span> <span class="token builtin">boolean</span><span class="token punctuation">;</span>
+  pageSize<span class="token operator">?</span><span class="token operator">:</span> <span class="token builtin">number</span><span class="token punctuation">;</span>
+  pageToken<span class="token operator">?</span><span class="token operator">:</span> <span class="token builtin">string</span><span class="token punctuation">;</span></code></pre></div></span>
+<p>Then, to actually get the blood glucose information from iOS, we're going to use the function <span><code class="language-text">getBloodGlucoseSamples</code></span> from <span><code class="language-text">AppleHealthKit</code></span>:</p>
+<span><div class="code-highlight" data-language="typescript"><pre class="language-typescript" data-language="typescript"><code class="language-typescript"> <span class="token comment">//iOS</span>
+ AppleHealthKit<span class="token punctuation">.</span><span class="token function">getBloodGlucoseSamples</span><span class="token punctuation">(</span>
+        <span class="token punctuation">{</span>
+          startDate<span class="token operator">:</span> dayStart<span class="token punctuation">.</span><span class="token function">toISOString</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+          endDate<span class="token operator">:</span> dayEnd<span class="token punctuation">.</span><span class="token function">toISOString</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+          ascending<span class="token operator">:</span> <span class="token boolean">false</span><span class="token punctuation">,</span>
+        <span class="token punctuation">}</span><span class="token punctuation">,</span>
+        <span class="token punctuation">(</span>err<span class="token punctuation">,</span> results<span class="token punctuation">)</span> <span class="token operator">=></span> <span class="token punctuation">{</span>
+          <span class="token keyword">if</span> <span class="token punctuation">(</span>err<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            <span class="token builtin">console</span><span class="token punctuation">.</span><span class="token function">error</span><span class="token punctuation">(</span>err<span class="token punctuation">)</span><span class="token punctuation">;</span>
+            <span class="token keyword">return</span><span class="token punctuation">;</span>
+          <span class="token punctuation">}</span>
+          <span class="token comment">//this will return the last result</span>
+          <span class="token keyword">return</span> results<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token operator">?.</span>value<span class="token punctuation">;</span>
+        <span class="token punctuation">}</span><span class="token punctuation">,</span>
+      <span class="token punctuation">)</span><span class="token punctuation">;</span></code></pre></div></span>
+<p>Similarly, we can get the data from Health Connect for Android using the function <span><code class="language-text">readRecords</code></span>:</p>
+<span><div class="code-highlight" data-language="typescript"><pre class="language-typescript" data-language="typescript"><code class="language-typescript">    <span class="token comment">//Android</span>
+    <span class="token keyword">const</span> result <span class="token operator">=</span> <span class="token keyword">await</span> <span class="token function">readRecords</span><span class="token punctuation">(</span><span class="token string">'BloodGlucose'</span><span class="token punctuation">,</span> <span class="token punctuation">{</span>
+        timeRangeFilter<span class="token operator">:</span> <span class="token punctuation">{</span>
+          operator<span class="token operator">:</span> <span class="token string">'between'</span><span class="token punctuation">,</span>
+          startTime<span class="token operator">:</span> dayStart<span class="token punctuation">.</span><span class="token function">toISOString</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+          endTime<span class="token operator">:</span> dayEnd<span class="token punctuation">.</span><span class="token function">toISOString</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+        <span class="token punctuation">}</span><span class="token punctuation">,</span>
+        ascendingOrder<span class="token operator">:</span> <span class="token boolean">false</span><span class="token punctuation">,</span>
+      <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+      <span class="token comment">//this will return the last result</span>
+      <span class="token keyword">return</span> result<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token operator">?.</span>level<span class="token operator">?.</span>inMillimolesPerLiter<span class="token punctuation">;</span></code></pre></div></span>
+<p>And then put it all together in a function called <span><code class="language-text">readBloodGlucose</code></span> :</p>
+<span><div class="code-highlight" data-language="typescript"><pre class="language-typescript" data-language="typescript"><code class="language-typescript"> <span class="token keyword">const</span> <span class="token function-variable function">readBloodGlucose</span> <span class="token operator">=</span> <span class="token keyword">async</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=></span> <span class="token punctuation">{</span>
+    <span class="token comment">//set up the time range for the query</span>
+    <span class="token keyword">const</span> dayStart <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Date</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">const</span> dayEnd <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Date</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    dayStart<span class="token punctuation">.</span><span class="token function">setHours</span><span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">,</span> <span class="token number">405</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    dayEnd<span class="token punctuation">.</span><span class="token function">setHours</span><span class="token punctuation">(</span><span class="token number">23</span><span class="token punctuation">,</span> <span class="token number">59</span><span class="token punctuation">,</span> <span class="token number">15</span><span class="token punctuation">,</span> <span class="token number">405</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+    <span class="token keyword">if</span> <span class="token punctuation">(</span>Platform<span class="token punctuation">.</span><span class="token constant">OS</span> <span class="token operator">===</span> <span class="token string">'ios'</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+      AppleHealthKit<span class="token punctuation">.</span><span class="token function">getBloodGlucoseSamples</span><span class="token punctuation">(</span>
+        <span class="token punctuation">{</span>
+          startDate<span class="token operator">:</span> dayStart<span class="token punctuation">.</span><span class="token function">toISOString</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+          endDate<span class="token operator">:</span> dayEnd<span class="token punctuation">.</span><span class="token function">toISOString</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+          ascending<span class="token operator">:</span> <span class="token boolean">false</span><span class="token punctuation">,</span>
+        <span class="token punctuation">}</span><span class="token punctuation">,</span>
+        <span class="token punctuation">(</span>err<span class="token punctuation">,</span> results<span class="token punctuation">)</span> <span class="token operator">=></span> <span class="token punctuation">{</span>
+          <span class="token keyword">if</span> <span class="token punctuation">(</span>err<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            <span class="token builtin">console</span><span class="token punctuation">.</span><span class="token function">error</span><span class="token punctuation">(</span>err<span class="token punctuation">)</span><span class="token punctuation">;</span>
+            <span class="token keyword">return</span><span class="token punctuation">;</span>
+          <span class="token punctuation">}</span>
+          <span class="token comment">//this will return the last result</span>
+          <span class="token keyword">return</span> results<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token operator">?.</span>value<span class="token punctuation">;</span>
+        <span class="token punctuation">}</span><span class="token punctuation">,</span>
+      <span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span> <span class="token keyword">else</span> <span class="token keyword">if</span> <span class="token punctuation">(</span>Platform<span class="token punctuation">.</span><span class="token constant">OS</span> <span class="token operator">===</span> <span class="token string">'android'</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+      <span class="token keyword">const</span> results <span class="token operator">=</span> <span class="token keyword">await</span> <span class="token function">readRecords</span><span class="token punctuation">(</span><span class="token string">'BloodGlucose'</span><span class="token punctuation">,</span> <span class="token punctuation">{</span>
+        timeRangeFilter<span class="token operator">:</span> <span class="token punctuation">{</span>
+          operator<span class="token operator">:</span> <span class="token string">'between'</span><span class="token punctuation">,</span>
+          startTime<span class="token operator">:</span> dayStart<span class="token punctuation">.</span><span class="token function">toISOString</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+          endTime<span class="token operator">:</span> dayEnd<span class="token punctuation">.</span><span class="token function">toISOString</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+        <span class="token punctuation">}</span><span class="token punctuation">,</span>
+        ascendingOrder<span class="token operator">:</span> <span class="token boolean">false</span><span class="token punctuation">,</span>
+      <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+      <span class="token comment">//this will return the last result</span>
+      <span class="token keyword">return</span> results<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token operator">?.</span>level<span class="token operator">?.</span>inMillimolesPerLiter<span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+  <span class="token punctuation">}</span><span class="token punctuation">;</span></code></pre></div></span>
+<p>There is more information in the object retrieved by each library, like the exact time the measure was taken. I encourage you to explore the response and find the specific information your app needs.</p>
+<h3 id="testing-the-integration">Testing the Integration</h3>
+<p>You may not have a wearable device that measures blood glucose, but you can still test the integration using the Health app on iOS and the Google Fit app on Android.</p>
+<h4 id="ios">iOS</h4>
+<p>To add a blood glucose sample, you can use the Health app. Simply go to the Browse section and search for the data type you want to add, in our case, blood glucose:</p>
+<img src="/images/wereableshealth-3.png" alt="">
+<p>Then, you can add a sample value for testing:</p>
+<img src="/images/wereableshealth-4.png" alt="">
+<h4 id="android">Android</h4>
+<p>You can use the Google Fit app to add a blood glucose sample. Similarly to iOS, go to the Browse section and search for the data type you want to add:</p>
+<img src="/images/wereableshealth-5.png" alt="">
+<p>Then, you can add a sample value for testing:</p>
+<img src="/images/wereableshealth-6.png" alt="">
+<h3 id="displaying-results">Displaying Results</h3>
+<p>Once we tested the integration and decided that it was working as expected, we could then use the results of the <span><code class="language-text">readBloodGlucose</code></span> function to show the blood glucose in the app UI.</p>
+<img src="/images/wereableshealth-7.png" alt="">
+<h3 id="sending-the-data-to-a-health-provider">Sending the data to a health provider</h3>
+<p>Once you have the data in the app, you can process it however you like. For model-informed precision dosing, we periodically checked for updates in the background and sent the data to our server using the MQTT protocol, but that’s beyond the scope of this article. For now, let’s generate a simple Axios request to send the blood glucose data to our backend:</p>
+<span><div class="code-highlight" data-language="typescript"><pre class="language-typescript" data-language="typescript"><code class="language-typescript"><span class="token keyword">import</span> axios <span class="token keyword">from</span> <span class="token string">'axios'</span><span class="token punctuation">;</span>
+
+<span class="token keyword">const</span> <span class="token function-variable function">sendBloodGlucoseData</span> <span class="token operator">=</span> <span class="token keyword">async</span> <span class="token punctuation">(</span>bloodGlucoseValue<span class="token punctuation">)</span> <span class="token operator">=></span> <span class="token punctuation">{</span>
+	<span class="token keyword">const</span> bloodGlucoseValue <span class="token operator">=</span> <span class="token keyword">await</span> <span class="token function">readBloodGlucose</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+  <span class="token keyword">try</span> <span class="token punctuation">{</span>
+    <span class="token keyword">const</span> response <span class="token operator">=</span> <span class="token keyword">await</span> axios<span class="token punctuation">.</span><span class="token function">post</span><span class="token punctuation">(</span><span class="token string">'https://example-api.com/api/glucose'</span><span class="token punctuation">,</span> <span class="token punctuation">{</span>
+      bloodGlucose<span class="token operator">:</span> bloodGlucoseValue<span class="token punctuation">,</span>
+    <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token punctuation">}</span> <span class="token keyword">catch</span> <span class="token punctuation">(</span>error<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token builtin">console</span><span class="token punctuation">.</span><span class="token function">error</span><span class="token punctuation">(</span><span class="token string">'Error sending blood glucose data:'</span><span class="token punctuation">,</span> error<span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token punctuation">}</span>
+<span class="token punctuation">}</span><span class="token punctuation">;</span></code></pre></div></span>
+<img src="/images/wereables.gif" alt="">
+<h2 id="conclusion">Conclusion</h2>
+<p>This approach doesn’t completely eliminate the need to sometimes implement custom watchOS or WearOS software. If your user requires specific functionality on a smartwatch, native development becomes inevitable. However, for many use cases, simply accessing the measurements taken by the device is enough. In those instances, these tools are lifesavers—not only because they can be easily integrated with React Native without the need for native code but also because they enable access to data recorded by specialized wearables using proprietary software.</p>
+<p>In our project, this flexibility made all the difference. Instead of implementing a very narrow solution, which would have limited the range of devices and data types, we created a universal solution that can work for any patient with a smartphone.</p>
+<p>If you're interested in wearables integration or looking for a partner to help you streamline your healthcare app, we might be a good fit! Feel free to reach out and thanks for reading!</p>
+<hr>
+<p><strong>References:</strong>
+<a href="https://developer.apple.com/documentation/healthkit/">A﻿pple Developer Documentation | HealthKit
+</a><a href="https://developer.android.com/health-and-fitness/guides/health-connect">A﻿ndroid Developers | Health Connect</a></p> 

@@ -1,0 +1,119 @@
+name: CI
+
+on:
+  pull_request:
+  push:
+    branches: [main, nextjs-payload]
+  workflow_dispatch:
+
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  checks:
+    name: Lint, types, tests, content, build and e2e
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+
+    # Throwaway database for the migrations, the content import and the build. No real
+    # credentials are used anywhere in this workflow.
+    services:
+      postgres:
+        image: postgres:17
+        env:
+          POSTGRES_USER: xlblog
+          POSTGRES_PASSWORD: xlblog
+          POSTGRES_DB: xlblog
+        ports:
+          - 5432:5432
+        options: >-
+          --health-cmd "pg_isready -U xlblog -d xlblog"
+          --health-interval 5s
+          --health-timeout 5s
+          --health-retries 10
+
+    env:
+      DATABASE_URL: postgres://xlblog:xlblog@localhost:5432/xlblog
+      PAYLOAD_SECRET: ci-only-not-a-real-secret
+      NEXT_PUBLIC_SERVER_URL: http://localhost:3000
+      NEXT_TELEMETRY_DISABLED: '1'
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version-file: .nvmrc
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Check formatting
+        run: npm run format:check
+
+      - name: Lint
+        run: npm run lint
+
+      - name: Type-check
+        run: npm run typecheck
+
+      - name: Unit tests
+        run: npm test
+
+      # Access control against the real Payload config. Uses its own database, xlblog_test on
+      # the same server (dropped, recreated and migrated by tests/int/global-setup.ts).
+      - name: Integration tests
+        run: npm run test:int
+
+      # Same order as the Vercel build (`npm run ci`): migrations first, with schema push off.
+      - name: Apply database migrations
+        run: npm run payload migrate
+        env:
+          NODE_ENV: production
+
+      - name: Check that migrations match the schema
+        run: |
+          npm run payload migrate:create ci-schema-check -- --skip-empty
+          if [ -n "$(git status --porcelain src/migrations)" ]; then
+            echo "::error::Collections changed without a migration. Run 'npm run payload migrate:create <name>' locally and commit it."
+            git status --porcelain src/migrations
+            exit 1
+          fi
+        env:
+          NODE_ENV: production
+
+      - name: Import the legacy content
+        run: npm run seed:migrate-content
+        env:
+          NODE_ENV: production
+
+      - name: Check every post renders like the verified snapshot
+        run: npx payload run scripts/compare-bodies.ts
+        env:
+          NODE_ENV: production
+
+      - name: Production build
+        run: npm run build
+        env:
+          NODE_ENV: production
+
+      # End-to-end tests against the production build above (`next start` on port 3003), on
+      # their own database: xlblog_e2e on the same Postgres service, dropped, created,
+      # migrated and seeded by tests/e2e/prepare.ts. Test users and secrets are generated or
+      # fixed test values; nothing real is used. (The parity test, tests/parity, compares
+      # with the live site and stays out of CI.)
+      - name: Install Chromium for the end-to-end tests
+        run: npx playwright install --with-deps chromium
+
+      - name: End-to-end tests
+        run: npm run test:e2e
+
+      - name: Upload end-to-end traces
+        if: failure()
+        uses: actions/upload-artifact@v4
+        with:
+          name: e2e-test-output
+          path: tests/e2e/.cache/test-output/
+          retention-days: 7

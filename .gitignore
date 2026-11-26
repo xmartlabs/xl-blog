@@ -1,7 +1,31 @@
 node_modules/
 .cache/
-public
 .DS_Store
 yarn.lock
 .idea
+
+# Env files (keep the example tracked)
 .env*
+!.env.example
+
+# Next.js / Vercel
+.next/
+out/
+next-env.d.ts
+.vercel
+*.tsbuildinfo
+
+# Old Astro build (kept locally as the migration reference)
+dist/
+.astro/
+.wrangler/
+
+# Payload local uploads (production uses Vercel Blob)
+/media/
+
+# Parity test (tests/parity): live-site cache and generated report
+tests/parity/.cache/
+tests/parity/report/
+
+# End-to-end tests (tests/e2e): test users' credentials, sessions, traces
+tests/e2e/.cache/

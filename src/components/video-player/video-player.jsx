@@ -1,7 +1,20 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 
-const VideoPlayer = ({ name, id, width, height, title, style }) => {
+// Self-hosted videos live in /images by default; set NEXT_PUBLIC_MEDIA_BASE_URL
+// (e.g. an R2 bucket URL) to serve them from somewhere else.
+const MEDIA_BASE_URL = (process.env.NEXT_PUBLIC_MEDIA_BASE_URL || '').replace(
+  /\/+$/,
+  ''
+);
+
+const VideoPlayer = ({
+  name,
+  id,
+  width = '100%',
+  height = '560px',
+  title = 'Xmartlabs',
+  style,
+}) => {
   if (id) {
     return (
       <iframe
@@ -20,28 +33,13 @@ const VideoPlayer = ({ name, id, width, height, title, style }) => {
     <video
       width={width}
       height={height}
-      src={`/images/${name}`}
+      src={`${MEDIA_BASE_URL || '/images'}/${name}`}
       title={title}
       allowFullScreen
       controls={true}
       style={style}
     />
   );
-};
-
-VideoPlayer.propTypes = {
-  name: PropTypes.string,
-  id: PropTypes.string,
-  width: PropTypes.string,
-  height: PropTypes.string,
-  title: PropTypes.string,
-  style: PropTypes.object,
-};
-
-VideoPlayer.defaultProps = {
-  width: '100%',
-  height: '560px',
-  title: 'Xmartlabs',
 };
 
 export { VideoPlayer };

@@ -1,0 +1,161 @@
+ <p>Building Android UIs with a consistent look and feel is easier than ever by using the new <a href="https://developer.android.com/jetpack/compose">Jetpack Compose</a> framework and setting up <a href="https://developer.android.com/jetpack/compose/themes">themes</a>.
+Compose offers a Material theme implementation that makes it easy to use Material style throughout the whole app.</p>
+<p>As you may already know, Material allows us to have a uniform UI that follows Android UI best practices and guidelines, but at the same time, it's super rigid and limited when the app needs a more complex UI customization level.</p>
+<p>In this post, we'll learn how to adapt, customize and extend Compose Material Theme in order to fulfill your app UI requirements and get rid of material limitations.</p>
+<h1 id="whats-an-application-theme">What's an application theme?</h1>
+<p><a href="https://developer.android.com/guide/topics/ui/look-and-feel/themes">Android Theme</a> is just a collection of resources that are useful throughout a given application.
+Each resource has a semantic name such as <span><code class="language-text">colorPrimary</code></span> that can be used as a reference from different places on the app.</p>
+<p>Most Android apps already follow <a href="https://material.io/design/introduction">Material Design Guidelines</a>, that's the reason Jetpack Compose provides the <span><code class="language-text">MaterialTheme</code></span> implementation, which is a systematic way to customize Material Design to better reflect your app style and branding.
+Material Theme comprises <a href="https://material.io/design/color/">color</a>, <a href="https://material.io/design/typography">typography</a>, and <a href="https://material.io/design/shape/">shape</a> attributes that can be tweaked to get custom style variations of the components.</p>
+<h3 id="sounds-good-but-is-it-perfect">Sounds good, but is it perfect?</h3>
+<p>Material does a great job making sure every app follows Android UI guidelines, but it clearly lacks flexibility.
+So, here lies the first problem: you have to adapt your look and feel to the Material guidelines, and if you don't, then it becomes hard to use it.</p>
+<p>Secondly, Material comprises only <a href="https://material.io/design/color/">color</a>, <a href="https://material.io/design/typography">typography</a>, and <a href="https://material.io/design/shape/">shape</a> attributes, but what if your app needs more resources, such as dimensions or icons?</p>
+<h1 id="extending-material-colors">Extending Material Colors</h1>
+<p>Compose provides the <a href="https://developer.android.com/reference/kotlin/androidx/compose/material/Colors"><span><code class="language-text">Colors</code></span></a> class to model the <a href="https://material.io/design/color/">Material color system</a> which includes nine colors and two functions to define light and dark color sets.</p>
+<p>According to our experience, most apps need way more than 9 colors.
+For example, a text link color or a subheader background color are common cases that signal the need for more colors.</p>
+<p>An important comment here is that all of these colors should be defined in your color palette because they could change depending on the system's configuration (light or dark mode) or your app's state.</p>
+<p>Let's suppose we want to define a <span><code class="language-text">subtitleTextColor</code></span>, in this case, Google recommends a way to do that:</p>
+<span><div class="code-highlight" data-language="kotlin"><pre class="language-kotlin" data-language="kotlin"><code class="language-kotlin"><span class="token annotation builtin">@get:Composable</span>
+<span class="token keyword">val</span> Colors<span class="token punctuation">.</span>subtitleTextColor<span class="token operator">:</span> Color
+    <span class="token keyword">get</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=</span> <span class="token keyword">if</span> <span class="token punctuation">(</span>isLight<span class="token punctuation">)</span> Red300 <span class="token keyword">else</span> Red700</code></pre></div></span>
+<p>If you look closely at this code, you can see that the <span><code class="language-text">subtitleTextColor</code></span> is only based on Material color's light property.
+However, what if we wanted to handle multiple color palettes in the same app, how could we possibly achieve that?</p>
+<p>The approach we will use is to define a brand new color class named <span><code class="language-text">AppColor</code></span>, which will keep Material standard colors and add our own custom ones.</p>
+<span><div class="code-highlight" data-language="kotlin"><pre class="language-kotlin" data-language="kotlin"><code class="language-kotlin"><span class="token annotation builtin">@Stable</span>
+<span class="token keyword">data</span> <span class="token keyword">class</span> <span class="token function">AppColors</span><span class="token punctuation">(</span>
+    <span class="token keyword">val</span> subtitleTextColor<span class="token operator">:</span> Color<span class="token punctuation">,</span>
+    <span class="token keyword">val</span> materialColors<span class="token operator">:</span> Colors<span class="token punctuation">,</span>
+<span class="token punctuation">)</span><span class="token punctuation">{</span>
+ <span class="token keyword">val</span> primary<span class="token operator">:</span> Color
+  <span class="token keyword">get</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=</span> materialColors<span class="token punctuation">.</span>primary
+  <span class="token comment">// Add other material colors properties</span>
+<span class="token punctuation">}</span></code></pre></div></span>
+<p><span><code class="language-text">AppColors</code></span> then holds all of the app's colors.
+Each application can also define multiple color palettes, often selecting one or another depending on the app's state.
+Suppose that we now want to define two color palettes, one based on blue colors and the other based on pink ones:</p>
+<span><div class="code-highlight" data-language="kotlin"><pre class="language-kotlin" data-language="kotlin"><code class="language-kotlin"><span class="token keyword">enum</span> <span class="token keyword">class</span> AppColorPalette <span class="token punctuation">{</span>
+  BLUE<span class="token punctuation">,</span>
+  PINK<span class="token punctuation">,</span>
+<span class="token punctuation">}</span>
+
+<span class="token comment">// AppCustomColors is private because we shouldn't expose a color that is not in a theme</span>
+<span class="token keyword">private</span> <span class="token keyword">object</span> AppCustomColors <span class="token punctuation">{</span>
+  <span class="token keyword">val</span> PINK_AMARANTH <span class="token operator">=</span> <span class="token function">Color</span><span class="token punctuation">(</span><span class="token number">0xffe91e63</span><span class="token punctuation">)</span>
+  <span class="token keyword">val</span> PINK_MAROON <span class="token operator">=</span> <span class="token function">Color</span><span class="token punctuation">(</span><span class="token number">0xffc2185b</span><span class="token punctuation">)</span>
+  <span class="token keyword">val</span> PINK_MAUVELOUS <span class="token operator">=</span> <span class="token function">Color</span><span class="token punctuation">(</span><span class="token number">0xfff48fb0</span><span class="token punctuation">)</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword">private</span> <span class="token keyword">val</span> darkPinkColors <span class="token operator">=</span> <span class="token function">AppColors</span><span class="token punctuation">(</span>
+    linkTextColor <span class="token operator">=</span> AppCustomColors<span class="token punctuation">.</span>PINK_AMARANTH<span class="token punctuation">,</span>
+    materialColors <span class="token operator">=</span> <span class="token function">darkColors</span><span class="token punctuation">(</span>
+        primary <span class="token operator">=</span> AppCustomColors<span class="token punctuation">.</span>PINK_MAUVELOUS<span class="token punctuation">,</span>
+        primaryVariant <span class="token operator">=</span> AppCustomColors<span class="token punctuation">.</span>PINK_MAROON<span class="token punctuation">,</span>
+        <span class="token operator">..</span><span class="token operator">..</span> <span class="token comment">// Material Colors</span>
+    <span class="token punctuation">)</span>
+
+<span class="token comment">// Define lightPinkColors, darkBlueColors, lightBlueColors the same way</span>
+
+<span class="token annotation builtin">@Composable</span>
+<span class="token keyword">fun</span> <span class="token function">appColors</span><span class="token punctuation">(</span>colorPalette<span class="token operator">:</span> AppColorPalette<span class="token punctuation">,</span> darkTheme<span class="token operator">:</span> Boolean<span class="token punctuation">)</span><span class="token operator">:</span> AppColors <span class="token operator">=</span>
+    <span class="token keyword">when</span> <span class="token punctuation">(</span>colorPalette<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+      AppColorPalette<span class="token punctuation">.</span>BLUE <span class="token operator">-></span> <span class="token keyword">if</span> <span class="token punctuation">(</span>darkTheme<span class="token punctuation">)</span> darkBlueColors <span class="token keyword">else</span> lightBlueColors
+      AppColorPalette<span class="token punctuation">.</span>PINK <span class="token operator">-></span> <span class="token keyword">if</span> <span class="token punctuation">(</span>darkTheme<span class="token punctuation">)</span> darkPinkColors <span class="token keyword">else</span> lightPinkColors
+    <span class="token punctuation">}</span></code></pre></div></span>
+<p>Note that, by using this approach, we could also define a colorblind-friendly palette, improving the app's accessibility.</p>
+<p>Given a color palette and the UI mode, the <span><code class="language-text">appColors</code></span> method returns an <span><code class="language-text">AppColors</code></span> instance.
+The complete implementation of these classes can be found <a href="https://github.com/xmartlabs/gong/blob/b0b617e/app/src/main/java/com/xmartlabs/gong/ui/theme/AppColors.kt">in Xmartlabs Gong template project code</a>.</p>
+<p>Right now we have a method that provides an <span><code class="language-text">AppColors</code></span> palette, but then how can we get the current app color palette?
+Material provides a way of obtaining the current Material color palette, by invoking a <span><code class="language-text">composable</code></span> method named <span><code class="language-text">MaterialTheme.colors</code></span>.
+To get our custom color palette, we will use the same idea: we will invoke <span><code class="language-text">AppTheme.colors</code></span> and get it.
+For that we will have to create our app theme, a custom theme that is the result of composing the <span><code class="language-text">MaterialTheme</code></span>:</p>
+<span><div class="code-highlight" data-language="kotlin"><pre class="language-kotlin" data-language="kotlin"><code class="language-kotlin"><span class="token keyword">object</span> AppTheme <span class="token punctuation">{</span>
+  <span class="token keyword">val</span> colors<span class="token operator">:</span> AppColors
+    <span class="token annotation builtin">@Composable</span>
+    <span class="token annotation builtin">@ReadOnlyComposable</span>
+    <span class="token keyword">get</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=</span> LocalAppColors<span class="token punctuation">.</span>current
+<span class="token punctuation">}</span>
+
+<span class="token keyword">private</span> <span class="token keyword">val</span> LocalAppColors <span class="token operator">=</span> staticCompositionLocalOf <span class="token punctuation">{</span>
+  <span class="token function">defaultAppColors</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token comment">// For instance, pink dark colors</span>
+<span class="token punctuation">}</span>
+
+<span class="token annotation builtin">@Composable</span>
+<span class="token keyword">fun</span> <span class="token function">AppTheme</span><span class="token punctuation">(</span>
+    darkTheme<span class="token operator">:</span> Boolean <span class="token operator">=</span> <span class="token function">isSystemInDarkTheme</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+    colorPalette<span class="token operator">:</span> AppColorPalette <span class="token operator">=</span> AppColorPalette<span class="token punctuation">.</span>PINK<span class="token punctuation">,</span>
+    content<span class="token operator">:</span> <span class="token annotation builtin">@Composable</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">-></span> Unit<span class="token punctuation">,</span>
+<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  <span class="token keyword">val</span> colors <span class="token operator">=</span> <span class="token function">appColors</span><span class="token punctuation">(</span>colorPalette <span class="token operator">=</span> colorPalette<span class="token punctuation">,</span> darkTheme <span class="token operator">=</span> darkTheme<span class="token punctuation">)</span>
+  <span class="token function">CompositionLocalProvider</span><span class="token punctuation">(</span>
+      LocalAppColors provides colors<span class="token punctuation">,</span>
+  <span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token function">MaterialTheme</span><span class="token punctuation">(</span>
+        colors <span class="token operator">=</span> colors<span class="token punctuation">.</span>materialColors<span class="token punctuation">,</span>
+        content <span class="token operator">=</span> content<span class="token punctuation">,</span>
+    <span class="token punctuation">)</span>
+  <span class="token punctuation">}</span>
+<span class="token punctuation">}</span></code></pre></div></span>
+<p>These lines define two things, a Composable app theme to handle our custom colors and a static class that provides them.
+The full implementation of these classes can be found <a href="https://github.com/xmartlabs/gong/blob/b0b617e56403c1f499704111acad89093aa3c9d6/app/src/main/java/com/xmartlabs/gong/ui/theme/AppTheme.kt#L10">here</a>.</p>
+<h3 id="extending-shape-and-typography">Extending <a href="https://material.io/design/shape/">shape</a> and <a href="https://material.io/design/typography">typography</a></h3>
+<p>To extend these classes, we can follow the same idea.
+We create an <a href="https://github.com/xmartlabs/gong/blob/b0b617e56403c1f499704111acad89093aa3c9d6/app/src/main/java/com/xmartlabs/gong/ui/theme/AppShapes.kt"><span><code class="language-text">AppShapes</code></span></a> class and an <a href="https://github.com/xmartlabs/gong/blob/b0b617e56403c1f499704111acad89093aa3c9d6/app/src/main/java/com/xmartlabs/gong/ui/theme/AppTypographies.kt"><span><code class="language-text">AppTypographies</code></span></a> class the same way and declare custom theme properties.</p>
+<p>I will not explain the code because it's almost identical, you can also find it on <a href="https://github.com/xmartlabs/gong/tree/b0b617e/app/src/main/java/com/xmartlabs/gong/ui/theme">Gong repo</a> and if you have any questions, don't forget to comment!</p>
+<h1 id="adding-custom-resources-to-your-theme">Adding custom resources to your theme</h1>
+<p>So far, we've learned how to extend the properties provided by Material, but what if our app requires new ones?
+Remember, a theme is a semantic resource set, so we could also need dimensions, icons, or any other resource to build the custom app UI.</p>
+<h2 id="defining-dimensions-in-our-theme">Defining dimensions in our theme</h2>
+<p>Dimensions are something that we usually define in our theme since many of them have a meaning in our app context.
+Examples are list items' padding, a "small size", and a container margin.</p>
+<p>We can use a similar approach here and define a dimension class:</p>
+<span><div class="code-highlight" data-language="kotlin"><pre class="language-kotlin" data-language="kotlin"><code class="language-kotlin"><span class="token annotation builtin">@Immutable</span>
+<span class="token keyword">data</span> <span class="token keyword">class</span> <span class="token function">AppDims</span><span class="token punctuation">(</span>
+    <span class="token keyword">val</span> textSizeSmall<span class="token operator">:</span> TextUnit<span class="token punctuation">,</span>
+    <span class="token keyword">val</span> textSizeMedium<span class="token operator">:</span> TextUnit<span class="token punctuation">,</span>
+    <span class="token keyword">val</span> textSizeRegular<span class="token operator">:</span> TextUnit<span class="token punctuation">,</span>
+
+    <span class="token keyword">val</span> listItemVerticalPadding<span class="token operator">:</span> Dp<span class="token punctuation">,</span>
+    <span class="token keyword">val</span> listItemHorizontalPadding<span class="token operator">:</span> Dp<span class="token punctuation">,</span>
+<span class="token punctuation">)</span></code></pre></div></span>
+<p>That's all fine, but you may be asking yourself a question which is: what are the actual advantages?</p>
+<p>First, your theme will be consistent.
+You can reuse the dimensions in multiple places throughout your app and thus make sure the correct values are enforced.</p>
+<p>Second, you gain flexibility as you can define custom dimensions based on the device's state or specs.
+A practical example, considering devices with small screens, is to define a separate set of dimensions for them to improve the user experience.</p>
+<p>Last but not least, you avoid magic numbers making your codebase more maintainable and readable.</p>
+<span><div class="code-highlight" data-language="kotlin"><pre class="language-kotlin" data-language="kotlin"><code class="language-kotlin"><span class="token annotation builtin">@Composable</span>
+<span class="token keyword">fun</span> <span class="token function">appDims</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=</span> <span class="token keyword">if</span> <span class="token punctuation">(</span>LocalConfiguration<span class="token punctuation">.</span>current<span class="token punctuation">.</span>screenWidthDp <span class="token operator">&#x3C;</span> <span class="token number">300</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  smallDeviceAppDims
+<span class="token punctuation">}</span> <span class="token keyword">else</span> <span class="token punctuation">{</span>
+  regularAppDims
+<span class="token punctuation">}</span>
+
+<span class="token keyword">private</span> <span class="token keyword">val</span> regularAppDims <span class="token operator">=</span> <span class="token function">AppDims</span><span class="token punctuation">(</span>
+    textSizeSmall <span class="token operator">=</span> <span class="token number">12</span><span class="token punctuation">.</span>sp<span class="token punctuation">,</span>
+    textSizeMedium <span class="token operator">=</span> <span class="token number">14</span><span class="token punctuation">.</span>sp<span class="token punctuation">,</span>
+    textSizeRegular <span class="token operator">=</span> <span class="token number">16</span><span class="token punctuation">.</span>sp<span class="token punctuation">,</span>
+
+    listItemVerticalPadding <span class="token operator">=</span> <span class="token number">27</span><span class="token punctuation">.</span>dp<span class="token punctuation">,</span>
+    listItemHorizontalPadding <span class="token operator">=</span> <span class="token number">30</span><span class="token punctuation">.</span>dp<span class="token punctuation">,</span>
+<span class="token punctuation">)</span>
+
+<span class="token keyword">private</span> <span class="token keyword">val</span> smallDeviceAppDims <span class="token operator">=</span> <span class="token function">AppDims</span><span class="token punctuation">(</span>
+    textSizeSmall <span class="token operator">=</span> <span class="token number">12</span><span class="token punctuation">.</span>sp<span class="token punctuation">,</span>
+    textSizeMedium <span class="token operator">=</span> <span class="token number">13</span><span class="token punctuation">.</span>sp<span class="token punctuation">,</span>
+    textSizeRegular <span class="token operator">=</span> <span class="token number">14</span><span class="token punctuation">.</span>sp<span class="token punctuation">,</span>
+
+    listItemVerticalPadding <span class="token operator">=</span> <span class="token number">15</span><span class="token punctuation">.</span>dp<span class="token punctuation">,</span>
+    listItemHorizontalPadding <span class="token operator">=</span> <span class="token number">14</span><span class="token punctuation">.</span>dp<span class="token punctuation">,</span>
+<span class="token punctuation">)</span></code></pre></div></span>
+<p>Then, you have to add the <span><code class="language-text">AppDims</code></span> to your <span><code class="language-text">AppTheme</code></span> just like we did with the <span><code class="language-text">AppColors</code></span> example.
+Check out <a href="https://github.com/xmartlabs/gong/blob/b0b617e/app/src/main/java/com/xmartlabs/gong/ui/theme/AppDims.kt">the complete code in Gong repo</a>.</p>
+<h1 id="conclusion">Conclusion</h1>
+<p>I don't have to convince you about the importance of having a good UX/UI in an app, most of the time we use top-tier apps that provide a world-class experience and we end up expecting this UI/UX quality everywhere.</p>
+<p>Compose is coming to transform the way we build Android apps, it's a whole new approach that drastically simplifies and accelerates UI development.</p>
+<p>Theming the application using Material Theme helps when it comes to encapsulating and reutilizing styles and assets.
+There is nothing worse than having a huge app that is a mess regarding the theme, assets management, and configuration.</p>
+<p>This blog post presents concepts and ideas to leverage compose, app theming, and Material.
+If your app still needs more customization, you'll be able to extend Material capabilities to derive full benefit from them.
+The benefits are clear, we end up having a clean code base, drastically reducing redundant style configuration code, and having full control over the whole app style from a single source of truth, the application-wide theming.</p> 

@@ -1,5 +1,6 @@
+'use client';
+
 import React, { useState } from 'react';
-import PropTypes from 'prop-types';
 
 import { NavMenuElements } from './nav-menu-elements';
 import {
@@ -24,21 +25,25 @@ const MobileNavMenu = () => {
       path: 'https://www.linkedin.com/company/xmartlabs/mycompany/',
       icon: <LinkedInIcon />,
       id: 'socialMenuLinkedIn',
+      label: 'Xmartlabs on LinkedIn',
     },
     {
       path: 'https://www.instagram.com/xmartlabs',
       icon: <InstagramIcon />,
       id: 'socialMenuInstagram',
+      label: 'Xmartlabs on Instagram',
     },
     {
       path: 'https://twitter.com/xmartlabs',
       icon: <TwitterIcon />,
       id: 'socialMenuTwitter',
+      label: 'Xmartlabs on X (Twitter)',
     },
     {
       path: 'https://github.com/xmartlabs',
       icon: <GithubIcon />,
       id: 'socialMenuGithub',
+      label: 'Xmartlabs on GitHub',
     },
   ];
 
@@ -86,14 +91,12 @@ const MobileNavMenu = () => {
                 </h4>
                 <button
                   onClick={() => setShowTypeForm(true)}
-                  target="_blank"
-                  rel="noopener noreferrer"
                   className="
                     w-56 h-[2.8rem] flex justify-center items-center bg-xl-pink text-neutral-100 m-[1.5rem_0_4rem]
                     no-underline font-primary font-black border-none
                   "
                 >
-                  Let's talk
+                  Let&apos;s talk
                 </button>
               </div>
               <SocialElement
@@ -109,13 +112,3 @@ const MobileNavMenu = () => {
 };
 
 export { MobileNavMenu as MobileMenu };
-
-MobileNavMenu.propTypes = {
-  onClick: PropTypes.func,
-  showMenu: PropTypes.bool,
-};
-
-MobileNavMenu.defaultProps = {
-  onClick: () => {},
-  showMenu: false,
-};

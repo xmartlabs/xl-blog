@@ -1,8 +1,6 @@
 import React from 'react';
 
-import PropTypes from 'prop-types';
-
-export const InstagramIcon = ({ className }) => (
+export const InstagramIcon = ({ className = '' }) => (
   <svg
     width="22"
     height="22"
@@ -17,11 +15,3 @@ export const InstagramIcon = ({ className }) => (
     />
   </svg>
 );
-
-InstagramIcon.propTypes = {
-  className: PropTypes.string,
-};
-
-InstagramIcon.defaultProps = {
-  className: '',
-};

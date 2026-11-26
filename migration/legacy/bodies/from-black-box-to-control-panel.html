@@ -1,0 +1,428 @@
+ <p>In this 2025, considered by many as the year of AI agents, almost any system based on LLMs performs wonderfully in a Proof of Concept (PoC). But what happens when it reaches production?</p>
+<p>Inconsistent answers, “hallucinations,” and silent performance degradation can turn a promising PoC into a maintenance nightmare.</p>
+<p>When a user receives an incorrect answer, a series of challenges arise: how do you diagnose the root cause? Was it a change in the prompt, an issue with the data used as context (RAG), or a model failure itself?</p>
+<p>In this article, the goal is to step away from the “build and launch” mindset and dive into the “continuous improvement” cycle that defines professional GenAI projects. We will demonstrate how implementing an observability framework transforms LLM systems from unpredictable black boxes into robust, maintainable, and auditable applications.</p>
+<h2 id="the-mirage-of-the-prototype">The Mirage of the Prototype</h2>
+<p>The real complexity of Generative AI (GenAI) applications doesn’t lie in the initial demo, but in their behavior once deployed in a dynamic, uncontrolled, and large-scale production environment. When a system moves from the sterile confines of a test dataset to the unpredictability of real user interactions, latent problems emerge quickly.</p>
+<h2 id="new-classes-of-failures">New Classes of Failures</h2>
+<p>Traditional software systems fail in predictable ways: unhandled exceptions, logic errors, concurrency issues. LLM systems introduce a new taxonomy of failures, often more subtle and difficult to diagnose, including:</p>
+<ul>
+<li><strong>Inconsistent Responses:</strong> For the same query, the model can produce drastically different answers in quality and content at different times.</li>
+<li><strong>Hallucinations:</strong> The model generates information that sounds plausible but is factually incorrect or not grounded in the provided data, a critical risk in enterprise applications.</li>
+<li><strong>Silent Performance Degradation:</strong> A minor change in a prompt, an underlying model update, or a shift in input data distribution can gradually and undetectably degrade response quality until the user impact becomes significant.</li>
+<li><strong>Opaque Root Cause Diagnosis:</strong> When a user gets a wrong answer, determining the origin of failure is a major challenge. Was it a prompt change? A problem in the Retrieval-Augmented Generation (RAG) data? A limitation in the model itself? Without the proper tools, engineering teams are left guessing.</li>
+<li><strong>Malicious or Poisoned Responses:</strong> There&#39;s a growing vulnerability where, under specific instructions, LLM-based systems can behave maliciously, expose data, or exhibit behavior different from their preset configurations.</li>
+</ul>
+<h2 id="observability-as-a-pillar-not-an-add-on">Observability as a Pillar, Not an Add-on</h2>
+<p>In traditional software engineering, monitoring and observability are often afterthoughts. In the GenAI world, this approach is a recipe for failure. Observability must not be an add-on, it must be a fundamental system design requirement from day one. To build robust, maintainable, and enterprise-trustworthy AI applications, a mindset shift is essential: move away from “build and launch” to a rigorous “measure, evaluate, and iterate” cycle which, when adopted properly, doesn’t have to be slower than the former.</p>
+<h2 id="the-basis-of-stability-prompts-as-code-not-as-strings">The Basis of Stability: Prompts as Code, Not as Strings</h2>
+<h3 id="the-anti-pattern-prompts-as-magic-strings">The anti-pattern: Prompts as magic strings</h3>
+<p>The most common and dangerous starting point in LLM application development is to treat prompts as simple text strings embedded directly in the source code.</p>
+<span><div class="code-highlight" data-language="python"><pre class="language-python" data-language="python"><code class="language-python"><span class="token comment">#</span>
+<span class="token keyword">def</span> <span class="token function">classify_support_ticket</span><span class="token punctuation">(</span>query<span class="token punctuation">:</span> <span class="token builtin">str</span><span class="token punctuation">)</span> <span class="token operator">-</span><span class="token operator">&gt;</span> <span class="token builtin">str</span><span class="token punctuation">:</span>
+
+  prompt <span class="token operator">=</span> <span class="token string-interpolation"><span class="token string">f&quot;&quot;&quot;
+  You are an expert support ticket classifier.
+
+  Classify the following ticket into one of these categories: &#39;Technical&#39;, &#39;Billing&#39;, &#39;Sales&#39;.
+
+  Ticket: &quot;</span><span class="token interpolation"><span class="token punctuation">{</span>query<span class="token punctuation">}</span></span><span class="token string">&quot;
+
+  Category:
+
+  &quot;&quot;&quot;</span></span>
+
+<span class="token comment">#... LLM call logic...</span></code></pre></div></span>
+<p>This approach, while fast for prototyping, introduces massive technical debt. Hardcoded prompts are fragile; a change in business requirements (e.g., adding a new category) requires a code modification and a full deployment cycle. They are difficult to track, with no clear history of why a prompt was changed or who changed it. They create a barrier to collaboration with non-technical domain experts, such as product specialists or the prompt engineers themselves, who shouldn&#39;t need to modify the application code to refine LLM prompts.</p>
+<h2 id="the-prompts-as-code-philosophy">The &quot;Prompts-as-Code&quot; Philosophy</h2>
+<p>To overcome these limitations, we must adopt the <strong>&quot;Prompts-as-Code&quot; philosophy</strong>. This paradigm consists of treating prompts not as strings, but as first-class software artifacts with their own development lifecycle, managed with the same rigor and tools as the application code. This approach is based on several key practices:</p>
+<ul>
+<li>
+<p><strong>Versioning:</strong> Every prompt should be under version control, preferably in a Git repository. Clear conventions, such as Semantic Versioning (SemVer: MAJOR.MINOR.PATCH), should be used to communicate the nature of each change.</p>
+<ul>
+<li><strong>MAJOR:</strong> Complete restructuring of the prompt&#39;s role</li>
+<li><strong>MINOR:</strong> Addition of new few-shot examples to improve performance</li>
+<li><strong>PATCH:</strong> Simple spelling or formatting corrections</li>
+</ul>
+</li>
+<li>
+<p><strong>Structured Documentation:</strong> Each version of a prompt should be accompanied by essential metadata: the change author, the justification, the expected behavior, and input/output examples that illustrate its functionality. This documentation is invaluable for debugging and onboarding new team members.</p>
+</li>
+<li>
+<p><strong>Testing and Validation:</strong> No change to a prompt should be deployed blindly. It is essential to have a suite of automated regression tests that verify that the new version does not degrade performance in known and critical use cases. This set of tests acts as a safety net against unexpected changes in the model&#39;s behavior.</p>
+</li>
+</ul>
+<p>Prompt management, when done correctly, is not simply a text storage problem. It&#39;s a complete DevOps microcycle. It involves writing the prompt, validating its syntax, evaluating its performance, promoting it to an environment, making it available to the application (deploying it), and monitoring (observing its effectiveness). Working on the problem in this way aligns it with mature, widely validated, and documented software engineering practices.</p>
+<h2 id="the-role-of-the-prompt-management-system-cms">The Role of the Prompt Management System (CMS)</h2>
+<p>A <strong>Prompt Management System (CMS)</strong> is an engineering tool that enables the implementation of the &quot;Prompts-as-Code&quot; philosophy at scale. Its primary function is <strong>decoupling</strong>, it separates instructional logic (the prompt) from business logic (the application code).</p>
+<p>This decoupling is an architectural transformation that enables a <strong>&quot;two-speed architecture&quot;:</strong></p>
+<ul>
+<li><strong>Application engineers</strong> can work on the core system, with slower, more controlled deployment cycles</li>
+<li><strong>Prompt engineers or domain experts</strong> can experiment, iterate, and deploy changes to prompts in minutes through the CMS interface, without requiring a single <span><code class="language-text">git commit</code></span> or <span><code class="language-text">docker build</code></span></li>
+</ul>
+<p>This agility is crucial for responding quickly to production issues. If a newly deployed prompt causes problems, reverting it is as simple as changing a label in the CMS, an operation that takes seconds, instead of a costly and time-consuming code rollback.</p>
+<p>Furthermore, a CMS <strong>centralizes governance and collaboration:</strong></p>
+<ul>
+<li>Provides a user interface where multidisciplinary teams can collaborate securely</li>
+<li>Allows for the establishment of approval workflows (similar to pull requests)</li>
+<li>Defines access controls to ensure that only authorized personnel can modify production prompts</li>
+</ul>
+<h3 id="example-practical-implementation-with-langfuse-prompt-management">Example: Practical Implementation with Langfuse Prompt Management</h3>
+<p>Langfuse, an observability platform for LLMs, includes powerful prompt management functionality that serves as a CMS.</p>
+<p>First, in the Langfuse user interface, you can create a new prompt. You assign it a unique name (e.g., <span><code class="language-text">customer-support-classifier</code></span>), write the prompt content using the <span><code class="language-text">{&quot;{{variable}}&quot;}</code></span> template syntax, and assign it tags such as <span><code class="language-text">development</code></span>, <span><code class="language-text">staging</code></span>, or <span><code class="language-text">production</code></span>. These tags manage which version of the prompt is considered active in each environment.</p>
+<p>Next, the application code is modified to dynamically retrieve the prompt from Langfuse instead of having it hardcoded. Let&#39;s see how this is implemented in practice:</p>
+<span><div class="code-highlight" data-language="python"><pre class="language-python" data-language="python"><code class="language-python"><span class="token comment"># main_app.py</span>
+<span class="token keyword">import</span> os
+<span class="token keyword">from</span> langfuse <span class="token keyword">import</span> get_client
+<span class="token keyword">from</span> langchain_openai <span class="token keyword">import</span> ChatOpenAI
+<span class="token keyword">from</span> langchain<span class="token punctuation">.</span>prompts <span class="token keyword">import</span> ChatPromptTemplate
+
+<span class="token comment"># It&#39;s good practice to configure credentials using environment variables</span>
+<span class="token comment"># os.environ[&quot;LANGFUSE_PUBLIC_KEY&quot;] = &quot;pk-lf-...&quot;</span>
+<span class="token comment"># os.environ[&quot;LANGFUSE_SECRET_KEY&quot;] = &quot;sk-lf-...&quot;</span>
+<span class="token comment"># os.environ[&quot;LANGFUSE_HOST&quot;] = &quot;https://cloud.langfuse.com&quot;</span>
+
+<span class="token comment"># Initialize the Langfuse client</span>
+<span class="token comment"># The SDK will read the credentials from the environment variables</span>
+langfuse <span class="token operator">=</span> get_client<span class="token punctuation">(</span><span class="token punctuation">)</span>
+
+<span class="token comment"># Get the version of the prompt labeled &#39;production&#39; from the Langfuse CMS.</span>
+<span class="token comment"># This is key to decoupling.</span>
+<span class="token keyword">try</span><span class="token punctuation">:</span>
+    prompt_from_fuse <span class="token operator">=</span> langfuse<span class="token punctuation">.</span>get_prompt<span class="token punctuation">(</span><span class="token string">&quot;customer-support-classifier&quot;</span><span class="token punctuation">,</span> label<span class="token operator">=</span><span class="token string">&quot;production&quot;</span><span class="token punctuation">)</span>
+<span class="token keyword">except</span> Exception <span class="token keyword">as</span> e<span class="token punctuation">:</span>
+    <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string-interpolation"><span class="token string">f&quot;Error getting the Langfuse prompt: </span><span class="token interpolation"><span class="token punctuation">{</span>e<span class="token punctuation">}</span></span><span class="token string">&quot;</span></span><span class="token punctuation">)</span>
+    <span class="token comment"># Implement fallback logic, such as using a default prompt</span>
+    <span class="token comment"># ...</span>
+
+<span class="token comment"># Langfuse uses the syntax {{variable}}, while LangChain uses {variable}.</span>
+<span class="token comment"># The Langfuse SDK provides a utility method for easy conversion.</span>
+langchain_prompt_str <span class="token operator">=</span> prompt_from_fuse<span class="token punctuation">.</span>get_langchain_prompt<span class="token punctuation">(</span><span class="token punctuation">)</span>
+
+<span class="token comment"># Create a LangChain ChatPromptTemplate from the converted string.</span>
+chat_prompt <span class="token operator">=</span> ChatPromptTemplate<span class="token punctuation">.</span>from_template<span class="token punctuation">(</span>langchain_prompt_str<span class="token punctuation">)</span>
+
+<span class="token comment"># The application continues its logic using the dynamically obtained prompt.</span>
+model <span class="token operator">=</span> ChatOpenAI<span class="token punctuation">(</span>model<span class="token operator">=</span><span class="token string">&quot;gpt-4o&quot;</span><span class="token punctuation">)</span>
+chain <span class="token operator">=</span> chat_prompt <span class="token operator">|</span> model
+
+<span class="token comment"># Example invocation</span>
+query <span class="token operator">=</span> <span class="token string">&quot;I can&#39;t access my account, I&#39;ve forgotten my password.&quot;</span>
+response <span class="token operator">=</span> chain<span class="token punctuation">.</span>invoke<span class="token punctuation">(</span><span class="token punctuation">{</span><span class="token string">&quot;query&quot;</span><span class="token punctuation">:</span> query<span class="token punctuation">}</span><span class="token punctuation">)</span>
+<span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string-interpolation"><span class="token string">f&quot;Ticket classification: </span><span class="token interpolation"><span class="token punctuation">{</span>response<span class="token punctuation">.</span>content<span class="token punctuation">}</span></span><span class="token string">&quot;</span></span><span class="token punctuation">)</span></code></pre></div></span>
+<p>This sample code demonstrates the decoupling capabilities. The prompts team can now experiment with new versions of the customer-support-classifier in Langfuse. They can test a version in staging and, once validated, promote it simply by applying the production tag. The application, without any changes to its code, will automatically use the updated prompt on the next run. A critical bottleneck is eliminated, enabling unprecedented iteration and responsiveness.</p>
+<h2 id="anatomy-of-a-trace-diagnosis-with-langfuse">Anatomy of a Trace: Diagnosis with Langfuse</h2>
+<h3 id="the-need-for-traceability">The need for traceability</h3>
+<p>In LLM-based systems, especially in complex architectures like RAG, using <span><code class="language-text">print()</code></span> or traditional logging is fundamentally insufficient for debugging. A log can record discrete events: &quot;User query received,&quot; &quot;Documents retrieved,&quot; &quot;Error generating response.&quot; However, it doesn&#39;t capture the causal relationship between these events. It doesn&#39;t answer the crucial question: Why did the generation fail? Was it because the retrieved documents were irrelevant?
+This is where observability traceability becomes indispensable. A trace not only records events but connects them in a hierarchical structure that represents the entire execution flow. It shows how the output of one step becomes the input of the next, creating an auditable and debuggable record of the entire interaction. This causal chain is the key to moving from the generic complaint &quot;the LLM made a mistake&quot; to the precise diagnosis &quot;the retriever failed to find document X because the user query was misinterpreted in the rewrite step.&quot;</p>
+<h3 id="example-integration-of-langfuse-into-langchain">Example: Integration of Langfuse into LangChain</h3>
+<p>Langfuse offers seamless and minimally invasive integration with LangChain through its CallbackHandler. This handler hooks into the execution lifecycle of a LangChain chain and automatically reports each step as part of a cohesive trace.
+Setup is simple. First, the handler is initialized, optionally passing metadata such as the user or session ID to enrich the traces.</p>
+<span><div class="code-highlight" data-language="python"><pre class="language-python" data-language="python"><code class="language-python"><span class="token comment"># rag_pipeline_setup.py</span>
+<span class="token keyword">import</span> os
+<span class="token keyword">from</span> langfuse<span class="token punctuation">.</span>langchain <span class="token keyword">import</span> CallbackHandler
+
+<span class="token comment"># Configure Langfuse credentials (usually in environment variables)</span>
+
+<span class="token comment"># Initialize the handler. Metadata can be passed to identify the session or user.</span>
+
+<span class="token comment"># This information will be visible in the Langfuse UI and is useful for filtering and analysis.</span>
+
+langfuse_handler <span class="token operator">=</span> CallbackHandler<span class="token punctuation">(</span>
+
+user_id<span class="token operator">=</span><span class="token string">&quot;user-456&quot;</span><span class="token punctuation">,</span>
+
+session_id<span class="token operator">=</span><span class="token string">&quot;session-xyz-789&quot;</span><span class="token punctuation">,</span>
+
+<span class="token comment"># Custom metadata can also be added</span>
+
+metadata<span class="token operator">=</span><span class="token punctuation">{</span><span class="token string">&quot;environment&quot;</span><span class="token punctuation">:</span> <span class="token string">&quot;production&quot;</span><span class="token punctuation">}</span>
+<span class="token punctuation">)</span>   </code></pre></div></span>
+<p>Once initialized, the handler is passed to the chain at invocation time via the config parameter. LangChain takes care of the rest, calling the handler at each step of execution.</p>
+<span><div class="code-highlight" data-language="python"><pre class="language-python" data-language="python"><code class="language-python"><span class="token comment"># rag_pipeline_invoke.py</span>
+<span class="token comment">#... (here the complete RAG chain is defined, with its retriever, prompt and model)</span>
+<span class="token keyword">from</span> langchain_core<span class="token punctuation">.</span>runnables <span class="token keyword">import</span> RunnablePassthrough
+<span class="token keyword">from</span> langchain_core<span class="token punctuation">.</span>output_parsers <span class="token keyword">import</span> StrOutputParser
+retriever <span class="token operator">=</span> <span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span>
+prompt <span class="token operator">=</span> <span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span>
+model <span class="token operator">=</span> <span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span>
+
+rag_chain <span class="token operator">=</span> <span class="token punctuation">(</span>
+<span class="token punctuation">{</span><span class="token string">&quot;context&quot;</span><span class="token punctuation">:</span> retriever<span class="token punctuation">,</span> <span class="token string">&quot;question&quot;</span><span class="token punctuation">:</span> RunnablePassthrough<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">}</span>
+<span class="token operator">|</span> prompt
+<span class="token operator">|</span> model
+<span class="token operator">|</span> StrOutputParser<span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">)</span>
+
+<span class="token comment"># The magic happens here: the handler is passed in the invocation configuration.</span>
+response <span class="token operator">=</span> rag_chain<span class="token punctuation">.</span>invoke<span class="token punctuation">(</span> 
+<span class="token string">&quot;What are the key evaluation metrics for RAG?&quot;</span><span class="token punctuation">,</span> 
+config<span class="token operator">=</span><span class="token punctuation">{</span><span class="token string">&quot;callbacks&quot;</span><span class="token punctuation">:</span> <span class="token punctuation">[</span>langfuse_handler<span class="token punctuation">]</span><span class="token punctuation">}</span>
+<span class="token punctuation">)</span></code></pre></div></span>
+<p>With just a few lines of code, as in the example above, each execution of rag_chain will generate a detailed and navigable trace in the Langfuse user interface.</p>
+<h3 id="dissecting-the-trace-of-a-rag-system">Dissecting the Trace of a RAG System</h3>
+<p>Opening a trace in Langfuse presents a hierarchical view that reveals the complete anatomy of the RAG system&#39;s execution.</p>
+<p><strong>Level 1: The Root Trace (Trace)</strong></p>
+<p>This is the main container representing the complete invocation of <span><code class="language-text">rag_chain.invoke()</code></span>. In the UI, it displays crucial aggregate metrics:</p>
+<ul>
+<li><strong>Total Latency:</strong> The time elapsed from the start to the end of the invocation</li>
+<li><strong>Total Cost:</strong> The sum of the costs of all LLM calls within the trace, calculated from token usage</li>
+<li><strong>Metadata:</strong> The information passed to the CallbackHandler, such as <span><code class="language-text">user_id</code></span> and <span><code class="language-text">session_id</code></span>, which allows for grouping and filtering traces</li>
+</ul>
+<p><strong>Level 2: Nested Spans (Spans)</strong></p>
+<p>Within the root trace, each component of the LangChain is represented as a nested &quot;span.&quot; For a typical RAG chain, the key spans to analyze are:</p>
+<ul>
+<li><strong><span><code class="language-text">retriever</code></span></strong> (or its specific name): This span is the first diagnostic point. Its input is the user&#39;s original query. Its output is a list of the documents or chunks retrieved from the vector database. Inspecting this span allows you to immediately answer the question: &quot;Was the correct information retrieved?&quot;</li>
+<li><strong><span><code class="language-text">stuff_documents_chain</code></span></strong> (or similar): This span shows how the retrieved chunks are formatted and combined to be inserted into the final prompt. It is useful for debugging formatting or context truncation issues.</li>
+<li><strong><span><code class="language-text">ChatOpenAI</code></span></strong> (or the model name): This is the generation span. Its input is the final prompt, with the context already injected. Its output is the textual response generated by the LLM. This span is where problems directly related to the model are diagnosed.</li>
+</ul>
+<h3 id="practical-diagnosis-with-the-trace">Practical Diagnosis with the Trace</h3>
+<p>The trace structure isn&#39;t just for visualization; it&#39;s a surgical diagnostic tool.</p>
+<p><strong>Latency Diagnostics</strong></p>
+<p>The timeline view (Gantt chart) in Langfuse shows the duration and sequence of each span. This allows you to visually identify which step is the bottleneck. If the total trace takes 5 seconds, the timeline might reveal that 4 of those seconds were spent on the retriever span, indicating a performance issue in the vector database, not the LLM.</p>
+<p><strong>Cost Diagnostics</strong></p>
+<p>Each LLM generation span accurately records the number of input and output tokens in its usage field. This enables granular cost attribution. In a complex agent that might make multiple calls to the LLM (for example, to rewrite the question, plan steps, and then generate the final response), the trace reveals exactly which call is the most expensive. This level of detail transforms cost optimization from an end-of-month invoice analysis task into a proactive engineering decision. If a &quot;planning&quot; step is found to consume 80% of the tokens, a smaller, more cost-effective model can be tested specifically for that task.</p>
+<p><strong>Error Diagnostics</strong></p>
+<p>If a component in the chain fails (for example, an external API becomes unresponsive), the corresponding span will be highlighted in red in the Langfuse UI, displaying the complete traceback of the error. This immediately isolates the failure to a specific component in the chain, saving hours of debugging.</p>
+<h2 id="important-metrics-rag-assessment">Important Metrics: RAG Assessment</h2>
+<h3 id="the-problem-of-accuracy-in-genai">The problem of &quot;accuracy&quot; in GenAI</h3>
+<p>Once we have visibility into the performance of our RAG system, the next step is to measure its quality. Here, we face a fundamental challenge: traditional machine learning metrics, such as accuracy, are largely useless for generative systems. Accuracy presupposes a single correct answer. In GenAI, there can be infinitely many valid answers to a single question, all with different styles, levels of detail, and wording. We need a more nuanced approach, a system of metrics that can assess the quality of a generated response from multiple dimensions.</p>
+<h3 id="rag-assessment-triage">RAG Assessment Triage</h3>
+<p>The LLM research and development community has converged on a powerful evaluation framework known as the &quot;RAG Triad.&quot; This set of three metrics, popularized by frameworks like Ragas, allows for a holistic and, more importantly, diagnostic evaluation of a RAG system.</p>
+<p><strong>Context Relevance</strong></p>
+<ul>
+<li><strong>Question it answers:</strong> Are the chunks of information retrieved by the retriever relevant to answering the user&#39;s question?</li>
+<li><strong>How it&#39;s measured:</strong> This metric evaluates the relationship between the user&#39;s question and the retrieved context. It doesn&#39;t look at the final answer. An LLM-as-a-judge receives the question and the retrieved chunks and evaluates whether the latter contain the information necessary to formulate a complete and accurate answer.</li>
+<li><strong>Diagnosis:</strong> A low score in Context Relevance unequivocally points to a problem with the retriever. It means the retrieval system isn&#39;t doing its job. The causes can be varied: an inadequate embedding model, a poor chunking strategy, or the lack of a re-ranking step.</li>
+</ul>
+<p><strong>Faithfulness (Fidelity/Groundedness)</strong></p>
+<ul>
+<li><strong>Question it answers:</strong> Is the generated response strictly based on the information provided in the retrieved context? Or is it &quot;hallucinating,&quot; i.e., fabricating information?</li>
+<li><strong>How it&#39;s measured:</strong> This metric evaluates the relationship between the generated response and the provided context. An LLM-as-a-judge breaks down the response into a series of individual statements. Then, for each statement, they check whether it can be supported by the information present in the context chunks. The final score is often the proportion of supported statements.</li>
+<li><strong>Diagnosis:</strong> A low Faithfulness score, assuming high Context Relevance, points directly to a problem with the Generator (the LLM or the prompt). It indicates that, despite having the correct information available, the model is choosing to fabricate facts.</li>
+</ul>
+<p><strong>Answer Relevance</strong></p>
+<ul>
+<li><strong>Question answered:</strong> Does the generated answer directly, usefully, and concisely address the user&#39;s original question?</li>
+<li><strong>How it&#39;s measured:</strong> This metric evaluates the relationship between the original question and the generated answer. Unlike Faithfulness, it focuses on usefulness, not factual accuracy. It penalizes answers that, while faithful to the context, are overly verbose, ramble, or fail to address the core of the user&#39;s question.</li>
+<li><strong>Diagnosis:</strong> A low Answer Relevance score also points to a problem with the Generator. Specifically, it indicates a deficiency in the LLM&#39;s ability to synthesize contextual information and present it in a way that is directly useful to the user.
+The best thing about this triage assessment lies in its ability to act as a decoupled diagnostic framework. It allows for the independent evaluation of the two main subsystems of a RAG (Retriever and Generator). Without this framework, a team could spend weeks tweaking the generator prompt (a Generator problem) when the real issue lies in the embedding model (a Retriever problem). The triad enforces a structured debugging discipline, directing engineering resources to the right place.
+Furthermore, these metrics form a hierarchy of logical requirements. Context Relevance is the base of the pyramid. Without relevant context, it&#39;s impossible to generate a faithful and relevant response. Faithfulness is the next level; once we have the correct context, we must ensure we don&#39;t make things up. Finally, Answer Relevance is the polishing layer, ensuring that the response, in addition to being correct and faithful, is also useful. This order creates a natural debugging workflow, e.g., &quot;Fix the retriever first.&quot;</li>
+</ul>
+<h3 id="implementation-with-ragas-and-langchainlangfuse">Implementation with Ragas and LangChain/Langfuse</h3>
+<p>The open-source framework Ragas integrates easily into an evaluation workflow. It can take as input a dataset containing the questions, retrieved contexts, and generated responses (information that can be extracted from Langfuse traces) and automatically calculate the triad metrics.</p>
+<span><div class="code-highlight" data-language="python"><pre class="language-python" data-language="python"><code class="language-python"><span class="token comment"># evaluate_rag_outputs.py</span>
+<span class="token keyword">from</span> datasets <span class="token keyword">import</span> Dataset
+<span class="token keyword">from</span> ragas <span class="token keyword">import</span> evaluate
+<span class="token keyword">from</span> ragas<span class="token punctuation">.</span>metrics <span class="token keyword">import</span> context_relevancy<span class="token punctuation">,</span> faithfulness<span class="token punctuation">,</span> answer_relevancy
+
+<span class="token comment"># Assuming we have run our RAG system on a set of questions</span>
+<span class="token comment"># and we have extracted the results of the Langfuse traces.</span>
+data_samples <span class="token operator">=</span> <span class="token punctuation">{</span> 
+<span class="token string">&#39;question&#39;</span><span class="token punctuation">:</span><span class="token punctuation">,</span> 
+<span class="token string">&#39;answer&#39;</span><span class="token punctuation">:</span><span class="token punctuation">,</span> 
+<span class="token string">&#39;contexts&#39;</span><span class="token punctuation">:</span><span class="token punctuation">,</span> 
+<span class="token punctuation">[</span><span class="token string">&quot;Faithfulness refers to the idea that the answer should be grounded in the given context. An answer is considered faithful if the claims made in the answer can be inferred from the context... A low score here points to a problem in the Generator.&quot;</span><span class="token punctuation">]</span><span class="token punctuation">,</span> 
+<span class="token comment"># &#39;ground_truth&#39; is optional for these metrics, but required for others such as &#39;answer_correctness&#39;. </span>
+<span class="token string">&#39;ground_truth&#39;</span><span class="token punctuation">:</span>
+<span class="token punctuation">}</span>
+dataset <span class="token operator">=</span> Dataset<span class="token punctuation">.</span>from_dict<span class="token punctuation">(</span>data_samples<span class="token punctuation">)</span>
+
+<span class="token comment"># Configure the models to use for the evaluation (these can be different from those in the app)</span>
+<span class="token comment"># os.environ = &quot;...&quot;</span>
+
+<span class="token comment"># Evaluate the dataset using the triad of metrics. Ragas will use LLMs as judges underneath.</span>
+
+result <span class="token operator">=</span> evaluate<span class="token punctuation">(</span>
+
+dataset<span class="token operator">=</span>dataset<span class="token punctuation">,</span>
+
+metrics<span class="token operator">=</span><span class="token punctuation">[</span>
+context_relevancy<span class="token punctuation">,</span>
+faithfulness<span class="token punctuation">,</span>
+answer_relevancy<span class="token punctuation">,</span>
+
+<span class="token punctuation">]</span>
+<span class="token punctuation">)</span>
+
+<span class="token comment"># The result is a dictionary-like object with the aggregated scores.</span>
+
+<span class="token keyword">print</span><span class="token punctuation">(</span>result<span class="token punctuation">)</span>
+<span class="token comment"># Example output:</span>
+<span class="token comment"># {&#39;context_relevancy&#39;: 0.95, &#39;faithfulness&#39;: 0.88, &#39;answer_relevancy&#39;: 0.92}</span></code></pre></div></span>
+<p>This script, inspired by Ragas&#39;s guidelines, demonstrates how qualitative assessment can be quantified and automated.</p>
+<h2 id="automated-quality-guardians-integration-into-cicd">Automated Quality Guardians: Integration into CI/CD</h2>
+<p>Having a system of observability and evaluation metrics is necessary, but not sufficient. To build truly robust, enterprise-level GenAI systems, we must automate the application of these quality standards. This is achieved by integrating our evaluation framework into a Continuous Integration and Continuous Deployment (CI/CD) pipeline. The goal is to create automated &quot;quality guardians&quot; that prevent performance-degrading changes from reaching production.</p>
+<h3 id="the-concept-of-the-golden-dataset">The Concept of the &quot;Golden Dataset&quot;</h3>
+<p>The heart of an automated evaluation system is the Golden Dataset. This isn&#39;t simply a set of test data, it&#39;s the executable specification of the system&#39;s expected behavior. It&#39;s the quality contract that defines what &quot;working well&quot; means for our application.
+A Golden Dataset for a RAG system typically consists of a curated list of tuples (question, ground_truth_answer, ground_truth_context). These tuples should represent a diverse mix of:</p>
+<ul>
+<li>Critical use cases: The most common and important questions users will ask.</li>
+<li>Edge cases: Complex, ambiguous, or poorly worded questions that test the system&#39;s limits.</li>
+<li>Historical failures: Examples of past interactions where the system failed, converted into regression tests to ensure the same errors are not repeated.</li>
+</ul>
+<h3 id="creation-and-maintenance-of-the-golden-dataset-a-living-process">Creation and Maintenance of the Golden Dataset (A Living Process)</h3>
+<p>The idea of ​​creating a &quot;perfect&quot; and static Golden Dataset all at once is a myth. In reality, it&#39;s a living entity that must evolve with the application. The creation and maintenance process is iterative:</p>
+<ul>
+<li>Phase 1: <strong>Getting Started with Synthetic Data</strong>. To get started quickly, LLMs can be used to generate an initial set of questions and answers from source documents. Tools like Ragas and other evaluation libraries offer functionality for generating these synthetic datasets, providing a solid foundation for initial evaluation.</li>
+<li>Phase 2: <strong>Human Curation</strong>. The synthetic dataset should be reviewed, filtered, and refined by a multidisciplinary team that includes engineers, product managers, and domain experts. This human step is crucial to ensure that the dataset reflects the true needs and nuances of the business.</li>
+<li>Phase 3: <strong>The Virtuous Circle of Observability</strong>. This is the most critical and sustainable step. Using the observability platform (Langfuse), production interactions that receive low user satisfaction scores or fail automated evaluation metrics should be identified. These failing interactions are perfect candidates for analysis, curation, and addition to the Golden Dataset. This continuous feedback loop ensures that the evaluation dataset evolves to address real and emerging system weaknesses, making it increasingly robust.</li>
+</ul>
+<p>The Golden Dataset, therefore, becomes the LLM&#39;s behavioral contract. It encodes stakeholder expectations into a machine-readable format. When a developer proposes a change (a new prompt, a different model), the CI/CD pipeline acts as an arbiter, running the system against this &quot;contract.&quot; Evaluation metrics determine whether the contract has been fulfilled or broken, transforming subjective debates about whether a change is &quot;better&quot; into an objective, data-driven decision.</p>
+<h3 id="cicd-pipeline-architecture-for-llms">CI/CD Pipeline Architecture for LLMs</h3>
+<p>A CI/CD pipeline for an LLM application merges traditional software testing practices with the rigor of scientific experimentation. While traditional CI/CD tests deterministic results (e.g., 2 + 2 should always equal 4), CI/CD for LLMs tests the quality of a probabilistic result against an established baseline. Each pull request that modifies the LLM&#39;s behavior is not just a code change; it&#39;s an experiment. The pipeline automates the execution of this experiment and compares its results to a control group (the performance of the main branch on the same Golden Dataset).</p>
+<p>Example of a typical workflow using GitHub Actions:</p>
+<p><strong>Trigger</strong>:</p>
+<ul>
+<li>The pipeline is automatically triggered on each pull request that modifies key files affecting the LLM&#39;s behavior, such as prompt files or RAG string code.</li>
+</ul>
+<p><strong>Workflow Steps</strong>:</p>
+<ul>
+<li>Checkout Code: Downloads the code from the pull request branch.</li>
+<li>Setup Environment: Installs Python and all necessary project dependencies.</li>
+<li>Run Application against Golden Dataset: Runs a script that iterates over the questions in the Golden Dataset, passes them to the modified version of the RAG application, and saves the generated responses to a results file.</li>
+<li>Run Evaluation: Runs a second script (like the one shown in Section RAG Assessment Triage using Ragas) that takes the generated responses, compares them to the ground_truth values ​​in the Golden Dataset, and calculates the RAG Triad metrics.</li>
+<li>Quality Gate (The Guardian): This is the crucial step. A script compares the scores of the obtained metrics with predefined quality thresholds (e.g., faithfulness &gt;= 0.85, context_relevancy &gt;= 0.90). If any metric falls below its threshold, the pipeline fails, blocking the pull request from being merged.</li>
+<li>Post Results (Optional but recommended): If the pipeline fails, it can be configured to post a comment on the pull request with a summary of the evaluation results, highlighting which metrics did not meet the threshold. This provides immediate and actionable feedback to the developer.</li>
+</ul>
+<h3 id="example-github-actions-workflow">Example GitHub Actions Workflow</h3>
+<span><div class="code-highlight" data-language="yaml"><pre class="language-yaml" data-language="yaml"><code class="language-yaml"><span class="token comment">#.github/workflows/llm_quality_gate.yml</span>
+<span class="token key atrule">name</span><span class="token punctuation">:</span> LLM Quality Gate
+
+<span class="token comment"># The workflow is executed on every pull request that modifies files in &#39;src/prompts/&#39; or the file &#39;src/rag_pipeline.py&#39;.</span>
+<span class="token key atrule">on</span><span class="token punctuation">:</span> 
+<span class="token key atrule">pull_request</span><span class="token punctuation">:</span> 
+<span class="token key atrule">paths</span><span class="token punctuation">:</span> 
+<span class="token punctuation">-</span> <span class="token string">&#39;src/prompts/**&#39;</span> 
+<span class="token punctuation">-</span> <span class="token string">&#39;src/rag_pipeline.py&#39;</span>
+
+<span class="token key atrule">jobs</span><span class="token punctuation">:</span> 
+<span class="token key atrule">evaluate</span><span class="token punctuation">:</span> 
+<span class="token key atrule">runs-on</span><span class="token punctuation">:</span> ubuntu<span class="token punctuation">-</span>latest 
+<span class="token key atrule">steps</span><span class="token punctuation">:</span> 
+<span class="token punctuation">-</span> <span class="token key atrule">name</span><span class="token punctuation">:</span> Checkout code 
+<span class="token key atrule">uses</span><span class="token punctuation">:</span> actions/checkout@v4 
+
+<span class="token punctuation">-</span> <span class="token key atrule">name</span><span class="token punctuation">:</span> Set up Python 3.11 
+<span class="token key atrule">uses</span><span class="token punctuation">:</span> actions/setup<span class="token punctuation">-</span>python@v4 
+<span class="token key atrule">with</span><span class="token punctuation">:</span> 
+<span class="token key atrule">python-version</span><span class="token punctuation">:</span> <span class="token string">&#39;3.11&#39;</span> 
+
+<span class="token punctuation">-</span> <span class="token key atrule">name</span><span class="token punctuation">:</span> Install dependencies 
+<span class="token key atrule">run</span><span class="token punctuation">:</span> <span class="token punctuation">|</span> 
+python <span class="token punctuation">-</span>m pip install <span class="token punctuation">-</span><span class="token punctuation">-</span>upgrade pip
+
+pip install <span class="token punctuation">-</span>r requirements.txt
+
+<span class="token comment"># This step simulates running the RAG application with the Golden Dataset.</span>
+
+<span class="token comment"># The script &#39;run_on_dataset.py&#39; would take the dataset and produce a JSON file with the responses.</span>
+
+<span class="token comment"># - name: Run RAG pipeline on Golden Dataset</span>
+
+<span class="token key atrule">id</span><span class="token punctuation">:</span> run_app
+
+<span class="token key atrule">env</span><span class="token punctuation">:</span>
+
+<span class="token key atrule">OPENAI_API_KEY</span><span class="token punctuation">:</span> $<span class="token punctuation">{</span><span class="token punctuation">{</span> secrets.OPENAI_API_KEY <span class="token punctuation">}</span><span class="token punctuation">}</span>
+
+<span class="token key atrule">LANGFUSE_PUBLIC_KEY</span><span class="token punctuation">:</span> $<span class="token punctuation">{</span><span class="token punctuation">{</span> secrets.LANGFUSE_PUBLIC_KEY <span class="token punctuation">}</span><span class="token punctuation">}</span>
+
+<span class="token key atrule">LANGFUSE_SECRET_KEY</span><span class="token punctuation">:</span> $<span class="token punctuation">{</span><span class="token punctuation">{</span> secrets.LANGFUSE_SECRET_KEY <span class="token punctuation">}</span><span class="token punctuation">}</span>
+
+<span class="token key atrule">run</span><span class="token punctuation">:</span> python scripts/run_on_dataset.py <span class="token punctuation">-</span><span class="token punctuation">-</span>dataset./data/golden_dataset.json <span class="token punctuation">-</span><span class="token punctuation">-</span>output./results/generated_answers.json
+
+<span class="token comment"># This step runs the evaluation using Ragas or another tool.</span>
+
+<span class="token comment"># The &#39;evaluate_results.py&#39; script would calculate the metrics and save them to JSON.</span>
+
+```````````````````````````````````` <span class="token punctuation">-</span> <span class="token key atrule">name</span><span class="token punctuation">:</span> Evaluate generated answers 
+<span class="token key atrule">id</span><span class="token punctuation">:</span> run_eval 
+<span class="token key atrule">env</span><span class="token punctuation">:</span> 
+<span class="token key atrule">OPENAI_API_KEY</span><span class="token punctuation">:</span> $<span class="token punctuation">{</span><span class="token punctuation">{</span> secrets.OPENAI_API_KEY <span class="token punctuation">}</span><span class="token punctuation">}</span> 
+<span class="token key atrule">run</span><span class="token punctuation">:</span> python scripts/evaluate_results.py <span class="token punctuation">-</span><span class="token punctuation">-</span>generated./results/generated_answers.json <span class="token punctuation">-</span><span class="token punctuation">-</span>output./results/eval_scores.json 
+
+<span class="token comment"># The Quality Gate. Compare scores with thresholds. </span>
+<span class="token punctuation">-</span> <span class="token key atrule">name</span><span class="token punctuation">:</span> Quality Gate Check 
+<span class="token key atrule">run</span><span class="token punctuation">:</span> <span class="token punctuation">|</span> 
+<span class="token comment"># Ensure jq is installed</span>
+
+sudo apt<span class="token punctuation">-</span>get install <span class="token punctuation">-</span>y jq
+
+FAITHFULNESS=$(jq &#39;.faithfulness&#39;./results/eval_scores.json)
+
+CONTEXT_RELEVANCE=$(jq &#39;.context_relevancy&#39;./results/eval_scores.json)
+
+ANSWER_RELEVANCE=$(jq &#39;.answer_relevancy&#39;./results/eval_scores.json)
+
+
+echo &quot;Evaluation Scores<span class="token punctuation">:</span>&quot;
+
+<span class="token key atrule">echo &quot;Faithfulness</span><span class="token punctuation">:</span> $FAITHFULNESS&quot;
+
+<span class="token key atrule">echo &quot;Context Relevance</span><span class="token punctuation">:</span> $CONTEXT_RELEVANCE&quot;
+
+<span class="token key atrule">echo &quot;Answer Relevance</span><span class="token punctuation">:</span> $ANSWER_RELEVANCE&quot;
+
+<span class="token comment"># Using &#39;bc&#39; for floating-point comparison in bash</span>
+
+if (( $(echo &quot;$FAITHFULNESS &lt; 0.85&quot; <span class="token punctuation">|</span> bc <span class="token punctuation">-</span>l) )); then 
+<span class="token key atrule">echo &quot;❌ Quality Gate Failed</span><span class="token punctuation">:</span> Faithfulness score ($FAITHFULNESS) is below the 0.85 threshold.&quot; 
+exit 1 
+fi 
+
+if (( $(echo &quot;$CONTEXT_RELEVANCE &lt; 0.90&quot; <span class="token punctuation">|</span> bc <span class="token punctuation">-</span>l) )); then 
+<span class="token key atrule">echo &quot;❌ Quality Gate Failed</span><span class="token punctuation">:</span> Context Relevance score ($CONTEXT_RELEVANCE) is below the 0.90 threshold.&quot; 
+exit 1 
+fi 
+
+echo &quot;✅ All quality gates passed<span class="token tag">!</span>&quot;</code></pre></div></span>
+<p>This example, inspired by CI/CD best practices for LLMs, is the most simple practical deliverable of this framework. It unites all the previous concepts of versioned prompts, metrics based evaluation, and the Golden Dataset, into an automation artifact that actively protects product quality.</p>
+<h2 id="conclusion">Conclusion</h2>
+<h3 id="towards-continuous-improvement-and-trust-in-ai">Towards Continuous Improvement and Trust in AI</h3>
+<p>We have come a long way from the opacity of the &quot;black box&quot; to the clarity of a &quot;control panel.&quot; This observability framework is built on four interconnected pillars that, together, transform LLM systems development from an experimental art to a rigorous engineering discipline:</p>
+<ol>
+<li>
+<p><strong>Prompts as Code:</strong> Systematically managing prompts as versioned, tested software artifacts decoupled from application code provides the foundation for stability and agility.</p>
+</li>
+<li>
+<p><strong>Anatomy of a Trace:</strong> Detailed traceability of each execution, enabled by tools like Langfuse, gives us the ability to perform surgical diagnoses, attributing latency, costs, and errors to specific components.</p>
+</li>
+<li>
+<p><strong>The RAG Evaluation Triad:</strong> Meaningful metrics such as Context Relevance, Faithfulness, and Answer Relevance allow us to quantify quality in a nuanced way and, more importantly, isolate failures in the retriever or generator.</p>
+</li>
+<li>
+<p><strong>Automated Quality Guardians:</strong> Integrating these assessments into a CI/CD pipeline, using a Golden Dataset as a quality contract, creates a safety net that prevents performance degradation and ensures continuous improvement.</p>
+</li>
+</ol>
+<h3 id="the-paradigm-shift">The Paradigm Shift</h3>
+<p>Adopting this framework represents a fundamental paradigm shift. It moves teams away from &quot;black box&quot; engineering, where changes are made in the hope that they will work, and toward a mature software engineering discipline characterized by measurement, automation, and data-driven decisions. We no longer ask, &quot;Is this answer good?&quot; but rather, &quot;What is the Faithfulness score of this answer compared to the baseline, according to our Golden Dataset?&quot;</p>
+<h2 id="references">References</h2>
+<ul>
+<li>Bouchard, Louis-François, &amp; Peters, Louie. Building LLMs for Production: Enhancing LLM Abilities and Reliability with Prompting, Fine-Tuning, and RAG. Montréal, Towards AI (ed. 2024). ISBN 979-8324731472. <a href="https://www.amazon.com/Building-LLMs-Production-Reliability-Fine-Tuning/dp/B0D4FFPFW8">https://www.amazon.com/Building-LLMs-Production-Reliability-Fine-Tuning/dp/B0D4FFPFW8</a></li>
+<li>RAG Evaluation Metrics: Assessing Answer Relevancy, Faithfulness, Contextual Relevancy, And More - Confident AI, <a href="https://www.confident-ai.com/blog/rag-evaluation-metrics-answer-relevancy-faithfulness-and-more">https://www.confident-ai.com/blog/rag-evaluation-metrics-answer-relevancy-faithfulness-and-more</a></li>
+<li>CI/CD for LLM apps: Run tests with Evidently and GitHub actions, <a href="https://www.evidentlyai.com/blog/llm-unit-testing-ci-cd-github-actions">https://www.evidentlyai.com/blog/llm-unit-testing-ci-cd-github-actions</a></li>
+<li>The Definitive Guide to Prompt Management Systems - Agenta, <a href="https://agenta.ai/blog/the-definitive-guide-to-prompt-management-systems">https://agenta.ai/blog/the-definitive-guide-to-prompt-management-systems</a></li>
+<li>Prompt Versioning &amp; Management Guide for Building AI Features - LaunchDarkly, <a href="https://launchdarkly.com/blog/prompt-versioning-and-management/">https://launchdarkly.com/blog/prompt-versioning-and-management/</a></li>
+<li>Prompt Versioning: Best Practices - Latitude, <a href="https://latitude-blog.ghost.io/blog/prompt-versioning-best-practices/">https://latitude-blog.ghost.io/blog/prompt-versioning-best-practices/</a></li>
+<li>Get Started with Open Source Prompt Management - Langfuse, <a href="https://langfuse.com/docs/prompts/get-started">https://langfuse.com/docs/prompts/get-started</a></li>
+<li>Example: Langfuse Prompt Management with Langchain (Python), <a href="https://langfuse.com/guides/cookbook/prompt_management_langchain">https://langfuse.com/guides/cookbook/prompt_management_langchain</a></li>
+<li>Langfuse Tracing Tutorial: Integrating with LangChain and OpenAI - Medium, <a href="https://medium.com/@danushidk507/langfuse-tracing-tutorial-integrating-with-langchain-and-openai-a13c5b63f259">https://medium.com/@danushidk507/langfuse-tracing-tutorial-integrating-with-langchain-and-openai-a13c5b63f259</a></li>
+<li>Cookbook: Langchain Integration - Langfuse, <a href="https://langfuse.com/guides/cookbook/integration_langchain">https://langfuse.com/guides/cookbook/integration_langchain</a></li>
+<li>Get Started with Tracing - Langfuse, <a href="https://langfuse.com/docs/observability/get-started">https://langfuse.com/docs/observability/get-started</a></li>
+<li>Example - Trace and Evaluate LangGraph Agents - Langfuse, <a href="https://langfuse.com/guides/cookbook/example_langgraph_agents">https://langfuse.com/guides/cookbook/example_langgraph_agents</a></li>
+<li>Benchmarking LLM-as-a-Judge for the RAG Triad Metrics - Snowflake, <a href="https://www.snowflake.com/en/engineering-blog/benchmarking-LLM-as-a-judge-RAG-triad-metrics/">https://www.snowflake.com/en/engineering-blog/benchmarking-LLM-as-a-judge-RAG-triad-metrics/</a></li>
+<li>RAG Evaluation Metrics - by Vanshika Mishraa - Medium, <a href="https://medium.com/@mvanshika23/rag-evaluation-metrics-b12e9261d621">https://medium.com/@mvanshika23/rag-evaluation-metrics-b12e9261d621</a></li>
+<li>Evaluate RAG pipeline using Ragas in Python with watsonx - IBM, <a href="https://www.ibm.com/think/tutorials/evaluate-rag-pipeline-using-ragas-in-python-with-watsonx">https://www.ibm.com/think/tutorials/evaluate-rag-pipeline-using-ragas-in-python-with-watsonx</a></li>
+<li>RAG Evaluation: The Definitive Guide to Unit Testing RAG in CI/CD - Confident AI, <a href="https://www.confident-ai.com/blog/how-to-evaluate-rag-applications-in-ci-cd-pipelines-with-deepeval">https://www.confident-ai.com/blog/how-to-evaluate-rag-applications-in-ci-cd-pipelines-with-deepeval</a></li>
+<li>CI/CD Pipeline for Large Language Models (LLMs) and GenAI | by Sanjay Kumar PhD, <a href="https://skphd.medium.com/ci-cd-pipeline-for-large-language-models-llms-7a78799e9d5f">https://skphd.medium.com/ci-cd-pipeline-for-large-language-models-llms-7a78799e9d5f</a></li>
+<li>Integrating LLM Evaluations into CI/CD Pipelines - Deepchecks, <a href="https://www.deepchecks.com/llm-evaluation-in-ci-cd-pipelines/">https://www.deepchecks.com/llm-evaluation-in-ci-cd-pipelines/</a></li>
+<li>Continuous Evaluation of Generative AI Using CI/CD Pipelines - WillowTree Apps, <a href="https://www.willowtreeapps.com/craft/continuous-evaluation-of-generative-ai-using-ci-cd-pipelines">https://www.willowtreeapps.com/craft/continuous-evaluation-of-generative-ai-using-ci-cd-pipelines</a></li>
+<li>RAG systems: Best practices to master evaluation for accurate and reliable AI. | Google Cloud Blog, <a href="https://cloud.google.com/blog/products/ai-machine-learning/optimizing-rag-retrieval">https://cloud.google.com/blog/products/ai-machine-learning/optimizing-rag-retrieval</a></li>
+<li>Best Practices for Building a QA Dataset to Evaluate RAG Quality? : r/LangChain - Reddit, <a href="https://www.reddit.com/r/LangChain/comments/1iq8vtb/best_practices_for_building_a_qa_dataset_to/">https://www.reddit.com/r/LangChain/comments/1iq8vtb/best_practices_for_building_a_qa_dataset_to/</a></li>
+<li>How important is a Golden Dataset for LLM pipeline evaluation? - Relari Blog, <a href="https://blog.relari.ai/how-important-is-a-golden-dataset-for-llm-pipeline-evaluation-4ef6deb14dc5">https://blog.relari.ai/how-important-is-a-golden-dataset-for-llm-pipeline-evaluation-4ef6deb14dc5</a></li>
+<li>Building datasets for LLM product evaluations - Gentrace, <a href="https://gentrace.ai/blog/how-to-build-datasets">https://gentrace.ai/blog/how-to-build-datasets</a></li>
+<li>RAGAS: How to Evaluate a RAG Application Like a Pro for Beginners - YouTube, <a href="https://www.youtube.com/watch?v=5fp6e5nhJRk">https://www.youtube.com/watch?v=5fp6e5nhJRk</a></li>
+<li>CI/CD Integration for LLM Eval and Security - Promptfoo, <a href="https://www.promptfoo.dev/docs/integrations/ci-cd/">https://www.promptfoo.dev/docs/integrations/ci-cd/</a></li>
+<li>Testing Prompts with GitHub Actions - Promptfoo, <a href="https://www.promptfoo.dev/docs/integrations/github-action/">https://www.promptfoo.dev/docs/integrations/github-action/</a></li>
+</ul> 

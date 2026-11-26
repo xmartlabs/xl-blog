@@ -1,0 +1,416 @@
+ <h2 id="introduction">Introduction</h2>
+<p>I’ll start strong and say that ActiveStorage has got to be one the most useful tools that comes bundled with Rails. Once you pay the initial cost of learning how it works, it's baffling how easy it is to upload and download files, both on local and production environments.</p>
+<p>Why are we here, then? If it really is so easy, then why am I writing this? Well, the cold hard truth is that there is no such thing as a free lunch, and generic out-of-the-box solutions are hardly ever optimal for every use case. Today we’ll look into a fairly common problem for Rails devs working on a project that depends on media like images or videos: ensuring a good download experience for all users. We’ll create a solution using a Rails API (with ActiveStorage) and two AWS services: S3 and Cloudfront.</p>
+<p>Here are the tools and libraries we’ll use:</p>
+<ul>
+<li><span><code class="language-text">rails</code></span> 7.0.2.3</li>
+<li><span><code class="language-text">aws-sdk-s3</code></span> 1.153</li>
+<li>An S3 bucket</li>
+<li>A Cloudfront distribution</li>
+</ul>
+<blockquote>
+<p><strong>ℹ️ This blogpost is both beginner-friendly and senior-friendly. Want me to stop yapping and just get to the point? Jump to the <a href="#TL;DR">TL;DR</a> section. Or keep reading, I’m not your dad.</strong></p>
+</blockquote>
+<h2 id="the-problem">The Problem</h2>
+<p>Say you want to implement an Instagram competitor (just don’t, but for the sake of the post let’s run with it). The first problem you need to think about is how to deliver content to all your users. Videos and images can be uploaded and streamed from anywhere. If you are serving your files from the US, then your users in Europe or Asia might experience degraded performance constantly caused by the comparatively long time it takes information to reach them. Scratch that, even your US users might experience horrible performance and you won’t even know it. Being physically closer to a server does not <a href="https://www.osti.gov/biblio/1016114">guarantee good latency</a>. Your eager user might turn into a detractor by merely walking a couple of miles and connecting to a different access point (this actually happened to us).</p>
+<p>Content distribution is a complex problem to solve by yourself. It’s hard to test and it’s hard to reproduce issues. Setting up the infrastructure to deliver big files to all users while ensuring a certain download speed threshold is almost impossible. That’s why CDNs exist.</p>
+<h2 id="what-are-cdns-and-how-do-they-work">What are CDNs and How Do They Work?</h2>
+<p>Content Delivery Networks act as caches of data. They store copies of content on multiple nodes around the Internet and intelligently choose where they serve it from, hopefully bridging the gap between your files and your users. Here’s a simple diagram to help you understand how they work.</p>
+<img src="/images/active-storage-1.png" alt="">
+<ol>
+<li>
+<p>Your user intends to access a file. Note that, in this case, the URL points to the CDN and not to your server. First, it needs to resolve the IP of the CDN’s node.</p>
+<ol>
+<li>a. CDNs intelligently “trick” your user into sending the request to the closest node in the network. This can be done by using smart DNS servers that look at your users' IP and estimate a good node, or even by manipulating how networks of nodes collectively build routing information (out of scope, go <a href="https://www.cloudflare.com/en-gb/learning/cdn/what-is-a-cdn/">read something made by people smarter than me</a>).</li>
+</ol>
+</li>
+<li>
+<p>After getting the IP of the host of the file, the user attempts to fetch the file. Their request gets handled by a node from the CDN.</p>
+</li>
+<li>
+<p>If this is the first time this node has been asked for this file, then it’s a <em>cache miss</em>. The node needs to fetch it from source. In this case, the node queries your server (or whatever location acts as an authority). The CDN node stores the file locally for future access. In this diagram the authority is inside the CDN for convenience, but it could be outside.</p>
+</li>
+<li>
+<p>The CDN node returns the file to the user.</p>
+</li>
+<li>
+<p>Another user asks for the file? No problem! As long as the CDN node considers the file not to be stale it will avoid going back to the source and just return the cached file.</p>
+</li>
+</ol>
+<p>Now that we know what a CDN is, let’s talk about what we’ll do in this blog post.</p>
+<h2 id="overview-of-the-cloudfront-and-activestorage-integration">Overview of the Cloudfront and Activestorage Integration</h2>
+<p>We want our users to have the best experience possible from anywhere, but we also want to ensure our content is still moderated by us and that we decide when users should have access to it or not. That’s where Cloudfront comes in, as it lets us lock content behind signed URLs (more on this later).</p>
+<p>Here’s what’s on our plate today:</p>
+<ul>
+<li>Create and configure an S3 bucket to use with ActiveStorage.</li>
+<li>Create and configure a Cloudfront distribution.</li>
+<li>Final touches over our API to close the loop.</li>
+</ul>
+<p>To get us going, here’s how a user will access our content:</p>
+<img src="/images/active-storage-2.png" alt="">
+<ol>
+<li>The user requests information from our backend. Think, for instance, an Instagram post or a list of posts. Some of that information will be links to media or content, which will <strong>not</strong> point to Cloudfront, but rather our API.</li>
+<li>The browser tries to render our files, so a request is made to our API. Authentication and authorization checks can be performed by our backend, and if the user is allowed, they will be redirected to a specially crafted Cloudfront URL. We’ll talk about these later.</li>
+<li>Cloudfront receives the request, checks the signature on the URL. If valid, then it will return the content (if cached) or forward the request to S3.</li>
+<li>S3 checks whether the file exists and returns it to the Cloudfront node.</li>
+<li>Cloudfront caches the file locally (it actually caches the whole response from S3, but that’s not important right now). It then returns the file to the user.</li>
+</ol>
+<p>Let’s start setting this up.</p>
+<h2 id="setting-up-s3">Setting up S3</h2>
+<h3 id="creating-the-s3-bucket">Creating the S3 Bucket</h3>
+<p>Our S3 bucket will be in charge of storing all our content. Contrary to instinct, we want our bucket to be completely private and only accessible via authenticated requests. Why? Well, it’s our API’s job to let users in or not. If your bucket is public then all links to its content are public permalinks and, barring renaming the file or deleting it, you cannot stop a user from accessing the content forever. By making the bucket private, we force users to go through our API first.</p>
+<p>Let’s start by creating our bucket. First, name it. A bucket’s name needs to be URL-safe as well as unique worldwide. That’s because the name of the bucket is part of the domain name that AWS assigns to it.</p>
+<img src="/images/active-storage-3.png" alt="">
+<p>Notice how, by default, the bucket is completely private. We want this. Here’s how it should look:</p>
+<img src="/images/active-storage-4.png" alt="">
+<p>I won’t post all other settings and options here for the sake of length, but make sure to review them. You’ll also need to configure CORS headers for your domain if you have not done so yet. Once you create the bucket you’re halfway there. Now we need to create a specific user with specific permissions.</p>
+<h3 id="creating-the-user">Creating the User</h3>
+<p>It’s always best practice to create a specific user that manages S3 buckets. I even go as far as to say that you should create one specific user for each environment that only has access to one bucket. By setting a very specific policy you can make sure that if your AWS credentials for that user leak the impact is as minimal as possible. Here’s an example of a policy you can use for that user:</p>
+<span><div class="code-highlight" data-language="json"><pre class="language-json" data-language="json"><code class="language-json"><span class="token punctuation">{</span>
+    <span class="token property">"Version"</span><span class="token operator">:</span> <span class="token string">"2012-10-17"</span><span class="token punctuation">,</span>
+    <span class="token property">"Statement"</span><span class="token operator">:</span> <span class="token punctuation">[</span>
+        <span class="token punctuation">{</span>
+            <span class="token property">"Action"</span><span class="token operator">:</span> <span class="token punctuation">[</span>
+                <span class="token string">"s3:PutObject"</span><span class="token punctuation">,</span>
+                <span class="token string">"s3:PutObjectAcl"</span><span class="token punctuation">,</span>
+                <span class="token string">"s3:GetObject"</span><span class="token punctuation">,</span>
+                <span class="token string">"s3:GetObjectAcl"</span><span class="token punctuation">,</span>
+                <span class="token string">"s3:DeleteObject"</span><span class="token punctuation">,</span>
+                <span class="token string">"s3:ListBucket"</span>
+            <span class="token punctuation">]</span><span class="token punctuation">,</span>
+            <span class="token property">"Effect"</span><span class="token operator">:</span> <span class="token string">"Allow"</span><span class="token punctuation">,</span>
+            <span class="token property">"Resource"</span><span class="token operator">:</span> <span class="token punctuation">[</span>
+                <span class="token string">"arn:aws:s3:::xl-activestorage-cloudfront"</span><span class="token punctuation">,</span>
+                <span class="token string">"arn:aws:s3:::xl-activestorage-cloudfront/*"</span>
+            <span class="token punctuation">]</span>
+        <span class="token punctuation">}</span>
+    <span class="token punctuation">]</span>
+<span class="token punctuation">}</span></code></pre></div></span>
+<p>Remember to store your AWS access key and secret key in a safe place. You’ll need them to allow ActiveStorage to upload files to the bucket.</p>
+<p>Now that our bucket is up and running, let’s set up our Cloudfront distribution.</p>
+<h2 id="setting-up-cloudfront">Setting up Cloudfront</h2>
+<p>Here comes the fun part. Let’s create a Cloudfront distribution linked to our S3 bucket. Step 1: set the origin to the one that points to the bucket you created previously.</p>
+<img src="/images/active-storage-5.png" alt="">
+<p>By selecting “Origin access control settings” you’ll need to create an Origin Access Control. Make it so requests are signed.</p>
+<p>As with the S3 bucket we’ll be skipping options that are not that relevant.</p>
+<p>Step 2: I recommend setting the distribution to only accept HTTPS connections. What you will need one hundred percent is restricting viewer access. This tells Cloudfront to only accept connections from a signed URL or signed cookies. We’ll use signed URLs. You will need to create a trusted key group, which can include a few trusted public keys. For now you can just create a group with one key. Note that you’ll have to create the key pairs locally and upload only the public key to AWS. You can find more information <a href="https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/private-content-trusted-signers.html#private-content-creating-cloudfront-key-pairs">here</a>. Keep the private key handy, you’ll use to sign requests.</p>
+<img src="/images/active-storage-6.png" alt="">
+<p>Next, configure the distribution to forward query parameters to S3 so that you don’t lose access to features like setting the content disposition. Here I’ve done it so Cloudfront forwards everything to S3, which might not be desirable.</p>
+<img src="/images/active-storage-7.png" alt="">
+<p>Now that our bucket and Cloudfront distribution are online, let’s configure ActiveStorage! But first, notice that once you create a distribution AWS automatically assigns a domain to it, keep it handy.</p>
+<h2 id="activestorage-configuration">ActiveStorage Configuration</h2>
+<p>This section assumes you already have a basic ActiveStorage configuration up and running. Let’s first dig into some ActiveStorage aspects.</p>
+<h3 id="redirect-mode-vs-proxy-mode">Redirect Mode Vs Proxy Mode</h3>
+<p>By default, ActiveStorage is configured to use the so-called “redirect mode”. This means that when a user requests an image ActiveStorage will redirect them to the actual source, in this case S3, and the user can directly request the file. Proxy mode, on the other hand, hides the source of the assets, and your API becomes a reverse proxy to it. Each time a user requests a file, your API will download the file from the source and stream it back to the user. Both approaches have their pros and cons, which I will not go into now.</p>
+<p>In this case, we’ll use redirect mode. Those of you who are avid readers of <a href="https://edgeguides.rubyonrails.org/active_storage_overview.html#proxy-mode">Rails documentation</a> might say “ActiveStorage actually says proxy mode can be used with CDNs”. Well… you are kind of right, but it depends on how you want to structure everything. The documentation assumes your CDN will re-route requests to your API, which is not the case here, since we want to limit user access. Also, if we were to do it as the documentation suggests we would not be able to leverage Cloudfront’s direct connection to S3.</p>
+<h2 id="signed-urls">Signed URLs</h2>
+<p>Ok, time to have a chat about signed URLs. The first thing of note is that signed URLs are just normal URLs, except that they carry a signature (typically in base 64 since it’s URL-safe). The recipient of the request (be it S3, Cloudfront, or whatever service) can then verify that the signature is valid to be confident it was generated by an authorized party. Signatures provide a way for our API to let users hit Cloudfront directly, but <strong>only</strong> with our explicit permission. It’s the best of both worlds! Our API does not need to pay the cost of data transfer, but it can still limit access to the data. We’ll look at examples in a moment.</p>
+<p>One thing to disambiguate right now is that S3 supports signed URLs, but so does Cloudfront. Both kinds of URLs follow the same logic, but are completely different, not just in format but also in how they are signed in practice. A corollary of this is that S3 signed URLs <strong>won’t work</strong> with Cloudfront and viceversa. Why is this important? Well, ActiveStorage is prepared to generate S3 signed URLs out of the box (and it’s actually what it does by default if your bucket is private). By introducing Cloudfront we need to change what ActiveStorage is doing when serving URLs to our files.</p>
+<p>Let’s look at examples of signed URLs. Note that these are just here for illustrative purposes and don’t actually point to anything. Here’s a signed URL for our S3 bucket created previously:</p>
+<p><a href="https://xl-activestorage-cloudfront.s3.amazonaws.com/">https://xl-activestorage-cloudfront.s3.amazonaws.com/</a>
+uivi1ye50kmapzmn5rr3h8wy2wye?response-content-
+disposition=inline%3B%20filename%3D%22Group%20168.png%22%
+3B%20filename%2A%3DUTF-8%27%27Group%2520168.png&#x26;response-
+content-type=image%2Fpng&#x26;X-Amz-Algorithm=AWS4-HMAC-SHA256&#x26;X-
+Amz-Credential=AKIAWJA6LBQMVE3WMN75%2F20240709%2Fus-east-
+1%2Fs3%2Faws4_request&#x26;X-Amz-Date=20240709T201035Z&#x26;X-Amz-
+Expires=172800&#x26;X-Amz-SignedHeaders=host&#x26;X-Amz-Signature=
+8e8ef2e42ae70ae46a030b0a8072407f4eec9abcc307945bb93354aece07dbdc</p>
+<p>This URL was generated using ActiveStorage <strong>without</strong> configuring Cloudfront. Let’s analyze it.</p>
+<ul>
+<li>
+<p>The domain: <span><code class="language-text">xl-activestorage-cloudfront.s3.amazonaws.com</code></span>. It points to the bucket we created before.</p>
+</li>
+<li>
+<p>The path <span><code class="language-text">uivi1ye50kmapzmn5rr3h8wy2wye</code></span> is the ActiveStorage blob key, which coincidentally matches the path to the file on the bucket. This is how ActiveStorage saves files by design.</p>
+</li>
+<li>
+<p>The query parameters:</p>
+<ul>
+<li><span><code class="language-text">response-content-disposition</code></span> tells S3 what to send on the <span><code class="language-text">Content-Disposition</code></span> header if the request is successful. This is useful for instructing the browsers to display content inline or trigger a download.</li>
+<li><span><code class="language-text">response-content-type</code></span> is similar to the previous one, but it tells S3 what to send back on the <span><code class="language-text">Content-Type</code></span> header.</li>
+<li><span><code class="language-text">X-Amz-Algorithm</code></span> informs S3 on what algorithm was used to generate the signature.</li>
+<li><span><code class="language-text">X-Amz-Credential</code></span> identifies the access key that generated the signature, with some other information like the region and the date the URL was generated.</li>
+<li><span><code class="language-text">X-Amz-Date</code></span> contains the exact timestamp of the generation of the URL.</li>
+<li><span><code class="language-text">X-Amz-Expires</code></span> informs S3 on the validity range of the URL, i.e. it can be used up to this many seconds after <span><code class="language-text">X-Amz-Date</code></span> .</li>
+<li><span><code class="language-text">X-Amz-SignedHeaders</code></span> informs what headers have been included in the signature.</li>
+<li><span><code class="language-text">X-Amz-Signature</code></span> the actual signature. Notice how it is encoded in base 64.</li>
+</ul>
+</li>
+</ul>
+<p>Now let’s look at a signed URL generated for Cloudfront for the same ActiveStorage blob.</p>
+<p><a href="https://d221pc53be89z4.cloudfront.net/uivi1ye50kmapzmn5rr3h8wy2wye">https://d221pc53be89z4.cloudfront.net/uivi1ye50kmapzmn5rr3h8wy2wye</a>?
+&#x26;Expires=1720729446&#x26;response-content-disposition=inline%3B%20filename
+%3D%22Group%20168.png%22%3B%20filename%2A%3DUTF-8%27%27Group%2520168
+.png&#x26;response-content-type=image%2Fpng&#x26;Signature=byNci40HdAjYeicFVpR
+7XXK4d6aO6d5KveKEgJYWOfcORrG8~9ugES6v9Zi9jh6b2q1OmLRG5xpA1ac3cSP~gDic5aTd
+SecFUjJt0XkEg8E65rA1nuOPca6~JlvFiSPxyYBPiT1N7tuaRzjhuNeeSYwzJcYRLJ~9S5tb
+MXGLnaaZSOYUABbaDa7kcNKcmrn8GpsAJfbEvfAZmw8fhptln ~DPKlVVSdOqLuwQDqdQp6ZbO
+ToGwvx66gpSQHMSfkqnhmFrmNgMLXO2Io3RCplfJ9A~rnX~~PQnGidtpU6mAgRtW9C8OWPqEU6q
+2HD~5DU3anqw4qzO8- pTI0VtDVdoDw__&#x26;Key-Pair-Id=K22BGJMS612N2Z</p>
+<p>The domain <span><code class="language-text">d2s1pcb3be89z4.cloudfront.net</code></span> points to our Cloudfront distribution.</p>
+<ul>
+<li>
+<p>The path <span><code class="language-text">uivi1ye50kmapzmn5rr3h8wy2wye</code></span> remains the same. Cloudfront just forwards the path and query parameters to S3, so this makes perfect sense.</p>
+</li>
+<li>
+<p>Let’s look at the query parameters:</p>
+<ul>
+<li><span><code class="language-text">Expires</code></span> is the UTC timestamp that marks the moment when this URL expires.</li>
+<li><span><code class="language-text">Signature</code></span> contains the signature, which you might notice is far longer than the previous one.</li>
+<li><span><code class="language-text">Key-Pair-Id</code></span> informs Cloudfront on what is the ID of the public key used to sign. Since you can use multiple different private keys to generate valid signed URLs you need to let Cloudfront know which key pair you used.</li>
+<li>Notice how both response headers are also present, since we want Cloudfront to forward them to S3.</li>
+</ul>
+</li>
+</ul>
+<h2 id="mixing-all-together">Mixing All Together</h2>
+<p>Now that we know we’re using signed URLs with redirect mode, how does it all look together? Well, ActiveStorage in redirect mode emits URLs that point to your API and then redirect to S3. We need that process to return signed Cloudfront URLs. In order to do that we need to overload ActiveStorage’s controllers.</p>
+<p>But first, let’s learn how to create a Cloudfront signed URL. Luckily for us, AWS provides the <span><code class="language-text">aws-sdk-cloudfront</code></span> gem which exposes a method to sign URLs. In order to use this we’ll create a concern named <span><code class="language-text">Cloudfrontable</code></span> to handle this:</p>
+<span><div class="code-highlight" data-language="ruby"><pre class="language-ruby" data-language="ruby"><code class="language-ruby"><span class="token comment"># app/controllers/concerns/cloudfrontable.rb</span>
+<span class="token comment"># frozen_string_literal: true</span>
+
+<span class="token keyword">module</span> <span class="token class-name">Cloudfrontable</span>
+  <span class="token keyword">extend</span> ActiveSupport<span class="token double-colon punctuation">::</span>Concern
+
+  <span class="token comment"># Returns the Cloudfront URL for the given blob.</span>
+  <span class="token keyword">def</span> <span class="token method-definition"><span class="token function">cloudfront_url</span></span><span class="token punctuation">(</span>blob<span class="token punctuation">,</span> options <span class="token operator">=</span> <span class="token punctuation">{</span><span class="token punctuation">}</span><span class="token punctuation">)</span>
+    uri <span class="token operator">=</span> <span class="token constant">URI</span><span class="token punctuation">.</span>parse<span class="token punctuation">(</span><span class="token string-literal"><span class="token string">"https://</span><span class="token interpolation"><span class="token delimiter punctuation">#{</span><span class="token content">Rails<span class="token punctuation">.</span>application<span class="token punctuation">.</span>config<span class="token punctuation">.</span>aws_cloudfront_domain</span><span class="token delimiter punctuation">}</span></span><span class="token string">/</span><span class="token interpolation"><span class="token delimiter punctuation">#{</span><span class="token content">blob<span class="token punctuation">.</span>key</span><span class="token delimiter punctuation">}</span></span><span class="token string">"</span></span><span class="token punctuation">)</span>
+    query <span class="token operator">=</span> <span class="token punctuation">[</span>
+      <span class="token string-literal"><span class="token string">"response-content-type=</span><span class="token interpolation"><span class="token delimiter punctuation">#{</span><span class="token content"><span class="token constant">URI</span><span class="token punctuation">.</span>encode_www_form_component content_type<span class="token punctuation">(</span>blob<span class="token punctuation">)</span></span><span class="token delimiter punctuation">}</span></span><span class="token string">"</span></span><span class="token punctuation">,</span>
+      <span class="token string-literal"><span class="token string">"response-content-disposition=</span><span class="token interpolation"><span class="token delimiter punctuation">#{</span><span class="token content"><span class="token constant">URI</span><span class="token punctuation">.</span>encode_www_form_component<span class="token punctuation">(</span>options<span class="token punctuation">[</span><span class="token symbol">:disposition</span><span class="token punctuation">]</span> <span class="token operator">||</span> default_content_disposition<span class="token punctuation">(</span>blob<span class="token punctuation">)</span><span class="token punctuation">)</span></span><span class="token delimiter punctuation">}</span></span><span class="token string">"</span></span><span class="token punctuation">,</span>
+    <span class="token punctuation">]</span><span class="token punctuation">.</span>compact<span class="token punctuation">.</span>join<span class="token punctuation">(</span><span class="token string-literal"><span class="token string">'&#x26;'</span></span><span class="token punctuation">)</span>
+    uri<span class="token punctuation">.</span>query <span class="token operator">=</span> query
+
+    signer <span class="token operator">=</span> Aws<span class="token double-colon punctuation">::</span>CloudFront<span class="token double-colon punctuation">::</span><span class="token class-name">UrlSigner</span><span class="token punctuation">.</span><span class="token keyword">new</span><span class="token punctuation">(</span>
+      <span class="token symbol">key_pair_id</span><span class="token operator">:</span> Rails<span class="token punctuation">.</span>application<span class="token punctuation">.</span>config<span class="token punctuation">.</span>aws_cloudfront_key_pair_id<span class="token punctuation">,</span>
+      <span class="token symbol">private_key_path</span><span class="token operator">:</span> Rails<span class="token punctuation">.</span>application<span class="token punctuation">.</span>config<span class="token punctuation">.</span>aws_cloudfront_private_key_path<span class="token punctuation">,</span>
+    <span class="token punctuation">)</span>
+
+    signer<span class="token punctuation">.</span>signed_url<span class="token punctuation">(</span>
+      uri<span class="token punctuation">.</span>to_s<span class="token punctuation">,</span>
+      <span class="token symbol">expires</span><span class="token operator">:</span> <span class="token builtin">Time</span><span class="token punctuation">.</span>now<span class="token punctuation">.</span>utc<span class="token punctuation">.</span>to_i <span class="token operator">+</span> ActiveStorage<span class="token punctuation">.</span>service_urls_expire_in<span class="token punctuation">.</span>to_i<span class="token punctuation">,</span>
+    <span class="token punctuation">)</span>
+  <span class="token keyword">end</span>
+
+  <span class="token keyword">private</span>
+
+  <span class="token keyword">def</span> <span class="token method-definition"><span class="token function">default_content_disposition</span></span><span class="token punctuation">(</span>blob<span class="token punctuation">)</span>
+    <span class="token string-literal"><span class="token string">"inline; filename=\"</span><span class="token interpolation"><span class="token delimiter punctuation">#{</span><span class="token content">filename<span class="token punctuation">(</span>blob<span class="token punctuation">)</span></span><span class="token delimiter punctuation">}</span></span><span class="token string">\"; filename*=UTF-8''</span><span class="token interpolation"><span class="token delimiter punctuation">#{</span><span class="token content">filename<span class="token punctuation">(</span>blob<span class="token punctuation">)</span></span><span class="token delimiter punctuation">}</span></span><span class="token string">"</span></span>
+  <span class="token keyword">end</span>
+
+  <span class="token keyword">def</span> <span class="token method-definition"><span class="token function">amazon</span></span><span class="token operator">?</span>
+    Rails<span class="token punctuation">.</span>application<span class="token punctuation">.</span>config<span class="token punctuation">.</span>active_storage<span class="token punctuation">.</span>service <span class="token operator">==</span> <span class="token symbol">:amazon</span>
+  <span class="token keyword">end</span>
+
+	<span class="token comment"># These two methods are needed in case you use variants. You'll need to make some changes</span>
+	<span class="token comment"># if you don't use variants with records.</span>
+  <span class="token keyword">def</span> <span class="token method-definition"><span class="token function">content_type</span></span><span class="token punctuation">(</span>blob<span class="token punctuation">)</span>
+    blob<span class="token punctuation">.</span>is_a<span class="token operator">?</span><span class="token punctuation">(</span>ActiveStorage<span class="token double-colon punctuation">::</span>VariantWithRecord<span class="token punctuation">)</span> <span class="token operator">?</span> blob<span class="token punctuation">.</span>image<span class="token punctuation">.</span>content_type <span class="token operator">:</span> blob<span class="token punctuation">.</span>content_type
+  <span class="token keyword">end</span>
+
+  <span class="token keyword">def</span> <span class="token method-definition"><span class="token function">filename</span></span><span class="token punctuation">(</span>blob<span class="token punctuation">)</span>
+    blob<span class="token punctuation">.</span>is_a<span class="token operator">?</span><span class="token punctuation">(</span>ActiveStorage<span class="token double-colon punctuation">::</span>VariantWithRecord<span class="token punctuation">)</span> <span class="token operator">?</span> blob<span class="token punctuation">.</span>image<span class="token punctuation">.</span>filename <span class="token operator">:</span> blob<span class="token punctuation">.</span>filename
+  <span class="token keyword">end</span>
+<span class="token keyword">end</span></code></pre></div></span>
+<p>There’s a few things going on here:</p>
+<ul>
+<li>First we generate a URL using the Cloudfront domain and the blob key. This matches how ActiveStorage generates its URLs.</li>
+<li>Then we set the <span><code class="language-text">response-content-type</code></span> and <span><code class="language-text">response-content-disposition</code></span> query parameters just like ActiveStorage generates them.</li>
+<li>The URL is signed using the key pair ID and the private key from that key pair. Make sure you define the path to the private key correctly.</li>
+</ul>
+<p>Now let’s use this concern. We need to overload two controllers: <span><code class="language-text">ActiveStorage::Blobs::RedirectController</code></span> and <span><code class="language-text">ActiveStorage::Representations::RedirectController</code></span>. You can find the original implementation of these controllers <a href="https://github.com/rails/rails/blob/v7.0.2.3/activestorage/app/controllers/active_storage/blobs/redirect_controller.rb">here</a> and <a href="https://github.com/rails/rails/blob/v7.0.2.3/activestorage/app/controllers/active_storage/representations/redirect_controller.rb">here</a>. In order to overload the controllers, you need to create two controller files in a specific location. Let’s look at the blob redirect controller:</p>
+<span><div class="code-highlight" data-language="ruby"><pre class="language-ruby" data-language="ruby"><code class="language-ruby"><span class="token comment"># app/controllers/active_storage/blobs/redirect_controller.rb</span>
+<span class="token comment"># frozen_string_literal: true</span>
+
+<span class="token keyword">class</span> <span class="token class-name">ActiveStorage</span><span class="token double-colon punctuation">::</span>Blobs<span class="token double-colon punctuation">::</span>RedirectController <span class="token operator">&#x3C;</span> ActiveStorage<span class="token double-colon punctuation">::</span>BaseController
+  <span class="token keyword">include</span> ActiveStorage<span class="token double-colon punctuation">::</span>SetBlob
+  <span class="token keyword">include</span> Cloudfrontable
+
+  <span class="token keyword">def</span> <span class="token method-definition"><span class="token function">show</span></span>
+    expires_in ActiveStorage<span class="token punctuation">.</span>service_urls_expire_in
+    redirect_to blob_url<span class="token punctuation">,</span> <span class="token symbol">allow_other_host</span><span class="token operator">:</span> <span class="token boolean">true</span>
+  <span class="token keyword">end</span>
+
+  <span class="token keyword">private</span>
+
+  <span class="token keyword">def</span> <span class="token method-definition"><span class="token function">blob_url</span></span>
+    <span class="token comment"># We only want to change the URL to Cloudfront's domain if we are using Amazon S3.</span>
+    <span class="token keyword">return</span> cloudfront_url<span class="token punctuation">(</span><span class="token variable">@blob</span><span class="token punctuation">,</span> <span class="token symbol">disposition</span><span class="token operator">:</span> params<span class="token punctuation">[</span><span class="token symbol">:disposition</span><span class="token punctuation">]</span><span class="token punctuation">)</span> <span class="token keyword">if</span> amazon<span class="token operator">?</span>
+
+    <span class="token variable">@blob</span><span class="token punctuation">.</span>url<span class="token punctuation">(</span><span class="token symbol">disposition</span><span class="token operator">:</span> params<span class="token punctuation">[</span><span class="token symbol">:disposition</span><span class="token punctuation">]</span><span class="token punctuation">)</span>
+  <span class="token keyword">end</span>
+<span class="token keyword">end</span></code></pre></div></span>
+<p>Note that we’re including the <span><code class="language-text">Cloudfrontable</code></span> concern. After that it’s pretty much standard stuff. Since Cloudfront only works with an S3 bucket, we first check if the service configured in ActiveStorage is S3 (we have named it <span><code class="language-text">amazon</code></span> ).</p>
+<p>The representations controller is almost identical:</p>
+<span><div class="code-highlight" data-language="ruby"><pre class="language-ruby" data-language="ruby"><code class="language-ruby"><span class="token comment"># app/controllers/active_storage/representations/redirect_controller.rb</span>
+<span class="token comment"># frozen_string_literal: true</span>
+
+<span class="token keyword">class</span> <span class="token class-name">ActiveStorage</span><span class="token double-colon punctuation">::</span>Representations<span class="token double-colon punctuation">::</span>RedirectController <span class="token operator">&#x3C;</span> ActiveStorage<span class="token double-colon punctuation">::</span>Representations<span class="token double-colon punctuation">::</span>BaseController
+  <span class="token keyword">include</span> Cloudfrontable
+
+  <span class="token keyword">def</span> <span class="token method-definition"><span class="token function">show</span></span>
+    expires_in ActiveStorage<span class="token punctuation">.</span>service_urls_expire_in
+    redirect_to representation_url<span class="token punctuation">,</span> <span class="token symbol">allow_other_host</span><span class="token operator">:</span> <span class="token boolean">true</span>
+  <span class="token keyword">end</span>
+
+  <span class="token keyword">private</span>
+
+  <span class="token keyword">def</span> <span class="token method-definition"><span class="token function">representation_url</span></span>
+    <span class="token comment"># We only want to change the URL to Cloudfront's domain if we are using Amazon S3.</span>
+    <span class="token keyword">return</span> cloudfront_url<span class="token punctuation">(</span><span class="token variable">@representation</span><span class="token punctuation">,</span> <span class="token symbol">disposition</span><span class="token operator">:</span> params<span class="token punctuation">[</span><span class="token symbol">:disposition</span><span class="token punctuation">]</span><span class="token punctuation">)</span> <span class="token keyword">if</span> amazon<span class="token operator">?</span>
+
+    <span class="token variable">@representation</span><span class="token punctuation">.</span>url<span class="token punctuation">(</span><span class="token symbol">disposition</span><span class="token operator">:</span> params<span class="token punctuation">[</span><span class="token symbol">:disposition</span><span class="token punctuation">]</span><span class="token punctuation">)</span>
+  <span class="token keyword">end</span>
+<span class="token keyword">end</span></code></pre></div></span>
+<p>We want to override both controllers since you might want to target your blobs directly or some representation of them (typically images).</p>
+<h2 id="finishing-up">Finishing Up</h2>
+<p>You can test this locally or on a higher environment fairly easily. Just fetch the URL of a blob (it really depends on how your API and project works) and check where it leads. You should get a URL that points to your API but redirects the user to Cloudfront.</p>
+<p>You can quickly generate the URL that points to a blob by calling the Rails route helper:</p>
+<span><div class="code-highlight" data-language="ruby"><pre class="language-ruby" data-language="ruby"><code class="language-ruby">Rails<span class="token punctuation">.</span>application<span class="token punctuation">.</span>routes<span class="token punctuation">.</span>url_helpers<span class="token punctuation">.</span>rails_blob_url<span class="token punctuation">(</span>blob<span class="token punctuation">)</span></code></pre></div></span>
+<p>This should output a URL similar to:</p>
+<p>https://YOUR_DOMAIN.com/rails/active_storage/representations/redirect/
+eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaHBBcDVUIiwiZXhwIjpudWxsLCJwdXIiOiJib
+G9iX2lkIn19--90ee7e940c77b194a9d55012d595f560d2085eb5/eyJfcmFpbHMiOnsib
+WVzc2FnZSI6IkJBaDdCem 9MWm05eWJXRjBTU0lJY0c1bkJqb0dSVlE2RkhKbGMybDZaVjkw
+YjE5c2FXMXBkRnNIYVFLUUFXa0NrQUU9 IiwiZXhwIjpudWxsLCJwdXIiOiJ2YXJpYXRpb24i
+fX0=--2640bc2d2290293bac7db1c3c43366e58f53ae97/image.png</p>
+<p>If the signed ID of the blob is valid, then our redirect controller will return a Cloudfront URL! And that’s it. You can also add more logic to the controllers we overloaded to make sure the user is authenticated.</p>
+<h2 id="caveats">Caveats</h2>
+<p>As I said at the beginning of this post, there’s no such thing as a free lunch. Here are some caveats to be mindful of.</p>
+<ul>
+<li><strong>Mirroring not possible/difficult</strong>: if your project is big and/or the information you store is vital you might want to store it in multiple providers (AWS, Google Cloud, Azure, etc). This Cloudfront setup does not play well with that approach, since you would be excluding all other providers from the benefits of the CDN.</li>
+<li><strong>Provider Lock-in:</strong> similar to the previous point, but you can only enjoy the benefits of this approach when using Cloudfront and S3.</li>
+<li><strong>Rails assets not included:</strong> this post covers only ActiveStorage blobs. If you want also to serve your rails assets via Cloudfront, then I recommend the first part of <a href="https://headey.net/rails-assets-active-storage-and-a-cloudfront-cdn">this post</a>, which creates a separate distribution.</li>
+</ul>
+<h2 id="tldr">TL;DR</h2>
+<blockquote>
+<p><strong>ℹ️ This section provides minimal information on how to configure S3, Cloudfront and ActiveStorage. Read the full post for details.</strong></p>
+</blockquote>
+<p>Want to speedrun this configuration? Here we go.</p>
+<ol>
+<li>
+<p><strong>Create an S3 bucket.</strong></p>
+<ol>
+<li>Make sure public access is blocked.</li>
+<li>Create credentials for a user. Recommended: limit its permissions only to use the bucket.</li>
+</ol>
+</li>
+<li>
+<p><strong>Create a Cloudfront distribution:</strong></p>
+<ol>
+<li>The origin domain of the distribution must be the domain of the S3 bucket. You should be able to select it from the list AWS provides.</li>
+<li>Origin access must be set to "Origin access control settings". You'll need to create a new Origin Access Control (OAC), which should be very simple. Force it to sign the requests. You will need to update bucket policy later, AWS will help you out on this.</li>
+<li>Force the distribution to only accept HTTPS connections.</li>
+<li>Restrict the viewer access. By default AWS should prompt you to add key groups. You'll need to create a key group containing a key-pair. Create a key pair on you local machine and upload the public key to AWS and that’s it.</li>
+<li>Origin request policy must be set to <span><code class="language-text">AllViewerExceptHostHeader</code></span>. This forwards all query parameters to S3 allowing us more flexibility.</li>
+</ol>
+</li>
+<li>
+<p><strong>Configure ActiveStorage</strong></p>
+<ol>
+<li>Create the <span><code class="language-text">Cloudfrontable</code></span> module.</li>
+<li>Overload the <span><code class="language-text">ActiveStorage::Blobs::RedirectController</code></span> and <span><code class="language-text">ActiveStorage::Representations::RedirectController</code></span> controllers.</li>
+<li>Make sure ActiveStorage is configured in redirect mode.</li>
+<li>Make sure ActiveStorage has access to your private key (this depends on your infrastructure and deployment process).</li>
+</ol>
+</li>
+</ol>
+<span><div class="code-highlight" data-language="ruby"><pre class="language-ruby" data-language="ruby"><code class="language-ruby"><span class="token comment"># app/controllers/concerns/cloudfrontable.rb</span>
+<span class="token comment"># frozen_string_literal: true</span>
+
+<span class="token keyword">module</span> <span class="token class-name">Cloudfrontable</span>
+  <span class="token keyword">extend</span> ActiveSupport<span class="token double-colon punctuation">::</span>Concern
+
+  <span class="token comment"># Returns the Cloudfront URL for the given blob.</span>
+  <span class="token keyword">def</span> <span class="token method-definition"><span class="token function">cloudfront_url</span></span><span class="token punctuation">(</span>blob<span class="token punctuation">,</span> options <span class="token operator">=</span> <span class="token punctuation">{</span><span class="token punctuation">}</span><span class="token punctuation">)</span>
+    uri <span class="token operator">=</span> <span class="token constant">URI</span><span class="token punctuation">.</span>parse<span class="token punctuation">(</span><span class="token string-literal"><span class="token string">"https://</span><span class="token interpolation"><span class="token delimiter punctuation">#{</span><span class="token content">Rails<span class="token punctuation">.</span>application<span class="token punctuation">.</span>config<span class="token punctuation">.</span>aws_cloudfront_domain</span><span class="token delimiter punctuation">}</span></span><span class="token string">/</span><span class="token interpolation"><span class="token delimiter punctuation">#{</span><span class="token content">blob<span class="token punctuation">.</span>key</span><span class="token delimiter punctuation">}</span></span><span class="token string">"</span></span><span class="token punctuation">)</span>
+    query <span class="token operator">=</span> <span class="token punctuation">[</span>
+      <span class="token string-literal"><span class="token string">"response-content-type=</span><span class="token interpolation"><span class="token delimiter punctuation">#{</span><span class="token content"><span class="token constant">URI</span><span class="token punctuation">.</span>encode_www_form_component content_type<span class="token punctuation">(</span>blob<span class="token punctuation">)</span></span><span class="token delimiter punctuation">}</span></span><span class="token string">"</span></span><span class="token punctuation">,</span>
+      <span class="token string-literal"><span class="token string">"response-content-disposition=</span><span class="token interpolation"><span class="token delimiter punctuation">#{</span><span class="token content"><span class="token constant">URI</span><span class="token punctuation">.</span>encode_www_form_component<span class="token punctuation">(</span>options<span class="token punctuation">[</span><span class="token symbol">:disposition</span><span class="token punctuation">]</span> <span class="token operator">||</span> default_content_disposition<span class="token punctuation">(</span>blob<span class="token punctuation">)</span><span class="token punctuation">)</span></span><span class="token delimiter punctuation">}</span></span><span class="token string">"</span></span><span class="token punctuation">,</span>
+    <span class="token punctuation">]</span><span class="token punctuation">.</span>compact<span class="token punctuation">.</span>join<span class="token punctuation">(</span><span class="token string-literal"><span class="token string">'&#x26;'</span></span><span class="token punctuation">)</span>
+    uri<span class="token punctuation">.</span>query <span class="token operator">=</span> query
+
+    signer <span class="token operator">=</span> Aws<span class="token double-colon punctuation">::</span>CloudFront<span class="token double-colon punctuation">::</span><span class="token class-name">UrlSigner</span><span class="token punctuation">.</span><span class="token keyword">new</span><span class="token punctuation">(</span>
+      <span class="token symbol">key_pair_id</span><span class="token operator">:</span> Rails<span class="token punctuation">.</span>application<span class="token punctuation">.</span>config<span class="token punctuation">.</span>aws_cloudfront_key_pair_id<span class="token punctuation">,</span>
+      <span class="token symbol">private_key_path</span><span class="token operator">:</span> Rails<span class="token punctuation">.</span>application<span class="token punctuation">.</span>config<span class="token punctuation">.</span>aws_cloudfront_private_key_path<span class="token punctuation">,</span>
+    <span class="token punctuation">)</span>
+
+    signer<span class="token punctuation">.</span>signed_url<span class="token punctuation">(</span>
+      uri<span class="token punctuation">.</span>to_s<span class="token punctuation">,</span>
+      <span class="token symbol">expires</span><span class="token operator">:</span> <span class="token builtin">Time</span><span class="token punctuation">.</span>now<span class="token punctuation">.</span>utc<span class="token punctuation">.</span>to_i <span class="token operator">+</span> ActiveStorage<span class="token punctuation">.</span>service_urls_expire_in<span class="token punctuation">.</span>to_i<span class="token punctuation">,</span>
+    <span class="token punctuation">)</span>
+  <span class="token keyword">end</span>
+
+  <span class="token keyword">private</span>
+
+  <span class="token keyword">def</span> <span class="token method-definition"><span class="token function">default_content_disposition</span></span><span class="token punctuation">(</span>blob<span class="token punctuation">)</span>
+    <span class="token string-literal"><span class="token string">"inline; filename=\"</span><span class="token interpolation"><span class="token delimiter punctuation">#{</span><span class="token content">filename<span class="token punctuation">(</span>blob<span class="token punctuation">)</span></span><span class="token delimiter punctuation">}</span></span><span class="token string">\"; filename*=UTF-8''</span><span class="token interpolation"><span class="token delimiter punctuation">#{</span><span class="token content">filename<span class="token punctuation">(</span>blob<span class="token punctuation">)</span></span><span class="token delimiter punctuation">}</span></span><span class="token string">"</span></span>
+  <span class="token keyword">end</span>
+
+  <span class="token keyword">def</span> <span class="token method-definition"><span class="token function">amazon</span></span><span class="token operator">?</span>
+    Rails<span class="token punctuation">.</span>application<span class="token punctuation">.</span>config<span class="token punctuation">.</span>active_storage<span class="token punctuation">.</span>service <span class="token operator">==</span> <span class="token symbol">:amazon</span>
+  <span class="token keyword">end</span>
+	<span class="token comment"># These two methods are needed in case you use variants. You'll need to make some changes</span>
+	<span class="token comment"># if you don't use variants with records.</span>
+  <span class="token keyword">def</span> <span class="token method-definition"><span class="token function">content_type</span></span><span class="token punctuation">(</span>blob<span class="token punctuation">)</span>
+    blob<span class="token punctuation">.</span>is_a<span class="token operator">?</span><span class="token punctuation">(</span>ActiveStorage<span class="token double-colon punctuation">::</span>VariantWithRecord<span class="token punctuation">)</span> <span class="token operator">?</span> blob<span class="token punctuation">.</span>image<span class="token punctuation">.</span>content_type <span class="token operator">:</span> blob<span class="token punctuation">.</span>content_type
+  <span class="token keyword">end</span>
+
+  <span class="token keyword">def</span> <span class="token method-definition"><span class="token function">filename</span></span><span class="token punctuation">(</span>blob<span class="token punctuation">)</span>
+    blob<span class="token punctuation">.</span>is_a<span class="token operator">?</span><span class="token punctuation">(</span>ActiveStorage<span class="token double-colon punctuation">::</span>VariantWithRecord<span class="token punctuation">)</span> <span class="token operator">?</span> blob<span class="token punctuation">.</span>image<span class="token punctuation">.</span>filename <span class="token operator">:</span> blob<span class="token punctuation">.</span>filename
+  <span class="token keyword">end</span>
+<span class="token keyword">end</span></code></pre></div></span>
+<span><div class="code-highlight" data-language="ruby"><pre class="language-ruby" data-language="ruby"><code class="language-ruby"><span class="token comment"># app/controllers/active_storage/blobs/redirect_controller.rb</span>
+<span class="token comment"># frozen_string_literal: true</span>
+
+<span class="token keyword">class</span> <span class="token class-name">ActiveStorage</span><span class="token double-colon punctuation">::</span>Blobs<span class="token double-colon punctuation">::</span>RedirectController <span class="token operator">&#x3C;</span> ActiveStorage<span class="token double-colon punctuation">::</span>BaseController
+  <span class="token keyword">include</span> ActiveStorage<span class="token double-colon punctuation">::</span>SetBlob
+  <span class="token keyword">include</span> Cloudfrontable
+
+  <span class="token keyword">def</span> <span class="token method-definition"><span class="token function">show</span></span>
+    expires_in ActiveStorage<span class="token punctuation">.</span>service_urls_expire_in
+    redirect_to blob_url<span class="token punctuation">,</span> <span class="token symbol">allow_other_host</span><span class="token operator">:</span> <span class="token boolean">true</span>
+  <span class="token keyword">end</span>
+
+  <span class="token keyword">private</span>
+
+  <span class="token keyword">def</span> <span class="token method-definition"><span class="token function">blob_url</span></span>
+    <span class="token comment"># We only want to change the URL to Cloudfront's domain if we are using Amazon S3.</span>
+    <span class="token keyword">return</span> cloudfront_url<span class="token punctuation">(</span><span class="token variable">@blob</span><span class="token punctuation">,</span> <span class="token symbol">disposition</span><span class="token operator">:</span> params<span class="token punctuation">[</span><span class="token symbol">:disposition</span><span class="token punctuation">]</span><span class="token punctuation">)</span> <span class="token keyword">if</span> amazon<span class="token operator">?</span>
+
+    <span class="token variable">@blob</span><span class="token punctuation">.</span>url<span class="token punctuation">(</span><span class="token symbol">disposition</span><span class="token operator">:</span> params<span class="token punctuation">[</span><span class="token symbol">:disposition</span><span class="token punctuation">]</span><span class="token punctuation">)</span>
+  <span class="token keyword">end</span> 
+<span class="token keyword">end</span></code></pre></div></span>
+<span><div class="code-highlight" data-language="ruby"><pre class="language-ruby" data-language="ruby"><code class="language-ruby"><span class="token comment"># app/controllers/active_storage/representations/redirect_controller.rb</span>
+<span class="token comment"># frozen_string_literal: true</span>
+
+<span class="token keyword">class</span> <span class="token class-name">ActiveStorage</span><span class="token double-colon punctuation">::</span>Representations<span class="token double-colon punctuation">::</span>RedirectController <span class="token operator">&#x3C;</span> ActiveStorage<span class="token double-colon punctuation">::</span>Representations<span class="token double-colon punctuation">::</span>BaseController
+  <span class="token keyword">include</span> Cloudfrontable
+
+  <span class="token keyword">def</span> <span class="token method-definition"><span class="token function">show</span></span>
+    expires_in ActiveStorage<span class="token punctuation">.</span>service_urls_expire_in
+    redirect_to representation_url<span class="token punctuation">,</span> <span class="token symbol">allow_other_host</span><span class="token operator">:</span> <span class="token boolean">true</span>
+  <span class="token keyword">end</span>
+
+  <span class="token keyword">private</span>
+
+  <span class="token keyword">def</span> <span class="token method-definition"><span class="token function">representation_url</span></span>
+    <span class="token comment"># We only want to change the URL to Cloudfront's domain if we are using Amazon S3.</span>
+    <span class="token keyword">return</span> cloudfront_url<span class="token punctuation">(</span><span class="token variable">@representation</span><span class="token punctuation">,</span> <span class="token symbol">disposition</span><span class="token operator">:</span> params<span class="token punctuation">[</span><span class="token symbol">:disposition</span><span class="token punctuation">]</span><span class="token punctuation">)</span> <span class="token keyword">if</span> amazon<span class="token operator">?</span>
+
+    <span class="token variable">@representation</span><span class="token punctuation">.</span>url<span class="token punctuation">(</span><span class="token symbol">disposition</span><span class="token operator">:</span> params<span class="token punctuation">[</span><span class="token symbol">:disposition</span><span class="token punctuation">]</span><span class="token punctuation">)</span>
+  <span class="token keyword">end</span>
+<span class="token keyword">end</span></code></pre></div></span>
+<h2 id="conclusion">Conclusion</h2>
+<p>Before finishing, some closing thoughts. This solution is clearly not meant to be used by everybody in every use case. It’s more of an optimized solution for a few use cases. The posts I could find on the subject were not really what I was looking for, so I was looking to come up with something that might work for a specific use case, which means it might not necessarily work for yours. However, I do hope you find this helpful.</p>
+<p>Thanks for reading, and if you have any comments, feel free to reach out. If you felt inspired by this blog check our previous work or contact <a href="https://xmartlabs.com/">us</a>!</p>
+<h2 id="references">References</h2>
+<ul>
+<li><a href="https://www.osti.gov/biblio/1016114">Geography-based structural analysis of the Internet</a></li>
+<li><a href="https://www.cloudflare.com/en-gb/learning/cdn/what-is-a-cdn/">What is a CDN</a></li>
+<li><a href="https://edgeguides.rubyonrails.org/active_storage_overview.html#proxy-mode">ActiveStorage Proxy Mode</a></li>
+<li><a href="https://github.com/rails/rails/blob/v7.0.2.3/activestorage/app/controllers/active_storage/blobs/redirect_controller.rb">ActiveStorage::Blobs::RedirectController implementation</a></li>
+<li><a href="https://github.com/rails/rails/blob/v7.0.2.3/activestorage/app/controllers/active_storage/representations/redirect_controller.rb">ActiveStorage::Representations::RedirectController implementation</a></li>
+<li><a href="https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/private-content-trusted-signers.html#private-content-creating-cloudfront-key-pairs">Specify Allowed Signers in Cloudfront</a></li>
+<li><a href="https://headey.net/rails-assets-active-storage-and-a-cloudfront-cdn">Rails Assets, ActiveStorage and a Cloudfront CDN</a></li>
+</ul> 

@@ -1,0 +1,170 @@
+ <p>It&#39;s been over a year since Apple has introduced <a href="https://developer.apple.com/documentation/createml">Create ML</a>, a framework that allows you to build neural network models in Swift and use them on iPhones and iPads with Core ML.
+However, the most common way of getting a CoreML model is still by converting a model trained on TensorFlow, Keras, Pytorch or other ML frameworks.
+Apple officially supports <a href="https://github.com/apple/coremltools">coremltools</a> which allows converting some model formats like Keras, Caffe (v1) and TensorFlow (since version 3.0).</p>
+<p>Unfortunately, not all model formats can be converted so easily to Core ML.
+For example, there is no library that supports converting a TensorFlow Lite model.
+While this is not required when you train your own model in TensorFlow, it can be helpful if you want to do performance comparisons between different on-device frameworks, or if you want to run a recently published research model in CoreML and you only have the model in TF Lite format.</p>
+<p>TensorFlow Lite is used to deploy TensorFlow models on mobile or embedded devices but not for training them.
+Once converted to TF Lite, a model cannot be converted back to a TensorFlow model but we can inspect its architecture and export its weights in order to reimplement the network graph in TensorFlow. We can then use <a href="https://github.com/apple/coremltools">coremltools</a> or <a href="https://github.com/tf-coreml/tf-coreml">tfcoreml</a> to convert it to CoreML.
+This is what we are going to accomplish in this tutorial.</p>
+<p>We will use an MNIST model from the <a href="https://github.com/tensorflow/examples/tree/master/lite">TF Lite examples</a> repository. <a href="http://yann.lecun.com/exdb/mnist/">MNIST</a> is a handwritten digit database. So the task this model tries to perform is to recognize handwritten digits, which can be done fairly well with a relatively small model.</p>
+<p>So for example, for the following image, we want our model to predict &quot;0&quot;:</p>
+<img width="343px" src="/images/tflite_coreml/zero.png"/>
+<h2 id="inspecting-the-model">Inspecting the model</h2>
+<p>The first thing we should do is to inspect the model to see its layers.
+One great tool to do this is <a href="https://github.com/lutzroeder/netron">Netron</a>.
+With Netron you can see the model&#39;s graph and even export its weights.
+With the MNIST model we get the following:</p>
+<img width="100%" src="/images/tflite_coreml/tflite-netron.png"/>
+<br/>
+<p>There we can see that this simple model has the following layers:</p>
+<ul>
+<li>A Flatten layer which serves as input</li>
+<li>A FullyConnected, or Dense, layer with ReLU activation function</li>
+<li>Another FullyConnected layer without activation function</li>
+<li>A Softmax layer</li>
+</ul>
+<p>We can also print each node in the graph of the model using the following snippet:</p>
+<span><div class="code-highlight" data-language="python"><pre class="language-python" data-language="python"><code class="language-python"><span class="token keyword">import</span> tensorflow <span class="token keyword">as</span> tf
+<span class="token comment"># Load TFLite model and allocate tensors.</span>
+interpreter <span class="token operator">=</span> tf<span class="token punctuation">.</span>lite<span class="token punctuation">.</span>Interpreter<span class="token punctuation">(</span>model_path<span class="token operator">=</span><span class="token string">&quot;mnist.tflite&quot;</span><span class="token punctuation">)</span>
+interpreter<span class="token punctuation">.</span>allocate_tensors<span class="token punctuation">(</span><span class="token punctuation">)</span>
+
+<span class="token comment"># Get tensor details.</span>
+details <span class="token operator">=</span> interpreter<span class="token punctuation">.</span>get_tensor_details<span class="token punctuation">(</span><span class="token punctuation">)</span>
+
+<span class="token keyword">for</span> detail <span class="token keyword">in</span> details<span class="token punctuation">:</span>
+    <span class="token keyword">print</span><span class="token punctuation">(</span>detail<span class="token punctuation">[</span><span class="token string">&#39;index&#39;</span><span class="token punctuation">]</span><span class="token punctuation">,</span> detail<span class="token punctuation">[</span><span class="token string">&#39;name&#39;</span><span class="token punctuation">]</span><span class="token punctuation">,</span> detail<span class="token punctuation">[</span><span class="token string">&#39;shape&#39;</span><span class="token punctuation">]</span><span class="token punctuation">)</span></code></pre></div></span>
+<p>Using this snippet we get the following output for our model:</p>
+<span><div class="code-highlight" data-language="text"><pre class="language-text" data-language="text"><code class="language-text">0 Identity [ 1 10]
+1 flatten_2_input [ 1 28 28]
+2 sequential_2/dense_4/MatMul/ReadVariableOp/transpose [128 784]
+3 sequential_2/dense_4/MatMul_bias [128]
+4 sequential_2/dense_4/Relu [  1 128]
+5 sequential_2/dense_5/BiasAdd [ 1 10]
+6 sequential_2/dense_5/MatMul/ReadVariableOp/transpose [ 10 128]
+7 sequential_2/dense_5/MatMul_bias [10]</code></pre></div></span>
+<h2 id="exporting-the-weights">Exporting the weights</h2>
+<p>As said before, Netron also allows us to export the weights of these layers.
+However, on this guide, we are going to export them differently.</p>
+<p>To export the weights we are going to use the <span><code class="language-text">get_tensor</code></span> function of the <span><code class="language-text">tf.lite.Interpreter</code></span>. This function cannot be used to get intermediate results of a graph but it can be used to get parameters such as weights and biases as well as the outputs of the model.</p>
+<p>Using the code snippet in the previous section we get the indexes of the parameters we have to export.
+We can now create a function to extract them from the interpreter:</p>
+<span><div class="code-highlight" data-language="python"><pre class="language-python" data-language="python"><code class="language-python"><span class="token keyword">def</span> <span class="token function">get_variable</span><span class="token punctuation">(</span>interpreter<span class="token punctuation">,</span> index<span class="token punctuation">,</span> transposed<span class="token operator">=</span><span class="token boolean">False</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
+    var <span class="token operator">=</span> interpreter<span class="token punctuation">.</span>get_tensor<span class="token punctuation">(</span>index<span class="token punctuation">)</span>
+    <span class="token keyword">if</span> transposed<span class="token punctuation">:</span>
+        var <span class="token operator">=</span> np<span class="token punctuation">.</span>transpose<span class="token punctuation">(</span>var<span class="token punctuation">,</span> <span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+    <span class="token keyword">return</span> var</code></pre></div></span>
+<blockquote>
+<p>Fully connected weights must be transposed. That might also be necessary for convolution weights, for example.</p>
+</blockquote>
+<h2 id="building-the-model">Building the model</h2>
+<p>We have to reimplement the model in TensorFlow, unless we have the code that produced the model.
+In our case, it is a pretty simple model that we can rebuild easily. First, we will implement the dense layer (which we will use later):</p>
+<span><div class="code-highlight" data-language="python"><pre class="language-python" data-language="python"><code class="language-python"><span class="token keyword">def</span> <span class="token function">dense</span><span class="token punctuation">(</span>params<span class="token punctuation">)</span><span class="token punctuation">:</span>
+    X<span class="token punctuation">,</span> W<span class="token punctuation">,</span> b <span class="token operator">=</span> params
+    <span class="token keyword">return</span> tf<span class="token punctuation">.</span>add<span class="token punctuation">(</span>tf<span class="token punctuation">.</span>matmul<span class="token punctuation">(</span>X<span class="token punctuation">,</span> W<span class="token punctuation">)</span><span class="token punctuation">,</span> b<span class="token punctuation">)</span></code></pre></div></span>
+<blockquote>
+<p>We use only one parameter to be able to use this function in a <span><code class="language-text">Lambda</code></span> layer</p>
+</blockquote>
+<p>And now we build our model (using TF 2):</p>
+<span><div class="code-highlight" data-language="python"><pre class="language-python" data-language="python"><code class="language-python"><span class="token keyword">import</span> tensorflow <span class="token keyword">as</span> tf
+<span class="token keyword">from</span> tensorflow<span class="token punctuation">.</span>python<span class="token punctuation">.</span>keras<span class="token punctuation">.</span>layers <span class="token keyword">import</span> Lambda
+
+<span class="token comment"># ...</span>
+
+<span class="token keyword">def</span> <span class="token function">network</span><span class="token punctuation">(</span>input_shape<span class="token punctuation">,</span> interpreter<span class="token punctuation">)</span><span class="token punctuation">:</span>
+    W1 <span class="token operator">=</span> get_variable<span class="token punctuation">(</span>interpreter<span class="token punctuation">,</span> <span class="token number">2</span><span class="token punctuation">,</span> transposed<span class="token operator">=</span><span class="token boolean">True</span><span class="token punctuation">)</span>
+    b1 <span class="token operator">=</span> get_variable<span class="token punctuation">(</span>interpreter<span class="token punctuation">,</span> <span class="token number">3</span><span class="token punctuation">)</span>
+    W2 <span class="token operator">=</span> get_variable<span class="token punctuation">(</span>interpreter<span class="token punctuation">,</span> <span class="token number">6</span><span class="token punctuation">,</span> transposed<span class="token operator">=</span><span class="token boolean">True</span><span class="token punctuation">)</span>
+    b2 <span class="token operator">=</span> get_variable<span class="token punctuation">(</span>interpreter<span class="token punctuation">,</span> <span class="token number">7</span><span class="token punctuation">)</span>
+
+    inputs <span class="token operator">=</span> tf<span class="token punctuation">.</span>keras<span class="token punctuation">.</span>layers<span class="token punctuation">.</span>Input<span class="token punctuation">(</span>shape<span class="token operator">=</span>input_shape<span class="token punctuation">)</span>
+
+    <span class="token comment"># Flatten layer</span>
+    x_0 <span class="token operator">=</span> tf<span class="token punctuation">.</span>keras<span class="token punctuation">.</span>layers<span class="token punctuation">.</span>Flatten<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">(</span>inputs<span class="token punctuation">)</span>
+
+    <span class="token comment"># First fully connected with relu</span>
+    x_1 <span class="token operator">=</span> Lambda<span class="token punctuation">(</span>dense<span class="token punctuation">)</span><span class="token punctuation">(</span><span class="token punctuation">(</span>x_0<span class="token punctuation">,</span> W1<span class="token punctuation">,</span> b1<span class="token punctuation">)</span><span class="token punctuation">)</span>
+    x_1relu <span class="token operator">=</span> tf<span class="token punctuation">.</span>nn<span class="token punctuation">.</span>relu<span class="token punctuation">(</span>x_1<span class="token punctuation">)</span>
+
+    <span class="token comment"># second fully connected</span>
+    x_2 <span class="token operator">=</span> Lambda<span class="token punctuation">(</span>dense<span class="token punctuation">)</span><span class="token punctuation">(</span><span class="token punctuation">(</span>x_1relu<span class="token punctuation">,</span> W2<span class="token punctuation">,</span> b2<span class="token punctuation">)</span><span class="token punctuation">)</span>
+
+    <span class="token comment"># Finally the softmax</span>
+    x_softmax <span class="token operator">=</span> tf<span class="token punctuation">.</span>keras<span class="token punctuation">.</span>activations<span class="token punctuation">.</span>softmax<span class="token punctuation">(</span>x_2<span class="token punctuation">)</span>
+
+    <span class="token keyword">return</span> tf<span class="token punctuation">.</span>keras<span class="token punctuation">.</span>models<span class="token punctuation">.</span>Model<span class="token punctuation">(</span>inputs<span class="token operator">=</span>inputs<span class="token punctuation">,</span> outputs<span class="token operator">=</span><span class="token punctuation">[</span>x_softmax<span class="token punctuation">]</span><span class="token punctuation">)</span></code></pre></div></span>
+<h3 id="testing-and-debugging-your-model">Testing and Debugging your Model</h3>
+<p>At this point we should test that our model gives the same output as the original so that we know our implementation is correct.
+Constructing the same model as the one used in the TF Lite model is not always straightforward.</p>
+<p>Sometimes you won&#39;t know why your implementation does not return the same result as the original, and it is not easy to debug errors in this context.
+For such cases it is helpful to check layer by layer that your model gives the same output as the original to know where to search for the bug.
+Getting intermediate outputs from a TensorFlow model is not difficult: you only need to return said node as an output of the model.</p>
+<p>The same does not happen to a TFLite model. You can&#39;t get intermediate outputs using the <span><code class="language-text">get_tensor()</code></span> method.
+What I used to debug the model and get to a working version is this <a href="https://github.com/raymond-li/tflite_tensor_outputter">tflite_tensor_outputter</a> script.
+This script will generate a folder with details and outputs of each intermediate node in the graph by changing the output node index in the graph.
+You can use it like this:</p>
+<span><div class="code-highlight" data-language="bash"><pre class="language-bash" data-language="bash"><code class="language-bash">python tflite_tensor_outputter.py <span class="token parameter variable">--image</span> input/dog.jpg <span class="token punctuation">\</span>
+    <span class="token parameter variable">--model_file</span> mnist.tflite <span class="token punctuation">\</span>
+    <span class="token parameter variable">--label_file</span> labels.txt <span class="token punctuation">\</span>
+    <span class="token parameter variable">--output_dir</span> output/</code></pre></div></span>
+<h2 id="converting-the-model">Converting the model</h2>
+<p>We now have the model but we still need to convert it.
+We will use <span><code class="language-text">tfcoreml</code></span> to convert our TensorFlow model.
+The <span><code class="language-text">convert</code></span> method supports a path to a <span><code class="language-text">SavedModel</code></span> but only when specifying a minimum iOS target of &#39;13&#39;.
+Nevertheless, it did not work for me using SavedModel so I had to freeze the TensorFlow graph and then convert it.</p>
+<h3 id="freeze-the-graph">Freeze the graph</h3>
+<p>To freeze a model you can use the <span><code class="language-text">freeze_graph</code></span> utility from <span><code class="language-text">tensorflow.python.tools</code></span>, but again it did not work for this model.
+You can also freeze the model using the following snippet:</p>
+<span><div class="code-highlight" data-language="python"><pre class="language-python" data-language="python"><code class="language-python"><span class="token comment"># imports ...</span>
+FROZEN_MODEL_FILE <span class="token operator">=</span> <span class="token string">&#39;frozen_model.pb&#39;</span>
+
+<span class="token comment"># Taken from https://stackoverflow.com/a/52823701/4708657</span>
+<span class="token keyword">def</span> <span class="token function">freeze_graph</span><span class="token punctuation">(</span>graph<span class="token punctuation">,</span> session<span class="token punctuation">,</span> output<span class="token punctuation">)</span><span class="token punctuation">:</span>
+    <span class="token keyword">with</span> graph<span class="token punctuation">.</span>as_default<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
+        graphdef_inf <span class="token operator">=</span> tf<span class="token punctuation">.</span>graph_util<span class="token punctuation">.</span>remove_training_nodes<span class="token punctuation">(</span>graph<span class="token punctuation">.</span>as_graph_def<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+        graphdef_frozen <span class="token operator">=</span> tf<span class="token punctuation">.</span>graph_util<span class="token punctuation">.</span>convert_variables_to_constants<span class="token punctuation">(</span>session<span class="token punctuation">,</span> graphdef_inf<span class="token punctuation">,</span> output<span class="token punctuation">)</span>
+        graph_io<span class="token punctuation">.</span>write_graph<span class="token punctuation">(</span>graphdef_frozen<span class="token punctuation">,</span> <span class="token string">&quot;.&quot;</span><span class="token punctuation">,</span> FROZEN_MODEL_FILE<span class="token punctuation">,</span> as_text<span class="token operator">=</span><span class="token boolean">False</span><span class="token punctuation">)</span>
+
+
+<span class="token comment"># Load TFLite model and allocate tensors.</span>
+interpreter <span class="token operator">=</span> tf<span class="token punctuation">.</span>lite<span class="token punctuation">.</span>Interpreter<span class="token punctuation">(</span>model_path<span class="token operator">=</span><span class="token string">&quot;mnist.tflite&quot;</span><span class="token punctuation">)</span>
+interpreter<span class="token punctuation">.</span>allocate_tensors<span class="token punctuation">(</span><span class="token punctuation">)</span>
+
+input_shape <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token number">28</span><span class="token punctuation">,</span> <span class="token number">28</span><span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">]</span>
+model <span class="token operator">=</span> network<span class="token punctuation">(</span>input_shape<span class="token punctuation">,</span> interpreter<span class="token punctuation">)</span>
+
+<span class="token comment"># FREEZE GRAPH</span>
+session <span class="token operator">=</span> tf<span class="token punctuation">.</span>keras<span class="token punctuation">.</span>backend<span class="token punctuation">.</span>get_session<span class="token punctuation">(</span><span class="token punctuation">)</span>
+
+INPUT_NODE <span class="token operator">=</span> model<span class="token punctuation">.</span>inputs<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">.</span>op<span class="token punctuation">.</span>name
+OUTPUT_NODE <span class="token operator">=</span> model<span class="token punctuation">.</span>outputs<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">.</span>op<span class="token punctuation">.</span>name
+freeze_graph<span class="token punctuation">(</span>session<span class="token punctuation">.</span>graph<span class="token punctuation">,</span> session<span class="token punctuation">,</span> <span class="token punctuation">[</span>out<span class="token punctuation">.</span>op<span class="token punctuation">.</span>name <span class="token keyword">for</span> out <span class="token keyword">in</span> model<span class="token punctuation">.</span>outputs<span class="token punctuation">]</span><span class="token punctuation">)</span></code></pre></div></span>
+<p>The output is a frozen <span><code class="language-text">.pb</code></span> file which we can finally convert to CoreML</p>
+<blockquote>
+<p>Note: Both the snippet above and the one below must be run on TensorFlow 1.x (1.14 in my case)</p>
+</blockquote>
+<span><div class="code-highlight" data-language="python"><pre class="language-python" data-language="python"><code class="language-python">tf_converter<span class="token punctuation">.</span>convert<span class="token punctuation">(</span>tf_model_path<span class="token operator">=</span>FROZEN_MODEL_FILE<span class="token punctuation">,</span>
+                     mlmodel_path<span class="token operator">=</span>OUTPUT_FILE<span class="token punctuation">,</span>
+                     output_feature_names<span class="token operator">=</span><span class="token punctuation">[</span><span class="token string">&#39;Softmax:0&#39;</span><span class="token punctuation">]</span><span class="token punctuation">,</span>
+                     input_name_shape_dict<span class="token operator">=</span><span class="token punctuation">{</span><span class="token string">&#39;input_1:0&#39;</span><span class="token punctuation">:</span> <span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">28</span><span class="token punctuation">,</span> <span class="token number">28</span><span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">}</span><span class="token punctuation">,</span>
+                     image_input_names<span class="token operator">=</span><span class="token punctuation">[</span><span class="token string">&#39;input_1:0&#39;</span><span class="token punctuation">]</span><span class="token punctuation">,</span>
+                     image_scale<span class="token operator">=</span><span class="token number">1.0</span><span class="token operator">/</span><span class="token number">255.0</span><span class="token punctuation">,</span>
+                     class_labels<span class="token operator">=</span><span class="token punctuation">[</span><span class="token string">&quot;0&quot;</span><span class="token punctuation">,</span> <span class="token string">&quot;1&quot;</span><span class="token punctuation">,</span> <span class="token string">&quot;2&quot;</span><span class="token punctuation">,</span> <span class="token string">&quot;3&quot;</span><span class="token punctuation">,</span> <span class="token string">&quot;4&quot;</span><span class="token punctuation">,</span> <span class="token string">&quot;5&quot;</span><span class="token punctuation">,</span> <span class="token string">&quot;6&quot;</span><span class="token punctuation">,</span> <span class="token string">&quot;7&quot;</span><span class="token punctuation">,</span> <span class="token string">&quot;8&quot;</span><span class="token punctuation">,</span> <span class="token string">&quot;9&quot;</span><span class="token punctuation">]</span><span class="token punctuation">)</span></code></pre></div></span>
+<p>And that is it. We have a CoreML model!</p>
+<img src="/images/tflite_coreml/model_on_ios.gif"/>
+<br/>
+<h2 id="conclusion">Conclusion</h2>
+<p>Some takeaways from this post:</p>
+<ul>
+<li>TensorFlow Lite models have to be converted manually to CoreML but that can be done, specially when you already have some code that produces the same architecture.</li>
+<li>Converting a model to CoreML can be tricky in some cases.</li>
+<li>Sometimes you must use a different layer or function for the conversion to be successful.</li>
+</ul>
+<p>The source code used in this tutorial can be found in <a href="https://gist.github.com/mats-claassen/f76520dd32108b65d57113fd7ac99bf9">this GitHub gist</a>.</p>
+<p>Need help with ML tasks like converting models to CoreML? We&#39;re glad to help!
+Get in touch at <a href="mailto:hi@xmartlabs.com"><a href="mailto:hi@xmartlabs.com">hi@xmartlabs.com</a></a></p>
+<p>We have also written other posts about ML topics.
+Is your CoreML or TFlite model not fast enough on iOS? Check out our post about <a href="https://blog.xmartlabs.com/2021/08/30/Bender-the-best">speeding up performance on iOS with MPS and Bender</a>.</p>
+<p>And if you&#39;d like to know <span><code class="language-text">5 Practical Ways to Speed Up your Deep Learning Model</code></span> check it out <a href="/2020/06/01/how-to-speed-up-inference-in-your-deep-learning-model/">here</a>.</p> 

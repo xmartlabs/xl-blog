@@ -1,0 +1,333 @@
+ <p>Some days ago, we released the introduction to create custom rows for <a href="https://github.com/xmartlabs/Eureka">Eureka</a>, now we are going to go deeper and see how to build a complex row.</p>
+<blockquote>
+<p>Note: for those who are starting, I strongly recommend reading <a href="https://blog.xmartlabs.com/2016/09/06/Eureka-custom-row-tutorial/">Creating your own rows for Eureka</a> first.</p>
+</blockquote>
+<p>The row we are going to build will allow the user to create strong passwords. The developer will be in charge of defining (and implementing) the concept of <strong>password strength</strong> and also the reactive view to provide feedback of it.</p>
+<h2 id="motivation">Motivation</h2>
+<p>We will support the following features:</p>
+<ul>
+<li>Show password strength while typing.</li>
+<li>Provide hints in order to help the user create a valid password.</li>
+<li>Provide a button to hide/show the password.</li>
+</ul>
+<p><strong>Final product</strong></p>
+<p>The result will be a row (as you can see below) which has a strength function and a way to let the user know how strong his password is.</p>
+<img src="/images/eureka-custom-row-2/GenericPasswordRow.gif" style="margin:0 auto;display:block"/>
+<h2 id="architecture">Architecture</h2>
+<p>Before start coding, since we want our row to be as reusable as we can, we should think about the architecture that will empower this…</p>
+<img src="/images/eureka-custom-row-2/GenericPasswordRow-Diagram.svg" style="margin:0 auto;display:block"/>
+<p>As you may have learned from our <a href="https://blog.xmartlabs.com/2016/09/06/Eureka-custom-row-tutorial/">previous post</a>, any custom row in Eureka will have a <span><code class="language-text">Row</code></span> and <span><code class="language-text">Cell</code></span> as primary components, in this case, <span><code class="language-text">GenericPasswordRow</code></span> and <span><code class="language-text">GenericPasswordCell</code></span> will map with those respectively. For the customizable UI side, we will be adding a custom nib file (which you can replace or use our default one). On the other hand, we will have a <span><code class="language-text">PasswordValidator</code></span> component that will be responsible for the password validation process, here is where you (as a programmer) could be as creative as you want.</p>
+<p>As any custom row of Eureka we will have our <span><code class="language-text">Row</code></span> and <span><code class="language-text">Cell</code></span> as primary components, in this example, <span><code class="language-text">GenericPasswordRow</code></span> and <span><code class="language-text">GenericPasswordCell</code></span> respectively. Then, we are adding a custom nib file as the <span><code class="language-text">Design</code></span> component and the <span><code class="language-text">PasswordValidator</code></span> component as the &quot;brain&quot; of the password validation process.</p>
+<br/>
+<h3 id="passwordvalidator">PasswordValidator</h3>
+<p>Let&#39;s take a look over the first component of this row:</p>
+<span><div class="code-highlight" data-language="swift"><pre class="language-swift" data-language="swift"><code class="language-swift"><span class="token keyword">protocol</span> <span class="token class-name">PasswordValidator</span> <span class="token punctuation">{</span>
+
+    <span class="token keyword">var</span> maxStrength<span class="token punctuation">:</span> <span class="token class-name">Double</span> <span class="token punctuation">{</span> <span class="token keyword">get</span> <span class="token punctuation">}</span>
+    <span class="token keyword">var</span> strengthLevels<span class="token punctuation">:</span> <span class="token punctuation">[</span><span class="token class-name">Double</span><span class="token punctuation">:</span> <span class="token class-name">UIColor</span><span class="token punctuation">]</span> <span class="token punctuation">{</span> <span class="token keyword">get</span> <span class="token punctuation">}</span>
+    <span class="token keyword">func</span> <span class="token function-definition function">strengthForPassword</span><span class="token punctuation">(</span>password<span class="token punctuation">:</span> <span class="token class-name">String</span><span class="token punctuation">)</span> <span class="token operator">-&gt;</span> <span class="token class-name">Double</span>
+    <span class="token keyword">func</span> <span class="token function-definition function">hintForPassword</span><span class="token punctuation">(</span>password<span class="token punctuation">:</span> <span class="token class-name">String</span><span class="token punctuation">)</span> <span class="token operator">-&gt;</span> <span class="token class-name">String</span><span class="token operator">?</span>
+    <span class="token keyword">func</span> <span class="token function-definition function">isPasswordValid</span><span class="token punctuation">(</span>password<span class="token punctuation">:</span> <span class="token class-name">String</span><span class="token punctuation">)</span> <span class="token operator">-&gt;</span> <span class="token class-name">Bool</span>
+
+<span class="token punctuation">}</span></code></pre></div></span>
+<p>This protocol should specify all what&#39;s needed to determine the UI state for any given password. Most of this methods are self-explanatory so we won&#39;t go further there but don&#39;t worry, we&#39;ll cover them through the following example. So, let&#39;s get started with the actual implementation!</p>
+<p>Let&#39;s create our custom password validator called <span><code class="language-text">MyPasswordValidator</code></span> with the following rules:</p>
+<ul>
+<li>At least a lowercase letter</li>
+<li>At least a number</li>
+<li>At least an uppercase letter</li>
+<li>At least 6 characters.</li>
+</ul>
+<p>Pretty basic, don&#39;t you think? We could check if you are using part of your email in your password but maybe some other time... ¯\<em>(ツ)</em>/¯</p>
+<p>First of all, we need to somehow model a certain rule and since Swift&#39;s structs are awesome (don&#39;t you like getting a memberwise initializer for free?):</p>
+<span><div class="code-highlight" data-language="swift"><pre class="language-swift" data-language="swift"><code class="language-swift"><span class="token keyword">public</span> <span class="token keyword">struct</span> <span class="token class-name">PasswordRule</span> <span class="token punctuation">{</span>
+
+    <span class="token keyword">let</span> hint<span class="token punctuation">:</span> <span class="token class-name">String</span>
+    <span class="token keyword">let</span> test<span class="token punctuation">:</span> <span class="token punctuation">(</span><span class="token class-name">String</span><span class="token punctuation">)</span> <span class="token operator">-&gt;</span> <span class="token class-name">Bool</span>
+
+<span class="token punctuation">}</span></code></pre></div></span>
+<p>It will hold a <span><code class="language-text">test</code></span> closure to specify whether or not the password satisfies that rule and an associated <span><code class="language-text">hint</code></span> in order to guide the user.
+Then, we could implement our validator like this:</p>
+<span><div class="code-highlight" data-language="swift"><pre class="language-swift" data-language="swift"><code class="language-swift"><span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">MyPasswordValidator</span><span class="token punctuation">:</span> <span class="token class-name">PasswordValidator</span> <span class="token punctuation">{</span>
+
+    <span class="token comment">// For any given password, the strength will be in the [0.0, 4.0] range.</span>
+    <span class="token keyword">public</span> <span class="token keyword">let</span> maxStrength <span class="token operator">=</span> <span class="token number">4.0</span>
+
+    <span class="token comment">// This property should hold key points of strength an its associated color.</span>
+    <span class="token comment">// It should be read as follows:</span>
+    <span class="token comment">//    - &quot;From 0.0 to &lt;1.0 strength values&quot; -&gt; color A</span>
+    <span class="token comment">//    - &quot;From 1.0 to &lt;2.0 strength values&quot; -&gt; color B</span>
+    <span class="token comment">//    - &quot;From 2.0 to &lt;3.0 strength values&quot; -&gt; color C</span>
+    <span class="token comment">//    - &quot;From 3.0 to  4.0 strength values&quot; -&gt; color D</span>
+    <span class="token keyword">public</span> <span class="token keyword">let</span> strengthLevels<span class="token punctuation">:</span> <span class="token punctuation">[</span><span class="token class-name">Double</span><span class="token punctuation">:</span> <span class="token class-name">UIColor</span><span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token punctuation">[</span>
+        <span class="token number">0</span><span class="token punctuation">:</span> <span class="token class-name">UIColor</span><span class="token punctuation">(</span>red<span class="token punctuation">:</span> <span class="token number">244</span> <span class="token operator">/</span> <span class="token number">255</span><span class="token punctuation">,</span> green<span class="token punctuation">:</span> <span class="token number">67</span> <span class="token operator">/</span> <span class="token number">255</span><span class="token punctuation">,</span> blue<span class="token punctuation">:</span> <span class="token number">54</span> <span class="token operator">/</span> <span class="token number">255</span><span class="token punctuation">,</span> alpha<span class="token punctuation">:</span> <span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token comment">// A</span>
+        <span class="token number">1</span><span class="token punctuation">:</span> <span class="token class-name">UIColor</span><span class="token punctuation">(</span>red<span class="token punctuation">:</span> <span class="token number">255</span> <span class="token operator">/</span> <span class="token number">255</span><span class="token punctuation">,</span> green<span class="token punctuation">:</span> <span class="token number">193</span> <span class="token operator">/</span> <span class="token number">255</span><span class="token punctuation">,</span> blue<span class="token punctuation">:</span> <span class="token number">7</span> <span class="token operator">/</span> <span class="token number">255</span><span class="token punctuation">,</span> alpha<span class="token punctuation">:</span> <span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token comment">// B</span>
+        <span class="token number">2</span><span class="token punctuation">:</span> <span class="token class-name">UIColor</span><span class="token punctuation">(</span>red<span class="token punctuation">:</span> <span class="token number">3</span> <span class="token operator">/</span> <span class="token number">255</span><span class="token punctuation">,</span> green<span class="token punctuation">:</span> <span class="token number">169</span> <span class="token operator">/</span> <span class="token number">255</span><span class="token punctuation">,</span> blue<span class="token punctuation">:</span> <span class="token number">244</span> <span class="token operator">/</span> <span class="token number">255</span><span class="token punctuation">,</span> alpha<span class="token punctuation">:</span> <span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token comment">// C</span>
+        <span class="token number">3</span><span class="token punctuation">:</span> <span class="token class-name">UIColor</span><span class="token punctuation">(</span>red<span class="token punctuation">:</span> <span class="token number">139</span> <span class="token operator">/</span> <span class="token number">255</span><span class="token punctuation">,</span> green<span class="token punctuation">:</span> <span class="token number">195</span> <span class="token operator">/</span> <span class="token number">255</span><span class="token punctuation">,</span> blue<span class="token punctuation">:</span> <span class="token number">74</span> <span class="token operator">/</span> <span class="token number">255</span><span class="token punctuation">,</span> alpha<span class="token punctuation">:</span> <span class="token number">1</span><span class="token punctuation">)</span> <span class="token comment">// D</span>
+    <span class="token punctuation">]</span>
+
+    <span class="token comment">// Our rules</span>
+    <span class="token keyword">let</span> rules<span class="token punctuation">:</span> <span class="token punctuation">[</span><span class="token class-name">PasswordRule</span><span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token punctuation">[</span>
+        <span class="token class-name">PasswordRule</span><span class="token punctuation">(</span>hint<span class="token punctuation">:</span> <span class="token string-literal"><span class="token string">&quot;Please enter a lowercase letter&quot;</span></span><span class="token punctuation">)</span> <span class="token punctuation">{</span> <span class="token short-argument">$0</span><span class="token punctuation">.</span><span class="token function">satisfiesRegexp</span><span class="token punctuation">(</span><span class="token string-literal"><span class="token string">&quot;[a-z]&quot;</span></span><span class="token punctuation">)</span> <span class="token punctuation">}</span><span class="token punctuation">,</span>
+        <span class="token class-name">PasswordRule</span><span class="token punctuation">(</span>hint<span class="token punctuation">:</span> <span class="token string-literal"><span class="token string">&quot;Please enter a number&quot;</span></span><span class="token punctuation">)</span> <span class="token punctuation">{</span> <span class="token short-argument">$0</span><span class="token punctuation">.</span><span class="token function">satisfiesRegexp</span><span class="token punctuation">(</span><span class="token string-literal"><span class="token string">&quot;[0-9]&quot;</span></span><span class="token punctuation">)</span> <span class="token punctuation">}</span><span class="token punctuation">,</span>
+        <span class="token class-name">PasswordRule</span><span class="token punctuation">(</span>hint<span class="token punctuation">:</span> <span class="token string-literal"><span class="token string">&quot;Please enter an uppercase letter&quot;</span></span><span class="token punctuation">)</span> <span class="token punctuation">{</span> <span class="token short-argument">$0</span><span class="token punctuation">.</span><span class="token function">satisfiesRegexp</span><span class="token punctuation">(</span><span class="token string-literal"><span class="token string">&quot;[A-Z]&quot;</span></span><span class="token punctuation">)</span> <span class="token punctuation">}</span><span class="token punctuation">,</span>
+        <span class="token class-name">PasswordRule</span><span class="token punctuation">(</span>hint<span class="token punctuation">:</span> <span class="token string-literal"><span class="token string">&quot;At least 6 characters&quot;</span></span><span class="token punctuation">)</span> <span class="token punctuation">{</span> <span class="token short-argument">$0</span><span class="token punctuation">.</span>characters<span class="token punctuation">.</span>count <span class="token operator">&gt;</span> <span class="token number">5</span> <span class="token punctuation">}</span>
+    <span class="token punctuation">]</span>
+
+    <span class="token comment">// In this example, each passing rule sums 1 to the password strength</span>
+    <span class="token keyword">public</span> <span class="token keyword">func</span> <span class="token function-definition function">strengthForPassword</span><span class="token punctuation">(</span>password<span class="token punctuation">:</span> <span class="token class-name">String</span><span class="token punctuation">)</span> <span class="token operator">-&gt;</span> <span class="token class-name">Double</span> <span class="token punctuation">{</span>
+        <span class="token keyword">return</span> rules<span class="token punctuation">.</span><span class="token function">reduce</span><span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">)</span> <span class="token punctuation">{</span> <span class="token short-argument">$0</span> <span class="token operator">+</span> <span class="token punctuation">(</span><span class="token short-argument">$1</span><span class="token punctuation">.</span><span class="token function">test</span><span class="token punctuation">(</span>password<span class="token punctuation">)</span> <span class="token operator">?</span> <span class="token number">1</span> <span class="token punctuation">:</span> <span class="token number">0</span><span class="token punctuation">)</span> <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+
+    <span class="token comment">// Here, we return the first failing rule hint.</span>
+    <span class="token keyword">public</span> <span class="token keyword">func</span> <span class="token function-definition function">hintForPassword</span><span class="token punctuation">(</span>password<span class="token punctuation">:</span> <span class="token class-name">String</span><span class="token punctuation">)</span> <span class="token operator">-&gt;</span> <span class="token class-name">String</span><span class="token operator">?</span> <span class="token punctuation">{</span>
+        <span class="token keyword">return</span> rules<span class="token punctuation">.</span>filter <span class="token punctuation">{</span> <span class="token operator">!</span><span class="token short-argument">$0</span><span class="token punctuation">.</span><span class="token function">test</span><span class="token punctuation">(</span>password<span class="token punctuation">)</span> <span class="token punctuation">}</span><span class="token punctuation">.</span>map <span class="token punctuation">{</span> <span class="token short-argument">$0</span><span class="token punctuation">.</span>hint <span class="token punctuation">}</span><span class="token punctuation">.</span>first
+    <span class="token punctuation">}</span>
+
+    <span class="token comment">// Password will be valid only when reaching the `maxStrength` value</span>
+    <span class="token keyword">public</span> <span class="token keyword">func</span> <span class="token function-definition function">isPasswordValid</span><span class="token punctuation">(</span>password<span class="token punctuation">:</span> <span class="token class-name">String</span><span class="token punctuation">)</span> <span class="token operator">-&gt;</span> <span class="token class-name">Bool</span> <span class="token punctuation">{</span>
+        <span class="token keyword">return</span> <span class="token function">strengthForPassword</span><span class="token punctuation">(</span>password<span class="token punctuation">)</span> <span class="token operator">==</span> maxStrength
+    <span class="token punctuation">}</span>
+
+<span class="token punctuation">}</span></code></pre></div></span>
+<br/>
+<h3 id="genericpasswordrow">GenericPasswordRow</h3>
+<p>Our row will just hold a <span><code class="language-text">PasswordValidator</code></span> and a placeholder for our password textfield. Since the Rows in Eureka must be final classes, we always try to encapsulate all the logic in a another class (like <span><code class="language-text">_GenericPasswordRow</code></span>) and then create our <span><code class="language-text">final class</code></span>, which conforms to <span><code class="language-text">RowType</code></span>, by inheriting from there. This allow us to create another row by subclassing the <span><code class="language-text">_GenericPasswordRow</code></span> class.</p>
+<span><div class="code-highlight" data-language="swift"><pre class="language-swift" data-language="swift"><code class="language-swift"><span class="token keyword">public</span> <span class="token keyword">class</span> _GenericPasswordRow<span class="token punctuation">:</span> <span class="token class-name">Row</span><span class="token operator">&lt;</span><span class="token class-name">String</span><span class="token punctuation">,</span> <span class="token class-name">GenericPasswordCell</span><span class="token operator">&gt;</span> <span class="token punctuation">{</span>
+
+    <span class="token keyword">public</span> <span class="token keyword">var</span> passwordValidator<span class="token punctuation">:</span> <span class="token class-name">PasswordValidator</span> <span class="token operator">=</span> <span class="token class-name">DefaultPasswordValidator</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+    <span class="token keyword">public</span> <span class="token keyword">var</span> placeholder<span class="token punctuation">:</span> <span class="token class-name">String</span><span class="token operator">?</span> <span class="token operator">=</span> <span class="token string-literal"><span class="token string">&quot;Password&quot;</span></span>
+
+    <span class="token keyword">public</span> <span class="token keyword">required</span> <span class="token keyword">init</span><span class="token punctuation">(</span>tag<span class="token punctuation">:</span> <span class="token class-name">String</span><span class="token operator">?</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">super</span><span class="token punctuation">.</span><span class="token keyword">init</span><span class="token punctuation">(</span>tag<span class="token punctuation">:</span> tag<span class="token punctuation">)</span>
+        displayValueFor <span class="token operator">=</span> <span class="token nil constant">nil</span>
+        <span class="token comment">// The cellProvider is what we use to &quot;connect&quot; the nib file with our custom design</span>
+        <span class="token comment">// GenericPasswordCell must be the class of the UITableViewCell contained in the GenericPasswordCell.xib file</span>
+        cellProvider <span class="token operator">=</span> <span class="token class-name">CellProvider</span><span class="token operator">&lt;</span><span class="token class-name">GenericPasswordCell</span><span class="token operator">&gt;</span><span class="token punctuation">(</span>nibName<span class="token punctuation">:</span> <span class="token string-literal"><span class="token string">&quot;GenericPasswordCell&quot;</span></span><span class="token punctuation">)</span>
+    <span class="token punctuation">}</span>
+
+    <span class="token keyword">public</span> <span class="token keyword">func</span> <span class="token function-definition function">isPasswordValid</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">-&gt;</span> <span class="token class-name">Bool</span> <span class="token punctuation">{</span>
+        <span class="token keyword">return</span> value<span class="token punctuation">.</span>map <span class="token punctuation">{</span> passwordValidator<span class="token punctuation">.</span><span class="token function">isPasswordValid</span><span class="token punctuation">(</span><span class="token short-argument">$0</span><span class="token punctuation">)</span> <span class="token punctuation">}</span> <span class="token operator">??</span> <span class="token boolean">false</span>
+    <span class="token punctuation">}</span>
+
+<span class="token punctuation">}</span>
+
+<span class="token keyword">public</span> <span class="token keyword">final</span> <span class="token keyword">class</span> <span class="token class-name">GenericPasswordRow</span><span class="token punctuation">:</span> _GenericPasswordRow<span class="token punctuation">,</span> <span class="token class-name">RowType</span> <span class="token punctuation">{</span> <span class="token punctuation">}</span></code></pre></div></span>
+<br/>
+<h3 id="design">Design</h3>
+<p>As we mentioned earlier, we will also provide our custom design in <span><code class="language-text">GenericPasswordCell.xib</code></span>. Using IB we will create a UITableViewCell with the following views:</p>
+<ul>
+<li>textField: UITextField</li>
+<li>visibility button: UIButton</li>
+<li>password strength view: <strong>subclass</strong> of PasswordStrengthView</li>
+<li>hint label: UILabel</li>
+</ul>
+<img src="/images/eureka-custom-row-2/Nib-outlets.svg" style="margin:0 auto;display:block"/>
+<p>Thinking ahead a little bit, we need to design this cell having in mind that the <span><code class="language-text">hintLabel</code></span> will be toggling its hidden state depending on the return values of <span><code class="language-text">func hintForPassword(password: String) -&gt; String?</code></span> (whether being <span><code class="language-text">nil</code></span> or not) on the <span><code class="language-text">passwordValidator</code></span> instance of our <span><code class="language-text">GenericPasswordRow</code></span>.
+Again, trying to be as generic as possible, we introduce the <span><code class="language-text">PasswordStrengthView</code></span> here. The idea is that you can easily replace this strength view by subclassing this class:</p>
+<span><div class="code-highlight" data-language="swift"><pre class="language-swift" data-language="swift"><code class="language-swift"><span class="token keyword">class</span> <span class="token class-name">PasswordStrengthView</span><span class="token punctuation">:</span> <span class="token class-name">UIView</span> <span class="token punctuation">{</span>
+
+    <span class="token keyword">func</span> <span class="token function-definition function">setPasswordValidator</span><span class="token punctuation">(</span>validator<span class="token punctuation">:</span> <span class="token class-name">PasswordValidator</span><span class="token punctuation">)</span> <span class="token punctuation">{</span> <span class="token punctuation">}</span>
+    <span class="token keyword">func</span> <span class="token function-definition function">updateStrength</span><span class="token punctuation">(</span>password password<span class="token punctuation">:</span> <span class="token class-name">String</span><span class="token punctuation">,</span> animated<span class="token punctuation">:</span> <span class="token class-name">Bool</span> <span class="token operator">=</span> <span class="token boolean">true</span><span class="token punctuation">)</span> <span class="token punctuation">{</span> <span class="token punctuation">}</span>
+
+<span class="token punctuation">}</span></code></pre></div></span>
+<p>and implementing your desired behavior in those methods. In this implementation we&#39;ll be using the <a href="https://github.com/EurekaCommunity/GenericPasswordRow/blob/master/Sources/DefaultPasswordStrengthView.swift">DefaultPasswordStrengthView</a>. We are not going to explain the details of this implementation but basically, once the <span><code class="language-text">setPasswordValidator(...)</code></span> function gets called, we are adding subviews to generate the &quot;empty state&quot; drawing the strength ranges and their colors (since we know the <span><code class="language-text">validator</code></span> to access this information):</p>
+<img src="/images/eureka-custom-row-2/strength-view-empty.png" style="margin:0 auto;display:block"/>
+<p>and then, every time <span><code class="language-text">updateStrength(...)</code></span> function gets called (while the user is typing) we use the <span><code class="language-text">validator</code></span> to calculate the actual strength and then update the strength view.</p>
+<img src="/images/eureka-custom-row-2/strength-loading.gif" style="margin:0 auto;display:block"/>
+<h3 id="genericpasswordcell">GenericPasswordCell</h3>
+<p>Finally we need to create our cell class, and set it as the class of the <span><code class="language-text">UITableViewCell</code></span> in the <span><code class="language-text">GenericPasswordCell.xib</code></span> file.
+This is probably the biggest piece of code of this blog, so take it slow. <strong>Try to read carefully the code comments</strong> in order to follow
+the general idea and be able to have a better understanding of the implementation.</p>
+<span><div class="code-highlight" data-language="swift"><pre class="language-swift" data-language="swift"><code class="language-swift"><span class="token keyword">import</span> <span class="token class-name">Foundation</span>
+<span class="token keyword">import</span> <span class="token class-name">Eureka</span>
+
+<span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">GenericPasswordCell</span><span class="token punctuation">:</span> <span class="token class-name">Cell</span><span class="token operator">&lt;</span><span class="token class-name">String</span><span class="token operator">&gt;</span><span class="token punctuation">,</span> <span class="token class-name">CellType</span> <span class="token punctuation">{</span>
+
+    <span class="token comment">// Outlets to be connected with our nib file views.</span>
+    <span class="token attribute atrule">@IBOutlet</span> <span class="token keyword">weak</span> <span class="token keyword">var</span> textField<span class="token punctuation">:</span> <span class="token class-name">UITextField</span><span class="token operator">!</span>
+    <span class="token attribute atrule">@IBOutlet</span> <span class="token keyword">weak</span> <span class="token keyword">var</span> visibilityButton<span class="token punctuation">:</span> <span class="token class-name">UIButton</span><span class="token operator">?</span>
+    <span class="token attribute atrule">@IBOutlet</span> <span class="token keyword">weak</span> <span class="token keyword">var</span> passwordStrengthView<span class="token punctuation">:</span> <span class="token class-name">PasswordStrengthView</span><span class="token operator">?</span>
+    <span class="token attribute atrule">@IBOutlet</span> <span class="token keyword">weak</span> <span class="token keyword">var</span> hintLabel<span class="token punctuation">:</span> <span class="token class-name">UILabel</span><span class="token operator">?</span>
+
+    <span class="token comment">// Computed property in order to access to the properties of our Row</span>
+    <span class="token keyword">var</span> genericPasswordRow<span class="token punctuation">:</span> _GenericPasswordRow <span class="token punctuation">{</span>
+          <span class="token keyword">return</span> row <span class="token keyword">as</span><span class="token operator">!</span> _GenericPasswordRow
+    <span class="token punctuation">}</span>
+
+    <span class="token comment">// Tuple holding the images to be used on the visibilityButton</span>
+    <span class="token keyword">public</span> <span class="token keyword">var</span> visibilityImage<span class="token punctuation">:</span> <span class="token punctuation">(</span>on<span class="token punctuation">:</span> <span class="token class-name">UIImage</span><span class="token operator">?</span><span class="token punctuation">,</span> off<span class="token punctuation">:</span> <span class="token class-name">UIImage</span><span class="token operator">?</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">didSet</span> <span class="token punctuation">{</span>
+            <span class="token function">setVisibilityButtonImage</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+        <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+
+    <span class="token comment">// Since we will be updating the cell height depending on the hidden</span>
+    <span class="token comment">// state of the hintLabel, we need to have two height values available</span>
+    <span class="token comment">// and set the `height` closure of Eureka&#39;s cells with those.</span>
+    <span class="token keyword">public</span> <span class="token keyword">var</span> dynamicHeight <span class="token operator">=</span> <span class="token punctuation">(</span>collapsed<span class="token punctuation">:</span> <span class="token class-name">UITableViewAutomaticDimension</span><span class="token punctuation">,</span> expanded<span class="token punctuation">:</span> <span class="token class-name">UITableViewAutomaticDimension</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">didSet</span> <span class="token punctuation">{</span>
+            <span class="token keyword">let</span> value <span class="token operator">=</span> dynamicHeight
+            height <span class="token operator">=</span> <span class="token punctuation">{</span> <span class="token punctuation">[</span><span class="token keyword">weak</span> <span class="token keyword">self</span><span class="token punctuation">]</span> <span class="token keyword">in</span>
+                <span class="token keyword">self</span><span class="token operator">?</span><span class="token punctuation">.</span>hintLabel<span class="token operator">?</span><span class="token punctuation">.</span>hidden <span class="token operator">==</span> <span class="token boolean">true</span> <span class="token operator">?</span> value<span class="token punctuation">.</span>collapsed <span class="token punctuation">:</span> value<span class="token punctuation">.</span>expanded
+            <span class="token punctuation">}</span>
+        <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+
+    <span class="token comment">// Cell&#39;s constructor</span>
+    <span class="token keyword">public</span> <span class="token keyword">required</span> <span class="token keyword">init</span><span class="token punctuation">(</span>style<span class="token punctuation">:</span> <span class="token class-name">UITableViewCellStyle</span><span class="token punctuation">,</span> reuseIdentifier<span class="token punctuation">:</span> <span class="token class-name">String</span><span class="token operator">?</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">super</span><span class="token punctuation">.</span><span class="token keyword">init</span><span class="token punctuation">(</span>style<span class="token punctuation">:</span> style<span class="token punctuation">,</span> reuseIdentifier<span class="token punctuation">:</span> reuseIdentifier<span class="token punctuation">)</span>
+    <span class="token punctuation">}</span>
+
+    <span class="token comment">// MARK - Overrides</span>
+
+    <span class="token comment">// Here we will setup our cell&#39;s behavior and style.</span>
+    <span class="token keyword">public</span> <span class="token keyword">override</span> <span class="token keyword">func</span> <span class="token function-definition function">setup</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">super</span><span class="token punctuation">.</span><span class="token function">setup</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+
+        <span class="token comment">// custom dynamic height for the design at GenericPasswordCell.xib</span>
+        dynamicHeight <span class="token operator">=</span> <span class="token punctuation">(</span>collapsed<span class="token punctuation">:</span> <span class="token number">48</span><span class="token punctuation">,</span> expanded<span class="token punctuation">:</span> <span class="token number">64</span><span class="token punctuation">)</span>
+
+        <span class="token comment">// ....</span>
+
+        <span class="token comment">// set the validator to the strength view in order to</span>
+        <span class="token comment">// give it the chance to layout itself accordingly</span>
+        passwordStrengthView<span class="token operator">?</span><span class="token punctuation">.</span><span class="token function">setPasswordValidator</span><span class="token punctuation">(</span>genericPasswordRow<span class="token punctuation">.</span>passwordValidator<span class="token punctuation">)</span>
+    <span class="token punctuation">}</span>
+
+    <span class="token keyword">override</span> <span class="token keyword">public</span> <span class="token keyword">func</span> <span class="token function-definition function">update</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">super</span><span class="token punctuation">.</span><span class="token function">update</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+
+        <span class="token comment">// in this override we need to map our row value</span>
+        <span class="token comment">// to the actual view that holds it.</span>
+        textField<span class="token punctuation">.</span>text <span class="token operator">=</span> genericPasswordRow<span class="token punctuation">.</span>value
+        textField<span class="token punctuation">.</span>placeholder <span class="token operator">=</span> genericPasswordRow<span class="token punctuation">.</span>placeholder
+    <span class="token punctuation">}</span>
+
+    <span class="token comment">// MARK - Callbacks</span>
+
+    <span class="token keyword">public</span> <span class="token keyword">func</span> <span class="token function-definition function">togglePasswordVisibility</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        textField<span class="token punctuation">.</span>secureTextEntry <span class="token operator">=</span> <span class="token operator">!</span>textField<span class="token punctuation">.</span>secureTextEntry
+        <span class="token function">setVisibilityButtonImage</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+
+        <span class="token comment">// workaround to update cursor position</span>
+        <span class="token comment">// see http://stackoverflow.com/questions/14220187/uitextfield-has-trailing-whitespace-after-securetextentry-toggle</span>
+        <span class="token keyword">let</span> tmpString <span class="token operator">=</span> textField<span class="token punctuation">.</span>text
+        textField<span class="token punctuation">.</span>text <span class="token operator">=</span> <span class="token nil constant">nil</span>
+        textField<span class="token punctuation">.</span>text <span class="token operator">=</span> tmpString
+    <span class="token punctuation">}</span>
+
+    <span class="token keyword">public</span> <span class="token keyword">func</span> <span class="token function-definition function">textFieldDidChange</span><span class="token punctuation">(</span>textField<span class="token punctuation">:</span> <span class="token class-name">UITextField</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+
+        <span class="token comment">// every time the textfield changes we</span>
+        <span class="token comment">// need to update our row value.</span>
+        genericPasswordRow<span class="token punctuation">.</span>value <span class="token operator">=</span> textField<span class="token punctuation">.</span>text
+
+        <span class="token comment">// update strength</span>
+        <span class="token function">updatePasswordStrengthIfNeeded</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+
+        <span class="token function">formViewController</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">?</span><span class="token punctuation">.</span>tableView<span class="token operator">?</span><span class="token punctuation">.</span><span class="token function">beginUpdates</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+        <span class="token comment">// this updates the height of the cell.</span>
+        <span class="token comment">// In fact, it calls the &#39;height&#39; closure.</span>
+        <span class="token function">formViewController</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">?</span><span class="token punctuation">.</span>tableView<span class="token operator">?</span><span class="token punctuation">.</span><span class="token function">endUpdates</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+
+        <span class="token comment">// with a little delay in order to wait for the</span>
+        <span class="token comment">// height change to take place, we animate the alpha</span>
+        <span class="token comment">// of the hintLabel to appear smoothly.</span>
+        <span class="token class-name">UIView</span><span class="token punctuation">.</span><span class="token function">animateWithDuration</span><span class="token punctuation">(</span><span class="token number">0.3</span><span class="token punctuation">,</span> delay<span class="token punctuation">:</span> <span class="token number">0.2</span><span class="token punctuation">,</span> options<span class="token punctuation">:</span> <span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">,</span> animations<span class="token punctuation">:</span> <span class="token punctuation">{</span> <span class="token punctuation">[</span><span class="token keyword">weak</span> <span class="token keyword">self</span><span class="token punctuation">]</span> <span class="token keyword">in</span>
+            <span class="token keyword">guard</span> <span class="token keyword">let</span> me <span class="token operator">=</span> <span class="token keyword">self</span> <span class="token keyword">else</span> <span class="token punctuation">{</span> <span class="token keyword">return</span> <span class="token punctuation">}</span>
+            me<span class="token punctuation">.</span>hintLabel<span class="token operator">?</span><span class="token punctuation">.</span>alpha <span class="token operator">=</span> me<span class="token punctuation">.</span>hintLabel<span class="token operator">?</span><span class="token punctuation">.</span>hidden <span class="token operator">==</span> <span class="token boolean">true</span> <span class="token operator">?</span> <span class="token number">0</span> <span class="token punctuation">:</span> <span class="token number">1</span>
+        <span class="token punctuation">}</span><span class="token punctuation">,</span> completion<span class="token punctuation">:</span> <span class="token nil constant">nil</span><span class="token punctuation">)</span>
+
+        <span class="token comment">// just in case that the cell gets partially covered</span>
+        <span class="token comment">// by the keyboard when it &#39;expands&#39; we need to perform</span>
+        <span class="token comment">// the minimum scroll movement to make it full visible.</span>
+        <span class="token keyword">if</span> <span class="token keyword">let</span> indexPath <span class="token operator">=</span> row<span class="token operator">?</span><span class="token punctuation">.</span><span class="token function">indexPath</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            <span class="token class-name">UIView</span><span class="token punctuation">.</span><span class="token function">animateWithDuration</span><span class="token punctuation">(</span><span class="token number">0.3</span><span class="token punctuation">,</span> delay<span class="token punctuation">:</span> <span class="token number">0</span><span class="token punctuation">,</span> options<span class="token punctuation">:</span> <span class="token punctuation">.</span><span class="token class-name">AllowUserInteraction</span><span class="token punctuation">,</span> animations<span class="token punctuation">:</span> <span class="token punctuation">{</span> <span class="token punctuation">[</span><span class="token keyword">weak</span> <span class="token keyword">self</span><span class="token punctuation">]</span> <span class="token keyword">in</span>
+                <span class="token keyword">self</span><span class="token operator">?</span><span class="token punctuation">.</span><span class="token function">formViewController</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">?</span><span class="token punctuation">.</span>tableView<span class="token operator">?</span><span class="token punctuation">.</span><span class="token function">scrollToRowAtIndexPath</span><span class="token punctuation">(</span>indexPath<span class="token punctuation">,</span> atScrollPosition<span class="token punctuation">:</span> <span class="token punctuation">.</span><span class="token class-name">None</span><span class="token punctuation">,</span> animated<span class="token punctuation">:</span> <span class="token boolean">false</span><span class="token punctuation">)</span>
+            <span class="token punctuation">}</span><span class="token punctuation">,</span> completion<span class="token punctuation">:</span> <span class="token nil constant">nil</span><span class="token punctuation">)</span>
+        <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+
+    <span class="token comment">// MARK - Helpers</span>
+
+    <span class="token keyword">private</span> <span class="token keyword">func</span> <span class="token function-definition function">setVisibilityButtonImage</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        visibilityButton<span class="token operator">?</span><span class="token punctuation">.</span><span class="token function">setImage</span><span class="token punctuation">(</span>textField<span class="token punctuation">.</span>secureTextEntry <span class="token operator">?</span> visibilityImage<span class="token punctuation">.</span>on <span class="token punctuation">:</span> visibilityImage<span class="token punctuation">.</span>off<span class="token punctuation">,</span> forState<span class="token punctuation">:</span> <span class="token punctuation">.</span><span class="token class-name">Normal</span><span class="token punctuation">)</span>
+    <span class="token punctuation">}</span>
+
+    <span class="token keyword">public</span> <span class="token keyword">func</span> <span class="token function-definition function">updatePasswordStrengthIfNeeded</span><span class="token punctuation">(</span>animated animated<span class="token punctuation">:</span> <span class="token class-name">Bool</span> <span class="token operator">=</span> <span class="token boolean">true</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">guard</span> <span class="token keyword">let</span> password <span class="token operator">=</span> textField<span class="token punctuation">.</span>text <span class="token keyword">else</span> <span class="token punctuation">{</span> <span class="token keyword">return</span> <span class="token punctuation">}</span>
+
+        <span class="token comment">// notify to the strength view the current password</span>
+        passwordStrengthView<span class="token operator">?</span><span class="token punctuation">.</span><span class="token function">updateStrength</span><span class="token punctuation">(</span>password<span class="token punctuation">:</span> password<span class="token punctuation">,</span> animated<span class="token punctuation">:</span> animated<span class="token punctuation">)</span>
+
+        <span class="token comment">// update hint label using the validator</span>
+        <span class="token keyword">let</span> hint <span class="token operator">=</span> genericPasswordRow<span class="token punctuation">.</span>passwordValidator<span class="token punctuation">.</span><span class="token function">hintForPassword</span><span class="token punctuation">(</span>password<span class="token punctuation">)</span>
+        hintLabel<span class="token operator">?</span><span class="token punctuation">.</span>text <span class="token operator">=</span> hint
+        hintLabel<span class="token operator">?</span><span class="token punctuation">.</span>hidden <span class="token operator">=</span> hint <span class="token operator">==</span> <span class="token nil constant">nil</span> <span class="token operator">||</span> password<span class="token punctuation">.</span>isEmpty
+    <span class="token punctuation">}</span>
+
+<span class="token punctuation">}</span>
+</code></pre></div></span>
+<br/>
+<h2 id="usage">Usage</h2>
+<p>You can use this row like any other in your <span><code class="language-text">FormViewController</code></span></p>
+<span><div class="code-highlight" data-language="swift"><pre class="language-swift" data-language="swift"><code class="language-swift"><span class="token keyword">import</span> <span class="token class-name">UIKit</span>
+<span class="token keyword">import</span> <span class="token class-name">GenericPasswordRow</span>
+<span class="token keyword">import</span> <span class="token class-name">Eureka</span>
+
+<span class="token keyword">class</span> <span class="token class-name">ViewController</span><span class="token punctuation">:</span> <span class="token class-name">FormViewController</span> <span class="token punctuation">{</span>
+
+    <span class="token keyword">override</span> <span class="token keyword">func</span> <span class="token function-definition function">viewDidLoad</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">super</span><span class="token punctuation">.</span><span class="token function">viewDidLoad</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+
+        form <span class="token operator">+++</span> <span class="token class-name">Section</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+            <span class="token operator">&lt;&lt;&lt;</span> <span class="token class-name">GenericPasswordRow</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+              <span class="token short-argument">$0</span><span class="token punctuation">.</span>passwordValidator <span class="token operator">=</span> <span class="token comment">// your custom validator</span>
+              <span class="token short-argument">$0</span><span class="token punctuation">.</span>placeholder <span class="token operator">=</span> <span class="token string-literal"><span class="token string">&quot;Create your password&quot;</span></span>
+            <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span></code></pre></div></span>
+<p>Again, you can see all the source files in <a href="https://github.com/EurekaCommunity/GenericPasswordRow/">GenericPasswordRow</a> github and run a simple example from there. The code is in Swift 2 syntax so it will break if you are on Swift 3.</p>
+<br/>
+<h2 id="customization">Customization</h2>
+<p>There are several ways to change this custom row. You should be able to reuse all of the implemented logic and just replace the design (with another nib file). Also, providing a custom implementation of the <span><code class="language-text">PasswordValidator</code></span> protocol should be pretty much straightforward (not being annoying to the user is the hard part). What follows should be used as a guideline to customize as much as you want or even extend the current functionality.</p>
+<ul>
+<li>
+<p>Providing a custom password validator.</p>
+<span><div class="code-highlight" data-language="swift"><pre class="language-swift" data-language="swift"><code class="language-swift">form <span class="token operator">+++</span> <span class="token class-name">Section</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+    <span class="token operator">&lt;&lt;&lt;</span> <span class="token class-name">GenericPasswordRow</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+      <span class="token short-argument">$0</span><span class="token punctuation">.</span>passwordValidator <span class="token operator">=</span> <span class="token comment">// your custom validator</span>
+    <span class="token punctuation">}</span></code></pre></div></span>
+</li>
+<li>
+<p>Creating another nib file to provide a different design component and connecting outlets to the <span><code class="language-text">GenericPasswordCell</code></span> class. This is a very important feature, you can literally change the <strong>entire design</strong> of this row having the same functionality (for free!). Check <a href="https://github.com/EurekaCommunity/GenericPasswordRow/blob/master/README.md#creating-custom-nib-file">this instructions</a> to get it done.</p>
+<span><div class="code-highlight" data-language="swift"><pre class="language-swift" data-language="swift"><code class="language-swift"><span class="token class-name">GenericPasswordRow</span><span class="token punctuation">.</span>defaultRowInitializer <span class="token operator">=</span> <span class="token punctuation">{</span>
+    <span class="token short-argument">$0</span><span class="token punctuation">.</span>cellProvider <span class="token operator">=</span> <span class="token class-name">CellProvider</span><span class="token operator">&lt;</span><span class="token class-name">GenericPasswordCell</span><span class="token operator">&gt;</span><span class="token punctuation">(</span>nibName<span class="token punctuation">:</span> <span class="token string-literal"><span class="token string">&quot;MyPasswordCell&quot;</span></span><span class="token punctuation">)</span>
+<span class="token punctuation">}</span></code></pre></div></span>
+<p>or</p>
+<span><div class="code-highlight" data-language="swift"><pre class="language-swift" data-language="swift"><code class="language-swift"><span class="token keyword">final</span> <span class="token keyword">class</span> <span class="token class-name">MyPasswordRow</span><span class="token punctuation">:</span> _GenericPasswordRow<span class="token punctuation">,</span> <span class="token class-name">RowType</span> <span class="token punctuation">{</span>
+    <span class="token keyword">required</span> <span class="token keyword">init</span><span class="token punctuation">(</span>tag<span class="token punctuation">:</span> <span class="token class-name">String</span><span class="token operator">?</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">super</span><span class="token punctuation">.</span><span class="token keyword">init</span><span class="token punctuation">(</span>tag<span class="token punctuation">:</span> tag<span class="token punctuation">)</span>
+        cellProvider <span class="token operator">=</span> <span class="token class-name">CellProvider</span><span class="token operator">&lt;</span><span class="token class-name">GenericPasswordCell</span><span class="token operator">&gt;</span><span class="token punctuation">(</span>nibName<span class="token punctuation">:</span> <span class="token string-literal"><span class="token string">&quot;MyPasswordCell&quot;</span></span><span class="token punctuation">)</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span></code></pre></div></span>
+</li>
+<li>
+<p>Subclassing <span><code class="language-text">DefaultPasswordStrengthView</code></span> or <span><code class="language-text">PasswordStrengthView</code></span> to provide a different strength view bar.</p>
+</li>
+<li>
+<p>Subclassing <span><code class="language-text">_GenericPasswordRow</code></span> or <span><code class="language-text">GenericPasswordCell</code></span>.</p>
+<span><div class="code-highlight" data-language="swift"><pre class="language-swift" data-language="swift"><code class="language-swift"><span class="token keyword">public</span> <span class="token keyword">final</span> <span class="token keyword">class</span> <span class="token class-name">MyGenericPasswordRow</span><span class="token punctuation">:</span> _GenericPasswordRow<span class="token punctuation">,</span> <span class="token class-name">RowType</span> <span class="token punctuation">{</span>
+    <span class="token comment">// add properties, methods, override, etc</span>
+<span class="token punctuation">}</span></code></pre></div></span>
+<p>or</p>
+<span><div class="code-highlight" data-language="swift"><pre class="language-swift" data-language="swift"><code class="language-swift"><span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">MyGenericPasswordCell</span><span class="token punctuation">:</span> <span class="token class-name">GenericPasswordCell</span> <span class="token punctuation">{</span>
+    <span class="token comment">// add properties, methods, override, etc</span>
+<span class="token punctuation">}</span></code></pre></div></span>
+</li>
+</ul>
+<h2 id="where-to-go-from-here">Where to go from here</h2>
+<p>I hope it has served as a good example of the potential of Eureka&#39;s rows. You can get as complex as you want while being flexible and scalable at the same time.
+Also, there are lots of customization points on this row so we can&#39;t wait to see what you can create!.</p>
+<p>We&#39;ve been publishing reusable custom rows at <a href="https://github.com/EurekaCommunity">EurekaCommunity</a>. If you have created a custom row and think that it could be reused then you could share it by creating a repository at EurekaCommunity. If you plan to do this, drop a mail to me or anyone at Xmartlabs to get access to the EurekaCommunity organization.</p> 

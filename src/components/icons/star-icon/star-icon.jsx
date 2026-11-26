@@ -1,8 +1,6 @@
 import React from 'react';
 
-import PropTypes from 'prop-types';
-
-export const StarIcon = ({ className }) => (
+export const StarIcon = ({ className = '' }) => (
   <svg
     width="62"
     height="63"
@@ -19,11 +17,3 @@ export const StarIcon = ({ className }) => (
     />
   </svg>
 );
-
-StarIcon.propTypes = {
-  className: PropTypes.string,
-};
-
-StarIcon.defaultProps = {
-  className: '',
-};

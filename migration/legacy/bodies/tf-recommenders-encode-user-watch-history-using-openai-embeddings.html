@@ -1,0 +1,97 @@
+ <h3 id="introduction">Introduction</h3>
+<p>In this digital age of endless possibilities and vast information, <strong>recommendation systems</strong> have emerged as the guiding compass that helps us navigate through the overwhelming sea of choices. Whether it's suggesting the perfect movie to watch, a personalized playlist for a road trip, or a tailored product recommendation, these intelligent algorithms have become integral to our online experiences.</p>
+<p>Recommendation systems are normally composed of multiple models either by combining their outputs or chaining the models in a pipeline. It is common to have a <strong>retrieval model</strong> that selects a few hundred or thousands of candidates from the complete set and then run a <strong>ranking model</strong> on these candidates to rank them.</p>
+<p>In this blog, we will focus on the <strong>retrieval model</strong> part, with special emphasis on encoding the user watch history with the help of LLMs. For an introduction to recommendation engines and their importance, check out our <a href="https://blog.xmartlabs.com/blog/recommendations-engines-what-they-do-and-why-they-are-useful/">blog post</a> on the matter.</p>
+<h3 id="two-tower-retrieval-models">Two tower retrieval models</h3>
+<p>Retrieval models should be fast to be computed on all items of a catalog and are often implemented as a vector search where the model returns the closest vectors (embeddings) to a given query.</p>
+<p>A common model architecture that follows this pattern is the two tower architecture. One tower takes the user features and produces the user (query) embedding, while the other takes the item features to create an item embedding. The item embeddings can be computed offline and indexed for more efficient serving. This means that in inference time, you need only to compute the user (query) embedding and then find the closest embeddings from the index.</p>
+<img src="/images/tf-recommenders-encode-user-watch-history-using-openai-embeddings/movie-rec-1.png" alt="Movie Rec 1">
+<p>In this blog, we will show how to build the <strong>user tower</strong> using TensorFlow Recommenders, taking advantage of its scalability, flexibility, and community. If you haven’t already, check out the basic <a href="https://www.tensorflow.org/recommenders/examples/basic_retrieval">TensorFlow Recommenders tutorial</a>, which will get you up and running with a basic retrieval model. We will delve into some more advanced preprocessing and model building. Specifically, using Open AI embeddings, attention layers, and more, showing the advantages of such an approach.</p>
+<h3 id="movielens-dataset">MovieLens dataset</h3>
+<p>One of the most commonly used movie datasets is the <a href="https://movielens.org/">MovieLens</a> dataset. It contains 25 million user ratings given by 162,000 users to 62,000 movies up until 2019. For each movie, it includes the title and genre, while for each user we just have a user ID. There is also a file that links each movie ID to the corresponding ID in popular movie webpages, <a href="https://www.themoviedb.org/?language=en-US">TMDB</a> and <a href="https://www.imdb.com/">IMDb</a>, from which we can obtain more metadata for these movies. To train our movie recommender, we used this dataset combined with input from TMDB.</p>
+<img src="/images/tf-recommenders-encode-user-watch-history-using-openai-embeddings/movie-rec-2.png" alt="Movie Rec 2">
+<p>Using the movie metadata, we can create very rich item feature vectors. On the other hand, we don't have similar information about our users (such as age, gender, likes, and dislikes). We only have the user’s ID and the movies a user has watched as our user features. The watch history is what contains the most information about the user and is what lets us relate a specific user to other similar ones. But how do we use this information? One option would be to learn an embedding for each movie ID and then combine all the embeddings in a watch history and use that as input for the user tower. This has several drawbacks:</p>
+<ul>
+<li>Restricted to movies that are in the training dataset (in this case, movies older than 2019)</li>
+<li>The model has to learn these embeddings only by learning from interactions of similar users (collaborative filtering) and not from metadata of the movies. This metadata could be added as separate inputs, but the model still needs to learn these embeddings from scratch.</li>
+</ul>
+<p>However, we can show you a better way of encoding this user watch history by leveraging the power of <strong>OpenAI’s embedding</strong> API, which will allow us to use embeddings of movies that are not in the dataset while also removing the need to learn these embeddings from scratch.</p>
+<p>As for the user ID, it is possible to let the model learn an embedding for each ID. However, using the user ID means that you need to retrain the model for each new user in your system, while the watch history can be helpful after just a few user interactions, even without retraining the model. In addition, when the dataset you train on is not from your system (like in this case with the MovieLens dataset), the user ID will not be helpful to you at all. That’s why in this case, <strong>we didn’t use the user ID</strong>.</p>
+<p>We <strong>split the dataset by users</strong>, taking a random set of 20k users as our validation dataset. This way, we can measure how well the model generalizes to users that are not in the dataset.</p>
+<h3 id="leveraging-llms-to-get-movie-embeddings">Leveraging LLMs to get movie embeddings</h3>
+<p>Using some of the columns of the movie metadata we can build a descriptive text for each movie like this:</p>
+<span><div class="code-highlight" data-language="text"><pre class="language-text" data-language="text"><code class="language-text">Title: Star Wars: Episode I - The Phantom Menace.
+Overview: Anakin Skywalker, a young slave strong with the Force, is discovered on Tatooine. Meanwhile, the evil Sith have returned, enacting their plot for revenge against the Jedi..
+Tagline: Every generation has a legend. Every journey has a first step. Every saga has a beginning..
+Genres: Adventure, Action, Science Fiction.
+Protagonists: Liam Neeson, Ewan McGregor, Natalie Portman</code></pre></div></span>
+<p>We can then use the OpenAI API to get an embedding, not only for the movies we have in the dataset, but also for newer movies, so as the user interacts with those movies, we can use their embedding in the model to get more accurate results. In this example, it lets us train a model which can recommend movies that were released after 2019.</p>
+<p>Getting an embedding from OpenAI is pretty easy:</p>
+<span><div class="code-highlight" data-language="python"><pre class="language-python" data-language="python"><code class="language-python"><span class="token keyword">import</span> openai
+
+<span class="token comment"># You need to set the OPENAI_API_KEY env variable</span>
+
+<span class="token keyword">def</span> <span class="token function">get_embedding</span><span class="token punctuation">(</span>text<span class="token punctuation">)</span><span class="token punctuation">:</span>
+    text <span class="token operator">=</span> text<span class="token punctuation">.</span>replace<span class="token punctuation">(</span><span class="token string">"\n"</span><span class="token punctuation">,</span> <span class="token string">" "</span><span class="token punctuation">)</span>
+    <span class="token keyword">return</span> openai<span class="token punctuation">.</span>Embedding<span class="token punctuation">.</span>create<span class="token punctuation">(</span><span class="token builtin">input</span><span class="token operator">=</span><span class="token punctuation">[</span>text<span class="token punctuation">]</span><span class="token punctuation">,</span> model<span class="token operator">=</span><span class="token string">"text-embedding-ada-002"</span><span class="token punctuation">)</span><span class="token punctuation">[</span><span class="token string">'data'</span><span class="token punctuation">]</span><span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">[</span><span class="token string">'embedding'</span><span class="token punctuation">]</span></code></pre></div></span>
+<p>This can be extended to get embeddings for all movies and arrange these vectors in a 2D numpy matrix.</p>
+<p>To validate that OpenAI’s embeddings actually capture the information about a movie, we can query which are the closest embeddings to a query vector. For example, which embeddings are closest to the embedding for the <span><code class="language-text">Toy Story</code></span> movie, using <strong>cosine</strong> distance:</p>
+<span><div class="code-highlight" data-language="text"><pre class="language-text" data-language="text"><code class="language-text">Toy Story 3 => Distance: 0.0617431402206
+Toy Story 2 => Distance: 0.0669441819191
+Toy Story 4 => Distance: 0.0801900029182
+Toy Story of Terror! => Distance: 0.0992990136147
+Buzz Lightyear of Star Command: The Adventure Begins => Distance: 0.104605972767
+Beyond Infinity: Buzz and the Journey to Lightyear => Distance: 0.112128674984
+Lightyear => Distance: 0.114516556263
+Toy Story That Time Forgot => Distance: 0.125901699066
+Lamp Life => Distance: 0.132924675941</code></pre></div></span>
+<p>This shows that the closest embeddings are actually very similar movies and, thus, that the embeddings capture meaningful information.</p>
+<h3 id="integrate-embeddings-into-user-tower">Integrate embeddings into user tower</h3>
+<p>To integrate the embeddings we got from OpenAI into the model, we can use TensorFlow’s <span><code class="language-text">tf.keras.layers.Embedding</code></span> layer and pass the embeddings to the initializer:</p>
+<span><div class="code-highlight" data-language="python"><pre class="language-python" data-language="python"><code class="language-python">embedding_matrix <span class="token operator">=</span> <span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span>  <span class="token comment"># 2D np.array</span>
+num_tokens <span class="token operator">=</span> <span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span>  <span class="token comment"># number of movies we want to support + 1 for unknown movies</span>
+embedding_layer <span class="token operator">=</span> Embedding<span class="token punctuation">(</span>
+    input_dim<span class="token operator">=</span>num_tokens<span class="token punctuation">,</span>
+    output_dim<span class="token operator">=</span>embedding_matrix<span class="token punctuation">.</span>shape<span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">,</span>  <span class="token comment"># vector dim = 1536 in case of OpenAI embeddings</span>
+    embeddings_initializer<span class="token operator">=</span>tf<span class="token punctuation">.</span>keras<span class="token punctuation">.</span>initializers<span class="token punctuation">.</span>Constant<span class="token punctuation">(</span>embedding_matrix<span class="token punctuation">)</span><span class="token punctuation">,</span>
+    trainable<span class="token operator">=</span><span class="token boolean">False</span><span class="token punctuation">,</span>
+<span class="token punctuation">)</span></code></pre></div></span>
+<p>We can actually choose to initialize this embedding layer with OpenAI’s embeddings and then finetune them (by setting <span><code class="language-text">trainable=True</code></span>). In our case, we found that not finetuning them worked better. This also has the benefit of speeding up training as these embeddings are given and not trained, so there are fewer parameters for the model to optimize.</p>
+<p>We tracked all our experiments using a self-hosted instance of the open-source <a href="https://clear.ml/">ClearML</a> experiment tracking tool. Tracking experiments in a clear and reproducible way is essential in any ML project. It allows us to look back at the ideas we tried, some of which were discarded, and others became part of the final solution.</p>
+<img src="/images/tf-recommenders-encode-user-watch-history-using-openai-embeddings/movie-rec-3.png" alt="Movie Rec 3">
+<p>In this chart, we can see the difference between learning the embeddings and using the OpenAI embeddings. The biggest difference is that using OpenAI embeddings, the model generalizes better, but it also performs slightly better than when learning the embeddings from scratch.</p>
+<h3 id="paying-attention-to-each-other">Paying Attention to each other</h3>
+<p>We found that adding a multi-head Self-Attention layer on top of the Embedding layer lets the model learn a much better user embedding. This can be done using the <span><code class="language-text">tf.keras.layers.MultiHeadAttention</code></span> layer and passing the input tensor as both key and query parameters. See the results comparing a model with and without Attention below.</p>
+<h3 id="combining-embeddings">Combining embeddings</h3>
+<p>The result of the embedding layer will be a Tensor of dimension <span><code class="language-text">[B, None, 1536]</code></span> where B is the batch size and the middle dimension is the number of movies in the user watch history. It is undefined as each user can have seen a variable number of movies. The size of OpenAI’s embeddings is 1536. The same shape will also be returned by the Attention layer.</p>
+<p>We need to combine these embeddings to end up with a 2-dimensional fixed-size matrix of <span><code class="language-text">[B, 1536]</code></span>. This means combining the values corresponding to each movie in the watch history post-attention layer to get a single vector. For this, we can now use something like <span><code class="language-text">GlobalAveragePooling1D</code></span> or <span><code class="language-text">GlobalMaxPool1D</code></span>, after which we will end up with the desired 2D Tensor. It is worth trying both of them or even similar layers. In our case, we went with the Average Pooling as the model is more capable even though it overfits a bit more than using the MaxPool.</p>
+<p>After this layer we can add a couple of fully connected (Dense) layers, which will form our user tower and result in the final user embedding.</p>
+<h3 id="adding-user-ratings-to-their-embeddings">Adding user ratings to their embeddings</h3>
+<p>We found that adding the rating the user gave to each movie in the user's watch history can improve the model further. A simple but effective way to do this is to concatenate the rating to the embedding of the movie before applying the Attention layer. We actually calculate the average rating of the user’s watch history and subtract that from the rating of each movie to get values around 0. We then use <span><code class="language-text">tf.concat([embedding, rating], axis=-1)</code></span>.</p>
+<p>We found this to work pretty good. As you can see in the chart, this will considerably increase the model’s recall.</p>
+<img src="/images/tf-recommenders-encode-user-watch-history-using-openai-embeddings/movie-rec-4.png" alt="Movie Rec 4">
+<h3 id="summary-of-user-tower">Summary of user tower</h3>
+<p>Putting all of this together leaves us with a user tower as follows:</p>
+<span><div class="code-highlight" data-language="text"><pre class="language-text" data-language="text"><code class="language-text">________________________________________________________________________________________________________________________
+ Layer (type)                        Output Shape         Param #     Connected to
+========================================================================================================================
+ user_history (InputLayer)           [(None, None)]       0           []
+ lookup_user_history (IntegerLookup)  (None, None)        0           ['user_history[0][0]']
+ history_ratings (InputLayer)        [(None, None)]       0           []
+ user_history_emb (Embedding)        (None, None, 1536)   25744896    ['lookup_user_history[0][0]']
+ tf.expand_dims (TFOpLambda)         (None, None, 1)      0           ['history_ratings[0][0]']
+ tf.concat (TFOpLambda)              (None, None, 1537)   0           ['user_history_emb[0][0]', 'tf.expand_dims[0][0]']
+ multi_head_attention (MultiHeadA...  (None, None, 1537)  6300161     ['tf.concat[0][0]', 'tf.concat[0][0]']
+ global_average_pooling1d_4 (Glob...  (None, 1537)        0           ['multi_head_attention[0][0]']
+ dense (Dense)                       (None, 128)          196864      ['global_average_pooling1d_4[0][0]']
+ dropout (Dropout)                   (None, 128)          0           ['dense[0][0]']
+ dense_1 (Dense)                     (None, 32)           4128        ['dropout[0][0]']
+=======================================================================================================================
+Total params: 32,246,049
+Trainable params: 6,501,153
+Non-trainable params: 25,744,896</code></pre></div></span>
+<img src="/images/tf-recommenders-encode-user-watch-history-using-openai-embeddings/movie-rec-5.png" alt="Movie Rec 5">
+<h3 id="conclusion">Conclusion</h3>
+<p>In this blog post, we demonstrate how to build a user model using a two-tower architecture that integrates external embeddings. This approach enables support for movies not present in the training dataset, while simultaneously improving model training. We also showed several additions on top of this model to improve its metrics significantly.</p>
+<p>We have not talked about the other half of the two-tower model: the movie model. We might write about that in the future, so <strong>let us know if you would like to hear about it!</strong></p>
+<p>Want a powerful recommender model for your own business? Our experts specialize in developing tailored recommendation systems that drive engagement and boost revenue. <a href="https://form.typeform.com/to/D1PhDJIR">Contact us</a> today to discuss your needs, and we'll become your trusted partner in creating a personalized solution.</p> 

@@ -6,7 +6,7 @@ permalink: /swiftui-flutter/
 featured: true
 date: 2019-06-03
 category: development
-thumbnail: images/swiftui-flutter/featured.jpg
+thumbnail: /images/swiftui-flutter/featured.jpg
 tags:
   - SwiftUI
   - Swift Flutter

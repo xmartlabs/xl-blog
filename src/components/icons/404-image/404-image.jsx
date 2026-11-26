@@ -1,8 +1,6 @@
 import React from 'react';
 
-import PropTypes from 'prop-types';
-
-export const ErrorImage = ({ className }) => (
+export const ErrorImage = ({ className = '' }) => (
   <>
     <svg
       viewBox="0 0 484 353"
@@ -773,11 +771,3 @@ export const ErrorImage = ({ className }) => (
     </svg>
   </>
 );
-
-ErrorImage.propTypes = {
-  className: PropTypes.string,
-};
-
-ErrorImage.defaultProps = {
-  className: '',
-};

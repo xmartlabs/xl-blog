@@ -1,9 +1,10 @@
+'use client';
+
 import React from 'react';
-import PropTypes from 'prop-types';
 
 import { classnames } from '../../helpers';
 
-const SeeMoreTitles = ({ onClick, className, children }) => (
+const SeeMoreTitles = ({ onClick = () => {}, className = '', children }) => (
   <a
     onClick={onClick}
     className={classnames(
@@ -14,15 +15,5 @@ const SeeMoreTitles = ({ onClick, className, children }) => (
     {children}
   </a>
 );
-
-SeeMoreTitles.propTypes = {
-  className: PropTypes.string,
-  onClick: PropTypes.func,
-};
-
-SeeMoreTitles.defaultProps = {
-  className: '',
-  onClick: () => {},
-};
 
 export { SeeMoreTitles };

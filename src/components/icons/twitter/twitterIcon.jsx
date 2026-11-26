@@ -1,8 +1,6 @@
 import React from 'react';
 
-import PropTypes from 'prop-types';
-
-export const TwitterIcon = ({ className }) => (
+export const TwitterIcon = ({ className = '' }) => (
   <svg
     width="23"
     height="18"
@@ -17,11 +15,3 @@ export const TwitterIcon = ({ className }) => (
     />
   </svg>
 );
-
-TwitterIcon.propTypes = {
-  className: PropTypes.string,
-};
-
-TwitterIcon.defaultProps = {
-  className: '',
-};

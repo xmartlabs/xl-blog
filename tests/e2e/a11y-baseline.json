@@ -1,0 +1,102 @@
+{
+  "home": {
+    "url": "/",
+    "rules": {
+      "color-contrast": {
+        "impact": "serious",
+        "nodes": 7,
+        "help": "Elements must meet minimum color contrast ratio thresholds"
+      },
+      "landmark-one-main": {
+        "impact": "moderate",
+        "nodes": 1,
+        "help": "Document should have one main landmark"
+      },
+      "region": {
+        "impact": "moderate",
+        "nodes": 7,
+        "help": "All page content should be contained by landmarks"
+      }
+    }
+  },
+  "category": {
+    "url": "/categories/e2e-development/",
+    "rules": {
+      "color-contrast": {
+        "impact": "serious",
+        "nodes": 7,
+        "help": "Elements must meet minimum color contrast ratio thresholds"
+      },
+      "landmark-one-main": {
+        "impact": "moderate",
+        "nodes": 1,
+        "help": "Document should have one main landmark"
+      },
+      "region": {
+        "impact": "moderate",
+        "nodes": 7,
+        "help": "All page content should be contained by landmarks"
+      }
+    }
+  },
+  "post": {
+    "url": "/blog/react-native-line-2/",
+    "rules": {
+      "color-contrast": {
+        "impact": "serious",
+        "nodes": 28,
+        "help": "Elements must meet minimum color contrast ratio thresholds"
+      },
+      "heading-order": {
+        "impact": "moderate",
+        "nodes": 2,
+        "help": "Heading levels should only increase by one"
+      },
+      "landmark-one-main": {
+        "impact": "moderate",
+        "nodes": 1,
+        "help": "Document should have one main landmark"
+      },
+      "region": {
+        "impact": "moderate",
+        "nodes": 8,
+        "help": "All page content should be contained by landmarks"
+      }
+    }
+  },
+  "notFound": {
+    "url": "/blog/does-not-exist/",
+    "rules": {
+      "color-contrast": {
+        "impact": "serious",
+        "nodes": 8,
+        "help": "Elements must meet minimum color contrast ratio thresholds"
+      },
+      "region": {
+        "impact": "moderate",
+        "nodes": 2,
+        "help": "All page content should be contained by landmarks"
+      }
+    }
+  },
+  "adminLogin": {
+    "url": "/admin/login/",
+    "rules": {
+      "color-contrast": {
+        "impact": "serious",
+        "nodes": 5,
+        "help": "Elements must meet minimum color contrast ratio thresholds"
+      },
+      "landmark-one-main": {
+        "impact": "moderate",
+        "nodes": 1,
+        "help": "Document should have one main landmark"
+      },
+      "region": {
+        "impact": "moderate",
+        "nodes": 8,
+        "help": "All page content should be contained by landmarks"
+      }
+    }
+  }
+}

@@ -1,3 +1,5 @@
+'use client';
+
 import React, { useState, useRef, useEffect } from 'react';
 
 import { ArrowIcon } from '../icons';
@@ -13,30 +15,6 @@ const TitleBlogIndex = ({ data, refIndexTitles, disappearIndex }) => {
   const linksContainerRef = useRef(null);
   const indexContainerRef = useRef(null);
   const [heightVariation, setHeightVariation] = useState();
-
-  useEffect(() => {
-    window.addEventListener('scroll', getActiveTitle, { passive: true });
-
-    return () => {
-      window.removeEventListener('scroll', getActiveTitle);
-    };
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
-
-  useEffect(() => {
-    if (linksContainerRef.current && indexContainerRef.current) {
-      const indexHeight = indexContainerRef.current.clientHeight;
-      const linksHeight = linksContainerRef.current.clientHeight;
-
-      const heightDifference = indexHeight - linksHeight;
-
-      if (heightDifference < 650) {
-        setHeightVariation(heightDifference);
-        setIsTopArrow(heightDifference < 0 || heightDifference > 0);
-        setIsBottomArrow(linksContainerRef.current.scrollToTop === 0);
-      }
-    }
-  }, [linksContainerRef, indexContainerRef]);
 
   const getActiveTitle = () => {
     if (refIndexTitles.current) {
@@ -72,6 +50,30 @@ const TitleBlogIndex = ({ data, refIndexTitles, disappearIndex }) => {
     }
   };
 
+  useEffect(() => {
+    window.addEventListener('scroll', getActiveTitle, { passive: true });
+
+    return () => {
+      window.removeEventListener('scroll', getActiveTitle);
+    };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  useEffect(() => {
+    if (linksContainerRef.current && indexContainerRef.current) {
+      const indexHeight = indexContainerRef.current.clientHeight;
+      const linksHeight = linksContainerRef.current.clientHeight;
+
+      const heightDifference = indexHeight - linksHeight;
+
+      if (heightDifference < 650) {
+        setHeightVariation(heightDifference);
+        setIsTopArrow(heightDifference < 0 || heightDifference > 0);
+        setIsBottomArrow(linksContainerRef.current.scrollToTop === 0);
+      }
+    }
+  }, [linksContainerRef, indexContainerRef]);
+
   const scrollToBottom = () => {
     linksContainerRef.current.scrollTo({
       top: heightVariation,
@@ -98,19 +100,17 @@ const TitleBlogIndex = ({ data, refIndexTitles, disappearIndex }) => {
         <SeeMoreTitles
           onClick={scrollToBottom}
           className={classnames({ hidden: disappearIndex })}
-          children={
-            <ArrowIcon className="pt-8 px-4 pb-0 transform rotate-180 w-auto h-auto max-sm:hidden [@media(max-height:_992px)]:mt-[1%]" />
-          }
-        />
+        >
+          <ArrowIcon className="pt-8 px-4 pb-0 transform rotate-180 w-auto h-auto max-sm:hidden [@media(max-height:_992px)]:mt-[1%]" />
+        </SeeMoreTitles>
       )}
       {isBottomArrow && (
         <SeeMoreTitles
           onClick={scrollToTop}
           className={classnames({ hidden: disappearIndex })}
-          children={
-            <ArrowIcon className="py-0 px-4 w-auto h-auto max-sm:hidden [@media(max-height:_992px)]:mt-[1%]" />
-          }
-        />
+        >
+          <ArrowIcon className="py-0 px-4 w-auto h-auto max-sm:hidden [@media(max-height:_992px)]:mt-[1%]" />
+        </SeeMoreTitles>
       )}
       <div
         className="flex flex-row items-start w-[20%] mr-[5%] scroll-smooth fixed top-[22%] h-[70vh] max-lg:hidden"

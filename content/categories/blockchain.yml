@@ -1,0 +1,4 @@
+name: Blockchain
+order: 7
+# The old site had no filter tab for this category.
+show_in_filters: false

@@ -1,8 +1,6 @@
 import React from 'react';
 
-import PropTypes from 'prop-types';
-
-export const ClockIcon = ({ className }) => (
+export const ClockIcon = ({ className = '' }) => (
   <svg
     width="15"
     height="15"
@@ -17,11 +15,3 @@ export const ClockIcon = ({ className }) => (
     />
   </svg>
 );
-
-ClockIcon.propTypes = {
-  className: PropTypes.string,
-};
-
-ClockIcon.defaultProps = {
-  className: '',
-};

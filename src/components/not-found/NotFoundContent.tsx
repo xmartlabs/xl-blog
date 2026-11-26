@@ -1,0 +1,34 @@
+/* eslint-disable @next/next/no-html-link-for-pages -- Plain <a> on purpose: same markup and full-page navigation as the old site (the list pages restore scroll position on load). */
+import React from 'react';
+
+import { ErrorImage } from '../icons';
+import { Seo } from '../seo/Seo';
+
+/** The styled 404 page (between the nav menu and the footer). */
+export function NotFoundContent() {
+  return (
+    <>
+      <Seo pathname="/404/" title="Not found" />
+      <main className="flex flex-row justify-center items-center p-[7rem_0_2rem_2.5rem] max-sm:flex max-sm:flex-col max-sm:m-0 max-sm:mt-20">
+        <a href="/" aria-label="Back to the Xmartlabs Blog home page">
+          <ErrorImage className="w-[31rem] max-sm:max-h-[14rem] max-sm:mb-8" />
+        </a>
+        <div className="flex flex-col ml-20 max-sm:ml-[1rem]">
+          <h1 className="text-xl-pink font-link mb-16 tracking-[0.1rem] text-heading-one">
+            You&apos;ve reached the land of lost URLs.
+          </h1>
+          <p className="text-paragraph text-blue-one">
+            While we dust off the treasure map,
+            <br /> why not explore some other hidden gems on our blog? 💎
+          </p>
+          <a
+            className="text-paragraph text-xl-pink mt-[2rem] max-xs:mt-12 max-xs:mb-20 max-xs:mx-0"
+            href="/"
+          >
+            Show me those golden insights
+          </a>
+        </div>
+      </main>
+    </>
+  );
+}

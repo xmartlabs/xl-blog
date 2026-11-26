@@ -1,0 +1,54 @@
+ <p>Eureka is a framework used to build forms in iOS, which has more than 1.000.000 downloads!
+In case you’re not familiar with it, you can start by reading <a href="https://blog.xmartlabs.com/2015/09/29/Introducing-Eureka-iOS-form-library-written-in-pure-Swift/">Introducing Eureka iOS form library written in pure Swift</a> or visit <a href="https://github.com/xmartlabs/Eureka">Eureka's GitHub page</a>, where you’ll find all it’s latest changes.</p>
+<p>We’re very happy to announce that version 4.0 of Eureka, which includes support to Swift 4, is now available!
+This version doesn’t include new features, the latest bug fixes (like memory leaks) and new features that you’ve been asking for, were included in the 3.0 version.</p>
+<p>Wanna know all the details about them?</p>
+<ul>
+<li>Multivalued section</li>
+<li>Usage of nib file for all rows</li>
+</ul>
+<h2 id="multivalued-section">Multivalued section</h2>
+<p>How many times have you desired to create a section where the user would be able to insert, move or delete rows? Like a contacts library or a calendar with different event priorities, or anything that you can imagine!</p>
+<p>The idea of this feature is to allow us to easily create sections with insertable, deletable and re-orderable rows.</p>
+<p align="center">
+  <img src="https://raw.githubusercontent.com/xmartlabs/Eureka/master/Example/Media/EurekaMultivalued.gif" alt="Eureka multivalue in action!">
+</p>
+<h4 id="how-to-use-it">How to use it?</h4>
+<p>In order to create a multivalued section we have to use <span><code class="language-text">MultivaluedSection</code></span> type, instead of the regular <span><code class="language-text">Section</code></span> type. <span><code class="language-text">MultivaluedSection</code></span> extends <span><code class="language-text">Section</code></span> and has some additional properties to configure the multivalued section behavior.</p>
+<span><div class="code-highlight" data-language="swift"><pre class="language-swift" data-language="swift"><code class="language-swift">form <span class="token operator">+++</span>
+    <span class="token class-name">MultivaluedSection</span><span class="token punctuation">(</span>multivaluedOptions<span class="token punctuation">:</span> <span class="token punctuation">[</span><span class="token punctuation">.</span><span class="token class-name">Reorder</span><span class="token punctuation">,</span> <span class="token punctuation">.</span><span class="token class-name">Insert</span><span class="token punctuation">,</span> <span class="token punctuation">.</span><span class="token class-name">Delete</span><span class="token punctuation">]</span><span class="token punctuation">,</span>
+                       header<span class="token punctuation">:</span> <span class="token string-literal"><span class="token string">"Multivalued TextField"</span></span><span class="token punctuation">,</span>
+                       footer<span class="token punctuation">:</span> <span class="token string-literal"><span class="token string">".Insert adds a 'Add Item' (Add New Tag) button row as last cell."</span></span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token short-argument">$0</span><span class="token punctuation">.</span>addButtonProvider <span class="token operator">=</span> <span class="token punctuation">{</span> section <span class="token keyword">in</span>
+            <span class="token keyword">return</span> <span class="token class-name">ButtonRow</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+                <span class="token short-argument">$0</span><span class="token punctuation">.</span>title <span class="token operator">=</span> <span class="token string-literal"><span class="token string">"Add New Tag"</span></span>
+            <span class="token punctuation">}</span>
+        <span class="token punctuation">}</span>
+        <span class="token short-argument">$0</span><span class="token punctuation">.</span>multivaluedRowToInsertAt <span class="token operator">=</span> <span class="token punctuation">{</span> index <span class="token keyword">in</span>
+            <span class="token keyword">return</span> <span class="token class-name">NameRow</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+                <span class="token short-argument">$0</span><span class="token punctuation">.</span>placeholder <span class="token operator">=</span> <span class="token string-literal"><span class="token string">"Tag Name"</span></span>
+            <span class="token punctuation">}</span>
+        <span class="token punctuation">}</span>
+        <span class="token short-argument">$0</span> <span class="token operator">&#x3C;&#x3C;&#x3C;</span> <span class="token class-name">NameRow</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            <span class="token short-argument">$0</span><span class="token punctuation">.</span>placeholder <span class="token operator">=</span> <span class="token string-literal"><span class="token string">"Tag Name"</span></span>
+        <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span></code></pre></div></span>
+<p>The previous code snippet shows how to create a multivalued section. In this case we wanted, delete and reorder rows as the <span><code class="language-text">multivaluedOptions</code></span> argument indicates.</p>
+<p>You can find an usage example in the <a href="https://github.com/xmartlabs/Eureka">Eureka project</a>.</p>
+<h2 id="usage-of-nib-file-in-all-the-rows">Usage of nib file in all the rows</h2>
+<p>Before Eureka’s 3.0 version in order to change the layout of a cell we had to create a custom row as a subclass of an existent row, without taking into account that maybe what we needed was a really small change.</p>
+<p>On the other hand, if the modification implied changing fonts and colors, we had to use the methods <strong>defaultCellUpdate</strong> and <strong>defaultCellSetup</strong> on the type of the row, in order to be able to modify them.</p>
+<p>But what if we had to do major changes? If the changes were in the layout (like constraints), we had to create a custom row.</p>
+<p>Eureka 3.0 introduced an easier way to do it! Now it’s possible to modify the layout of a row without having to create a custom one. We decided to make some changes which allow the usage of a nib file to create your own row style, and layout. This is a big change for all Eureka users!</p>
+<p>Of course sometimes it’s not enough to modify an existing row, because there are a lot of changes to make on it, so in that case we need to create a custom row. If this is your case, check out some already existing custom rows here: <a href="https://github.com/EurekaCommunity">EurekaCommunity</a>.</p>
+<h4 id="how-to-use-it-1">How to use it?</h4>
+<p>In a few steps you can modify layout constraints or add some custom UI components to an existent row. For example... imagine that you want to use an Eureka row, but you want to have some extra components; just follow this steps:</p>
+<ul>
+<li>Create a nib file</li>
+<li>Add all the UI components that you need</li>
+<li>Connect the outlets to your cell class</li>
+<li>Convert your cell class to a subclass of NameRow (for example)</li>
+</ul>
+<p>You’re already set! You now have a row with everything that’s included in Eureka, and all the extra components that you want, with no need to create a new custom row!</p>
+<h2 id="where-to-go-from-here">Where to go from here</h2>
+<p>We hope that the new Eureka’s features make the usage of this library more enjoyable and productive! As always, if you found our article useful and want to suggest some new features or just need some help, contact us. Also feel free contribute with this <a href="https://github.com/xmartlabs/Eureka">library</a>.</p> 

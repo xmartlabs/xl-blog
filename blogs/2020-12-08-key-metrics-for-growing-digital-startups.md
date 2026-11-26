@@ -5,7 +5,7 @@ excerpt: "Still not using data and analytics to make informed decisions and make
 tags: [digital product development, product metrics, Analytics, A/B testing, Xmartlabs]
 category: development
 author: robert
-thumbnail: images/key-metrics-for-growing-digital-startups/featured.png
+thumbnail: /images/key-metrics-for-growing-digital-startups/featured.png
 permalink: /key-metrics-for-growing-digital-startups/
 ---
 

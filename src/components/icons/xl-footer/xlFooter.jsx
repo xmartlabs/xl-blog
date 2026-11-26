@@ -1,8 +1,6 @@
 import React from 'react';
 
-import PropTypes from 'prop-types';
-
-export const XlFooter = ({ className }) => (
+export const XlFooter = () => (
   <svg
     width="135"
     height="19"
@@ -33,11 +31,3 @@ export const XlFooter = ({ className }) => (
     />
   </svg>
 );
-
-XlFooter.propTypes = {
-  className: PropTypes.string,
-};
-
-XlFooter.defaultProps = {
-  className: '',
-};

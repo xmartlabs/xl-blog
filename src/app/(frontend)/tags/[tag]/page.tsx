@@ -1,0 +1,35 @@
+/* eslint-disable @next/next/no-html-link-for-pages -- Plain <a> on purpose: same markup and full-page navigation as the old site (the list pages restore scroll position on load). */
+import React from 'react';
+
+import { NotFoundPage } from '@/components/not-found/NotFoundPage';
+import { Seo } from '@/components/seo/Seo';
+import { getTags } from '@/lib/posts';
+
+type Props = { params: Promise<{ tag: string }> };
+
+export async function generateStaticParams() {
+  return (await getTags()).map((tag) => ({ tag: tag.segment }));
+}
+
+export default async function TagPage({ params }: Props) {
+  const { tag: segment } = await params;
+  const tag = (await getTags()).find((t) => t.segment === segment);
+  if (!tag) return <NotFoundPage />;
+  const header = `${tag.posts.length} post${tag.posts.length === 1 ? '' : 's'} tagged with "${tag.name}"`;
+  return (
+    <>
+      <Seo pathname={`/tags/${segment}/`} />
+      <div className="p-[10rem_16%_5rem]">
+        <h1>{header}</h1>
+        <ul>
+          {tag.posts.map((post) => (
+            <li key={post.slug}>
+              <a href={`/blog/${post.slug}/`}>{post.title}</a>
+            </li>
+          ))}
+        </ul>
+        <a href="/tags/">All tags</a>
+      </div>
+    </>
+  );
+}

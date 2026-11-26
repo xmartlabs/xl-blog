@@ -1,0 +1,83 @@
+ <p>Well-informed, objective decisions have always been a key aspect of every successful business.
+Nowadays, lots of companies gather a huge amount of data as a result of different processes, i.e, marketing campaign results, web site analytics or customer information on their product databases such as usage history or demographics.
+Once you have this input, a key component in today&#39;s data-driven company is the data warehouse.
+There, a consolidated view of all the convenient business information is stored in one place and can be queried in-depth for complex analysis.</p>
+<img style="width:100%" src="/images/redshift-snowflake/cloud-data-warehouse.jpg"/>
+<br/>
+<p style="text-align:center"> (source: <a href="https://www.cazena.com/resource-topic/data-mart">Cazena</a>)</p>
+<p><strong>Cloud Data warehouses</strong> are a popular choice among today&#39;s options.
+This type of warehouses are <strong>easy-to-scale</strong>, <strong>highly performant</strong> and <strong>cheaper</strong> than their in-house counterparts, as companies don&#39;t need to buy and maintain dedicated hardware nor hire highly specialized personnel.</p>
+<p>On this ecosystem of providing a data warehouse as a service, there are two solutions that you must have heard about, especially if you prefer AWS platform, <a href="https://aws.amazon.com/redshift/"><strong>Amazon Redshift</strong></a> and <a href="https://www.snowflake.com/"><strong>Snowflake</strong></a>.
+With <strong>Columnar storage and massively parallel processing</strong> (MPP) infrastructure, <strong>integrated with many Business Intelligence solutions</strong> and <strong>flexible pricing</strong>, this two solutions will definitely meet most of your requirements to analyze your business data today and in the future to come.</p>
+<p>However, choosing the right option for your company sometimes is not about if the solution will successfully complete a task but what is the most suitable option for your data strategy.
+Following, we describe some aspects that are different between these two solutions and you should have in mind when choosing your data warehouse.</p>
+<h2 id="pricing">Pricing</h2>
+<p>One of the questions that may arise when selecting a warehouse is, what will I pay for?</p>
+<p>The Snowflake approach for pricing is essentially paying for what you use, <a href="https://www.snowflake.com/pricing/">splitting the billing on</a>:</p>
+<ol>
+<li>
+<p><em>Computing:</em></p>
+<ul>
+<li>Offers a compute resource called <strong>Warehouse</strong>, <a href="https://docs.snowflake.net/manuals/user-guide/warehouses-overview.html#warehouse-size">which comes in seven different sizes</a>.</li>
+<li>The price is charged <strong>per-second</strong> of warehouse usage, which can be configured to automatically stop and resume.</li>
+<li>Each <strong>second cost a fraction of a credit</strong>. The price of the <strong>credit varies on the <a href="https://www.snowflake.com/pricing/">plan you selected</a></strong>.</li>
+</ul>
+</li>
+<li>
+<p><em>Storage:</em></p>
+<ul>
+<li><em>On-demand</em>: Pay storage as you use it on a monthly basis.</li>
+<li><em>Up-front</em>: If you know how much storage you need, you can pre-pay for it each month, which is cheaper than the on-demand option.</li>
+</ul>
+</li>
+</ol>
+<p>The pricing on Redshift <a href="https://aws.amazon.com/redshift/pricing/">is more coupled</a> but it offer some interesting options too:</p>
+<ul>
+<li>You can choose between <strong>two different cluster types</strong>, <strong>dense compute</strong> or <strong>dense storage</strong>, both options with powerful characteristics.</li>
+<li>The usage is billed on a <strong>per-hour</strong> granularity.</li>
+<li>You can choose between an <strong>on-demand plan or an up-front payment</strong>, obtaining interesting savings if you choose the latter option.</li>
+<li>Provides a <strong>Concurrency Scaling</strong> option, where you can add to your cluster more computing power on-demand, priced on a per-second rate.</li>
+<li>Amazon now provides <a href="https://aws.amazon.com/blogs/big-data/amazon-redshift-spectrum-extends-data-warehousing-out-to-exabytes-no-loading-required/">Redshift Spectrum</a>, which allows the user to <strong>run queries over S3 storage data</strong>. This way, you can pay for your storage and compute capabilities more independently.</li>
+</ul>
+<h2 id="security">Security</h2>
+<p>If you manage sensitive information, for example, Protected Health Information (PHI), one of your top concerns must be to have an infrastructure that correctly protects your data and complies to the highest standards.</p>
+<p>Redshift provides <strong>robust and customizable end-to-end encryption</strong>, <strong>network isolation</strong> using VPCs and <strong>audit</strong> options through CloudTrail integration, among other features.
+Also, AWS services comply with <a href="https://aws.amazon.com/compliance/programs/">several programs</a>, meaning you can configure your cluster to satisfy well-known regulations.</p>
+<p>Snowflake also takes security seriously and provides <strong>always-on encryption</strong> on both your in-transit and at-rest data, <strong>VPN network isolation</strong> and also complies with security regulations.
+The important detail here is that these <strong>security options will depend on the <a href="https://www.snowflake.com/pricing/">plan you selected</a></strong>, so you should take extra care when selecting the plan that fits your needs best.
+For example, if some of the data you want to analyze are PHIs, you must at least have an &quot;Enterprise for Sensitive Data&quot; plan, which is the first level that provides HIPAA support.</p>
+<h2 id="performance">Performance</h2>
+<p>A desirable feature for your data warehouse is the ability to scale up or down the compute capacity as your needs change.
+On Snowflake, this process is as easy as <a href="https://docs.snowflake.net/manuals/user-guide/warehouses-tasks.html#resizing-a-warehouse">altering your warehouse</a> and select a new size, taking virtually no time.</p>
+<p>On redshift, you have <a href="https://docs.aws.amazon.com/redshift/latest/mgmt/rs-resize-tutorial.html">two different options to re-scale a cluster</a>:</p>
+<ol>
+<li><em>Elastic resize:</em>
+<ul>
+<li>Change only the <strong>number of nodes</strong> on your cluster</li>
+<li><strong>Takes a few minutes</strong> to add the new resources and redistribute the data among them.</li>
+</ul>
+</li>
+<li><em>Classic resize:</em>
+<ul>
+<li>Change the <strong>types of the nodes</strong> (and the amount if you want).</li>
+<li><strong>Takes some hours</strong>, as a new cluster is created the data from the old one is transfer to it.</li>
+<li>Redshift team recommends to follow the approach <a href="https://docs.aws.amazon.com/redshift/latest/mgmt/rs-resize-tutorial.html#rs-tutorial-snapshot-restore-resize-overview"><em>Snapshot, Restore, and Resize</em></a> to avoid downtimes during this process.</li>
+</ul>
+</li>
+</ol>
+<p>Another topic to consider is how to manage the query load on your data warehouse, in order to deliver the needed information for every report in a reasonable time.</p>
+<p>On Redshift, all the user that wants to analyze data on the cluster <strong>shares the compute resources</strong>, so if there are a lot of user running a bunch of queries, they will definitely compete for them.
+The solution that Redshift provides to control this concurrency problem is to configure <a href="https://docs.aws.amazon.com/redshift/latest/dg/cm-c-wlm-queue-assignment-rules.html">WLM Queue Assignment Rules</a> to <strong>give priority on the cluster usage</strong>.</p>
+<img width="100%" src="/images/redshift-snowflake/redshift_WML_Queues.png"/>
+<br/>
+<p style="text-align:center"> (source: <a href="https://www.slideshare.net/AmazonWebServices/getting-started-with-amazon-redshift-72473371">Amazon</a>)</p>
+<p>On Snowflake, the solution is much simpler, as the data and compute layers are independent.
+On this platform, you can <strong>create different warehouses for different proposes</strong> and give each one different compute capacities if needed. This way, different queries to different warehouses won&#39;t compete, as they have separated resources.</p>
+<img width="100%" src="/images/redshift-snowflake/snowflake_warehouses.png"/>
+<br/>
+<p style="text-align:center"> (source: <a href="https://www.cazena.com/resource-topic/data-mart">Snowflake</a>)</p>
+<h2 id="semi-structured-data">Semi-Structured data</h2>
+<p>Nowadays, it is more and more common to have information on a semi-structured format, for example, a JSON report from 3rd party API like Google Analytics Reporting API or exports from a NoSQL database like MongoDB.</p>
+<p>If this is the case and you want to extract and correlate this data with other sources, Snowflake provides <a href="https://docs.snowflake.net/manuals/sql-reference/data-types-semistructured.html"><strong>out-of-the-box datatypes and a query syntax</strong></a> that allow you to traverse your JSON data.
+Redshift also provides this feature through <a href="https://aws.amazon.com/blogs/big-data/amazon-redshift-spectrum-extends-data-warehousing-out-to-exabytes-no-loading-required/"><strong>Spectrum</strong></a>, but it needs <a href="https://docs.aws.amazon.com/redshift/latest/dg/c-getting-started-using-spectrum.html">some previous configuration</a> to work properly, like creating external schemas and tables.</p>
+<p>Summarizing, both of these cloud data warehouse options are powerful and flexible solutions that are constantly improving to help companies to focus on what&#39;s important, get data-supported insights that will make their business successful.</p> 

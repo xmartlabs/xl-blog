@@ -1,0 +1,15 @@
+{
+  "name": "Xmartlabs | Blog",
+  "short_name": "Xmartlabs Blog",
+  "start_url": "/",
+  "display": "minimal-ui",
+  "background_color": "#ffffff",
+  "theme_color": "#ee1a64",
+  "icons": [
+    {
+      "src": "/favicon.png",
+      "sizes": "32x32",
+      "type": "image/png"
+    }
+  ]
+}

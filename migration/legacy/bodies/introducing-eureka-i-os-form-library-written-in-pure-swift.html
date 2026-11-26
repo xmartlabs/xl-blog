@@ -1,0 +1,116 @@
+ <p>We are incredibly excited to announce <a href="https://github.com/xmartlabs/Eureka">Eureka!</a>, our first Swift open source project designed to easily build dynamic table-view forms.</p>
+<p><strong>Why we built Eureka!</strong></p>
+<p>April last year we released XLForm, an open source obj-c iOS library to build dynamic complex forms based on a DSL. Luckily it has been largely used by iOS community and in thousands of apps saving a lot of development time.</p>
+<p>After Swift release a huge part of the iOS community started to use <a href="https://github.com/xmartlabs/XLForm">XLForm</a> from Swift projects. We added support for Swift but we were not able to use all of the Swift language benefits so we rethought XLForm and built something from scratch following the swift way and taking advantage of all Swift language capabilities.</p>
+<p><strong>About Eureka!</strong></p>
+<p>Eureka is a library that can be used to create dynamic table-view forms and which uses a high level DSL abstraction to specify the forms. Sounds familiar? (hint: <a href="https://github.com/xmartlabs/XLForm">XLForm</a>)</p>
+<h2 id="what-makes-eureka-so-special">What makes Eureka so special?</h2>
+<p>Eureka was originally designed to be:</p>
+<ul>
+<li><a href="#elegant-concise-readable"><em>Elegant, concise syntax and super readable</em></a></li>
+<li><a href="#dynamic-forms"><em>Support dynamic table-view forms</em></a></li>
+<li><a href="#fully-customizable"><em>Fully customizable</em></a></li>
+<li><a href="#safe"><em>Safe</em></a></li>
+<li><a href="#powerful-and-flexible"><em>Powerful and Flexible</em></a></li>
+<li><a href="#extensible"><em>Extensible</em></a></li>
+</ul>
+<p>Eureka takes advantage of Swift language capabilities such as <a href="https://developer.apple.com/library/ios/documentation/Swift/Conceptual/Swift_Programming_Language/Generics.html">generics</a>, functional and protocol oriented programming, operators, protocol extensions and much more to accomplish these design goals.</p>
+<p>Let's deep into what we mean by each of the listed points.</p>
+<h3 id="elegant-concise-syntax-and-super-readable-">Elegant, concise syntax and super readable <a name="elegant-concise-readable"></a></h3>
+<p>Eureka uses a chainable approach along with custom swift operators to declare a table-view form.</p>
+<span><div class="code-highlight" data-language="text"><pre class="language-text" data-language="text"><code class="language-text">self.form +++=  DateRow("Date") {
+                  $0.value = NSDate()
+                  $0.title = "The clock says:"
+                }
+           &#x3C;&#x3C;&#x3C;  CheckRow("Check") {
+                  $0.title = "Check"
+                  $0.value = true
+                }
+           +++  SegmentedRow&#x3C;Emoji>("SegmentedRow") {
+                  $0.title = "Who are You?"
+                  $0.options = [💁, 🍐, 👦, 🐗, 🐼, 🐻]
+                  $0.value = 🍐
+                }
+           &#x3C;&#x3C;&#x3C;  PhoneRow("Phone") { $0.placeholder = "Phone" }</code></pre></div></span>
+<h3 id="support-dynamic-table-view-forms-">Support dynamic table-view forms <a name="dynamic-forms"></a></h3>
+<p>Eureka provides a very powerful DSL used to create a form, basically a form is represented by a <span><code class="language-text">Form</code></span> instance that contains   Sections which finally contain Rows. This data structure is identical to how table-views deal with the sections and cells.
+Typically any form we might build needs to make a row or section visible/invisible depending on a certain condition or action. To address this problem Eureka keeps track of any change made on the <span><code class="language-text">Form</code></span> and updates the <span><code class="language-text">FormViewController</code></span> table view accordingly and on the fly. This means that any change made through insertion, deletion or replacement of either a row or a section will be reflected on the tableView of the <span><code class="language-text">FormViewController</code></span>.
+Based on that, you do not have to deal with table-view delegates and data sources anymore.</p>
+<h3 id="fully-customizable">Fully customizable</h3>
+<p>Typically there is no need to define a new <span><code class="language-text">Row</code></span> to customize the appearance of a row or a cell.</p>
+<p>However, full customization is supported. Eureka! provides 2 customization levels, general and individual customization. Individual customization always overrides general customization.</p>
+<h4 id="general-customization">General customization</h4>
+<p>General customization allows us to make changes to all rows or cells of a specific type.</p>
+<span><div class="code-highlight" data-language="swift"><pre class="language-swift" data-language="swift"><code class="language-swift"><span class="token comment">// set up minimumDate for all DateRows</span>
+<span class="token class-name">DateRow</span><span class="token punctuation">.</span>defaultRowInitializer <span class="token operator">=</span> <span class="token punctuation">{</span> row <span class="token keyword">in</span> row<span class="token punctuation">.</span>minimumDate <span class="token operator">=</span> <span class="token class-name">NSDate</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">}</span>
+<span class="token comment">// modify all NameRow cell textField font to UIFont.systemFontOfSize(fontSize: 12.0)</span>
+<span class="token class-name">NameRow</span><span class="token punctuation">.</span>defaultCellUpdate <span class="token operator">=</span> <span class="token punctuation">{</span> cell<span class="token punctuation">,</span> row <span class="token keyword">in</span> cell<span class="token punctuation">.</span>textField<span class="token operator">?</span><span class="token punctuation">.</span>font <span class="token operator">=</span>  <span class="token class-name">UIFont</span><span class="token punctuation">.</span><span class="token function">systemFontOfSize</span><span class="token punctuation">(</span>fontSize<span class="token punctuation">:</span> <span class="token number">12.0</span><span class="token punctuation">)</span>  <span class="token punctuation">}</span>
+<span class="token comment">// Modify all CheckRow cells in order to show a orange check mark.  </span>
+<span class="token class-name">CheckRow</span><span class="token punctuation">.</span>defaultCellSetup <span class="token operator">=</span> <span class="token punctuation">{</span> cell<span class="token punctuation">,</span> row <span class="token keyword">in</span> cell<span class="token punctuation">.</span>tintColor <span class="token operator">=</span> <span class="token class-name">UIColor</span><span class="token punctuation">.</span><span class="token function">orangeColor</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">}</span></code></pre></div></span>
+<p>Notice that the cell and row parameters are strongly typed and these 3 method are injected automatically through protocol extensions since all rows should conform to <span><code class="language-text">RowType</code></span>.</p>
+<h4 id="individual-customization">Individual customization</h4>
+<p>Individual customization allows us to make changes to a particular row or cell instance.</p>
+<span><div class="code-highlight" data-language="swift"><pre class="language-swift" data-language="swift"><code class="language-swift"><span class="token comment">// Every row has a initializer that receive a tag and a initializer blog</span>
+<span class="token comment">// as a first and second parameter respectively.</span>
+<span class="token keyword">let</span> segmentedRow <span class="token operator">=</span>  <span class="token class-name">SegmentedRow</span><span class="token operator">&#x3C;</span><span class="token class-name">Emoji</span><span class="token operator">></span><span class="token punctuation">(</span><span class="token string-literal"><span class="token string">"Emoji"</span></span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+                      <span class="token short-argument">$0</span><span class="token punctuation">.</span>title <span class="token operator">=</span> <span class="token string-literal"><span class="token string">"Who are You?"</span></span>  <span class="token comment">// set up the row title</span>
+                      <span class="token short-argument">$0</span><span class="token punctuation">.</span>options <span class="token operator">=</span> <span class="token punctuation">[</span>💁<span class="token punctuation">,</span> 🍐<span class="token punctuation">,</span> 👦<span class="token punctuation">,</span> 🐗<span class="token punctuation">,</span> 🐼<span class="token punctuation">,</span> 🐻<span class="token punctuation">]</span> <span class="token comment">// available options</span>
+                      <span class="token short-argument">$0</span><span class="token punctuation">.</span>value <span class="token operator">=</span> 🍐 <span class="token comment">// selected value</span>
+                      <span class="token short-argument">$0</span><span class="token punctuation">.</span>isDisabled <span class="token operator">=</span> <span class="token boolean">true</span> <span class="token comment">// disable the row by default</span>
+                    <span class="token punctuation">}</span>
+<span class="token comment">// Every Row has a cellSetup and cellUpdate method that receive a function as a parameter and</span>
+<span class="token comment">// return the concrete row instance.</span>
+<span class="token keyword">let</span> nameRow <span class="token operator">=</span>  <span class="token class-name">NameRow</span><span class="token punctuation">(</span><span class="token string-literal"><span class="token string">"Name"</span></span><span class="token punctuation">)</span><span class="token punctuation">.</span>cellSetup <span class="token punctuation">{</span> cell<span class="token punctuation">,</span> row <span class="token keyword">in</span>
+                                cell<span class="token punctuation">.</span>textField<span class="token punctuation">.</span>placeholder <span class="token operator">=</span> <span class="token string-literal"><span class="token string">"Your name ..."</span></span>
+                              <span class="token punctuation">}</span>
+                              <span class="token punctuation">.</span>cellUpdate <span class="token punctuation">{</span> cell<span class="token punctuation">,</span> row <span class="token keyword">in</span>
+                                cell<span class="token punctuation">.</span>textLabel<span class="token operator">?</span><span class="token punctuation">.</span>textColor <span class="token operator">=</span> <span class="token class-name">UIColor</span><span class="token punctuation">.</span><span class="token function">redColor</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+                              <span class="token punctuation">}</span></code></pre></div></span>
+<p>Notice that the parameter function type is <span><code class="language-text">(NameCell, NameRow) -> ()</code></span> for <span><code class="language-text">NameRow</code></span> and is <span><code class="language-text">(SegmentedCell&#x3C;Emoji>, SegmentedRow&#x3C;Emoji>) -> ()</code></span> for <span><code class="language-text">SegmentedRow&#x3C;Emoji></code></span>.</p>
+<h3 id="safe">Safe</h3>
+<p>Eureka uses Swift's <a href="https://developer.apple.com/library/ios/documentation/Swift/Conceptual/Swift_Programming_Language/TheBasics.html">type safety</a> to help avoiding mistakes while developing. Each Eureka <span><code class="language-text">Row</code></span> allocates a <strong>strongly typed</strong> value and any form definition and configuration is made over specific concrete object types.</p>
+<p>For example in the code example shown above <span><code class="language-text">$0</code></span> is an instance of <span><code class="language-text">SegmentedRow&#x3C;Emoji></code></span> and its <span><code class="language-text">value</code></span> property type is <span><code class="language-text">Emoji</code></span> whereas NameRow's <span><code class="language-text">value</code></span> property type is <span><code class="language-text">String</code></span>. Similarly <span><code class="language-text">SegmentedRow&#x3C;Emoji></code></span>'s <span><code class="language-text">options</code></span> array property only stores <span><code class="language-text">Emoji</code></span> instances and <span><code class="language-text">options</code></span> is not available in <span><code class="language-text">NameRow</code></span>.
+The same applies to any chainable method we invoke to set up a row, for example <span><code class="language-text">cell</code></span> and <span><code class="language-text">row</code></span> parameters of <span><code class="language-text">cellUpdate</code></span> and <span><code class="language-text">cellSetup</code></span> closure are also strongly typed.</p>
+<p>Additionally Eureka makes sure that each new user defined <span><code class="language-text">Row</code></span> has a specific value type and a specific TableViewCell type, this is possible combining Swift Generics and Type Constraints. By definition any <span><code class="language-text">Row</code></span> must extend from <span><code class="language-text">Row&#x3C;T: Equatable, Cell: CellType where Cell: BaseCell, Cell.Value == T></code></span> class ensuring that each <span><code class="language-text">Row</code></span> has a defined value type <span><code class="language-text">T</code></span> and works with a specific table view cell <span><code class="language-text">Cell</code></span> which holds a row of type <span><code class="language-text">T</code></span>.</p>
+<p>I can ensure Eureka is super safe either during form creation or when defining new row and cell types.</p>
+<h3 id="powerful-and-flexible">Powerful and Flexible</h3>
+<p>Eureka allows us to easily attach onChange and onSelect handlers to a row.</p>
+<span><div class="code-highlight" data-language="text"><pre class="language-text" data-language="text"><code class="language-text">let segmentedRow =  SegmentedRow&#x3C;Emoji>("Emoji"){
+                      $0.title = "Who are You?"  // set up the row title
+                      $0.options = [💁, 🍐, 👦, 🐗, 🐼, 🐻] // available options
+                    }
+                    .onChange { row in print(row.value?.name) } // row.value is Emoji?, name is a stored property
+                    .onCellSelection { cell, row in print("Cell was selected") }</code></pre></div></span>
+<h4 id="form-and-section-conform-to-rangereplaceablecollectiontype-mutablecollectiontype">Form and Section conform to RangeReplaceableCollectionType, MutableCollectionType</h4>
+<p>As mentioned before, Eureka <span><code class="language-text">Forms</code></span> contain a list of <span><code class="language-text">Sections</code></span> and a section contains a list of <span><code class="language-text">Rows</code></span>. We made <span><code class="language-text">Form</code></span> and <span><code class="language-text">Section</code></span> conform to <span><code class="language-text">RangeReplaceableCollectionType</code></span> and <span><code class="language-text">MutableCollectionType</code></span>, which both "inherit" from the well known <a href="https://developer.apple.com/library/prerelease/ios/documentation/Swift/Reference/Swift_CollectionType_Protocol/index.html">CollectionType</a> protocol.</p>
+<p>Doing that we gain for free a lot of helpers and behaviour and we are able to iterate over the collection, use subscript to access and modify a Section or a Row, make use of some cool functions like map, filter, first, removeRange, reduce and much much more.</p>
+<p>Let's see this in action assuming form is an instance of Form:</p>
+<span><div class="code-highlight" data-language="swift"><pre class="language-swift" data-language="swift"><code class="language-swift"><span class="token comment">// let's get second form section and append a new DateRow</span>
+<span class="token keyword">let</span> section_two <span class="token operator">=</span> form<span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span> <span class="token operator">&#x3C;&#x3C;&#x3C;</span> <span class="token class-name">DateRow</span><span class="token punctuation">(</span><span class="token string-literal"><span class="token string">"Date"</span></span><span class="token punctuation">)</span> <span class="token punctuation">{</span> <span class="token short-argument">$0</span><span class="token punctuation">.</span>value <span class="token operator">=</span> <span class="token class-name">NSDate</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">}</span> <span class="token comment">// we can also use append instead of &#x3C;&#x3C;&#x3C; operator</span>
+
+<span class="token comment">// What about replacing section two?</span>
+form<span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span> <span class="token operator">=</span> newSection <span class="token comment">// ;)</span>
+
+<span class="token comment">// lets add a new button row to all sections</span>
+<span class="token keyword">for</span> <span class="token punctuation">(</span>index<span class="token punctuation">,</span> section<span class="token punctuation">)</span> <span class="token keyword">in</span> form<span class="token punctuation">.</span><span class="token function">enumerate</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    section <span class="token operator">&#x3C;&#x3C;&#x3C;</span> <span class="token class-name">ButtonRow</span><span class="token punctuation">(</span><span class="token string-literal"><span class="token string">"Button</span><span class="token interpolation-punctuation punctuation">\(</span><span class="token interpolation">index</span><span class="token interpolation-punctuation punctuation">)</span><span class="token string">"</span></span><span class="token punctuation">)</span> <span class="token punctuation">{</span> <span class="token short-argument">$0</span><span class="token punctuation">.</span>title <span class="token operator">=</span> <span class="token string-literal"><span class="token string">"Some title"</span></span> <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+
+<span class="token comment">// replace rows from 3 to 7 with a checkRow</span>
+section_two<span class="token punctuation">.</span><span class="token function">replaceRange</span><span class="token punctuation">(</span><span class="token number">3</span><span class="token operator">..&#x3C;</span><span class="token number">7</span><span class="token punctuation">,</span> with<span class="token punctuation">:</span> <span class="token punctuation">[</span><span class="token class-name">CheckRow</span><span class="token punctuation">(</span><span class="token string-literal"><span class="token string">"checkRow"</span></span><span class="token punctuation">)</span><span class="token punctuation">]</span><span class="token punctuation">)</span>
+
+<span class="token comment">// we can also look up for CheckRows inside a section by..</span>
+section_two<span class="token punctuation">.</span>filter <span class="token punctuation">{</span> <span class="token short-argument">$0</span> <span class="token keyword">is</span> <span class="token class-name">CheckRow</span> <span class="token punctuation">}</span>
+
+<span class="token comment">// one more example</span>
+form <span class="token operator">+=</span> <span class="token punctuation">[</span>newSection1<span class="token punctuation">,</span> newSection2<span class="token punctuation">]</span>
+section <span class="token operator">+=</span> <span class="token punctuation">[</span>newRow1<span class="token punctuation">,</span> newRow2<span class="token punctuation">,</span> newRow3<span class="token punctuation">]</span>
+
+<span class="token comment">//And there are much more possibilities ;)</span></code></pre></div></span>
+<h3 id="extensible">Extensible</h3>
+<p>Adding a new <span><code class="language-text">Row</code></span> definition is super simple by extending <span><code class="language-text">Row&#x3C;T, Cell></code></span> and conforming to <span><code class="language-text">RowType</code></span>. The basic behaviour of the row is inherited either from the superclass or added through protocol extension. Based on that you should only provide the row definition and the UITableViewCell that the <span><code class="language-text">Row</code></span> handles. Eureka provides many rows by default that actually have no conceptual difference from a user defined row.</p>
+<h3 id="and-we-are-planning-more">And we are planning more...</h3>
+<p>We understand that Eureka's first version is very capable and powerful but we plan to enhance it even further. Among what we plan to improve is adding more row types, inline row support and multivalued sections.</p>
+<p>This post is just intended to briefly introduce Eureka and some of its architecture insights.
+If you are interested in how to use Eureka I would suggest you to take a look at its <a href="https://github.com/xmartlabs/Eureka">github repository readme</a>, You can also run the example project and  play with Eureka playground that are contained in Eureka workspace.</p>
+<p>If you liked what you have read, want to suggest some feature, contribute to the project or you need some help on how to use it please drop us a line on <a href="https://twitter.com/xmartlabs">twitter</a>.</p> 

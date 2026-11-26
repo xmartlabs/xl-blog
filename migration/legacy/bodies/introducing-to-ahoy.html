@@ -1,0 +1,64 @@
+ <p>We’re pretty sure you’ll need to include an onboarding library in the iOS App you’re building. In order to speed up the time spent in development while giving the developers freedom to build an awesome experience for their users, we created <a href="https://github.com/xmartlabs/Ahoy">Ahoy</a>, developed in Swift!</p>
+<p>Unique?
+Yes. We know that there are some other alternatives out there, but due to the fact that we always had to tweak them in order to meet our needs, we decided to create our own framework and open source it (Woohoo!).</p>
+<h2 id="why-using-ahoy">Why using Ahoy?</h2>
+<p>The ease and speed to create what you need, are the first things to spotlight.
+The flexibility to customize it the way you want comes next.</p>
+<p>In Ahoy you can:</p>
+<ul>
+<li>Customize number of pages</li>
+<li>Tweak text labels</li>
+<li>Add images</li>
+<li>Include a button to skip or continue</li>
+<li>Enable the option to move to the next page</li>
+<li>Make awesome transitions between steps, via the visibilityChanged callback</li>
+</ul>
+<p>Some of the common actions that we always use were taken into account when we created Ahoy.</p>
+<p>Basic overview:</p>
+<p><span><code class="language-text">onOnboardingSkipped</code></span> is called by the controller when the user taps on the skip action.</p>
+<p><span><code class="language-text">onOnBoardingFinished</code></span> is called by the controller when the user taps on the finish button.</p>
+<p><span><code class="language-text">visibilityChanged(for cell: UICollectionViewCell, at index: Int, amount: CGFloat)</code></span> is called each time the visibility of a cell changes (pst, use this option to incorporate some cool animations between each cell).</p>
+<p><strong>Bonus track:</strong> if you feel like it, you can redo the whole UI and just plug it in.</p>
+<p align="center">
+  <img src="https://raw.githubusercontent.com/xmartlabs/Ahoy/master/movie.gif" alt="Ahoy in action!">
+</p>
+<h2 id="setup">Setup</h2>
+<p>In order to setup your onboarding you just need to define 2 components:</p>
+<ol>
+<li>Specify the view controller that you are going to use, and set it as a subclass from <span><code class="language-text">OnboardingViewController</code></span>.
+This component will be responsible for all the logic related to the slides, and the management of their global controls (for instance, a skip button).</li>
+<li>Choose a Presenter to implement the protocol <span><code class="language-text">OnboardingPresenter</code></span> or the subclassing from <span><code class="language-text">BasePresenter</code></span>.
+This component will handle all the specific functionalities for each cell (which text goes where, the type of cells, etc).</li>
+</ol>
+<p>Once you’ve defined the two components you’re good to go! Remember that you can also add any other UI component that you want. Add them via IBOutlets or directly in the code.</p>
+<p><strong>Note:</strong> Create your <span><code class="language-text">OnboardingViewController</code></span> subclass and set the presenter property to an instance of your presenter's class. Take into account that this must be done <strong>before</strong> calling <span><code class="language-text">super.viewDidLoad()</code></span>, otherwise, you won't see the onboarding view.</p>
+<h2 id="example">Example</h2>
+<span><div class="code-highlight" data-language="swift"><pre class="language-swift" data-language="swift"><code class="language-swift"><span class="token keyword">import</span> <span class="token class-name">Ahoy</span>
+<span class="token keyword">class</span> <span class="token class-name">MovieFanOnboardingController</span><span class="token punctuation">:</span> <span class="token class-name">OnboardingViewController</span> <span class="token punctuation">{</span>
+
+    <span class="token keyword">override</span> <span class="token keyword">func</span> <span class="token function-definition function">viewDidLoad</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        presenter <span class="token operator">=</span> <span class="token class-name">MovieFanPresenter</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+        presenter<span class="token punctuation">.</span>onOnBoardingFinished <span class="token operator">=</span> <span class="token punctuation">{</span> <span class="token punctuation">[</span><span class="token keyword">weak</span> <span class="token keyword">self</span><span class="token punctuation">]</span> <span class="token keyword">in</span>
+            <span class="token omit keyword">_</span> <span class="token operator">=</span> <span class="token keyword">self</span><span class="token operator">?</span><span class="token punctuation">.</span>navigationController<span class="token operator">?</span><span class="token punctuation">.</span><span class="token function">popViewController</span><span class="token punctuation">(</span>animated<span class="token punctuation">:</span> <span class="token boolean">true</span><span class="token punctuation">)</span>
+        <span class="token punctuation">}</span>
+        <span class="token keyword">super</span><span class="token punctuation">.</span><span class="token function">viewDidLoad</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword">class</span> <span class="token class-name">MovieFanPresenter</span><span class="token punctuation">:</span> <span class="token class-name">BasePresenter</span> <span class="token punctuation">{</span>
+  <span class="token comment">// Your presenter implementation's here</span>
+<span class="token punctuation">}</span></code></pre></div></span>
+<h2 id="installation">Installation</h2>
+<p>You can install Ahoy by using CocoaProjects or Carthage, both are very simple and easy!</p>
+<h3 id="cocoapods">CocoaPods</h3>
+<p>CocoaPods is a dependency manager for Cocoa projects.
+To install Ahoy, simply add the following line to your Podfile:</p>
+<span><div class="code-highlight" data-language="ruby"><pre class="language-ruby" data-language="ruby"><code class="language-ruby">pod <span class="token string-literal"><span class="token string">'Ahoy'</span></span><span class="token punctuation">,</span> <span class="token string-literal"><span class="token string">'~> 1.0'</span></span></code></pre></div></span>
+<h3 id="carthage">Carthage</h3>
+<p>Carthage is a simple and decentralized dependency manager for Cocoa.
+To install Ahoy, simply add the following line to your Cartfile:</p>
+<span><div class="code-highlight" data-language="ruby"><pre class="language-ruby" data-language="ruby"><code class="language-ruby">github <span class="token string-literal"><span class="token string">"xmartlabs/Ahoy"</span></span> <span class="token operator">~</span><span class="token operator">></span> <span class="token number">1.0</span></code></pre></div></span>
+<h2 id="whats-next">What’s next?</h2>
+<p>We hope that Ahoy will be as useful for you as it was for us and that you create incredible onboarding views with it! We are also willing to receive your collaboration in our humble but helpful <a href="https://github.com/xmartlabs/Ahoy">library</a>.</p>
+<p>Need other quick but powerful solutions?
+Visit us on <a href="https://github.com/xmartlabs">GitHub</a>, we’re one of the top 10 GitHub Swift developers :), or drop us a line at <a href="mailto:hi@xmartlabs.com"></a><a href="mailto:hi@xmartlabs.com">hi@xmartlabs.com</a></p> 

@@ -1,12 +1,18 @@
 import React from 'react';
 
-export const XmartlabsLogo = () => (
+/**
+ * Square brand mark. Extra props (e.g. width/height) go to the <svg>; the site passes none.
+ *
+ * @param {import('react').SVGProps<SVGSVGElement>} svgProps
+ */
+export const XmartlabsLogo = (svgProps) => (
   <svg
     width="44"
     height="44"
     viewBox="0 0 56 56"
     fill="none"
     xmlns="http://www.w3.org/2000/svg"
+    {...svgProps}
   >
     <rect width="56" height="56" fill="#EE1A64" />
     <path

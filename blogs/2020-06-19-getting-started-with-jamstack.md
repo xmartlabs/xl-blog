@@ -5,7 +5,7 @@ tags: [Jamstack, Markup, Static Site Generator, Static Website, web stack, Xmart
 excerpt: "In this blogpost, we cover all you need to get started with Jamstack. From its meaning and best practices to what caused Jamstack's rapid adoption as a web stack alternative."
 category: development
 author: mtnBarreto
-thumbnail: images/jamstack-intro/featured.jpeg
+thumbnail: /images/jamstack-intro/featured.jpeg
 permalink: /2020-06-22-getting-started-with-jamstack/
 ---
 

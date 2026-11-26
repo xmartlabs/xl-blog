@@ -1,0 +1,87 @@
+ <p>We are happy to announce a new <a href="https://github.com/xmartlabs/react-native-line">react-native-line</a> version that supports the latest updates on the <a href="https://developers.line.biz/en/docs/line-login/overview/">LINE SDK</a> and it&#39;s available to download via <a href="https://www.npmjs.com/package/@xmartlabs/react-native-line">npm</a>!</p>
+<p>When one of our projects called for an integration of sign in with <a href="https://line.me/en/">Line</a> (which <a href="https://www.statista.com/statistics/735063/japan-number-of-line-users/#:~:text=Number%20of%20LINE%20users%20in%20Japan%202016%2D2021&amp;text=In%202016%2C%20approximately%2045.5%20million,58.5%20million%20users%20in%202021.">is pretty popular in Japan</a>), there were not any maintained alternatives in the React Native community so we decided to develop our own!</p>
+<img src="/images/react-native-line/example1.png" alt="Example app main" width="300"/>
+<img src="/images/react-native-line/example2.png" alt="Example app permissions" width="300"/>
+<p style="text-align:center;color:gray;font-size:14px;font-style:italic">(Example app with <code>react-native-line</code> integration)</p>
+<p>A few years after the first release, being more specific in 2019, an <a href="https://github.com/xmartlabs/react-native-line/issues/31">issue</a> was reported asking us for supporting React Native versions greater than 0.58.
+The newest React Native version introduced some breaking changes so we spent some time making it compatible again with the latest libraries.</p>
+<p>Let&#39;s get into its functionality and how it works....</p>
+<h1 id="functionalities">Functionalities</h1>
+<h3 id="login-with-arguments">Login with Arguments</h3>
+<p>The new login functionality accepts any kind of argument like the native LineSDK.</p>
+<p>Try out any of the following arguments:</p>
+<span><div class="code-highlight" data-language="js"><pre class="language-js" data-language="js"><code class="language-js"><span class="token punctuation">{</span>
+  scopes<span class="token operator">?</span><span class="token operator">:</span> LoginPermission<span class="token punctuation">[</span><span class="token punctuation">]</span>
+  onlyWebLogin<span class="token operator">?</span><span class="token operator">:</span> boolean
+  botPrompt<span class="token operator">?</span><span class="token operator">:</span> BotPrompt
+<span class="token punctuation">}</span></code></pre></div></span>
+<p>Where <span><code class="language-text">scopes</code></span> accepts:</p>
+<span><div class="code-highlight" data-language="js"><pre class="language-js" data-language="js"><code class="language-js"><span class="token punctuation">{</span>
+  <span class="token constant">EMAIL</span> <span class="token operator">=</span> <span class="token string">&#39;email&#39;</span><span class="token punctuation">,</span>
+  <span class="token comment">/// The permission to get an ID token in the login response.</span>
+  <span class="token constant">OPEN_ID</span> <span class="token operator">=</span> <span class="token string">&#39;openid&#39;</span><span class="token punctuation">,</span>
+
+  <span class="token comment">/// The permission to get the user&#39;s profile including the user ID, display name, and the profile image</span>
+  <span class="token comment">/// URL in the login response.</span>
+  <span class="token constant">PROFILE</span> <span class="token operator">=</span> <span class="token string">&#39;profile&#39;</span><span class="token punctuation">,</span>
+<span class="token punctuation">}</span></code></pre></div></span>
+<p>and <span><code class="language-text">botPrompt</code></span>:</p>
+<span><div class="code-highlight" data-language="js"><pre class="language-js" data-language="js"><code class="language-js"><span class="token punctuation">{</span>
+  aggressive <span class="token operator">=</span> <span class="token string">&#39;aggressive&#39;</span><span class="token punctuation">,</span>
+  normal <span class="token operator">=</span> <span class="token string">&#39;normal&#39;</span><span class="token punctuation">,</span>
+<span class="token punctuation">}</span></code></pre></div></span>
+<p>This means your application would have the ability to get specific logged user information such as email address, user id, URL, and more!</p>
+<h3 id="logout">Logout</h3>
+<p>Simply trigger this piece of code to logout the user:</p>
+<span><div class="code-highlight" data-language="js"><pre class="language-js" data-language="js"><code class="language-js"><span class="token keyword">try</span> <span class="token punctuation">{</span>
+   <span class="token operator">...</span>
+   <span class="token keyword">await</span> Line<span class="token punctuation">.</span><span class="token function">logout</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+   <span class="token operator">...</span>
+<span class="token punctuation">}</span> <span class="token keyword">catch</span> <span class="token punctuation">(</span>error<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+   <span class="token operator">...</span>
+<span class="token punctuation">}</span></code></pre></div></span>
+<h3 id="get-logged-user-information">Get logged user information</h3>
+<p>If you want to get information from the logged user, just run this snippet of code:</p>
+<span><div class="code-highlight" data-language="js"><pre class="language-js" data-language="js"><code class="language-js"><span class="token keyword">try</span> <span class="token punctuation">{</span>
+   <span class="token operator">...</span>
+   <span class="token keyword">const</span> profile <span class="token operator">=</span> <span class="token keyword">await</span> Line<span class="token punctuation">.</span><span class="token function">getProfile</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+   <span class="token operator">...</span>
+<span class="token punctuation">}</span> <span class="token keyword">catch</span> <span class="token punctuation">(</span>error<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+   <span class="token operator">...</span>
+<span class="token punctuation">}</span></code></pre></div></span>
+<p>And you will get this <span><code class="language-text">profile</code></span> object to use as you wish:</p>
+<span><div class="code-highlight" data-language="js"><pre class="language-js" data-language="js"><code class="language-js"><span class="token punctuation">{</span>
+   <span class="token comment">/// The user ID of the current authorized user.</span>
+  <span class="token literal-property property">userID</span><span class="token operator">:</span> String
+
+  <span class="token comment">/// The display name of the current authorized user.</span>
+  <span class="token literal-property property">displayName</span><span class="token operator">:</span> string
+
+  <span class="token comment">/// The profile image URL of the current authorized user. `null` if the user has not set a profile</span>
+  <span class="token comment">/// image.</span>
+  pictureURL<span class="token operator">?</span><span class="token operator">:</span> string
+
+  <span class="token comment">/// The status message of the current authorized user. `null` if the user has not set a status message.</span>
+  statusMessage<span class="token operator">?</span><span class="token operator">:</span> string
+<span class="token punctuation">}</span></code></pre></div></span>
+<h3 id="get-and-refresh-access-token">Get and refresh access token</h3>
+<p>LINE <a href="https://developers.line.biz/en/docs/android-sdk/managing-access-tokens/#refresh-token">encourages</a> to let the SDK to take care of the token management. But if for some reason you want to handle it, you have these functionalities in your swiss-army-knife:</p>
+<ul>
+<li>Current token: <span><code class="language-text">getCurrentAccessToken()</code></span></li>
+<li>Refresh token: <span><code class="language-text">refreshToken()</code></span></li>
+<li>Verify token: <span><code class="language-text">verifyAccessToken()</code></span></li>
+</ul>
+<h3 id="get-bot-prompt">Get bot prompt</h3>
+<p>Finally, you can get your user friendship status with the Line Official Account. You need to configure it in your account, specify the <span><code class="language-text">botPrompt</code></span> option when logging in and then call <span><code class="language-text">getBotFriendshipStatus()</code></span> method.
+Follow <a href="https://developers.line.biz/en/docs/line-login/link-a-bot/">LINE&#39;s instructions for more information</a> on how to link the bot to your account.</p>
+<h1 id="comments-about-the-library">Comments about the library</h1>
+<h3 id="implementation">Implementation</h3>
+<p>Unlike most natives modules in the React Native community which are developed in Objective-C and Java, new React Native Line version is implemented using Swift and Kotlin at a low level.</p>
+<p>This was an easy decision to make. First, we have been using Swift and Kotlin since their first release. Secondly, <a href="https://developers.line.biz/en/docs/ios-sdk/objective-c/overview/">Line SDK is deprecating the Objective-C version</a> on behalf of Swift (see image below). Lastly, and this is more obvious, Swift and Kotlin are modern, more intuitive, easy to read, and maintain than Obj-c and Java respectively.</p>
+<img src="/images/react-native-line/migrate.png" alt="deprecation advertisement"/>
+<h1 id="integration-guide">Integration Guide</h1>
+<p>If you&#39;re using LineSDK for the first time, you can check the <a href="https://github.com/xmartlabs/react-native-line#installation">installation guide</a>.</p>
+<p>If you want to update to the latest version, please check out our fined-tuned <a href="https://github.com/xmartlabs/react-native-line#migration-from-v1xx">migration guide</a>.</p>
+<h1 id="final-thoughts">Final thoughts</h1>
+<p>We hope you find it useful. Don&#39;t hesitate to contact us if you need any help or have a great new feature idea. We will be more than happy to keep this project growing!</p>
+<p>Finally, we also want to thank <a href="https://github.com/xmartlabs/react-native-line#contributors">everyone</a> that helps create and maintain this library.</p> 

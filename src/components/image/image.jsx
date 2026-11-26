@@ -1,7 +1,13 @@
+/* eslint-disable @next/next/no-img-element -- Plain <img> on purpose: the markup must match the old site exactly (pixel-parity tests), and images are served from /images or external URLs as before. */
 import React from 'react';
-import PropTypes from 'prop-types';
 
-const Image = ({ src, alt, width, height, aspectRatio }) => {
+const Image = ({
+  src,
+  alt = 'Xmartlabs',
+  width = '100%',
+  height = '315px',
+  aspectRatio = '16/9',
+}) => {
   const isMultiple = Array.isArray(src);
 
   const imageStyle = {
@@ -34,24 +40,6 @@ const Image = ({ src, alt, width, height, aspectRatio }) => {
   }
 
   return <img src={src} alt={alt} style={imageStyle} />;
-};
-
-Image.propTypes = {
-  src: PropTypes.oneOfType([
-    PropTypes.string,
-    PropTypes.arrayOf(PropTypes.string),
-  ]).isRequired,
-  alt: PropTypes.string,
-  width: PropTypes.string,
-  height: PropTypes.string,
-  aspectRatio: PropTypes.string,
-};
-
-Image.defaultProps = {
-  width: '100%',
-  height: '315px',
-  alt: 'Xmartlabs',
-  aspectRatio: '16/9',
 };
 
 export { Image };

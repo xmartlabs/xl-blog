@@ -1,0 +1,129 @@
+import path from 'path';
+import { fileURLToPath } from 'url';
+
+import { postgresAdapter } from '@payloadcms/db-postgres';
+import { lexicalEditor } from '@payloadcms/richtext-lexical';
+import { vercelBlobStorage } from '@payloadcms/storage-vercel-blob';
+import { buildConfig } from 'payload';
+import sharp from 'sharp';
+
+import { canRunJobs } from './lib/cron-auth';
+import { emailAdapter, getEmailSettings } from './lib/email';
+import { getGoogleAuthSettings, googleAuthPlugin } from './auth/google';
+import { decidePasswordLogin, withPasswordLogin } from './auth/password-login';
+import { seedFirstAdmin } from './auth/seedFirstAdmin';
+import { Authors } from './collections/Authors';
+import { Categories } from './collections/Categories';
+import { Media } from './collections/Media';
+import { Posts } from './collections/Posts';
+import { Users } from './collections/Users';
+
+const filename = fileURLToPath(import.meta.url);
+const dirname = path.dirname(filename);
+
+const googleAuth = getGoogleAuthSettings();
+// DISABLE_PASSWORD_LOGIN=true: Google only (ignored, with a warning, when Google isn't set up).
+const passwordLogin = decidePasswordLogin(process.env, googleAuth !== null);
+// RESEND_API_KEY + EMAIL_FROM: password-reset emails via Resend. Otherwise they're logged.
+const email = getEmailSettings();
+
+export default buildConfig({
+  // Login tokens come from the payload-token cookie (admin, previews) or `Authorization: JWT`.
+  // `Bearer` is left out on purpose: Vercel Cron sends `Authorization: Bearer $CRON_SECRET`,
+  // which Payload would otherwise try to verify as a login token on every run and log
+  // "Invalid Compact JWS". The cron secret is checked separately (src/lib/cron-auth.ts).
+  auth: { jwtOrder: ['JWT', 'cookie'] },
+  admin: {
+    user: Users.slug,
+    importMap: {
+      baseDir: path.resolve(dirname),
+    },
+    meta: {
+      titleSuffix: ' – Xmartlabs Blog',
+      description: 'Write and publish posts for the Xmartlabs blog.',
+      icons: [{ rel: 'icon', type: 'image/png', url: '/favicon.png' }],
+      openGraph: {
+        siteName: 'Xmartlabs Blog',
+        title: 'Xmartlabs Blog – Admin',
+        description: 'Write and publish posts for the Xmartlabs blog.',
+        images: [{ url: '/images/og-thumbnail.png' }],
+      },
+    },
+    components: {
+      graphics: {
+        Logo: '/components/admin/Logo#Logo',
+        Icon: '/components/admin/Icon#Icon',
+      },
+      beforeDashboard: ['/components/admin/Welcome#Welcome'],
+      // Google is the main way in, so its button goes above the email/password form (kept
+      // for the break-glass admin). Always registered (so the import map doesn't depend on
+      // env vars); it renders nothing unless Google sign-in is configured.
+      beforeLogin: [
+        {
+          path: '/auth/GoogleLoginButton#GoogleLoginButton',
+          clientProps: {
+            enabled: googleAuth !== null,
+            allowedDomain: googleAuth?.allowedDomain ?? '',
+            passwordLogin: passwordLogin.enabled,
+          },
+        },
+      ],
+    },
+  },
+  collections: [
+    Posts,
+    Authors,
+    Categories,
+    Media,
+    withPasswordLogin(Users, passwordLogin),
+  ],
+  jobs: {
+    // Scheduled publishing (posts: versions.drafts.schedulePublish) queues jobs that
+    // /api/payload-jobs/run executes. `autoRun` needs a long-running server, so on Vercel a
+    // cron job (vercel.json, every 5 minutes) calls that endpoint with
+    // `Authorization: Bearer $CRON_SECRET`, which Vercel adds when CRON_SECRET is set.
+    access: { run: canRunJobs },
+  },
+  // The admin panel and the site use REST and the Local API only. (The `graphql` package stays
+  // installed: it's a peer dependency of payload and @payloadcms/next.)
+  graphQL: { disable: true },
+  editor: lexicalEditor(),
+  email: emailAdapter(email),
+  secret: process.env.PAYLOAD_SECRET || '',
+  typescript: {
+    outputFile: path.resolve(dirname, 'payload-types.ts'),
+  },
+  db: postgresAdapter({
+    pool: {
+      connectionString: process.env.DATABASE_URL,
+      // `next build` pre-renders pages in several workers, each with its own pool; keep them
+      // small so the build stays under the server's connection limit (Postgres: 100).
+      max: process.env.NEXT_PHASE === 'phase-production-build' ? 3 : 10,
+    },
+    // Dev: schema is pushed automatically. Production: `payload migrate` (npm run ci).
+    push: process.env.NODE_ENV !== 'production',
+    migrationDir: path.resolve(dirname, 'migrations'),
+  }),
+  sharp,
+  plugins: [
+    vercelBlobStorage({
+      enabled: Boolean(process.env.BLOB_READ_WRITE_TOKEN),
+      collections: { media: true },
+      clientUploads: true,
+      token: process.env.BLOB_READ_WRITE_TOKEN,
+    }),
+    googleAuthPlugin(googleAuth),
+  ],
+  onInit: async (payload) => {
+    if (passwordLogin.warning) payload.logger.warn(passwordLogin.warning);
+    if (!email.enabled && email.warning) payload.logger.warn(email.warning);
+    try {
+      await seedFirstAdmin(payload, { passwordLogin: passwordLogin.enabled });
+    } catch (error) {
+      payload.logger.error(
+        { err: error },
+        'Could not seed the first admin user'
+      );
+    }
+  },
+});
