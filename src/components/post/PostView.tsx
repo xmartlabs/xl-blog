@@ -5,6 +5,7 @@ import type { CardData } from '../../lib/post-utils';
 import {
   asDoc,
   authorImage,
+  DEFAULT_AUTHOR_IMAGE,
   formatPostDate,
   postThumbnail,
 } from '../../lib/post-utils';
@@ -72,7 +73,8 @@ export function PostView({
           <div className="w-full">
             <div className="flex flex-row mt-8">
               <img
-                src={(author && authorImage(author)) ?? undefined}
+                src={authorImage(author)}
+                data-fallback={DEFAULT_AUTHOR_IMAGE}
                 alt={author?.name ?? ''}
                 className="rounded-[10px] mr-8 w-[5.5rem] h-full"
               />

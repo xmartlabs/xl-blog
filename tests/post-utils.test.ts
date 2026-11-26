@@ -2,6 +2,8 @@ import { describe, expect, it } from 'vitest';
 
 import type { Media } from '../src/payload-types';
 import {
+  authorImage,
+  DEFAULT_AUTHOR_IMAGE,
   compareNodeOrder,
   postThumbnail,
   toCardData,
@@ -86,5 +88,30 @@ describe('compareNodeOrder', () => {
       '2026-01-01T00:00:00.000Z',
       '2026-02-01T00:00:00.000Z',
     ]);
+  });
+});
+
+describe('authorImage', () => {
+  const author = (fields: object) =>
+    ({ id: 1, name: 'A', slug: 'a', ...fields }) as never;
+
+  it('prefers the uploaded photo, then the legacy URL', () => {
+    expect(
+      authorImage(
+        author({
+          image: { url: '/api/media/file/a.jpg' },
+          imageUrl: '/images/members/a.png',
+        })
+      )
+    ).toBe('/api/media/file/a.jpg');
+    expect(authorImage(author({ imageUrl: '/images/members/a.png' }))).toBe(
+      '/images/members/a.png'
+    );
+  });
+
+  it('falls back to the default avatar for authors without a photo', () => {
+    expect(authorImage(author({}))).toBe(DEFAULT_AUTHOR_IMAGE);
+    expect(authorImage(author({ imageUrl: '' }))).toBe(DEFAULT_AUTHOR_IMAGE);
+    expect(authorImage(null)).toBe(DEFAULT_AUTHOR_IMAGE);
   });
 });

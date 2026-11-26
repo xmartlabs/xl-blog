@@ -39,8 +39,13 @@ export const postThumbnail = (
   size?: MediaSize
 ) => mediaUrl(post.thumbnail, size) ?? post.thumbnailUrl ?? null;
 
-export const authorImage = (author: Author) =>
-  mediaUrl(author.image) ?? author.imageUrl ?? null;
+/** Shown for authors created without a photo (the "Xmartlabs Team" avatar). */
+export const DEFAULT_AUTHOR_IMAGE = '/images/members/xl.png';
+
+/** The author's photo: an upload, the legacy URL, or the default avatar. */
+export const authorImage = (author: Author | null | undefined) =>
+  (author && (mediaUrl(author.image) ?? author.imageUrl)) ||
+  DEFAULT_AUTHOR_IMAGE;
 
 export const toCardData = (
   post: Pick<Post, 'id' | 'title' | 'slug' | 'thumbnail' | 'thumbnailUrl'>
