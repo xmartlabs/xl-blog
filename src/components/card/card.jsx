@@ -1,3 +1,4 @@
+/* eslint-disable @next/next/no-img-element -- Plain <img> on purpose: the markup must match the old site exactly (pixel-parity tests), and images are served from /images or external URLs as before. */
 import React from 'react';
 
 import { classnames } from '../../helpers';

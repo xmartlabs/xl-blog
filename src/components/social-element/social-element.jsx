@@ -16,6 +16,7 @@ const SocialElement = ({ className = '', links }) => {
           href={item.path}
           target="_blank"
           rel="noopener noreferrer"
+          aria-label={item.label}
           className="w-6 h-6"
         >
           {item.icon}

@@ -37,6 +37,18 @@ const GoogleMark = () => (
  * forwards Payload's `?redirect=` (the page the user wanted) so they land back on it; the
  * server sanitizes it.
  */
+const visuallyHidden: React.CSSProperties = {
+  position: 'absolute',
+  width: 1,
+  height: 1,
+  padding: 0,
+  margin: -1,
+  overflow: 'hidden',
+  clip: 'rect(0, 0, 0, 0)',
+  whiteSpace: 'nowrap',
+  border: 0,
+};
+
 export const GoogleLoginButton = ({
   enabled = false,
   allowedDomain = '',
@@ -47,7 +59,9 @@ export const GoogleLoginButton = ({
   passwordLogin?: boolean;
 }) => {
   const searchParams = useSearchParams();
-  if (!enabled) return null;
+  // Payload's login page has no <h1>; give screen readers one without changing the look.
+  const heading = <h1 style={visuallyHidden}>Sign in to the Xmartlabs Blog</h1>;
+  if (!enabled) return heading;
   const failed = searchParams.get('error') === 'google';
   const domain = allowedDomain || 'xmartlabs.com';
   const redirect = searchParams.get('redirect');
@@ -57,6 +71,7 @@ export const GoogleLoginButton = ({
 
   return (
     <div className="xl-google-login">
+      {heading}
       {failed && (
         <p role="alert" className="xl-google-login__error">
           <strong>Google sign-in didn&apos;t work.</strong> Only @{domain}{' '}

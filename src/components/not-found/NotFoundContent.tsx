@@ -1,3 +1,4 @@
+/* eslint-disable @next/next/no-html-link-for-pages -- Plain <a> on purpose: same markup and full-page navigation as the old site (the list pages restore scroll position on load). */
 import React from 'react';
 
 import { ErrorImage } from '../icons';
@@ -9,7 +10,7 @@ export function NotFoundContent() {
     <>
       <Seo pathname="/404/" title="Not found" />
       <main className="flex flex-row justify-center items-center p-[7rem_0_2rem_2.5rem] max-sm:flex max-sm:flex-col max-sm:m-0 max-sm:mt-20">
-        <a href="/">
+        <a href="/" aria-label="Back to the Xmartlabs Blog home page">
           <ErrorImage className="w-[31rem] max-sm:max-h-[14rem] max-sm:mb-8" />
         </a>
         <div className="flex flex-col ml-20 max-sm:ml-[1rem]">

@@ -12,14 +12,9 @@
         "nodes": 1,
         "help": "Document should have one main landmark"
       },
-      "link-name": {
-        "impact": "serious",
-        "nodes": 4,
-        "help": "Links must have discernible text"
-      },
       "region": {
         "impact": "moderate",
-        "nodes": 13,
+        "nodes": 7,
         "help": "All page content should be contained by landmarks"
       }
     }
@@ -37,14 +32,9 @@
         "nodes": 1,
         "help": "Document should have one main landmark"
       },
-      "link-name": {
-        "impact": "serious",
-        "nodes": 4,
-        "help": "Links must have discernible text"
-      },
       "region": {
         "impact": "moderate",
-        "nodes": 13,
+        "nodes": 7,
         "help": "All page content should be contained by landmarks"
       }
     }
@@ -67,14 +57,9 @@
         "nodes": 1,
         "help": "Document should have one main landmark"
       },
-      "link-name": {
-        "impact": "serious",
-        "nodes": 11,
-        "help": "Links must have discernible text"
-      },
       "region": {
         "impact": "moderate",
-        "nodes": 13,
+        "nodes": 8,
         "help": "All page content should be contained by landmarks"
       }
     }
@@ -87,14 +72,9 @@
         "nodes": 8,
         "help": "Elements must meet minimum color contrast ratio thresholds"
       },
-      "link-name": {
-        "impact": "serious",
-        "nodes": 5,
-        "help": "Links must have discernible text"
-      },
       "region": {
         "impact": "moderate",
-        "nodes": 8,
+        "nodes": 2,
         "help": "All page content should be contained by landmarks"
       }
     }
@@ -112,14 +92,9 @@
         "nodes": 1,
         "help": "Document should have one main landmark"
       },
-      "page-has-heading-one": {
-        "impact": "moderate",
-        "nodes": 1,
-        "help": "Page should contain a level-one heading"
-      },
       "region": {
         "impact": "moderate",
-        "nodes": 7,
+        "nodes": 8,
         "help": "All page content should be contained by landmarks"
       }
     }

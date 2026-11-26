@@ -25,21 +25,25 @@ const MobileNavMenu = () => {
       path: 'https://www.linkedin.com/company/xmartlabs/mycompany/',
       icon: <LinkedInIcon />,
       id: 'socialMenuLinkedIn',
+      label: 'Xmartlabs on LinkedIn',
     },
     {
       path: 'https://www.instagram.com/xmartlabs',
       icon: <InstagramIcon />,
       id: 'socialMenuInstagram',
+      label: 'Xmartlabs on Instagram',
     },
     {
       path: 'https://twitter.com/xmartlabs',
       icon: <TwitterIcon />,
       id: 'socialMenuTwitter',
+      label: 'Xmartlabs on X (Twitter)',
     },
     {
       path: 'https://github.com/xmartlabs',
       icon: <GithubIcon />,
       id: 'socialMenuGithub',
+      label: 'Xmartlabs on GitHub',
     },
   ];
 

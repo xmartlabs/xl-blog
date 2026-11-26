@@ -17,21 +17,25 @@ export const Footer = () => {
       path: 'https://github.com/xmartlabs',
       icon: <GithubIcon />,
       id: 'socialMenuGithub',
+      label: 'Xmartlabs on GitHub',
     },
     {
       path: 'https://www.linkedin.com/company/xmartlabs/',
       icon: <Linkedin />,
       id: 'socialProfileLinkedIn',
+      label: 'Xmartlabs on LinkedIn',
     },
     {
       path: 'https://twitter.com/xmartlabs',
       icon: <TwitterIcon />,
       id: 'socialProfileTwitter',
+      label: 'Xmartlabs on X (Twitter)',
     },
     {
       path: 'https://www.instagram.com/xmartlabs',
       icon: <InstagramIcon />,
       id: 'socialMenuInstagram',
+      label: 'Xmartlabs on Instagram',
     },
   ];
 

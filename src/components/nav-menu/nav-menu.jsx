@@ -1,4 +1,5 @@
 'use client';
+/* eslint-disable @next/next/no-html-link-for-pages -- Plain <a> on purpose: same markup and full-page navigation as the old site (the list pages restore scroll position on load). */
 
 import React, { useState } from 'react';
 

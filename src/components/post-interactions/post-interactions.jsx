@@ -25,16 +25,19 @@ export const PostInteractions = ({ pathname }) => {
       path: `https://twitter.com/intent/tweet?url=${encodedUrl}`,
       icon: <TwitterIcon />,
       id: 'socialSharePostTwitter',
+      label: 'Share this post on X (Twitter)',
     },
     {
       path: `https://www.facebook.com/sharer/sharer.php?u=${encodedUrl}`,
       icon: <Facebook />,
       id: 'socialSharePostFacebook',
+      label: 'Share this post on Facebook',
     },
     {
       path: `https://www.linkedin.com/sharing/share-offsite/?url=${encodedUrl}`,
       icon: <Linkedin />,
       id: 'socialSharePostLinkedIn',
+      label: 'Share this post on LinkedIn',
     },
   ];
 

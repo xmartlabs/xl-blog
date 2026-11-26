@@ -1,3 +1,4 @@
+/* eslint-disable @next/next/no-head-element -- App Router root layout: <head> is valid here; the rule targets the Pages Router (next/head). */
 import React from 'react';
 
 import { Footer } from '../footer';
