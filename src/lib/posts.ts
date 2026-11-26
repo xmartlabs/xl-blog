@@ -7,6 +7,7 @@ import { getPayloadClient } from './payload';
 import {
   asDoc,
   authorPathSegment,
+  compareNodeOrder,
   tagPathSegment,
   toCardData,
   type CardData,
@@ -191,8 +192,8 @@ export const getTags = async (): Promise<LinkList[]> => {
 };
 
 /**
- * Up to 3 other published posts of the same category, in the old site's order: source file
- * order (legacy posts), then publication date for posts created in the CMS.
+ * Up to 3 other published posts of the same category, in the old site's order (Gatsby's
+ * `relatedPosts` resolver returned them in node order; see `compareNodeOrder`).
  */
 export async function getRelatedPosts(post: Post): Promise<CardData[]> {
   const category = asDoc<Category>(post.category);
@@ -205,10 +206,9 @@ export async function getRelatedPosts(post: Post): Promise<CardData[]> {
       id: { not_equals: post.id },
       ...PUBLISHED,
     },
-    sort: ['legacySourceFile', 'publishedDate', 'createdAt'],
-    limit: 3,
+    pagination: false,
     depth: 1,
     overrideAccess: false,
   });
-  return docs.map(toCardData);
+  return docs.sort(compareNodeOrder).slice(0, 3).map(toCardData);
 }

@@ -68,3 +68,34 @@ export const authorPathSegment = (authorSlug: string) => kebabCase(authorSlug);
 
 /** URL segment of a tag page; tag variants such as "AI" and "ai" share one. */
 export const tagPathSegment = (tag: string) => kebabCase(tag);
+
+/**
+ * Legacy posts whose Gatsby node was re-created (edited on a cached build) after the old
+ * site's last clean build, so they come after the other legacy posts in node order.
+ * Verified against the live "More from" cards of every post.
+ */
+const RECREATED_LEGACY_NODES = new Set([
+  '2015-09-29-Introducing-Eureka-iOS-form-library-written-in-pure-Swift.md',
+]);
+
+type NodeOrderFields = Pick<
+  Post,
+  'legacySourceFile' | 'publishedDate' | 'createdAt'
+>;
+
+const compareStrings = (a: string, b: string) => (a < b ? -1 : a > b ? 1 : 0);
+
+const nodeOrderRank = ({ legacySourceFile }: NodeOrderFields) =>
+  !legacySourceFile ? 2 : RECREATED_LEGACY_NODES.has(legacySourceFile) ? 1 : 0;
+
+/**
+ * The old site's Gatsby node order: Gatsby lists nodes by creation counter, i.e. the source
+ * files in byte order on a clean build, and a node re-created by an edit moves to the end.
+ * Legacy posts: source file name (code-unit order, not the database collation), the
+ * re-created ones last; then posts created in the CMS, by publication and creation date.
+ */
+export const compareNodeOrder = (a: NodeOrderFields, b: NodeOrderFields) =>
+  nodeOrderRank(a) - nodeOrderRank(b) ||
+  compareStrings(a.legacySourceFile ?? '', b.legacySourceFile ?? '') ||
+  compareStrings(a.publishedDate ?? '', b.publishedDate ?? '') ||
+  compareStrings(a.createdAt, b.createdAt);

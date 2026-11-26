@@ -54,7 +54,7 @@ export const BlogList = ({
       <div
         className="
           w-full max-w-full flex flex-row flex-nowrap 
-          md:m-[8rem_0_5rem_0] md:gap-[6%] md:items-center md:justify-center-safe md:overflow-x-auto md:px-[2rem]
+          md:m-[8rem_0_5rem_0] md:gap-[6%] md:items-center md:justify-center 
           max-md:gap-[3rem] max-md:m-[3rem_0_1.5rem_0] max-md:p-[0_2rem_0.5rem_2rem] max-md:overflow-x-auto
         "
         ref={categoryFiltersRef}

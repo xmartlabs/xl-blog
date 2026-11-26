@@ -44,9 +44,14 @@ export function SiteDocument({ children }: { children: React.ReactNode }) {
             />
           </noscript>
         )}
-        <NavMenu />
-        {children}
-        <Footer />
+        {/* Auto-height wrapper, like Gatsby's #___gatsby > #gatsby-focus-wrapper: `html, body`
+            are height: 100%, so percentage heights in the page (the footer's `max-sm:h-full`,
+            the post header's `max-sm:min-h-full`) must resolve against an auto-height parent. */}
+        <div id="site-root">
+          <NavMenu />
+          {children}
+          <Footer />
+        </div>
       </body>
     </html>
   );

@@ -1,7 +1,11 @@
 import { describe, expect, it } from 'vitest';
 
 import type { Media } from '../src/payload-types';
-import { postThumbnail, toCardData } from '../src/lib/post-utils';
+import {
+  compareNodeOrder,
+  postThumbnail,
+  toCardData,
+} from '../src/lib/post-utils';
 
 const media = {
   id: 1,
@@ -49,5 +53,38 @@ describe('postThumbnail', () => {
         thumbnailUrl: null,
       }).thumbnail
     ).toBe('/api/media/file/photo-800x450.jpg');
+  });
+});
+
+describe('compareNodeOrder', () => {
+  const post = (
+    legacySourceFile: string | null,
+    publishedDate = '2020-01-01T00:00:00.000Z',
+    createdAt = '2024-01-01T00:00:00.000Z'
+  ) => ({ legacySourceFile, publishedDate, createdAt });
+
+  it('orders legacy posts by source file (code units), re-created nodes and CMS posts last', () => {
+    const posts = [
+      post(null, '2026-02-01T00:00:00.000Z'),
+      post('2016-03-07-ci-with-xcode-server-and-fastlane.mdx'),
+      post(null, '2026-01-01T00:00:00.000Z'),
+      post(
+        '2015-09-29-Introducing-Eureka-iOS-form-library-written-in-pure-Swift.md'
+      ),
+      post('2015-07-09-Android-logging-with-Crashlytics-and-Timber.mdx'),
+      post('2015-07-09-a-lowercase-name.md'),
+    ];
+    expect(
+      [...posts]
+        .sort(compareNodeOrder)
+        .map((p) => p.legacySourceFile ?? p.publishedDate)
+    ).toEqual([
+      '2015-07-09-Android-logging-with-Crashlytics-and-Timber.mdx',
+      '2015-07-09-a-lowercase-name.md',
+      '2016-03-07-ci-with-xcode-server-and-fastlane.mdx',
+      '2015-09-29-Introducing-Eureka-iOS-form-library-written-in-pure-Swift.md',
+      '2026-01-01T00:00:00.000Z',
+      '2026-02-01T00:00:00.000Z',
+    ]);
   });
 });

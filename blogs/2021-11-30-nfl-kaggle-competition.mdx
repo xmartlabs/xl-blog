@@ -22,7 +22,7 @@ The video training datasets consist of 60 short plays (around 10 seconds videos 
 
 <p style={{ textAlign:'right'}}>
 	<img src="/images/nfl-kaggle-competition/nfl_frame.png" />
-	Left image: SidelinView. Right image: Endzone view.
+	<span style={{ display: 'block', margin: '2rem 0' }}>Left image: SidelinView. Right image: Endzone view.</span>
 </p>
 
 The tracking information comes from a device located in the player's shoulder pad. It gives the relative position of each player on the field with other information about the player's movement at a 10Hz frequency. The tracking has the 'x' and 'y' positions described in the image below.
@@ -51,7 +51,7 @@ In our case, we used the method proposed in the paper "Robust Point Set Registra
 <p style={{ textAlign:'end', fontStyle: 'italic'}}
 >
 	<img src="/images/nfl-kaggle-competition/nfl_2dmatching.png" />
-	Left: Example shown in code presentation, Right: Example of implementation in our solution.
+	<span style={{ display: 'block', margin: '2rem 0' }}>Left: Example shown in code presentation, Right: Example of implementation in our solution.</span>
 </p>
 
 
@@ -60,7 +60,7 @@ When passed two normalized clouds of points, the algorithm can return a correspo
 
 <p style={{ textAlign:'end', fontStyle: 'italic'}}>
 	<img src="/images/nfl-kaggle-competition/nfl_helmetsinframe.png" />
-	Example of a low number of helmets in the frame.
+	<span style={{ display: 'block', margin: '2rem 0' }}>Example of a low number of helmets in the frame.</span>
 </p>
 
 
@@ -83,7 +83,7 @@ In some cases, this implementation gave impressive results. As seen in the follo
 
 <p style={{ textAlign:'end', fontStyle: 'italic'}}>
 	<img src="/images/nfl-kaggle-competition/nfl_helmet.gif" />
-	Output of our solution applied to a Sideline video.
+	<span style={{ display: 'block', margin: '2rem 0' }}>Output of our solution applied to a Sideline video.</span>
 </p>
 
 
@@ -100,7 +100,7 @@ The rotation is done using the purple line, and the angle with the green one is 
 
 <p style={{ textAlign:'end', fontStyle: 'italic'}}>
 	<img src="/images/nfl-kaggle-competition/nfl_rotation.png" />
-	Image rotation example.
+	<span style={{ display: 'block', margin: '2rem 0' }}>Image rotation example.</span>
 </p>
 
 
@@ -122,7 +122,7 @@ Each video was labeled "Sideline" or "Endzone," but it wasn't specified from whi
 
 <p style={{ textAlign:'end', fontStyle: 'italic'}}>
 	<img src="/images/nfl-kaggle-competition/nfl_angle.png" />
-	Left: Endzone example. Right: Sideline example.
+	<span style={{ display: 'block', margin: '2rem 0' }}>Left: Endzone example. Right: Sideline example.</span>
 </p>
 
 At the beginning of each video, we saw that the formations were very identifiable and easy to correlate with the tracking. In other words, with the correct view, the 2D matching should have a high rate of matches. So the implementation takes five frames distributed in the first 100 frames. In these selected frames, the 2D matching is done for each possible case; the one with the most matches is selected as correct; after doing it for all five frames, the correct side is selected and saved.
