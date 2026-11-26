@@ -8,7 +8,7 @@ Work left before the new blog (branch `nextjs-payload`, [PR #371](https://github
 2. First deploy from `nextjs-payload`: content import, cron check, parity test against the `vercel.app` URL.
 3. DNS cutover: point `blog.xmartlabs.com` to Vercel.
 4. **Only then merge PR #371** into `main`, and switch Vercel's Production Branch to `main`. Don't merge earlier: Netlify still deploys `main` to the live site and can't build this app.
-5. After 2 weeks without problems: turn off the Netlify site, Netlify Identity and Git Gateway.
+5. After 2 weeks without problems: turn off the Netlify site, Netlify Identity and Git Gateway, and delete `netlify.toml` (it makes Netlify skip every build of this codebase, so its last Gatsby deploy stays up as the rollback and PR deploy previews don't fail).
 
 ## Vercel setup (needs someone with access)
 

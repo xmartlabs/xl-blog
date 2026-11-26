@@ -1,0 +1,7 @@
+# This codebase is the Next.js + Payload blog, deployed on Vercel (see README and MIGRATION-TODO.md).
+# Netlify's project is set up for the old Gatsby site and can't build it (it needs Postgres and the
+# Next.js runtime), so every Netlify build of this code is skipped. Netlify keeps serving its last
+# Gatsby deploy, which is the rollback during the first weeks after the DNS cutover; then the Netlify
+# site is turned off and this file can go.
+[build]
+  ignore = "exit 0"
