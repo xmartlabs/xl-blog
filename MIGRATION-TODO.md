@@ -22,8 +22,9 @@ Work left before the new blog (branch `nextjs-payload`) replaces the Gatsby site
 
 ## Google sign-in
 
-- [ ] Google Cloud OAuth client ("Web application") in the xmartlabs.com organization, consent screen **Internal**. Redirect URIs: `http://localhost:3000/api/users/oauth/google/callback`, `https://blog.xmartlabs.com/api/users/oauth/google/callback`, and optionally one fixed preview host. Sign-in can't work on random per-deployment preview URLs (Google needs exact redirect URIs).
-- [ ] End-to-end test with a real account: an @xmartlabs.com account signs in and gets an `editor` user; a personal Gmail is rejected.
+- [x] Google Cloud OAuth client ("Web application") in the xmartlabs.com organization, consent screen **Internal**, with the localhost redirect URI (done 2026-11-26). Make sure the project's organization is xmartlabs.com: a client in another organization fails with `Error 403: org_internal`.
+- [ ] Add the production redirect URI `https://blog.xmartlabs.com/api/users/oauth/google/callback` to that client (and the `*.vercel.app` production URL if you sign in there before the cutover), plus optionally one fixed preview host. Sign-in can't work on random per-deployment preview URLs (Google needs exact redirect URIs).
+- [x] End-to-end test with a real account, locally (2026-11-26): an @xmartlabs.com account signed in through Google and was created as `editor` with its Google id stored. Accounts outside xmartlabs.com are refused by Google itself (Internal consent screen) before reaching the app; the app's own domain check is the second layer (unit tests).
 - [ ] Promote the real admins, then set `DISABLE_PASSWORD_LOGIN=true` in production (Google sign-in only; login tokens then last 8 hours) and remove `FIRST_ADMIN_PASSWORD` from the environment.
 
 ## Verify in the browser (not done by the automated checks)
