@@ -46,6 +46,8 @@ test('pages send a report-only CSP; the admin panel its own', async () => {
     expect(policy).toContain('report-uri /next/csp-report/');
     expect(policy).toContain('report-to csp-endpoint');
     expect(home['content-security-policy']).toBeUndefined();
+    // YouTube embeds need the origin as referrer (Error 153 with `same-origin`).
+    expect(home['referrer-policy']).toBe('strict-origin-when-cross-origin');
     expect(home['reporting-endpoints']).toBe(
       'csp-endpoint="/next/csp-report/"'
     );

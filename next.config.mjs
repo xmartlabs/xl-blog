@@ -24,7 +24,10 @@ const legacyPosts = () =>
 const securityHeaders = (frameOptions, cspArea) => [
   { key: 'X-Frame-Options', value: frameOptions },
   { key: 'X-Content-Type-Options', value: 'nosniff' },
-  { key: 'Referrer-Policy', value: 'same-origin' },
+  // Not `same-origin` (the old site's value): YouTube refuses to play embeds when the page sends
+  // no referrer ("Error 153: Video player configuration error"). This browser-default policy
+  // sends other sites only the origin (https://blog.xmartlabs.com), never the page path.
+  { key: 'Referrer-Policy', value: 'strict-origin-when-cross-origin' },
   ...cspHeaders(cspArea),
 ];
 
