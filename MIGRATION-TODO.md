@@ -69,10 +69,11 @@ The parity test (`npm run test:parity`) compares all 720 URLs of the live sitema
 
 - [ ] **Accessibility** (`tests/e2e/A11Y-FINDINGS.md`): icon-only links and the admin login heading are fixed. Remaining, all from the original design, so they change the look and need a design decision: low color contrast (pink/gray text), a `<main>` landmark around the page content, and heading-level jumps in some old posts (fix by editing those posts in the CMS). The e2e baseline fails on any new issue meanwhile.
 - [ ] Remove `blogs/`, `content/` and the `migration/` snapshot once production runs on Payload (keep `migration/legacy/posts.json` while the Jekyll redirects are generated from it, or inline them), and the related import scripts and CI steps.
+- [ ] An author without an image shows a broken `<img>` (with its alt text) on their posts: render a placeholder avatar or no image. Every migrated author has one, so it only affects authors created in the CMS without a photo.
 - [ ] Optional features the old blog didn't have: RSS feed, search, automatic dependency updates (Renovate/Dependabot, Next.js + Payload grouped).
 
 ## Docs
 
-- [x] Internal how-to for bloggers, in Spanish: [XL Blog: cómo publicar](https://claude.ai/artifact/GackffrPeGkjZTmseUcWGm) (replaces the Netlify/Decap Notion pages, including the "Blog Snippets" components). Screenshots of each step are being added.
+- [x] Internal how-to for bloggers, in Spanish: [XL Blog: cómo publicar](https://claude.ai/artifact/GackffrPeGkjZTmseUcWGm) (replaces the Netlify/Decap Notion pages, including the "Blog Snippets" components). With annotated screenshots of every step and block (2026-11-26).
 - [ ] Record a new walkthrough video for devs (the one on Drive shows Netlify/Decap).
 - [x] `.vscode/launch.json` now runs the Next.js dev server, a server-side debug session and the production build (it pointed at the Gatsby binary).
