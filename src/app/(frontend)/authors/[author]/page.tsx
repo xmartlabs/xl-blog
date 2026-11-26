@@ -1,6 +1,6 @@
-import { notFound } from 'next/navigation';
 import React from 'react';
 
+import { NotFoundPage } from '@/components/not-found/NotFoundPage';
 import { Seo } from '@/components/seo/Seo';
 import { getAuthorPages } from '@/lib/posts';
 
@@ -15,7 +15,7 @@ export async function generateStaticParams() {
 export default async function AuthorPage({ params }: Props) {
   const { author: segment } = await params;
   const author = (await getAuthorPages()).find((a) => a.segment === segment);
-  if (!author) notFound();
+  if (!author) return <NotFoundPage />;
   const { posts } = author;
   const header = `${posts.length} post${posts.length === 1 ? '' : 's'} written by "${author.name}"`;
   return (

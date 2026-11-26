@@ -12,7 +12,7 @@ concurrency:
 
 jobs:
   checks:
-    name: Lint, types, tests, content and build
+    name: Lint, types, tests, content, build and e2e
     runs-on: ubuntu-latest
     timeout-minutes: 30
 
@@ -98,3 +98,22 @@ jobs:
         run: npm run build
         env:
           NODE_ENV: production
+
+      # End-to-end tests against the production build above (`next start` on port 3003), on
+      # their own database: xlblog_e2e on the same Postgres service, dropped, created,
+      # migrated and seeded by tests/e2e/prepare.ts. Test users and secrets are generated or
+      # fixed test values; nothing real is used. (The parity test, tests/parity, compares
+      # with the live site and stays out of CI.)
+      - name: Install Chromium for the end-to-end tests
+        run: npx playwright install --with-deps chromium
+
+      - name: End-to-end tests
+        run: npm run test:e2e
+
+      - name: Upload end-to-end traces
+        if: failure()
+        uses: actions/upload-artifact@v4
+        with:
+          name: e2e-test-output
+          path: tests/e2e/.cache/test-output/
+          retention-days: 7

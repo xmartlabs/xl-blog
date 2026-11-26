@@ -8,6 +8,7 @@ import { buildConfig } from 'payload';
 import sharp from 'sharp';
 
 import { canRunJobs } from './lib/cron-auth';
+import { emailAdapter, getEmailSettings } from './lib/email';
 import { getGoogleAuthSettings, googleAuthPlugin } from './auth/google';
 import { decidePasswordLogin, withPasswordLogin } from './auth/password-login';
 import { seedFirstAdmin } from './auth/seedFirstAdmin';
@@ -23,8 +24,15 @@ const dirname = path.dirname(filename);
 const googleAuth = getGoogleAuthSettings();
 // DISABLE_PASSWORD_LOGIN=true: Google only (ignored, with a warning, when Google isn't set up).
 const passwordLogin = decidePasswordLogin(process.env, googleAuth !== null);
+// RESEND_API_KEY + EMAIL_FROM: password-reset emails via Resend. Otherwise they're logged.
+const email = getEmailSettings();
 
 export default buildConfig({
+  // Login tokens come from the payload-token cookie (admin, previews) or `Authorization: JWT`.
+  // `Bearer` is left out on purpose: Vercel Cron sends `Authorization: Bearer $CRON_SECRET`,
+  // which Payload would otherwise try to verify as a login token on every run and log
+  // "Invalid Compact JWS". The cron secret is checked separately (src/lib/cron-auth.ts).
+  auth: { jwtOrder: ['JWT', 'cookie'] },
   admin: {
     user: Users.slug,
     importMap: {
@@ -80,6 +88,7 @@ export default buildConfig({
   // installed: it's a peer dependency of payload and @payloadcms/next.)
   graphQL: { disable: true },
   editor: lexicalEditor(),
+  email: emailAdapter(email),
   secret: process.env.PAYLOAD_SECRET || '',
   typescript: {
     outputFile: path.resolve(dirname, 'payload-types.ts'),
@@ -107,6 +116,7 @@ export default buildConfig({
   ],
   onInit: async (payload) => {
     if (passwordLogin.warning) payload.logger.warn(passwordLogin.warning);
+    if (!email.enabled && email.warning) payload.logger.warn(email.warning);
     try {
       await seedFirstAdmin(payload, { passwordLogin: passwordLogin.enabled });
     } catch (error) {

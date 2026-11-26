@@ -1,6 +1,6 @@
-import { notFound } from 'next/navigation';
 import React from 'react';
 
+import { NotFoundPage } from '@/components/not-found/NotFoundPage';
 import { Seo } from '@/components/seo/Seo';
 import { getTags } from '@/lib/posts';
 
@@ -13,7 +13,7 @@ export async function generateStaticParams() {
 export default async function TagPage({ params }: Props) {
   const { tag: segment } = await params;
   const tag = (await getTags()).find((t) => t.segment === segment);
-  if (!tag) notFound();
+  if (!tag) return <NotFoundPage />;
   const header = `${tag.posts.length} post${tag.posts.length === 1 ? '' : 's'} tagged with "${tag.name}"`;
   return (
     <>

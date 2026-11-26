@@ -42,6 +42,8 @@ In development the database schema is pushed automatically from the Payload conf
 
 **Integration tests** (`npm run test:int`, `tests/int/`) run the real Payload config against a separate database, `xlblog_test` on the same server (`TEST_DATABASE_URL` overrides it; its name must end in `_test`). The global setup drops, recreates and migrates it on every run (`payload migrate`, schema push off, like a deploy), so it never touches your `xlblog` data and can be left in place. Every assertion runs with `overrideAccess: false` and an explicit `user`, like the REST API does.
 
+**End-to-end tests** (`npm run test:e2e`, `tests/e2e/`, Playwright + Chromium) run a production build: run `npm run build` first (with the database up), and `npx playwright install chromium` once. The web server command recreates its own database, `xlblog_e2e` on the same server (`E2E_DATABASE_URL` overrides it; the name must end in `_e2e`), applies the migrations, seeds 1 author, 2 categories, 3 posts and a test editor and admin (random passwords per run, kept in the git-ignored `tests/e2e/.cache/`), then runs `next start` on port 3003 (`E2E_PORT`) with a test `CRON_SECRET` and a fake Google OAuth client. The tests sign in through `POST /api/users/login` and cover publishing/unpublishing and revalidation, draft privacy (preview route, stale draft-mode cookie, REST API), the admin's Preview button and Live Preview, the Google sign-in redirect/cookies and forged callbacks, role and secret checks, and the server-rendered 404 page. Google itself is never called: domain rejection (personal Gmail, wrong `hd`, unverified email) is covered by the unit tests with a mocked Google (`tests/google-*.test.ts`). The e2e server regenerates pages into the build's cache (`.next`) from the e2e database, so rebuild before using that build for anything else. `npm run test:parity` (`tests/parity/`) compares the site with the live blog and isn't part of CI.
+
 Other commands:
 
 | Command                           | What                                                                    |
@@ -50,6 +52,7 @@ Other commands:
 | `npm run ci`                      | `payload migrate` + `next build`. The Vercel build command.             |
 | `npm test`                        | Unit tests (Vitest, no database): Google sign-in, redirects, helpers.   |
 | `npm run test:int`                | Integration tests: access control on a real `xlblog_test` database.     |
+| `npm run test:e2e`                | End-to-end tests (Playwright) against the production build.             |
 | `npm run lint`                    | ESLint (`eslint-config-next` core-web-vitals + TypeScript).             |
 | `npm run typecheck`               | `tsc --noEmit`.                                                         |
 | `npm run format` / `format:check` | Prettier.                                                               |
@@ -70,7 +73,9 @@ See `.env.example` for the full list with comments.
 | `DISABLE_PASSWORD_LOGIN`                    | `true` → Google sign-in only (no email/password form). Ignored, with a warning, unless Google sign-in is configured.                  |
 | `FIRST_ADMIN_EMAIL`, `FIRST_ADMIN_PASSWORD` | Break-glass admin, created on startup only while the users table is empty.                                                            |
 | `TEST_DATABASE_URL`                         | Optional, integration tests only. Default: `DATABASE_URL` with the database name `xlblog_test`.                                       |
+| `E2E_DATABASE_URL`, `E2E_PORT`              | Optional, e2e tests only. Default: `DATABASE_URL` with the database name `xlblog_e2e`; port 3003.                                     |
 | `BLOB_READ_WRITE_TOKEN`                     | Vercel Blob store for uploads. Empty → uploads go to `./media` on local disk.                                                         |
+| `RESEND_API_KEY`, `EMAIL_FROM`              | Optional. Password-reset emails via [Resend](https://resend.com) from `EMAIL_FROM` (e.g. `Xmartlabs Blog <blog@xmartlabs.com>`, a domain verified in Resend). Unset → emails are only logged to the console. |
 | `CRON_SECRET`                               | Lets Vercel Cron run the jobs queue (scheduled publishing). Letters/digits only.                                                      |
 | `NEXT_PUBLIC_GTM_ID`                        | Google Tag Manager container. GTM is only added when set.                                                                             |
 | `NEXT_PUBLIC_FORM_URL`                      | "Let's talk" form URL (iframe).                                                                                                       |
@@ -81,6 +86,7 @@ See `.env.example` for the full list with comments.
 - **Editors** (everyone by default): any @xmartlabs.com Google account gets an `editor` user on first sign-in. Editors can create, edit, publish and schedule posts, and add authors.
 - **Admins**: everything editors can do, plus deleting posts/authors, managing categories, and promoting/demoting users (Users → open the user → Roles).
 - **First admin**: set `FIRST_ADMIN_EMAIL`/`FIRST_ADMIN_PASSWORD` before the first start; it's created while there are no users and signs in with email + password. Use it to promote the first Google users to admin. Keep its password in the team vault; it's the break-glass account if Google sign-in breaks.
+- **Password resets** ("Forgot password?" on the login page) only send an email when `RESEND_API_KEY` and `EMAIL_FROM` are set; otherwise the reset link is only written to the server log, and an admin resets the password from Users instead.
 - **Password login** is locked for 10 minutes after 5 wrong passwords. Once the real admins have signed in with Google, set `DISABLE_PASSWORD_LOGIN=true` in production: the login page then only shows the Google button and `/api/users/login` is refused. The break-glass account stays in the database (and works again if the variable is removed and the site redeployed). With password login off, a first admin seeded into an empty database gets no password: that person becomes admin by signing in with Google as `FIRST_ADMIN_EMAIL`. Note that payload-oauth2 only uses Payload's server-side sessions while the local strategy is on, so with password login off, signing out clears the cookie but can't revoke the token. To limit that, tokens then last 8 hours instead of 7 days (editors sign in with Google again after that); deleting the user still locks it out immediately.
 
 ### Google sign-in setup (Google Cloud console)
@@ -143,4 +149,5 @@ The import is idempotent (upsert by slug) and publishes posts with their origina
 
 - Post bodies are rendered from Lexical to one HTML string inside `.bodyPostContainer` (`src/components/rich-text/to-html.ts`), so the CSS that targets direct children (`.bodyPostContainer > p`, `> img`, …) matches the old markup exactly.
 - SEO tags (`<title>`, combined `name`/`property` meta, canonical, Twitter card) are rendered by `src/components/seo/Seo.tsx` in each page and hoisted into `<head>` by React.
-- Old Jekyll URLs (`/YYYY/MM/DD/<file name>/`) redirect to `/blog/<slug>/` (`next.config.mjs`).
+- Old Jekyll URLs (`/YYYY/MM/DD/<file name>/`) redirect to `/blog/<slug>/` (`next.config.mjs`, generated by `src/lib/legacy-redirects.mjs`, plus a short explicit list for old links the file names don't produce).
+- Unknown posts, categories, tags, authors and page numbers return a 404 with the styled 404 page in the HTML: pages return `<NotFoundPage />` (`src/components/not-found/NotFoundPage.tsx`) instead of calling `notFound()`, which in Next 16 would send an empty error shell and render the page on the client.

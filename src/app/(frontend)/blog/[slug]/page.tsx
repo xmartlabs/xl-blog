@@ -1,7 +1,7 @@
 import { draftMode, headers } from 'next/headers';
-import { notFound } from 'next/navigation';
 import React from 'react';
 
+import { NotFoundPage } from '@/components/not-found/NotFoundPage';
 import { LivePreviewPost } from '@/components/post/LivePreviewPost';
 import { PostView } from '@/components/post/PostView';
 import { Seo } from '@/components/seo/Seo';
@@ -26,8 +26,8 @@ export async function generateStaticParams() {
  * Draft mode is only turned on by /next/preview for signed-in users, but its cookie outlives
  * the session; drafts are shown only while the visitor is still signed in.
  */
-async function canSeeDrafts() {
-  if (!(await draftMode()).isEnabled) return false;
+async function canSeeDrafts(draftModeOn: boolean) {
+  if (!draftModeOn) return false;
   const payload = await getPayloadClient();
   const { user } = await payload.auth({ headers: await headers() });
   return Boolean(user);
@@ -35,13 +35,13 @@ async function canSeeDrafts() {
 
 export default async function PostPage({ params }: Props) {
   const { slug } = await params;
-  const preview = await canSeeDrafts();
+  const preview = await canSeeDrafts((await draftMode()).isEnabled);
   const post = await getPostBySlug(slug, {
     draft: preview,
   });
-  if (!post) notFound();
+  if (!post) return <NotFoundPage />;
   if (!asDoc<Author>(post.author) || !asDoc<Category>(post.category)) {
-    if (!preview) notFound();
+    if (!preview) return <NotFoundPage />;
   }
 
   const body = renderPostBody(post);

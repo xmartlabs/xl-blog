@@ -13,6 +13,10 @@ Work left before the new blog (branch `nextjs-payload`) replaces the Gatsby site
 - [ ] Cron: check after the first deploy that Project → Settings → Cron Jobs lists `/api/payload-jobs/run/` and that its invocations return 200 (401 = `CRON_SECRET` missing/mismatched). Crons only run on production deployments.
 - [ ] Cutover: point `blog.xmartlabs.com` to Vercel. Keep the Netlify site for 2 weeks as a rollback, then turn off Netlify Identity and Git Gateway.
 
+## Email (optional, user's call)
+
+- [ ] Password-reset emails are only logged to the server console today (Google users never need them; the break-glass admin's password can be reset by another admin). To send them: create a Resend account, verify a sending domain (e.g. `xmartlabs.com` or a subdomain: DNS records in Cloudflare), then set `RESEND_API_KEY` and `EMAIL_FROM` (e.g. `Xmartlabs Blog <blog@xmartlabs.com>`) in Vercel. The adapter (`@payloadcms/email-resend`, `src/lib/email.ts`) is only enabled when both are set.
+
 ## Google sign-in
 
 - [ ] Google Cloud OAuth client ("Web application") in the xmartlabs.com organization, consent screen **Internal**. Redirect URIs: `http://localhost:3000/api/users/oauth/google/callback`, `https://blog.xmartlabs.com/api/users/oauth/google/callback`, and optionally one fixed preview host. Sign-in can't work on random per-deployment preview URLs (Google needs exact redirect URIs).
@@ -21,9 +25,9 @@ Work left before the new blog (branch `nextjs-payload`) replaces the Gatsby site
 
 ## Verify in the browser (not done by the automated checks)
 
-- [ ] Live preview with a signed-in user: edit a draft's title/body and see the preview pane update; check the **Preview** button; check that a logged-out browser never sees the draft. (Draft mode and access were verified over HTTP: `/next/preview/` returns 403 without a session, and a stale draft-mode cookie without a session shows the published version.)
+- [x] Live preview with a signed-in user, the **Preview** button, and that logged-out visitors never see drafts: covered by the e2e tests (`tests/e2e/live-preview.spec.ts`, `draft-privacy.spec.ts`; local build, password-login editor). Still worth one look on a deployed preview with a Google-signed-in editor (body edits, blocks).
 - [ ] Schedule a post from the admin UI on a deployed preview and wait for the cron (the jobs endpoint + schedulePublish were tested locally with `CRON_SECRET`).
-- [ ] Create a post that uses every block and a Blob upload, publish it, see it on `/` and its category page, then unpublish it.
+- [ ] Create a post that uses every block and a Blob upload, publish it, see it on `/` and its category page, then unpublish it. (Publish → home/category/post page → unpublish → 404 is covered by `tests/e2e/publishing.spec.ts` with a text-only post; blocks and Blob uploads aren't.)
 
 ## Content and media
 
@@ -32,7 +36,7 @@ Work left before the new blog (branch `nextjs-payload`) replaces the Gatsby site
   2. Set `NEXT_PUBLIC_MEDIA_BASE_URL` to the store's public base URL (the video block's legacy file name is appended), or edit the post's video block and upload the file there.
   3. Remove the file from `public/images/`.
 - [ ] Missing thumbnails, also missing on live (the fallback image shows): `/images/crashlytics-timber-web.png`, `/images/portada.jpg`, `/images/swift-with-the-best-web.png`.
-- [x] Old Jekyll-style URLs (`/YYYY/MM/DD/<name>/`, e.g. `/2014/12/02/linkedin-for-work/`) redirect (308) to `/blog/<slug>/`: `redirects()` in `next.config.mjs`, generated from `migration/legacy/posts.json` (file-name date and post date, case-insensitive). Not covered: `/2021/08/30/Bender-the-best` (a mistyped link; the post is `/blog/how-to-get-the-best-performance-for-ml-models-on-ios/`) and the file name with a space (`2022-06-27-Top EVM-compatible-frameworks.md`). If an editor changes the slug of an old post, its redirect still points to the old slug.
+- [x] Old Jekyll-style URLs (`/YYYY/MM/DD/<name>/`, e.g. `/2014/12/02/linkedin-for-work/`) redirect (308) to `/blog/<slug>/`: `redirects()` in `next.config.mjs`, generated from `migration/legacy/posts.json` (file-name date and post date, case-insensitive). Also covered (`src/lib/legacy-redirects.mjs`, `tests/legacy-redirects.test.ts`): the mistyped link `/2021/08/30/Bender-the-best/` → `/blog/how-to-get-the-best-performance-for-ml-models-on-ios/`, and the file name with a space (`2022-06-27-Top EVM-compatible-frameworks.md`) as `Top%20EVM-…` and `Top-EVM-…`, both dates → `/blog/best-blockchain-development-framework/`. If an editor changes the slug of an old post, its redirect still points to the old slug.
 
 ## Known differences from the live (Gatsby) site
 
@@ -44,7 +48,6 @@ Full height sweep at 1440px (175 posts + list pages, tag, author and 404 pages):
 - `pdf-charts-images-processing-with-llm`: the "slide with charts" image shows; on live its relative `../static/…` path is broken.
 - `/tags/`, `/tags/<tag>/`, `/authors/<slug>/`: these pages use the site layout (nav menu, padding, footer), and tag variants such as "AI"/"ai" are merged into one page; live renders them unstyled and keeps one variant per URL (e.g. live `/tags/ai/` lists 1 post, the new one 14).
 - `/categories/`: live shows a broken "NaN" pager; heights match.
-- 404s from `notFound()` (unknown post/category/tag/author/page number) return status 404 but Next 16 sends an error shell and renders the styled 404 on the client. URLs that match no route at all get the fully server-rendered 404 (`app/global-not-found.tsx`, `experimental.globalNotFound`).
 - No `robots.txt`: live's is added by Cloudflare (content signals), not by the site.
 
 ## Small cleanups

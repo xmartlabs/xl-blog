@@ -1,6 +1,6 @@
-import { notFound } from 'next/navigation';
 import React from 'react';
 
+import { NotFoundPage } from '@/components/not-found/NotFoundPage';
 import {
   PostListPage,
   parsePageParam,
@@ -22,11 +22,11 @@ export default async function CategoryListPage({ params }: Props) {
   const { category, page: pageParam } = await params;
   const pageNumber = parsePageParam(pageParam);
   // Page 1 lives at `/categories/<slug>/`.
-  if (!pageNumber || pageNumber < 2) notFound();
+  if (!pageNumber || pageNumber < 2) return <NotFoundPage />;
   const page = (await getCategoryPages()).find(
     (p) => p.category === category && p.currentPage === pageNumber
   );
-  if (!page) notFound();
+  if (!page) return <NotFoundPage />;
   return (
     <PostListPage
       {...page}

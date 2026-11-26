@@ -26,3 +26,6 @@ dist/
 # Parity test (tests/parity): live-site cache and generated report
 tests/parity/.cache/
 tests/parity/report/
+
+# End-to-end tests (tests/e2e): test users' credentials, sessions, traces
+tests/e2e/.cache/

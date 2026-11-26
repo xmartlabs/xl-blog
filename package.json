@@ -21,6 +21,7 @@
     "seed:migrate-content": "cross-env NODE_OPTIONS=--no-deprecation payload run scripts/migrate-content.ts",
     "test": "vitest run",
     "test:int": "vitest run --config vitest.int.config.mts",
+    "test:e2e": "playwright test -c tests/e2e/playwright.config.ts",
     "test:parity": "playwright test -c tests/parity/playwright.config.ts",
     "lint": "eslint .",
     "typecheck": "tsc --noEmit",
@@ -35,6 +36,7 @@
   },
   "dependencies": {
     "@payloadcms/db-postgres": "3.94.2",
+    "@payloadcms/email-resend": "3.94.2",
     "@payloadcms/live-preview-react": "^3.94.2",
     "@payloadcms/next": "3.94.2",
     "@payloadcms/richtext-lexical": "3.94.2",

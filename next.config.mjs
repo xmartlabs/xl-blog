@@ -2,37 +2,16 @@ import { readFileSync } from 'node:fs';
 
 import { withPayload } from '@payloadcms/next/withPayload';
 
-/**
- * Old Jekyll URLs (`/YYYY/MM/DD/<file name>/`) → `/blog/<slug>/`. Several posts still link to
- * them. Built from the legacy post list: the date comes from the file name and from the post's
- * date (Jekyll used the latter when set), the name is the file name without date/extension.
- */
-const legacyRedirects = () => {
-  const posts = JSON.parse(
+import { legacyRedirects } from './src/lib/legacy-redirects.mjs';
+
+// Old Jekyll URLs (`/YYYY/MM/DD/<file name>/`) → `/blog/<slug>/` (src/lib/legacy-redirects.mjs).
+const legacyPosts = () =>
+  JSON.parse(
     readFileSync(
       new URL('./migration/legacy/posts.json', import.meta.url),
       'utf8'
     )
   );
-  const redirects = new Map();
-  for (const post of posts) {
-    const match = post.sourceFile.match(/^(\d{4})-(\d{2})-(\d{2})-(.+)\.mdx?$/);
-    // Skip names that aren't plain path segments (one has a space).
-    if (!match || !/^[\w.-]+$/.test(match[4])) continue;
-    const [, year, month, day, name] = match;
-    for (const date of new Set([
-      `${year}/${month}/${day}`,
-      post.date.replaceAll('-', '/'),
-    ])) {
-      redirects.set(`/${date}/${name}/`, `/blog/${post.slug}/`);
-    }
-  }
-  return [...redirects].map(([source, destination]) => ({
-    source,
-    destination,
-    permanent: true,
-  }));
-};
 
 // The security headers the Gatsby/Netlify site sent. X-Frame-Options note: Payload's live
 // preview shows the frontend (e.g. /blog/<slug>/) in an iframe inside /admin, so the frontend
@@ -53,7 +32,7 @@ const nextConfig = {
     globalNotFound: true,
   },
   async redirects() {
-    return legacyRedirects();
+    return legacyRedirects(legacyPosts());
   },
   async headers() {
     // When several rules set the same header, the last matching rule wins.
