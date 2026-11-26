@@ -86,14 +86,24 @@ See `.env.example` for the full list with comments.
 
 - **Editors** (everyone by default): any @xmartlabs.com Google account gets an `editor` user on first sign-in. Editors can create, edit, publish and schedule posts, and add authors.
 - **Admins**: everything editors can do, plus deleting posts/authors, managing categories, and promoting/demoting users (Users → open the user → Roles).
-- **First admin**: set `FIRST_ADMIN_EMAIL`/`FIRST_ADMIN_PASSWORD` before the first start; it's created while there are no users and signs in with email + password. Use it to promote the first Google users to admin. Keep its password in the team vault; it's the break-glass account if Google sign-in breaks.
+- **First admin**: Google sign-in always creates editors, so nobody can make themselves admin by logging in. The first admin comes from `FIRST_ADMIN_EMAIL` instead: on startup, **only while the users table is empty**, that user is created as admin (`src/auth/seedFirstAdmin.ts`). With password login on (default) it also needs `FIRST_ADMIN_PASSWORD`; with `DISABLE_PASSWORD_LOGIN=true` it's created without a password and that person becomes admin by signing in with Google as that address (sign-in matches users by email). Once any user exists, the variables do nothing. See "First admin in production" below.
 - **Password resets** ("Forgot password?" on the login page) only send an email when `RESEND_API_KEY` and `EMAIL_FROM` are set; otherwise the reset link is only written to the server log, and an admin resets the password from Users instead.
 - **Password login** is locked for 10 minutes after 5 wrong passwords. Once the real admins have signed in with Google, set `DISABLE_PASSWORD_LOGIN=true` in production: the login page then only shows the Google button and `/api/users/login` is refused. The break-glass account stays in the database (and works again if the variable is removed and the site redeployed). With password login off, a first admin seeded into an empty database gets no password: that person becomes admin by signing in with Google as `FIRST_ADMIN_EMAIL`. Note that payload-oauth2 only uses Payload's server-side sessions while the local strategy is on, so with password login off, signing out clears the cookie but can't revoke the token. To limit that, tokens then last 8 hours instead of 7 days (editors sign in with Google again after that); deleting the user still locks it out immediately.
+
+### First admin in production
+
+1. Before the first deploy, set `FIRST_ADMIN_EMAIL` to the real address of the person who will administer the blog (e.g. your own `@xmartlabs.com` email) and `FIRST_ADMIN_PASSWORD` to a strong password (keep it in the team vault as the fallback).
+2. Deploy. On the first start against the empty database, that user is created as **admin**.
+3. That person signs in with **Google** using the same address and lands in the same admin account (Google sign-in matches users by email).
+4. They promote the other admins in **Users → open the user → Roles → admin** (everyone else signs in with Google and starts as editor).
+5. Turn on Google-only login: set `DISABLE_PASSWORD_LOGIN=true` and remove `FIRST_ADMIN_PASSWORD` from the Vercel environment, then redeploy. The fallback admin stays in the database; removing `DISABLE_PASSWORD_LOGIN` and redeploying brings password login back if Google sign-in ever breaks.
+
+Locally the same applies to your own database: the user from `FIRST_ADMIN_EMAIL` is created on the first `npm run dev` against an empty database.
 
 ### Google sign-in setup (Google Cloud console)
 
 1. Use a project of the xmartlabs.com Google Workspace organization.
-2. **OAuth consent screen**: user type **Internal** (only accounts of the organization can sign in), app name "XL Blog", scopes `openid`, `email`, `profile`.
+2. **OAuth consent screen**: user type **Internal** (only accounts of the organization can sign in), app name "XL Blog", scopes `openid`, `email`, `profile`. Check the project's organization in **IAM & Admin → Settings**: a project created under another organization fails with `Error 403: org_internal` for Xmartlabs accounts.
 3. **Credentials → Create credentials → OAuth client ID**, type "Web application". Authorized redirect URIs:
    - `http://localhost:3000/api/users/oauth/google/callback`
    - `https://blog.xmartlabs.com/api/users/oauth/google/callback`
