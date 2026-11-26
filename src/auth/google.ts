@@ -6,6 +6,7 @@ import { parseCookies } from 'payload';
 import type { Config, Endpoint, PayloadRequest, Plugin } from 'payload';
 
 import { safeInternalPath } from '../lib/redirects';
+import { resolveServerURL } from '../lib/server-url.mjs';
 
 /**
  * "Sign in with Google" for the admin panel, restricted to one Google Workspace domain.
@@ -106,19 +107,6 @@ export interface GoogleAuthSettings {
 }
 
 /**
- * On Vercel without NEXT_PUBLIC_SERVER_URL: the production domain, or the branch URL on
- * preview deployments (stable per branch, unlike the per-deployment URL). Google only accepts
- * redirect URIs registered in the OAuth client, so sign-in works on the hosts registered there.
- */
-const vercelURL = (env: Record<string, string | undefined>) => {
-  const host =
-    env.VERCEL_ENV === 'production'
-      ? env.VERCEL_PROJECT_PRODUCTION_URL
-      : env.VERCEL_BRANCH_URL || env.VERCEL_URL;
-  return host?.trim() ? `https://${host.trim()}` : '';
-};
-
-/**
  * Reads the Google settings from the environment. Returns null (Google sign-in disabled,
  * no login button) unless the client id, secret, allowed domain and server URL are all set.
  */
@@ -128,11 +116,9 @@ export function getGoogleAuthSettings(
   const clientId = env.GOOGLE_CLIENT_ID?.trim();
   const clientSecret = env.GOOGLE_CLIENT_SECRET?.trim();
   const allowedDomain = env.GOOGLE_ALLOWED_DOMAIN?.trim().toLowerCase();
-  const serverURL = (
-    env.NEXT_PUBLIC_SERVER_URL?.trim() ||
-    vercelURL(env) ||
-    (env.NODE_ENV !== 'production' ? 'http://localhost:3000' : '')
-  ).replace(/\/+$/, '');
+  // NEXT_PUBLIC_SERVER_URL, else the Vercel production domain / branch URL (only the hosts
+  // registered in the Google OAuth client work), else localhost outside production.
+  const serverURL = resolveServerURL(env);
   if (!clientId || !clientSecret || !allowedDomain || !serverURL) return null;
   return { clientId, clientSecret, allowedDomain, serverURL };
 }

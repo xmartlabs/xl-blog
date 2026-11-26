@@ -7,6 +7,7 @@ import crypto from 'node:crypto';
 import type { CollectionConfig, Config, Endpoint } from 'payload';
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 
+import { authCookieOptions } from '../src/auth/cookies';
 import {
   GOOGLE_USERINFO_URL,
   googleAuthPlugin,
@@ -61,7 +62,13 @@ const mockGoogle = (userinfo: Record<string, unknown>) =>
     throw new Error(`Unexpected fetch ${href}`);
   });
 
-const mockPayload = (existingUsers: Record<string, unknown>[] = []) => {
+const mockPayload = (
+  existingUsers: Record<string, unknown>[] = [],
+  cookies: { sameSite: string; secure: boolean } = {
+    sameSite: 'Lax',
+    secure: false,
+  }
+) => {
   const created: Record<string, unknown>[] = [];
   const updated: Record<string, unknown>[] = [];
   const collectionConfig = {
@@ -72,7 +79,7 @@ const mockPayload = (existingUsers: Record<string, unknown>[] = []) => {
     auth: {
       useSessions: true,
       tokenExpiration: 7200,
-      cookies: { sameSite: 'Lax', secure: false },
+      cookies,
     },
   };
   const payload = {
@@ -283,6 +290,37 @@ describe('Google sign-in callback', () => {
         new RegExp(`^${name}=; Path=/api/users/oauth/google; .*Max-Age=0`)
       );
     }
+  });
+
+  it('sets the payload-token cookie with the collection cookie options (Secure on https)', async () => {
+    const users = await buildUsersCollection();
+    const { payload } = mockPayload(
+      [],
+      authCookieOptions({
+        NEXT_PUBLIC_SERVER_URL: 'https://blog.xmartlabs.com',
+      })
+    );
+    const res = await endpoint(users, 'get', '/oauth/google/callback').handler(
+      callbackRequest(payload) as never
+    );
+    const token = setCookies(res).get('payload-token');
+    expect(token).toMatch(/; Secure=true\b/);
+    expect(token).toContain('; HttpOnly');
+    expect(token).toContain('; SameSite=Lax');
+    expect(token).toContain('; Path=/');
+
+    const { payload: httpPayload } = mockPayload(
+      [],
+      authCookieOptions({ NEXT_PUBLIC_SERVER_URL: 'http://localhost:3000' })
+    );
+    const httpRes = await endpoint(
+      users,
+      'get',
+      '/oauth/google/callback'
+    ).handler(callbackRequest(httpPayload) as never);
+    const httpToken = setCookies(httpRes).get('payload-token');
+    expect(httpToken).toContain('; SameSite=Lax');
+    expect(httpToken).not.toContain('Secure');
   });
 
   it('ignores a tampered return-path cookie', async () => {

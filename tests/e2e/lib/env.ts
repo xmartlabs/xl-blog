@@ -97,4 +97,13 @@ export const SEED = {
       category: 'e2e-design',
     },
   ],
+  /**
+   * Two imported posts (migration/legacy/), converted like the content import: one with
+   * embeds (YouTube iframes, a tweet with Twitter's widgets.js, images) and one with code
+   * blocks and images. Used by the CSP and accessibility checks.
+   */
+  legacyPosts: [
+    { slug: 'crypto-landscape-2021', category: 'e2e-design' },
+    { slug: 'react-native-line-2', category: 'e2e-development' },
+  ],
 } as const;

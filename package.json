@@ -59,6 +59,7 @@
     "tailwind-merge": "^3.7.1"
   },
   "devDependencies": {
+    "@axe-core/playwright": "4.14.0",
     "@playwright/test": "^1.65.1",
     "@tailwindcss/postcss": "^4.3.5",
     "@types/escape-html": "^1.0.4",

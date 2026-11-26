@@ -12,6 +12,9 @@ Work left before the new blog (branch `nextjs-payload`) replaces the Gatsby site
 - [ ] First production deploy: the build runs `payload migrate` on the empty Neon database, then builds an empty site. Then run the content migration once against production: `npx vercel env pull .env.production.local`, then `DATABASE_URL=<neon url> CRON_SECRET=<prod secret> REVALIDATE_URL=https://<production host> npm run seed:migrate-content`. The script ends by calling `/next/revalidate/`, so the pages pre-rendered while the database was empty (home, tags, sitemap) are regenerated without a redeploy. (Rehearsed locally on an empty database: migrate + build + import + revalidate → home 12 posts, 442 tags, sitemap 719 URLs.)
 - [ ] Cron: check after the first deploy that Project → Settings → Cron Jobs lists `/api/payload-jobs/run/` and that its invocations return 200 (401 = `CRON_SECRET` missing/mismatched). Crons only run on production deployments.
 - [ ] Cutover: point `blog.xmartlabs.com` to Vercel. Keep the Netlify site for 2 weeks as a rollback, then turn off Netlify Identity and Git Gateway.
+- [ ] **robots.txt at cutover**: the site now serves its own `/robots.txt` (allow all except `/admin`, `/api`, `/next/`, plus `Sitemap: https://blog.xmartlabs.com/sitemap-index.xml`). Today's live robots.txt comes from Cloudflare's **managed robots.txt / content signals** setting (only comments, no rules). Decide whether to keep it: if it stays on, Cloudflare prepends its content-signal block (and may add AI-crawler rules) to the site's file. After cutover, `curl https://blog.xmartlabs.com/robots.txt` and check that the `Disallow` and `Sitemap` lines are there; on a preview deployment check `Disallow: /` and the `X-Robots-Tag: noindex, nofollow` header.
+- [ ] **CSP**: the Content Security Policy is report-only. For a couple of weeks after cutover, check the Vercel logs for `[csp]` lines (the production GTM container may load other tags; the Typeform iframe wasn't tested locally), adjust `src/lib/csp.mjs`, then set `CSP_ENFORCE=true` (README, "Security headers").
+- [ ] Check in the browser on production that the `payload-token` cookie is `Secure` (DevTools → Application → Cookies) after signing in with Google and with the password.
 
 ## Email (optional, user's call)
 
@@ -48,7 +51,7 @@ Full height sweep at 1440px (175 posts + list pages, tag, author and 404 pages):
 - `pdf-charts-images-processing-with-llm`: the "slide with charts" image shows; on live its relative `../static/…` path is broken.
 - `/tags/`, `/tags/<tag>/`, `/authors/<slug>/`: these pages use the site layout (nav menu, padding, footer), and tag variants such as "AI"/"ai" are merged into one page; live renders them unstyled and keeps one variant per URL (e.g. live `/tags/ai/` lists 1 post, the new one 14).
 - `/categories/`: live shows a broken "NaN" pager; heights match.
-- No `robots.txt`: live's is added by Cloudflare (content signals), not by the site.
+- `robots.txt`: live's is added by Cloudflare (content signals, no rules), not by the site; the new site serves its own (see Cutover).
 
 ## Small cleanups
 

@@ -2,7 +2,9 @@ import { readFileSync } from 'node:fs';
 
 import { withPayload } from '@payloadcms/next/withPayload';
 
+import { cspHeaders } from './src/lib/csp.mjs';
 import { legacyRedirects } from './src/lib/legacy-redirects.mjs';
+import { isNoIndexDeployment } from './src/lib/robots.mjs';
 
 // Old Jekyll URLs (`/YYYY/MM/DD/<file name>/`) → `/blog/<slug>/` (src/lib/legacy-redirects.mjs).
 const legacyPosts = () =>
@@ -17,10 +19,13 @@ const legacyPosts = () =>
 // preview shows the frontend (e.g. /blog/<slug>/) in an iframe inside /admin, so the frontend
 // pages must allow same-origin framing (SAMEORIGIN still blocks every other site). The admin
 // panel and API are never framed, so they keep DENY.
-const securityHeaders = (frameOptions) => [
+// Plus a Content Security Policy, report-only unless CSP_ENFORCE=true (src/lib/csp.mjs): one
+// for the site, a more permissive one for the admin panel.
+const securityHeaders = (frameOptions, cspArea) => [
   { key: 'X-Frame-Options', value: frameOptions },
   { key: 'X-Content-Type-Options', value: 'nosniff' },
   { key: 'Referrer-Policy', value: 'same-origin' },
+  ...cspHeaders(cspArea),
 ];
 
 /** @type {import('next').NextConfig} */
@@ -37,9 +42,18 @@ const nextConfig = {
   async headers() {
     // When several rules set the same header, the last matching rule wins.
     return [
-      { source: '/:path*', headers: securityHeaders('SAMEORIGIN') },
-      { source: '/admin/:path*', headers: securityHeaders('DENY') },
-      { source: '/api/:path*', headers: securityHeaders('DENY') },
+      { source: '/:path*', headers: securityHeaders('SAMEORIGIN', 'public') },
+      { source: '/admin/:path*', headers: securityHeaders('DENY', 'admin') },
+      { source: '/api/:path*', headers: securityHeaders('DENY', 'public') },
+      // Vercel preview deployments must not be indexed (robots.txt disallows everything too).
+      ...(isNoIndexDeployment(process.env)
+        ? [
+            {
+              source: '/:path*',
+              headers: [{ key: 'X-Robots-Tag', value: 'noindex, nofollow' }],
+            },
+          ]
+        : []),
     ];
   },
 };

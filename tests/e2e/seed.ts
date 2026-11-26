@@ -1,13 +1,16 @@
 /**
  * Seeds the e2e database (run by prepare.ts with `payload run`, DATABASE_URL = the e2e
- * database): one author, two categories, three published posts, a test editor and admin.
+ * database): one author, two categories, three published posts plus two imported legacy
+ * posts (embeds, code, images), a test editor and admin.
  */
 import { readFileSync } from 'node:fs';
+import path from 'node:path';
 
 import { getPayload } from 'payload';
 
 import config from '@payload-config';
-import { type Credentials, SEED, assertE2eDatabase } from './lib/env';
+import { htmlToLexical } from '../../src/migration/html-to-lexical';
+import { type Credentials, ROOT, SEED, assertE2eDatabase } from './lib/env';
 
 assertE2eDatabase(process.env.DATABASE_URL ?? '');
 const credentials = JSON.parse(
@@ -82,6 +85,40 @@ for (const [i, post] of SEED.posts.entries()) {
   });
 }
 
+// Imported posts, as scripts/migrate-content.ts creates them (legacyImport context).
+const legacyDir = path.join(ROOT, 'migration/legacy');
+const legacyMeta = JSON.parse(
+  readFileSync(path.join(legacyDir, 'posts.json'), 'utf8')
+) as {
+  slug: string;
+  title: string;
+  date: string;
+  tags: string[];
+  thumbnail?: string;
+}[];
+for (const post of SEED.legacyPosts) {
+  const meta = legacyMeta.find((p) => p.slug === post.slug)!;
+  const body = readFileSync(
+    path.join(legacyDir, 'bodies', `${post.slug}.html`),
+    'utf8'
+  );
+  await payload.create({
+    collection: 'posts',
+    data: {
+      title: meta.title,
+      slug: meta.slug,
+      publishedDate: `${meta.date}T12:00:00.000Z`,
+      category: categoryIds.get(post.category)!,
+      author: author.id,
+      tags: meta.tags,
+      thumbnailUrl: meta.thumbnail,
+      content: htmlToLexical(body).content as never,
+      _status: 'published',
+    },
+    context: { ...context, legacyImport: true },
+  });
+}
+
 for (const role of ['editor', 'admin'] as const) {
   await payload.create({
     collection: 'users',
@@ -95,5 +132,5 @@ for (const role of ['editor', 'admin'] as const) {
   });
 }
 
-payload.logger.info('[e2e] Seeded 1 author, 2 categories, 3 posts, 2 users.');
+payload.logger.info('[e2e] Seeded 1 author, 2 categories, 5 posts, 2 users.');
 process.exit(0);

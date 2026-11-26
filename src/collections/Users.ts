@@ -8,6 +8,7 @@ import {
   authenticated,
   isAdminUser,
 } from '../access';
+import { authCookieOptions } from '../auth/cookies';
 import { LOCK_TIME_MS, MAX_LOGIN_ATTEMPTS } from '../auth/password-login';
 
 /**
@@ -45,6 +46,9 @@ export const Users: CollectionConfig = {
     // 10 minutes. DISABLE_PASSWORD_LOGIN turns password login off (payload.config.ts).
     maxLoginAttempts: MAX_LOGIN_ATTEMPTS,
     lockTime: LOCK_TIME_MS,
+    // payload-token cookie: Secure on https, SameSite=Lax (src/auth/cookies.ts). Used by
+    // password login and by Google sign-in (payload-oauth2's generatePayloadCookie).
+    cookies: authCookieOptions(),
   },
   hooks: {
     beforeChange: [editorsKeepGoogleIdentity],
